@@ -113,6 +113,14 @@ static func unsubscribe(type: StringName, handler: Callable) -> void:
 		return
 	_data_subscriptions[type].erase(handler)
 
+static func _clear_subscriptions() -> void:
+	for type in _data_subscriptions:
+		_data_subscriptions[type].clear()
+	_data_subscriptions.clear()
+	
+func _exit_tree() -> void:
+	_clear_subscriptions()
+
 
 func request_data(type: StringName, handler: Callable, args: Dictionary = {}) -> int:
 	var request_id: int = _next_data_request_id
@@ -148,3 +156,4 @@ func data_push(type: StringName, data: Dictionary) -> void:
 	for handler: Callable in _data_subscriptions.get(type, []):
 		if handler.is_valid():
 			handler.call(data)
+			
