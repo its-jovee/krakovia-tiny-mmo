@@ -110,6 +110,15 @@ func _show(next: Control, can_back: bool = true) -> void:
 	back_button.visible = can_back
 
 
+func _maybe_autoselect_world(world_info: Dictionary) -> bool:
+	# If only one world exists, skip the selection UI and proceed directly
+	if world_info.size() == 1:
+		var world_id_str: String = world_info.keys()[0]
+		_on_world_selected(world_id_str.to_int())
+		return true
+	return false
+
+
 func _on_login_button_pressed() -> void:
 	_show(login_panel)
 
@@ -146,7 +155,8 @@ func _on_login_login_button_pressed() -> void:
 	fill_connection_info(d["a"]["name"], d["a"]["id"])
 	
 	popup_panel.hide()
-	_show($WorldSelection, false)
+	if not _maybe_autoselect_world(d.get("w", {})):
+		_show($WorldSelection, false)
 
 
 func _on_guest_button_pressed() -> void:
@@ -165,7 +175,8 @@ func _on_guest_button_pressed() -> void:
 	populate_worlds(d.get("w", {}))
 	
 	popup_panel.hide()
-	_show($WorldSelection, false)
+	if not _maybe_autoselect_world(d.get("w", {})):
+		_show($WorldSelection, false)
 
 
 func _on_world_selected(world_id: int) -> void:
@@ -305,7 +316,8 @@ func create_account() -> void:
 	populate_worlds(d.get("w", {}))
 	
 	popup_panel.hide()
-	_show($WorldSelection, false)
+	if not _maybe_autoselect_world(d.get("w", {})):
+		_show($WorldSelection, false)
 
 
 func _on_create_account_button_pressed() -> void:
