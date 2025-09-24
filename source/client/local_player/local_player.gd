@@ -9,6 +9,7 @@ var input_direction: Vector2 = Vector2.ZERO
 var last_input_direction: Vector2 = Vector2.ZERO
 var action_input: bool = false
 var interact_input: bool = false
+var is_sitting_local: bool = false
 
 var state: String = "idle"
 
@@ -21,6 +22,14 @@ func _ready() -> void:
 	Events.local_player = self
 	Events.local_player_ready.emit(self)
 	super()
+	# mirror sit flag to local state
+	var asc: AbilitySystemComponent = get_node_or_null(^"AbilitySystemComponent")
+	if asc:
+		asc.mirror.attribute_local_changed.connect(
+			func(attr: StringName, value: float, _max_value: float) -> void:
+				if attr == &"is_sitting":
+					is_sitting_local = (value > 0.5)
+		)
 	fid_position = PathRegistry.id_of(":position")
 	fid_flipped = PathRegistry.id_of(":flipped")
 	fid_anim = PathRegistry.id_of(":anim")
@@ -38,7 +47,10 @@ func _physics_process(delta: float) -> void:
 
 
 func move() -> void:
-	velocity = input_direction * speed
+	if is_sitting_local:
+		velocity = Vector2.ZERO
+	else:
+		velocity = input_direction * speed
 	move_and_slide()
 
 
@@ -57,6 +69,11 @@ func check_inputs() -> void:
 	# Test: spend 10 Energy on Spacebar (ui_accept)
 	if Input.is_action_just_pressed("ui_accept"):
 		InstanceClient.current.request_data(&"resource.consume", Callable(), {"type": &"energy", "amount": 10.0})
+
+	# Sit toggle on X
+	if Input.is_action_just_pressed("sit"):
+		is_sitting_local = not is_sitting_local
+		InstanceClient.current.request_data(&"state.sit", Callable(), {"on": is_sitting_local})
 
 
 func update_animation(delta: float) -> void:

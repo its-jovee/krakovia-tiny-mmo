@@ -4,6 +4,7 @@ extends GameplayResource
 
 @export var regen_per_second: float = 5.0
 @export var regen_delay_after_spend: float = 1.5
+@export var sit_regen_multiplier: float = 4.0
 @export var default_max: float = 100.0
 
 var _time_since_spend: float = 0.0
@@ -45,7 +46,9 @@ func tick_server(asc: AbilitySystemComponent, dt: float) -> void:
 		return
 	var cur: float = asc.get_value(&"energy")
 	if cur < mx and regen_per_second > 0.0:
-		asc.set_value_server(&"energy", min(mx, cur + regen_per_second * dt))
+		var is_sitting: bool = asc.get_value(&"is_sitting") > 0.5
+		var rate: float = regen_per_second * (sit_regen_multiplier if is_sitting else 1.0)
+		asc.set_value_server(&"energy", min(mx, cur + rate * dt))
 
 
 func get_ui_snapshot(asc: AbilitySystemComponent) -> Dictionary:
