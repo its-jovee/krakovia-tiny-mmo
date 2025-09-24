@@ -54,6 +54,11 @@ func check_inputs() -> void:
 	interact_input = Input.is_action_just_pressed("interact")
 
 
+	# Test: spend 10 Energy on Spacebar (ui_accept)
+	if Input.is_action_just_pressed("ui_accept"):
+		InstanceClient.current.request_data(&"resource.consume", Callable(), {"type": &"energy", "amount": 10.0})
+
+
 func update_animation(delta: float) -> void:
 	flipped = (mouse.position.x < global_position.x)
 	update_hand_pivot(delta)

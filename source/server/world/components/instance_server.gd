@@ -131,13 +131,11 @@ func instantiate_player(peer_id: int) -> Player:
 
 		var asc: AbilitySystemComponent = new_player.ability_system_component
 		
-		var player_stats: Dictionary[StringName, float] = player_resource.BASE_STATS
+		var player_stats: Dictionary[StringName, float] = player_resource.BASE_STATS.duplicate()
 		var stats_from_attributes: Dictionary[StringName, float] = player_resource.get_stats_from_attributes()
 		for stat_name: StringName in stats_from_attributes:
-			if player_stats.has(stat_name):
-				player_stats[stat_name] = stats_from_attributes[stat_name]
-			else:
-				player_stats[stat_name] += stats_from_attributes[stat_name]
+			var inc: float = stats_from_attributes[stat_name]
+			player_stats[stat_name] = player_stats.get(stat_name, 0.0) + inc
 		for stat_name: StringName in player_stats:
 			var value: float = player_stats[stat_name]
 			print(stat_name, " : ", value)
@@ -163,7 +161,20 @@ func instantiate_player(peer_id: int) -> Player:
 			#else:
 				#asc.ensure_attr(stat_name, value, value)
 				#asc.set_value_server(stat_name, value)
-		#asc.install_resources(new_player.character_resource.power_resources, base_stats)
+		# Install pluggable resource modules so costs/regen work
+		var resources := new_player.character_resource.power_resources.duplicate()
+		var has_hp_cost := false
+		var has_energy := false
+		for r in resources:
+			if r is HealthCostResource:
+				has_hp_cost = true
+			elif r is EnergyResource:
+				has_energy = true
+		if not has_hp_cost:
+			resources.append(HealthCostResource.new())
+		if not has_energy:
+			resources.append(EnergyResource.new())
+		asc.install_resources(resources, player_stats)
 	,
 	CONNECT_ONE_SHOT)
 	

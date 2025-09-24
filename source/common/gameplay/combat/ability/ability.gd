@@ -4,6 +4,7 @@ extends Resource
 
 @export var name: String
 @export var cooldown: float = 1.0
+@export var costs: Dictionary = {}
 
 
 var last_action_time: float = -INF

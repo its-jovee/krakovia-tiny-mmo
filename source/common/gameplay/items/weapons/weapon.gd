@@ -30,6 +30,12 @@ func try_perform_action(action_index: int, direction: Vector2) -> bool:
 	
 	if not ability.can_use():
 		return false
+
+	# Server-side resource cost payment (uses ASC pluggable resources)
+	if character and character.ability_system_component and ability.costs.size() > 0:
+		var asc := character.ability_system_component
+		if not asc.try_pay_costs(ability.costs, {"ability": ability.name}):
+			return false
 	
 	ability.use_ability(character, direction)
 	

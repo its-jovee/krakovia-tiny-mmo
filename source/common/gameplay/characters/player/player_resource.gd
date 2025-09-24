@@ -50,15 +50,18 @@ func init(
 
 
 func get_stats_from_attributes() -> Dictionary[StringName, float]:
-	var stats: Dictionary[StringName, float]
+	var stats: Dictionary[StringName, float] = {}
 	# To Replace by constants
-	for attribute: StringName in attributes:
-		if attributes.has(&"vitality"):
-			stats[StatsCatalog.HEALTH_MAX] += 5
-		elif attributes.has(&"strength"):
-			stats[StatsCatalog.AD] += 2
-		elif attributes.has(&"agility"):
-			stats[StatsCatalog.MOVE_SPEED] += 3
+	if attributes == null:
+		return stats
+	for attr_name: StringName in attributes.keys():
+		match attr_name:
+			&"vitality":
+				stats[StatsCatalog.HEALTH_MAX] = stats.get(StatsCatalog.HEALTH_MAX, 0.0) + 5.0
+			&"strength":
+				stats[StatsCatalog.AD] = stats.get(StatsCatalog.AD, 0.0) + 2.0
+			&"agility":
+				stats[StatsCatalog.MOVE_SPEED] = stats.get(StatsCatalog.MOVE_SPEED, 0.0) + 3.0
 	return stats
 
 
