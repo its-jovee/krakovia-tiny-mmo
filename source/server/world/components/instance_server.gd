@@ -203,6 +203,11 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 	
 	var player: Player = players_by_peer_id[peer_id]
 	if player:
+		# Cleanup harvesting memberships
+		for node in get_tree().get_nodes_in_group(&"harvest_nodes"):
+			if node is HarvestNode:
+				var hn: HarvestNode = node
+				hn.cleanup_peer(peer_id)
 		if delete:
 			player.queue_free()
 		else:

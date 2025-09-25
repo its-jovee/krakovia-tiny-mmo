@@ -6,7 +6,7 @@
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
 version = 1758570219
-next_id = 16
+next_id = 18
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -87,6 +87,16 @@ entries = Array[Dictionary]([{
 &"id": 16,
 &"path": "res://source/server/world/components/data_request_handlers/state.sit.gd",
 &"slug": &"state.sit"
+}, {
+&"hash": "",
+&"id": 17,
+&"path": "res://source/server/world/components/data_request_handlers/harvest.join.gd",
+&"slug": &"harvest.join"
+}, {
+&"hash": "",
+&"id": 18,
+&"path": "res://source/server/world/components/data_request_handlers/harvest.leave.gd",
+&"slug": &"harvest.leave"
 }])
 scan_path = ""
 filters = PackedStringArray()

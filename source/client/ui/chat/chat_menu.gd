@@ -28,7 +28,11 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(&"chat"):
+	var enter_pressed: bool = false
+	if event is InputEventKey and event.pressed and not event.echo:
+		var evk: InputEventKey = event
+		enter_pressed = (evk.keycode == KEY_ENTER or evk.keycode == KEY_KP_ENTER)
+	if event.is_action_pressed(&"chat") or enter_pressed:
 		if not full_feed.visible and not peek_feed_message_edit.has_focus():
 			get_viewport().set_input_as_handled()
 			accept_event()
@@ -36,6 +40,7 @@ func _input(event: InputEvent) -> void:
 
 
 func open_chat() -> void:
+	show()
 	peek_feed.show()
 	reset_view()
 	peek_feed_message_edit.grab_focus()

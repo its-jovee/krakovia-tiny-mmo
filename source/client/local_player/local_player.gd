@@ -55,6 +55,11 @@ func move() -> void:
 
 
 func check_inputs() -> void:
+	if _is_typing_in_ui():
+		input_direction = Vector2.ZERO
+		action_input = false
+		interact_input = false
+		return
 	input_direction = Input.get_vector("left", "right", "up", "down")
 	match input_direction:
 		Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN:
@@ -64,11 +69,13 @@ func check_inputs() -> void:
 		InstanceClient.current.request_data(&"action.perform", Callable(),
 		{"d": position.direction_to(mouse.position), "i": 0})
 	interact_input = Input.is_action_just_pressed("interact")
+	if interact_input:
+		# Toggle join/leave harvesting (iteration 0 test)
+		InstanceClient.current.request_data(&"harvest.leave", Callable(), {})
+		InstanceClient.current.request_data(&"harvest.join", Callable(), {})
 
 
-	# Test: spend 10 Energy on Spacebar (ui_accept)
-	if Input.is_action_just_pressed("ui_accept"):
-		InstanceClient.current.request_data(&"resource.consume", Callable(), {"type": &"energy", "amount": 10.0})
+	# Enter (ui_accept) should open chat; remove temporary energy consume
 
 	# Sit toggle on X
 	if Input.is_action_just_pressed("sit"):
@@ -110,6 +117,17 @@ func define_sync_state() -> void:
 	synchronizer_manager.send_my_delta(
 		multiplayer.get_unique_id(), syn.collect_dirty_pairs()
 	)
+
+
+func _is_typing_in_ui() -> bool:
+	var vp: Viewport = get_viewport()
+	if vp == null:
+		return false
+	var owner: Control = vp.gui_get_focus_owner()
+	if owner == null:
+		return false
+	# Freeze movement if user is typing in a text field
+	return owner is LineEdit or owner is TextEdit
 
 
 func _set_character_class(new_class: String):

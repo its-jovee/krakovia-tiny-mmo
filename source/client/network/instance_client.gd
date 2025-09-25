@@ -45,6 +45,20 @@ func _ready() -> void:
 			
 		player.equipped_weapon_right.perform_action(data["i"], data["d"])
 	)
+
+	# Harvesting debug prints (iteration 0)
+	subscribe(&"harvest.event", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.event:", data)
+	)
+
+	# Harvesting status logs (iteration 0)
+	subscribe(&"harvest.status", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.status:", data)
+	)
 	
 	synchronizer_manager = StateSynchronizerManagerClient.new()
 	synchronizer_manager.name = "StateSynchronizerManager"

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=29 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -32,11 +32,83 @@ id = 12
 username = "guest12"
 password = "28z19u-rn0js"
 
+[sub_resource type="Resource" id="Resource_pexyu"]
+script = ExtResource("1_wgikn")
+id = 13
+username = "guest13"
+password = "1+w#s1co4dio"
+
+[sub_resource type="Resource" id="Resource_xxt2i"]
+script = ExtResource("1_wgikn")
+id = 14
+username = "guest14"
+password = "guo2qjq+422n"
+
+[sub_resource type="Resource" id="Resource_dw4nj"]
+script = ExtResource("1_wgikn")
+id = 15
+username = "guest15"
+password = "2d52uwa22#kn"
+
+[sub_resource type="Resource" id="Resource_6puu8"]
+script = ExtResource("1_wgikn")
+id = 16
+username = "guest16"
+password = "2xtrjkiw7n-3"
+
+[sub_resource type="Resource" id="Resource_2mduh"]
+script = ExtResource("1_wgikn")
+id = 17
+username = "guest17"
+password = "uu47mi5x6q5+"
+
+[sub_resource type="Resource" id="Resource_ukcac"]
+script = ExtResource("1_wgikn")
+id = 18
+username = "guest18"
+password = "qfdztf9i+kj5"
+
+[sub_resource type="Resource" id="Resource_k6705"]
+script = ExtResource("1_wgikn")
+id = 19
+username = "guest19"
+password = "aagw#6x+c7+m"
+
 [sub_resource type="Resource" id="Resource_lbkgn"]
 script = ExtResource("1_wgikn")
 id = 2
 username = "guest2"
 password = "1$-s0dtsnd+l"
+
+[sub_resource type="Resource" id="Resource_15j2d"]
+script = ExtResource("1_wgikn")
+id = 20
+username = "guest20"
+password = "zblvpp$vo-$h"
+
+[sub_resource type="Resource" id="Resource_q7yn4"]
+script = ExtResource("1_wgikn")
+id = 21
+username = "guest21"
+password = "oivq9s1ekglj"
+
+[sub_resource type="Resource" id="Resource_xi1rh"]
+script = ExtResource("1_wgikn")
+id = 22
+username = "guest22"
+password = "o++1i683g5ma"
+
+[sub_resource type="Resource" id="Resource_2elt6"]
+script = ExtResource("1_wgikn")
+id = 23
+username = "guest23"
+password = "x2af#f6fjyx0"
+
+[sub_resource type="Resource" id="Resource_imgnp"]
+script = ExtResource("1_wgikn")
+id = 24
+username = "guest24"
+password = "5hj8ts292xt0"
 
 [sub_resource type="Resource" id="Resource_5pt73"]
 script = ExtResource("1_wgikn")
@@ -80,11 +152,11 @@ id = 9
 username = "guest9"
 password = "1f40o-sd6u$w"
 
-[sub_resource type="Resource" id="Resource_pexyu"]
+[sub_resource type="Resource" id="Resource_ux5pu"]
 script = ExtResource("1_wgikn")
-id = 13
-username = "guest13"
-password = "1+w#s1co4dio"
+id = 25
+username = "guest25"
+password = "4xv69yooozkm"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -95,7 +167,19 @@ collection = {
 "guest11": SubResource("Resource_qe1k7"),
 "guest12": SubResource("Resource_coowf"),
 "guest13": SubResource("Resource_pexyu"),
+"guest14": SubResource("Resource_xxt2i"),
+"guest15": SubResource("Resource_dw4nj"),
+"guest16": SubResource("Resource_6puu8"),
+"guest17": SubResource("Resource_2mduh"),
+"guest18": SubResource("Resource_ukcac"),
+"guest19": SubResource("Resource_k6705"),
 "guest2": SubResource("Resource_lbkgn"),
+"guest20": SubResource("Resource_15j2d"),
+"guest21": SubResource("Resource_q7yn4"),
+"guest22": SubResource("Resource_xi1rh"),
+"guest23": SubResource("Resource_2elt6"),
+"guest24": SubResource("Resource_imgnp"),
+"guest25": SubResource("Resource_ux5pu"),
 "guest3": SubResource("Resource_5pt73"),
 "guest4": SubResource("Resource_obwkj"),
 "guest5": SubResource("Resource_rw0ll"),
@@ -104,4 +188,4 @@ collection = {
 "guest8": SubResource("Resource_w6h2b"),
 "guest9": SubResource("Resource_7ql8d")
 }
-next_account_id = 14
+next_account_id = 26
