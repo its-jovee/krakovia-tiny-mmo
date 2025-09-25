@@ -59,6 +59,19 @@ func _ready() -> void:
 			return
 		print_debug("harvest.status:", data)
 	)
+
+	# Harvesting distribution logs (iteration 0)
+	subscribe(&"harvest.distribution", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.distribution:", data)
+		# Refresh inventory UI if open (Inventory node root)
+		var ui: Node = get_tree().get_root().find_child("HUD", true, false)
+		if ui:
+			var inv_menu: Control = ui.find_child("Inventory", true, false)
+			if inv_menu and inv_menu.is_visible_in_tree():
+				InstanceClient.current.request_data(&"inventory.get", inv_menu.fill_inventory)
+	)
 	
 	synchronizer_manager = StateSynchronizerManagerClient.new()
 	synchronizer_manager.name = "StateSynchronizerManager"

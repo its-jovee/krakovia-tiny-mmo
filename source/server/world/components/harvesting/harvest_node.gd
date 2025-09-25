@@ -24,6 +24,12 @@ var pool_amount: float = 0.0
 var state: StringName = &"full" # full | partial | depleted | cooldown
 var _cooldown_clock: float = 0.0
 
+const ITEM_BY_NODE_TYPE := {
+	&"ore": &"ore",
+	&"plant": &"plant_fiber",
+	&"hunting": &"hide",
+}
+
 
 func _ready() -> void:
 	add_to_group(&"harvest_nodes")
@@ -163,6 +169,9 @@ func player_leave(peer_id: int) -> bool:
 	var h: Dictionary = harvesters[peer_id]
 	var joined_at: float = float(h.get("joined_at", _clock))
 	h["accum_time"] = float(h.get("accum_time", 0.0)) + (_clock - joined_at)
+	# Include the leaver in distribution if there is something to distribute
+	if pool_amount > 0.0:
+		_distribute(&"leave")
 	harvesters.erase(peer_id)
 	multiplier = compute_multiplier(get_count())
 	_broadcast({
@@ -211,9 +220,73 @@ func _get_player(peer_id: int) -> Player:
 
 func _on_depleted() -> void:
 	# Transition to cooldown, stop all harvesters, and notify
+	if pool_amount > 0.0:
+		_distribute(&"depleted")
 	state = &"cooldown"
 	_cooldown_clock = 0.0
 	var ids: Array = harvesters.keys().duplicate()
 	for pid_any in ids:
+		# notify leaving after distribution
 		player_leave(int(pid_any))
 	_broadcast_status()
+
+func _distribute(reason: StringName) -> void:
+	if pool_amount <= 0.0:
+		return
+	if harvesters.size() == 0:
+		return
+	var instance: ServerInstance = get_viewport() as ServerInstance
+	if instance == null:
+		return
+	# Sum of times
+	var total_time: float = 0.0
+	for pid_any in harvesters.keys():
+		var pid: int = int(pid_any)
+		var h: Dictionary = harvesters.get(pid, {})
+		total_time += float(h.get("accum_time", 0.0))
+	if total_time <= 0.0:
+		return
+	# Integer shares by largest remainder method; carry fractional remainder forward
+	var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
+	var pool_int: int = int(floor(pool_amount))
+	var pool_frac: float = pool_amount - float(pool_int)
+	if pool_int <= 0:
+		return # keep fractional pool for next session
+	# Build quotas
+	var allocations: Array = [] # [{pid, base:int, rem:float}]
+	var sum_base: int = 0
+	for pid_any2 in harvesters.keys():
+		var pid2: int = int(pid_any2)
+		var h2: Dictionary = harvesters.get(pid2, {})
+		var t: float = float(h2.get("accum_time", 0.0))
+		if t <= 0.0:
+			continue
+		var quota: float = float(pool_int) * (t / total_time)
+		var base_share: int = int(floor(quota))
+		var remainder: float = quota - float(base_share)
+		sum_base += base_share
+		allocations.append({"pid": pid2, "base": base_share, "rem": remainder})
+	var leftover: int = pool_int - sum_base
+	if leftover > 0 and allocations.size() > 0:
+		allocations.sort_custom(func(a, b): return a["rem"] > b["rem"]) # descending by remainder
+		for i in range(min(leftover, allocations.size())):
+			allocations[i]["base"] = int(allocations[i]["base"]) + 1
+	# Award
+	for alloc in allocations:
+		var final_share: int = int(alloc["base"])
+		if final_share <= 0:
+			continue
+		var pid_award: int = int(alloc["pid"])
+		if instance.give_item(pid_award, slug, final_share):
+			instance.data_push.rpc_id(pid_award, &"harvest.distribution", {
+				"node": String(get_path()),
+				"items": [{"slug": slug, "amount": final_share}],
+				"reason": reason,
+			})
+	# Reset pool to fractional remainder and zero accum_time for continuing harvesters
+	pool_amount = pool_frac
+	for pid_any3 in harvesters.keys():
+		var pid3: int = int(pid_any3)
+		var h3: Dictionary = harvesters.get(pid3, {})
+		h3["accum_time"] = 0.0
+		harvesters[pid3] = h3

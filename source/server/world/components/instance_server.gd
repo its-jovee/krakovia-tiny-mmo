@@ -283,6 +283,23 @@ func set_player_path_value(peer_id: int, rel_path: NodePath, value: Variant) -> 
 	return true
 
 
+# Award an item to a player's inventory by slug (server-authoritative).
+func give_item(peer_id: int, item_slug: StringName, amount: int) -> bool:
+	if amount <= 0:
+		return false
+	var p: Player = get_player(peer_id)
+	if p == null:
+		return false
+	var item_id: int = ContentRegistryHub.id_from_slug(&"items", item_slug)
+	if item_id <= 0:
+		return false
+	var inv: Dictionary = p.player_resource.inventory
+	var slot: Dictionary = inv.get(item_id, {"stack": 0})
+	slot["stack"] = int(slot.get("stack", 0)) + amount
+	inv[item_id] = slot
+	return true
+
+
 # To translate in english
 ## API “propre” pour les attributs (serveur = source de vérité).
 ## Utilise l’ASC si présent ; sinon fallback en poussant le miroir.

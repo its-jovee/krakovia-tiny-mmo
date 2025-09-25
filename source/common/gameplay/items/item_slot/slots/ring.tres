@@ -7,8 +7,6 @@
 script = ExtResource("2_3qvo8")
 kind = 1
 level = 5
-quest_id = 0
-flag_key = &""
 metadata/_custom_type_script = "uid://b31ll8nrh57dx"
 
 [resource]

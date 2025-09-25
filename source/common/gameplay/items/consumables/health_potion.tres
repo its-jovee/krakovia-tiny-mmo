@@ -6,29 +6,13 @@
 
 [sub_resource type="Resource" id="Resource_bst0a"]
 script = ExtResource("2_35wr3")
-name_id = &""
 is_debuff = false
-dispel_mask = 0
-tags = []
-duration = 0.0
-period = 0.0
-first_tick_delay = 0.0
-stacks_max = 1
 metadata/_custom_type_script = "uid://4v8isgqu1aho"
 
 [resource]
 script = ExtResource("2_oie41")
 effects = Array[ExtResource("1_ux3ni")]([SubResource("Resource_bst0a")])
-shared_cooldown_ms = 1500
-cooldown_category = &"potion"
-default_charges = 1
 item_name = &"Health Potion"
-description = ""
-can_trade = false
-can_sell = false
-minimum_price = 0
-stack_limit = 0
-tags = []
 metadata/_custom_type_script = "uid://bprsise4rcsak"
 metadata/slug = &"health_potion"
 metadata/id = 1
