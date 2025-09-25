@@ -9,6 +9,11 @@ extends Node2D
 @export var cooldown_seconds: float = 300.0
 @export var max_move_during_tick: float = 1.0
 @export var energy_cost_per_sec: float = 5.0 / 30.0
+@export var encourage_session_window: float = 10.0
+@export var encourage_cooldown: float = 10.0
+@export var encourage_bonus_pct: float = 0.25
+@export var encourage_max_stacks: int = 5
+@export var encourage_max_total_bonus_pct: float = 1.0
 
 
 var harvesters: Dictionary[int, Dictionary] = {}
@@ -23,6 +28,12 @@ var remaining_amount: float = 0.0
 var pool_amount: float = 0.0
 var state: StringName = &"full" # full | partial | depleted | cooldown
 var _cooldown_clock: float = 0.0
+var _enc_session_active: bool = false
+var _enc_session_expires_at: float = 0.0
+var _enc_session_contributors: Dictionary[int, bool] = {}
+var _enc_session_stack_count: int = 0
+var _enc_session_cum_bonus_pct: float = 0.0
+var _encourage_cd_until: Dictionary[int, float] = {}
 
 const ITEM_BY_NODE_TYPE := {
 	&"ore": &"ore",
@@ -56,6 +67,21 @@ func _process(delta: float) -> void:
 	if harvesters.size() > 0 and (state == &"full" or state == &"partial"):
 		_tick_accum += delta
 		_status_accum += delta
+		# Expire encourage session
+		if _enc_session_active and _clock >= _enc_session_expires_at:
+			# Broadcast session end
+			var instance_end: ServerInstance = get_viewport() as ServerInstance
+			if instance_end != null:
+				for pid_end: int in harvesters.keys():
+					instance_end.data_push.rpc_id(pid_end, &"harvest.encourage.end", {
+						"node": String(get_path()),
+						"stacks": _enc_session_stack_count,
+						"total_bonus_pct": _enc_session_cum_bonus_pct,
+					})
+			_enc_session_active = false
+			_enc_session_contributors.clear()
+			_enc_session_stack_count = 0
+			_enc_session_cum_bonus_pct = 0.0
 		while _tick_accum >= _tick_interval:
 			_tick_accum -= _tick_interval
 			var count: int = get_count()
@@ -188,6 +214,9 @@ func player_leave(peer_id: int) -> bool:
 func cleanup_peer(peer_id: int) -> void:
 	if harvesters.has(peer_id):
 		player_leave(peer_id)
+	_encourage_cd_until.erase(peer_id)
+	if _enc_session_active:
+		_enc_session_contributors.erase(peer_id)
 
 
 func _broadcast(payload: Dictionary) -> void:
@@ -228,6 +257,9 @@ func _on_depleted() -> void:
 	for pid_any in ids:
 		# notify leaving after distribution
 		player_leave(int(pid_any))
+		_encourage_cd_until.erase(int(pid_any))
+		if _enc_session_active:
+			_enc_session_contributors.erase(int(pid_any))
 	_broadcast_status()
 
 func _distribute(reason: StringName) -> void:
@@ -290,3 +322,65 @@ func _distribute(reason: StringName) -> void:
 		var h3: Dictionary = harvesters.get(pid3, {})
 		h3["accum_time"] = 0.0
 		harvesters[pid3] = h3
+
+
+func request_encourage(peer_id: int) -> Dictionary:
+	if not multiplayer.is_server():
+		return {"ok": false, "err": &"not_server"}
+	if not harvesters.has(peer_id):
+		return {"ok": false, "err": &"not_harvesting"}
+	var cd_until: float = float(_encourage_cd_until.get(peer_id, 0.0))
+	if cd_until > _clock:
+		return {"ok": false, "err": &"cooldown", "cd_remaining": cd_until - _clock}
+	var instance: ServerInstance = get_viewport() as ServerInstance
+	# If no session active, start it with this contributor
+	if not _enc_session_active:
+		_enc_session_active = true
+		_enc_session_expires_at = _clock + encourage_session_window
+		_enc_session_contributors.clear()
+		_enc_session_stack_count = 0
+		_enc_session_cum_bonus_pct = 0.0
+		_enc_session_contributors[peer_id] = true
+		_enc_session_stack_count = 1
+		_encourage_cd_until[peer_id] = _clock + encourage_cooldown
+		if instance != null:
+			for pid_s: int in harvesters.keys():
+				instance.data_push.rpc_id(pid_s, &"harvest.encourage.session", {
+					"node": String(get_path()),
+					"started_by": peer_id,
+					"window": encourage_session_window,
+				})
+		return {
+			"ok": true, "session_started": true, "hit": false,
+			"stack_index": 1, "time_left": encourage_session_window,
+			"cd_remaining": encourage_cooldown
+		}
+	# Session active: check caps and uniqueness
+	if _enc_session_contributors.has(peer_id):
+		return {"ok": false, "err": &"already_contributed", "time_left": _enc_session_expires_at - _clock}
+	if _enc_session_stack_count >= encourage_max_stacks or _enc_session_cum_bonus_pct >= encourage_max_total_bonus_pct:
+		return {"ok": false, "err": &"cap_reached", "time_left": _enc_session_expires_at - _clock}
+	# Apply stack
+	var remaining_pct: float = encourage_max_total_bonus_pct - _enc_session_cum_bonus_pct
+	var apply_pct: float = min(encourage_bonus_pct, remaining_pct)
+	_enc_session_contributors[peer_id] = true
+	_enc_session_stack_count += 1
+	_enc_session_cum_bonus_pct += apply_pct
+	pool_amount += pool_amount * apply_pct
+	_encourage_cd_until[peer_id] = _clock + encourage_cooldown
+	if instance != null:
+		for pid_h: int in harvesters.keys():
+			instance.data_push.rpc_id(pid_h, &"harvest.encourage.hit", {
+				"node": String(get_path()),
+				"peer": peer_id,
+				"stack_index": _enc_session_stack_count,
+				"bonus_pct_applied": apply_pct,
+				"total_bonus_pct": _enc_session_cum_bonus_pct,
+				"time_left": max(0.0, _enc_session_expires_at - _clock),
+			})
+	return {
+		"ok": true, "session_started": false, "hit": true,
+		"stack_index": _enc_session_stack_count,
+		"cd_remaining": encourage_cooldown,
+		"time_left": max(0.0, _enc_session_expires_at - _clock)
+	}

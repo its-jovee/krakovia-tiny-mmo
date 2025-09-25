@@ -7,6 +7,7 @@ const DUMMY_PLAYER: PackedScene = preload("res://source/common/gameplay/characte
 
 static var current: InstanceClient
 static var local_player: LocalPlayer
+static var local_harvest_node: String = ""
 
 var players_by_peer_id: Dictionary[int, Player]
 
@@ -51,6 +52,12 @@ func _ready() -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.event:", data)
+		# Track local harvesting membership
+		if data.get("peer", -1) == multiplayer.get_unique_id():
+			if data.get("type", StringName("")) == &"joined":
+				local_harvest_node = String(data.get("node", ""))
+			elif data.get("type", StringName("")) == &"left":
+				local_harvest_node = ""
 	)
 
 	# Harvesting status logs (iteration 0)
@@ -71,6 +78,25 @@ func _ready() -> void:
 			var inv_menu: Control = ui.find_child("Inventory", true, false)
 			if inv_menu and inv_menu.is_visible_in_tree():
 				InstanceClient.current.request_data(&"inventory.get", inv_menu.fill_inventory)
+	)
+
+	# Encourage start and bonus
+	subscribe(&"harvest.encourage.session", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.encourage.session:", data)
+	)
+
+	subscribe(&"harvest.encourage.hit", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.encourage.hit:", data)
+	)
+
+	subscribe(&"harvest.encourage.end", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.encourage.end:", data)
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerClient.new()
