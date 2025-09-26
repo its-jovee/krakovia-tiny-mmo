@@ -240,64 +240,64 @@ func _broadcast_status() -> void:
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance == null:
 		return
-    var pool_int: int = int(floor(pool_amount))
-    var total_time: float = 0.0
-    var pid_list: Array[int] = []
-    for pid_any in harvesters.keys():
-        var pid_i: int = int(pid_any)
-        pid_list.append(pid_i)
-        var h_all: Dictionary = harvesters.get(pid_i, {})
-        total_time += float(h_all.get("accum_time", 0.0))
-    # Build largest-remainder integer preview shares
-    var shares: Dictionary[int, int] = {}
-    var remainders: Array = [] # [{pid:int, rem:float}]
-    var sum_base: int = 0
-    if pool_int > 0 and total_time > 0.0:
-        for pid_p in pid_list:
-            var h_p: Dictionary = harvesters.get(pid_p, {})
-            var t_p: float = float(h_p.get("accum_time", 0.0))
-            if t_p <= 0.0:
-                shares[pid_p] = 0
-                continue
-            var quota: float = float(pool_int) * (t_p / total_time)
-            var base_share: int = int(floor(quota))
-            var rem: float = quota - float(base_share)
-            shares[pid_p] = base_share
-            sum_base += base_share
-            remainders.append({"pid": pid_p, "rem": rem})
-        var leftover: int = pool_int - sum_base
-        if leftover > 0 and remainders.size() > 0:
-            remainders.sort_custom(func(a, b): return a["rem"] > b["rem"]) # desc by remainder
-            for i in range(min(leftover, remainders.size())):
-                var pid_extra: int = int(remainders[i]["pid"])
-                shares[pid_extra] = int(shares.get(pid_extra, 0)) + 1
-    else:
-        for pid_zero in pid_list:
-            shares[pid_zero] = 0
-    # Send per-peer payloads
-    for pid: int in pid_list:
-        var h: Dictionary = harvesters.get(pid, {})
-        var earned_total: int = int(h.get("earned_total", 0))
-        var my_share_int: int = int(shares.get(pid, 0))
-        var projected_total_int: int = earned_total + my_share_int
-        # For a potential progress bar, compute own remainder (optional)
-        var next_progress: float = 0.0
-        if pool_int > 0 and total_time > 0.0:
-            var t_self: float = float(h.get("accum_time", 0.0))
-            var quota_self: float = float(pool_int) * (t_self / total_time)
-            next_progress = quota_self - floor(quota_self)
-        var payload: Dictionary = {
-            "node": String(get_path()),
-            "count": get_count(),
-            "multiplier": multiplier,
-            "state": state,
-            "remaining": remaining_amount,
-            "pool": pool_amount,
-            "earned_total": earned_total,
-            "projected_total_int": projected_total_int,
-            "next_progress": next_progress,
-        }
-        instance.data_push.rpc_id(pid, &"harvest.status", payload)
+	var pool_int: int = int(floor(pool_amount))
+	var total_time: float = 0.0
+	var pid_list: Array[int] = []
+	for pid_any in harvesters.keys():
+		var pid_i: int = int(pid_any)
+		pid_list.append(pid_i)
+		var h_all: Dictionary = harvesters.get(pid_i, {})
+		total_time += float(h_all.get("accum_time", 0.0))
+	# Build largest-remainder integer preview shares
+	var shares: Dictionary[int, int] = {}
+	var remainders: Array = [] # [{pid:int, rem:float}]
+	var sum_base: int = 0
+	if pool_int > 0 and total_time > 0.0:
+		for pid_p in pid_list:
+			var h_p: Dictionary = harvesters.get(pid_p, {})
+			var t_p: float = float(h_p.get("accum_time", 0.0))
+			if t_p <= 0.0:
+				shares[pid_p] = 0
+				continue
+			var quota: float = float(pool_int) * (t_p / total_time)
+			var base_share: int = int(floor(quota))
+			var rem: float = quota - float(base_share)
+			shares[pid_p] = base_share
+			sum_base += base_share
+			remainders.append({"pid": pid_p, "rem": rem})
+		var leftover: int = pool_int - sum_base
+		if leftover > 0 and remainders.size() > 0:
+			remainders.sort_custom(func(a, b): return a["rem"] > b["rem"]) # desc by remainder
+			for i in range(min(leftover, remainders.size())):
+				var pid_extra: int = int(remainders[i]["pid"])
+				shares[pid_extra] = int(shares.get(pid_extra, 0)) + 1
+	else:
+		for pid_zero in pid_list:
+			shares[pid_zero] = 0
+	# Send per-peer payloads
+	for pid: int in pid_list:
+		var h: Dictionary = harvesters.get(pid, {})
+		var earned_total: int = int(h.get("earned_total", 0))
+		var my_share_int: int = int(shares.get(pid, 0))
+		var projected_total_int: int = earned_total + my_share_int
+		# For a potential progress bar, compute own remainder (optional)
+		var next_progress: float = 0.0
+		if pool_int > 0 and total_time > 0.0:
+			var t_self: float = float(h.get("accum_time", 0.0))
+			var quota_self: float = float(pool_int) * (t_self / total_time)
+			next_progress = quota_self - floor(quota_self)
+		var payload: Dictionary = {
+			"node": String(get_path()),
+			"count": get_count(),
+			"multiplier": multiplier,
+			"state": state,
+			"remaining": remaining_amount,
+			"pool": pool_amount,
+			"earned_total": earned_total,
+			"projected_total_int": projected_total_int,
+			"next_progress": next_progress,
+		}
+		instance.data_push.rpc_id(pid, &"harvest.status", payload)
 
 func _get_player(peer_id: int) -> Player:
 	var instance: ServerInstance = get_viewport() as ServerInstance

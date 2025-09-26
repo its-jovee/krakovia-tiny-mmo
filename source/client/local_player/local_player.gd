@@ -15,6 +15,13 @@ var state: String = "idle"
 
 var synchronizer_manager: StateSynchronizerManagerClient
 
+# Zoom settings
+var zoom_speed: float = 0.1  # How much to zoom per wheel step
+var min_zoom: float = 1.0    # Minimum zoom level (same as slider)
+var max_zoom: float = 4.0    # Maximum zoom level (same as slider)
+var target_zoom: float = 1.0 # Target zoom for smooth transitions
+var zoom_transition_speed: float = 10.0 # Speed of zoom transitions
+
 @onready var mouse: Node2D = $MouseComponent
 
 
@@ -35,14 +42,20 @@ func _ready() -> void:
 	fid_anim = PathRegistry.id_of(":anim")
 	fid_pivot = PathRegistry.id_of(":pivot")
 	
+	# Initialize zoom from settings
 	if Events.settings.has("zoom"):
-		$Camera2D.zoom = Vector2.ONE * Events.settings["zoom"]
+		target_zoom = Events.settings["zoom"]
+		$Camera2D.zoom = Vector2.ONE * target_zoom
+	else:
+		target_zoom = 1.0
+		$Camera2D.zoom = Vector2.ONE * target_zoom
 
 
 func _physics_process(delta: float) -> void:
 	check_inputs()
 	move()
 	update_animation(delta)
+	update_zoom(delta)
 	define_sync_state()
 
 
@@ -89,6 +102,37 @@ func check_inputs() -> void:
 	if Input.is_action_just_pressed("sit"):
 		is_sitting_local = not is_sitting_local
 		InstanceClient.current.request_data(&"state.sit", Callable(), {"on": is_sitting_local})
+
+
+func _input(event: InputEvent) -> void:
+	# Handle mouse wheel zoom
+	if event is InputEventMouseButton:
+		match event.button_index:
+			MOUSE_BUTTON_WHEEL_UP:
+				# Zoom in
+				adjust_zoom(zoom_speed)
+			MOUSE_BUTTON_WHEEL_DOWN:
+				# Zoom out
+				adjust_zoom(-zoom_speed)
+
+
+func adjust_zoom(zoom_delta: float) -> void:
+	# Don't zoom if user is typing in UI
+	if _is_typing_in_ui():
+		return
+	
+	# Update target zoom
+	target_zoom = clampf(target_zoom + zoom_delta, min_zoom, max_zoom)
+	
+	# Update settings for persistence
+	Events.settings["zoom"] = target_zoom
+
+
+func update_zoom(delta: float) -> void:
+	# Smoothly transition to target zoom
+	var current_zoom = $Camera2D.zoom.x
+	var new_zoom = move_toward(current_zoom, target_zoom, delta * zoom_transition_speed)
+	$Camera2D.zoom = Vector2.ONE * new_zoom
 
 
 func update_animation(delta: float) -> void:

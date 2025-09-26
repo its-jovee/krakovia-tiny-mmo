@@ -43,4 +43,3 @@ func data_request_handler(
 		"remaining": best.remaining_amount,
 		"pool": best.pool_amount,
 	}
-

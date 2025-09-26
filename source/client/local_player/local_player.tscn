@@ -15,3 +15,6 @@ script = ExtResource("3_7fqr5")
 
 [node name="AnimatedSprite2D" parent="." index="5"]
 frame_progress = 0.0
+
+[node name="ProgressBar" parent="." index="9"]
+visible = false
