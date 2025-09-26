@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=8 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://l1v1g3n3rgybr" path="res://source/client/ui/hud/energy_bar/energy_bar.tscn" id="3_energy"]
 [ext_resource type="Script" uid="uid://pkprr0ll1y44" path="res://source/client/ui/hud/item_slots.gd" id="4_8qpw0"]
 [ext_resource type="Script" uid="uid://brq8mxox5bclj" path="res://source/client/ui/hud/menu_overlay.gd" id="4_cx7qp"]
+[ext_resource type="PackedScene" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rchld")
@@ -13,6 +14,8 @@ script = ExtResource("1_rchld")
 [node name="HealthBar" parent="." instance=ExtResource("2_klco5")]
 
 [node name="EnergyBar" parent="." instance=ExtResource("3_energy")]
+[node name="HarvestingPanel" parent="." instance=ExtResource("5_harv")]
+
 
 [node name="MenuButton" type="Button" parent="."]
 offset_left = 885.0

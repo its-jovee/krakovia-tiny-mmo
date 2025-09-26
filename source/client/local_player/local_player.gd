@@ -75,6 +75,11 @@ func check_inputs() -> void:
 	if interact_input:
 		# Toggle join/leave harvesting (iteration 0 test)
 		InstanceClient.current.request_data(&"harvest.leave", Callable(), {})
+		# Optimistically hide/reset HUD; it will re-show on joined event if join succeeds
+		InstanceClient.local_harvest_node = ""
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("reset"):
+			panel.reset()
 		InstanceClient.current.request_data(&"harvest.join", Callable(), {})
 
 

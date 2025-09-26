@@ -56,8 +56,17 @@ func _ready() -> void:
 		if data.get("peer", -1) == multiplayer.get_unique_id():
 			if data.get("type", StringName("")) == &"joined":
 				local_harvest_node = String(data.get("node", ""))
+				var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+				if ui_hud and ui_hud is Control:
+					(ui_hud as Control).visible = true
 			elif data.get("type", StringName("")) == &"left":
 				local_harvest_node = ""
+				var ui_hud2: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+				if ui_hud2:
+					if ui_hud2.has_method("reset"):
+						ui_hud2.reset()
+					elif ui_hud2 is Control:
+						(ui_hud2 as Control).visible = false
 	)
 
 	# Harvesting status logs (iteration 0)
@@ -65,6 +74,14 @@ func _ready() -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.status:", data)
+		# Safety: if we no longer track a local node, ensure panel is hidden/reset
+		if local_harvest_node == "":
+			var pnl: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+			if pnl and pnl.has_method("reset"):
+				pnl.reset()
+		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if ui_hud and ui_hud.has_method("on_status"):
+			ui_hud.on_status(data)
 	)
 
 	# Harvesting distribution logs (iteration 0)
@@ -85,18 +102,27 @@ func _ready() -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.encourage.session:", data)
+		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if ui_hud and ui_hud.has_method("on_session"):
+			ui_hud.on_session(data)
 	)
 
 	subscribe(&"harvest.encourage.hit", func(data: Dictionary) -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.encourage.hit:", data)
+		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if ui_hud and ui_hud.has_method("on_hit"):
+			ui_hud.on_hit(data)
 	)
 
 	subscribe(&"harvest.encourage.end", func(data: Dictionary) -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.encourage.end:", data)
+		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if ui_hud and ui_hud.has_method("on_end"):
+			ui_hud.on_end(data)
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerClient.new()
@@ -151,6 +177,12 @@ func despawn_player(player_id: int) -> void:
 	if player and player != local_player:
 		player.queue_free()
 	players_by_peer_id.erase(player_id)
+	# Safety: if this is the local player, reset harvesting panel
+	if player_id == multiplayer.get_unique_id():
+		local_harvest_node = ""
+		var pnl: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if pnl and pnl.has_method("reset"):
+			pnl.reset()
 #endregion
 
 
