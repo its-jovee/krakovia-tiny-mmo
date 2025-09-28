@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://5wv1gfwppcnf"]
+[gd_scene load_steps=19 format=3 uid="uid://5wv1gfwppcnf"]
 
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_sg1qr"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_74q4y"]
 [ext_resource type="PackedScene" uid="uid://6ds5d0praaft" path="res://source/client/gateway/ui/password_strength_indicator.tscn" id="2_strength"]
+[ext_resource type="PackedScene" uid="uid://b8x7y9z2a1b2d" path="res://source/client/gateway/ui/handle_validation_indicator.tscn" id="3_validation"]
 [ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_1c3kr"]
 [ext_resource type="Texture2D" uid="uid://cn5blfyqokda6" path="res://assets/sprites/gui/backgrounds/fairy_forest.png" id="4_uvr2v"]
 [ext_resource type="FontFile" uid="uid://cehc3gujked8x" path="res://assets/fonts/Cinzel/static/Cinzel-Bold.ttf" id="5_opc3y"]
@@ -205,6 +206,10 @@ size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your player handle here"
 
+[node name="HandleValidationIndicator" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_validation")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -306,6 +311,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your player handle here"
+
+[node name="HandleValidationIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("3_validation")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
 layout_mode = 2

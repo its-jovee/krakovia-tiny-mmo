@@ -114,13 +114,13 @@ func create_account_request(username: String, password: String, is_guest: bool) 
 		result_code = 1
 	elif username.length() < 3:
 		result_code = 2
-	elif username.length() > 12:
+	elif username.length() > 20:
 		result_code = 3
 	elif password.is_empty():
 		result_code = 4
 	elif password.length() < 6:
 		result_code = 5
-	elif password.length() > 30:
+	elif password.length() > 32:
 		result_code = 6
 	
 	if result_code == OK:

@@ -1,9 +1,10 @@
 extends Control#can be refactor, 350 lines script too much?
 
 
-# Helper class
+# Helper classes
 const CredentialsUtils = preload("res://source/common/utils/credentials_utils.gd")
 const GatewayApi = preload("res://source/common/network/gateway_api.gd")
+const ErrorMessages = preload("res://source/common/utils/error_messages.gd")
 
 @export var world_server: WorldClient
 
@@ -74,6 +75,9 @@ func _ready() -> void:
 	# Setup Remember Me functionality
 	_setup_remember_me()
 	
+	# Setup handle validation indicators
+	_setup_handle_validation_indicators()
+	
 	# Check for saved credentials on startup
 	_check_saved_credentials()
 
@@ -126,6 +130,18 @@ func _setup_remember_me() -> void:
 	# Connect Remember Me checkbox signal
 	var remember_me_checkbox: CheckBox = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/RememberMeCheckBox
 	remember_me_checkbox.toggled.connect(_on_remember_me_toggled)
+
+
+func _setup_handle_validation_indicators() -> void:
+	# Setup login handle validation indicator
+	var login_handle_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
+	var login_handle_indicator = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HandleValidationIndicator
+	login_handle_indicator.setup_for_handle(login_handle_edit)
+	
+	# Setup create account handle validation indicator
+	var create_handle_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
+	var create_handle_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HandleValidationIndicator
+	create_handle_indicator.setup_for_handle(create_handle_edit)
 
 
 func _on_remember_me_toggled(enabled: bool) -> void:
@@ -200,17 +216,27 @@ func do_request(
 	var args: Array = await http_request.request_completed
 	var result: int = args[0]
 	if result != OK:
-		print("ERROR?, TIMEOUT?")
-		return {"error": 1, "ERROR?": "TIMEOUT?"}
+		# Network error occurred
+		var error_data = ErrorMessages.get_network_error_message("connection_failed")
+		return {"error": error_data, "network_error": true}
 	
 	var response_code: int = args[1]
 	var headers: PackedStringArray = args[2]
 	var body: PackedByteArray = args[3]
 	
+	# Check for HTTP error codes
+	if response_code >= 400:
+		var error_data = ErrorMessages.get_network_error_message("server_unavailable")
+		return {"error": error_data, "network_error": true}
+	
+	# Parse response
 	var data = JSON.parse_string(body.get_string_from_ascii())
 	if data is Dictionary:
 		return data
-	return {"error": 1}
+	
+	# Invalid response format
+	var error_data = ErrorMessages.get_error_message("server_error_generic")
+	return {"error": error_data, "network_error": true}
 
 
 func _show(next: Control, can_back: bool = true) -> void:
@@ -245,10 +271,22 @@ func _on_login_login_button_pressed() -> void:
 	
 	var login_button: Button = $LoginPanel/VBoxContainer/VBoxContainer/LoginButton
 	login_button.disabled = true
-	if (
-		CredentialsUtils.validate_handle(handle).code != CredentialsUtils.HandleError.OK
-		or CredentialsUtils.validate_password(password).code != CredentialsUtils.UsernameError.OK
-	):
+	
+	# Validate handle
+	var handle_result = CredentialsUtils.validate_handle(handle)
+	if handle_result.code != CredentialsUtils.HandleError.OK:
+		var error_data = ErrorMessages.get_validation_error_message(handle_result.code, "handle")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
+		login_button.disabled = false
+		return
+	
+	# Validate password
+	var password_result = CredentialsUtils.validate_password(password)
+	if password_result.code != CredentialsUtils.UsernameError.OK:
+		var error_data = ErrorMessages.get_validation_error_message(password_result.code, "password")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		login_button.disabled = false
 		return
 
@@ -260,36 +298,32 @@ func _on_login_login_button_pressed() -> void:
 		GatewayApi.KEY_TOKEN_ID: token}
 	)
 	if d.has("error"):
-		var error_message: String = "Login failed."
-		var error_code = d["error"]
+		var error_data: Dictionary
 		
-		# Handle both integer and dictionary error formats
-		if error_code is int:
-			if error_code == 50:
-				error_message = "Invalid handle or password. Please check your credentials."
-			elif error_code == 51:
-				error_message = "This account is already logged in elsewhere."
-			else:
-				error_message = "Login failed with error code: " + str(error_code)
-		elif error_code is Dictionary:
-			# If error is a dictionary, try to get the error code from it
-			if error_code.has("code"):
-				var code = error_code["code"]
-				if code == 50:
-					error_message = "Invalid handle or password. Please check your credentials."
-				elif code == 51:
-					error_message = "This account is already logged in elsewhere."
-				else:
-					error_message = "Login failed with error code: " + str(code)
-			else:
-				error_message = "Login failed: " + str(error_code)
+		# Check if it's a network error
+		if d.has("network_error") and d["network_error"]:
+			error_data = d["error"]  # Already formatted error data
 		else:
-			error_message = "Login failed with error: " + str(error_code)
+			var error_code = d["error"]
+			
+			# Handle both integer and dictionary error formats
+			if error_code is int:
+				error_data = ErrorMessages.get_server_error_message(error_code)
+			elif error_code is Dictionary:
+				# If error is a dictionary, try to get the error code from it
+				if error_code.has("code"):
+					error_data = ErrorMessages.get_server_error_message(error_code["code"])
+				else:
+					error_data = ErrorMessages.get_error_message("server_error_generic")
+			else:
+				error_data = ErrorMessages.get_error_message("server_error_generic")
 		
 		# Clear saved credentials on login failure
 		_clear_saved_credentials()
 		
-		await popup_panel.confirm_message(error_message)
+		# Display enhanced error message
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		login_button.disabled = false
 		return
 	
@@ -429,25 +463,35 @@ func create_account() -> void:
 	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
 	var password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
 
+	# Check password match
 	if password_edit.text != password_repeat_edit.text:
-		await popup_panel.confirm_message("Passwords don't match")
+		var error_data = ErrorMessages.get_error_message("password_match_failed")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		return
 	
-	var result: Dictionary
-	result = CredentialsUtils.validate_handle(handle_edit.text)
-	if result.code != CredentialsUtils.HandleError.OK:
-		await popup_panel.confirm_message("Player Handle:\n" + result.message)
+	# Validate handle
+	var handle_result = CredentialsUtils.validate_handle(handle_edit.text)
+	if handle_result.code != CredentialsUtils.HandleError.OK:
+		var error_data = ErrorMessages.get_validation_error_message(handle_result.code, "handle")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		return
 	
 	# Check password strength - prevent weak passwords
 	var strength_result: Dictionary = CredentialsUtils.calculate_password_strength(password_edit.text)
 	if strength_result["strength"] == CredentialsUtils.PasswordStrength.WEAK:
-		await popup_panel.confirm_message("Password is too weak. Please choose a stronger password with more characters and variety.")
+		var error_data = ErrorMessages.get_error_message("password_weak")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		return
 	
-	result = CredentialsUtils.validate_password(password_edit.text)
-	if result.code != CredentialsUtils.UsernameError.OK:
-		await popup_panel.confirm_message("Password:\n" + result.message)
+	# Validate password
+	var password_result = CredentialsUtils.validate_password(password_edit.text)
+	if password_result.code != CredentialsUtils.UsernameError.OK:
+		var error_data = ErrorMessages.get_validation_error_message(password_result.code, "password")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		return
 	
 	$CreateAccountPanel.hide()
@@ -460,25 +504,18 @@ func create_account() -> void:
 		GatewayApi.KEY_TOKEN_ID: token}
 	)
 	if d.has("error"):
-		var error_message: String = "Account creation failed."
-		if d["error"] == 30:
-			error_message = "This player handle is already taken. Please choose a different handle."
-		elif d["error"] == 1:
-			error_message = "Handle is required."
-		elif d["error"] == 2:
-			error_message = "Handle must be at least 3 characters long."
-		elif d["error"] == 3:
-			error_message = "Handle must be no more than 20 characters long."
-		elif d["error"] == 4:
-			error_message = "Password is required."
-		elif d["error"] == 5:
-			error_message = "Password must be at least 6 characters long."
-		elif d["error"] == 6:
-			error_message = "Password must be no more than 32 characters long."
-		else:
-			error_message = "Account creation failed with error code: " + str(d["error"])
+		var error_data: Dictionary
 		
-		await popup_panel.confirm_message(error_message)
+		# Check if it's a network error
+		if d.has("network_error") and d["network_error"]:
+			error_data = d["error"]  # Already formatted error data
+		else:
+			var error_code = d["error"]
+			error_data = ErrorMessages.get_server_error_message(error_code)
+		
+		# Display enhanced error message
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
 		$CreateAccountPanel.show()
 		return
 	
