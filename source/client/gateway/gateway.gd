@@ -60,6 +60,25 @@ func _ready() -> void:
 			animated_sprite_2d.sprite_frames = sprite
 			animated_sprite_2d.play(&"run")
 		)
+	
+	# Setup password strength indicators
+	_setup_password_strength_indicators()
+
+
+func _setup_password_strength_indicators() -> void:
+	# Setup login password strength indicator
+	var login_password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
+	var login_strength_indicator = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/PasswordStrengthIndicator
+	login_strength_indicator.setup_for_password(login_password_edit)
+	
+	# Setup create account password strength indicators
+	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
+	var create_password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/LineEdit
+	var create_strength_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/PasswordStrengthIndicator
+	var create_match_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/PasswordMatchIndicator
+	
+	create_strength_indicator.setup_for_password(create_password_edit)
+	create_match_indicator.setup_for_password_repeat(create_password_repeat_edit, create_password_edit)
 
 
 func do_request(
@@ -301,6 +320,13 @@ func create_account() -> void:
 	if result.code != CredentialsUtils.HandleError.OK:
 		await popup_panel.confirm_message("Player Handle:\n" + result.message)
 		return
+	
+	# Check password strength - prevent weak passwords
+	var strength_result: Dictionary = CredentialsUtils.calculate_password_strength(password_edit.text)
+	if strength_result["strength"] == CredentialsUtils.PasswordStrength.WEAK:
+		await popup_panel.confirm_message("Password is too weak. Please choose a stronger password with more characters and variety.")
+		return
+	
 	result = CredentialsUtils.validate_password(password_edit.text)
 	if result.code != CredentialsUtils.UsernameError.OK:
 		await popup_panel.confirm_message("Password:\n" + result.message)

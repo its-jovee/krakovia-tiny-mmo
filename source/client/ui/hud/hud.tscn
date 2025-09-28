@@ -30,6 +30,7 @@ offset_bottom = 56.0
 text = "Menu"
 
 [node name="LevelupButton" type="Button" parent="."]
+visible = false
 offset_left = 826.0
 offset_top = 17.0
 offset_right = 879.0
@@ -93,6 +94,7 @@ text = "Characters stats:
 visible = false
 
 [node name="ItemSlots" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 6
 anchor_left = 1.0

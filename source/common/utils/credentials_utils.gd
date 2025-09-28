@@ -8,6 +8,13 @@ const HANDLE_RESERVED: PackedStringArray = ["admin", "moderator", "guest", "syst
 const PASSWORD_MIN_LEN: int = 6
 const PASSWORD_MAX_LEN: int = 32
 
+enum PasswordStrength {
+	WEAK,
+	FAIR,
+	GOOD,
+	STRONG
+}
+
 enum HandleError {
 	OK,
 	EMPTY,
@@ -80,3 +87,84 @@ static func _fail_handle(code: HandleError, message: String) -> Dictionary:
 
 static func _fail_username(code: UsernameError, message: String) -> Dictionary:
 	return {"code": code, "message": message}
+
+
+static func calculate_password_strength(password: String) -> Dictionary:
+	if password.is_empty():
+		return {"strength": PasswordStrength.WEAK, "score": 0, "message": "Password required"}
+	
+	var score: int = 0
+	var message: String = ""
+	
+	# Length scoring
+	if password.length() >= 6:
+		score += 1
+	if password.length() >= 8:
+		score += 1
+	if password.length() >= 12:
+		score += 1
+	
+	# Character variety scoring
+	var has_lower: bool = false
+	var has_upper: bool = false
+	var has_digit: bool = false
+	var has_special: bool = false
+	
+	for char in password:
+		if char >= 'a' and char <= 'z':
+			has_lower = true
+		elif char >= 'A' and char <= 'Z':
+			has_upper = true
+		elif char >= '0' and char <= '9':
+			has_digit = true
+		else:
+			has_special = true
+	
+	if has_lower:
+		score += 1
+	if has_upper:
+		score += 1
+	if has_digit:
+		score += 1
+	if has_special:
+		score += 1
+	
+	# Pattern detection (penalties)
+	var has_repeated: bool = false
+	for i in range(password.length() - 1):
+		if password[i] == password[i + 1]:
+			has_repeated = true
+			break
+	
+	if has_repeated:
+		score -= 1
+	
+	# Common password detection (basic)
+	var common_passwords: PackedStringArray = ["password", "123456", "qwerty", "abc123", "password123"]
+	if common_passwords.has(password.to_lower()):
+		score = 0
+	
+	# Determine strength level
+	var strength: PasswordStrength
+	if score <= 2:
+		strength = PasswordStrength.WEAK
+		message = "Too weak. Add more characters and variety."
+	elif score <= 4:
+		strength = PasswordStrength.FAIR
+		message = "Fair strength. Consider adding more variety."
+	elif score <= 6:
+		strength = PasswordStrength.GOOD
+		message = "Good strength!"
+	else:
+		strength = PasswordStrength.STRONG
+		message = "Excellent strength!"
+	
+	return {
+		"strength": strength,
+		"score": score,
+		"message": message,
+		"has_lower": has_lower,
+		"has_upper": has_upper,
+		"has_digit": has_digit,
+		"has_special": has_special
+	}
