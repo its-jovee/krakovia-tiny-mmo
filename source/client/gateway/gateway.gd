@@ -63,22 +63,53 @@ func _ready() -> void:
 	
 	# Setup password strength indicators
 	_setup_password_strength_indicators()
+	
+	# Setup password toggle buttons
+	_setup_password_toggles()
 
 
 func _setup_password_strength_indicators() -> void:
 	# Setup login password strength indicator
-	var login_password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
+	var login_password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
 	var login_strength_indicator = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/PasswordStrengthIndicator
 	login_strength_indicator.setup_for_password(login_password_edit)
 	
 	# Setup create account password strength indicators
-	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
-	var create_password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/LineEdit
+	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var create_password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
 	var create_strength_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/PasswordStrengthIndicator
 	var create_match_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/PasswordMatchIndicator
 	
 	create_strength_indicator.setup_for_password(create_password_edit)
 	create_match_indicator.setup_for_password_repeat(create_password_repeat_edit, create_password_edit)
+
+
+func _setup_password_toggles() -> void:
+	# Setup login password toggle
+	var login_password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var login_toggle_button: Button = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ToggleButton
+	login_toggle_button.pressed.connect(_on_password_toggle_pressed.bind(login_password_edit, login_toggle_button))
+	
+	# Setup create account password toggle
+	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var create_toggle_button: Button = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ToggleButton
+	create_toggle_button.pressed.connect(_on_password_toggle_pressed.bind(create_password_edit, create_toggle_button))
+	
+	# Setup password repeat toggle
+	var repeat_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
+	var repeat_toggle_button: Button = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/ToggleButton
+	repeat_toggle_button.pressed.connect(_on_password_toggle_pressed.bind(repeat_password_edit, repeat_toggle_button))
+
+
+func _on_password_toggle_pressed(password_edit: LineEdit, toggle_button: Button) -> void:
+	if password_edit.secret:
+		# Show password
+		password_edit.secret = false
+		toggle_button.text = "Hide"
+	else:
+		# Hide password
+		password_edit.secret = true
+		toggle_button.text = "Show"
 
 
 func do_request(
@@ -144,7 +175,7 @@ func _on_login_button_pressed() -> void:
 
 func _on_login_login_button_pressed() -> void:
 	var handle_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
-	var password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
+	var password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
 	
 	var handle: String = handle_edit.text
 	var password: String = password_edit.text
@@ -308,8 +339,8 @@ func _on_create_character_button_pressed() -> void:
 
 func create_account() -> void:
 	var handle_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
-	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
-	var password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/LineEdit
+	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
 
 	if password_edit.text != password_repeat_edit.text:
 		await popup_panel.confirm_message("Passwords don't match")

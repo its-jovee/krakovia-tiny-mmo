@@ -213,10 +213,21 @@ layout_mode = 2
 text = "Password"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your password here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
 
 [node name="PasswordStrengthIndicator" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_strength")]
 custom_minimum_size = Vector2(0, 32)
@@ -298,10 +309,21 @@ layout_mode = 2
 text = "Password"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your password here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
 
 [node name="PasswordStrengthIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_strength")]
 custom_minimum_size = Vector2(0, 32)
@@ -315,10 +337,21 @@ layout_mode = 2
 text = "Password Repeat"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3"]
 layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your password again here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
 
 [node name="PasswordMatchIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3" instance=ExtResource("2_strength")]
 visible = false
