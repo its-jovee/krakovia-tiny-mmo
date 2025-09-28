@@ -230,8 +230,14 @@ theme_override_font_sizes/font_size = 12
 text = "Show"
 
 [node name="PasswordStrengthIndicator" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_strength")]
+visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+
+[node name="RememberMeCheckBox" type="CheckBox" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Remember Me"
 
 [node name="LoginButton" type="Button" parent="LoginPanel/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(420, 56)

@@ -16,6 +16,10 @@ var selected_skin: String = "rogue"
 
 var menu_stack: Array[Control]
 
+# Remember Me functionality
+var remember_me_enabled: bool = false
+var stored_credentials: Dictionary = {}
+
 @onready var main_panel: PanelContainer = $MainPanel
 @onready var login_panel: PanelContainer = $LoginPanel
 @onready var popup_panel: PanelContainer = $PopupPanel
@@ -66,6 +70,12 @@ func _ready() -> void:
 	
 	# Setup password toggle buttons
 	_setup_password_toggles()
+	
+	# Setup Remember Me functionality
+	_setup_remember_me()
+	
+	# Check for saved credentials on startup
+	_check_saved_credentials()
 
 
 func _setup_password_strength_indicators() -> void:
@@ -110,6 +120,59 @@ func _on_password_toggle_pressed(password_edit: LineEdit, toggle_button: Button)
 		# Hide password
 		password_edit.secret = true
 		toggle_button.text = "Show"
+
+
+func _setup_remember_me() -> void:
+	# Connect Remember Me checkbox signal
+	var remember_me_checkbox: CheckBox = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/RememberMeCheckBox
+	remember_me_checkbox.toggled.connect(_on_remember_me_toggled)
+
+
+func _on_remember_me_toggled(enabled: bool) -> void:
+	remember_me_enabled = enabled
+	# If user unchecks Remember Me, clear saved credentials
+	if not enabled:
+		_clear_saved_credentials()
+
+
+func _check_saved_credentials() -> void:
+	# Check if we have saved credentials
+	var config = ConfigFile.new()
+	var err = config.load("user://remember_me.cfg")
+	if err == OK:
+		var handle = config.get_value("credentials", "handle", "")
+		if handle != "":
+			stored_credentials["handle"] = handle
+			_prefill_login_form()
+
+
+func _prefill_login_form() -> void:
+	if stored_credentials.has("handle"):
+		# Pre-fill the login form with saved handle
+		var handle_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
+		var remember_me_checkbox: CheckBox = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/RememberMeCheckBox
+		
+		handle_edit.text = stored_credentials["handle"]
+		remember_me_checkbox.button_pressed = true
+
+
+func _save_credentials(handle: String, password: String) -> void:
+	if remember_me_enabled:
+		stored_credentials["handle"] = handle
+		
+		# Only save the handle, not the password for security
+		var config = ConfigFile.new()
+		config.set_value("credentials", "handle", handle)
+		config.save("user://remember_me.cfg")
+
+
+func _clear_saved_credentials() -> void:
+	stored_credentials.clear()
+	
+	# Delete config file for both web and desktop builds
+	var dir = DirAccess.open("user://")
+	if dir:
+		dir.remove("remember_me.cfg")
 
 
 func do_request(
@@ -198,16 +261,40 @@ func _on_login_login_button_pressed() -> void:
 	)
 	if d.has("error"):
 		var error_message: String = "Login failed."
-		if d["error"] == 50:
-			error_message = "Invalid handle or password. Please check your credentials."
-		elif d["error"] == 51:
-			error_message = "This account is already logged in elsewhere."
+		var error_code = d["error"]
+		
+		# Handle both integer and dictionary error formats
+		if error_code is int:
+			if error_code == 50:
+				error_message = "Invalid handle or password. Please check your credentials."
+			elif error_code == 51:
+				error_message = "This account is already logged in elsewhere."
+			else:
+				error_message = "Login failed with error code: " + str(error_code)
+		elif error_code is Dictionary:
+			# If error is a dictionary, try to get the error code from it
+			if error_code.has("code"):
+				var code = error_code["code"]
+				if code == 50:
+					error_message = "Invalid handle or password. Please check your credentials."
+				elif code == 51:
+					error_message = "This account is already logged in elsewhere."
+				else:
+					error_message = "Login failed with error code: " + str(code)
+			else:
+				error_message = "Login failed: " + str(error_code)
 		else:
-			error_message = "Login failed with error code: " + str(d["error"])
+			error_message = "Login failed with error: " + str(error_code)
+		
+		# Clear saved credentials on login failure
+		_clear_saved_credentials()
 		
 		await popup_panel.confirm_message(error_message)
 		login_button.disabled = false
 		return
+	
+	# Save credentials on successful login if Remember Me is enabled
+	_save_credentials(handle, password)
 	
 	populate_worlds(d.get("w", {}))
 	fill_connection_info(d["a"]["name"], d["a"]["id"])
