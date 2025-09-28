@@ -27,10 +27,10 @@ func get_player_resource(player_id: int) -> PlayerResource:
 	return null
 
 
-func create_player_character(username: String, character_data: Dictionary) -> int:
+func create_player_character(handle: String, character_data: Dictionary) -> int:
 	if (
-		accounts.has(username)
-		and accounts[username].size() > max_character_per_account
+		accounts.has(handle)
+		and accounts[handle].size() > max_character_per_account
 	):
 		return -1
 	
@@ -46,22 +46,22 @@ func create_player_character(username: String, character_data: Dictionary) -> in
 	player_character.available_attributes_points = 10
 	
 	player_character.init(
-		player_id, username,
+		player_id, handle,
 		character_data["name"], character_data["class"]
 	)
 	players[player_id] = player_character
-	if accounts.has(username):
-		accounts[username].append(player_id)
+	if accounts.has(handle):
+		accounts[handle].append(player_id)
 	else:
-		accounts[username] = [player_id] as PackedInt32Array
+		accounts[handle] = [player_id] as PackedInt32Array
 	return player_id
 
 
-func get_account_characters(account_name: String) -> Dictionary:
+func get_account_characters(handle: String) -> Dictionary:
 	var data: Dictionary#[int, Dictionary]
 	
-	if accounts.has(account_name):
-		for player_id: int in accounts[account_name]:
+	if accounts.has(handle):
+		for player_id: int in accounts[handle]:
 			var player_character := get_player_resource(player_id)
 			if player_character:
 				data[player_id] = {

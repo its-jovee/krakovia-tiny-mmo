@@ -53,26 +53,26 @@ func player_disconnected(_username: String) -> void:
 
 
 @rpc("authority")
-func create_player_character_request(gateway_id: int, peer_id: int, username: String, character_data: Dictionary) -> void:
+func create_player_character_request(gateway_id: int, peer_id: int, handle: String, character_data: Dictionary) -> void:
 	player_character_creation_result.rpc_id(
 		1,
 		gateway_id,
 		peer_id,
-		username,
-		database.player_data.create_player_character(username, character_data)
+		handle,
+		database.player_data.create_player_character(handle, character_data)
 	)
 
 
 @rpc("any_peer")
-func player_character_creation_result(_gateway_id: int, _peer_id: int, _username: String, _result_code: int) -> void:
+func player_character_creation_result(_gateway_id: int, _peer_id: int, _handle: String, _result_code: int) -> void:
 	pass
 
 
 @rpc("authority")
-func request_player_characters(gateway_id: int, peer_id: int, username: String) -> void:
+func request_player_characters(gateway_id: int, peer_id: int, handle: String) -> void:
 	receive_player_characters.rpc_id(
 		1,
-		database.player_data.get_account_characters(username),
+		database.player_data.get_account_characters(handle),
 		gateway_id,
 		peer_id
 	)
@@ -87,19 +87,19 @@ func receive_player_characters(_gateway_id: int, _peer_id: int, _player_characte
 func request_login(
 	gateway_id: int,
 	peer_id: int,
-	username: String,
+	handle: String,
 	character_id: int
 ) -> void:
 	if (
 		database.player_data.players.has(character_id)
-		and database.player_data.players[character_id].account_name == username
+		and database.player_data.players[character_id].account_name == handle
 	):
 		result_login.rpc_id(
 			1,
 			OK,
 			gateway_id,
 			peer_id,
-			username,
+			handle,
 			character_id,
 		)
 
@@ -109,7 +109,7 @@ func result_login(
 	_result_code: int,
 	_gateway_id: int,
 	_peer_id: int,
-	_username: String,
+	_handle: String,
 	_character_id: int
 ) -> void:
 	pass

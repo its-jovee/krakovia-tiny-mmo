@@ -18,16 +18,16 @@ func load_account_collection() -> void:
 		account_collection = AccountResourceCollection.new()
 
 
-func username_exists(username: String) -> bool:
-	if account_collection.collection.has(username):
+func handle_exists(handle: String) -> bool:
+	if account_collection.collection.has(handle):
 		return true
 	return false
 
 
-func validate_credentials(username: String, password: String) -> AccountResource:
+func validate_credentials(handle: String, password: String) -> AccountResource:
 	var account: AccountResource = null
-	if account_collection.collection.has(username):
-		account = account_collection.collection[username]
+	if account_collection.collection.has(handle):
+		account = account_collection.collection[handle]
 		if account.password == password:
 			return account
 	return null

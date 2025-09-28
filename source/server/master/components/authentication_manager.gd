@@ -18,16 +18,16 @@ func generate_random_token() -> String:
 	return password
 
 
-func create_account(username: String, password: String, is_guest: bool) -> AccountResource:
-	if not is_guest and database.username_exists(username):
+func create_account(handle: String, password: String, is_guest: bool) -> AccountResource:
+	if not is_guest and database.handle_exists(handle):
 		return null
 	var account_id: int = database.account_collection.get_new_account_id()
 	if is_guest:
-		username = "guest%d" % account_id
+		handle = "guest%d" % account_id
 		password = generate_random_token()
 	var new_account: AccountResource = AccountResource.new()
-	new_account.init(account_id, username, password)
-	database.account_collection.collection[username] = new_account
+	new_account.init(account_id, handle, password)
+	database.account_collection.collection[handle] = new_account
 	# Save on disk should only occur at specific times.
 	# Temporary work around for debug purpose.
 	database.save_account_collection()

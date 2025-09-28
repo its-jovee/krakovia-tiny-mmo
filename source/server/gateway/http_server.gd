@@ -46,7 +46,7 @@ func handle_login(payload: Dictionary) -> Dictionary:
 	gateway_manager_client.login_request.rpc_id(
 		1,
 		payload["t-id"],
-		payload["u"],
+		payload["h"],
 		payload["p"]
 	)
 	while true:
@@ -69,7 +69,7 @@ func handle_character_create(payload: Dictionary) -> Dictionary:
 	gateway_manager_client.create_player_character_request.rpc_id(
 		1,
 		payload["t-id"],
-		payload["a-u"],
+		payload["a-h"],
 		payload["data"],
 		payload["w-id"]
 	)
@@ -84,7 +84,7 @@ func handle_world_characters(payload: Dictionary) -> Dictionary:
 	gateway_manager_client.request_player_characters.rpc_id(
 		1,
 		payload["t-id"],
-		payload["a-u"],
+		payload["a-h"],
 		payload["w-id"]
 	)
 	while true:
@@ -98,7 +98,7 @@ func handle_world_enter(payload: Dictionary) -> Dictionary:
 	gateway_manager_client.request_login.rpc_id(
 		1,
 		payload["t-id"],
-		payload["a-u"],
+		payload["a-h"],
 		payload["w-id"],
 		payload["c-id"],
 	)
@@ -113,7 +113,7 @@ func handle_account_creation(payload: Dictionary) -> Dictionary:
 	gateway_manager_client.create_account_request.rpc_id(
 		1,
 		payload["t-id"],
-		payload["u"],
+		payload["h"],
 		payload["p"],
 		false
 	)

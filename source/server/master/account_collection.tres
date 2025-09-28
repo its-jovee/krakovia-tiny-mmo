@@ -1,384 +1,327 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=66 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=67 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
 
 [sub_resource type="Resource" id="Resource_e6eac"]
 script = ExtResource("1_wgikn")
-username = "guest0"
 password = "p6v3ml+nghkx"
 
 [sub_resource type="Resource" id="Resource_wgikn"]
 script = ExtResource("1_wgikn")
 id = 1
-username = "guest1"
 password = "eng+g#oj1h69"
 
 [sub_resource type="Resource" id="Resource_sv77w"]
 script = ExtResource("1_wgikn")
 id = 10
-username = "guest10"
 password = "nhh-akqgje+9"
 
 [sub_resource type="Resource" id="Resource_qe1k7"]
 script = ExtResource("1_wgikn")
 id = 11
-username = "guest11"
 password = "3c77n0m8yv0k"
 
 [sub_resource type="Resource" id="Resource_coowf"]
 script = ExtResource("1_wgikn")
 id = 12
-username = "guest12"
 password = "28z19u-rn0js"
 
 [sub_resource type="Resource" id="Resource_pexyu"]
 script = ExtResource("1_wgikn")
 id = 13
-username = "guest13"
 password = "1+w#s1co4dio"
 
 [sub_resource type="Resource" id="Resource_xxt2i"]
 script = ExtResource("1_wgikn")
 id = 14
-username = "guest14"
 password = "guo2qjq+422n"
 
 [sub_resource type="Resource" id="Resource_dw4nj"]
 script = ExtResource("1_wgikn")
 id = 15
-username = "guest15"
 password = "2d52uwa22#kn"
 
 [sub_resource type="Resource" id="Resource_6puu8"]
 script = ExtResource("1_wgikn")
 id = 16
-username = "guest16"
 password = "2xtrjkiw7n-3"
 
 [sub_resource type="Resource" id="Resource_2mduh"]
 script = ExtResource("1_wgikn")
 id = 17
-username = "guest17"
 password = "uu47mi5x6q5+"
 
 [sub_resource type="Resource" id="Resource_ukcac"]
 script = ExtResource("1_wgikn")
 id = 18
-username = "guest18"
 password = "qfdztf9i+kj5"
 
 [sub_resource type="Resource" id="Resource_k6705"]
 script = ExtResource("1_wgikn")
 id = 19
-username = "guest19"
 password = "aagw#6x+c7+m"
 
 [sub_resource type="Resource" id="Resource_lbkgn"]
 script = ExtResource("1_wgikn")
 id = 2
-username = "guest2"
 password = "1$-s0dtsnd+l"
 
 [sub_resource type="Resource" id="Resource_15j2d"]
 script = ExtResource("1_wgikn")
 id = 20
-username = "guest20"
 password = "zblvpp$vo-$h"
 
 [sub_resource type="Resource" id="Resource_q7yn4"]
 script = ExtResource("1_wgikn")
 id = 21
-username = "guest21"
 password = "oivq9s1ekglj"
 
 [sub_resource type="Resource" id="Resource_xi1rh"]
 script = ExtResource("1_wgikn")
 id = 22
-username = "guest22"
 password = "o++1i683g5ma"
 
 [sub_resource type="Resource" id="Resource_2elt6"]
 script = ExtResource("1_wgikn")
 id = 23
-username = "guest23"
 password = "x2af#f6fjyx0"
 
 [sub_resource type="Resource" id="Resource_imgnp"]
 script = ExtResource("1_wgikn")
 id = 24
-username = "guest24"
 password = "5hj8ts292xt0"
 
 [sub_resource type="Resource" id="Resource_ux5pu"]
 script = ExtResource("1_wgikn")
 id = 25
-username = "guest25"
 password = "4xv69yooozkm"
 
 [sub_resource type="Resource" id="Resource_tqxbd"]
 script = ExtResource("1_wgikn")
 id = 26
-username = "guest26"
 password = "zche+#47yqyt"
 
 [sub_resource type="Resource" id="Resource_cnwcq"]
 script = ExtResource("1_wgikn")
 id = 27
-username = "guest27"
 password = "0e1f4y4q6mar"
 
 [sub_resource type="Resource" id="Resource_vyv53"]
 script = ExtResource("1_wgikn")
 id = 28
-username = "guest28"
 password = "ta8xzh8ydsc#"
 
 [sub_resource type="Resource" id="Resource_7nsc3"]
 script = ExtResource("1_wgikn")
 id = 29
-username = "guest29"
 password = "r7e32$2orqg$"
 
 [sub_resource type="Resource" id="Resource_5pt73"]
 script = ExtResource("1_wgikn")
 id = 3
-username = "guest3"
 password = "7zs7rxx0f5om"
 
 [sub_resource type="Resource" id="Resource_ttt7q"]
 script = ExtResource("1_wgikn")
 id = 30
-username = "guest30"
 password = "g$9oa3497nzh"
 
 [sub_resource type="Resource" id="Resource_vmyp1"]
 script = ExtResource("1_wgikn")
 id = 31
-username = "guest31"
 password = "4p-48h6$cr9v"
 
 [sub_resource type="Resource" id="Resource_evpwc"]
 script = ExtResource("1_wgikn")
 id = 32
-username = "guest32"
 password = "0va$mj01vctw"
 
 [sub_resource type="Resource" id="Resource_1va16"]
 script = ExtResource("1_wgikn")
 id = 33
-username = "guest33"
 password = "xj1pjn8+oplx"
 
 [sub_resource type="Resource" id="Resource_dy13a"]
 script = ExtResource("1_wgikn")
 id = 34
-username = "guest34"
 password = "5cql8p1xi0-7"
 
 [sub_resource type="Resource" id="Resource_fstae"]
 script = ExtResource("1_wgikn")
 id = 35
-username = "guest35"
 password = "dhc4v9+j#7rc"
 
 [sub_resource type="Resource" id="Resource_lcb2v"]
 script = ExtResource("1_wgikn")
 id = 36
-username = "guest36"
 password = "v39jr0w9hbkl"
 
 [sub_resource type="Resource" id="Resource_2kxt6"]
 script = ExtResource("1_wgikn")
 id = 37
-username = "guest37"
 password = "t3rowcwnvpuq"
 
 [sub_resource type="Resource" id="Resource_ojier"]
 script = ExtResource("1_wgikn")
 id = 38
-username = "guest38"
 password = "-zw4tqawg$x+"
 
 [sub_resource type="Resource" id="Resource_mppfs"]
 script = ExtResource("1_wgikn")
 id = 39
-username = "guest39"
 password = "z5js96e8gee9"
 
 [sub_resource type="Resource" id="Resource_obwkj"]
 script = ExtResource("1_wgikn")
 id = 4
-username = "guest4"
 password = "at+#99z+bgkw"
 
 [sub_resource type="Resource" id="Resource_1cfdd"]
 script = ExtResource("1_wgikn")
 id = 40
-username = "guest40"
 password = "ap6#7c9c1e##"
 
 [sub_resource type="Resource" id="Resource_ut2qt"]
 script = ExtResource("1_wgikn")
 id = 41
-username = "guest41"
 password = "74hzyo$lu4vz"
 
 [sub_resource type="Resource" id="Resource_aj6qi"]
 script = ExtResource("1_wgikn")
 id = 42
-username = "guest42"
 password = "kvy0spq0f#r-"
 
 [sub_resource type="Resource" id="Resource_alm1d"]
 script = ExtResource("1_wgikn")
 id = 43
-username = "guest43"
 password = "17b3nb-pkfx9"
 
 [sub_resource type="Resource" id="Resource_prhyt"]
 script = ExtResource("1_wgikn")
 id = 44
-username = "guest44"
 password = "hd2o52+5a9lj"
 
 [sub_resource type="Resource" id="Resource_expot"]
 script = ExtResource("1_wgikn")
 id = 45
-username = "guest45"
 password = "yl#6y$sv-##w"
 
 [sub_resource type="Resource" id="Resource_h0h7h"]
 script = ExtResource("1_wgikn")
 id = 46
-username = "guest46"
 password = "rbc6q+-ys9vb"
 
 [sub_resource type="Resource" id="Resource_fm6fk"]
 script = ExtResource("1_wgikn")
 id = 47
-username = "guest47"
 password = "i$8k6loc#obk"
 
 [sub_resource type="Resource" id="Resource_g10ro"]
 script = ExtResource("1_wgikn")
 id = 48
-username = "guest48"
 password = "23p6yb#hwe5m"
 
 [sub_resource type="Resource" id="Resource_x3myy"]
 script = ExtResource("1_wgikn")
 id = 49
-username = "guest49"
 password = "pnlmz+02yqnu"
 
 [sub_resource type="Resource" id="Resource_rw0ll"]
 script = ExtResource("1_wgikn")
 id = 5
-username = "guest5"
 password = "gz9qtqc74$4z"
 
 [sub_resource type="Resource" id="Resource_ee0rr"]
 script = ExtResource("1_wgikn")
 id = 50
-username = "guest50"
 password = "xw7duk8-efb0"
 
 [sub_resource type="Resource" id="Resource_34jfk"]
 script = ExtResource("1_wgikn")
 id = 51
-username = "guest51"
 password = "#i#ki$jh8b3r"
 
 [sub_resource type="Resource" id="Resource_vfldh"]
 script = ExtResource("1_wgikn")
 id = 52
-username = "guest52"
 password = "2fcfaikiydzp"
 
 [sub_resource type="Resource" id="Resource_j6wmw"]
 script = ExtResource("1_wgikn")
 id = 53
-username = "guest53"
 password = "suvz-5riv99t"
 
 [sub_resource type="Resource" id="Resource_f0gpb"]
 script = ExtResource("1_wgikn")
 id = 54
-username = "guest54"
 password = "pvt6qqzblk11"
 
 [sub_resource type="Resource" id="Resource_onivn"]
 script = ExtResource("1_wgikn")
 id = 55
-username = "guest55"
 password = "6izxo6l8aff9"
 
 [sub_resource type="Resource" id="Resource_as0vd"]
 script = ExtResource("1_wgikn")
 id = 56
-username = "guest56"
 password = "kojz2sjv08i2"
 
 [sub_resource type="Resource" id="Resource_1auph"]
 script = ExtResource("1_wgikn")
 id = 57
-username = "guest57"
 password = "u+spn-c$fy1s"
 
 [sub_resource type="Resource" id="Resource_aeab5"]
 script = ExtResource("1_wgikn")
 id = 58
-username = "guest58"
 password = "uib8p0x8a$9q"
 
 [sub_resource type="Resource" id="Resource_t5uya"]
 script = ExtResource("1_wgikn")
 id = 59
-username = "guest59"
 password = "g1volsol$aa$"
 
 [sub_resource type="Resource" id="Resource_kbbby"]
 script = ExtResource("1_wgikn")
 id = 6
-username = "guest6"
 password = "9ttu4m#khjds"
 
 [sub_resource type="Resource" id="Resource_defhh"]
 script = ExtResource("1_wgikn")
 id = 60
-username = "guest60"
 password = "zc1yw9kxaj1-"
 
 [sub_resource type="Resource" id="Resource_3pxju"]
 script = ExtResource("1_wgikn")
 id = 61
-username = "guest61"
 password = "agk--yigg-9#"
+
+[sub_resource type="Resource" id="Resource_o2etm"]
+script = ExtResource("1_wgikn")
+id = 62
+password = "phgs2-yof74q"
 
 [sub_resource type="Resource" id="Resource_47dsw"]
 script = ExtResource("1_wgikn")
 id = 7
-username = "guest7"
 password = "27fvokpsd6gx"
 
 [sub_resource type="Resource" id="Resource_w6h2b"]
 script = ExtResource("1_wgikn")
 id = 8
-username = "guest8"
 password = "q1m$iqvt63u5"
 
 [sub_resource type="Resource" id="Resource_7ql8d"]
 script = ExtResource("1_wgikn")
 id = 9
-username = "guest9"
 password = "1f40o-sd6u$w"
 
-[sub_resource type="Resource" id="Resource_o2etm"]
+[sub_resource type="Resource" id="Resource_q2jx2"]
 script = ExtResource("1_wgikn")
-id = 62
-username = "guest62"
-password = "phgs2-yof74q"
+id = 63
+handle = "jovi"
+password = "jovi1610"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -445,6 +388,7 @@ collection = {
 "guest62": SubResource("Resource_o2etm"),
 "guest7": SubResource("Resource_47dsw"),
 "guest8": SubResource("Resource_w6h2b"),
-"guest9": SubResource("Resource_7ql8d")
+"guest9": SubResource("Resource_7ql8d"),
+"jovi": SubResource("Resource_q2jx2")
 }
-next_account_id = 63
+next_account_id = 64

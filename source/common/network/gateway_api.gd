@@ -3,7 +3,7 @@
 ## Shared keys (client + gateway)
 const KEY_TOKEN_ID := "t-id"
 const KEY_ACCOUNT_ID := "a-id"
-const KEY_ACCOUNT_USERNAME := "a-u"
+const KEY_ACCOUNT_HANDLE := "a-h"
 const KEY_WORLD_ID := "w-id"
 const KEY_CHAR_ID := "c-id"
 

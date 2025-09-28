@@ -78,6 +78,11 @@ func account_creation_result(peer_id: int, result_code: int, result: Dictionary)
 		response_received.emit(
 			{"t-id": peer_id, "a": result, "w": worlds_info}
 		)
+	else:
+		# Handle error cases
+		response_received.emit(
+			{"t-id": peer_id, "error": result_code}
+		)
 	#gateway.account_creation_result.rpc_id(peer_id, result_code)
 
 

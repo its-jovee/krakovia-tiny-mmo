@@ -124,16 +124,16 @@ func _on_login_button_pressed() -> void:
 
 
 func _on_login_login_button_pressed() -> void:
-	var account_name_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/LineEdit
+	var handle_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
 	var password_edit: LineEdit = $LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
 	
-	var username: String = account_name_edit.text
+	var handle: String = handle_edit.text
 	var password: String = password_edit.text
 	
 	var login_button: Button = $LoginPanel/VBoxContainer/VBoxContainer/LoginButton
 	login_button.disabled = true
 	if (
-		CredentialsUtils.validate_username(username).code != CredentialsUtils.UsernameError.OK
+		CredentialsUtils.validate_handle(handle).code != CredentialsUtils.HandleError.OK
 		or CredentialsUtils.validate_password(password).code != CredentialsUtils.UsernameError.OK
 	):
 		login_button.disabled = false
@@ -143,11 +143,19 @@ func _on_login_login_button_pressed() -> void:
 	var d: Dictionary = await do_request(
 		HTTPClient.Method.METHOD_POST,
 		GatewayApi.login(),
-		{"u": username, "p": password,
+		{"h": handle, "p": password,
 		GatewayApi.KEY_TOKEN_ID: token}
 	)
 	if d.has("error"):
-		await popup_panel.confirm_message(str(d))
+		var error_message: String = "Login failed."
+		if d["error"] == 50:
+			error_message = "Invalid handle or password. Please check your credentials."
+		elif d["error"] == 51:
+			error_message = "This account is already logged in elsewhere."
+		else:
+			error_message = "Login failed with error code: " + str(d["error"])
+		
+		await popup_panel.confirm_message(error_message)
 		login_button.disabled = false
 		return
 	
@@ -187,7 +195,7 @@ func _on_world_selected(world_id: int) -> void:
 		GatewayApi.world_characters(),
 		{GatewayApi.KEY_WORLD_ID: world_id,
 		GatewayApi.KEY_ACCOUNT_ID: account_id,
-		GatewayApi.KEY_ACCOUNT_USERNAME: account_name,
+		GatewayApi.KEY_ACCOUNT_HANDLE: account_name,
 		GatewayApi.KEY_TOKEN_ID: token}
 	)
 	if d.has("error"):
@@ -232,7 +240,7 @@ func _on_character_selected(world_id: int, character_id: int) -> void:
 		GatewayApi.world_enter(),
 		{
 			GatewayApi.KEY_TOKEN_ID: token,
-			GatewayApi.KEY_ACCOUNT_USERNAME: account_name,
+			GatewayApi.KEY_ACCOUNT_HANDLE: account_name,
 			GatewayApi.KEY_WORLD_ID: world_id,
 			GatewayApi.KEY_CHAR_ID: character_id
 		}
@@ -262,7 +270,7 @@ func _on_create_character_button_pressed() -> void:
 				"name": username_edit.text,
 				"class": selected_skin,
 			},
-			GatewayApi.KEY_ACCOUNT_USERNAME: account_name,
+			GatewayApi.KEY_ACCOUNT_HANDLE: account_name,
 			GatewayApi.KEY_WORLD_ID: current_world_id
 		}
 	)
@@ -280,7 +288,7 @@ func _on_create_character_button_pressed() -> void:
 
 
 func create_account() -> void:
-	var name_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/LineEdit
+	var handle_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
 	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/LineEdit
 	var password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/LineEdit
 
@@ -289,9 +297,9 @@ func create_account() -> void:
 		return
 	
 	var result: Dictionary
-	result = CredentialsUtils.validate_username(name_edit.text)
-	if result.code != CredentialsUtils.UsernameError.OK:
-		await popup_panel.confirm_message("Username:\n" + result.message)
+	result = CredentialsUtils.validate_handle(handle_edit.text)
+	if result.code != CredentialsUtils.HandleError.OK:
+		await popup_panel.confirm_message("Player Handle:\n" + result.message)
 		return
 	result = CredentialsUtils.validate_password(password_edit.text)
 	if result.code != CredentialsUtils.UsernameError.OK:
@@ -304,11 +312,29 @@ func create_account() -> void:
 	var d: Dictionary = await do_request(
 		HTTPClient.Method.METHOD_POST,
 		GatewayApi.account_create(),
-		{"u": name_edit.text, "p": password_edit.text,
+		{"h": handle_edit.text, "p": password_edit.text,
 		GatewayApi.KEY_TOKEN_ID: token}
 	)
 	if d.has("error"):
-		await popup_panel.confirm_message(str(d))
+		var error_message: String = "Account creation failed."
+		if d["error"] == 30:
+			error_message = "This player handle is already taken. Please choose a different handle."
+		elif d["error"] == 1:
+			error_message = "Handle is required."
+		elif d["error"] == 2:
+			error_message = "Handle must be at least 3 characters long."
+		elif d["error"] == 3:
+			error_message = "Handle must be no more than 20 characters long."
+		elif d["error"] == 4:
+			error_message = "Password is required."
+		elif d["error"] == 5:
+			error_message = "Password must be at least 6 characters long."
+		elif d["error"] == 6:
+			error_message = "Password must be no more than 32 characters long."
+		else:
+			error_message = "Account creation failed with error code: " + str(d["error"])
+		
+		await popup_panel.confirm_message(error_message)
 		$CreateAccountPanel.show()
 		return
 	

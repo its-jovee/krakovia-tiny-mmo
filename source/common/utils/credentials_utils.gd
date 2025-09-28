@@ -1,12 +1,22 @@
 extends RefCounted
 
 
-const USERNAME_MIN_LEN: int = 3
-const USERNAME_MAX_LEN: int = 20
-const USERNAME_RESERVED: PackedStringArray = ["admin", "moderator", "guest"]
+const HANDLE_MIN_LEN: int = 3
+const HANDLE_MAX_LEN: int = 20
+const HANDLE_RESERVED: PackedStringArray = ["admin", "moderator", "guest", "system"]
 
 const PASSWORD_MIN_LEN: int = 6
 const PASSWORD_MAX_LEN: int = 32
+
+enum HandleError {
+	OK,
+	EMPTY,
+	TOO_SHORT,
+	TOO_LONG,
+	INVALID_CHARS,
+	RESERVED,
+	ALREADY_EXISTS
+}
 
 enum UsernameError {
 	OK,
@@ -15,41 +25,58 @@ enum UsernameError {
 	TOO_LONG,
 	INVALID_CHARS,
 	RESERVED,
-	
 }
 
 
-static func is_valid_username(username: String) -> bool:
-	if username.is_empty():
+static func is_valid_handle(handle: String) -> bool:
+	if handle.is_empty():
 		return false
 	return true
 
 
+static func validate_handle(handle: String) -> Dictionary:
+	if handle.is_empty():
+		return _fail_handle(HandleError.EMPTY, "Player handle required.")
+	if handle.length() < HANDLE_MIN_LEN:
+		return _fail_handle(HandleError.TOO_SHORT, "Min %d characters." % HANDLE_MIN_LEN)
+	if handle.length() > HANDLE_MAX_LEN:
+		return _fail_handle(HandleError.TOO_LONG, "Max %d characters." % HANDLE_MAX_LEN)
+	if not handle.is_valid_ascii_identifier():
+		return _fail_handle(HandleError.INVALID_CHARS, "Use letters, digits, underscore.")
+	if HANDLE_RESERVED.has(handle.to_lower()):
+		return _fail_handle(HandleError.RESERVED, "This handle is reserved.")
+	return {"code": HandleError.OK, "message": ""}
+
+
+# Keep validate_username for backward compatibility if needed
 static func validate_username(username: String) -> Dictionary:
 	if username.is_empty():
-		return _fail(UsernameError.EMPTY, "Username required.")
-	if username.length() < USERNAME_MIN_LEN:
-		return _fail(UsernameError.TOO_SHORT, "Min %d characters." % USERNAME_MIN_LEN)
-	if username.length() > USERNAME_MAX_LEN:
-		return _fail(UsernameError.TOO_LONG, "Max %d characters." % USERNAME_MAX_LEN)
+		return _fail_username(UsernameError.EMPTY, "Username required.")
+	if username.length() < HANDLE_MIN_LEN:
+		return _fail_username(UsernameError.TOO_SHORT, "Min %d characters." % HANDLE_MIN_LEN)
+	if username.length() > HANDLE_MAX_LEN:
+		return _fail_username(UsernameError.TOO_LONG, "Max %d characters." % HANDLE_MAX_LEN)
 	if not username.is_valid_ascii_identifier():
-		return _fail(UsernameError.INVALID_CHARS, "Use letters, digits, underscore.")
-	if USERNAME_RESERVED.has(username.to_lower()):
-		return _fail(UsernameError.RESERVED, "This name is reserved.")
+		return _fail_username(UsernameError.INVALID_CHARS, "Use letters, digits, underscore.")
+	if HANDLE_RESERVED.has(username.to_lower()):
+		return _fail_username(UsernameError.RESERVED, "This name is reserved.")
 	return {"code": UsernameError.OK, "message": ""}
 
 
 static func validate_password(password: String) -> Dictionary:
 	if password.is_empty():
-		return _fail(UsernameError.EMPTY, "Password required.")
+		return _fail_username(UsernameError.EMPTY, "Password required.")
 	if password.length() < PASSWORD_MIN_LEN:
-		return _fail(UsernameError.TOO_SHORT, "Min %d characters." % PASSWORD_MIN_LEN)
+		return _fail_username(UsernameError.TOO_SHORT, "Min %d characters." % PASSWORD_MIN_LEN)
 	if password.length() > PASSWORD_MAX_LEN:
-		return _fail(UsernameError.TOO_LONG, "Max %d characters." % PASSWORD_MAX_LEN)
+		return _fail_username(UsernameError.TOO_LONG, "Max %d characters." % PASSWORD_MAX_LEN)
 	if not password.is_valid_ascii_identifier():
-		return _fail(UsernameError.INVALID_CHARS, "Use letters, digits, underscore.")
+		return _fail_username(UsernameError.INVALID_CHARS, "Use letters, digits, underscore.")
 	return {"code": UsernameError.OK, "message": ""}
 
 
-static func _fail(code: UsernameError, message: String) -> Dictionary:
+static func _fail_handle(code: HandleError, message: String) -> Dictionary:
+	return {"code": code, "message": message}
+
+static func _fail_username(code: UsernameError, message: String) -> Dictionary:
 	return {"code": code, "message": message}

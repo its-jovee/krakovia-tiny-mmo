@@ -186,13 +186,24 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Account name"
+text = "Player Handle"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="AtLabel" type="Label" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("LabelSettings_rky0m")
+theme_override_font_sizes/font_size = 16
+text = "@"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
-placeholder_text = "Enter your account name here"
+placeholder_text = "Enter your player handle here"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -257,13 +268,24 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Account name"
+text = "Player Handle"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="AtLabel" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("LabelSettings_rky0m")
+theme_override_font_sizes/font_size = 16
+text = "@"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
-placeholder_text = "Enter your account name here"
+placeholder_text = "Enter your player handle here"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
 layout_mode = 2
