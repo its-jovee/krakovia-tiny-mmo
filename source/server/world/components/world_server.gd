@@ -31,11 +31,15 @@ func _on_peer_connected(peer_id: int) -> void:
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	print("Peer: %d is disconnected." % peer_id)
-	world_manager.player_disconnected.rpc_id(
-		1,
-		connected_players[peer_id].account_name
-	)
-	connected_players.erase(peer_id)
+	
+	# Save player data immediately on disconnect to prevent data loss
+	if connected_players.has(peer_id):
+		database.save_world_database()
+		world_manager.player_disconnected.rpc_id(
+			1,
+			connected_players[peer_id].account_name
+		)
+		connected_players.erase(peer_id)
 
 
 func _on_peer_authenticating(peer_id: int) -> void:

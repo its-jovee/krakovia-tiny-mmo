@@ -137,7 +137,7 @@ const ERROR_MESSAGES: Dictionary = {
 	"character_invalid_class": {
 		"title": "Invalid Character Class",
 		"message": "Please select a valid character class.",
-		"suggestion": "Choose from Knight, Rogue, or Wizard."
+		"suggestion": "Choose from Miner, Forager, or Trapper."
 	},
 	"character_missing_data": {
 		"title": "Incomplete Character Data",

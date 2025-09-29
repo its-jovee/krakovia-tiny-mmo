@@ -58,10 +58,12 @@ func _ready() -> void:
 	for button: Button in v_box_container.get_children():
 		button.pressed.connect(
 		func():
-			var sprite = ContentRegistryHub.load_by_slug(&"sprites", button.text.to_lower())
+			# Use button.name for the slug; keep text as the display label
+			var slug := button.name.to_lower()
+			var sprite = ContentRegistryHub.load_by_slug(&"sprites", slug)
 			if not sprite:
 				return
-			selected_skin = button.text.to_lower()
+			selected_skin = slug
 			animated_sprite_2d.sprite_frames = sprite
 			animated_sprite_2d.play(&"run")
 		)

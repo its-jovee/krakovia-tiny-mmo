@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("3_wlykr")
-character_name = "Wizard"
+character_name = "Trapper"
 character_sprite = ExtResource("2_vs5xq")
 base_health = 25
 base_mana = 10

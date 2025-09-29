@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_sg1qr"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_74q4y"]
 [ext_resource type="PackedScene" uid="uid://6ds5d0praaft" path="res://source/client/gateway/ui/password_strength_indicator.tscn" id="2_strength"]
-[ext_resource type="PackedScene" uid="uid://b8x7y9z2a1b2d" path="res://source/client/gateway/ui/handle_validation_indicator.tscn" id="3_validation"]
 [ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_1c3kr"]
+[ext_resource type="PackedScene" uid="uid://b8x70a02a1b2d" path="res://source/client/gateway/ui/handle_validation_indicator.tscn" id="3_validation"]
 [ext_resource type="Texture2D" uid="uid://cn5blfyqokda6" path="res://assets/sprites/gui/backgrounds/fairy_forest.png" id="4_uvr2v"]
 [ext_resource type="FontFile" uid="uid://cehc3gujked8x" path="res://assets/fonts/Cinzel/static/Cinzel-Bold.ttf" id="5_opc3y"]
 [ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="6_tnybn"]
@@ -595,40 +595,40 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="GridContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-columns = 2
+columns = 3
 
-[node name="CreateButton" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="knight" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_tnybn")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("7_waovh")
-text = "Knight"
+text = "Miner"
 
-[node name="CreateButton2" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="rogue" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_tnybn")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("7_waovh")
-text = "Rogue"
+text = "Forager"
 
-[node name="CreateButton3" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+[node name="wizard" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_tnybn")
 theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("7_waovh")
-text = "Wizard"
+text = "Trapper"
 
 [node name="CreateButton4" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -689,7 +689,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "Wizard
+text = "Trapper
 A master of elemental forces, commanding powerful spells to devastate enemies or support allies."
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer"]

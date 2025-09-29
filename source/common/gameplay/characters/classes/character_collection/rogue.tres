@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("2_xvbqh")
-character_name = "Rogue"
+character_name = "Forager"
 character_sprite = ExtResource("2_giwuu")
 base_health = 30
 base_mana = 10
