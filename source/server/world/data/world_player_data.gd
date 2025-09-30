@@ -40,7 +40,7 @@ func create_player_character(handle: String, character_data: Dictionary) -> int:
 	
 	# Temporary for fast test
 	player_character.inventory = {
-		1: {"stack": 1}, 2: {"stack": 1}, 3: {"stack": 1}, 4: {"stack": 1}, 5: {"stack": 1}
+		6: {"stack": 1}, 
 	}
 	
 	player_character.available_attributes_points = 10
