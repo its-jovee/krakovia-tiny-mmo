@@ -10,7 +10,7 @@ var equipment_inventory: Dictionary
 var materials_inventory: Dictionary
 
 var latest_items: Dictionary
-var gear_slots_cache: Dictionary[Button, Item]
+var gear_slots_cache: Dictionary[Panel, Item]
 var selected_item: Item
 
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
@@ -31,19 +31,25 @@ func _on_visibility_changed() -> void:
 func fill_inventory(inv_data: Dictionary) -> void:
 	inventory = inv_data
 	var slot_index: int = 0
+	
+	# Clear all slots first
+	_clear_all_inventory_slots()
+	
+	# Fill slots with items
 	for item_id: int in inv_data.keys():
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
 			var entry: Dictionary = inv_data[item_id]
 			var stack: int = int(entry.get("stack", 1))
-			var button: Button = inventory_grid.get_child(slot_index) as Button
-			button.icon = item.item_icon
-			button.text = str(stack)
-			button.set_meta(&"item_id", item_id)
-			slot_index += 1
-			gear_slots_cache.set(button, item)
-			if not button.pressed.has_connections():
-				button.pressed.connect(_on_item_slot_button_pressed.bind(button, item))
+			
+			# Find the next available Panel slot (skip Button nodes)
+			var item_slot_panel: Panel = _get_next_panel_slot(slot_index)
+			if item_slot_panel and item_slot_panel.has_method("set_item_data"):
+				item_slot_panel.set_item_data(item_id, item, stack)
+				gear_slots_cache.set(item_slot_panel, item)
+				slot_index += 1
+	
+	# Update equipment slots
 	for equipment_slot: GearSlotButton in equipment_slots.get_children():
 		if equipment_slot.gear_slot:
 			if equipment_slot.gear_slot == null:
@@ -61,10 +67,12 @@ func _on_close_button_pressed() -> void:
 	hide()
 
 
-func _on_item_slot_button_pressed(button: Button, item: Item) -> void:
-	selected_item = item
-	selected_item_id = int(button.get_meta(&"item_id", -1))
-	rich_text_label.text = item.description
+func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
+	var item_data = item_slot_panel.item_data
+	if item_data.has("item") and item_data.item:
+		selected_item = item_data.item
+		selected_item_id = item_data.get("item_id", -1)
+		rich_text_label.text = item_data.item.description
 
 
 func _on_equip_button_pressed() -> void:
@@ -75,3 +83,24 @@ func _on_equip_button_pressed() -> void:
 				Callable(),
 				{"id": selected_item_id}
 			)
+
+
+func _clear_all_inventory_slots() -> void:
+	# Clear all Panel slots in the inventory grid
+	for i in range(inventory_grid.get_child_count()):
+		var child = inventory_grid.get_child(i)
+		if child is Panel and child.has_method("clear_item_data"):
+			child.clear_item_data()
+			gear_slots_cache.erase(child)
+
+
+func _get_next_panel_slot(slot_index: int) -> Panel:
+	# Find the next Panel node (skip Button nodes) starting from slot_index
+	var panel_count: int = 0
+	for i in range(inventory_grid.get_child_count()):
+		var child = inventory_grid.get_child(i)
+		if child is Panel:
+			if panel_count == slot_index:
+				return child as Panel
+			panel_count += 1
+	return null
