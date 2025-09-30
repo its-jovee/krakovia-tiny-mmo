@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://dia55s0a7lhnv"]
+[gd_scene load_steps=15 format=3 uid="uid://dia55s0a7lhnv"]
 
 [ext_resource type="Script" uid="uid://3kue0fgf78ik" path="res://source/client/ui/inventory/inventory_menu.gd" id="1_g6fyq"]
 [ext_resource type="Script" uid="uid://cx6ltmvpbwdng" path="res://source/client/ui/inventory/gear_slot.gd" id="2_0wccm"]
+[ext_resource type="Script" uid="uid://ffegg32rv2m0" path="res://source/client/ui/inventory/drag_drop_world.gd" id="2_as6qe"]
+[ext_resource type="Script" uid="uid://bqi5sg3vg7bbe" path="res://source/client/ui/inventory/item_slot.gd" id="2_mkng7"]
 [ext_resource type="Texture2D" uid="uid://tg02o3a14emh" path="res://source/client/ui/inventory/test_sprites/Icon162.png" id="2_q1iwn"]
 [ext_resource type="Texture2D" uid="uid://bd0ohyvo6looc" path="res://source/client/ui/inventory/test_sprites/Icon202.png" id="3_3w0rw"]
+[ext_resource type="Texture2D" uid="uid://bnbuckrw4q7nx" path="res://assets/node_icons/color/icon_heart.png" id="3_as6qe"]
 [ext_resource type="Texture2D" uid="uid://bb7ec36sc1thr" path="res://source/client/ui/inventory/test_sprites/Icon182.png" id="4_0wccm"]
 [ext_resource type="Texture2D" uid="uid://cf0y64q72i32l" path="res://source/client/ui/inventory/test_sprites/Icon2.png" id="5_lqdnc"]
 [ext_resource type="Texture2D" uid="uid://c5i67th8u1h7l" path="res://source/client/ui/inventory/test_sprites/Icon222.png" id="6_7d8wy"]
@@ -57,138 +60,492 @@ theme_override_constants/separation = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EquipmentView/HBoxContainer"]
 layout_mode = 2
+script = ExtResource("2_as6qe")
 
 [node name="TabTitle" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Equipment"
 
 [node name="InventoryGrid" type="GridContainer" parent="EquipmentView/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
 columns = 5
 metadata/_edit_group_ = true
 
 [node name="Button" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button2" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button3" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button4" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button5" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button6" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button7" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button8" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button9" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button10" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button11" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button12" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button13" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button14" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button15" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button16" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button17" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button18" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button19" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button20" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button21" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button22" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button23" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button24" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button25" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button26" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button27" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button28" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button29" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 
 [node name="Button30" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+visible = false
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
+
+[node name="ItemSlot" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot2" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot3" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot4" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot5" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot6" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot7" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot8" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot9" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot10" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="EquipmentView/HBoxContainer"]
 layout_mode = 2
