@@ -35,13 +35,13 @@ color = Color(0.184314, 0.184314, 0.184314, 0.662745)
 metadata/_edit_lock_ = true
 
 [node name="EquipmentView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EquipmentView"]
 layout_mode = 1
@@ -547,11 +547,1132 @@ offset_bottom = 21.0
 grow_horizontal = 0
 horizontal_alignment = 1
 
+[node name="ItemSlot11" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot12" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot13" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot14" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot15" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot16" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot17" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot18" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot19" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot20" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot21" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot22" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot23" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot23"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot23"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot24" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot24"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot24"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot25" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot25"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot25"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot26" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot26"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot26"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot27" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot27"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot27"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot28" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot28"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot28"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot29" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot29"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot29"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot30" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot30"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot30"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot31" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot31"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot31"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot32" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot32"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot32"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot33" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot33"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot33"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot34" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot34"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot34"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot35" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot35"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot35"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot36" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot36"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot36"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot37" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot37"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot37"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot38" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot38"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot38"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot39" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot39"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot39"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot40" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot40"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot40"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot41" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot41"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot41"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot42" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot42"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot42"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot43" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot43"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot43"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot44" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot44"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot44"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot45" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot45"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot45"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="EquipmentView/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="EquipmentSlots" type="GridContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 columns = 3
@@ -632,32 +1753,2363 @@ metadata/_custom_type_script = "uid://cx6ltmvpbwdng"
 
 [node name="ItemInfo" type="PanelContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo"]
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="RichTextLabel" type="RichTextLabel" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
 text = "Thornmail - Level 1
 
 30 Health
 5 Armor
 
 Unique – Thorns: When struck by a basic attack on-hit, deal 2 (+ 5% bonus armor) magic damage to the attacker."
+fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
 [node name="Button" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Equip/Unequip"
 
 [node name="Button2" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Expand"
+
+[node name="TradeView" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Screen" type="HBoxContainer" parent="TradeView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TradeView/Screen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="PlayerInv" type="VBoxContainer" parent="TradeView/Screen/HBoxContainer"]
+layout_mode = 2
+script = ExtResource("2_as6qe")
+
+[node name="TabTitle" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv"]
+visible = false
+layout_mode = 2
+text = "Equipment"
+
+[node name="InventoryGrid" type="GridContainer" parent="TradeView/Screen/HBoxContainer/PlayerInv"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 5
+metadata/_edit_group_ = true
+
+[node name="Button" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button3" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button4" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button5" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button6" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button7" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button8" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button9" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button10" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button11" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button12" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button13" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button14" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button15" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button16" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button17" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button18" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button19" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button20" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button21" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button22" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button23" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button24" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button25" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button26" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button27" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button28" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button29" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Button30" type="Button" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="ItemSlot" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot2" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot3" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot4" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot5" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot6" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot7" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot8" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot9" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot10" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot11" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot12" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot13" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot14" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot15" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot16" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot17" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot18" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot19" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot20" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot21" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot21"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot22" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot22"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot23" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot23"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot23"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot24" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot24"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot24"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot25" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot25"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot25"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot26" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot26"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot26"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot27" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot27"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot27"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot28" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot28"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot28"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot29" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot29"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot29"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot30" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot30"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot30"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot31" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot31"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot31"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot32" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot32"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot32"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot33" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot33"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot33"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot34" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot34"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot34"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot35" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot35"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot35"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot36" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot36"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot36"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot37" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot37"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot37"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot38" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot38"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot38"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot39" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot39"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot39"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot40" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot40"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot40"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot41" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot41"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot41"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot42" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot42"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot42"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot43" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot43"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot43"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot44" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot44"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot44"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot45" type="Panel" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot45"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid/ItemSlot45"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="TradePanel" type="HBoxContainer" parent="TradeView/Screen/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="YourOffer" type="PanelContainer" parent="TradeView/Screen/HBoxContainer/TradePanel"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer"]
+layout_mode = 2
+
+[node name="TabTitle" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Your Offer"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="ItemSlot" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot2" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot3" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot4" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot5" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot6" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot7" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot8" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot9" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gold"
+
+[node name="LineEdit" type="LineEdit" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="TradeView/Screen/HBoxContainer/TradePanel/YourOffer/VBoxContainer"]
+layout_mode = 2
+text = "Accept"
+
+[node name="TheirOffer" type="PanelContainer" parent="TradeView/Screen/HBoxContainer/TradePanel"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer"]
+layout_mode = 2
+
+[node name="TabTitle" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 0
+text = "Their Offer"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="ItemSlot" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot2" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot3" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot4" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot5" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot6" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot7" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot8" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="ItemSlot9" type="Panel" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("2_mkng7")
+
+[node name="Icon" type="TextureRect" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_as6qe")
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/GridContainer/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+text = "256"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gold"
+
+[node name="LineEdit" type="LineEdit" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer"]
+layout_mode = 2
+text = "Accept"
 
 [node name="MaterialsView" type="Control" parent="."]
 visible = false
@@ -884,6 +4336,7 @@ offset_bottom = 65.0
 text = "Materials"
 
 [node name="TitleLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 446.0
 offset_top = 9.0
@@ -892,6 +4345,7 @@ offset_bottom = 32.0
 text = "Inventory"
 
 [node name="InventoryTabs" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -927,14 +4381,19 @@ layout_mode = 2
 text = "Key Items"
 
 [node name="CloseButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 868.0
-offset_top = 7.0
-offset_right = 952.0
-offset_bottom = 82.0
-text = "Close"
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -98.0
+offset_top = 22.0
+offset_right = -18.0
+offset_bottom = 62.0
+grow_horizontal = 0
+text = "Cancel"
 
 [node name="MenuButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 890.0
 offset_top = 228.0
@@ -943,6 +4402,7 @@ offset_bottom = 301.0
 text = "Menu"
 
 [node name="HistoryButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = -11.0
 offset_top = 17.0
