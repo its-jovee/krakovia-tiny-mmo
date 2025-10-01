@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1759274613
-next_id = 23
+version = 1759321600
+next_id = 24
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -117,4 +117,9 @@ entries = Array[Dictionary]([{
 &"id": 22,
 &"path": "res://source/server/world/components/data_request_handlers/trade.update.gd",
 &"slug": &"trade.update"
+}, {
+&"hash": "f1ffbecea9aa9eecaf9cbafeffff4bfef9cfffeefffbcdcedefafbacbdcedefafbc",
+&"id": 23,
+&"path": "res://source/server/world/components/data_request_handlers/state.sit.gd",
+&"slug": &"state.sit"
 }])

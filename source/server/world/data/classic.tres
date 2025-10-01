@@ -43,7 +43,7 @@ inventory = {
 "stack": 1
 },
 6: {
-"stack": 32
+"stack": 63
 }
 }
 available_attributes_points = 10

@@ -141,7 +141,7 @@ func instantiate_player(peer_id: int) -> Player:
 		var syn: StateSynchronizer = new_player.state_synchronizer
 		syn.set_by_path(^":character_class", new_player.player_resource.character_class)
 		syn.set_by_path(^":display_name", new_player.player_resource.display_name)
-		
+		syn.set_by_path(^":handle_name", new_player.player_resource.account_name)
 
 		var asc: AbilitySystemComponent = new_player.ability_system_component
 		

@@ -8,12 +8,32 @@
 script = ExtResource("2_meo3t")
 
 [node name="DisplayNameLabel" type="Label" parent="." index="2"]
-offset_left = -23.7
-offset_right = 213.3
-offset_bottom = 45.0
+offset_left = -24.0
+offset_top = 2.0
+offset_right = 213.0
+offset_bottom = 47.0
 scale = Vector2(0.2, 0.2)
 theme_override_font_sizes/font_size = 32
 text = "1234567890123"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
+
+[node name="HandleNameLabel" type="Label" parent="." index="3"]
+offset_left = -24.0
+offset_top = 10.0
+offset_right = 213.0
+offset_bottom = 40.0
+scale = Vector2(0.2, 0.2)
+theme_override_colors/font_color = Color(0.5689727, 0.56897277, 0.5689727, 1)
+theme_override_font_sizes/font_size = 24
+text = "1234567890123"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_cxg7o")
+
+[node name="HandPivot" parent="HandOffset" index="0"]
+visible = false
+
+[node name="ProgressBar" parent="." index="8"]
+visible = false
