@@ -4,13 +4,13 @@
 
 [resource]
 script = ExtResource("1_38lmc")
-item_name = &"ItemDefault"
-description = ""
-can_trade = false
-can_sell = false
-minimum_price = 0
-stack_limit = 0
-tags = []
+item_name = &"Bone"
+description = "A bone that can be sold for a small amount of gold"
+can_trade = true
+can_sell = true
+minimum_price = 3
+stack_limit = 10
+tags = ["material", "bone"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
 metadata/slug = &"bone"
 metadata/id = 4

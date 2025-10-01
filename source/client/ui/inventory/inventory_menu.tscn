@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dia55s0a7lhnv"]
+[gd_scene load_steps=14 format=3 uid="uid://dia55s0a7lhnv"]
 
 [ext_resource type="Script" uid="uid://3kue0fgf78ik" path="res://source/client/ui/inventory/inventory_menu.gd" id="1_g6fyq"]
 [ext_resource type="Script" uid="uid://cx6ltmvpbwdng" path="res://source/client/ui/inventory/gear_slot.gd" id="2_0wccm"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bqi5sg3vg7bbe" path="res://source/client/ui/inventory/item_slot.gd" id="2_mkng7"]
 [ext_resource type="Texture2D" uid="uid://tg02o3a14emh" path="res://source/client/ui/inventory/test_sprites/Icon162.png" id="2_q1iwn"]
 [ext_resource type="Texture2D" uid="uid://bd0ohyvo6looc" path="res://source/client/ui/inventory/test_sprites/Icon202.png" id="3_3w0rw"]
-[ext_resource type="Texture2D" uid="uid://bnbuckrw4q7nx" path="res://assets/node_icons/color/icon_heart.png" id="3_as6qe"]
 [ext_resource type="Texture2D" uid="uid://bb7ec36sc1thr" path="res://source/client/ui/inventory/test_sprites/Icon182.png" id="4_0wccm"]
 [ext_resource type="Texture2D" uid="uid://cf0y64q72i32l" path="res://source/client/ui/inventory/test_sprites/Icon2.png" id="5_lqdnc"]
 [ext_resource type="Texture2D" uid="uid://c5i67th8u1h7l" path="res://source/client/ui/inventory/test_sprites/Icon222.png" id="6_7d8wy"]
@@ -35,7 +34,6 @@ color = Color(0.184314, 0.184314, 0.184314, 0.662745)
 metadata/_edit_lock_ = true
 
 [node name="EquipmentView" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -245,7 +243,6 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_as6qe")
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot"]
@@ -256,7 +253,6 @@ anchor_right = 1.0
 offset_left = -36.0
 offset_bottom = 21.0
 grow_horizontal = 0
-text = "256"
 horizontal_alignment = 1
 
 [node name="ItemSlot2" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid"]
@@ -1762,15 +1758,11 @@ size_flags_vertical = 8
 [node name="RichTextLabel" type="RichTextLabel" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-text = "Thornmail - Level 1
-
-30 Health
-5 Armor
-
-Unique – Thorns: When struck by a basic attack on-hit, deal 2 (+ 5% bonus armor) magic damage to the attacker."
 fit_content = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 alignment = 1
 
@@ -1784,7 +1776,16 @@ visible = false
 layout_mode = 2
 text = "Expand"
 
+[node name="SellButton" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
+layout_mode = 2
+text = "Sell Item"
+
+[node name="SellPriceLabel" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
+layout_mode = 2
+text = "Sell Price: 0 gold"
+
 [node name="TradeView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

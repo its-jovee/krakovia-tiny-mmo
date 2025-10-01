@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cey1mg75dsmuu"]
+
+[ext_resource type="Script" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.gd" id="1_market"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_market"]
+size = Vector2(64, 64)
+
+[node name="MarketArea" type="Area2D"]
+script = ExtResource("1_market")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_market")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -10.0
+offset_right = 32.0
+offset_bottom = 10.0
+text = "Market"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://sscb58nigni8"]
+[gd_scene load_steps=21 format=4 uid="uid://sscb58nigni8"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="TileSet" uid="uid://bm6rosvdjjdcd" path="res://source/common/gameplay/maps/tilesets/forest_tileset.tres" id="2_ulyvq"]
@@ -17,9 +17,13 @@
 [ext_resource type="Resource" uid="uid://iuqxmo63ipnn" path="res://source/common/gameplay/maps/instance/instance_collection/mining_cave/cave_area1.tres" id="15_6ybks"]
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="16_bs6wx"]
 [ext_resource type="Texture2D" uid="uid://cb5r143fxpb0x" path="res://assets/node_icons/blue/icon_bag.png" id="17_u3weo"]
+[ext_resource type="Script" uid="uid://dfxctfxndtyhk" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.gd" id="18_6ybks"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3weo"]
 size = Vector2(19.75, 20.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ybks"]
+size = Vector2(89, 87)
 
 [node name="Overworld" type="Node2D"]
 y_sort_enabled = true
@@ -120,3 +124,12 @@ shape = SubResource("RectangleShape2D_u3weo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/Area2D"]
 texture = ExtResource("17_u3weo")
+
+[node name="MarketArea" type="Area2D" parent="."]
+position = Vector2(1111, 608)
+script = ExtResource("18_6ybks")
+metadata/_custom_type_script = "uid://dfxctfxndtyhk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarketArea"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_6ybks")

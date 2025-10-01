@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bdpfln22w1uys"]
 
-[ext_resource type="Script" path="res://source/client/ui/hud/harvesting/HarvestingPanel.gd" id="1"]
+[ext_resource type="Script" uid="uid://dcdcwyy33n7xd" path="res://source/client/ui/hud/harvesting/HarvestingPanel.gd" id="1"]
+[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="2_66tgb"]
 
 [node name="HarvestingPanel" type="Control"]
 layout_mode = 3
@@ -13,6 +14,8 @@ offset_left = -200.0
 offset_top = -120.0
 offset_right = 200.0
 offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1")
 
 [node name="Panel" type="Panel" parent="."]
@@ -22,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_66tgb")
 
 [node name="Summary" type="Label" parent="."]
 layout_mode = 0
@@ -30,5 +34,3 @@ offset_top = 8.0
 offset_right = 392.0
 offset_bottom = 92.0
 text = "Harvesting..."
-
-

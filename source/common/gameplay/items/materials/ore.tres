@@ -6,8 +6,10 @@
 [resource]
 script = ExtResource("1_ncgcn")
 item_icon = ExtResource("1_e0qso")
-description = "ore"
+item_name = &"Ore"
+description = "A valuable ore that can be sold for gold"
 can_trade = true
 can_sell = true
+minimum_price = 10
 tags = ["material", "ore"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

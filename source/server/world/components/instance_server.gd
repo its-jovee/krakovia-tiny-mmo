@@ -78,6 +78,8 @@ func load_map(map_path: String) -> void:
 		for child in instance_map.get_children():
 			if child is InteractionArea:
 				child.player_entered_interaction_area.connect(self._on_player_entered_interaction_area)
+				if child.has_signal("player_exited_interaction_area"):
+					child.player_exited_interaction_area.connect(self._on_player_exited_interaction_area)
 		
 		# Reindex harvest nodes after map loads
 		if harvest_manager:
@@ -94,7 +96,18 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		if not player.just_teleported:
 			player.just_teleported = true
 			player.syn.set_by_path(^":position", interaction_area.target.global_position)
+	if interaction_area is MarketArea:
+		# Notify client about market status
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"market.status", {"in_market": true})
 
+func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
+	if interaction_area is MarketArea:
+		# Notify client that they left market
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"market.status", {"in_market": false})
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func ready_to_enter_instance() -> void:
@@ -290,6 +303,13 @@ func propagate_rpc(callable: Callable) -> void:
 func get_player(peer_id: int) -> Player:
 	var p: Player = players_by_peer_id.get(peer_id, null)
 	return p
+
+func _get_peer_id_for_player(player: Player) -> int:
+	# Find the peer_id for this player by searching through the mapping
+	for peer_id in players_by_peer_id.keys():
+		if players_by_peer_id[peer_id] == player:
+			return peer_id
+	return 0  # Return 0 if not found
 
 
 func get_player_syn(peer_id: int) -> StateSynchronizer:

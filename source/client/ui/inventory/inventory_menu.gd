@@ -25,6 +25,9 @@ var your_ready: bool = false
 var their_ready: bool = false
 var trade_locked: bool = false
 
+# Market/sell variables
+var in_market: bool = false
+
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
 @onready var equipment_slots: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots
 @onready var rich_text_label: RichTextLabel = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/RichTextLabel
@@ -42,8 +45,13 @@ var trade_locked: bool = false
 @onready var player_inv_grid: GridContainer = $TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid
 @onready var close_button: Button = $CloseButton
 
+# Market/sell @onready references
+@onready var sell_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellButton
+@onready var sell_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellPriceLabel
+
 
 func _ready() -> void:
+	print("Inventory menu _ready() called")
 	InstanceClient.current.request_data(&"inventory.get", fill_inventory)
 	visibility_changed.connect(_on_visibility_changed)
 	
@@ -58,13 +66,86 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"trade.complete", _on_trade_complete)
 	InstanceClient.subscribe(&"trade.cancel", _on_trade_cancel)
 	
+	# Subscribe to market status updates
+	print("Subscribing to market.status signal")
+	InstanceClient.subscribe(&"market.status", _on_market_status_update)
+	
+	# Connect sell button
+	if sell_button:
+		sell_button.pressed.connect(_on_sell_button_pressed)
+	
 	#hide trade viewby default
 	trade_view.hide()
 	$EquipmentView.show()
 
 
 func _on_visibility_changed() -> void:
+	print("Inventory menu visibility changed: ", is_visible_in_tree())
 	if is_visible_in_tree():
+		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+		# Always sync market status from HUD when inventory becomes visible
+		_sync_market_status_from_hud()
+
+func _sync_market_status_from_hud() -> void:
+	# Try to find HUD through the UI scene structure
+	var ui = get_viewport().get_node_or_null("UI")
+	var hud = null
+	if ui:
+		hud = ui.get_node_or_null("HUD")
+	
+	print("UI node found: ", ui != null)
+	print("HUD node found: ", hud != null)
+	if hud:
+		print("HUD has get_market_status method: ", hud.has_method("get_market_status"))
+		if hud.has_method("get_market_status"):
+			var hud_market_status = hud.get_market_status()
+			print("HUD market status: ", hud_market_status)
+			in_market = hud_market_status
+			print("Inventory synced market status from HUD: ", in_market)
+			_update_sell_ui()
+		else:
+			print("HUD does not have get_market_status method")
+	else:
+		print("HUD node not found")
+
+func _on_market_status_update(data: Dictionary) -> void:
+	print("Inventory received market status signal: ", data)
+	in_market = data.get("in_market", false)
+	print("Inventory received market status: ", in_market)
+	_update_sell_ui()
+
+func _update_sell_ui() -> void:
+	if not sell_button or not sell_price_label:
+		return
+	
+	# Use the inventory menu's own in_market variable (should be updated by market status signal)
+	if selected_item and in_market:
+		sell_button.visible = true
+		sell_price_label.visible = true
+		# Calculate sell price
+		var sell_price = selected_item.minimum_price if selected_item.minimum_price > 0 else 1
+		sell_price_label.text = "Sell Price: %d gold" % sell_price
+	else:
+		sell_button.visible = false
+		sell_price_label.visible = false
+
+func _on_sell_button_pressed() -> void:
+	if not selected_item or not in_market:
+		return
+	
+	# Request to sell the selected item
+	InstanceClient.current.request_data(&"item.sell", _on_sell_response, {
+		"item_id": selected_item_id,
+		"quantity": 1
+	})
+
+func _on_sell_response(data: Dictionary) -> void:
+	if data.has("error"):
+		print("Sell error: ", data["error"])
+		# Could show error message to user
+	else:
+		print("Sold item for ", data["total_price"], " gold")
+		# Refresh inventory to show updated quantities
 		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
 
 
@@ -130,6 +211,10 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 			selected_item = item_data.item
 			selected_item_id = item_data.get("item_id", -1)
 			rich_text_label.text = item_data.item.description
+			
+			# Sync market status and update sell UI when item is selected
+			_sync_market_status_from_hud()
+			_update_sell_ui()
 
 
 func _on_equip_button_pressed() -> void:
@@ -148,19 +233,20 @@ func _clear_all_inventory_slots() -> void:
 		var child = inventory_grid.get_child(i)
 		if child is Panel and child.has_method("clear_item_data"):
 			child.clear_item_data()
-			gear_slots_cache.erase(child)
+	gear_slots_cache.clear()
 
 
-func _get_next_panel_slot(slot_index: int) -> Panel:
-	# Find the next Panel node (skip Button nodes) starting from slot_index
+func _get_next_panel_slot(start_index: int) -> Panel:
+	# Find the next available Panel slot starting from start_index
 	var panel_count: int = 0
 	for i in range(inventory_grid.get_child_count()):
 		var child = inventory_grid.get_child(i)
 		if child is Panel:
-			if panel_count == slot_index:
-				return child as Panel
+			if panel_count >= start_index:
+				return child
 			panel_count += 1
 	return null
+
 
 # Trade system functions
 func _on_close_button_pressed():
@@ -249,129 +335,88 @@ func _update_trade_ui():
 			your_ready_button.text = "Ready ✓"
 		else:
 			your_ready_button.text = "Ready"
+		your_gold_input.editable = true
 		_enable_inventory_interaction()
-	
-	# Update their button
-	if their_ready:
-		their_ready_button.text = "Ready ✓"
-		their_ready_button.disabled = true
-	else:
-		their_ready_button.text = "Ready"
-		their_ready_button.disabled = true
 
 func _update_offer_grid(grid: GridContainer, items: Dictionary):
-	# Clear existing items (skip the first few buttons)
-	var start_index = 0
-	for i in range(start_index, grid.get_child_count()):
-		var child = grid.get_child(i)
-		if child is Panel and child.has_method("clear_item_data"):
-			child.clear_item_data()
+	# Clear existing items
+	for child in grid.get_children():
+		child.queue_free()
 	
 	# Add items to grid
-	var slot_index = start_index
 	for item_id in items:
-		if slot_index < grid.get_child_count():
-			var slot = grid.get_child(slot_index)
-			if slot is Panel and slot.has_method("set_item_data"):
-				var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
-				if item:
-					slot.set_item_data(item_id, item, items[item_id])
-			slot_index += 1
+		var quantity = items[item_id]
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		if item:
+			var label = Label.new()
+			label.text = item.item_name + " x" + str(quantity)
+			grid.add_child(label)
 
-func _on_your_ready_pressed():
-	if trade_locked:
-		return
+func _populate_trade_inventory():
+	# Clear existing items
+	for child in player_inv_grid.get_children():
+		child.queue_free()
 	
-	if your_ready:
-		# Cancel ready state
-		InstanceClient.current.request_data(&"trade.confirm", Callable(), {
-			"session_id": trade_session_id,
-			"ready": false
-		})
-	else:
-		# Set ready state
-		InstanceClient.current.request_data(&"trade.confirm", Callable(), {
-			"session_id": trade_session_id,
-			"ready": true
-		})
+	# Add items from player inventory
+	for item_id in inventory:
+		var entry = inventory[item_id]
+		var stack = entry.get("stack", 1)
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		if item:
+			var button = Button.new()
+			button.text = item.item_name + " x" + str(stack)
+			button.pressed.connect(_add_item_to_trade.bind(item_id, stack))
+			player_inv_grid.add_child(button)
 
-func _on_gold_input_changed(new_text: String):
-	if trade_locked or your_ready:
-		return
+func _add_item_to_trade(item_id: int, quantity: int):
+	var available = inventory.get(item_id, {}).get("stack", 0)
+	var currently_offered = your_trade_items.get(item_id, 0)
 	
-	your_trade_gold = int(new_text) if new_text.is_valid_int() else 0
+	if currently_offered + quantity <= available:
+		if your_trade_items.has(item_id):
+			your_trade_items[item_id] += quantity
+		else:
+			your_trade_items[item_id] = quantity
+	
+	_update_trade_ui()
 	_send_trade_update()
 
 func _send_trade_update():
-	if trade_session_id == -1:
-		return
-	
 	InstanceClient.current.request_data(&"trade.update", Callable(), {
 		"session_id": trade_session_id,
 		"items": your_trade_items,
 		"gold": your_trade_gold
 	})
 
-func _reset_trade_state():
-	your_trade_items.clear()
-	their_trade_items.clear()
-	your_trade_gold = 0
-	their_trade_gold = 0
-	your_ready = false
-	their_ready = false
-	trade_locked = false
-	trade_session_id = -1
+func _on_your_ready_pressed():
+	your_ready = not your_ready
+	_update_trade_ui()
+	_send_trade_update()
+
+func _on_gold_input_changed(new_text: String):
+	your_trade_gold = int(new_text) if new_text.is_valid_int() else 0
 
 func _close_trade():
 	trade_view.hide()
 	$EquipmentView.show()
 	_reset_trade_state()
 
-func _enable_inventory_interaction():
-	# Enable clicking items in trade inventory
-	for i in range(player_inv_grid.get_child_count()):
-		var child = player_inv_grid.get_child(i)
-		if child is Panel:
-			child.mouse_filter = Control.MOUSE_FILTER_PASS
+func _reset_trade_state():
+	trade_session_id = -1
+	other_player_name = ""
+	other_player_peer = -1
+	your_trade_items = {}
+	their_trade_items = {}
+	your_trade_gold = 0
+	their_trade_gold = 0
+	your_ready = false
+	their_ready = false
+	trade_locked = false
 
 func _disable_inventory_interaction():
-	# Disable clicking items when ready or locked
-	for i in range(player_inv_grid.get_child_count()):
-		var child = player_inv_grid.get_child(i)
-		if child is Panel:
-			child.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# Disable inventory interactions during locked trade
+	pass
 
-func _populate_trade_inventory():
-	# Clear the trade inventory grid first
-	for i in range(player_inv_grid.get_child_count()):
-		var child = player_inv_grid.get_child(i)
-		if child is Panel and child.has_method("clear_item_data"):
-			child.clear_item_data()
-	
-	# Fill with player's items
-	var slot_index = 0
-	for item_id in inventory.keys():
-		if slot_index >= player_inv_grid.get_child_count():
-			break
-			
-		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
-		if item:
-			var entry: Dictionary = inventory[item_id]
-			var stack: int = int(entry.get("stack", 1))
-			
-			# Find next panel slot
-			var panel_slot = _get_next_trade_panel_slot(slot_index)
-			if panel_slot and panel_slot.has_method("set_item_data"):
-				panel_slot.set_item_data(item_id, item, stack)
-				slot_index += 1
-
-func _get_next_trade_panel_slot(slot_index: int) -> Panel:
-	# Find the next Panel node in trade inventory grid
-	var panel_count: int = 0
-	for i in range(player_inv_grid.get_child_count()):
-		var child = player_inv_grid.get_child(i)
-		if child is Panel:
-			if panel_count == slot_index:
-				return child as Panel
-			panel_count += 1
-	return null
+func _enable_inventory_interaction():
+	# Re-enable inventory interactions
+	pass

@@ -73,6 +73,8 @@ func check_inputs() -> void:
 		action_input = false
 		interact_input = false
 		return
+	
+	# Market detection is handled by server notifications
 	input_direction = Input.get_vector("left", "right", "up", "down")
 	match input_direction:
 		Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN:
@@ -188,3 +190,9 @@ func _set_character_class(new_class: String):
 	)
 	animated_sprite.sprite_frames = character_resource.character_sprite
 	character_class = new_class
+
+func _on_entered_market(market_area: MarketArea) -> void:
+	print("Entered market: ", market_area.market_name)
+
+func _on_exited_market(market_area: MarketArea) -> void:
+	print("Exited market: ", market_area.market_name)

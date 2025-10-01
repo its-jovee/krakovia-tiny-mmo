@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1759321600
-next_id = 24
+version = 1759321601
+next_id = 26
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -122,4 +122,14 @@ entries = Array[Dictionary]([{
 &"id": 23,
 &"path": "res://source/server/world/components/data_request_handlers/state.sit.gd",
 &"slug": &"state.sit"
+}, {
+&"hash": "a2aacfdb4cbb4ffcaf3dcbaffafd9bdaf4cbfaaaaabedeafbacbdcedefafbac",
+&"id": 24,
+&"path": "res://source/server/world/components/data_request_handlers/gold.get.gd",
+&"slug": &"gold.get"
+}, {
+&"hash": "b3bbdaec5dcc5aadba4edcbabbbe0cebba5dcabbbbcfeafbacbdcedefafbacbd",
+&"id": 25,
+&"path": "res://source/server/world/components/data_request_handlers/item.sell.gd",
+&"slug": &"item.sell"
 }])

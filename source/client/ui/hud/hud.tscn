@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=10 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://gofowwc2uc1h" path="res://source/client/ui/hud/energy_bar/energy_bar.tscn" id="3_energy"]
 [ext_resource type="Script" uid="uid://pkprr0ll1y44" path="res://source/client/ui/hud/item_slots.gd" id="4_8qpw0"]
 [ext_resource type="Script" uid="uid://brq8mxox5bclj" path="res://source/client/ui/hud/menu_overlay.gd" id="4_cx7qp"]
-[ext_resource type="PackedScene" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
+[ext_resource type="PackedScene" uid="uid://bdpfln22w1uys" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
+[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="5_yye8g"]
+[ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="6_qjrur"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rchld")
@@ -19,14 +21,31 @@ visible = false
 [node name="HarvestingPanel" parent="." instance=ExtResource("5_harv")]
 offset_top = -149.0
 offset_bottom = -49.0
+
+[node name="GoldDisplay" type="Panel" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 60.0
+theme_override_styles/panel = ExtResource("5_yye8g")
+
+[node name="Label" type="Label" parent="GoldDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+text = "Gold: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MenuButton" type="Button" parent="."]
 offset_left = 885.0
 offset_top = 17.0
 offset_right = 938.0
 offset_bottom = 56.0
+theme = ExtResource("6_qjrur")
 text = "Menu"
 
 [node name="LevelupButton" type="Button" parent="."]

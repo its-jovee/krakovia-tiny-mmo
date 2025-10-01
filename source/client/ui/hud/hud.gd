@@ -4,11 +4,13 @@ extends CanvasLayer
 
 var last_opened_interface: Control
 var menus: Dictionary[StringName, Control]
+var current_gold: int = 0
+var in_market: bool = false
 
 @onready var menu_overlay: Control = $MenuOverlay
 @onready var close_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 @onready var sub_menu: CanvasLayer = $SubMenu
-
+@onready var gold_label: Label = $GoldDisplay/Label
 
 func _ready() -> void:
 	for button: Button in $MenuOverlay/VBoxContainer.get_children():
@@ -22,7 +24,44 @@ func _ready() -> void:
 	sub_menu.add_child(trade_request_modal)
 	menus["trade_request"] = trade_request_modal
 	InstanceClient.subscribe(&"trade.open", _on_trade_open)
+	
+	# Subscribe to gold updates
+	InstanceClient.subscribe(&"gold.update", _on_gold_update)
+	
+	# Subscribe to market status updates
+	InstanceClient.subscribe(&"market.status", _on_market_status_update)
+	
+	# Request initial gold amount
+	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
 
+func _on_gold_received(data: Dictionary) -> void:
+	current_gold = data.get("gold", 0)
+	_update_gold_display()
+
+func _on_gold_update(data: Dictionary) -> void:
+	current_gold = data.get("gold", 0)
+	_update_gold_display()
+
+func _update_gold_display() -> void:
+	if gold_label:
+		gold_label.text = "Gold: %d" % current_gold
+
+func _on_market_status_update(data: Dictionary) -> void:
+	var in_market_area = data.get("in_market", false)
+	print("HUD received market status: ", in_market_area)
+	set_market_status(in_market_area)
+
+func set_market_status(in_market_area: bool) -> void:
+	in_market = in_market_area
+	# Update UI to show market status if needed
+	if gold_label:
+		if in_market:
+			gold_label.modulate = Color.GREEN
+		else:
+			gold_label.modulate = Color.WHITE
+
+func get_market_status() -> bool:
+	return in_market
 
 func _on_overlay_menu_close_button_pressed() -> void:
 	menu_overlay.hide()
@@ -36,6 +75,10 @@ func open_player_profile(player_id: int) -> void:
 func _on_submenu_visiblity_changed(menu: Control) -> void:
 	if menu.visible:
 		hide()
+		# Special handling for inventory menu to sync market status
+		if menu.name == "Inventory" and menu.has_method("_sync_market_status_from_hud"):
+			print("HUD: Calling inventory market status sync")
+			menu._sync_market_status_from_hud()
 	else:
 		show()
 

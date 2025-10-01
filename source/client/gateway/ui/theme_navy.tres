@@ -31,6 +31,7 @@ border_color = Color(0.3515034, 0.52007717, 0.6073806, 1)
 border_blend = true
 corner_detail = 1
 shadow_color = Color(0, 0, 0, 0.22)
+shadow_size = 2
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_fnfxe"]
