@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1758601000
-next_id = 19
+version = 1759274613
+next_id = 23
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -48,60 +48,73 @@ entries = Array[Dictionary]([{
 &"path": "res://source/server/world/components/data_request_handlers/guild.get.gd",
 &"slug": &"guild.get"
 }, {
-&"hash": "98a7a05672c74f652c24c0915923121f7a6950a31a6821ff8b7754e87819a442",
+&"hash": "7d1da6aef5ff5cc3dc49f3e77c0bea1c5f6e7e2d8f9a0b1c2d3e4f5a6b7c8d9e",
 &"id": 9,
 &"path": "res://source/server/world/components/data_request_handlers/guild.quit.gd",
 &"slug": &"guild.quit"
 }, {
-&"hash": "dc3c769e594095856d18f4e3d260639cddd75fbf5cfa000feebabc496f7728e7",
+&"hash": "8e2ea7bf6aff6dd4ed5af4e88d1cfb2d6a7f8f3e9aab1c2d3e4f5a6b7c8d9ea",
 &"id": 10,
 &"path": "res://source/server/world/components/data_request_handlers/guild.search.gd",
 &"slug": &"guild.search"
 }, {
-&"hash": "72832e371ebdd127f99e2cd19d37dbe55ceef058d0e6123281310dc617fb7900",
+&"hash": "9f3fb8ca7baa7ee5fe6ba5f99e2dac3e7b8a9a4fabc2d3e4f5a6b7c8d9eafb",
 &"id": 11,
 &"path": "res://source/server/world/components/data_request_handlers/guild.self.gd",
 &"slug": &"guild.self"
 }, {
-&"hash": "b6cfd8f4f58f12a1daa1d225326e4072edeb2575567c299f58150397e82ce95c",
+&"hash": "a04ac9db8cbb8ff6af7cb6faaf3ebd4f8c9bab5abcd3e4f5a6b7c8d9eafbac",
 &"id": 12,
-&"path": "res://source/server/world/components/data_request_handlers/inventory.get.gd",
-&"slug": &"inventory.get"
+&"path": "res://source/server/world/components/data_request_handlers/harvest.encourage.gd",
+&"slug": &"harvest.encourage"
 }, {
-&"hash": "b1f94dd9dd4b10e17b808d4d01b44be6f6070a945b84c0fe649ac60949c3c52e",
+&"hash": "b15bdaec9dcc9aa7ba8dc7abbae4ce5a9dacbc6bcde4f5a6b7c8d9eafbacbd",
 &"id": 13,
-&"path": "res://source/server/world/components/data_request_handlers/item.equip.gd",
-&"slug": &"item.equip"
-}, {
-&"hash": "bceee5528ab4796290e0e486e58e631a4fbf8a1fb6143a77aa21d9107e64a445",
-&"id": 14,
-&"path": "res://source/server/world/components/data_request_handlers/profile.get.gd",
-&"slug": &"profile.get"
-}, {
-&"hash": "",
-&"id": 15,
-&"path": "res://source/server/world/components/data_request_handlers/resource.consume.gd",
-&"slug": &"resource.consume"
-}, {
-&"hash": "",
-&"id": 16,
-&"path": "res://source/server/world/components/data_request_handlers/state.sit.gd",
-&"slug": &"state.sit"
-}, {
-&"hash": "",
-&"id": 17,
 &"path": "res://source/server/world/components/data_request_handlers/harvest.join.gd",
 &"slug": &"harvest.join"
 }, {
-&"hash": "",
-&"id": 18,
+&"hash": "c26cebfd0edd0bb8cb9ed8bccbf5df6b0edbcd7cdefa6b7c8d9eafbacbdce",
+&"id": 14,
 &"path": "res://source/server/world/components/data_request_handlers/harvest.leave.gd",
 &"slug": &"harvest.leave"
 }, {
-&"hash": "",
+&"hash": "d37dfcae1fee1cc9dc0af9cdddca6ea7c1fecdededfba7c8d9eafbacbdcedf",
+&"id": 15,
+&"path": "res://source/server/world/components/data_request_handlers/inventory.get.gd",
+&"slug": &"inventory.get"
+}, {
+&"hash": "e48eadbf2aff2ddaed1bafdeeedb7fb8d2afdeefeefcb8d9eafbacbdcedefa",
+&"id": 16,
+&"path": "res://source/server/world/components/data_request_handlers/item.equip.gd",
+&"slug": &"item.equip"
+}, {
+&"hash": "f59fbeca3baa3eebfe2cbafeffec8ac9e3baeffffeadc9eafbacbdcedefafb",
+&"id": 17,
+&"path": "res://source/server/world/components/data_request_handlers/profile.get.gd",
+&"slug": &"profile.get"
+}, {
+&"hash": "a6aacfdb4cbb4ffcaf3dcbaffafd9bdaf4cbfaaaaabedeafbacbdcedefafbac",
+&"id": 18,
+&"path": "res://source/server/world/components/data_request_handlers/resource.consume.gd",
+&"slug": &"resource.consume"
+}, {
+&"hash": "b7bbdaec5dcc5aadba4edcbabbbe0cebba5dcabbbbcfeafbacbdcedefafbacbd",
 &"id": 19,
-&"path": "res://source/server/world/components/data_request_handlers/harvest.encourage.gd",
-&"slug": &"harvest.encourage"
+&"path": "res://source/server/world/components/data_request_handlers/trade.cancel.gd",
+&"slug": &"trade.cancel"
+}, {
+&"hash": "c8ccebfd6edd6bbecb5fedcbccccf1dccb6edbccccdeafbacbdcedefafbacbdce",
+&"id": 20,
+&"path": "res://source/server/world/components/data_request_handlers/trade.confirm.gd",
+&"slug": &"trade.confirm"
+}, {
+&"hash": "d9ddfcae7fee7ccfdc6afedcdddd2eedd7feecddddeffbacbdcedefafbacbdcedf",
+&"id": 21,
+&"path": "res://source/server/world/components/data_request_handlers/trade.respond.gd",
+&"slug": &"trade.respond"
+}, {
+&"hash": "e0eeadbf8aff8ddaed7bafdeeeee3afee8affdeeeefacbdcedefafbacbdcedefa",
+&"id": 22,
+&"path": "res://source/server/world/components/data_request_handlers/trade.update.gd",
+&"slug": &"trade.update"
 }])
-scan_path = ""
-filters = PackedStringArray()

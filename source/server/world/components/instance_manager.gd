@@ -12,15 +12,15 @@ var instance_collection: Array[InstanceResource]
 
 func start_instance_manager() -> void:
 	ServerInstance.world_server = world_server
-	
+
 	configure_global_roles_and_commands()
-	
+
 	set_instance_collection.call_deferred()
-	
+
 	# Timer which will call unload_unused_instances
 	var timer: Timer = Timer.new()
 	timer.wait_time = 20.0 # 20.0 is for testing, consider increasing it
-	
+
 	timer.autostart = true
 	timer.timeout.connect(unload_unused_instances)
 	add_sibling(timer)
@@ -32,9 +32,10 @@ func configure_global_roles_and_commands() -> void:
 		"/size" = load("res://source/server/world/components/chat_command/size_command.gd").new(),
 		"/getid" = load("res://source/server/world/components/chat_command/getid_command.gd").new(),
 		"/help" = load("res://source/server/world/components/chat_command/help_command.gd").new(),
-		"/set" = load("res://source/server/world/components/chat_command/set_command.gd").new()
+		"/set" = load("res://source/server/world/components/chat_command/set_command.gd").new(),
+		"/trade" = load("res://source/server/world/components/chat_command/trade_command.gd").new()
 	}
-	
+
 	ServerInstance.global_role_definitions = {
 		"senior_admin": {
 			"commands": ["/heal", "/size", "/set"],
@@ -45,10 +46,10 @@ func configure_global_roles_and_commands() -> void:
 			"priority": 1,
 			},
 		"default": {
-			"commands": ["/help", "/getid"]
+			"commands": ["/help", "/getid", "/trade"]
 		}
 	}
-	
+
 	if OS.has_feature("debug") or OS.has_feature("editor"):
 		ServerInstance.global_chat_commands["/selfadmin"] = load("res://source/server/world/components/chat_command/selfadmin_command.gd").new()
 		ServerInstance.global_role_definitions["default"]["commands"].append("/selfadmin")
@@ -65,7 +66,7 @@ func _on_player_entered_warper(player: Player, current_instance: ServerInstance,
 	var instance_resource: InstanceResource = warper.target_instance
 	if not instance_resource:
 		return
-	
+
 	if instance_resource.can_join_instance(player, instance_index):
 		target_instance = instance_resource.get_instance()
 		if target_instance:
@@ -137,20 +138,20 @@ func prepare_instance(instance_resource: InstanceResource) -> ServerInstance:
 
 func set_instance_collection() -> void:
 	var default_instance: InstanceResource
-	
+
 	for file_path: String in FileUtils.get_all_file_at(INSTANCE_COLLECTION_PATH):
 		print(file_path)
 	#for file_path: String in ResourceLoader.list_directory(INSTANCE_COLLECTION_PATH):
 		#print(INSTANCE_COLLECTION_PATH + file_path)
 		#instance_collection.append(ResourceLoader.load(INSTANCE_COLLECTION_PATH + file_path))
 		instance_collection.append(ResourceLoader.load(file_path, "InstanceResource"))
-	
+
 	for instance_resource: InstanceResource in instance_collection:
 		if instance_resource.load_at_startup:
 			charge_instance(instance_resource)
 		if instance_resource.instance_name == "Overworld":
 			default_instance = instance_resource
-	
+
 	world_server.multiplayer_api.peer_connected.connect(
 		func(peer_id: int):
 			charge_new_instance.rpc_id(

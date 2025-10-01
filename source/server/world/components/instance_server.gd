@@ -35,6 +35,15 @@ func _ready() -> void:
 	world_server.multiplayer_api.peer_disconnected.connect(
 		func(peer_id: int):
 			if connected_peers.has(peer_id):
+				# Cancel any active trades for this peer
+				if has_node("TradeManager"):
+					var trade_mgr: TradeManager = get_node("TradeManager")
+					for session_id in trade_mgr.active_trades.keys():
+						var session = trade_mgr.active_trades[session_id]
+						if session.peer_a == peer_id or session.peer_b == peer_id:
+							trade_mgr.cancel_trade(session_id, peer_id)
+							break
+				
 				despawn_player(peer_id)
 	)
 	
@@ -42,6 +51,11 @@ func _ready() -> void:
 	synchronizer_manager.name = "StateSynchronizerManager"
 	
 	add_child(synchronizer_manager, true)
+	
+	# Add TradeManager
+	var trade_mgr = TradeManager.new()
+	trade_mgr.name = "TradeManager"
+	add_child(trade_mgr, true)
 
 
 func load_map(map_path: String) -> void:

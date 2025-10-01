@@ -16,6 +16,12 @@ func _ready() -> void:
 			button.pressed.connect(_on_overlay_menu_close_button_pressed)
 			continue
 		button.pressed.connect(display_menu.bind(button.text.to_lower()))
+	
+	# Add trade request modal
+	var trade_request_modal = preload("res://source/client/ui/inventory/trade_request_modal.tscn").instantiate()
+	sub_menu.add_child(trade_request_modal)
+	menus["trade_request"] = trade_request_modal
+	InstanceClient.subscribe(&"trade.open", _on_trade_open)
 
 
 func _on_overlay_menu_close_button_pressed() -> void:
@@ -52,6 +58,9 @@ func _on_overlay_menu_button_pressed() -> void:
 	tween.tween_callback(menu_overlay.show)
 	tween.tween_property(menu_overlay, ^"position:x", 815.0, 0.3)
 
+func _on_trade_open(data: Dictionary):
+	# Open inventory menu to ensure it's loaded and ready for trade
+	display_menu(&"inventory")
 
 # temporary
 var attributes: Dictionary
