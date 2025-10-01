@@ -2,14 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dl1qb5l1yivlu" path="res://source/client/gateway/ui/stylebox_gradient.gd" id="1_d7wpl"]
 
-[sub_resource type="Gradient" id="Gradient_fnfxe"]
-colors = PackedColorArray(0.027451, 0.0627451, 0.101961, 1, 0.109276, 0.182321, 0.260778, 1)
+[sub_resource type="Gradient" id="Gradient_d7wpl"]
+colors = PackedColorArray(0.01148527, 0.01783115, 0.034158394, 0.6745098, 0.09618234, 0.12634364, 0.1823535, 0.6745098)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_q35d6"]
-gradient = SubResource("Gradient_fnfxe")
-width = 32
-height = 32
-fill_from = Vector2(1, 1)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ba4sw"]
+gradient = SubResource("Gradient_d7wpl")
 
 [resource]
 resource_local_to_scene = false
@@ -19,7 +16,7 @@ content_margin_top = -1.0
 content_margin_right = -1.0
 content_margin_bottom = -1.0
 script = ExtResource("1_d7wpl")
-texture = SubResource("GradientTexture2D_q35d6")
+texture = SubResource("GradientTexture1D_ba4sw")
 border_color = Color(0.247059, 0.419608, 0.454902, 1)
 border_width = 1.0
 segments_per_corner = 8

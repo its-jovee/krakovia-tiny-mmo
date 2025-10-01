@@ -17,22 +17,22 @@ extends StyleBox
 		border_width = v
 		emit_changed()
 
-@export var corner_radius_top_left: float = 12.0:
+@export var corner_radius_top_left: float = 0.0:
 	set(v):
 		corner_radius_top_left = v
 		emit_changed()
 
-@export var corner_radius_top_right: float = 12.0:
+@export var corner_radius_top_right: float = 0.0:
 	set(v):
 		corner_radius_top_right = v
 		emit_changed()
 
-@export var corner_radius_bottom_right: float = 12.0:
+@export var corner_radius_bottom_right: float = 0.0:
 	set(v):
 		corner_radius_bottom_right = v
 		emit_changed()
 
-@export var corner_radius_bottom_left: float = 12.0:
+@export var corner_radius_bottom_left: float = 0.0:
 	set(v):
 		corner_radius_bottom_left = v
 		emit_changed()

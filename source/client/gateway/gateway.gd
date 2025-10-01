@@ -91,14 +91,13 @@ func _setup_password_strength_indicators() -> void:
 	login_strength_indicator.setup_for_password(login_password_edit)
 	
 	# Setup create account password strength indicators
-	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/LineEdit
 	var create_password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
-	var create_strength_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/PasswordStrengthIndicator
+	var create_strength_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/PasswordStrengthIndicator
 	var create_match_indicator = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/PasswordMatchIndicator
 	
 	create_strength_indicator.setup_for_password(create_password_edit)
 	create_match_indicator.setup_for_password_repeat(create_password_repeat_edit, create_password_edit)
-
 
 func _setup_password_toggles() -> void:
 	# Setup login password toggle
@@ -107,8 +106,8 @@ func _setup_password_toggles() -> void:
 	login_toggle_button.pressed.connect(_on_password_toggle_pressed.bind(login_password_edit, login_toggle_button))
 	
 	# Setup create account password toggle
-	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
-	var create_toggle_button: Button = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ToggleButton
+	var create_password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/LineEdit
+	var create_toggle_button: Button = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/ToggleButton
 	create_toggle_button.pressed.connect(_on_password_toggle_pressed.bind(create_password_edit, create_toggle_button))
 	
 	# Setup password repeat toggle

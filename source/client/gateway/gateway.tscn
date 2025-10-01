@@ -35,18 +35,13 @@ content_margin_left = 12.0
 content_margin_top = 12.0
 content_margin_right = 16.0
 content_margin_bottom = 16.0
-bg_color = Color(0, 0, 0, 0.9)
+bg_color = Color(0, 0, 0, 0.54901963)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.692304, 0.737968, 0.839943, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+border_color = Color(0.8, 0.8, 0.8, 0.29803923)
 shadow_color = Color(0, 0, 0, 0.25)
-shadow_size = 12
 shadow_offset = Vector2(0, 4)
 
 [node name="Gateway" type="Control"]
@@ -324,23 +319,27 @@ layout_mode = 2
 text = "Password"
 label_settings = SubResource("LabelSettings_rky0m")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
 placeholder_text = "Enter your password here"
 secret = true
 
-[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Show"
 
-[node name="PasswordStrengthIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("2_strength")]
+[node name="PasswordStrengthIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("2_strength")]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
