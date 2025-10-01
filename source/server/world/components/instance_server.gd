@@ -30,6 +30,8 @@ var synchronizer_manager: StateSynchronizerManagerServer
 
 var request_handlers: Dictionary[StringName, DataRequestHandler]
 
+var harvest_manager: HarvestManager
+
 
 func _ready() -> void:
 	world_server.multiplayer_api.peer_disconnected.connect(
@@ -56,6 +58,11 @@ func _ready() -> void:
 	var trade_mgr = TradeManager.new()
 	trade_mgr.name = "TradeManager"
 	add_child(trade_mgr, true)
+	
+	# Add HarvestManager
+	harvest_manager = HarvestManager.new()
+	harvest_manager.name = "HarvestManager"
+	add_child(harvest_manager, true)
 
 
 func load_map(map_path: String) -> void:
@@ -71,6 +78,10 @@ func load_map(map_path: String) -> void:
 		for child in instance_map.get_children():
 			if child is InteractionArea:
 				child.player_entered_interaction_area.connect(self._on_player_entered_interaction_area)
+		
+		# Reindex harvest nodes after map loads
+		if harvest_manager:
+			harvest_manager.reindex_existing()
 		)
 
 
@@ -217,11 +228,10 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 	
 	var player: Player = players_by_peer_id[peer_id]
 	if player:
-		# Cleanup harvesting memberships
-		for node in get_tree().get_nodes_in_group(&"harvest_nodes"):
-			if node is HarvestNode:
-				var hn: HarvestNode = node
-				hn.cleanup_peer(peer_id)
+		# Cleanup harvesting memberships (now uses manager)
+		if harvest_manager:
+			harvest_manager.cleanup_peer(peer_id)
+		
 		if delete:
 			player.queue_free()
 		else:

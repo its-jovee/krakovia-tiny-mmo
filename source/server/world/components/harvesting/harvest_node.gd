@@ -46,6 +46,21 @@ func _ready() -> void:
 	add_to_group(&"harvest_nodes")
 	remaining_amount = max(remaining_amount, max_amount)
 	_update_state()
+	
+	# Register with HarvestManager
+	var instance: ServerInstance = get_viewport() as ServerInstance
+	if instance and instance.harvest_manager:
+		instance.harvest_manager.register_node(self)
+	
+	# Start with _process disabled since no one is harvesting yet
+	set_process(false)
+
+
+func _exit_tree() -> void:
+	# Unregister from HarvestManager
+	var instance: ServerInstance = get_viewport() as ServerInstance
+	if instance and instance.harvest_manager:
+		instance.harvest_manager.unregister_node(self)
 
 
 func _process(delta: float) -> void:
@@ -175,6 +190,11 @@ func player_join(peer_id: int, player: Player) -> bool:
 	if harvesters.has(peer_id):
 		return true
 	harvesters[peer_id] = {"joined_at": _clock, "accum_time": 0.0, "last_pos": player.global_position, "earned_total": 0.0}
+	
+	# Enable processing when first harvester joins
+	if harvesters.size() == 1:
+		set_process(true)
+	
 	multiplier = compute_multiplier(get_count())
 	_broadcast({
 		"type": &"joined",
@@ -209,6 +229,11 @@ func player_leave(peer_id: int) -> bool:
 			"multiplier": compute_multiplier(max(0, get_count() - 1)),
 		})
 	harvesters.erase(peer_id)
+	
+	# Disable processing when last harvester leaves (but keep enabled during cooldown)
+	if harvesters.size() == 0 and state != &"cooldown":
+		set_process(false)
+	
 	multiplier = compute_multiplier(get_count())
 	_broadcast({
 		"type": &"left",
@@ -311,6 +336,10 @@ func _on_depleted() -> void:
 		_distribute(&"depleted")
 	state = &"cooldown"
 	_cooldown_clock = 0.0
+	
+	# Keep processing enabled for cooldown countdown
+	set_process(true)
+	
 	var ids: Array = harvesters.keys().duplicate()
 	for pid_any in ids:
 		# notify leaving after distribution

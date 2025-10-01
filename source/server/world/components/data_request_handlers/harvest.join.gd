@@ -10,26 +10,13 @@ func data_request_handler(
 	if not player:
 		return {"ok": false, "err": &"no_player"}
 
-	# Find nearest node in range
-	var best: HarvestNode = null
-	var best_d2: float = INF
-	for node in instance.get_tree().get_nodes_in_group(&"harvest_nodes"):
-		if node is HarvestNode:
-			var hn: HarvestNode = node
-			if hn.player_in_range(player):
-				var d2: float = player.global_position.distance_squared_to(hn.global_position)
-				if d2 < best_d2:
-					best = hn
-					best_d2 = d2
+	# Use HarvestManager to find nearest node (eliminates tree scan)
+	var best: HarvestNode = instance.harvest_manager.find_nearest_in_range(player)
 	if best == null:
 		return {"ok": false, "err": &"no_node"}
 
-	# Ensure player is not already harvesting elsewhere
-	for node2 in instance.get_tree().get_nodes_in_group(&"harvest_nodes"):
-		if node2 is HarvestNode:
-			var hn2: HarvestNode = node2
-			if hn2.harvesters.has(peer_id) and hn2 != best:
-				hn2.player_leave(peer_id)
+	# Ensure player is not already harvesting elsewhere (eliminates second tree scan)
+	instance.harvest_manager.ensure_single_harvest(peer_id, best)
 
 	var ok: bool = best.player_join(peer_id, player)
 	if not ok:

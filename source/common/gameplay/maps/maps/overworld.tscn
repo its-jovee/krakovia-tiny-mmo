@@ -107,7 +107,7 @@ target_instance = ExtResource("15_6ybks")
 warper_id = 6
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(1074, 602)
+position = Vector2(1287, 635)
 script = ExtResource("16_bs6wx")
 energy_cost_per_sec = 5.0
 

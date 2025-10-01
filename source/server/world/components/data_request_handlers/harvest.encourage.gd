@@ -10,14 +10,8 @@ func data_request_handler(
 	if not player:
 		return {"ok": false, "err": &"no_player"}
 
-	# Find the node this player is harvesting
-	var target: HarvestNode = null
-	for node in instance.get_tree().get_nodes_in_group(&"harvest_nodes"):
-		if node is HarvestNode:
-			var hn: HarvestNode = node
-			if hn.harvesters.has(peer_id):
-				target = hn
-				break
+	# Use HarvestManager for instant lookup (eliminates tree scan)
+	var target: HarvestNode = instance.harvest_manager.get_player_harvest_node(peer_id)
 	if target == null:
 		return {"ok": false, "err": &"not_harvesting"}
 
