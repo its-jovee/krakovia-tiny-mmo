@@ -188,6 +188,10 @@ func execute_trade(session_id: int) -> bool:
 	# Log trade (optional: save to database)
 	_log_trade(session)
 	
+	# Notify players of their new gold amounts
+	session.instance.data_push.rpc_id(session.peer_a, &"gold.update", {"gold": res_a.golds})
+	session.instance.data_push.rpc_id(session.peer_b, &"gold.update", {"gold": res_b.golds})
+	
 	# Notify completion
 	session.instance.data_push.rpc_id(session.peer_a, &"trade.complete", {})
 	session.instance.data_push.rpc_id(session.peer_b, &"trade.complete", {})
@@ -201,48 +205,38 @@ func cancel_trade(session_id: int, peer_id: int = -1) -> Dictionary:
 	
 	var session: TradeSession = active_trades[session_id]
 	
-	# Check if the cancelling peer is part of this trade
-	if peer_id != -1 and peer_id != session.peer_a and peer_id != session.peer_b:
-		return {"error": "not_participant"}
+	var cancelled_by = ""
+	if peer_id != -1:
+		if peer_id == session.peer_a:
+			cancelled_by = session.instance.get_player(session.peer_a).player_resource.display_name
+		else:
+			cancelled_by = session.instance.get_player(session.peer_b).player_resource.display_name
 	
-	# Get the name of who cancelled
-	var cancelled_by_name = ""
-	if peer_id == session.peer_a:
-		cancelled_by_name = session.instance.get_player(session.peer_a).player_resource.display_name
-	elif peer_id == session.peer_b:
-		cancelled_by_name = session.instance.get_player(session.peer_b).player_resource.display_name
-	else:
-		cancelled_by_name = "System"
+	session.instance.data_push.rpc_id(session.peer_a, &"trade.cancel", {"cancelled_by": cancelled_by})
+	session.instance.data_push.rpc_id(session.peer_b, &"trade.cancel", {"cancelled_by": cancelled_by})
 	
-	# Notify both players about the cancellation
-	session.instance.data_push.rpc_id(session.peer_a, &"trade.cancel", {
-		"cancelled_by": cancelled_by_name
-	})
-	session.instance.data_push.rpc_id(session.peer_b, &"trade.cancel", {
-		"cancelled_by": cancelled_by_name
-	})
-	
-	# Remove the trade session
 	active_trades.erase(session_id)
-	
 	return {"success": "Trade cancelled"}
 
 func _broadcast_update(session: TradeSession):
+	# Send update to peer A
 	session.instance.data_push.rpc_id(session.peer_a, &"trade.update", {
 		"session_id": session.session_id,
 		"your_items": session.items_a,
-		"your_gold": session.gold_a,
 		"their_items": session.items_b,
+		"your_gold": session.gold_a,
 		"their_gold": session.gold_b,
 		"your_confirmed": session.confirmed_a,
 		"their_confirmed": session.confirmed_b,
 		"locked": session.locked_a
 	})
+	
+	# Send update to peer B
 	session.instance.data_push.rpc_id(session.peer_b, &"trade.update", {
 		"session_id": session.session_id,
 		"your_items": session.items_b,
-		"your_gold": session.gold_b,
 		"their_items": session.items_a,
+		"your_gold": session.gold_b,
 		"their_gold": session.gold_a,
 		"your_confirmed": session.confirmed_b,
 		"their_confirmed": session.confirmed_a,
@@ -269,3 +263,4 @@ func _process(delta: float):
 			session.confirm_timer -= delta
 			if session.confirm_timer <= 0:
 				execute_trade(session_id)
+				return

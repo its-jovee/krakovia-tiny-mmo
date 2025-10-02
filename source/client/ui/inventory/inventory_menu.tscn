@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dia55s0a7lhnv"]
+[gd_scene load_steps=15 format=3 uid="uid://dia55s0a7lhnv"]
 
 [ext_resource type="Script" uid="uid://3kue0fgf78ik" path="res://source/client/ui/inventory/inventory_menu.gd" id="1_g6fyq"]
 [ext_resource type="Script" uid="uid://cx6ltmvpbwdng" path="res://source/client/ui/inventory/gear_slot.gd" id="2_0wccm"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c3n053obioby0" path="res://source/client/ui/inventory/test_sprites/Icon142.png" id="7_4toxt"]
 [ext_resource type="Texture2D" uid="uid://cslc64xbpxpsd" path="res://source/client/ui/inventory/test_sprites/Icon321.png" id="8_3w0rw"]
 [ext_resource type="Texture2D" uid="uid://w14y1o4gi3l2" path="res://source/client/ui/inventory/test_sprites/Icon325.png" id="9_0wccm"]
+[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="12_as6qe"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -34,7 +35,6 @@ color = Color(0.184314, 0.184314, 0.184314, 0.662745)
 metadata/_edit_lock_ = true
 
 [node name="EquipmentView" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1748,6 +1748,23 @@ icon_alignment = 1
 script = ExtResource("2_0wccm")
 metadata/_custom_type_script = "uid://cx6ltmvpbwdng"
 
+[node name="GoldDisplay" type="Panel" parent="EquipmentView/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = ExtResource("12_as6qe")
+
+[node name="Label" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer2/GoldDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gold: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ItemInfo" type="PanelContainer" parent="EquipmentView/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 10
@@ -1788,6 +1805,7 @@ layout_mode = 2
 text = "Sell Price: 0 gold"
 
 [node name="TradeView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3268,6 +3286,23 @@ offset_bottom = 21.0
 grow_horizontal = 0
 horizontal_alignment = 1
 
+[node name="GoldDisplay" type="Panel" parent="TradeView/Screen/HBoxContainer"]
+custom_minimum_size = Vector2(80, 32)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("12_as6qe")
+
+[node name="Label" type="Label" parent="TradeView/Screen/HBoxContainer/GoldDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Gold: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="TradePanel" type="HBoxContainer" parent="TradeView/Screen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -3921,6 +3956,7 @@ text = "Gold"
 [node name="LineEdit" type="LineEdit" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+editable = false
 
 [node name="Button" type="Button" parent="TradeView/Screen/HBoxContainer/TradePanel/TheirOffer/VBoxContainer"]
 layout_mode = 2

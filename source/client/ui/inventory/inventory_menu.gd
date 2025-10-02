@@ -28,6 +28,9 @@ var trade_locked: bool = false
 # Market/sell variables
 var in_market: bool = false
 
+# Gold tracking
+var current_gold: int = 0
+
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
 @onready var equipment_slots: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots
 @onready var rich_text_label: RichTextLabel = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/RichTextLabel
@@ -48,6 +51,10 @@ var in_market: bool = false
 # Market/sell @onready references
 @onready var sell_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellButton
 @onready var sell_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellPriceLabel
+
+# Gold display @onready references
+@onready var equipment_gold_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/GoldDisplay/Label
+@onready var trade_gold_label: Label = $TradeView/Screen/HBoxContainer/GoldDisplay/Label
 
 
 func _ready() -> void:
@@ -70,6 +77,12 @@ func _ready() -> void:
 	print("Subscribing to market.status signal")
 	InstanceClient.subscribe(&"market.status", _on_market_status_update)
 	
+	# Subscribe to gold updates
+	InstanceClient.subscribe(&"gold.update", _on_gold_update)
+	
+	# Request initial gold amount
+	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
+	
 	# Connect sell button
 	if sell_button:
 		sell_button.pressed.connect(_on_sell_button_pressed)
@@ -83,8 +96,17 @@ func _on_visibility_changed() -> void:
 	print("Inventory menu visibility changed: ", is_visible_in_tree())
 	if is_visible_in_tree():
 		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+		# Request fresh gold amount when opening inventory
+		InstanceClient.current.request_data(&"gold.get", _on_gold_received)
 		# Always sync market status from HUD when inventory becomes visible
 		_sync_market_status_from_hud()
+		
+		# If we have an active trade session when becoming visible, show TradeView
+		# Note: _populate_trade_inventory() will be called in fill_inventory() after data arrives
+		if trade_session_id != -1:
+			$EquipmentView.hide()
+			$MaterialsView.hide()
+			trade_view.show()
 
 func _sync_market_status_from_hud() -> void:
 	# Try to find HUD through the UI scene structure
@@ -148,6 +170,21 @@ func _on_sell_response(data: Dictionary) -> void:
 		# Refresh inventory to show updated quantities
 		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
 
+func _on_gold_received(data: Dictionary) -> void:
+	current_gold = data.get("gold", 0)
+	_update_gold_display()
+
+func _on_gold_update(data: Dictionary) -> void:
+	current_gold = data.get("gold", 0)
+	_update_gold_display()
+
+func _update_gold_display() -> void:
+	var gold_text = "Gold: %d" % current_gold
+	if equipment_gold_label:
+		equipment_gold_label.text = gold_text
+	if trade_gold_label:
+		trade_gold_label.text = gold_text
+
 
 func fill_inventory(inv_data: Dictionary) -> void:
 	inventory = inv_data
@@ -178,6 +215,10 @@ func fill_inventory(inv_data: Dictionary) -> void:
 		else:
 			equipment_slot.icon = null
 			equipment_slot.text = "Lock"
+	
+	# If we're in a trade, populate the trade inventory now that we have the data
+	if trade_session_id != -1:
+		_populate_trade_inventory()
 
 
 func add_item() -> void:
@@ -339,34 +380,44 @@ func _update_trade_ui():
 		_enable_inventory_interaction()
 
 func _update_offer_grid(grid: GridContainer, items: Dictionary):
-	# Clear existing items
+	# Clear all item slots first
 	for child in grid.get_children():
-		child.queue_free()
+		if child is Panel and child.has_method("clear_item_data"):
+			child.clear_item_data()
 	
-	# Add items to grid
+	# Fill item slots with trade items
+	var slot_index: int = 0
 	for item_id in items:
 		var quantity = items[item_id]
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
-			var label = Label.new()
-			label.text = item.item_name + " x" + str(quantity)
-			grid.add_child(label)
+			# Find the next available Panel slot
+			if slot_index < grid.get_child_count():
+				var item_slot_panel = grid.get_child(slot_index)
+				if item_slot_panel is Panel and item_slot_panel.has_method("set_item_data"):
+					item_slot_panel.set_item_data(item_id, item, quantity)
+					slot_index += 1
 
 func _populate_trade_inventory():
-	# Clear existing items
+	# Clear all item slots first
 	for child in player_inv_grid.get_children():
-		child.queue_free()
+		if child is Panel and child.has_method("clear_item_data"):
+			child.clear_item_data()
 	
-	# Add items from player inventory
-	for item_id in inventory:
-		var entry = inventory[item_id]
-		var stack = entry.get("stack", 1)
+	# Fill item slots with inventory items
+	var slot_index: int = 0
+	for item_id: int in inventory.keys():
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
-			var button = Button.new()
-			button.text = item.item_name + " x" + str(stack)
-			button.pressed.connect(_add_item_to_trade.bind(item_id, stack))
-			player_inv_grid.add_child(button)
+			var entry: Dictionary = inventory[item_id]
+			var stack: int = int(entry.get("stack", 1))
+			
+			# Find the next available Panel slot
+			if slot_index < player_inv_grid.get_child_count():
+				var item_slot_panel = player_inv_grid.get_child(slot_index)
+				if item_slot_panel is Panel and item_slot_panel.has_method("set_item_data"):
+					item_slot_panel.set_item_data(item_id, item, stack)
+					slot_index += 1
 
 func _add_item_to_trade(item_id: int, quantity: int):
 	var available = inventory.get(item_id, {}).get("stack", 0)
@@ -391,10 +442,30 @@ func _send_trade_update():
 func _on_your_ready_pressed():
 	your_ready = not your_ready
 	_update_trade_ui()
-	_send_trade_update()
+	# Send confirmation status to server
+	InstanceClient.current.request_data(&"trade.confirm", Callable(), {
+		"session_id": trade_session_id,
+		"ready": your_ready
+	})
 
 func _on_gold_input_changed(new_text: String):
-	your_trade_gold = int(new_text) if new_text.is_valid_int() else 0
+	# Only process numeric characters
+	var numeric_only = ""
+	for c in new_text:
+		if c.is_valid_int():
+			numeric_only += c
+	
+	# Update the gold amount
+	your_trade_gold = int(numeric_only) if numeric_only != "" else 0
+	
+	# If the text contains non-numeric characters, update the field to show only numbers
+	if new_text != numeric_only:
+		your_gold_input.text = numeric_only
+		# Move cursor to end
+		your_gold_input.caret_column = numeric_only.length()
+		return  # Don't send update yet, it will be sent when the corrected text triggers this again
+	
+	_send_trade_update()
 
 func _close_trade():
 	trade_view.hide()
