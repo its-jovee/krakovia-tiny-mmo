@@ -461,7 +461,7 @@ func _on_create_character_button_pressed() -> void:
 
 func create_account() -> void:
 	var handle_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit
-	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit
+	var password_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/LineEdit
 	var password_repeat_edit: LineEdit = $CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit
 
 	# Check password match

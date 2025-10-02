@@ -131,5 +131,4 @@ script = ExtResource("18_6ybks")
 metadata/_custom_type_script = "uid://dfxctfxndtyhk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MarketArea"]
-position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_6ybks")
