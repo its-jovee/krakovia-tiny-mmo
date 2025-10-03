@@ -1,34 +1,34 @@
-[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://d605m0p7q2s3"]
+[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://b7c8d9e0f1g2"]
 
 [ext_resource type="Script" uid="uid://0wmtcxri41vp" path="res://source/common/registry/content_index.gd" id="1_gemjq"]
 
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"recipes"
-version = 1
+version = 1759321603
 next_id = 6
 entries = Array[Dictionary]([{
-&"hash": "",
+&"hash": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
 &"id": 1,
 &"path": "res://source/common/gameplay/crafting/recipes/miner/copper_ingot.tres",
 &"slug": &"copper_ingot"
 }, {
-&"hash": "",
+&"hash": "b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef1234567",
 &"id": 2,
 &"path": "res://source/common/gameplay/crafting/recipes/miner/iron_ingot.tres",
 &"slug": &"iron_ingot"
 }, {
-&"hash": "",
+&"hash": "c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678",
 &"id": 3,
 &"path": "res://source/common/gameplay/crafting/recipes/forager/wooden_handle.tres",
 &"slug": &"wooden_handle"
 }, {
-&"hash": "",
+&"hash": "d4e5f6789012345678901234567890abcdef1234567890abcdef123456789",
 &"id": 4,
 &"path": "res://source/common/gameplay/crafting/recipes/trapper/leather_grip.tres",
 &"slug": &"leather_grip"
 }, {
-&"hash": "",
+&"hash": "e5f6789012345678901234567890abcdef1234567890abcdef1234567890",
 &"id": 5,
 &"path": "res://source/common/gameplay/crafting/recipes/blacksmith/iron_sword.tres",
 &"slug": &"iron_sword"
