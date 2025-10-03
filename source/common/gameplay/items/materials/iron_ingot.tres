@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bwqv5pkd4exwf"]
+
+[ext_resource type="Texture2D" uid="uid://bpxojkwdtufxl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb148.png" id="1_1x1bw"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Iron Ingot"
+item_icon = ExtResource("1_1x1bw")
+description = "A refined iron ingot. Stronger than copper."
+can_trade = true
+can_sell = true
+minimum_price = 25
+stack_limit = 99
+tags = ["material", "component", "miner", "combat", "defense"]
+metadata/_custom_type_script = "uid://nsr1timk430j"

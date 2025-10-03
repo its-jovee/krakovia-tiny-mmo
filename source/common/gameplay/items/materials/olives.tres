@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://8erweba40jww"]
+
+[ext_resource type="Texture2D" uid="uid://dgb03b8x5j0jw" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb452.png" id="1_ixidp"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Olives"
+item_icon = ExtResource("1_ixidp")
+description = "Rich olives that can be pressed into oil or eaten."
+can_trade = true
+can_sell = true
+minimum_price = 6
+stack_limit = 99
+tags = ["harvestable", "forager", "material", "food"]
+metadata/_custom_type_script = "uid://nsr1timk430j"

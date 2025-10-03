@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://b4x3k8n5o0q1"]
+
+[ext_resource type="Texture2D" uid="uid://5wbqg8y114su" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb2068.png" id="1_3yorq"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+recipe_name = &"Leather Grip"
+recipe_icon = ExtResource("1_3yorq")
+description = "Craft a comfortable leather grip from hide and sinew."
+required_class = "trapper"
+required_level = 5
+gold_cost = 12
+energy_cost = 6.0
+input_1_slug = &"hide"
+input_1_quantity = 2
+input_2_slug = &"sinew"
+input_2_quantity = 1
+output_1_slug = &"leather_grip"
+output_1_quantity = 2
+tags = ["trapper", "leatherwork", "basic"]
+metadata/_custom_type_script = "uid://b4x3k8n5o0q1"

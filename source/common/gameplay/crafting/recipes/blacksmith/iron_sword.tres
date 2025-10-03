@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://c5y4mao6p1r2"]
+
+[ext_resource type="Texture2D" uid="uid://30ed3urweojh" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1448.png" id="1_4p6y0"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+recipe_name = &"Iron Sword"
+recipe_icon = ExtResource("1_4p6y0")
+description = "Forge a sturdy iron sword. Requires components from multiple classes."
+required_class = "blacksmith"
+required_level = 30
+gold_cost = 100
+energy_cost = 40.0
+input_1_slug = &"iron_ingot"
+input_2_slug = &"wooden_handle"
+input_2_quantity = 1
+input_3_slug = &"leather_grip"
+input_3_quantity = 1
+output_1_slug = &"iron_sword"
+tags = ["blacksmith", "weapon", "combat", "interdependent"]
+metadata/_custom_type_script = "uid://c5y4l9o6p1r2"

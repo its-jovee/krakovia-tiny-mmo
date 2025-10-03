@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://d605m0p7q2s3"]
+
+[ext_resource type="Script" uid="uid://0wmtcxri41vp" path="res://source/common/registry/content_index.gd" id="1_gemjq"]
+
+[resource]
+script = ExtResource("1_gemjq")
+content_name = &"recipes"
+version = 1
+next_id = 6
+entries = Array[Dictionary]([{
+&"hash": "",
+&"id": 1,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/copper_ingot.tres",
+&"slug": &"copper_ingot"
+}, {
+&"hash": "",
+&"id": 2,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/iron_ingot.tres",
+&"slug": &"iron_ingot"
+}, {
+&"hash": "",
+&"id": 3,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/wooden_handle.tres",
+&"slug": &"wooden_handle"
+}, {
+&"hash": "",
+&"id": 4,
+&"path": "res://source/common/gameplay/crafting/recipes/trapper/leather_grip.tres",
+&"slug": &"leather_grip"
+}, {
+&"hash": "",
+&"id": 5,
+&"path": "res://source/common/gameplay/crafting/recipes/blacksmith/iron_sword.tres",
+&"slug": &"iron_sword"
+}])

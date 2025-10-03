@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dg4yekl7442w1"]
+
+[ext_resource type="Texture2D" uid="uid://datps4c5oc3j2" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb481.png" id="1_1h8cc"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Raw Meat"
+item_icon = ExtResource("1_1h8cc")
+description = "Fresh meat from hunted animals. Can be cooked or preserved."
+can_trade = true
+can_sell = true
+minimum_price = 6
+stack_limit = 99
+tags = ["harvestable", "trapper", "material", "food"]
+metadata/_custom_type_script = "uid://nsr1timk430j"

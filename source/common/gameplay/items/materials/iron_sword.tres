@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b435jjh108o0g"]
+
+[ext_resource type="Texture2D" uid="uid://30ed3urweojh" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1448.png" id="1_5gdqf"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Iron Sword"
+item_icon = ExtResource("1_5gdqf")
+description = "A well-crafted iron sword. Requires components from multiple classes."
+can_trade = true
+can_sell = true
+minimum_price = 150
+stack_limit = 1
+tags = ["weapon", "combat", "blacksmith"]
+metadata/_custom_type_script = "uid://nsr1timk430j"

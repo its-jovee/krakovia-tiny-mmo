@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1759321601
-next_id = 26
+version = 1759321602
+next_id = 28
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -132,4 +132,14 @@ entries = Array[Dictionary]([{
 &"id": 25,
 &"path": "res://source/server/world/components/data_request_handlers/item.sell.gd",
 &"slug": &"item.sell"
+}, {
+&"hash": "",
+&"id": 26,
+&"path": "res://source/server/world/components/data_request_handlers/craft.execute.gd",
+&"slug": &"craft.execute"
+}, {
+&"hash": "",
+&"id": 27,
+&"path": "res://source/server/world/components/data_request_handlers/craft.get_recipes.gd",
+&"slug": &"craft.get_recipes"
 }])

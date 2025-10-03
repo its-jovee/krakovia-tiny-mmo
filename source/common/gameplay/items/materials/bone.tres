@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=2 format=3 uid="uid://bme5xgselkbng"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bme5xgselkbng"]
 
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="1_38lmc"]
+[ext_resource type="Texture2D" uid="uid://cd61rnd2ljfpt" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb231.png" id="1_t2ilm"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
-script = ExtResource("1_38lmc")
+script = ExtResource("2_material")
 item_name = &"Bone"
-description = "A bone that can be sold for a small amount of gold"
+item_icon = ExtResource("1_t2ilm")
+description = "Animal bones used for crafting tools and ornaments."
 can_trade = true
 can_sell = true
 minimum_price = 3
-stack_limit = 10
-tags = ["material", "bone"]
+stack_limit = 99
+tags = ["harvestable", "trapper", "material"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-metadata/slug = &"bone"
-metadata/id = 4

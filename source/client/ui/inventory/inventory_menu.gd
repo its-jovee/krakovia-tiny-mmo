@@ -31,6 +31,12 @@ var in_market: bool = false
 # Gold tracking
 var current_gold: int = 0
 
+# Crafting system variables
+var available_recipes: Array = []
+var selected_recipe: CraftingRecipe = null
+var player_class: String = ""
+var player_level: int = 0
+
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
 @onready var equipment_slots: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots
 @onready var rich_text_label: RichTextLabel = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/RichTextLabel
@@ -55,6 +61,19 @@ var current_gold: int = 0
 # Gold display @onready references
 @onready var equipment_gold_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/GoldDisplay/Label
 @onready var trade_gold_label: Label = $TradeView/Screen/HBoxContainer/GoldDisplay/Label
+
+# Crafting UI @onready references
+@onready var crafting_view: Control = $CraftingView
+@onready var recipe_grid: GridContainer = $CraftingView/HBoxContainer/VBoxContainer/RecipeList/RecipeGrid
+@onready var class_filter: OptionButton = $CraftingView/HBoxContainer/VBoxContainer/FilterContainer/ClassFilter
+@onready var search_box: LineEdit = $CraftingView/HBoxContainer/VBoxContainer/FilterContainer/SearchBox
+@onready var recipe_name_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeName
+@onready var recipe_description: RichTextLabel = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeDescription
+@onready var inputs_container: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RequirementsContainer/InputsContainer
+@onready var outputs_list: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/OutputsContainer/OutputsList
+@onready var costs_list: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CostsContainer/CostsList
+@onready var craft_button: Button = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CraftButton
+@onready var status_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/StatusLabel
 
 
 func _ready() -> void:
@@ -86,6 +105,22 @@ func _ready() -> void:
 	# Connect sell button
 	if sell_button:
 		sell_button.pressed.connect(_on_sell_button_pressed)
+	
+	# Connect tab buttons
+	var inventory_tabs = $InventoryTabs
+	if inventory_tabs:
+		var buttons = inventory_tabs.get_children()
+		for i in range(buttons.size()):
+			if buttons[i] is Button:
+				buttons[i].pressed.connect(_on_tab_button_pressed.bind(i))
+	
+	# Connect crafting UI
+	if craft_button:
+		craft_button.pressed.connect(_on_craft_button_pressed)
+	if class_filter:
+		class_filter.item_selected.connect(_on_class_filter_changed)
+	if search_box:
+		search_box.text_changed.connect(_on_search_text_changed)
 	
 	#hide trade viewby default
 	trade_view.hide()
@@ -491,3 +526,221 @@ func _disable_inventory_interaction():
 func _enable_inventory_interaction():
 	# Re-enable inventory interactions
 	pass
+
+
+# Tab switching logic
+func _on_tab_button_pressed(tab_index: int) -> void:
+	# Hide all views
+	$EquipmentView.hide()
+	$TradeView.hide()
+	$MaterialsView.hide()
+	crafting_view.hide()
+	
+	# Show appropriate view based on tab
+	match tab_index:
+		0: # Equipment
+			$EquipmentView.show()
+		1: # Materials  
+			$MaterialsView.show()
+		2: # Consumables
+			$EquipmentView.show() # For now, show equipment view
+		3: # Key Items
+			$EquipmentView.show() # For now, show equipment view
+		4: # Crafting
+			crafting_view.show()
+			_load_crafting_data()
+
+
+# Crafting system methods
+func _load_crafting_data() -> void:
+	# Request available recipes from server
+	InstanceClient.current.request_data(&"craft.get_recipes", _on_recipes_received)
+
+func _on_recipes_received(data: Dictionary) -> void:
+	player_class = data.get("player_class", "")
+	player_level = data.get("player_level", 0)
+	
+	# Load all recipes from registry
+	available_recipes.clear()
+	var registry = ContentRegistryHub.registry_of(&"recipes")
+	if registry:
+		# Get all recipe IDs and load them
+		# For now, we'll load a few example recipes
+		var example_recipe_ids = [1, 2, 3, 4, 5] # Our example recipes
+		for recipe_id in example_recipe_ids:
+			var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
+			if recipe:
+				available_recipes.append(recipe)
+	
+	_populate_recipe_list()
+	_setup_class_filter()
+
+func _populate_recipe_list() -> void:
+	# Clear existing recipe buttons
+	for child in recipe_grid.get_children():
+		child.queue_free()
+	
+	# Create recipe buttons
+	for recipe in available_recipes:
+		var recipe_button = _create_recipe_button(recipe)
+		recipe_grid.add_child(recipe_button)
+
+func _create_recipe_button(recipe: CraftingRecipe) -> Button:
+	var button = Button.new()
+	button.text = recipe.recipe_name
+	button.custom_minimum_size = Vector2(200, 60)
+	
+	# Set visual state based on availability
+	var can_craft = recipe.can_craft(player_class, player_level)
+	var has_materials = _check_recipe_materials(recipe)
+	
+	if not can_craft:
+		button.disabled = true
+		button.modulate = Color(0.5, 0.5, 0.5, 0.7) # Dimmed
+	elif not has_materials:
+		button.disabled = true
+		button.modulate = Color(1, 0.8, 0.8, 0.8) # Slightly red
+	else:
+		button.modulate = Color.WHITE
+	
+	button.pressed.connect(_on_recipe_selected.bind(recipe))
+	return button
+
+func _check_recipe_materials(recipe: CraftingRecipe) -> bool:
+	var inputs = recipe.get_inputs()
+	for input in inputs:
+		var item_id = ContentRegistryHub.id_from_slug(&"items", input.slug)
+		if item_id <= 0:
+			return false
+		
+		var inv_entry = inventory.get(item_id, {})
+		var available = inv_entry.get("stack", 0)
+		
+		if available < input.quantity:
+			return false
+	
+	return true
+
+func _setup_class_filter() -> void:
+	if not class_filter:
+		return
+	
+	class_filter.clear()
+	class_filter.add_item("All Classes")
+	class_filter.add_item("Miner")
+	class_filter.add_item("Forager") 
+	class_filter.add_item("Trapper")
+	class_filter.add_item("Blacksmith")
+	class_filter.add_item("Culinarian")
+	class_filter.add_item("Artisan")
+
+func _on_recipe_selected(recipe: CraftingRecipe) -> void:
+	selected_recipe = recipe
+	_update_recipe_details()
+
+func _update_recipe_details() -> void:
+	if not selected_recipe:
+		recipe_name_label.text = "Select a recipe"
+		recipe_description.text = "Choose a recipe from the list to see details."
+		craft_button.disabled = true
+		status_label.text = ""
+		return
+	
+	# Update recipe info
+	recipe_name_label.text = selected_recipe.recipe_name
+	recipe_description.text = selected_recipe.description
+	
+	# Clear and populate inputs
+	_clear_container(inputs_container)
+	var inputs = selected_recipe.get_inputs()
+	for input in inputs:
+		var item_id = ContentRegistryHub.id_from_slug(&"items", input.slug)
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		if item:
+			var input_label = Label.new()
+			var available = inventory.get(item_id, {}).get("stack", 0)
+			input_label.text = "%s x%d (Have: %d)" % [item.item_name, input.quantity, available]
+			if available < input.quantity:
+				input_label.modulate = Color(1, 0.5, 0.5)
+			inputs_container.add_child(input_label)
+	
+	# Clear and populate outputs
+	_clear_container(outputs_list)
+	var outputs = selected_recipe.get_outputs()
+	for output in outputs:
+		var item_id = ContentRegistryHub.id_from_slug(&"items", output.slug)
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		if item:
+			var output_label = Label.new()
+			output_label.text = "%s x%d" % [item.item_name, output.quantity]
+			outputs_list.add_child(output_label)
+	
+	# Clear and populate costs
+	_clear_container(costs_list)
+	if selected_recipe.gold_cost > 0:
+		var gold_label = Label.new()
+		gold_label.text = "Gold: %d (Have: %d)" % [selected_recipe.gold_cost, current_gold]
+		if current_gold < selected_recipe.gold_cost:
+			gold_label.modulate = Color(1, 0.5, 0.5)
+		costs_list.add_child(gold_label)
+	
+	if selected_recipe.energy_cost > 0:
+		var energy_label = Label.new()
+		energy_label.text = "Energy: %.1f" % selected_recipe.energy_cost
+		costs_list.add_child(energy_label)
+	
+	# Update craft button and status
+	var can_craft = selected_recipe.can_craft(player_class, player_level)
+	var has_materials = _check_recipe_materials(selected_recipe)
+	var has_gold = current_gold >= selected_recipe.gold_cost
+	
+	craft_button.disabled = not (can_craft and has_materials and has_gold)
+	
+	if not can_craft:
+		status_label.text = "Requires %s level %d" % [selected_recipe.required_class, selected_recipe.required_level]
+	elif not has_materials:
+		status_label.text = "Missing required materials"
+	elif not has_gold:
+		status_label.text = "Not enough gold"
+	else:
+		status_label.text = "Ready to craft!"
+
+func _clear_container(container: Container) -> void:
+	for child in container.get_children():
+		child.queue_free()
+
+func _on_craft_button_pressed() -> void:
+	if not selected_recipe:
+		return
+	
+	# Get recipe ID
+	var recipe_id = ContentRegistryHub.id_from_slug(&"recipes", selected_recipe.recipe_name)
+	if recipe_id <= 0:
+		status_label.text = "Recipe not found!"
+		return
+	
+	# Request crafting from server
+	InstanceClient.current.request_data(&"craft.execute", _on_craft_response, {
+		"recipe_id": recipe_id
+	})
+
+func _on_craft_response(data: Dictionary) -> void:
+	if data.get("success", false):
+		status_label.text = "Crafted successfully!"
+		# Refresh inventory to show new items
+		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+		# Refresh recipe details to update material counts
+		_update_recipe_details()
+	else:
+		status_label.text = "Error: " + data.get("error", "Unknown error")
+
+func _on_class_filter_changed(index: int) -> void:
+	_filter_recipes()
+
+func _on_search_text_changed(new_text: String) -> void:
+	_filter_recipes()
+
+func _filter_recipes() -> void:
+	# For now, just repopulate the list
+	# TODO: Implement actual filtering
+	_populate_recipe_list()
