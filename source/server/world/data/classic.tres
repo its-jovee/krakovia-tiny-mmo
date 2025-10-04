@@ -32,7 +32,7 @@ script = ExtResource("1_83xu3")
 player_id = 1
 account_name = "teste"
 display_name = "teste"
-golds = 253
+golds = 318
 inventory = {
 1: {
 "stack": 1
@@ -40,8 +40,8 @@ inventory = {
 6: {
 "stack": 202
 },
-7: {
-"stack": 24
+24: {
+"stack": 3
 }
 }
 available_attributes_points = 10

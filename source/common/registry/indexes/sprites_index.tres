@@ -23,3 +23,5 @@ entries = Array[Dictionary]([{
 &"path": "res://source/common/gameplay/characters/sprite_frames/trapper.tres",
 &"slug": &"trapper"
 }])
+metadata/slug = &"sprites_index"
+metadata/id = 5

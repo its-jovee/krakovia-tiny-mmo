@@ -6,7 +6,7 @@
 script = ExtResource("1_gemjq")
 content_name = &"items"
 version = 1758600001
-next_id = 25
+next_id = 29
 entries = Array[Dictionary]([{
 &"hash": "5e2c9ea62f0834942e7633d440ac9054423ada15a996d1c1aabf760508c1c423",
 &"id": 1,
@@ -148,3 +148,5 @@ entries = Array[Dictionary]([{
 &"path": "res://source/common/gameplay/items/materials/iron_sword.tres",
 &"slug": &"iron_sword"
 }])
+metadata/slug = &"items_index"
+metadata/id = 2

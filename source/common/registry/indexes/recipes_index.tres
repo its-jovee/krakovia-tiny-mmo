@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://b7c8d9e0f1g2"]
+[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://b7c8eae0f1g2"]
 
 [ext_resource type="Script" uid="uid://0wmtcxri41vp" path="res://source/common/registry/content_index.gd" id="1_gemjq"]
 
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"recipes"
-version = 1759321603
+version = 1759321604
 next_id = 6
 entries = Array[Dictionary]([{
 &"hash": "a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
@@ -33,3 +33,5 @@ entries = Array[Dictionary]([{
 &"path": "res://source/common/gameplay/crafting/recipes/blacksmith/iron_sword.tres",
 &"slug": &"iron_sword"
 }])
+metadata/slug = &"recipes_index"
+metadata/id = 4

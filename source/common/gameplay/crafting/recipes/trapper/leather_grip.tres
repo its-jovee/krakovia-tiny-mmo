@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
+slug = &"leather_grip"
 recipe_name = &"Leather Grip"
 recipe_icon = ExtResource("1_3yorq")
 description = "Craft a comfortable leather grip from hide and sinew."
@@ -12,7 +13,7 @@ required_class = "trapper"
 required_level = 5
 gold_cost = 12
 energy_cost = 6.0
-input_1_slug = &"hide"
+input_1_slug = &"raw_meat"
 input_1_quantity = 2
 input_2_slug = &"sinew"
 input_2_quantity = 1
@@ -20,3 +21,5 @@ output_1_slug = &"leather_grip"
 output_1_quantity = 2
 tags = ["trapper", "leatherwork", "basic"]
 metadata/_custom_type_script = "uid://b4x3k8n5o0q1"
+metadata/slug = &"leather_grip"
+metadata/id = 4

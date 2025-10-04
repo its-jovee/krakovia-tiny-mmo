@@ -742,7 +742,7 @@ func _on_craft_button_pressed() -> void:
 		return
 	
 	# Get recipe ID
-	var recipe_id = ContentRegistryHub.id_from_slug(&"recipes", selected_recipe.recipe_name)
+	var recipe_id = ContentRegistryHub.id_from_slug(&"recipes", selected_recipe.slug)
 	if recipe_id <= 0:
 		status_label.text = "Recipe not found!"
 		return

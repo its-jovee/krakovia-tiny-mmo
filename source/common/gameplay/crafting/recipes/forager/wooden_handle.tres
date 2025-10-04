@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
+slug = &"wooden_handle"
 recipe_name = &"Wooden Handle"
 recipe_icon = ExtResource("1_hc1we")
 description = "Craft a sturdy wooden handle from raw wood."
@@ -17,3 +18,5 @@ output_1_slug = &"wooden_handle"
 output_1_quantity = 2
 tags = ["forager", "woodwork", "basic"]
 metadata/_custom_type_script = "uid://a3w2j7m4n9p0"
+metadata/slug = &"wooden_handle"
+metadata/id = 3

@@ -3,6 +3,7 @@ extends Resource
 
 
 ## Recipe identification
+@export var slug: StringName = &""
 @export var recipe_name: StringName = &"RecipeDefault"
 @export var recipe_icon: CompressedTexture2D
 @export_multiline var description: String

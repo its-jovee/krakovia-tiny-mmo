@@ -143,3 +143,5 @@ entries = Array[Dictionary]([{
 &"path": "res://source/server/world/components/data_request_handlers/craft.get_recipes.gd",
 &"slug": &"craft.get_recipes"
 }])
+metadata/slug = &"data_request_handlers_index"
+metadata/id = 1

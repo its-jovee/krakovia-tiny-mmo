@@ -34,7 +34,7 @@ func data_request_handler(
 	# Validate energy
 	var asc: AbilitySystemComponent = player.get_node_or_null(^"AbilitySystemComponent")
 	if asc:
-		var current_energy = asc.get_attribute_current(&"energy")
+		var current_energy = asc.get_value(&"energy")
 		if current_energy < recipe.energy_cost:
 			return {"success": false, "error": "Not enough energy"}
 	

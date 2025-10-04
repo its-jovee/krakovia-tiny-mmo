@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
+slug = &"iron_sword"
 recipe_name = &"Iron Sword"
 recipe_icon = ExtResource("1_4p6y0")
 description = "Forge a sturdy iron sword. Requires components from multiple classes."
@@ -20,3 +21,5 @@ input_3_quantity = 1
 output_1_slug = &"iron_sword"
 tags = ["blacksmith", "weapon", "combat", "interdependent"]
 metadata/_custom_type_script = "uid://c5y4l9o6p1r2"
+metadata/slug = &"iron_sword"
+metadata/id = 5

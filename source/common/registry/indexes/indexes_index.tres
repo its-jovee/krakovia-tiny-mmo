@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://du3yx1r2cwte6"]
+
+[ext_resource type="Script" uid="uid://0wmtcxri41vp" path="res://source/common/registry/content_index.gd" id="1_cc7ov"]
+
+[resource]
+script = ExtResource("1_cc7ov")
+content_name = &"indexes"
+version = 1759585099
+next_id = 6
+entries = Array[Dictionary]([{
+&"hash": "acccbd68e6bf640bdb8b9fc8e837ae45295698c10015a56e29674a0f0a799b60",
+&"id": 1,
+&"path": "res://source/common/registry/indexes/data_request_handlers_index.tres",
+&"slug": &"data_request_handlers_index"
+}, {
+&"hash": "b53d23367f06d44e163fdfa020696f6e7ae43768259418a4707547eb5a8c8ba2",
+&"id": 2,
+&"path": "res://source/common/registry/indexes/items_index.tres",
+&"slug": &"items_index"
+}, {
+&"hash": "3305f7ae714e38e1c697a1b572f296c5a053a871919a2429e3f94ff00ec027ed",
+&"id": 3,
+&"path": "res://source/common/registry/indexes/maps_index.tres",
+&"slug": &"maps_index"
+}, {
+&"hash": "e0b1755d36a1a56a8602a792beab601637d8ea5d9afdce17e5e081c26cfa43fe",
+&"id": 4,
+&"path": "res://source/common/registry/indexes/recipes_index.tres",
+&"slug": &"recipes_index"
+}, {
+&"hash": "e66d58f364c096ee064c3a651bcdd3be85a270348c3a749ab4a6ea19f9995ade",
+&"id": 5,
+&"path": "res://source/common/registry/indexes/sprites_index.tres",
+&"slug": &"sprites_index"
+}])
