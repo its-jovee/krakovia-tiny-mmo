@@ -5,21 +5,21 @@
 [resource]
 script = ExtResource("1_ccyyb")
 content_name = &"sprites"
-version = 1757682500
+version = 1759321603
 next_id = 4
 entries = Array[Dictionary]([{
 &"hash": "b20c36766102dfdb9082db2882c32c878146f67e186800b55870eb4fec192a63",
 &"id": 1,
-&"path": "res://source/common/gameplay/characters/sprite_frames/knight.tres",
-&"slug": &"knight"
+&"path": "res://source/common/gameplay/characters/sprite_frames/miner.tres",
+&"slug": &"miner"
 }, {
 &"hash": "7e337d0e7ba978e53fc68eb7ea8839939828cb645cad0b9e5b1e904dbd1c96c3",
 &"id": 2,
-&"path": "res://source/common/gameplay/characters/sprite_frames/rogue.tres",
-&"slug": &"rogue"
+&"path": "res://source/common/gameplay/characters/sprite_frames/forager.tres",
+&"slug": &"forager"
 }, {
 &"hash": "5caf2f95ab65991bc735c69ed2c5bdc01262299b7e37c3b452978be1e284abcb",
 &"id": 3,
-&"path": "res://source/common/gameplay/characters/sprite_frames/wizard.tres",
-&"slug": &"wizard"
+&"path": "res://source/common/gameplay/characters/sprite_frames/trapper.tres",
+&"slug": &"trapper"
 }])

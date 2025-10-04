@@ -9,7 +9,7 @@
 [ext_resource type="FontFile" uid="uid://cehc3gujked8x" path="res://assets/fonts/Cinzel/static/Cinzel-Bold.ttf" id="5_opc3y"]
 [ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="6_tnybn"]
 [ext_resource type="StyleBox" uid="uid://bi8r7kxlh83no" path="res://source/client/gateway/ui/gradient_button.tres" id="7_waovh"]
-[ext_resource type="SpriteFrames" uid="uid://dkeeft051qhl3" path="res://source/common/gameplay/characters/sprite_frames/rogue.tres" id="8_afkjb"]
+[ext_resource type="SpriteFrames" uid="uid://dkeeft051qhl3" path="res://source/common/gameplay/characters/sprite_frames/forager.tres" id="8_afkjb"]
 [ext_resource type="Script" uid="uid://q5rsjtg6nsto" path="res://source/client/gateway/ui/popup_panel.gd" id="9_4rdug"]
 [ext_resource type="AudioStream" uid="uid://xxr4otrq1cg0" path="res://assets/audio/music/ekonia-main-theme.wav" id="10_q1aoo"]
 
@@ -596,7 +596,7 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
-[node name="knight" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="miner" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -606,7 +606,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("7_waovh")
 text = "Miner"
 
-[node name="rogue" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="forager" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -616,7 +616,7 @@ theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = ExtResource("7_waovh")
 text = "Forager"
 
-[node name="wizard" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="trapper" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(88, 64)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -823,3 +823,4 @@ timeout = 7.0
 [connection signal="pressed" from="LoginPanel/VBoxContainer/VBoxContainer/LoginButton" to="." method="_on_login_login_button_pressed"]
 [connection signal="pressed" from="CreateAccountPanel/VBoxContainer/VBoxContainer/CreateAccountButton" to="." method="create_account"]
 [connection signal="pressed" from="CharacterCreation/VBoxContainer/VBoxContainer/CreateButton" to="." method="_on_create_character_button_pressed"]
+

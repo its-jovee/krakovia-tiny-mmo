@@ -4,7 +4,7 @@ extends Resource
 
 @export var power_resources: Array[GameplayResource] = []
 
-@export var class_name_id: StringName = &"knight"
+@export var class_name_id: StringName = &"miner"
 @export var character_name: String
 
 @export var character_sprite: SpriteFrames

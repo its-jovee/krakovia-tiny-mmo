@@ -113,6 +113,7 @@ warper_id = 6
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(1287, 635)
 script = ExtResource("16_bs6wx")
+node_type = &"copper_ore"
 energy_cost_per_sec = 5.0
 
 [node name="Area2D" type="Area2D" parent="Node2D"]

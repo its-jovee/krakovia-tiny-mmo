@@ -13,7 +13,7 @@ var account_name: String
 var token: int = randi()
 
 var current_world_id: int
-var selected_skin: String = "rogue"
+var selected_skin: String = "forager"
 
 var menu_stack: Array[Control]
 

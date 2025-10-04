@@ -22,7 +22,7 @@ var character_class: String:
 	set = _set_character_class
 var character_resource: CharacterResource
 
-var sprite_frames: String = "knight":
+var sprite_frames: String = "miner":
 	set = _set_sprite_frames
 
 var anim: Animations = Animations.IDLE:
@@ -46,10 +46,13 @@ var pivot: float = 0.0:
 @onready var equipment_component: EquipmentComponent = $EquipmentComponent
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var state_machine: AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/OnFoot/LocomotionSM/playback")
 
 
 func _ready() -> void:
+	# Initialize character visuals
+	sprite_frames = "miner"  # Default, will be overridden by character_class if set
+	anim = Animations.IDLE
+	
 	# NEW
 	$AbilitySystemComponent/AttributesMirror.attribute_local_changed.connect(
 		func(attr: StringName, value: float, max_value: float):
@@ -109,11 +112,11 @@ func _set_sprite_frames(new_sprite_frames: String) -> void:
 func _set_anim(new_anim: Animations) -> void:
 	match new_anim:
 		Animations.IDLE:
-			state_machine.travel(&"locomotion_idle")
+			animated_sprite.play("idle")
 		Animations.RUN:
-			state_machine.travel(&"locomotion_run")
+			animated_sprite.play("run")
 		Animations.DEATH:
-			state_machine[&"parameters/OnFoot/InteruptShot/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			animated_sprite.play("death")
 	anim = new_anim
 
 

@@ -145,7 +145,7 @@ func create_player_character_request(character_data: Dictionary, world_id: int) 
 		character_name = character_data["name"]
 	if not connected_peers[peer_id].has("account"):
 		result_code = 7
-	elif not character_data["class"] in ["knight", "rogue", "wizard"]:
+	elif not character_data["class"] in ["miner", "forager", "trapper"]:
 		result_code = 8
 	elif character_name.is_empty():
 		result_code = 1

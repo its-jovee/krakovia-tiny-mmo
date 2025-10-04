@@ -39,6 +39,25 @@ const ITEM_BY_NODE_TYPE := {
 	&"ore": &"ore",
 	&"plant": &"plant_fiber",
 	&"hunting": &"hide",
+	# NEW: Add all harvestable items
+	&"copper_ore": &"copper_ore",
+	&"iron_ore": &"iron_ore",
+	&"coal": &"coal",
+	&"stone": &"stone",
+	&"clay": &"clay",
+	&"wood": &"wood",
+	&"berries": &"berries",
+	&"mushrooms": &"mushrooms",
+	&"herbs": &"herbs",
+	&"olives": &"olives",
+	&"apples": &"apples",
+	&"wheat": &"wheat",
+	&"animal_feces": &"animal_feces",
+	&"quality_honey": &"quality_honey",
+	&"raw_meat": &"raw_meat",
+	&"bone": &"bone",
+	&"feathers": &"feathers",
+	&"sinew": &"sinew",
 }
 
 

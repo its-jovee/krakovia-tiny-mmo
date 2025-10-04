@@ -8,6 +8,7 @@ script = ExtResource("1_recipe")
 recipe_name = &"Iron Ingot"
 recipe_icon = ExtResource("1_cbq5w")
 description = "Smelt iron ore into a refined ingot."
+required_class = "miner"
 required_level = 3
 gold_cost = 15
 energy_cost = 7.0

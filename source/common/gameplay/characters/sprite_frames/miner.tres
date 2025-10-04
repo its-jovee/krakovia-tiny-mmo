@@ -94,7 +94,7 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 0.91,
 "texture": SubResource("AtlasTexture_1q2s0")
 }, {
 "duration": 1.0,
@@ -133,5 +133,5 @@ animations = [{
 "name": &"run",
 "speed": 5.0
 }]
-metadata/slug = &"knight"
+metadata/slug = &"miner"
 metadata/id = 1

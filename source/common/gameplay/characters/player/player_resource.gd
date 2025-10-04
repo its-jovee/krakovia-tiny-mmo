@@ -18,7 +18,7 @@ const BASE_STATS: Dictionary[StringName, float] = {
 @export var account_name: String
 
 @export var display_name: String = "Player"
-@export var character_class: String = "knight"
+@export var character_class: String = "miner"
 
 @export var golds: int
 @export var inventory: Dictionary

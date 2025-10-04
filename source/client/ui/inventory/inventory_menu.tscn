@@ -4343,19 +4343,22 @@ metadata/_edit_group_ = true
 [node name="Button" type="Button" parent="InventoryTabs"]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
-text = "Equipment"
+text = "Inventory"
 
 [node name="Button2" type="Button" parent="InventoryTabs"]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Materials"
 
 [node name="Button3" type="Button" parent="InventoryTabs"]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Consumables"
 
 [node name="Button4" type="Button" parent="InventoryTabs"]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Key Items"

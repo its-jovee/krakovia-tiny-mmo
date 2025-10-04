@@ -557,20 +557,38 @@ func _load_crafting_data() -> void:
 	InstanceClient.current.request_data(&"craft.get_recipes", _on_recipes_received)
 
 func _on_recipes_received(data: Dictionary) -> void:
+	print("=== RECIPES RECEIVED DEBUG ===")
+	print("Raw server data: ", data)
+	
 	player_class = data.get("player_class", "")
 	player_level = data.get("player_level", 0)
+	
+	print("Player class: '", player_class, "'")
+	print("Player level: ", player_level)
 	
 	# Load all recipes from registry
 	available_recipes.clear()
 	var registry = ContentRegistryHub.registry_of(&"recipes")
 	if registry:
+		print("✅ Recipes registry found")
 		# Get all recipe IDs and load them
 		# For now, we'll load a few example recipes
 		var example_recipe_ids = [1, 2, 3, 4, 5] # Our example recipes
 		for recipe_id in example_recipe_ids:
 			var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
 			if recipe:
+				print("✅ Loaded recipe: ", recipe.recipe_name)
+				print("   - Required class: '", recipe.required_class, "'")
+				print("   - Required level: ", recipe.required_level)
+				print("   - Can craft: ", recipe.can_craft(player_class, player_level))
 				available_recipes.append(recipe)
+			else:
+				print("❌ Failed to load recipe ID: ", recipe_id)
+	else:
+		print("❌ Recipes registry not found!")
+	
+	print("Total recipes loaded: ", available_recipes.size())
+	print("===============================")
 	
 	_populate_recipe_list()
 	_setup_class_filter()
@@ -586,6 +604,8 @@ func _populate_recipe_list() -> void:
 		recipe_grid.add_child(recipe_button)
 
 func _create_recipe_button(recipe: CraftingRecipe) -> Button:
+	print("Creating button for recipe: ", recipe.recipe_name)
+	
 	var button = Button.new()
 	button.text = recipe.recipe_name
 	button.custom_minimum_size = Vector2(200, 60)
@@ -594,14 +614,22 @@ func _create_recipe_button(recipe: CraftingRecipe) -> Button:
 	var can_craft = recipe.can_craft(player_class, player_level)
 	var has_materials = _check_recipe_materials(recipe)
 	
+	print("  - Player class: '", player_class, "' vs Required: '", recipe.required_class, "'")
+	print("  - Player level: ", player_level, " vs Required: ", recipe.required_level)
+	print("  - Can craft: ", can_craft)
+	print("  - Has materials: ", has_materials)
+	
 	if not can_craft:
 		button.disabled = true
 		button.modulate = Color(0.5, 0.5, 0.5, 0.7) # Dimmed
+		print("  - Button state: LOCKED (wrong class/level)")
 	elif not has_materials:
-		button.disabled = true
+		# DON'T disable button - player can click to see what's missing
 		button.modulate = Color(1, 0.8, 0.8, 0.8) # Slightly red
+		print("  - Button state: MISSING MATERIALS (clickable)")
 	else:
 		button.modulate = Color.WHITE
+		print("  - Button state: AVAILABLE")
 	
 	button.pressed.connect(_on_recipe_selected.bind(recipe))
 	return button

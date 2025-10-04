@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b41gujk35w421" path="res://source/common/gameplay/combat/ability/ability.gd" id="1_fu0re"]
 [ext_resource type="Script" uid="uid://b2tgdabbgoor" path="res://source/common/gameplay/characters/classes/character_resource.gd" id="2_0padl"]
-[ext_resource type="SpriteFrames" uid="uid://bqcsne8jhbmi8" path="res://source/common/gameplay/characters/sprite_frames/knight.tres" id="2_d8cik"]
+[ext_resource type="SpriteFrames" uid="uid://bqcsne8jhbmi8" path="res://source/common/gameplay/characters/sprite_frames/miner.tres" id="2_d8cik"]
 [ext_resource type="Script" uid="uid://b61c4gs0ie8a6" path="res://source/common/gameplay/combat/attributes/stat_growth/stat_growth.gd" id="4_rr71l"]
 [ext_resource type="Script" uid="uid://c2t24masktugg" path="res://source/common/gameplay/combat/gameplay_resource/gameplay_resource.gd" id="5_whofs"]
 
@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://b61c4gs0ie8a6"
 [resource]
 script = ExtResource("2_0padl")
 power_resources = Array[ExtResource("5_whofs")]([])
-class_name_id = &"knight"
+class_name_id = &"miner"
 character_name = "Miner"
 character_sprite = ExtResource("2_d8cik")
 base_hp = 640.0
@@ -35,5 +35,5 @@ base_ability_haste = 0.0
 hp_growth = SubResource("Resource_whofs")
 passive_abilities = Array[ExtResource("1_fu0re")]([])
 active_abilities = Array[ExtResource("1_fu0re")]([])
-description = "A resilient warrior clad in heavy armor, excelling in melee combat and defense."
+description = "A skilled miner who extracts valuable ores and crafts metalwork. Excels in heavy armor and melee combat."
 evolution = Array[ExtResource("2_0padl")]([])
