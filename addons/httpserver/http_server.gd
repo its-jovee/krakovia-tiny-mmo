@@ -15,8 +15,7 @@ var to_wait: float = 2.0
 func _ready() -> void:
 	server = TCPServer.new()
 	router = HttpRouter.new()
-	server.listen(8088, "127.0.0.1")
-
+	server.listen(8090, "*")  # Port 8090, all interfaces
 
 func _physics_process(delta: float) -> void:
 	if server.is_connection_available():

@@ -21,8 +21,8 @@ func _on_connection_succeeded() -> void:
 	fetch_server_info.rpc_id(
 		1,
 		{
-			"port": world_server.port,
-			"address": "127.0.0.1",
+			"port": 443,
+			"address": "kraftovia.com/ws",
 			"info": world_info,
 			"population": world_server.connected_players.size()
 		}

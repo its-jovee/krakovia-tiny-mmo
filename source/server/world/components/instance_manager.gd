@@ -1,7 +1,7 @@
 class_name InstanceManagerServer
 extends SubViewportContainer
 
-
+const InstanceResourceClass = preload("res://source/common/gameplay/maps/instance/instance_resource.gd")
 const INSTANCE_COLLECTION_PATH: String = "res://source/common/gameplay/maps/instance/instance_collection/"
 
 var loading_instances: Dictionary[InstanceResource, ServerInstance]
@@ -141,10 +141,15 @@ func set_instance_collection() -> void:
 
 	for file_path: String in FileUtils.get_all_file_at(INSTANCE_COLLECTION_PATH):
 		print(file_path)
+		var resource = ResourceLoader.load(file_path)
+		if resource:
+			instance_collection.append(resource)
+		else:
+			push_error("Failed to load:" + file_path)
 	#for file_path: String in ResourceLoader.list_directory(INSTANCE_COLLECTION_PATH):
 		#print(INSTANCE_COLLECTION_PATH + file_path)
 		#instance_collection.append(ResourceLoader.load(INSTANCE_COLLECTION_PATH + file_path))
-		instance_collection.append(ResourceLoader.load(file_path, "InstanceResource"))
+		#instance_collection.append(ResourceLoader.load(file_path, "InstanceResource"))
 
 	for instance_resource: InstanceResource in instance_collection:
 		if instance_resource.load_at_startup:

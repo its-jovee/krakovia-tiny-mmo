@@ -9,19 +9,9 @@ const KEY_CHAR_ID := "c-id"
 
 
 static func base_url() -> String:
-	# Hardcoded default one
-	return "http://127.0.0.1:8088"
-	var command_line_arg: String = CmdlineUtils.get_parsed_args().get("api", "")
-	if command_line_arg:
-		return command_line_arg
-
-	# Check if has default in ProjectSettings
-	# (set different values for debug/release export presets))
-	var value: String = ProjectSettings.get_setting("network/api/base_url", "")
-	if not value.is_empty():
-		return value
-	#return "http://127.0.0.1:8088"
-
+	var url = "https://kraftovia.com"  # Or your config logic
+	print("DEBUG: base_url is: ", url)  # ADD THIS LINE
+	return url
 
 static func get_endpoint(path: String) -> String:
 	return "%s%s" % [base_url().rstrip("/"), path]
