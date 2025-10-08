@@ -9,9 +9,13 @@ const KEY_CHAR_ID := "c-id"
 
 
 static func base_url() -> String:
-	var url = "https://kraftovia.com"  # Or your config logic
-	print("DEBUG: base_url is: ", url)  # ADD THIS LINE
-	return url
+	# Auto-detect environment
+	if OS.has_feature("template"):
+		# Production (exported build)
+		return "https://kraftovia.com"
+	else:
+		# Development (Godot editor)
+		return "http://127.0.0.1:8090"
 
 static func get_endpoint(path: String) -> String:
 	return "%s%s" % [base_url().rstrip("/"), path]
