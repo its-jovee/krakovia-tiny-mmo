@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b7mica027"]
+
+[ext_resource type="Texture2D" uid="uid://c48bfvua66n4v" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb159.png" id="1_evefn"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Mica"
+item_icon = ExtResource("1_evefn")
+description = "Transparent mineral sheets. Used for windows and decorative purposes."
+can_trade = true
+can_sell = true
+minimum_price = 15
+stack_limit = 50
+metadata/_custom_type_script = "uid://nsr1timk430j"

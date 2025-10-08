@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://y4quart0024"]
+
+[ext_resource type="Texture2D" uid="uid://be3b7lah8gklm" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb174.png" id="1_7yorh"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Quartz Crystal"
+item_icon = ExtResource("1_7yorh")
+description = "Clear crystalline mineral. Used for decoration and polishing."
+can_trade = true
+can_sell = true
+minimum_price = 12
+stack_limit = 50
+metadata/_custom_type_script = "uid://nsr1timk430j"

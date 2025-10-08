@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://recipe003"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_glass_bottle"
+recipe_name = &"Glass Bottle"
+recipe_icon = ExtResource("1_icon")
+description = "Melt sand with coal to create glass bottles. Essential for potions!"
+required_class = "miner"
+required_level = 1
+gold_cost = 12
+energy_cost = 6.0
+input_1_slug = &"sand"
+input_1_quantity = 3
+input_2_slug = &"coal"
+input_2_quantity = 1
+output_1_slug = &"glass_bottle"
+output_1_quantity = 2
+tags = ["miner", "glass", "t1", "solo", "potion"]
+metadata/_custom_type_script = "uid://recipe003"
+

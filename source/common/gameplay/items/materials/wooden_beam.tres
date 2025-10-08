@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bayxg47q0smsf"]
+
+[ext_resource type="Texture2D" uid="uid://cwa647iuu6hep" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb201.png" id="1_2m5cy"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Wooden Beam"
+item_icon = ExtResource("1_2m5cy")
+description = "Reinforced structural beam. Essential for buildings. "
+can_trade = true
+can_sell = true
+minimum_price = 70
+stack_limit = 50
+metadata/_custom_type_script = "uid://nsr1timk430j"

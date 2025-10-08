@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cxshyq5lvvcqb"]
+
+[ext_resource type="Texture2D" uid="uid://hth3jyh01g1p" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb427.png" id="1_h2y4v"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Rare Seeds"
+item_icon = ExtResource("1_h2y4v")
+description = "Mysterious exotic seeds. Valuable trade commodity. "
+can_trade = true
+can_sell = true
+minimum_price = 20
+stack_limit = 50
+metadata/_custom_type_script = "uid://nsr1timk430j"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cu525nh36vg37"]
+
+[ext_resource type="Texture2D" uid="uid://cultt60vkc6bh" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1458.png" id="1_kb0ja"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Agricultural Tools"
+item_icon = ExtResource("1_kb0ja")
+description = "Farming tools (hoes, rakes, sickles). "
+can_trade = true
+can_sell = true
+minimum_price = 65
+stack_limit = 10
+metadata/_custom_type_script = "uid://nsr1timk430j"

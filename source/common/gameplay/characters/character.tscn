@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bu6yn6ww7d7c8" path="res://source/common/gameplay/characters/character.gd" id="1_uqmoo"]
 [ext_resource type="SpriteFrames" uid="uid://bqcsne8jhbmi8" path="res://source/common/gameplay/characters/sprite_frames/miner.tres" id="2_pypn5"]
-[ext_resource type="PackedScene" uid="uid://dslec2qgwwig2" path="res://source/common/gameplay/items/weapons/empty_hand/empty_hand.tscn" id="3_eddh2"]
+[ext_resource type="PackedScene" uid="uid://dslec2qgwwig2" path="res://source/common/gameplay/items/(unused) weapons/empty_hand/empty_hand.tscn" id="3_eddh2"]
 [ext_resource type="Script" uid="uid://d1a30n4ktgm71" path="res://source/common/network/sync/state_synchronizer.gd" id="5_eyotc"]
 [ext_resource type="Script" uid="uid://gl2cwrrfvlkh" path="res://source/common/gameplay/combat/components/ability_system_component.gd" id="6_fg3fs"]
 [ext_resource type="Resource" uid="uid://djprqmldadljv" path="res://source/common/gameplay/combat/damage_model/DamageModelResource.tres" id="6_k71qx"]

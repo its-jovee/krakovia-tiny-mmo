@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b7b0078g4y0tu"]
+
+[ext_resource type="Texture2D" uid="uid://bsuewdt75heaf" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb2019.png" id="1_lsaba"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Silk Fabric"
+item_icon = ExtResource("1_lsaba")
+description = "Luxurious silk fabric. For nobility and royalty."
+can_trade = true
+can_sell = true
+minimum_price = 120
+stack_limit = 50
+metadata/_custom_type_script = "uid://nsr1timk430j"

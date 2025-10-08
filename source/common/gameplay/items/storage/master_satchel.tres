@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dmamn1p8g5gtt"]
+
+[ext_resource type="Texture2D" uid="uid://cglpvrc30qlbn" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1.png" id="1_rblcy"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Master\'s Satchel"
+item_icon = ExtResource("1_rblcy")
+description = "Master-crafted satchel. "
+can_trade = true
+can_sell = true
+minimum_price = 220
+stack_limit = 1
+metadata/_custom_type_script = "uid://nsr1timk430j"

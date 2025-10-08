@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://mortar152"]
+
+[ext_resource type="Texture2D" uid="uid://ntojs5cfmehy" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb195.png" id="1_10la4"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Mortar"
+item_icon = ExtResource("1_10la4")
+description = "Binding mortar. Holds bricks together. Crafted from limestone + sand."
+can_trade = true
+can_sell = true
+minimum_price = 8
+stack_limit = 99
+metadata/_custom_type_script = "uid://nsr1timk430j"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://kamarble01a"]
+
+[ext_resource type="Texture2D" uid="uid://ml5dophh4we0" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb214.png" id="1_btgk8"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Marble"
+item_icon = ExtResource("1_btgk8")
+description = "Beautiful metamorphic stone used for luxury construction and decoration."
+can_trade = true
+can_sell = true
+minimum_price = 15
+stack_limit = 99
+metadata/_custom_type_script = "uid://nsr1timk430j"

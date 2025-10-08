@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://d3505q4gu6cqj"]
+
+[ext_resource type="Texture2D" uid="uid://dpic4g3wq5ejo" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb862.png" id="1_f7ltp"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Trophy Antlers"
+item_icon = ExtResource("1_f7ltp")
+description = "Magnificent antlers. Valuable trophy decoration. "
+can_trade = true
+can_sell = true
+minimum_price = 50
+stack_limit = 20
+metadata/_custom_type_script = "uid://nsr1timk430j"

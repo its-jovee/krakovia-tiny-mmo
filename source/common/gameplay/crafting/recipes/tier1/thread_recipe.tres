@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://recipe009"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_thread"
+recipe_name = &"Thread"
+recipe_icon = ExtResource("1_icon")
+description = "Spin plant fiber into thread. Foundation of all textile work."
+required_class = "forager"
+required_level = 1
+gold_cost = 4
+energy_cost = 2.0
+input_1_slug = &"plant_fiber_new"
+input_1_quantity = 4
+output_1_slug = &"thread"
+output_1_quantity = 1
+tags = ["forager", "textile", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe009"
+

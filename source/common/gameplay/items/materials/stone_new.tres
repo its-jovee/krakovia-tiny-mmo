@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dwdg804nesikb"]
+
+[ext_resource type="Texture2D" uid="uid://wu6ob8rp3nu" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb315.png" id="1_a60k1"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Stone"
+item_icon = ExtResource("1_a60k1")
+description = "Basic stone extracted from mining. Essential for construction."
+can_trade = true
+can_sell = true
+minimum_price = 2
+stack_limit = 99
+metadata/_custom_type_script = "uid://nsr1timk430j"

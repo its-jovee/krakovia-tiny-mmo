@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://recipe007"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_flour"
+recipe_name = &"Flour"
+recipe_icon = ExtResource("1_icon")
+description = "Grind wheat into flour. Foundation of baking."
+required_class = "forager"
+required_level = 1
+gold_cost = 3
+energy_cost = 2.0
+input_1_slug = &"wheat_new"
+input_1_quantity = 3
+output_1_slug = &"flour"
+output_1_quantity = 2
+tags = ["forager", "food", "grain", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe007"
+

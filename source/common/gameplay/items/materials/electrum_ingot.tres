@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://d1knnvvsh4kny"]
+
+[ext_resource type="Texture2D" uid="uid://dbetyel1wiep2" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb146.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Electrum Ingot"
+item_icon = ExtResource("1_icon")
+description = "Gold-silver alloy. Master-level jewelry material. Crafted from silver + gold ingots."
+can_trade = true
+can_sell = true
+minimum_price = 150
+stack_limit = 50
+tags = ["metal", "ingot", "miner", "precious", "alloy", "t5"]
+metadata/_custom_type_script = "uid://nsr1timk430j"
+

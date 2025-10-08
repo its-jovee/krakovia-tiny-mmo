@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bonqrsohqu8cg"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Ancient Wood Planks"
+item_icon = ExtResource("1_icon")
+description = "Luxury planks from cedar or willow. For fine furniture and nobles. Crafted from ancient woods."
+can_trade = true
+can_sell = true
+minimum_price = 45
+stack_limit = 99
+tags = ["wood", "plank", "forager", "luxury", "t4"]
+metadata/_custom_type_script = "uid://nsr1timk430j"
+
