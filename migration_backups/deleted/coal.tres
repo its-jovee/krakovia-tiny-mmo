@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://duoncte8h4wcg"]
+
+[ext_resource type="Texture2D" uid="uid://dko6hcuga3fil" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb384.png" id="1_ktw28"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Coal"
+item_icon = ExtResource("1_ktw28")
+description = "Black coal used for fuel and smelting. Essential for steel production."
+can_trade = true
+can_sell = true
+minimum_price = 3
+stack_limit = 99
+tags = ["harvestable", "miner", "material"]
+metadata/_custom_type_script = "uid://nsr1timk430j"

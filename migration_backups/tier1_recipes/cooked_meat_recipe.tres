@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://recipe012"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_cooked_meat"
+recipe_name = &"Cooked Meat"
+recipe_icon = ExtResource("1_icon")
+description = "Roast rabbit meat into simple cooked food."
+required_class = "trapper"
+required_level = 1
+gold_cost = 5
+energy_cost = 3.0
+input_1_slug = &"rabbit_meat"
+input_1_quantity = 2
+output_1_slug = &"cooked_meat"
+output_1_quantity = 1
+tags = ["trapper", "food", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe012"
+

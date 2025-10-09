@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_6mlu6")
-slug = &"craft_berry_juice"
+slug = &"berry_juice_recipe"
 recipe_name = &"Berry Juice"
 recipe_icon = ExtResource("1_iiijh")
 description = "A sweet, revitalizing drink squeezed from wild berries, restoring a bit of strength to weary adventurers."

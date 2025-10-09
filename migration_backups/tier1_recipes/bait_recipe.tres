@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://recipe013"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_bait"
+recipe_name = &"Bait"
+recipe_icon = ExtResource("1_icon")
+description = "Mix berries and meat to create basic trap bait."
+required_class = "trapper"
+required_level = 1
+gold_cost = 5
+energy_cost = 3.0
+input_1_slug = &"berries"
+input_1_quantity = 2
+input_2_slug = &"rabbit_meat"
+input_2_quantity = 1
+output_1_slug = &"bait"
+output_1_quantity = 3
+tags = ["trapper", "trap", "bait", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe013"
+

@@ -55,8 +55,15 @@ func _authentication_callback(peer_id: int, data: PackedByteArray) -> void:
 	var auth_token := bytes_to_var(data) as String
 	print("Peer: %d is trying to connect with data: \"%s\"." % [peer_id, auth_token])
 	if is_valid_authentication_token(auth_token):
+		var player_resource: PlayerResource = token_list[auth_token]
+		# Check if player is banned
+		if database.player_data.is_banned(player_resource.account_name):
+			print("Peer: %d (%s) is banned. Connection rejected." % [peer_id, player_resource.account_name])
+			server.disconnect_peer(peer_id)
+			token_list.erase(auth_token)
+			return
 		multiplayer.complete_auth(peer_id)
-		connected_players[peer_id] = token_list[auth_token]
+		connected_players[peer_id] = player_resource
 		token_list.erase(auth_token)
 	else:
 		server.disconnect_peer(peer_id)

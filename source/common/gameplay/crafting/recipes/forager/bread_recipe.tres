@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_bread"
+slug = &"bread_recipe"
 recipe_name = &"Bread"
 recipe_icon = ExtResource("1_icon")
 description = "Bake flour into fresh bread. Essential during FAMINE events!"

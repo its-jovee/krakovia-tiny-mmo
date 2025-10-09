@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_8cp0n")
-slug = &"craft_binding_cord"
+slug = &"binding_cord_recipe"
 recipe_name = &"Binding Cord"
 recipe_icon = ExtResource("1_vlbro")
 description = "A tough, woven strand used to fasten materials together or secure enchanted items during crafting."

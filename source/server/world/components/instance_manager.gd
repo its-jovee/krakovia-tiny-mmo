@@ -33,16 +33,23 @@ func configure_global_roles_and_commands() -> void:
 		"/getid" = load("res://source/server/world/components/chat_command/getid_command.gd").new(),
 		"/help" = load("res://source/server/world/components/chat_command/help_command.gd").new(),
 		"/set" = load("res://source/server/world/components/chat_command/set_command.gd").new(),
-		"/trade" = load("res://source/server/world/components/chat_command/trade_command.gd").new()
+		"/trade" = load("res://source/server/world/components/chat_command/trade_command.gd").new(),
+		# Admin commands
+		"/give" = load("res://source/server/world/components/chat_command/give_command.gd").new(),
+		"/setgold" = load("res://source/server/world/components/chat_command/setgold_command.gd").new(),
+		"/setlevel" = load("res://source/server/world/components/chat_command/setlevel_command.gd").new(),
+		"/ban" = load("res://source/server/world/components/chat_command/ban_command.gd").new(),
+		"/mute" = load("res://source/server/world/components/chat_command/mute_command.gd").new(),
+		"/tp" = load("res://source/server/world/components/chat_command/tp_command.gd").new(),
 	}
 
 	ServerInstance.global_role_definitions = {
 		"senior_admin": {
-			"commands": ["/heal", "/size", "/set"],
+			"commands": ["/heal", "/size", "/set", "/give", "/setgold", "/setlevel", "/ban", "/mute", "/tp"],
 			"priority": 5,
 		},
 		"moderator": {
-			"commands": ["/heal", "/size"],
+			"commands": ["/heal", "/size", "/mute"],
 			"priority": 1,
 			},
 		"default": {

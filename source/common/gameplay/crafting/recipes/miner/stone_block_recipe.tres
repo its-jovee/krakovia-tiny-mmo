@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_vu4cj")
-slug = &"craft_stone_block"
+slug = &"stone_block_recipe"
 recipe_name = &"Stone Block"
 recipe_icon = ExtResource("1_gk04p")
 description = "A sturdy block of carved stone used as the foundation for buildings, tools, and sturdy creations."

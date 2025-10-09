@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_glass_bottle"
+slug = &"glass_bottle_recipe"
 recipe_name = &"Glass Bottle"
 recipe_icon = ExtResource("1_icon")
 description = "Melt sand with coal to create glass bottles. Essential for potions!"

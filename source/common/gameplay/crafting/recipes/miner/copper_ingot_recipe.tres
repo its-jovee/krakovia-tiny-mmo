@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_copper_ingot"
+slug = &"copper_ingot_recipe"
 recipe_name = &"Copper Ingot"
 recipe_icon = ExtResource("1_icon")
 description = "Smelt copper ore with coal into a refined copper ingot. Foundation of metalworking."
@@ -17,7 +17,7 @@ input_1_slug = &"copper_ore"
 input_1_quantity = 2
 input_2_slug = &"coal"
 input_2_quantity = 1
-output_1_slug = &"copper_ingot_new"
+output_1_slug = &"copper_ingot"
 output_1_quantity = 1
 tags = ["miner", "smelting", "t1", "solo"]
 metadata/_custom_type_script = "uid://recipe001"

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_pottery_set"
+slug = &"pottery_set_recipe"
 recipe_name = &"Pottery Set"
 recipe_icon = ExtResource("1_icon")
 description = "Mold and fire clay into basic pottery bowls and plates."

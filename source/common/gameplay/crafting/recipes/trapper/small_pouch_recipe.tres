@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_small_pouch"
+slug = &"small_pouch_recipe"
 recipe_name = &"Small Pouch"
 recipe_icon = ExtResource("1_icon")
 description = "Craft a small leather pouch. Adds +10 inventory slots."

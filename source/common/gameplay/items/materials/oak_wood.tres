@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b6aey70f355da"]
+
+[ext_resource type="Texture2D" uid="uid://35kt78shv3l0" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb109.png" id="1_g8mtt"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Oak Wood"
+item_icon = ExtResource("1_g8mtt")
+description = "Sturdy oak logs. Foundation of all woodworking. "
+can_trade = true
+can_sell = true
+minimum_price = 3
+stack_limit = 99
+metadata/_custom_type_script = "uid://nsr1timk430j"

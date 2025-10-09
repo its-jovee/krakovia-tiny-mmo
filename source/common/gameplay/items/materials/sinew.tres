@@ -1,16 +1,15 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b5x6syqdyhlw5"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://i6sinew086"]
 
-[ext_resource type="Texture2D" uid="uid://c5oaxedckx57d" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb410.png" id="1_cyod1"]
+[ext_resource type="Texture2D" uid="uid://c5oaxedckx57d" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb410.png" id="1_hnyue"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Sinew"
-item_icon = ExtResource("1_cyod1")
-description = "Strong animal sinew used for binding and crafting."
+item_icon = ExtResource("1_hnyue")
+description = "Animal sinew. Strong binding material for bows and tools. From Quick Snare traps."
 can_trade = true
 can_sell = true
-minimum_price = 4
+minimum_price = 3
 stack_limit = 99
-tags = ["harvestable", "trapper", "material"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

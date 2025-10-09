@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_recipe")
-slug = &"craft_basic_leather"
+slug = &"basic_leather_recipe"
 recipe_name = &"Basic Leather"
 recipe_icon = ExtResource("1_icon")
 description = "Tan rabbit hides into basic leather. Foundation of leatherworking."
@@ -13,7 +13,7 @@ required_class = "trapper"
 required_level = 1
 gold_cost = 8
 energy_cost = 4.0
-input_1_slug = &"rabbit_hide_new"
+input_1_slug = &"rabbit_hide"
 input_1_quantity = 2
 output_1_slug = &"basic_leather"
 output_1_quantity = 1

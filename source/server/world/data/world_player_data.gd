@@ -20,6 +20,16 @@ extends Resource
 @export var user_roles: Dictionary[int, Array]
 @export var guilds: Dictionary[String, Guild]
 
+## Maps account_name to ban info
+## Structure: {"account_name": {"reason": String, "until": int (unix timestamp), "banned_by": String}}
+## until == 0 means permanent ban
+@export var banned_players: Dictionary[String, Dictionary] = {}
+
+## Maps account_name to mute info
+## Structure: {"account_name": {"reason": String, "until": int (unix timestamp), "muted_by": String}}
+## until == 0 means permanent mute
+@export var muted_players: Dictionary[String, Dictionary] = {}
+
 
 func get_player_resource(player_id: int) -> PlayerResource:
 	if players.has(player_id):
@@ -82,3 +92,71 @@ func create_guild(guild_name: String, player_id: int) -> bool:
 	new_guild.add_member(player_id, "Leader")
 	guilds[guild_name] = new_guild
 	return true
+
+
+## Check if an account is banned
+func is_banned(account_name: String) -> bool:
+	if not banned_players.has(account_name):
+		return false
+	var ban_info: Dictionary = banned_players[account_name]
+	var until: int = ban_info.get("until", 0)
+	# until == 0 means permanent
+	if until == 0:
+		return true
+	# Check if ban has expired
+	var now: int = int(Time.get_unix_time_from_system())
+	if now >= until:
+		banned_players.erase(account_name)
+		return false
+	return true
+
+
+## Check if an account is muted
+func is_muted(account_name: String) -> bool:
+	if not muted_players.has(account_name):
+		return false
+	var mute_info: Dictionary = muted_players[account_name]
+	var until: int = mute_info.get("until", 0)
+	# until == 0 means permanent
+	if until == 0:
+		return true
+	# Check if mute has expired
+	var now: int = int(Time.get_unix_time_from_system())
+	if now >= until:
+		muted_players.erase(account_name)
+		return false
+	return true
+
+
+## Add a ban for an account
+func add_ban(account_name: String, reason: String, until: int, banned_by: String) -> void:
+	banned_players[account_name] = {
+		"reason": reason,
+		"until": until,
+		"banned_by": banned_by
+	}
+
+
+## Add a mute for an account
+func add_mute(account_name: String, reason: String, until: int, muted_by: String) -> void:
+	muted_players[account_name] = {
+		"reason": reason,
+		"until": until,
+		"muted_by": muted_by
+	}
+
+
+## Remove a ban from an account
+func remove_ban(account_name: String) -> bool:
+	if banned_players.has(account_name):
+		banned_players.erase(account_name)
+		return true
+	return false
+
+
+## Remove a mute from an account
+func remove_mute(account_name: String) -> bool:
+	if muted_players.has(account_name):
+		muted_players.erase(account_name)
+		return true
+	return false
