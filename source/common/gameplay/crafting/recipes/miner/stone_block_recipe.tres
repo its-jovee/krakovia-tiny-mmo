@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://c21bj7vn0p3ks"]
+
+[ext_resource type="Texture2D" uid="uid://bqg5eg1f21nwl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb212.png" id="1_gk04p"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="2_vu4cj"]
+
+[resource]
+script = ExtResource("2_vu4cj")
+slug = &"craft_stone_block"
+recipe_name = &"Stone Block"
+recipe_icon = ExtResource("1_gk04p")
+description = "A sturdy block of carved stone used as the foundation for buildings, tools, and sturdy creations."
+required_class = "miner"
+required_level = 1
+gold_cost = 6
+energy_cost = 3.0
+input_1_slug = &"stone"
+input_1_quantity = 4
+output_1_slug = &"stone_block"
+output_1_quantity = 2
+tags = ["miner", "construction", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe003"
+

@@ -121,6 +121,8 @@ func adjust_zoom(zoom_delta: float) -> void:
 	# Don't zoom if user is typing in UI
 	if _is_typing_in_ui():
 		return
+	if _is_crafting_view_open():
+		return
 	
 	# Update target zoom
 	target_zoom = clampf(target_zoom + zoom_delta, min_zoom, max_zoom)
@@ -172,6 +174,21 @@ func _is_typing_in_ui() -> bool:
 	# Freeze movement if user is typing in a text field
 	return owner is LineEdit or owner is TextEdit
 
+func _is_crafting_view_open() -> bool:
+	# Check if the inventory menu's crafting view is open
+	var inventory_menu = get_tree().get_root().find_child("InventoryMenu", true, false)
+	if inventory_menu == null:
+		return false
+	
+	# Check if inventory menu is visible AND crafting view is visible
+	if not inventory_menu.is_visible_in_tree():
+		return false
+	
+	var crafting_view = inventory_menu.get_node_or_null("CraftingView")
+	if crafting_view == null:
+		return false
+	
+	return crafting_view.is_visible_in_tree()
 
 func _set_character_class(new_class: String):
 	character_resource = ResourceLoader.load(

@@ -13,8 +13,8 @@ func _ready() -> void:
 	item_shortcuts.fill(null)
 	
 	# Temporary for fast debug
-	add_item_to_shorcut(ContentRegistryHub.load_by_id(&"items", 1), 0)
-	add_item_to_shorcut(ContentRegistryHub.load_by_id(&"items", 5), 1)
+	#add_item_to_shorcut(ContentRegistryHub.load_by_id(&"items", 1), 0)
+	#add_item_to_shorcut(ContentRegistryHub.load_by_id(&"items", 5), 1)
 
 
 func _on_item_shortcut_pressed(button: Button, index: int) -> void:
@@ -29,11 +29,11 @@ func _on_item_shortcut_pressed(button: Button, index: int) -> void:
 	)
 
 
-func add_item_to_shorcut(item: Item, index: int) -> void:
-	item_shortcuts[index] = item
-	var button: Button = $VBoxContainer.get_child(index)
-	button.icon = item.item_icon
-	if button.icon:
-		button.text = ""
-	else:
-		button.text = item.item_name
+#func add_item_to_shorcut(item: Item, index: int) -> void:
+	#item_shortcuts[index] = item
+	#var button: Button = $VBoxContainer.get_child(index)
+	#button.icon = item.item_icon
+	#if button.icon:
+		#button.text = ""
+	#else:
+		#button.text = item.item_name

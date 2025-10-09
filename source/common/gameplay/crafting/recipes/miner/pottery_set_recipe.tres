@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://du6mjagndmwso"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_pottery_set"
+recipe_name = &"Pottery Set"
+recipe_icon = ExtResource("1_icon")
+description = "Mold and fire clay into basic pottery bowls and plates."
+required_class = "miner"
+required_level = 1
+gold_cost = 8
+energy_cost = 4.0
+input_1_slug = &"clay"
+input_1_quantity = 3
+output_1_slug = &"pottery_set"
+output_1_quantity = 1
+tags = ["miner", "pottery", "t1", "solo", "household"]
+metadata/_custom_type_script = "uid://recipe002"
+

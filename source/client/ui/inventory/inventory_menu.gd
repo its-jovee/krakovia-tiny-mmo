@@ -572,15 +572,10 @@ func _on_recipes_received(data: Dictionary) -> void:
 	if registry:
 		print("✅ Recipes registry found")
 		# Get all recipe IDs and load them
-		# For now, we'll load a few example recipes
-		var example_recipe_ids = [1, 2, 3, 4, 5] # Our example recipes
-		for recipe_id in example_recipe_ids:
+		for recipe_id in range (1,146):
 			var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
 			if recipe:
 				print("✅ Loaded recipe: ", recipe.recipe_name)
-				print("   - Required class: '", recipe.required_class, "'")
-				print("   - Required level: ", recipe.required_level)
-				print("   - Can craft: ", recipe.can_craft(player_class, player_level))
 				available_recipes.append(recipe)
 			else:
 				print("❌ Failed to load recipe ID: ", recipe_id)
@@ -769,6 +764,28 @@ func _on_search_text_changed(new_text: String) -> void:
 	_filter_recipes()
 
 func _filter_recipes() -> void:
-	# For now, just repopulate the list
-	# TODO: Implement actual filtering
-	_populate_recipe_list()
+	# Clear existing recipe buttons
+	for child in recipe_grid.get_children():
+		child.queue_free()
+	
+	# Get filter criteria
+	var selected_class_index = class_filter.selected if class_filter else 0
+	var search_text = search_box.text.to_lower() if search_box else ""
+	
+	# Map class filter index to class name
+	var class_names = ["", "miner", "forager", "trapper", "blacksmith", "culinarian", "artisan"]
+	var filter_class = class_names[selected_class_index] if selected_class_index < class_names.size() else ""
+	
+	# Filter and display recipes
+	for recipe in available_recipes:
+		# Apply class filter (0 = "All Classes")
+		if filter_class != "" and recipe.required_class != filter_class:
+			continue
+		
+		# Apply search filter
+		if search_text != "" and not recipe.recipe_name.to_lower().contains(search_text):
+			continue
+		
+		# Recipe passes all filters - create and add button
+		var recipe_button = _create_recipe_button(recipe)
+		recipe_grid.add_child(recipe_button)

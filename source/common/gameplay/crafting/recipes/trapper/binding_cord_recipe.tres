@@ -1,26 +1,20 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bfassn8vec1ug"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+[ext_resource type="Texture2D" uid="uid://5wbqg8y114su" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb2068.png" id="1_vlbro"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="2_8cp0n"]
 
 [resource]
-script = ExtResource("1_recipe")
-slug = &"binding_cord_recipe"
+script = ExtResource("2_8cp0n")
+slug = &"craft_binding_cord"
 recipe_name = &"Binding Cord"
-recipe_icon = null
-description = "Sturdy cord made from sinew, used in various crafts."
+recipe_icon = ExtResource("1_vlbro")
+description = "A tough, woven strand used to fasten materials together or secure enchanted items during crafting."
 required_class = "trapper"
-required_level = 1
 gold_cost = 4
 energy_cost = 2.0
 input_1_slug = &"sinew"
 input_1_quantity = 3
-input_2_slug = &""
-input_2_quantity = 1
-input_3_slug = &""
-input_3_quantity = 1
 output_1_slug = &"binding_cord"
 output_1_quantity = 2
-output_2_slug = &""
-output_2_quantity = 1
-tags = ["tier1", "trapper", "component", "solo"]
-
+tags = ["trapper", "binding", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe016"

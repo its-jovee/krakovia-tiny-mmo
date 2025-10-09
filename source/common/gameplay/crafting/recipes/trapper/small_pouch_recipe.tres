@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bbitwl5e8viei"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"craft_small_pouch"
+recipe_name = &"Small Pouch"
+recipe_icon = ExtResource("1_icon")
+description = "Craft a small leather pouch. Adds +10 inventory slots."
+required_class = "trapper"
+required_level = 1
+gold_cost = 10
+energy_cost = 5.0
+input_1_slug = &"basic_leather"
+input_1_quantity = 1
+output_1_slug = &"small_pouch"
+output_1_quantity = 1
+tags = ["trapper", "storage", "t1", "solo"]
+metadata/_custom_type_script = "uid://recipe011"
+
