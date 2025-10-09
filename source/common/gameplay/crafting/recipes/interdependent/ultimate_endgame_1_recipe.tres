@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"ultimate_endgame_1_recipe"
+recipe_name = &"Grand Monument"
+recipe_icon = null
+description = "Ultimate monument requiring all professions at peak coordination."
+required_class = "miner"
+required_level = 26
+gold_cost = 900
+energy_cost = 100.0
+input_1_slug = &"monument_base"
+input_1_quantity = 2
+input_2_slug = &"decorative_statue"
+input_2_quantity = 3
+input_3_slug = &"gold_inlay"
+input_3_quantity = 5
+output_1_slug = &"grand_monument"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier6", "interdependent", "guild", "legendary", "3class"]
+

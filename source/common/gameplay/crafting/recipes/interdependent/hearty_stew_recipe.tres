@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"hearty_stew_recipe"
+recipe_name = &"Hearty Stew"
+recipe_icon = null
+description = "Nutritious stew for recovery after battles. Requires all 3 classes!"
+required_class = "forager"
+required_level = 11
+gold_cost = 30
+energy_cost = 15.0
+input_1_slug = &"deer_meat"
+input_1_quantity = 1
+input_2_slug = &"carrots"
+input_2_quantity = 1
+input_3_slug = &"onions"
+input_3_quantity = 1
+output_1_slug = &"hearty_stew"
+output_1_quantity = 2
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier3", "interdependent", "food", "recovery", "3class"]
+

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"lantern_recipe"
+recipe_name = &"Lantern"
+recipe_icon = null
+description = "Portable light source for night exploration. Requires all 3 classes!"
+required_class = "miner"
+required_level = 11
+gold_cost = 40
+energy_cost = 20.0
+input_1_slug = &"glass_bottle"
+input_1_quantity = 1
+input_2_slug = &"iron_fittings"
+input_2_quantity = 1
+input_3_slug = &"beeswax"
+input_3_quantity = 1
+output_1_slug = &"lantern"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier3", "interdependent", "household", "night", "3class"]
+

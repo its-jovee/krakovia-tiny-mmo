@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"items"
-version = 1758600002
-next_id = 248
+version = 1758600003
+next_id = 249
 entries = Array[Dictionary]([{
 &"hash": "5e2c9ea62f0834942e7633d440ac9054423ada15a996d1c1aabf760508c1c423",
 &"id": 1,
@@ -1227,6 +1227,11 @@ entries = Array[Dictionary]([{
 &"id": 244,
 &"path": "res://source/common/gameplay/items/guild/tanning_rack.tres",
 &"slug": &"tanning_rack"
+}, {
+&"hash": "",
+&"id": 248,
+&"path": "res://source/common/gameplay/items/consumables/beer.tres",
+&"slug": &"beer"
 }])
 metadata/slug = &"items_index"
 metadata/id = 2

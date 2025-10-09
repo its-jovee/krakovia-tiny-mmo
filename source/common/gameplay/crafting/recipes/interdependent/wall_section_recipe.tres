@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"wall_section_recipe"
+recipe_name = &"Wall Section"
+recipe_icon = null
+description = "Build wall sections for fortifications. Requires Miner materials."
+required_class = "miner"
+required_level = 16
+gold_cost = 70
+energy_cost = 35.0
+input_1_slug = &"stone_block"
+input_1_quantity = 4
+input_2_slug = &"mortar"
+input_2_quantity = 2
+input_3_slug = &"sand"
+input_3_quantity = 1
+output_1_slug = &"wall_section"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier4", "interdependent", "construction", "rebuild", "war"]
+

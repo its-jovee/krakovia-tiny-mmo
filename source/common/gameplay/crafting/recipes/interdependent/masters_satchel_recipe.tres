@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"masters_satchel_recipe"
+recipe_name = &"Master's Satchel"
+recipe_icon = null
+description = "Ultimate storage for master gatherers. Requires all 3 classes!"
+required_class = "trapper"
+required_level = 21
+gold_cost = 160
+energy_cost = 80.0
+input_1_slug = &"canvas"
+input_1_quantity = 2
+input_2_slug = &"quality_leather"
+input_2_quantity = 3
+input_3_slug = &"iron_fittings"
+input_3_quantity = 3
+output_1_slug = &"masters_satchel"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier5", "interdependent", "storage", "masterwork", "3class"]
+

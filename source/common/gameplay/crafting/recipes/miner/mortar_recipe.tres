@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"mortar_recipe"
+recipe_name = &"Mortar"
+recipe_icon = null
+description = "Mix limestone and sand to create construction mortar."
+required_class = "miner"
+required_level = 6
+gold_cost = 8
+energy_cost = 4.0
+input_1_slug = &"limestone"
+input_1_quantity = 2
+input_2_slug = &"sand"
+input_2_quantity = 1
+input_3_slug = &""
+input_3_quantity = 1
+output_1_slug = &"mortar"
+output_1_quantity = 3
+output_2_slug = &""
+output_2_quantity = 1
+tags = ["tier2", "miner", "construction", "processing"]
+
