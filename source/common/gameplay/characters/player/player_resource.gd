@@ -3,6 +3,7 @@ extends Resource
 
 
 const ATTRIBUTE_POINTS_PER_LEVEL: int = 3
+const MAX_LEVEL: int = 30
 
 const BASE_STATS: Dictionary[StringName, float] = {
 	StatsCatalog.HEALTH_MAX: 100.0,
@@ -26,7 +27,8 @@ const BASE_STATS: Dictionary[StringName, float] = {
 @export var attributes: Dictionary
 @export var available_attributes_points: int
 
-@export var level: int
+@export var level: int = 1
+@export var experience: int = 0
 
 @export var guild: Guild
 ##
@@ -66,5 +68,28 @@ func get_stats_from_attributes() -> Dictionary[StringName, float]:
 
 
 func level_up() -> void:
+	if level >= MAX_LEVEL:
+		return
 	available_attributes_points += ATTRIBUTE_POINTS_PER_LEVEL
 	level += 1
+	experience = 0  # Reset exp on level up
+
+
+static func get_exp_for_level(lvl: int) -> int:
+	# Exponential: level * 100
+	return lvl * 100
+
+
+func get_exp_required() -> int:
+	return get_exp_for_level(level + 1)
+
+
+func get_exp_progress() -> float:
+	if level >= MAX_LEVEL:
+		return 1.0
+	var required = get_exp_required()
+	return float(experience) / float(required) if required > 0 else 0.0
+
+
+func can_level_up() -> bool:
+	return level < MAX_LEVEL and experience >= get_exp_required()

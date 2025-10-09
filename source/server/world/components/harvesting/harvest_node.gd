@@ -188,17 +188,25 @@ func _process(delta: float) -> void:
 							continue
 							
 						var items_array: Array = []
+						var total_item_count: int = 0  # Count all items for EXP
 						for item_slug in total_items.keys():
 							var qty: int = int(total_items[item_slug])
 							if qty > 0:
 								if instance.give_item(pid, item_slug, qty):
 									items_array.append({"slug": item_slug, "amount": qty})
+									total_item_count += qty  # Add to total
 						
-						# Send immediate notification
+						# Calculate and award EXP based on items received
+						var exp_gained: int = 0
+						if total_item_count > 0:
+							exp_gained = _award_exp_for_items(pid, total_item_count, instance)
+						
+						# Send immediate notification with EXP info
 						if items_array.size() > 0:
 							instance.data_push.rpc_id(pid, &"harvest.item_received", {
 								"node": String(get_path()),
 								"items": items_array,
+								"exp_gained": exp_gained
 							})
 							
 							# Update earned total for UI display
@@ -501,3 +509,42 @@ func request_encourage(peer_id: int) -> Dictionary:
 		"cd_remaining": encourage_cooldown,
 		"time_left": max(0.0, _enc_session_expires_at - _clock)
 	}
+
+
+func _calculate_exp_per_item() -> int:
+	# Tier-based EXP per item: T1=5, T2=10, T3=15, T4=20, T5=25, T6=30
+	return tier * 5
+
+
+func _award_exp_for_items(player_id: int, item_count: int, instance: ServerInstance) -> int:
+	var player: Player = _get_player(player_id)
+	if not player or not player.player_resource:
+		return 0
+	
+	var pr: PlayerResource = player.player_resource
+	if pr.level >= PlayerResource.MAX_LEVEL:
+		return 0
+	
+	# Calculate total EXP (exp per item * number of items)
+	var exp_per_item = _calculate_exp_per_item()
+	var total_exp = exp_per_item * item_count
+	
+	pr.experience += total_exp
+	
+	# Check for level-ups (can level up multiple times)
+	var leveled_up = false
+	while pr.can_level_up():
+		var old_level = pr.level
+		pr.level_up()
+		leveled_up = true
+		print("Player %s leveled up: %d -> %d" % [pr.display_name, old_level, pr.level])
+	
+	# Notify client of exp gain (separate from harvest notification)
+	instance.data_push.rpc_id(player_id, &"exp.update", {
+		"exp": pr.experience,
+		"level": pr.level,
+		"exp_required": pr.get_exp_required(),
+		"leveled_up": leveled_up
+	})
+	
+	return total_exp

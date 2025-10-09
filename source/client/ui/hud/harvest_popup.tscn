@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://harvest_popup_ui"]
+[gd_scene load_steps=2 format=3 uid="uid://cfyxtghpsfg0w"]
 
-[ext_resource type="Script" path="res://source/client/ui/hud/harvest_popup.gd" id="1"]
+[ext_resource type="Script" uid="uid://don5fd7cmj8bp" path="res://source/client/ui/hud/harvest_popup.gd" id="1"]
 
 [node name="HarvestPopup" type="Control"]
 layout_mode = 3
@@ -36,3 +36,10 @@ text = "+3 Copper Ore"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ExpLabel" type="Label" parent="Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "+15 XP"
+horizontal_alignment = 1
+vertical_alignment = 1

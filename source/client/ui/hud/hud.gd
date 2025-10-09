@@ -6,11 +6,17 @@ var last_opened_interface: Control
 var menus: Dictionary[StringName, Control]
 var current_gold: int = 0
 var in_market: bool = false
+var current_level: int = 1
+var current_exp: int = 0
+var exp_required: int = 100
 
 @onready var menu_overlay: Control = $MenuOverlay
 @onready var close_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 @onready var sub_menu: CanvasLayer = $SubMenu
 @onready var gold_label: Label = $GoldDisplay/Label
+@onready var level_display: Panel = $LevelDisplay
+@onready var level_label: Label = $LevelDisplay/VBoxContainer/LevelLabel
+@onready var exp_progress_bar: ProgressBar = $LevelDisplay/VBoxContainer/ExpProgressBar
 
 func _ready() -> void:
 	for button: Button in $MenuOverlay/VBoxContainer.get_children():
@@ -34,8 +40,14 @@ func _ready() -> void:
 	# Subscribe to harvest item notifications
 	InstanceClient.subscribe(&"harvest.item_received", _on_harvest_item_received)
 	
+	# Subscribe to exp updates
+	InstanceClient.subscribe(&"exp.update", _on_exp_update)
+	
 	# Request initial gold amount
 	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
+	
+	# Request initial level/exp data
+	InstanceClient.current.request_data(&"level.get", _on_level_received)
 
 func _on_gold_received(data: Dictionary) -> void:
 	current_gold = data.get("gold", 0)
@@ -156,6 +168,17 @@ func _on_button_str_pressed() -> void:
 func _on_harvest_item_received(data: Dictionary) -> void:
 	"""Handle harvest item notifications and show popup"""
 	var items: Array = data.get("items", [])
+	var exp_gained: int = data.get("exp_gained", 0)
+	
+	# Calculate EXP per item (divide total exp by total items)
+	var total_items: int = 0
+	for item_dict in items:
+		total_items += int(item_dict.get("amount", 0))
+	
+	var exp_per_item: int = 0
+	if total_items > 0 and exp_gained > 0:
+		exp_per_item = int(float(exp_gained) / float(total_items))
+	
 	for item_dict in items:
 		var slug: StringName = item_dict.get("slug", &"")
 		var amount: int = int(item_dict.get("amount", 0))
@@ -163,10 +186,11 @@ func _on_harvest_item_received(data: Dictionary) -> void:
 		# Get item details from registry
 		var item: Item = ContentRegistryHub.load_by_slug(&"items", slug)
 		if item and amount > 0:
-			_show_harvest_popup(item.item_name, item.item_icon, amount)
+			var item_exp: int = exp_per_item * amount
+			_show_harvest_popup(item.item_name, item.item_icon, amount, item_exp)
 
 
-func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int) -> void:
+func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_amount: int = 0) -> void:
 	"""Create and display a harvest notification popup"""
 	# Load the popup scene
 	var popup_scene = preload("res://source/client/ui/hud/harvest_popup.tscn")
@@ -192,4 +216,45 @@ func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int) -> voi
 	
 	# Setup the popup
 	if popup.has_method("setup"):
-		popup.setup(item_name, icon, amount)
+		popup.setup(item_name, icon, amount, exp_amount)
+
+
+func _on_level_received(data: Dictionary) -> void:
+	current_level = data.get("level", 1)
+	current_exp = data.get("experience", 0)
+	exp_required = data.get("exp_required", 100)
+	_update_level_display()
+
+
+func _on_exp_update(data: Dictionary) -> void:
+	var old_level = current_level
+	current_level = data.get("level", current_level)
+	current_exp = data.get("exp", current_exp)
+	exp_required = data.get("exp_required", 100)
+	var leveled_up = data.get("leveled_up", false)
+	
+	_update_level_display()
+	
+	if leveled_up and current_level > old_level:
+		_show_level_up_popup(current_level)
+
+
+func _update_level_display() -> void:
+	if level_label:
+		level_label.text = "Level %d" % current_level
+	if exp_progress_bar:
+		exp_progress_bar.max_value = exp_required
+		exp_progress_bar.value = current_exp
+
+
+func _show_level_up_popup(new_level: int) -> void:
+	var popup_scene = preload("res://source/client/ui/hud/level_up_popup.tscn")
+	var popup: Control = popup_scene.instantiate()
+	add_child(popup)
+	
+	# Position at center of screen
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	popup.position = Vector2(viewport_size.x / 2.0 - 150.0, viewport_size.y / 2.0 - 100.0)
+	
+	if popup.has_method("setup"):
+		popup.setup(new_level)

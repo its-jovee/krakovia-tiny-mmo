@@ -350,9 +350,23 @@ character_class = "trapper"
 inventory = {
 6: {
 "stack": 1
+},
+104: {
+"stack": 13
+},
+105: {
+"stack": 16
+},
+110: {
+"stack": 8
+},
+111: {
+"stack": 7
 }
 }
-available_attributes_points = 10
+available_attributes_points = 13
+level = 2
+experience = 20
 
 [sub_resource type="Resource" id="Resource_nwafu"]
 script = ExtResource("1_83xu3")
