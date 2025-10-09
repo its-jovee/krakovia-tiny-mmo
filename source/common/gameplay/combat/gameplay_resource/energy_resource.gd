@@ -2,9 +2,9 @@ class_name EnergyResource
 extends GameplayResource
 
 
-@export var regen_per_second: float = 5.0
+@export var regen_per_second: float = 1.0
 @export var regen_delay_after_spend: float = 1.5
-@export var sit_regen_multiplier: float = 4.0
+@export var sit_regen_multiplier: float = 1.5
 @export var default_max: float = 100.0
 
 var _time_since_spend: float = 0.0
@@ -12,7 +12,7 @@ var _time_since_spend: float = 0.0
 
 func _init() -> void:
 	id = &"energy"
-	ui_color = Color(0.95, 0.85, 0.25, 1.0)
+	ui_color = Color(0.5, 0.85, 0.25, 1.0)
 
 
 func setup(asc: AbilitySystemComponent, base_stats: Dictionary) -> void:

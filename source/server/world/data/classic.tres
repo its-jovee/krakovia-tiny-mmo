@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=27 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=28 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -41,16 +41,19 @@ inventory = {
 "stack": 202
 },
 7: {
-"stack": 8
+"stack": 20
+},
+9: {
+"stack": 5
 },
 11: {
-"stack": 1
+"stack": 6
 },
 24: {
 "stack": 3
 },
 33: {
-"stack": 7
+"stack": 19
 },
 39: {
 "stack": 2
@@ -371,6 +374,21 @@ account_name = "testenilson"
 display_name = "miner"
 golds = 100155
 inventory = {
+7: {
+"stack": 8
+},
+9: {
+"stack": 3
+},
+11: {
+"stack": 2
+},
+33: {
+"stack": 1
+},
+39: {
+"stack": 2
+},
 130: {
 "stack": 1
 },
@@ -391,12 +409,76 @@ inventory = {
 6: {
 "stack": 1
 },
+104: {
+"stack": 8
+},
+105: {
+"stack": 2
+},
+106: {
+"stack": 5
+},
+107: {
+"stack": 7
+},
+108: {
+"stack": 6
+},
+109: {
+"stack": 3
+},
+110: {
+"stack": 2
+},
+112: {
+"stack": 5
+},
+113: {
+"stack": 2
+},
+115: {
+"stack": 1
+},
+116: {
+"stack": 2
+},
+117: {
+"stack": 6
+},
+118: {
+"stack": 2
+},
+121: {
+"stack": 1
+},
+122: {
+"stack": 5
+},
+123: {
+"stack": 3
+},
+124: {
+"stack": 10
+},
+125: {
+"stack": 5
+},
 133: {
 "stack": 5
 }
 }
 available_attributes_points = 160
 level = 50
+
+[sub_resource type="Resource" id="Resource_4vi33"]
+script = ExtResource("1_83xu3")
+player_id = 20
+account_name = "testenilson"
+display_name = "lol"
+character_class = "trapper"
+golds = 311
+available_attributes_points = 40
+level = 10
 
 [resource]
 script = ExtResource("2_83xu3")
@@ -416,7 +498,7 @@ accounts = Dictionary[String, PackedInt32Array]({
 "joaozinho123": PackedInt32Array(14),
 "jovi2": PackedInt32Array(12, 16),
 "teste": PackedInt32Array(1, 15, 19),
-"testenilson": PackedInt32Array(18)
+"testenilson": PackedInt32Array(18, 20)
 })
 players = Dictionary[int, ExtResource("1_83xu3")]({
 1: SubResource("Resource_tcuqq"),
@@ -437,9 +519,10 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 16: SubResource("Resource_1eduu"),
 17: SubResource("Resource_nwafu"),
 18: SubResource("Resource_tjm63"),
-19: SubResource("Resource_5a24n")
+19: SubResource("Resource_5a24n"),
+20: SubResource("Resource_4vi33")
 })
-next_player_id = 19
+next_player_id = 20
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),

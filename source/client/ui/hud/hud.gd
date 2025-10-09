@@ -31,6 +31,9 @@ func _ready() -> void:
 	# Subscribe to market status updates
 	InstanceClient.subscribe(&"market.status", _on_market_status_update)
 	
+	# Subscribe to harvest item notifications
+	InstanceClient.subscribe(&"harvest.item_received", _on_harvest_item_received)
+	
 	# Request initial gold amount
 	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
 
@@ -148,3 +151,45 @@ func _on_button_str_pressed() -> void:
 			Callable(),
 			{"attr": "strenght"}
 		)
+
+
+func _on_harvest_item_received(data: Dictionary) -> void:
+	"""Handle harvest item notifications and show popup"""
+	var items: Array = data.get("items", [])
+	for item_dict in items:
+		var slug: StringName = item_dict.get("slug", &"")
+		var amount: int = int(item_dict.get("amount", 0))
+		
+		# Get item details from registry
+		var item: Item = ContentRegistryHub.load_by_slug(&"items", slug)
+		if item and amount > 0:
+			_show_harvest_popup(item.item_name, item.item_icon, amount)
+
+
+func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int) -> void:
+	"""Create and display a harvest notification popup"""
+	# Load the popup scene
+	var popup_scene = preload("res://source/client/ui/hud/harvest_popup.tscn")
+	if not popup_scene:
+		# Fallback: print to console if scene doesn't exist yet
+		print("[Harvest] +%d %s" % [amount, item_name])
+		return
+	
+	var popup: Control = popup_scene.instantiate()
+	add_child(popup)
+	
+	# Position popup at bottom-center of screen, stacking vertically if multiple exist
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	var base_y: float = viewport_size.y - 150.0
+	
+	# Count existing popups to stack them
+	var existing_popups: int = 0
+	for child in get_children():
+		if child.name.begins_with("HarvestPopup"):
+			existing_popups += 1
+	
+	popup.position = Vector2(viewport_size.x / 2.0 - 100.0, base_y - (existing_popups * 50.0))
+	
+	# Setup the popup
+	if popup.has_method("setup"):
+		popup.setup(item_name, icon, amount)

@@ -154,7 +154,56 @@ func _process(delta: float) -> void:
 				else:
 					produce = min(produce, remaining_amount)
 				remaining_amount -= produce
-				pool_amount += produce
+				
+				# NEW: Immediate distribution with fractional accumulation
+				var harvest_pool: float = float(h.get("harvest_pool", 0.0)) + produce
+				h["harvest_pool"] = harvest_pool
+				
+				# When we have at least 1 full harvest, distribute immediately
+				if harvest_pool >= 1.0:
+					var harvest_count: int = int(floor(harvest_pool))
+					harvest_pool -= float(harvest_count)
+					h["harvest_pool"] = harvest_pool
+					
+					# Roll loot for this player's harvests
+					var total_items: Dictionary = {}
+					for _i in range(harvest_count):
+						var rolled_loot: Dictionary
+						if loot_table != null:
+							rolled_loot = loot_table.roll_loot()
+						else:
+							# Legacy behavior
+							var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
+							rolled_loot = {slug: 1}
+						
+						# Accumulate rolled items
+						for item_slug in rolled_loot.keys():
+							var qty: int = int(rolled_loot[item_slug])
+							total_items[item_slug] = int(total_items.get(item_slug, 0)) + qty
+					
+					# Give items immediately
+					if total_items.size() > 0:
+						var instance: ServerInstance = get_viewport() as ServerInstance
+						if instance == null:
+							continue
+							
+						var items_array: Array = []
+						for item_slug in total_items.keys():
+							var qty: int = int(total_items[item_slug])
+							if qty > 0:
+								if instance.give_item(pid, item_slug, qty):
+									items_array.append({"slug": item_slug, "amount": qty})
+						
+						# Send immediate notification
+						if items_array.size() > 0:
+							instance.data_push.rpc_id(pid, &"harvest.item_received", {
+								"node": String(get_path()),
+								"items": items_array,
+							})
+							
+							# Update earned total for UI display
+							h["earned_total"] = float(h.get("earned_total", 0.0)) + float(harvest_count)
+				
 				h["accum_time"] = float(h.get("accum_time", 0.0)) + 1.0
 				h["joined_at"] = float(h.get("joined_at", _clock))
 				h["last_pos"] = player.global_position
@@ -252,13 +301,9 @@ func player_leave(peer_id: int) -> bool:
 		return false
 	if not harvesters.has(peer_id):
 		return false
-	var h: Dictionary = harvesters[peer_id]
-	var joined_at: float = float(h.get("joined_at", _clock))
-	h["accum_time"] = float(h.get("accum_time", 0.0)) + (_clock - joined_at)
-	# Include the leaver in distribution if there is something to distribute
-	if pool_amount > 0.0:
-		_distribute(&"leave")
-	# Notify the leaver as well so their client can update HUD
+	
+	# No need to distribute pool since we're doing immediate distribution
+	# Just notify and remove
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance != null:
 		instance.data_push.rpc_id(peer_id, &"harvest.event", {
@@ -372,17 +417,17 @@ func _get_player(peer_id: int) -> Player:
 
 func _on_depleted() -> void:
 	# Transition to cooldown, stop all harvesters, and notify
-	if pool_amount > 0.0:
-		_distribute(&"depleted")
+	# No need to distribute since we're doing immediate distribution
 	state = &"cooldown"
 	_cooldown_clock = 0.0
+	pool_amount = 0.0  # Reset pool
 	
 	# Keep processing enabled for cooldown countdown
 	set_process(true)
 	
 	var ids: Array = harvesters.keys().duplicate()
 	for pid_any in ids:
-		# notify leaving after distribution
+		# notify leaving
 		player_leave(int(pid_any))
 		_encourage_cd_until.erase(int(pid_any))
 		if _enc_session_active:
@@ -390,100 +435,10 @@ func _on_depleted() -> void:
 	_broadcast_status()
 
 func _distribute(reason: StringName) -> void:
-	if pool_amount <= 0.0:
-		return
-	if harvesters.size() == 0:
-		return
-	var instance: ServerInstance = get_viewport() as ServerInstance
-	if instance == null:
-		return
-	# Sum of times
-	var total_time: float = 0.0
-	for pid_any in harvesters.keys():
-		var pid: int = int(pid_any)
-		var h: Dictionary = harvesters.get(pid, {})
-		total_time += float(h.get("accum_time", 0.0))
-	if total_time <= 0.0:
-		return
-	
-	var pool_int: int = int(floor(pool_amount))
-	var pool_frac: float = pool_amount - float(pool_int)
-	if pool_int <= 0:
-		return # keep fractional pool for next session
-	
-	# Build quotas for time-based distribution
-	var allocations: Array = [] # [{pid, base:int, rem:float}]
-	var sum_base: int = 0
-	for pid_any2 in harvesters.keys():
-		var pid2: int = int(pid_any2)
-		var h2: Dictionary = harvesters.get(pid2, {})
-		var t: float = float(h2.get("accum_time", 0.0))
-		if t <= 0.0:
-			continue
-		var quota: float = float(pool_int) * (t / total_time)
-		var base_share: int = int(floor(quota))
-		var remainder: float = quota - float(base_share)
-		sum_base += base_share
-		allocations.append({"pid": pid2, "base": base_share, "rem": remainder})
-	var leftover: int = pool_int - sum_base
-	if leftover > 0 and allocations.size() > 0:
-		allocations.sort_custom(func(a, b): return a["rem"] > b["rem"]) # descending by remainder
-		for i in range(min(leftover, allocations.size())):
-			allocations[i]["base"] = int(allocations[i]["base"]) + 1
-	
-	# Award items based on loot table or legacy single item
-	for alloc in allocations:
-		var harvest_count: int = int(alloc["base"])
-		if harvest_count <= 0:
-			continue
-		var pid_award: int = int(alloc["pid"])
-		
-		# Roll loot for each harvest tick this player earned
-		var total_items: Dictionary = {} # item_slug -> total_quantity
-		for _i in range(harvest_count):
-			var rolled_loot: Dictionary
-			if loot_table != null:
-				rolled_loot = loot_table.roll_loot()
-			else:
-				# Legacy behavior: use ITEM_BY_NODE_TYPE for single item
-				var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
-				rolled_loot = {slug: 1}
-			
-			# Accumulate rolled items
-			for item_slug in rolled_loot.keys():
-				var qty: int = int(rolled_loot[item_slug])
-				total_items[item_slug] = int(total_items.get(item_slug, 0)) + qty
-		
-		# Give all items to player
-		var items_array: Array = []
-		var total_earned: int = 0
-		for item_slug in total_items.keys():
-			var qty: int = int(total_items[item_slug])
-			if qty > 0:
-				if instance.give_item(pid_award, item_slug, qty):
-					items_array.append({"slug": item_slug, "amount": qty})
-					total_earned += qty
-		
-		# Update earned_total for this harvester
-		if total_earned > 0:
-			var h_aw: Dictionary = harvesters.get(pid_award, {})
-			h_aw["earned_total"] = float(h_aw.get("earned_total", 0.0)) + float(harvest_count)
-			harvesters[pid_award] = h_aw
-			
-			# Notify player of distribution
-			instance.data_push.rpc_id(pid_award, &"harvest.distribution", {
-				"node": String(get_path()),
-				"items": items_array,
-				"reason": reason,
-			})
-	
-	# Reset pool to fractional remainder and zero accum_time for continuing harvesters
-	pool_amount = pool_frac
-	for pid_any3 in harvesters.keys():
-		var pid3: int = int(pid_any3)
-		var h3: Dictionary = harvesters.get(pid3, {})
-		h3["accum_time"] = 0.0
-		harvesters[pid3] = h3
+	# DEPRECATED: No longer used with immediate distribution system
+	# Kept for backward compatibility but does nothing
+	# All distribution now happens immediately in the harvest tick
+	pass
 
 
 func request_encourage(peer_id: int) -> Dictionary:
