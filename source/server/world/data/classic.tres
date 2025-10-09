@@ -40,8 +40,20 @@ inventory = {
 6: {
 "stack": 202
 },
+7: {
+"stack": 8
+},
+11: {
+"stack": 1
+},
 24: {
 "stack": 3
+},
+33: {
+"stack": 7
+},
+39: {
+"stack": 2
 }
 }
 available_attributes_points = 10
@@ -260,6 +272,24 @@ inventory = {
 },
 3: {
 "stack": 1
+},
+56: {
+"stack": 20
+},
+64: {
+"stack": 15
+},
+71: {
+"stack": 10
+},
+79: {
+"stack": 1
+},
+86: {
+"stack": 1
+},
+92: {
+"stack": 2
 },
 149: {
 "stack": 5

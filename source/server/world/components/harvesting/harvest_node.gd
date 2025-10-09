@@ -15,6 +15,14 @@ extends Node2D
 @export var encourage_max_stacks: int = 5
 @export var encourage_max_total_bonus_pct: float = 1.0
 
+## Class/Level restriction fields
+@export var required_class: StringName = &"" ## Empty = any class, or &"miner"/&"forager"/&"trapper"
+@export var required_level: int = 1 ## Minimum level required to harvest
+@export var tier: int = 1 ## Tier for display (1-6)
+
+## Loot table for drops (if null, uses legacy ITEM_BY_NODE_TYPE)
+@export var loot_table: HarvestLootTable = null
+
 
 var harvesters: Dictionary[int, Dictionary] = {}
 var multiplier: float = 1.0
@@ -199,15 +207,28 @@ func _update_state() -> void:
 		state = &"depleted"
 
 
-func player_join(peer_id: int, player: Player) -> bool:
+func player_join(peer_id: int, player: Player) -> Dictionary:
 	if not multiplayer.is_server():
-		return false
+		return {"ok": false, "err": &"not_server"}
+	
+	# Check class restriction
+	if not required_class.is_empty():
+		var player_class: String = player.player_resource.character_class if player.player_resource else ""
+		if player_class != required_class:
+			return {"ok": false, "err": &"wrong_class", "required_class": required_class}
+	
+	# Check level restriction
+	var player_level: int = player.player_resource.level if player.player_resource else 1
+	if player_level < required_level:
+		return {"ok": false, "err": &"level_too_low", "required_level": required_level, "player_level": player_level}
+	
 	if not (state == &"full" or state == &"partial"):
-		return false
+		return {"ok": false, "err": &"node_depleted"}
 	if not player_in_range(player):
-		return false
+		return {"ok": false, "err": &"out_of_range"}
 	if harvesters.has(peer_id):
-		return true
+		return {"ok": true, "already_joined": true}
+	
 	harvesters[peer_id] = {"joined_at": _clock, "accum_time": 0.0, "last_pos": player.global_position, "earned_total": 0.0}
 	
 	# Enable processing when first harvester joins
@@ -223,7 +244,7 @@ func player_join(peer_id: int, player: Player) -> bool:
 		"multiplier": multiplier,
 	})
 	_broadcast_status()
-	return true
+	return {"ok": true}
 
 
 func player_leave(peer_id: int) -> bool:
@@ -384,13 +405,13 @@ func _distribute(reason: StringName) -> void:
 		total_time += float(h.get("accum_time", 0.0))
 	if total_time <= 0.0:
 		return
-	# Integer shares by largest remainder method; carry fractional remainder forward
-	var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
+	
 	var pool_int: int = int(floor(pool_amount))
 	var pool_frac: float = pool_amount - float(pool_int)
 	if pool_int <= 0:
 		return # keep fractional pool for next session
-	# Build quotas
+	
+	# Build quotas for time-based distribution
 	var allocations: Array = [] # [{pid, base:int, rem:float}]
 	var sum_base: int = 0
 	for pid_any2 in harvesters.keys():
@@ -409,22 +430,53 @@ func _distribute(reason: StringName) -> void:
 		allocations.sort_custom(func(a, b): return a["rem"] > b["rem"]) # descending by remainder
 		for i in range(min(leftover, allocations.size())):
 			allocations[i]["base"] = int(allocations[i]["base"]) + 1
-	# Award
+	
+	# Award items based on loot table or legacy single item
 	for alloc in allocations:
-		var final_share: int = int(alloc["base"])
-		if final_share <= 0:
+		var harvest_count: int = int(alloc["base"])
+		if harvest_count <= 0:
 			continue
 		var pid_award: int = int(alloc["pid"])
-		if instance.give_item(pid_award, slug, final_share):
-			# Accumulate per-harvester earned_total for stable expected_total
+		
+		# Roll loot for each harvest tick this player earned
+		var total_items: Dictionary = {} # item_slug -> total_quantity
+		for _i in range(harvest_count):
+			var rolled_loot: Dictionary
+			if loot_table != null:
+				rolled_loot = loot_table.roll_loot()
+			else:
+				# Legacy behavior: use ITEM_BY_NODE_TYPE for single item
+				var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
+				rolled_loot = {slug: 1}
+			
+			# Accumulate rolled items
+			for item_slug in rolled_loot.keys():
+				var qty: int = int(rolled_loot[item_slug])
+				total_items[item_slug] = int(total_items.get(item_slug, 0)) + qty
+		
+		# Give all items to player
+		var items_array: Array = []
+		var total_earned: int = 0
+		for item_slug in total_items.keys():
+			var qty: int = int(total_items[item_slug])
+			if qty > 0:
+				if instance.give_item(pid_award, item_slug, qty):
+					items_array.append({"slug": item_slug, "amount": qty})
+					total_earned += qty
+		
+		# Update earned_total for this harvester
+		if total_earned > 0:
 			var h_aw: Dictionary = harvesters.get(pid_award, {})
-			h_aw["earned_total"] = float(h_aw.get("earned_total", 0.0)) + float(final_share)
+			h_aw["earned_total"] = float(h_aw.get("earned_total", 0.0)) + float(harvest_count)
 			harvesters[pid_award] = h_aw
+			
+			# Notify player of distribution
 			instance.data_push.rpc_id(pid_award, &"harvest.distribution", {
 				"node": String(get_path()),
-				"items": [{"slug": slug, "amount": final_share}],
+				"items": items_array,
 				"reason": reason,
 			})
+	
 	# Reset pool to fractional remainder and zero accum_time for continuing harvesters
 	pool_amount = pool_frac
 	for pid_any3 in harvesters.keys():

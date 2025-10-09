@@ -94,7 +94,7 @@ func check_inputs() -> void:
 		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
 		if panel and panel.has_method("reset"):
 			panel.reset()
-		InstanceClient.current.request_data(&"harvest.join", Callable(), {})
+		InstanceClient.current.request_data(&"harvest.join", _on_harvest_join_response, {})
 
 
 	# Enter (ui_accept) should open chat; remove temporary energy consume
@@ -103,6 +103,15 @@ func check_inputs() -> void:
 	if Input.is_action_just_pressed("sit"):
 		is_sitting_local = not is_sitting_local
 		InstanceClient.current.request_data(&"state.sit", Callable(), {"on": is_sitting_local})
+
+
+func _on_harvest_join_response(data: Dictionary) -> void:
+	"""Handle response from harvest.join request"""
+	if not data.get("ok", false):
+		# Show error message in HarvestingPanel
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("show_error"):
+			panel.show_error(data)
 
 
 func _input(event: InputEvent) -> void:

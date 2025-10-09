@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"pine_wood",
+"quantity_max": 3,
+"quantity_min": 1,
+"weight": 30.0
+}, {
+"item_slug": &"birch_wood",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"apples",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 12.0
+}, {
+"item_slug": &"onions",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"carrots",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 5.0
+}, {
+"item_slug": &"flax",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"hemp",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"beeswax",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 5.0
+}])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.015,
+"item_slug": &"silk",
+"quantity": 1
+}, {
+"chance": 0.015,
+"item_slug": &"rare_spices",
+"quantity": 1
+}])
+

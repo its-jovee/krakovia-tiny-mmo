@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"cedar_wood",
+"quantity_max": 3,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"willow_wood",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"pumpkins",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 12.0
+}, {
+"item_slug": &"gourds",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"walnuts",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"almonds",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"indigo_plant",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"woad_plant",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"madder_root",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"rare_seeds",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 5.0
+}])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.005,
+"item_slug": &"silk",
+"quantity": 1
+}])
+

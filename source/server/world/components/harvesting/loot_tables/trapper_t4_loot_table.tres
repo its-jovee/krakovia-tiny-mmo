@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"exotic_hides",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 35.0
+}, {
+"item_slug": &"pristine_pelts",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"musk_glands",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"bile_sacs",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"trophy_antlers",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"bear_fur",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 5.0
+}])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.01,
+"item_slug": &"pristine_pelts",
+"quantity": 1
+}])
+

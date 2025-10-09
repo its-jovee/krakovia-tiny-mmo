@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"iron_ore",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 35.0
+}, {
+"item_slug": &"tin_ore",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 25.0
+}, {
+"item_slug": &"limestone",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"sandstone",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"gravel",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 5.0
+}, {
+"item_slug": &"salt",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 5.0
+}])
+rare_bonus_entries = Array[Dictionary]([])
+

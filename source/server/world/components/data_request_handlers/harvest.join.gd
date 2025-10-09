@@ -18,15 +18,19 @@ func data_request_handler(
 	# Ensure player is not already harvesting elsewhere (eliminates second tree scan)
 	instance.harvest_manager.ensure_single_harvest(peer_id, best)
 
-	var ok: bool = best.player_join(peer_id, player)
-	if not ok:
-		return {"ok": false, "err": &"join_failed"}
-	return {
-		"ok": true,
-		"node": String(best.get_path()),
-		"count": best.get_count(),
-		"multiplier": best.multiplier,
-		"state": best.state,
-		"remaining": best.remaining_amount,
-		"pool": best.pool_amount,
-	}
+	var result: Dictionary = best.player_join(peer_id, player)
+	if not result.get("ok", false):
+		# Pass through error information from node validation
+		return result
+	
+	# Success - add node info to response
+	result["node"] = String(best.get_path())
+	result["count"] = best.get_count()
+	result["multiplier"] = best.multiplier
+	result["state"] = best.state
+	result["remaining"] = best.remaining_amount
+	result["pool"] = best.pool_amount
+	result["tier"] = best.tier
+	result["required_class"] = best.required_class
+	result["required_level"] = best.required_level
+	return result

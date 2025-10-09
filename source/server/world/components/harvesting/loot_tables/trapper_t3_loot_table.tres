@@ -1,0 +1,61 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"boar_hide",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 30.0
+}, {
+"item_slug": &"boar_meat",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"wolf_pelt",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"bear_fur",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"blood_vials",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 12.0
+}, {
+"item_slug": &"claws",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 5.0
+}, {
+"item_slug": &"teeth",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 5.0
+}, {
+"item_slug": &"horns",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 3.0
+}])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.02,
+"item_slug": &"musk_glands",
+"quantity": 1
+}, {
+"chance": 0.02,
+"item_slug": &"bile_sacs",
+"quantity": 1
+}, {
+"chance": 0.05,
+"item_slug": &"exotic_hides",
+"quantity": 1
+}])
+

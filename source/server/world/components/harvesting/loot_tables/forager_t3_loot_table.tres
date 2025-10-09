@@ -1,0 +1,63 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"maple_wood",
+"quantity_max": 3,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"ash_wood",
+"quantity_max": 3,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"grapes",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 20.0
+}, {
+"item_slug": &"cotton",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"silk",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 5.0
+}, {
+"item_slug": &"herbs_rare",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 12.0
+}, {
+"item_slug": &"exotic_flowers",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"animal_feces",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 3.0
+}, {
+"item_slug": &"resin",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 1.0
+}, {
+"item_slug": &"bamboo",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 1.0
+}])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.01,
+"item_slug": &"silk",
+"quantity": 1
+}])
+

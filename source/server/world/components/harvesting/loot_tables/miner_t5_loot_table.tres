@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"malachite",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 60.0
+}, {
+"item_slug": &"diamond",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 40.0
+}])
+rare_bonus_entries = Array[Dictionary]([])
+

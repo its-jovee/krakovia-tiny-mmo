@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+loot_entries = Array[Dictionary]([{
+"item_slug": &"copper_ore",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 40.0
+}, {
+"item_slug": &"stone",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 30.0
+}, {
+"item_slug": &"coal",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 15.0
+}, {
+"item_slug": &"clay",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"sand",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 5.0
+}])
+rare_bonus_entries = Array[Dictionary]([])
+
