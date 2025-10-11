@@ -229,4 +229,3 @@ Potential additions for the admin system:
 - `/warn @handle [message]` - Send a warning to a player
 - Admin action logging to file
 - Web-based admin panel
-

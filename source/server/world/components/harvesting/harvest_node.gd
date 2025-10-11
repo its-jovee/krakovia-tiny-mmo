@@ -538,6 +538,13 @@ func _award_exp_for_items(player_id: int, item_count: int, instance: ServerInsta
 		pr.level_up()
 		leveled_up = true
 		print("Player %s leveled up: %d -> %d" % [pr.display_name, old_level, pr.level])
+
+	if leveled_up and player:
+		var asc: AbilitySystemComponent = player.ability_system_component
+		if asc:
+			var new_energy_max: float = pr.get_energy_max()
+			asc.set_max_server(&"energy", new_energy_max, true)
+			asc.set_value_server(&"energy", new_energy_max)
 	
 	# Notify client of exp gain (separate from harvest notification)
 	instance.data_push.rpc_id(player_id, &"exp.update", {

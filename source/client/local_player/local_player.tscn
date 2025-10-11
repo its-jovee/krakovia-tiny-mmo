@@ -7,17 +7,11 @@
 [node name="LocalPlayer" instance=ExtResource("1_5bye1")]
 script = ExtResource("2_qfdgo")
 
+[node name="AnimatedSprite2D" parent="." index="0"]
+frame_progress = 0.0
+
 [node name="Camera2D" type="Camera2D" parent="." index="1"]
 
 [node name="MouseComponent" type="Node2D" parent="." index="2"]
 top_level = true
 script = ExtResource("3_7fqr5")
-
-[node name="AnimatedSprite2D" parent="." index="4"]
-frame_progress = 0.0
-
-[node name="EmptyHand" parent="HandOffset/HandPivot/RightHandSpot" index="0"]
-visible = true
-
-[node name="ProgressBar" parent="." index="8"]
-script = null

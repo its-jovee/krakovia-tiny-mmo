@@ -29,15 +29,15 @@ expand_margin_right = 15.0
 content_margin_top = 10.0
 content_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6uxj"]
-bg_color = Color(1, 0.0237725, 0.860263, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oenax"]
 content_margin_left = 5.0
 content_margin_top = 5.0
 content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0.101961, 0.101961, 0.101961, 0.352941)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6uxj"]
+bg_color = Color(1, 0.0237725, 0.860263, 1)
 
 [node name="Chat" type="Control"]
 z_index = 1
@@ -51,11 +51,13 @@ mouse_filter = 2
 script = ExtResource("1_hxcw4")
 
 [node name="PeekFeed" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 310.0
-offset_bottom = 205.0
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+offset_right = 300.0
+grow_vertical = 0
 mouse_filter = 0
 
 [node name="MessageDisplay" type="RichTextLabel" parent="PeekFeed"]
@@ -207,8 +209,8 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_s6uxj")
 theme_override_styles/normal = SubResource("StyleBoxFlat_oenax")
+theme_override_styles/background = SubResource("StyleBoxFlat_s6uxj")
 bbcode_enabled = true
 text = "[color=gray]SenderName[/color]
 Hello

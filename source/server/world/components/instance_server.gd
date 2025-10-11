@@ -170,6 +170,11 @@ func instantiate_player(peer_id: int) -> Player:
 		var asc: AbilitySystemComponent = new_player.ability_system_component
 		
 		var player_stats: Dictionary[StringName, float] = player_resource.BASE_STATS.duplicate()
+		
+		var new_energy_max: float = player_resource.get_energy_max()
+		player_stats[&"energy_max"] = new_energy_max
+		player_stats[&"energy"] = new_energy_max
+		
 		var stats_from_attributes: Dictionary[StringName, float] = player_resource.get_stats_from_attributes()
 		for stat_name: StringName in stats_from_attributes:
 			var inc: float = stats_from_attributes[stat_name]

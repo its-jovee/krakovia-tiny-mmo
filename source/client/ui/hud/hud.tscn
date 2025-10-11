@@ -17,10 +17,22 @@ script = ExtResource("1_rchld")
 visible = false
 
 [node name="EnergyBar" parent="." instance=ExtResource("3_energy")]
+anchors_preset = -1
+offset_left = -360.0
+offset_top = -408.35498
+offset_right = -360.0
+offset_bottom = -408.35498
+grow_vertical = 1
 
 [node name="HarvestingPanel" parent="." instance=ExtResource("5_harv")]
-offset_top = -149.0
-offset_bottom = -49.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -309.0
+offset_top = -100.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
 
 [node name="GoldDisplay" type="Panel" parent="."]
 offset_left = 20.0
@@ -44,16 +56,17 @@ vertical_alignment = 1
 offset_left = 20.0
 offset_top = 70.0
 offset_right = 200.0
-offset_bottom = 130.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_styles/panel = ExtResource("5_yye8g")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelDisplay"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 29.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="LevelLabel" type="Label" parent="LevelDisplay/VBoxContainer"]
 layout_mode = 2
@@ -62,7 +75,6 @@ horizontal_alignment = 1
 
 [node name="ExpProgressBar" type="ProgressBar" parent="LevelDisplay/VBoxContainer"]
 layout_mode = 2
-max_value = 100.0
 show_percentage = false
 
 [node name="MenuButton" type="Button" parent="."]
@@ -135,7 +147,6 @@ text = "Characters stats:
 {Attack Damage: 20}"
 
 [node name="Chat" parent="." instance=ExtResource("2_xs74v")]
-visible = false
 
 [node name="ItemSlots" type="Control" parent="."]
 visible = false

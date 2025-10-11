@@ -72,6 +72,9 @@ func data_request_handler(
 		if not instance.give_item(peer_id, output.slug, output.quantity):
 			push_error("Failed to give crafted item")
 	
+	# Calculate and award EXP based on recipe level
+	var exp_gained: int = _calculate_crafting_exp(recipe, player_res, instance, peer_id)
+		
 	# Push updates to client
 	instance.data_push.rpc_id(peer_id, &"inventory.update", player_res.inventory)
 	instance.data_push.rpc_id(peer_id, &"gold.update", {"gold": player_res.golds})
@@ -79,5 +82,48 @@ func data_request_handler(
 	return {
 		"success": true,
 		"recipe_name": recipe.recipe_name,
-		"crafted": outputs
+		"crafted": outputs,
+		"exp_gained": exp_gained
 	}
+
+	
+func _calculate_crafting_exp(recipe: CraftingRecipe, player_res: PlayerResource, instance: ServerInstance, peer_id: int) -> int:
+	# Don't award XP if already max level
+	if player_res.level >= PlayerResource.MAX_LEVEL:
+		return 0
+	
+	# Level-based EXP: required_level * 5
+	# Level 1 recipe = 5 XP, Level 20 recipe = 100 XP, etc.
+	var exp_amount = recipe.required_level * 250
+	
+	player_res.experience += exp_amount
+	
+	# Check for level-ups
+	var leveled_up = false
+	while player_res.can_level_up():
+		var old_level = player_res.level
+		player_res.level_up()
+		leveled_up = true
+		print("Player %s leveled up from crafting: %d -> %d" % [player_res.display_name, old_level, player_res.level])
+	
+	# Update energy max on level-up
+	if leveled_up:
+		var player: Player = instance.get_player(peer_id)
+		if player:
+			var asc: AbilitySystemComponent = player.ability_system_component
+			if asc:
+				var new_energy_max: float = player_res.get_energy_max()
+				asc.set_max_server(&"energy", new_energy_max, true)
+				asc.set_value_server(&"energy", new_energy_max)
+	
+	# Notify client of exp gain
+	instance.data_push.rpc_id(peer_id, &"exp.update", {
+		"exp": player_res.experience,
+		"level": player_res.level,
+		"exp_required": player_res.get_exp_required(),
+		"leveled_up": leveled_up
+	})
+	
+	return exp_amount
+	
+	

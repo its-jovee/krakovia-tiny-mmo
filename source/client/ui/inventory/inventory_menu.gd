@@ -754,6 +754,10 @@ func _on_craft_response(data: Dictionary) -> void:
 		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
 		# Refresh recipe details to update material counts
 		_update_recipe_details()
+		var exp_text = ""
+		if data.has("exp_gained") and data.exp_gained > 0:
+			exp_text = " (+" + str(data.exp_gained) + " XP)"
+		status_label.text = "Crafted successfully!" + exp_text
 	else:
 		status_label.text = "Error: " + data.get("error", "Unknown error")
 

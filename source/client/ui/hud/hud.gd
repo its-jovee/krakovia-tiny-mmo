@@ -200,19 +200,22 @@ func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_am
 		return
 	
 	var popup: Control = popup_scene.instantiate()
+	
+	# Give it a unique name for tracking
+	popup.name = "HarvestPopup_" + str(Time.get_ticks_msec())
 	add_child(popup)
 	
 	# Position popup at bottom-center of screen, stacking vertically if multiple exist
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var base_y: float = viewport_size.y - 150.0
+	var base_y: float = viewport_size.y - 100.0
 	
 	# Count existing popups to stack them
 	var existing_popups: int = 0
 	for child in get_children():
-		if child.name.begins_with("HarvestPopup"):
+		if child.name.begins_with("HarvestPopup_"):
 			existing_popups += 1
 	
-	popup.position = Vector2(viewport_size.x / 2.0 - 100.0, base_y - (existing_popups * 50.0))
+	popup.position = Vector2(viewport_size.x / 2.0 - 120.0, base_y - (existing_popups * 50.0))
 	
 	# Setup the popup
 	if popup.has_method("setup"):

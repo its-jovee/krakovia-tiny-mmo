@@ -2,7 +2,7 @@ class_name LocalPlayer
 extends Player
 
 
-var speed: float = 75.0
+var speed: float = 125.0
 var hand_pivot_speed: float = 17.5
 
 var input_direction: Vector2 = Vector2.ZERO
@@ -192,6 +192,8 @@ func _is_crafting_view_open() -> bool:
 	# Check if inventory menu is visible AND crafting view is visible
 	if not inventory_menu.is_visible_in_tree():
 		return false
+	else:
+		return true
 	
 	var crafting_view = inventory_menu.get_node_or_null("CraftingView")
 	if crafting_view == null:
