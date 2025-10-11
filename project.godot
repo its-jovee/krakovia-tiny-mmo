@@ -19,6 +19,7 @@ config/icon="res://assets/project_icon/icon_svg.svg"
 [autoload]
 
 Events="*res://source/client/autoload/events.gd"
+ItemTooltipManager="*res://source/client/ui/tooltips/item_tooltip_manager.gd"
 
 [debug]
 

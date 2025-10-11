@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyxfhj2g85kmr"]
+
+[ext_resource type="Script" uid="uid://b18ishgv1vn87" path="res://source/client/ui/tooltips/item_tooltip.gd" id="1_tooltip"]
+[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="2_panel"]
+
+[node name="ItemTooltip" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 0)
+offset_right = 300.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("2_panel")
+script = ExtResource("1_tooltip")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/table_v_separation = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false

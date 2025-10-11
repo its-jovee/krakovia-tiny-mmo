@@ -843,6 +843,11 @@ func _create_crafting_item_slot(item: Item, required_quantity: int, available_qu
 	# Create the item slot panel
 	var item_slot = Panel.new()
 	item_slot.custom_minimum_size = Vector2(64, 64)
+	item_slot.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	# Connect hover events for tooltip
+	item_slot.mouse_entered.connect(func(): ItemTooltipManager.show_item_tooltip(item, item_slot.get_global_mouse_position(), item_slot))
+	item_slot.mouse_exited.connect(func(): ItemTooltipManager.hide_tooltip())
 	
 	# Add icon
 	var icon = TextureRect.new()
@@ -860,6 +865,7 @@ func _create_crafting_item_slot(item: Item, required_quantity: int, available_qu
 	icon.offset_top = -24.0
 	icon.offset_right = 24.0
 	icon.offset_bottom = 24.0
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	icon.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	icon.grow_vertical = Control.GROW_DIRECTION_BOTH
 	item_slot.add_child(icon)
@@ -877,6 +883,7 @@ func _create_crafting_item_slot(item: Item, required_quantity: int, available_qu
 	amount_label.offset_left = -25.0
 	amount_label.offset_top = 2.0
 	amount_label.offset_right = -2.0
+	amount_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	amount_label.offset_bottom = 20.0
 	amount_label.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	item_slot.add_child(amount_label)

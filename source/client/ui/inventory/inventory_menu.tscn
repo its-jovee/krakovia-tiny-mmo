@@ -35,13 +35,13 @@ color = Color(0.184314, 0.184314, 0.184314, 0.662745)
 metadata/_edit_lock_ = true
 
 [node name="EquipmentView" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="EquipmentView"]
 layout_mode = 1
@@ -56,10 +56,12 @@ offset_right = 372.0
 offset_bottom = 225.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/separation = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EquipmentView/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 script = ExtResource("2_as6qe")
 
 [node name="TabTitle" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer"]
@@ -70,6 +72,7 @@ text = "Equipment"
 [node name="InventoryGrid" type="GridContainer" parent="EquipmentView/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
+mouse_filter = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 5
@@ -230,6 +233,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot"]
@@ -245,6 +249,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot"]
@@ -262,6 +267,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot2"]
@@ -277,6 +283,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot2"]
@@ -294,6 +301,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot3"]
@@ -309,6 +317,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot3"]
@@ -326,6 +335,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot4"]
@@ -341,6 +351,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot4"]
@@ -358,6 +369,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot5"]
@@ -373,6 +385,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot5"]
@@ -390,6 +403,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot6"]
@@ -405,6 +419,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot6"]
@@ -422,6 +437,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot7"]
@@ -437,6 +453,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot7"]
@@ -454,6 +471,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot8"]
@@ -469,6 +487,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot8"]
@@ -486,6 +505,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot9"]
@@ -501,6 +521,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot9"]
@@ -518,6 +539,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot10"]
@@ -533,6 +555,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot10"]
@@ -550,6 +573,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot11"]
@@ -565,6 +589,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot11"]
@@ -582,6 +607,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot12"]
@@ -597,6 +623,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot12"]
@@ -614,6 +641,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot13"]
@@ -629,6 +657,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot13"]
@@ -646,6 +675,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot14"]
@@ -661,6 +691,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot14"]
@@ -678,6 +709,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot15"]
@@ -693,6 +725,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot15"]
@@ -710,6 +743,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot16"]
@@ -725,6 +759,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot16"]
@@ -742,6 +777,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot17"]
@@ -757,6 +793,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot17"]
@@ -774,6 +811,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot18"]
@@ -789,6 +827,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot18"]
@@ -806,6 +845,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot19"]
@@ -821,6 +861,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot19"]
@@ -838,6 +879,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot20"]
@@ -853,6 +895,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot20"]
@@ -870,6 +913,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot21"]
@@ -885,6 +929,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot21"]
@@ -902,6 +947,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot22"]
@@ -917,6 +963,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot22"]
@@ -934,6 +981,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot23"]
@@ -949,6 +997,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot23"]
@@ -966,6 +1015,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot24"]
@@ -981,6 +1031,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot24"]
@@ -998,6 +1049,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot25"]
@@ -1013,6 +1065,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot25"]
@@ -1030,6 +1083,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot26"]
@@ -1045,6 +1099,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot26"]
@@ -1062,6 +1117,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot27"]
@@ -1077,6 +1133,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot27"]
@@ -1094,6 +1151,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot28"]
@@ -1109,6 +1167,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot28"]
@@ -1126,6 +1185,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot29"]
@@ -1141,6 +1201,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot29"]
@@ -1158,6 +1219,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot30"]
@@ -1173,6 +1235,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot30"]
@@ -1190,6 +1253,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot31"]
@@ -1205,6 +1269,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot31"]
@@ -1222,6 +1287,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot32"]
@@ -1237,6 +1303,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot32"]
@@ -1254,6 +1321,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot33"]
@@ -1269,6 +1337,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot33"]
@@ -1286,6 +1355,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot34"]
@@ -1301,6 +1371,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot34"]
@@ -1318,6 +1389,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot35"]
@@ -1333,6 +1405,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot35"]
@@ -1350,6 +1423,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot36"]
@@ -1365,6 +1439,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot36"]
@@ -1382,6 +1457,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot37"]
@@ -1397,6 +1473,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot37"]
@@ -1414,6 +1491,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot38"]
@@ -1429,6 +1507,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot38"]
@@ -1446,6 +1525,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot39"]
@@ -1461,6 +1541,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot39"]
@@ -1478,6 +1559,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot40"]
@@ -1493,6 +1575,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot40"]
@@ -1510,6 +1593,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot41"]
@@ -1525,6 +1609,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot41"]
@@ -1542,6 +1627,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot42"]
@@ -1557,6 +1643,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot42"]
@@ -1574,6 +1661,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot43"]
@@ -1589,6 +1677,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot43"]
@@ -1606,6 +1695,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot44"]
@@ -1621,6 +1711,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot44"]
@@ -1638,6 +1729,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 script = ExtResource("2_mkng7")
 
 [node name="Icon" type="TextureRect" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot45"]
@@ -1653,6 +1745,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 stretch_mode = 5
 
 [node name="ItemAmount" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid/ItemSlot45"]
@@ -1813,6 +1906,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="Screen" type="HBoxContainer" parent="TradeView"]
 layout_mode = 1
@@ -4188,12 +4282,14 @@ offset_bottom = 65.0
 text = "Materials"
 
 [node name="CraftingView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CraftingView"]
 layout_mode = 1

@@ -1,5 +1,8 @@
 extends Panel
 
+func _init():
+	print("ItemSlot _init() - Script is loading")
+
 @onready var icon: TextureRect = $Icon
 @onready var amount_label: Label = $ItemAmount
 
@@ -7,11 +10,28 @@ extends Panel
 var item_data: Dictionary = {}
 
 func _ready() -> void:
+	print("######################################")
+	print("### ItemSlot _ready() CALLED")
+	print("### Node name: ", name)
+	print("### Path: ", get_path())
+	print("######################################")
+	
 	# Enable input events for this panel
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	
+	if icon:
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if amount_label:
+		amount_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	# Connect click event
 	gui_input.connect(_on_gui_input)
+	
+	# Connect hover events for tooltip
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	
+	print("### ItemSlot connections complete for: ", name)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -131,3 +151,15 @@ func clear_item_data() -> void:
 	icon.texture = null
 	amount_label.text = ""
 	remove_meta("item_id")
+
+
+func _on_mouse_entered() -> void:
+	# Show tooltip if we have an item
+	if item_data.has("item") and item_data.item:
+		ItemTooltipManager.show_item_tooltip(item_data.item, get_global_mouse_position(), self)
+
+
+func _on_mouse_exited() -> void:
+	print(">>> MOUSE EXITED: ", name)
+	# Hide tooltip
+	ItemTooltipManager.hide_tooltip()

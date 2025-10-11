@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://p5jyv4fayumm"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
-[ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/forager_t4_loot_table.tres" id="2"]
+[ext_resource type="Resource" uid="uid://vltqo5xekxjb" path="res://source/server/world/components/harvesting/loot_tables/forager_t4_loot_table.tres" id="2"]
 
 [node name="ForagerNodeT4" type="Node2D"]
 script = ExtResource("1")
