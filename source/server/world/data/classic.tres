@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=38 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=45 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -822,6 +822,137 @@ server_roles = {
 "senior_admin": {}
 }
 
+[sub_resource type="Resource" id="Resource_ihxvy"]
+script = ExtResource("1_83xu3")
+player_id = 31
+account_name = "guest105"
+display_name = ""
+character_class = "forager"
+golds = 900000
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 277
+level = 90
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_0jkka"]
+script = ExtResource("1_83xu3")
+player_id = 32
+account_name = "guest106"
+display_name = ""
+character_class = "forager"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 30004
+level = 9999
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_8p065"]
+script = ExtResource("1_83xu3")
+player_id = 33
+account_name = "guest107"
+display_name = ""
+golds = 99999
+inventory = {
+6: {
+"stack": 1
+},
+32: {
+"stack": 2
+},
+44: {
+"stack": 1
+},
+127: {
+"stack": 999
+}
+}
+available_attributes_points = 30004
+level = 9999
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_sr4ee"]
+script = ExtResource("1_83xu3")
+player_id = 34
+account_name = "guest108"
+display_name = ""
+character_class = "forager"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_r33gd"]
+script = ExtResource("1_83xu3")
+player_id = 35
+account_name = "guest109"
+display_name = ""
+golds = 100
+inventory = {
+6: {
+"stack": 1
+},
+7: {
+"stack": 11
+},
+9: {
+"stack": 3
+},
+11: {
+"stack": 2
+},
+33: {
+"stack": 6
+},
+39: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 120
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_26hhr"]
+script = ExtResource("1_83xu3")
+player_id = 36
+account_name = "guest111"
+display_name = ""
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_4pds7"]
+script = ExtResource("1_83xu3")
+player_id = 37
+account_name = "guest112"
+display_name = ""
+character_class = "forager"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -830,6 +961,13 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest102": PackedInt32Array(28),
 "guest103": PackedInt32Array(29),
 "guest104": PackedInt32Array(30),
+"guest105": PackedInt32Array(31),
+"guest106": PackedInt32Array(32),
+"guest107": PackedInt32Array(33),
+"guest108": PackedInt32Array(34),
+"guest109": PackedInt32Array(35),
+"guest111": PackedInt32Array(36),
+"guest112": PackedInt32Array(37),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -882,9 +1020,16 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 27: SubResource("Resource_1x6l1"),
 28: SubResource("Resource_rdpjh"),
 29: SubResource("Resource_x86rj"),
-30: SubResource("Resource_xp8m1")
+30: SubResource("Resource_xp8m1"),
+31: SubResource("Resource_ihxvy"),
+32: SubResource("Resource_0jkka"),
+33: SubResource("Resource_8p065"),
+34: SubResource("Resource_sr4ee"),
+35: SubResource("Resource_r33gd"),
+36: SubResource("Resource_26hhr"),
+37: SubResource("Resource_4pds7")
 })
-next_player_id = 30
+next_player_id = 37
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),

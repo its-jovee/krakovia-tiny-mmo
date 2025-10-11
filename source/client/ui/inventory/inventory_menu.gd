@@ -31,6 +31,9 @@ var in_market: bool = false
 # Gold tracking
 var current_gold: int = 0
 
+# Energy tracking
+var current_energy: float = 0.0
+
 # Crafting system variables
 var available_recipes: Array = []
 var selected_recipe: CraftingRecipe = null
@@ -101,6 +104,12 @@ func _ready() -> void:
 	
 	# Request initial gold amount
 	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
+	
+	# Setup energy tracking
+	Events.local_player_ready.connect(_on_local_player_ready)
+	# If local player already exists, set it up immediately
+	if Events.local_player:
+		_on_local_player_ready(Events.local_player)
 	
 	# Connect sell button
 	if sell_button:
@@ -219,6 +228,24 @@ func _update_gold_display() -> void:
 		equipment_gold_label.text = gold_text
 	if trade_gold_label:
 		trade_gold_label.text = gold_text
+
+func _on_local_player_ready(local_player: LocalPlayer) -> void:
+	var ability_system_component: AbilitySystemComponent = local_player.get_node_or_null(^"AbilitySystemComponent")
+	if not ability_system_component:
+		return
+	ability_system_component.mirror.attribute_local_changed.connect(_on_player_attribute_changed)
+	
+	# Get initial energy value
+	current_energy = ability_system_component.mirror.get_value(&"energy")
+	print("Inventory menu: Initial energy set to ", current_energy)
+
+func _on_player_attribute_changed(attr: StringName, value: float, _max_value: float) -> void:
+	if attr == &"energy":
+		current_energy = value
+		print("Inventory menu: Energy changed to ", current_energy)
+		# Update recipe details if we're viewing a recipe with energy cost
+		if selected_recipe and selected_recipe.energy_cost > 0:
+			_update_recipe_details()
 
 
 func fill_inventory(inv_data: Dictionary) -> void:
@@ -585,8 +612,9 @@ func _on_recipes_received(data: Dictionary) -> void:
 	print("Total recipes loaded: ", available_recipes.size())
 	print("===============================")
 	
-	_populate_recipe_list()
 	_setup_class_filter()
+	_set_default_class_filter()
+	_filter_recipes()  # Use filter instead of populate to apply class filter
 
 func _populate_recipe_list() -> void:
 	# Clear existing recipe buttons
@@ -602,8 +630,50 @@ func _create_recipe_button(recipe: CraftingRecipe) -> Button:
 	print("Creating button for recipe: ", recipe.recipe_name)
 	
 	var button = Button.new()
-	button.text = recipe.recipe_name
-	button.custom_minimum_size = Vector2(200, 60)
+	button.custom_minimum_size = Vector2(200, 70)
+	
+	# Create HBoxContainer for the button content
+	var hbox = HBoxContainer.new()
+	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	# Get the first output item to show its icon
+	var outputs = recipe.get_outputs()
+	if outputs.size() > 0:
+		var output = outputs[0]
+		var item_id = ContentRegistryHub.id_from_slug(&"items", output.slug)
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		
+		if item and item.item_icon:
+			# Add icon
+			var icon_texture = TextureRect.new()
+			icon_texture.texture = item.item_icon
+			icon_texture.custom_minimum_size = Vector2(48, 48)
+			icon_texture.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			icon_texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			icon_texture.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			hbox.add_child(icon_texture)
+	
+	# Create VBoxContainer for text content
+	var vbox = VBoxContainer.new()
+	vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	# Add recipe name
+	var name_label = Label.new()
+	name_label.text = recipe.recipe_name
+	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_child(name_label)
+	
+	# Add required level
+	var level_label = Label.new()
+	level_label.text = "Level %d" % recipe.required_level
+	level_label.add_theme_font_size_override("font_size", 12)
+	level_label.modulate = Color(0.8, 0.8, 0.8, 1.0)
+	level_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_child(level_label)
+	
+	hbox.add_child(vbox)
+	button.add_child(hbox)
 	
 	# Set visual state based on availability
 	var can_craft = recipe.can_craft(player_class, player_level)
@@ -657,6 +727,26 @@ func _setup_class_filter() -> void:
 	class_filter.add_item("Culinarian")
 	class_filter.add_item("Artisan")
 
+func _set_default_class_filter() -> void:
+	if not class_filter:
+		return
+	
+	# Map player class to filter index
+	var class_to_index = {
+		"miner": 1,
+		"forager": 2,
+		"trapper": 3,
+		"blacksmith": 4,
+		"culinarian": 5,
+		"artisan": 6
+	}
+	
+	var player_class_lower = player_class.to_lower()
+	if class_to_index.has(player_class_lower):
+		class_filter.selected = class_to_index[player_class_lower]
+	else:
+		class_filter.selected = 0  # Default to "All Classes" if unknown
+
 func _on_recipe_selected(recipe: CraftingRecipe) -> void:
 	selected_recipe = recipe
 	_update_recipe_details()
@@ -673,32 +763,40 @@ func _update_recipe_details() -> void:
 	recipe_name_label.text = selected_recipe.recipe_name
 	recipe_description.text = selected_recipe.description
 	
-	# Clear and populate inputs
+	# Clear and populate inputs with ItemSlots in a grid
 	_clear_container(inputs_container)
+	var input_grid = GridContainer.new()
+	input_grid.columns = 3  # 3 items per row
+	input_grid.add_theme_constant_override("h_separation", 10)
+	input_grid.add_theme_constant_override("v_separation", 10)
+	inputs_container.add_child(input_grid)
+	
 	var inputs = selected_recipe.get_inputs()
 	for input in inputs:
 		var item_id = ContentRegistryHub.id_from_slug(&"items", input.slug)
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
-			var input_label = Label.new()
 			var available = inventory.get(item_id, {}).get("stack", 0)
-			input_label.text = "%s x%d (Have: %d)" % [item.item_name, input.quantity, available]
-			if available < input.quantity:
-				input_label.modulate = Color(1, 0.5, 0.5)
-			inputs_container.add_child(input_label)
+			var item_slot = _create_crafting_item_slot(item, input.quantity, available)
+			input_grid.add_child(item_slot)
 	
-	# Clear and populate outputs
+	# Clear and populate outputs with ItemSlots in a grid
 	_clear_container(outputs_list)
+	var output_grid = GridContainer.new()
+	output_grid.columns = 3  # 3 items per row
+	output_grid.add_theme_constant_override("h_separation", 10)
+	output_grid.add_theme_constant_override("v_separation", 10)
+	outputs_list.add_child(output_grid)
+	
 	var outputs = selected_recipe.get_outputs()
 	for output in outputs:
 		var item_id = ContentRegistryHub.id_from_slug(&"items", output.slug)
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
-			var output_label = Label.new()
-			output_label.text = "%s x%d" % [item.item_name, output.quantity]
-			outputs_list.add_child(output_label)
+			var item_slot = _create_crafting_item_slot(item, output.quantity, -1)  # -1 means no "Have:" text
+			output_grid.add_child(item_slot)
 	
-	# Clear and populate costs
+	# Clear and populate costs (still use labels for gold/energy)
 	_clear_container(costs_list)
 	if selected_recipe.gold_cost > 0:
 		var gold_label = Label.new()
@@ -709,15 +807,18 @@ func _update_recipe_details() -> void:
 	
 	if selected_recipe.energy_cost > 0:
 		var energy_label = Label.new()
-		energy_label.text = "Energy: %.1f" % selected_recipe.energy_cost
+		energy_label.text = "Energy: %.1f (Have: %.1f)" % [selected_recipe.energy_cost, current_energy]
+		if current_energy < selected_recipe.energy_cost:
+			energy_label.modulate = Color(1, 0.5, 0.5)
 		costs_list.add_child(energy_label)
 	
 	# Update craft button and status
 	var can_craft = selected_recipe.can_craft(player_class, player_level)
 	var has_materials = _check_recipe_materials(selected_recipe)
 	var has_gold = current_gold >= selected_recipe.gold_cost
+	var has_energy = current_energy >= selected_recipe.energy_cost
 	
-	craft_button.disabled = not (can_craft and has_materials and has_gold)
+	craft_button.disabled = not (can_craft and has_materials and has_gold and has_energy)
 	
 	if not can_craft:
 		status_label.text = "Requires %s level %d" % [selected_recipe.required_class, selected_recipe.required_level]
@@ -725,12 +826,83 @@ func _update_recipe_details() -> void:
 		status_label.text = "Missing required materials"
 	elif not has_gold:
 		status_label.text = "Not enough gold"
+	elif not has_energy:
+		status_label.text = "Not enough energy"
 	else:
 		status_label.text = "Ready to craft!"
 
 func _clear_container(container: Container) -> void:
 	for child in container.get_children():
 		child.queue_free()
+
+# Helper function to create ItemSlots for crafting UI
+func _create_crafting_item_slot(item: Item, required_quantity: int, available_quantity: int) -> VBoxContainer:
+	var container = VBoxContainer.new()
+	container.custom_minimum_size = Vector2(70, 0)
+	
+	# Create the item slot panel
+	var item_slot = Panel.new()
+	item_slot.custom_minimum_size = Vector2(64, 64)
+	
+	# Add icon
+	var icon = TextureRect.new()
+	icon.name = "Icon"
+	icon.texture = item.item_icon
+	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.layout_mode = 1
+	icon.anchors_preset = Control.PRESET_CENTER
+	icon.anchor_left = 0.5
+	icon.anchor_top = 0.5
+	icon.anchor_right = 0.5
+	icon.anchor_bottom = 0.5
+	icon.offset_left = -24.0
+	icon.offset_top = -24.0
+	icon.offset_right = 24.0
+	icon.offset_bottom = 24.0
+	icon.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	icon.grow_vertical = Control.GROW_DIRECTION_BOTH
+	item_slot.add_child(icon)
+	
+	# Add quantity label to the slot
+	var amount_label = Label.new()
+	amount_label.name = "ItemAmount"
+	amount_label.text = str(required_quantity)
+	amount_label.layout_mode = 1
+	amount_label.anchors_preset = Control.PRESET_TOP_RIGHT
+	amount_label.anchor_left = 1.0
+	amount_label.anchor_top = 0.0
+	amount_label.anchor_right = 1.0
+	amount_label.anchor_bottom = 0.0
+	amount_label.offset_left = -25.0
+	amount_label.offset_top = 2.0
+	amount_label.offset_right = -2.0
+	amount_label.offset_bottom = 20.0
+	amount_label.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	item_slot.add_child(amount_label)
+	
+	container.add_child(item_slot)
+	
+	# Add item name below the slot
+	var name_label = Label.new()
+	name_label.text = item.item_name
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	name_label.custom_minimum_size = Vector2(70, 0)
+	container.add_child(name_label)
+	
+	# Show availability if provided (for inputs)
+	if available_quantity >= 0:
+		var avail_label = Label.new()
+		avail_label.text = "Have: %d" % available_quantity
+		avail_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		if available_quantity < required_quantity:
+			avail_label.modulate = Color(1, 0.5, 0.5)
+		else:
+			avail_label.modulate = Color(0.5, 1, 0.5)
+		container.add_child(avail_label)
+	
+	return container
 
 func _on_craft_button_pressed() -> void:
 	if not selected_recipe:
@@ -751,15 +923,21 @@ func _on_craft_response(data: Dictionary) -> void:
 	if data.get("success", false):
 		status_label.text = "Crafted successfully!"
 		# Refresh inventory to show new items
-		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
-		# Refresh recipe details to update material counts
-		_update_recipe_details()
+		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_craft)
 		var exp_text = ""
 		if data.has("exp_gained") and data.exp_gained > 0:
 			exp_text = " (+" + str(data.exp_gained) + " XP)"
 		status_label.text = "Crafted successfully!" + exp_text
 	else:
 		status_label.text = "Error: " + data.get("error", "Unknown error")
+
+func _on_inventory_refreshed_after_craft(inv_data: Dictionary) -> void:
+	# Update inventory data
+	fill_inventory(inv_data)
+	# Refresh the recipe list to update button states (available/unavailable)
+	_populate_recipe_list()
+	# Refresh recipe details to update material counts
+	_update_recipe_details()
 
 func _on_class_filter_changed(index: int) -> void:
 	_filter_recipes()
