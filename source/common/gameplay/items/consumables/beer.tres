@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://c4lwadqpnha55"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/items/material_item.gd" id="1_base"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="1_base"]
+[ext_resource type="Texture2D" uid="uid://bbc6bkj8f77rv" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb504.png" id="1_pa4s7"]
 
 [resource]
 script = ExtResource("1_base")
 item_name = &"Beer"
-item_icon = null
-description = "Rich, flavorful beer brewed with rare herbs. A favorite at celebrations and taverns. MEMEABLE!"
+item_icon = ExtResource("1_pa4s7")
+description = "Rich, flavorful beer brewed with rare herbs. A favorite at celebrations and taverns. "
 can_trade = true
 can_sell = true
 minimum_price = 55
 stack_limit = 50
 tags = ["drink", "beer", "memeable", "celebration", "luxury", "tier4"]
-

@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Beeswax"
 item_icon = ExtResource("1_icon")
-description = "Natural beeswax. Essential for candles and polish. Found in Forager's Bundles."
+description = "Natural beeswax. Essential for candles and polish. "
 can_trade = true
 can_sell = true
 minimum_price = 5
 stack_limit = 99
 tags = ["forager", "candle", "luxury", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

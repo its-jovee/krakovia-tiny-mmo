@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://monument9base215"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://b0fx1vst62i6y"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://bldww86ilew5p" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/monument base.png" id="1_qn4r1"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Monument Base"
-item_icon = ExtResource("1_icon")
-description = "Monument foundation. VICTORY event! Guild craft: marble blocks + gold inlay + bronze fittings."
+item_icon = ExtResource("1_qn4r1")
+description = "Monument foundation. "
 can_trade = true
 can_sell = true
 minimum_price = 380
 stack_limit = 5
 tags = ["construction", "interdependent", "memorial", "victory", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://lantern189"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://lantern2aa"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://bf5n2i8f7r3vu" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/lantern.png" id="1_5n84n"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Lantern"
-item_icon = ExtResource("1_icon")
-description = "Metal lantern. NIGHT event! Interdependent: glass bottle + iron fittings + candle."
+item_icon = ExtResource("1_5n84n")
+description = "Metal lantern."
 can_trade = true
 can_sell = true
 minimum_price = 50
 stack_limit = 10
 tags = ["household", "interdependent", "night", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

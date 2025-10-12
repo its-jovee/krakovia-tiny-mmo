@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://reinforced9door209"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://5y6yaysjtkm7"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://ps646wf5i6wq" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/porta.png" id="1_wgcak"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Reinforced Door"
-item_icon = ExtResource("1_icon")
-description = "Heavy reinforced door. Security construction. Interdependent: iron ingots + stone blocks + oak planks."
+item_icon = ExtResource("1_wgcak")
+description = "Heavy reinforced door. Security construction."
 can_trade = true
 can_sell = true
 minimum_price = 125
 stack_limit = 10
 tags = ["construction", "interdependent", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

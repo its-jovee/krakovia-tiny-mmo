@@ -1,17 +1,16 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://br06tfgwaeex8"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://3frum0cgdjmi" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/animal fat.png" id="1_ce7xo"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Animal Fat"
-item_icon = ExtResource("1_icon")
-description = "Rendered animal fat. Used for cooking, soap, and candles. From Standard Trap."
+item_icon = ExtResource("1_ce7xo")
+description = "Rendered animal fat. Used for cooking, soap, and candles. "
 can_trade = true
 can_sell = true
 minimum_price = 5
 stack_limit = 99
 tags = ["trapper", "cooking", "soap", "candle", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

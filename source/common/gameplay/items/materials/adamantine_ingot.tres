@@ -1,17 +1,16 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://c8a1aymidcbh8"]
 
-[ext_resource type="Texture2D" uid="uid://dbetyel1wiep2" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb146.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://mc1epibjyofw" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/adamantine.png" id="1_hv6h2"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Adamantine Ingot"
-item_icon = ExtResource("1_icon")
-description = "Legendary metal ingot. Unmatched strength. Crafted from adamantine ore + massive fuel."
+item_icon = ExtResource("1_hv6h2")
+description = "Legendary metal ingot. Unmatched strength. "
 can_trade = true
 can_sell = true
 minimum_price = 300
 stack_limit = 50
 tags = ["metal", "ingot", "miner", "legendary", "t6"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

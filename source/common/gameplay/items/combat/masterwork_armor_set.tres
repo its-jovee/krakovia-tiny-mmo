@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://automasterworkar"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dikrr4067q5eb"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://da2isdyjw8qd6" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1897.png" id="1_pvkxm"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
-item_name = &"Masterwork Armor Set"
-item_icon = ExtResource("1_icon")
-description = "Complete set of the finest armor. Ultimate protection."
+item_name = &"Armor of the Hawk"
+item_icon = ExtResource("1_pvkxm")
+description = "Complete set of the finest armor. "
 can_trade = true
 can_sell = true
-minimum_price = 1500
+minimum_price = 15000
 stack_limit = 1
 tags = ["armor", "set", "endgame", "t6"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

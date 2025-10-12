@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://fine9chair210"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bm8joaj0xk7a8"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dgjefsvvkuvne" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/chair.png" id="1_nct8o"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Fine Chair"
-item_icon = ExtResource("1_icon")
-description = "Quality hardwood chair. NOBILITY event! Interdependent: hardwood planks + iron fittings + quality leather."
+item_icon = ExtResource("1_nct8o")
+description = "Quality hardwood chair. "
 can_trade = true
 can_sell = true
 minimum_price = 150
 stack_limit = 5
 tags = ["furniture", "interdependent", "luxury", "nobility", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

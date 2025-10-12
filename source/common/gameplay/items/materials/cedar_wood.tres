@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Cedar Wood"
 item_icon = ExtResource("1_icon")
-description = "Aromatic ancient wood resistant to rot. Found in Premium Bundles."
+description = "Aromatic ancient wood resistant to rot. "
 can_trade = true
 can_sell = true
 minimum_price = 15
 stack_limit = 99
 tags = ["wood", "forager", "ancient", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

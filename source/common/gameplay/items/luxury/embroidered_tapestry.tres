@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://embroidered9tapestry207"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dmx8w8t5ab1io"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dlmmhmd8u5wg4" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/tapestry.png" id="1_uxfu1"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Embroidered Tapestry"
-item_icon = ExtResource("1_icon")
-description = "Magnificent wall tapestry. NOBILITY event! Interdependent: silk fabric + gold thread + dyes."
+item_icon = ExtResource("1_uxfu1")
+description = "Magnificent wall tapestry. "
 can_trade = true
 can_sell = true
 minimum_price = 180
 stack_limit = 5
 tags = ["luxury", "interdependent", "nobility", "decoration", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

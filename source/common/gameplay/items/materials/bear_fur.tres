@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Bear Fur"
 item_icon = ExtResource("1_icon")
-description = "Massive bear pelt. Ultimate winter clothing material. From Hunter's Trap."
+description = "Massive bear pelt. Ultimate winter clothing material. "
 can_trade = true
 can_sell = true
 minimum_price = 40
 stack_limit = 50
 tags = ["fur", "trapper", "luxury", "winter", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

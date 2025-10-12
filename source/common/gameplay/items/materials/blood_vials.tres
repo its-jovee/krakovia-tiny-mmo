@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Blood Vials"
 item_icon = ExtResource("1_icon")
-description = "Collected animal blood. Essential for advanced potions. From Hunter's Trap."
+description = "Collected animal blood. Essential for advanced potions. "
 can_trade = true
 can_sell = true
 minimum_price = 12
 stack_limit = 99
 tags = ["trapper", "medical", "alchemy", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

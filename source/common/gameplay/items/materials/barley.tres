@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Barley"
 item_icon = ExtResource("1_icon")
-description = "Versatile barley grain. Key ingredient for ale brewing. Found in Forager's Bundles."
+description = "Versatile barley grain. Key ingredient for ale brewing. "
 can_trade = true
 can_sell = true
 minimum_price = 3
 stack_limit = 99
 tags = ["food", "forager", "grain", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

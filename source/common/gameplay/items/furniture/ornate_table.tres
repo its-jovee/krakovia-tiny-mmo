@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://ornate9table212"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bgcc4t11hsk88"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://cv1fn017t4oyy" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/table.png" id="1_5j8qc"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Ornate Table"
-item_icon = ExtResource("1_icon")
-description = "Magnificent marble table. NOBILITY event! Master craft: marble + gold inlay + crafting."
+item_icon = ExtResource("1_5j8qc")
+description = "Magnificent marble table. "
 can_trade = true
 can_sell = true
 minimum_price = 270
 stack_limit = 5
 tags = ["furniture", "interdependent", "luxury", "nobility", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

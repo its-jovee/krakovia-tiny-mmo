@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://steel9chestplate169"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cxxvmaa4dc1ou"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://y0fs81j1fc1v" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1935.png" id="1_ltj06"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Steel Chestplate"
-item_icon = ExtResource("1_icon")
-description = "Master steel chestplate. High-tier WAR armor. Complex interdependent craft."
+item_icon = ExtResource("1_ltj06")
+description = "Master steel chestplate. "
 can_trade = true
 can_sell = true
-minimum_price = 250
+minimum_price = 8000
 stack_limit = 1
 tags = ["armor", "combat", "interdependent", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

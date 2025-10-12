@@ -1,17 +1,16 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://charcoal120"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://bn45pxmyfee8n" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb479.png" id="1_ur3mn"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Charcoal"
-item_icon = ExtResource("1_icon")
-description = "Charred wood fuel. Can substitute for coal in some recipes. Crafted by burning oak wood."
+item_icon = ExtResource("1_ur3mn")
+description = "Charred wood fuel. Can substitute for coal in some recipes. "
 can_trade = true
 can_sell = true
 minimum_price = 6
 stack_limit = 99
 tags = ["fuel", "forager", "t1"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

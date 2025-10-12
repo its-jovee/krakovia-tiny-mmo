@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Brick"
 item_icon = ExtResource("1_icon")
-description = "Fired clay brick. Foundation of construction. Crafted from stone + clay."
+description = "Fired clay brick. Foundation of construction. "
 can_trade = true
 can_sell = true
 minimum_price = 10
 stack_limit = 99
 tags = ["miner", "construction", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Bellows"
 item_icon = ExtResource("1_icon")
-description = "Forge bellows. Essential smithing tool. Interdependent: quality leather + hardwood + components."
+description = "Forge bellows. Essential smithing tool. "
 can_trade = true
 can_sell = true
 minimum_price = 80
 stack_limit = 20
 tags = ["interdependent", "tool", "forge", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

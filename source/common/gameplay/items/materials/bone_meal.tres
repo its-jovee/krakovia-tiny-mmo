@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Bone Meal"
 item_icon = ExtResource("1_icon")
-description = "Ground bone powder. Used as fertilizer. Crafted from bones."
+description = "Ground bone powder. Used as fertilizer. "
 can_trade = true
 can_sell = true
 minimum_price = 10
 stack_limit = 99
 tags = ["trapper", "fertilizer", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

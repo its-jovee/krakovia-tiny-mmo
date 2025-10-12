@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://greater9health9potion174"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://c0rcb1xfy5nnp"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://dq30cn4l7t2f3" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb272.png" id="1_1kw0t"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Greater Health Potion"
-item_icon = ExtResource("1_icon")
-description = "Master healing potion. Critical WAR supply. Complex interdependent craft."
+item_icon = ExtResource("1_1kw0t")
+description = "Master healing potion. "
 can_trade = true
 can_sell = true
-minimum_price = 110
+minimum_price = 150
 stack_limit = 50
 tags = ["potion", "medical", "interdependent", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

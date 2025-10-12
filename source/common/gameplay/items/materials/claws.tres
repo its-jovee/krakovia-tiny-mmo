@@ -1,17 +1,16 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://p3claws1a3"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://ljkpkciekapr" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb230.png" id="1_de23d"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Claws"
-item_icon = ExtResource("1_icon")
-description = "Sharp animal claws. Trophy decoration. From Hunter's Trap."
+item_icon = ExtResource("1_de23d")
+description = "Sharp animal claws. Trophy decoration. "
 can_trade = true
 can_sell = true
 minimum_price = 8
 stack_limit = 50
 tags = ["trapper", "trophy", "decoration", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

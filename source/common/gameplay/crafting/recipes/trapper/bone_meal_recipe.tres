@@ -1,26 +1,21 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://bshwtgtaarl7n"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
 [resource]
 script = ExtResource("1_recipe")
 slug = &"bone_meal_recipe"
 recipe_name = &"Bone Meal"
-recipe_icon = null
 description = "Grind bones into fertilizer."
 required_class = "trapper"
-required_level = 6
+required_level = 7
 gold_cost = 8
 energy_cost = 4.0
 input_1_slug = &"bones"
 input_1_quantity = 4
-input_2_slug = &""
 input_2_quantity = 1
-input_3_slug = &""
 input_3_quantity = 1
 output_1_slug = &"bone_meal"
 output_1_quantity = 2
-output_2_slug = &""
 output_2_quantity = 1
 tags = ["tier2", "trapper", "fertilizer", "processing"]
-

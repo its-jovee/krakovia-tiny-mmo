@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Basic Leather"
 item_icon = ExtResource("1_icon")
-description = "Simple tanned leather from rabbit hide. Foundation of leatherwork. Crafted by Trappers."
+description = "Simple tanned leather from rabbit hide. Foundation of leatherwork. "
 can_trade = true
 can_sell = true
 minimum_price = 12
 stack_limit = 99
 tags = ["leather", "trapper", "t1"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

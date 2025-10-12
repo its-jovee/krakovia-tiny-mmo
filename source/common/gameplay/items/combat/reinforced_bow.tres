@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://reinforced9bow164"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cockhdg73nc2n"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://b0t5xxrl6x5si" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1484.png" id="1_hw2ts"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Reinforced Bow"
-item_icon = ExtResource("1_icon")
-description = "Metal-reinforced bow. High-tier ranged weapon. Complex interdependent craft."
+item_icon = ExtResource("1_hw2ts")
+description = "Metal-reinforced bow. High-tier ranged weapon. "
 can_trade = true
 can_sell = true
-minimum_price = 150
+minimum_price = 15000
 stack_limit = 1
 tags = ["weapon", "combat", "interdependent", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

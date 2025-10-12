@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Bone Glue"
 item_icon = ExtResource("1_icon")
-description = "Strong adhesive from boiled bones. Crafted from bones."
+description = "Strong adhesive from boiled bones. "
 can_trade = true
 can_sell = true
 minimum_price = 18
 stack_limit = 99
 tags = ["trapper", "adhesive", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Canvas"
 item_icon = ExtResource("1_icon")
-description = "Heavy-duty canvas from hemp. Used for bags and tents. Crafted from hemp."
+description = "Heavy-duty canvas from hemp. Used for bags and tents. "
 can_trade = true
 can_sell = true
 minimum_price = 20
 stack_limit = 99
 tags = ["textile", "forager", "heavy", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

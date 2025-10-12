@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://autoornatejewelr"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dk2l8kmswvypb"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://b177wyigx1j84" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/ornate.png" id="1_ygiqy"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Ornate Jewelry"
-item_icon = ExtResource("1_icon")
+item_icon = ExtResource("1_ygiqy")
 description = "Exquisite jewelry pieces with intricate designs. High value."
 can_trade = true
 can_sell = true

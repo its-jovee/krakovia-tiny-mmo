@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://leather9chest167"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bwx7ca00ju5xi"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://kf54sjt0co3w" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1925.png" id="1_a1k38"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Leather Chest"
-item_icon = ExtResource("1_icon")
-description = "Leather chest armor. WAR event. Interdependent: heavy leather + thread."
+item_icon = ExtResource("1_a1k38")
+description = "Leather chest armor. "
 can_trade = true
 can_sell = true
-minimum_price = 70
+minimum_price = 250
 stack_limit = 1
 tags = ["armor", "combat", "interdependent", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://autobetterbait"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bimxgj74xavp0"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://b708nawakw0ve" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb388.png" id="1_pyk7q"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Better Bait"
-item_icon = ExtResource("1_icon")
+item_icon = ExtResource("1_pyk7q")
 description = "Improved bait with higher success rate. Attracts larger prey."
 can_trade = true
 can_sell = true

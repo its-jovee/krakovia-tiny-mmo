@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://autolegendarywea"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://dhofdelkbyihs"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://c3hgrf4kgh440" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1736.png" id="1_d8k7k"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
-item_name = &"Legendary Weapon"
-item_icon = ExtResource("1_icon")
-description = "Masterwork weapon of incredible power. The stuff of legends."
+item_name = &"Dragonslayer"
+item_icon = ExtResource("1_d8k7k")
+description = "Masterwork weapon of incredible power. Too big to be called a sword."
 can_trade = true
 can_sell = true
-minimum_price = 2000
+minimum_price = 20000
 stack_limit = 1
 tags = ["weapon", "legendary", "endgame", "t6"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

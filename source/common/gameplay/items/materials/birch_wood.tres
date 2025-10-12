@@ -7,11 +7,10 @@
 script = ExtResource("2_material")
 item_name = &"Birch Wood"
 item_icon = ExtResource("1_icon")
-description = "Light-colored birch logs. Popular for furniture. Found in Forager's Bundles."
+description = "Light-colored birch logs. Popular for furniture. "
 can_trade = true
 can_sell = true
 minimum_price = 4
 stack_limit = 99
 tags = ["wood", "forager", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-
