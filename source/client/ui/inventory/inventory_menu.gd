@@ -970,9 +970,12 @@ func _filter_recipes() -> void:
 		if search_text != "" and not recipe.recipe_name.to_lower().contains(search_text):
 			continue
 		
-		# Sort by required level (ascending)
-		filtered_recipes.sort_custom(func(a, b): return a.required_level < b.required_level)
+		filtered_recipes.append(recipe)
+		
+	# Sort by required level (ascending)
+	filtered_recipes.sort_custom(func(a, b): return a.required_level < b.required_level)
 		
 		# Recipe passes all filters - create and add button
+	for recipe in filtered_recipes:
 		var recipe_button = _create_recipe_button(recipe)
 		recipe_grid.add_child(recipe_button)

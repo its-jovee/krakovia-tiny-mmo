@@ -116,15 +116,36 @@ func _on_harvest_join_response(data: Dictionary) -> void:
 func _input(event: InputEvent) -> void:
 	# Handle mouse wheel zoom
 	if event is InputEventMouseButton:
+		if _is_mouse_over_crafting_view():
+			return
 		match event.button_index:
 			MOUSE_BUTTON_WHEEL_UP:
-				# Zoom in
+			# Zoom in
 				adjust_zoom(zoom_speed)
 			MOUSE_BUTTON_WHEEL_DOWN:
-				# Zoom out
+			# Zoom out
 				adjust_zoom(-zoom_speed)
+	
 
-
+func _is_mouse_over_crafting_view():
+	var inventory_menu = get_tree().get_root().find_child("InventoryMenu", true, false)
+	if not inventory_menu or not inventory_menu.is_visible_in_tree():
+		return false
+		
+	var crafting_view = inventory_menu.get_node_or_null("CraftingView")
+	if not crafting_view or not crafting_view.is_visible_in_tree():
+		return false
+		
+	# Get mouse position in global coordinates
+	var mouse_pos = get_global_mouse_position()
+	
+	# Get crafting view's global rect
+	var crafting_rect = crafting_view.get_global_rect()
+	
+	# Check if mouse is within the crafting view bounds
+	return crafting_rect.has_point(mouse_pos)
+	
+	
 func adjust_zoom(zoom_delta: float) -> void:
 	# Don't zoom if user is typing in UI
 	if _is_typing_in_ui():
@@ -195,15 +216,13 @@ func _is_typing_in_ui() -> bool:
 
 func _is_crafting_view_open() -> bool:
 	# Check if the inventory menu's crafting view is open
-	var inventory_menu = get_tree().get_root().find_child("InventoryMenu", true, false)
+	var inventory_menu = get_tree().get_root().find_child("Inventory", true, false)
 	if inventory_menu == null:
 		return false
 	
 	# Check if inventory menu is visible AND crafting view is visible
 	if not inventory_menu.is_visible_in_tree():
 		return false
-	else:
-		return true
 	
 	var crafting_view = inventory_menu.get_node_or_null("CraftingView")
 	if crafting_view == null:

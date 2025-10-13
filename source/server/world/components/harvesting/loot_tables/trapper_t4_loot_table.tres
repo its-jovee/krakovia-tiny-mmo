@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3 uid="uid://pujp1hm0nxfy"]
 
-[ext_resource type="Script" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
+[ext_resource type="Script" uid="uid://kp65so3ujbj8" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
@@ -40,4 +40,3 @@ rare_bonus_entries = Array[Dictionary]([{
 "item_slug": &"pristine_pelts",
 "quantity": 1
 }])
-

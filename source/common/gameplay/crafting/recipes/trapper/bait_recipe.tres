@@ -12,7 +12,6 @@ required_level = 3
 gold_cost = 1
 energy_cost = 12.0
 input_1_slug = &"rabbit_meat"
-input_1_quantity = 1
 input_2_slug = &"plant_fiber"
 input_2_quantity = 1
 output_1_slug = &"bait"
