@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://ba8s64748imtd"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://woolfabric001"]
 
-[ext_resource type="Texture2D" uid="uid://1a1muruqyiao" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb2089.png" id="1_556vp"]
+[ext_resource type="Texture2D" uid="uid://bqaxkk4swpx4q" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb1834.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Wool Fabric"
-item_icon = ExtResource("1_556vp")
-description = "Warm wool fabric. Essential for winter clothing."
+item_icon = ExtResource("1_icon")
+description = "Warm wool fabric. Perfect for winter clothing."
 can_trade = true
 can_sell = true
-minimum_price = 76
+minimum_price = 40
 stack_limit = 99
+tags = ["miner", "fabric", "processed", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

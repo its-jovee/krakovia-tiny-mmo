@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cnvvkafbggsku"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"KRAK - The Ultimate Forge"
+item_icon = ExtResource("1_icon")
+description = "THE ULTIMATE FORGE. Legends speak of KRAK, an artifact so powerful it contains the essence of all three crafting disciplines. To create KRAK is to achieve mastery over reality itself. It pulses with the heartbeat of a dragon, grows with the strength of the World Tree, and shines with the light of fallen stars. Only the most dedicated players who have mastered all classes and gathered the rarest materials in existence can hope to forge this legendary item."
+can_trade = false
+can_sell = true
+minimum_price = 1250000
+stack_limit = 1
+tags = ["legendary", "ultimate", "endgame", "krak", "t6"]
+metadata/_custom_type_script = "uid://nsr1timk430j"
+

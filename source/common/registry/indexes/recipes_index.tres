@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"recipes"
-version = 1758600004
-next_id = 146
+version = 1760000001
+next_id = 164
 entries = Array[Dictionary]([{
 &"hash": "aa1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef1234",
 &"id": 1,
@@ -732,6 +732,96 @@ entries = Array[Dictionary]([{
 &"id": 145,
 &"path": "res://source/common/gameplay/crafting/recipes/interdependent/beer_recipe.tres",
 &"slug": &"beer_recipe"
+}, {
+&"hash": "",
+&"id": 146,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/pine_planks_recipe.tres",
+&"slug": &"pine_planks_recipe"
+}, {
+&"hash": "",
+&"id": 147,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/birch_planks_recipe.tres",
+&"slug": &"birch_planks_recipe"
+}, {
+&"hash": "",
+&"id": 148,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/ash_planks_recipe.tres",
+&"slug": &"ash_planks_recipe"
+}, {
+&"hash": "",
+&"id": 149,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/maple_planks_recipe.tres",
+&"slug": &"maple_planks_recipe"
+}, {
+&"hash": "",
+&"id": 150,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/cedar_planks_recipe.tres",
+&"slug": &"cedar_planks_recipe"
+}, {
+&"hash": "",
+&"id": 151,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/willow_planks_recipe.tres",
+&"slug": &"willow_planks_recipe"
+}, {
+&"hash": "",
+&"id": 152,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/bamboo_planks_recipe.tres",
+&"slug": &"bamboo_planks_recipe"
+}, {
+&"hash": "",
+&"id": 153,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/ironwood_planks_recipe.tres",
+&"slug": &"ironwood_planks_recipe"
+}, {
+&"hash": "",
+&"id": 154,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/reinforced_bow_recipe.tres",
+&"slug": &"reinforced_bow_recipe"
+}, {
+&"hash": "",
+&"id": 155,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/master_trading_caravan_recipe.tres",
+&"slug": &"master_trading_caravan_recipe"
+}, {
+&"hash": "",
+&"id": 156,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/grand_monument_recipe.tres",
+&"slug": &"grand_monument_recipe"
+}, {
+&"hash": "",
+&"id": 157,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/legendary_siege_engine_recipe.tres",
+&"slug": &"legendary_siege_engine_recipe"
+}, {
+&"hash": "",
+&"id": 158,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/miracle_elixir_recipe.tres",
+&"slug": &"miracle_elixir_recipe"
+}, {
+&"hash": "",
+&"id": 159,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/celestial_convergence_recipe.tres",
+&"slug": &"celestial_convergence_recipe"
+}, {
+&"hash": "",
+&"id": 160,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/ultimate_forge_core_recipe.tres",
+&"slug": &"ultimate_forge_core_recipe"
+}, {
+&"hash": "",
+&"id": 161,
+&"path": "res://source/common/gameplay/crafting/recipes/trapper/champions_trophy_recipe.tres",
+&"slug": &"champions_trophy_recipe"
+}, {
+&"hash": "",
+&"id": 162,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/essence_of_mastery_recipe.tres",
+&"slug": &"essence_of_mastery_recipe"
+}, {
+&"hash": "",
+&"id": 163,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/krak_recipe.tres",
+&"slug": &"krak_recipe"
 }])
 metadata/slug = &"recipes_index"
 metadata/id = 4

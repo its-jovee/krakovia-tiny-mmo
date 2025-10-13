@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://cy4r300dacqrm"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"ultimate_forge_core_recipe"
+recipe_name = &"Ultimate Forge Core"
+recipe_icon = ExtResource("1_icon")
+description = "The Heart of Creation. Mega-component combining siege engine, eternal brazier, and Eternal Flame Relic. One of four components needed to forge KRAK!"
+required_class = "miner"
+required_level = 28
+gold_cost = 40000
+energy_cost = 120.0
+input_1_slug = &"legendary_siege_engine"
+input_1_quantity = 1
+input_2_slug = &"eternal_flame_brazier"
+input_2_quantity = 1
+input_3_slug = &"ultimate_endgame_6"
+input_3_quantity = 1
+output_1_slug = &"ultimate_forge_core"
+output_1_quantity = 1
+tags = ["miner", "mega_component", "legendary", "endgame", "t6"]
+

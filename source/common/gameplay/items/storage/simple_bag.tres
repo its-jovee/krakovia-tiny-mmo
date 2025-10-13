@@ -10,6 +10,6 @@ item_icon = ExtResource("1_pk10g")
 description = "Simple cloth bag. "
 can_trade = true
 can_sell = true
-minimum_price = 45
+minimum_price = 120
 stack_limit = 1
 metadata/_custom_type_script = "uid://nsr1timk430j"

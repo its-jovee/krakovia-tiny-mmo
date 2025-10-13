@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://btu6mo7wq44ys"]
+
+[ext_resource type="Texture2D" uid="uid://dpic4g3wq5ejo" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb862.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"champions_trophy_recipe"
+recipe_name = &"Champion's Trophy"
+recipe_icon = ExtResource("1_icon")
+description = "Proof of ultimate hunting mastery. Mega-component created from trophies and Ancient Titan Essence. One of four components needed to forge KRAK!"
+required_class = "trapper"
+required_level = 28
+gold_cost = 15000
+energy_cost = 120.0
+input_1_slug = &"trophy_antlers"
+input_1_quantity = 8
+input_2_slug = &"pristine_pelts"
+input_2_quantity = 6
+input_3_slug = &"ancient_titan_essence"
+input_3_quantity = 1
+output_1_slug = &"champions_trophy"
+output_1_quantity = 1
+tags = ["trapper", "mega_component", "legendary", "endgame", "t6"]
+

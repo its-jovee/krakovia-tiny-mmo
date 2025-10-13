@@ -24,11 +24,10 @@ loot_entries = Array[Dictionary]([{
 "quantity_max": 2,
 "quantity_min": 1,
 "weight": 10.0
-}, {
-"item_slug": &"fox_fur",
-"quantity_max": 1,
-"quantity_min": 1,
-"weight": 5.0
 }])
-rare_bonus_entries = Array[Dictionary]([])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.05,
+"item_slug": &"fox_fur",
+"quantity": 1
+}])
 

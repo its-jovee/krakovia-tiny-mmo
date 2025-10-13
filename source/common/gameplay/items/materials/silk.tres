@@ -10,6 +10,6 @@ item_icon = ExtResource("1_sl3me")
 description = "Rare luxurious silk. "
 can_trade = true
 can_sell = true
-minimum_price = 3
+minimum_price = 60
 stack_limit = 50
 metadata/_custom_type_script = "uid://nsr1timk430j"

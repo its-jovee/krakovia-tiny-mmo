@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://lye157"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://lye001"]
 
-[ext_resource type="Texture2D" uid="uid://3eaqxoqqytkr" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb46.png" id="1_eiwhm"]
+[ext_resource type="Texture2D" uid="uid://dwick7qctqoir" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb314.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Lye"
-item_icon = ExtResource("1_eiwhm")
-description = "Caustic lye solution. Essential for soap making. "
+item_icon = ExtResource("1_icon")
+description = "Caustic alkaline solution. Used for soap making and tanning."
 can_trade = true
 can_sell = true
-minimum_price = 35
+minimum_price = 5
 stack_limit = 99
+tags = ["miner", "chemical", "t1"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

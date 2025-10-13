@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://7snd1qhadao6"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://cedarwood001"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_120328/items/material_item.gd" id="2_material"]
+[ext_resource type="Texture2D" uid="uid://dl8qsx5bmhchv" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb217.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Cedar Wood"
 item_icon = ExtResource("1_icon")
-description = "Aromatic ancient wood resistant to rot. "
+description = "Aromatic wood from cedar trees. Naturally resistant to rot and insects."
 can_trade = true
 can_sell = true
-minimum_price = 70
+minimum_price = 28
 stack_limit = 99
-tags = ["wood", "forager", "ancient", "t4"]
+tags = ["forager", "wood", "t3", "harvestable"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

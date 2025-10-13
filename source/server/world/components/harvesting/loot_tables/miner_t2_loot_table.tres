@@ -18,22 +18,21 @@ loot_entries = Array[Dictionary]([{
 "item_slug": &"limestone",
 "quantity_max": 2,
 "quantity_min": 1,
-"weight": 20.0
+"weight": 15.0
 }, {
 "item_slug": &"sandstone",
 "quantity_max": 1,
 "quantity_min": 1,
-"weight": 10.0
+"weight": 15.0
 }, {
 "item_slug": &"gravel",
 "quantity_max": 2,
 "quantity_min": 1,
-"weight": 5.0
-}, {
-"item_slug": &"salt",
-"quantity_max": 1,
-"quantity_min": 1,
-"weight": 5.0
+"weight": 10.0
 }])
-rare_bonus_entries = Array[Dictionary]([])
+rare_bonus_entries = Array[Dictionary]([{
+"chance": 0.05,
+"item_slug": &"salt",
+"quantity": 1
+}])
 

@@ -8,10 +8,10 @@ loot_entries = Array[Dictionary]([{
 "item_slug": &"fire_herbs",
 "quantity_max": 1,
 "quantity_min": 1,
-"weight": 60.0
+"weight": 50.0
 }, {
-"item_slug": &"mushrooms_special",
+"item_slug": &"special_mushrooms",
 "quantity_max": 1,
 "quantity_min": 1,
-"weight": 40.0
+"weight": 50.0
 }])

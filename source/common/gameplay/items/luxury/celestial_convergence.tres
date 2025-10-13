@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://knh2ht7yf6t5"]
+
+[ext_resource type="Texture2D" uid="uid://c2u5j3qgd4bh8" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb237.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Celestial Convergence"
+item_icon = ExtResource("1_icon")
+description = "The Essence of Nature. A legendary mega-component combining the power of miracles, trade routes, and the World Tree itself. One of the components required to forge KRAK."
+can_trade = false
+can_sell = true
+minimum_price = 350000
+stack_limit = 1
+tags = ["legendary", "mega_component", "endgame", "t6", "forager"]
+metadata/_custom_type_script = "uid://nsr1timk430j"
+

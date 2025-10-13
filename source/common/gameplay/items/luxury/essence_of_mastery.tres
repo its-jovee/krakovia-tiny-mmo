@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://xeqoqv47r5aa"]
+
+[ext_resource type="Texture2D" uid="uid://cyv5fh62o4nq3" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb238.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+
+[resource]
+script = ExtResource("2_material")
+item_name = &"Essence of Mastery"
+item_icon = ExtResource("1_icon")
+description = "The Soul of All Crafts. A legendary mega-component combining royal jewelry, throne, and steel chestplate. Represents mastery across all three crafting disciplines."
+can_trade = false
+can_sell = true
+minimum_price = 400000
+stack_limit = 1
+tags = ["legendary", "mega_component", "endgame", "t6", "miner"]
+metadata/_custom_type_script = "uid://nsr1timk430j"
+

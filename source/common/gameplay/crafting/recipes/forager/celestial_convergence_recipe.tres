@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://celestconvrec"]
+
+[ext_resource type="Texture2D" uid="uid://c2u5j3qgd4bh8" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb237.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"celestial_convergence_recipe"
+recipe_name = &"Celestial Convergence"
+recipe_icon = ExtResource("1_icon")
+description = "The Essence of Nature. Mega-component combining miracle elixir, trading caravan, and World Tree Sapling. One of four components needed to forge KRAK!"
+required_class = "forager"
+required_level = 28
+gold_cost = 30000
+energy_cost = 120.0
+input_1_slug = &"miracle_elixir"
+input_1_quantity = 1
+input_2_slug = &"master_trading_caravan"
+input_2_quantity = 1
+input_3_slug = &"ultimate_endgame_4"
+input_3_quantity = 1
+output_1_slug = &"celestial_convergence"
+output_1_quantity = 1
+tags = ["forager", "mega_component", "legendary", "endgame", "t6"]
+

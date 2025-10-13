@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://b1ngmb6besisk"]
+
+[ext_resource type="Texture2D" uid="uid://c6w8bexkbvh0b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb105.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"reinforced_bow_recipe"
+recipe_name = &"Reinforced Bow"
+recipe_icon = ExtResource("1_icon")
+description = "Ultimate bow crafted from ironwood and adamantine. Requires all 3 classes!"
+required_class = "forager"
+required_level = 24
+gold_cost = 1800
+energy_cost = 115.0
+input_1_slug = &"ironwood_planks"
+input_1_quantity = 6
+input_2_slug = &"pristine_pelts"
+input_2_quantity = 4
+input_3_slug = &"adamantine_ingot"
+input_3_quantity = 2
+output_1_slug = &"reinforced_bow"
+output_1_quantity = 1
+tags = ["forager", "interdependent", "weapon", "combat", "legendary", "t6"]
+

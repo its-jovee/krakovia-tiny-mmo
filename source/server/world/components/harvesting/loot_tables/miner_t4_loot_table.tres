@@ -8,12 +8,12 @@ loot_entries = Array[Dictionary]([{
 "item_slug": &"gold_ore",
 "quantity_max": 2,
 "quantity_min": 1,
-"weight": 35.0
+"weight": 40.0
 }, {
 "item_slug": &"obsidian",
 "quantity_max": 2,
 "quantity_min": 1,
-"weight": 30.0
+"weight": 25.0
 }, {
 "item_slug": &"lodestone",
 "quantity_max": 1,

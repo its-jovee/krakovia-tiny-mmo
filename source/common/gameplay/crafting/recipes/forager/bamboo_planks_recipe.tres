@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bdepek170cirq"]
+
+[ext_resource type="Texture2D" uid="uid://c5jotxlbg7ygb" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb225.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"bamboo_planks_recipe"
+recipe_name = &"Bamboo Planks"
+recipe_icon = ExtResource("1_icon")
+description = "Process bamboo into lightweight but incredibly strong planks."
+required_class = "forager"
+required_level = 20
+gold_cost = 24
+energy_cost = 95.0
+input_1_slug = &"bamboo"
+input_1_quantity = 2
+output_1_slug = &"bamboo_planks"
+output_1_quantity = 6
+tags = ["forager", "woodworking", "t4", "solo"]
+

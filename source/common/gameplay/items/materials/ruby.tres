@@ -10,6 +10,6 @@ item_icon = ExtResource("1_jrsih")
 description = "Deep red gemstone. The most valuable common gem."
 can_trade = true
 can_sell = true
-minimum_price = 3
+minimum_price = 30
 stack_limit = 50
 metadata/_custom_type_script = "uid://nsr1timk430j"

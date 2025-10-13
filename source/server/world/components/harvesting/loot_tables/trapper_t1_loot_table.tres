@@ -13,12 +13,12 @@ loot_entries = Array[Dictionary]([{
 "item_slug": &"rabbit_meat",
 "quantity_max": 2,
 "quantity_min": 1,
-"weight": 35.0
+"weight": 30.0
 }, {
 "item_slug": &"feathers",
 "quantity_max": 1,
 "quantity_min": 1,
-"weight": 15.0
+"weight": 20.0
 }, {
 "item_slug": &"sinew",
 "quantity_max": 1,

@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://c2qv5d6r5jvur"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://potteryset001"]
 
-[ext_resource type="Texture2D" uid="uid://cwwr4tl53ojd2" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb54.png" id="1_rg38t"]
+[ext_resource type="Texture2D" uid="uid://c4e6u3vhghmwh" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb493.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Pottery Set"
-item_icon = ExtResource("1_rg38t")
-description = "Clay pottery bowls and plates. Household essential. Crafted from clay."
+item_icon = ExtResource("1_icon")
+description = "Basic pottery set. Useful for storage and cooking."
 can_trade = true
 can_sell = true
-minimum_price = 25
-stack_limit = 50
+minimum_price = 18
+stack_limit = 20
+tags = ["miner", "pottery", "processed", "t1"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

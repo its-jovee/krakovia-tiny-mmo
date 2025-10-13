@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://blmayqasw2o26"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://adamore001"]
 
-[ext_resource type="Texture2D" uid="uid://dasg0u8jgvb4e" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/adamant.png" id="1_eu3ql"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_120328/items/material_item.gd" id="2_material"]
+[ext_resource type="Texture2D" uid="uid://dnqf63wqgr0jj" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb210.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Adamantine Ore"
-item_icon = ExtResource("1_eu3ql")
-description = "Legendary metallic ore of immense strength. Extremely rare."
+item_icon = ExtResource("1_icon")
+description = "Legendary ultra-hard ore. The rarest and most valuable metal in existence."
 can_trade = true
 can_sell = true
 minimum_price = 450
-stack_limit = 99
-tags = ["ore", "miner", "legendary", "t6"]
+stack_limit = 50
+tags = ["miner", "ore", "t6", "harvestable", "legendary"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
