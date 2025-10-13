@@ -10,6 +10,6 @@ item_icon = ExtResource("1_tq1ds")
 description = "Precious silver ingot. For jewelry and fine items. "
 can_trade = true
 can_sell = true
-minimum_price = 40
+minimum_price = 25
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

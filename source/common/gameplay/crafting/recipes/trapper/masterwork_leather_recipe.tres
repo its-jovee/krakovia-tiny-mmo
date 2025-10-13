@@ -1,26 +1,22 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://cpvcm04y5qrc"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
 [resource]
 script = ExtResource("1_recipe")
 slug = &"masterwork_leather_recipe"
 recipe_name = &"Masterwork Leather"
-recipe_icon = null
 description = "Tan exotic hides into masterwork leather. Requires all 3 classes!"
 required_class = "trapper"
-required_level = 16
-gold_cost = 75
-energy_cost = 38.0
+required_level = 25
+gold_cost = 33536
+energy_cost = 8017.8
 input_1_slug = &"exotic_hides"
-input_1_quantity = 1
+input_1_quantity = 7
 input_2_slug = &"salt"
-input_2_quantity = 1
+input_2_quantity = 7
 input_3_slug = &"olive_oil"
-input_3_quantity = 1
+input_3_quantity = 7
 output_1_slug = &"masterwork_leather"
-output_1_quantity = 1
-output_2_slug = &""
 output_2_quantity = 1
 tags = ["tier4", "trapper", "leather", "masterwork", "3class"]
-

@@ -10,6 +10,6 @@ item_icon = ExtResource("1_fdjnn")
 description = "Quality linen fabric from flax. Used for clothing and linens. "
 can_trade = true
 can_sell = true
-minimum_price = 25
+minimum_price = 74
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

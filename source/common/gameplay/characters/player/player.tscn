@@ -7,7 +7,20 @@
 [node name="Player" instance=ExtResource("1_0ps03")]
 script = ExtResource("2_meo3t")
 
-[node name="DisplayNameLabel" type="Label" parent="." index="2"]
+[node name="AnimatedSprite2D" parent="." index="0"]
+scale = Vector2(0.8, 0.8)
+sprite_frames = null
+frame_progress = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, -23.465)
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, -8.565)
+scale = Vector2(1, 0.985)
+
+[node name="DisplayNameLabel" type="Label" parent="." index="3"]
 offset_left = -24.0
 offset_top = 2.0
 offset_right = 213.0
@@ -19,7 +32,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="HandleNameLabel" type="Label" parent="." index="3"]
+[node name="HandleNameLabel" type="Label" parent="." index="4"]
 offset_left = -24.0
 offset_top = 10.0
 offset_right = 213.0
@@ -32,8 +45,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
+[node name="HandOffset" parent="." index="5"]
+visible = false
+
 [node name="HandPivot" parent="HandOffset" index="0"]
 visible = false
 
-[node name="ProgressBar" parent="." index="8"]
+[node name="HurtBox" parent="." index="6"]
+visible = false
+
+[node name="ProgressBar" parent="." index="7"]
 visible = false

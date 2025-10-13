@@ -24,7 +24,6 @@ var zoom_transition_speed: float = 10.0 # Speed of zoom transitions
 
 @onready var mouse: Node2D = $MouseComponent
 
-
 func _ready() -> void:
 	Events.local_player = self
 	Events.local_player_ready.emit(self)
@@ -40,7 +39,8 @@ func _ready() -> void:
 	fid_position = PathRegistry.id_of(":position")
 	fid_flipped = PathRegistry.id_of(":flipped")
 	fid_anim = PathRegistry.id_of(":anim")
-	fid_pivot = PathRegistry.id_of(":pivot")
+#	fid_pivot = PathRegistry.id_of(":pivot")
+		
 	
 	# Initialize zoom from settings
 	if Events.settings.has("zoom"):
@@ -57,7 +57,6 @@ func _physics_process(delta: float) -> void:
 	update_animation(delta)
 	update_zoom(delta)
 	define_sync_state()
-
 
 func move() -> void:
 	if is_sitting_local:
@@ -148,24 +147,35 @@ func update_zoom(delta: float) -> void:
 
 
 func update_animation(delta: float) -> void:
-	anim = Animations.RUN if input_direction else Animations.IDLE
-	flipped = (mouse.position.x < global_position.x)
-	var flips: int = -1 if flipped else 1
-	var look_at_mouse: float = atan2(
-		(mouse.position.y), 
-		(mouse.position.x) * flips
-		)
-
+	# Determine animation based on current state
+	if is_sitting_local:
+		anim = Animations.SIT
+	elif InstanceClient.local_harvest_node != "":
+		anim = Animations.HARVEST
+	elif input_direction:
+		anim = Animations.RUN
+	else:
+		anim = Animations.IDLE
+	
+	# Handle character flipping
+	if input_direction.x != 0:
+		flipped = (input_direction.x < 0)
+		last_input_direction = input_direction  # Store the last direction
+	elif last_input_direction.x != 0:
+		# Keep facing the last direction when not moving horizontally
+		flipped = (last_input_direction.x < 0)
+		
 var fid_position: int = PathRegistry.id_of(":position")
 var fid_flipped: int = PathRegistry.id_of(":flipped")
 var fid_anim: int = PathRegistry.id_of(":anim")
-var fid_pivot: int = PathRegistry.id_of(":pivot")
+#var fid_pivot: int = PathRegistry.id_of(":pivot")
+
 func define_sync_state() -> void:
 	var pairs: Array[Array] = [
 		[fid_position, global_position],
 		[fid_flipped, flipped],
 		[fid_anim, anim],
-		[fid_pivot, snappedf(hand_pivot.rotation, 0.05)],
+		#[fid_pivot, snappedf(hand_pivot.rotation, 0.05)],
 	]
 	syn.mark_many_by_id(pairs, true)
 	synchronizer_manager.send_my_delta(

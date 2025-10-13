@@ -1,26 +1,21 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://b0a13xywfec11"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
 [resource]
 script = ExtResource("1_recipe")
 slug = &"basic_fabric_recipe"
 recipe_name = &"Basic Fabric"
-recipe_icon = null
 description = "Weave plant fiber into basic fabric."
 required_class = "forager"
-required_level = 1
-gold_cost = 8
-energy_cost = 4.0
+required_level = 21
+gold_cost = 8040
+energy_cost = 1792.1
 input_1_slug = &"plant_fiber"
-input_1_quantity = 5
+input_1_quantity = 12
 input_2_slug = &"thread"
-input_2_quantity = 1
-input_3_slug = &""
+input_2_quantity = 3
 input_3_quantity = 1
 output_1_slug = &"basic_fabric"
-output_1_quantity = 1
-output_2_slug = &""
 output_2_quantity = 1
 tags = ["tier1", "forager", "textile"]
-

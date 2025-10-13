@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://r6xiodwrgbmw"]
 
 [ext_resource type="Texture2D" uid="uid://bjby5npd2clgv" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/cabinet.png" id="1_nvhgx"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_120328/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
@@ -10,7 +10,7 @@ item_icon = ExtResource("1_nvhgx")
 description = "Glass display cabinet. "
 can_trade = true
 can_sell = true
-minimum_price = 195
+minimum_price = 1647
 stack_limit = 5
 tags = ["furniture", "interdependent", "luxury", "nobility", "t5"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

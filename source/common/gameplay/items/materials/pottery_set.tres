@@ -10,6 +10,6 @@ item_icon = ExtResource("1_rg38t")
 description = "Clay pottery bowls and plates. Household essential. Crafted from clay."
 can_trade = true
 can_sell = true
-minimum_price = 15
+minimum_price = 25
 stack_limit = 50
 metadata/_custom_type_script = "uid://nsr1timk430j"

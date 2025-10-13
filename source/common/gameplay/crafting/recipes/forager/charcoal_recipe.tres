@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://cgdwjdhk3pnl2"]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://2dnfq7mqv57i"]
 
 [ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
@@ -19,4 +19,5 @@ output_1_slug = &"charcoal"
 output_1_quantity = 4
 tags = ["forager", "fuel", "t1", "solo"]
 metadata/_custom_type_script = "uid://recipe006"
+
 

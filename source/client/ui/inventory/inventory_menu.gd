@@ -723,9 +723,6 @@ func _setup_class_filter() -> void:
 	class_filter.add_item("Miner")
 	class_filter.add_item("Forager") 
 	class_filter.add_item("Trapper")
-	class_filter.add_item("Blacksmith")
-	class_filter.add_item("Culinarian")
-	class_filter.add_item("Artisan")
 
 func _set_default_class_filter() -> void:
 	if not class_filter:
@@ -736,9 +733,6 @@ func _set_default_class_filter() -> void:
 		"miner": 1,
 		"forager": 2,
 		"trapper": 3,
-		"blacksmith": 4,
-		"culinarian": 5,
-		"artisan": 6
 	}
 	
 	var player_class_lower = player_class.to_lower()
@@ -962,9 +956,10 @@ func _filter_recipes() -> void:
 	var search_text = search_box.text.to_lower() if search_box else ""
 	
 	# Map class filter index to class name
-	var class_names = ["", "miner", "forager", "trapper", "blacksmith", "culinarian", "artisan"]
+	var class_names = ["", "miner", "forager", "trapper"]
 	var filter_class = class_names[selected_class_index] if selected_class_index < class_names.size() else ""
 	
+	var filtered_recipes = []
 	# Filter and display recipes
 	for recipe in available_recipes:
 		# Apply class filter (0 = "All Classes")
@@ -974,6 +969,9 @@ func _filter_recipes() -> void:
 		# Apply search filter
 		if search_text != "" and not recipe.recipe_name.to_lower().contains(search_text):
 			continue
+		
+		# Sort by required level (ascending)
+		filtered_recipes.sort_custom(func(a, b): return a.required_level < b.required_level)
 		
 		# Recipe passes all filters - create and add button
 		var recipe_button = _create_recipe_button(recipe)

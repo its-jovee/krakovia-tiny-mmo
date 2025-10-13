@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://d0e4ij1mybb86"]
 
 [ext_resource type="Texture2D" uid="uid://bqs3var8y062f" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/mount.png" id="1_3uri2"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_120328/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
@@ -10,7 +10,7 @@ item_icon = ExtResource("1_3uri2")
 description = "Mounted display for hunting trophies and rare creature parts."
 can_trade = true
 can_sell = true
-minimum_price = 150
+minimum_price = 1397
 stack_limit = 99
 tags = ["decoration", "trophy", "t4"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

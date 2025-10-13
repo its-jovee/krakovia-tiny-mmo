@@ -10,6 +10,6 @@ item_icon = ExtResource("1_icon")
 description = "Soft tin ingot. Combined with copper to make bronze. "
 can_trade = true
 can_sell = true
-minimum_price = 15
+minimum_price = 66
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

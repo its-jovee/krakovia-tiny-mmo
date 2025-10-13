@@ -10,6 +10,6 @@ item_icon = ExtResource("1_ss3am")
 description = "Wooden storage chest. Household storage. "
 can_trade = true
 can_sell = true
-minimum_price = 45
+minimum_price = 255
 stack_limit = 10
 metadata/_custom_type_script = "uid://nsr1timk430j"

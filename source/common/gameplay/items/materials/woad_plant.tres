@@ -10,6 +10,6 @@ item_icon = ExtResource("1_k1qy2")
 description = "Traditional blue dye plant. Ancient dyeing technique. Found in Premium Bundles."
 can_trade = true
 can_sell = true
-minimum_price = 10
+minimum_price = 3
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

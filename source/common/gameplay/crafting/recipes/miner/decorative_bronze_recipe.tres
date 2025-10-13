@@ -1,26 +1,20 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://dws38qtp1ofow"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
 [resource]
 script = ExtResource("1_recipe")
 slug = &"decorative_bronze_recipe"
 recipe_name = &"Decorative Bronze"
-recipe_icon = null
 description = "Embellish bronze with malachite for luxury items."
-required_class = "miner"
-required_level = 21
-gold_cost = 40
-energy_cost = 20.0
+required_level = 25
+gold_cost = 10634
+energy_cost = 2609.2
 input_1_slug = &"bronze_ingot"
-input_1_quantity = 1
+input_1_quantity = 7
 input_2_slug = &"malachite"
-input_2_quantity = 1
-input_3_slug = &""
+input_2_quantity = 7
 input_3_quantity = 1
 output_1_slug = &"decorative_bronze"
-output_1_quantity = 1
-output_2_slug = &""
 output_2_quantity = 1
 tags = ["tier5", "miner", "metal", "luxury", "decoration"]
-

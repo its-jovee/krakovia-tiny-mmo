@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://6bl2b8b650ph"]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://ec3lrx8oj0nd"]
 
 [ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
@@ -19,4 +19,5 @@ output_1_slug = &"oak_planks"
 output_1_quantity = 4
 tags = ["forager", "woodworking", "t1", "solo", "construction"]
 metadata/_custom_type_script = "uid://recipe005"
+
 

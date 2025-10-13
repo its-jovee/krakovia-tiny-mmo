@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="MaterialItem" load_steps=2 format=3 uid="uid://barrel121"]
+[gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://barrel121"]
 
+[ext_resource type="Texture2D" uid="uid://s4repjuf4bs" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/barrel.png" id="1_jgptl"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Barrel"
+item_icon = ExtResource("1_jgptl")
 description = "Wooden barrel with iron bands. Used for wine and storage. "
 can_trade = true
 can_sell = true
-minimum_price = 30
+minimum_price = 173
 stack_limit = 20
 tags = ["wood", "container", "forager", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

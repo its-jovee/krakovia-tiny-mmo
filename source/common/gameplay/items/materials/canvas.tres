@@ -1,16 +1,16 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://canvas126"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://b0a1g4knrpdsq" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/canvas.png" id="1_6lnhn"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Canvas"
-item_icon = ExtResource("1_icon")
+item_icon = ExtResource("1_6lnhn")
 description = "Heavy-duty canvas from hemp. Used for bags and tents. "
 can_trade = true
 can_sell = true
-minimum_price = 20
+minimum_price = 74
 stack_limit = 99
 tags = ["textile", "forager", "heavy", "t2"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

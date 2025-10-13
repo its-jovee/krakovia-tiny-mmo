@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://candlfaset188"]
 
 [ext_resource type="Texture2D" uid="uid://bih1ooabpb0vt" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/candles.png" id="1_co2nu"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_120328/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
@@ -10,7 +10,7 @@ item_icon = ExtResource("1_co2nu")
 description = "Beeswax candles. "
 can_trade = true
 can_sell = true
-minimum_price = 22
+minimum_price = 35
 stack_limit = 50
 tags = ["household", "interdependent", "night", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"

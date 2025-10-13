@@ -10,6 +10,6 @@ item_icon = ExtResource("1_64a6n")
 description = "Iron reinforcement bands for barrels and construction. Crafted from iron ingots."
 can_trade = true
 can_sell = true
-minimum_price = 15
+minimum_price = 6
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

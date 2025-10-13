@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=146 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=152 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -294,6 +294,42 @@ script = ExtResource("1_wgikn")
 id = 141
 handle = "guest141"
 password = "ghfon#u7vtvw"
+
+[sub_resource type="Resource" id="Resource_wtqf2"]
+script = ExtResource("1_wgikn")
+id = 142
+handle = "guest142"
+password = "uf9inl1oi+ej"
+
+[sub_resource type="Resource" id="Resource_ld3w8"]
+script = ExtResource("1_wgikn")
+id = 143
+handle = "guest143"
+password = "kayi#3fr8fc9"
+
+[sub_resource type="Resource" id="Resource_xporf"]
+script = ExtResource("1_wgikn")
+id = 144
+handle = "guest144"
+password = "e5cs4+zvn1l1"
+
+[sub_resource type="Resource" id="Resource_dl3yr"]
+script = ExtResource("1_wgikn")
+id = 145
+handle = "guest145"
+password = "g-9i8-33vbtk"
+
+[sub_resource type="Resource" id="Resource_ncq5h"]
+script = ExtResource("1_wgikn")
+id = 146
+handle = "guest146"
+password = "mh05wjljhjtm"
+
+[sub_resource type="Resource" id="Resource_swyfe"]
+script = ExtResource("1_wgikn")
+id = 147
+handle = "guest147"
+password = "h0ibp++8uf9q"
 
 [sub_resource type="Resource" id="Resource_dw4nj"]
 script = ExtResource("1_wgikn")
@@ -791,11 +827,11 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_wtqf2"]
+[sub_resource type="Resource" id="Resource_e1w4j"]
 script = ExtResource("1_wgikn")
-id = 142
-handle = "guest142"
-password = "uf9inl1oi+ej"
+id = 148
+handle = "guest148"
+password = "c-5h6t#opol5"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -851,6 +887,12 @@ collection = {
 "guest140": SubResource("Resource_nbcxm"),
 "guest141": SubResource("Resource_fr05y"),
 "guest142": SubResource("Resource_wtqf2"),
+"guest143": SubResource("Resource_ld3w8"),
+"guest144": SubResource("Resource_xporf"),
+"guest145": SubResource("Resource_dl3yr"),
+"guest146": SubResource("Resource_ncq5h"),
+"guest147": SubResource("Resource_swyfe"),
+"guest148": SubResource("Resource_e1w4j"),
 "guest15": SubResource("Resource_dw4nj"),
 "guest16": SubResource("Resource_6puu8"),
 "guest17": SubResource("Resource_2mduh"),
@@ -944,4 +986,4 @@ collection = {
 "teste": SubResource("Resource_gr30x"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 143
+next_account_id = 149

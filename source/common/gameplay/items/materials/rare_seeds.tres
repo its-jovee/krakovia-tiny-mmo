@@ -10,6 +10,6 @@ item_icon = ExtResource("1_h2y4v")
 description = "Mysterious exotic seeds. Valuable trade commodity. "
 can_trade = true
 can_sell = true
-minimum_price = 20
+minimum_price = 3
 stack_limit = 50
 metadata/_custom_type_script = "uid://nsr1timk430j"

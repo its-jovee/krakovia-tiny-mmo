@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://fl0y1grv7lwj"]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bmal7q1h4n0kk"]
 
 [ext_resource type="Texture2D" uid="uid://bqh4lekh6454o" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb500.png" id="1_iiijh"]
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="2_6mlu6"]

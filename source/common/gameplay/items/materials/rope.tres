@@ -10,6 +10,6 @@ item_icon = ExtResource("1_wff8h")
 description = "Strong hemp rope. Construction and utility essential. Crafted from hemp."
 can_trade = true
 can_sell = true
-minimum_price = 18
+minimum_price = 37
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"

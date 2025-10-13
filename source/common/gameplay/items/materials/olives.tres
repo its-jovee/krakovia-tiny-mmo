@@ -10,6 +10,6 @@ item_icon = ExtResource("1_cwpmm")
 description = "Mediterranean olives. Pressed into valuable olive oil. "
 can_trade = true
 can_sell = true
-minimum_price = 4
+minimum_price = 3
 stack_limit = 99
 metadata/_custom_type_script = "uid://nsr1timk430j"
