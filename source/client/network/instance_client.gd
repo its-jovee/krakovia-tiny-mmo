@@ -22,6 +22,23 @@ static var _data_subscriptions: Dictionary[StringName, Array]
 func _ready() -> void:
 	current = self
 	
+	# Subscribe to chat messages for speech bubbles
+	subscribe(&"chat.message", func(message: Dictionary) -> void:
+		if message.is_empty():
+			return
+		var text: String = message.get("text", "")
+		var sender_id: int = message.get("id", 0)
+		
+		# Skip system messages (id = 1)
+		if sender_id == 1 or text.is_empty():
+			return
+		
+		# Find the player and show speech bubble
+		var player: Player = players_by_peer_id.get(sender_id, null)
+		if player and player.has_method("show_speech_bubble"):
+			player.show_speech_bubble(text)
+	)
+	
 	subscribe(&"item.equip", func(data: Dictionary) -> void:
 		if data.is_empty() or not data.has_all(["p", "i"]):
 			return

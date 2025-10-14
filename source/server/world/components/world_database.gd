@@ -48,12 +48,13 @@ func setup_auto_save() -> void:
 
 
 func _send_save_warning() -> void:
-	send_system_message("⚠️ The world will save in 1 minute...")
+	pass
+	#send_system_message("⚠️ The world will save in 1 minute...")
 
 
 func _auto_save() -> void:
 	save_world_database()
-	send_system_message("✅ World data saved successfully!")
+	#send_system_message("✅ World data saved successfully!")
 
 
 func send_system_message(message: String) -> void:

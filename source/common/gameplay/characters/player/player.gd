@@ -23,6 +23,7 @@ var just_teleported: bool = false:
 @onready var syn: StateSynchronizer = $StateSynchronizer
 @onready var display_name_label: Label = $DisplayNameLabel
 @onready var handle_name_label: Label = $HandleNameLabel
+@onready var speech_bubble: Control = $SpeechBubble
 
 
 func _init() -> void:
@@ -36,4 +37,11 @@ func _set_handle_name(new_handle: String) -> void:
 func _set_display_name(new_name: String) -> void:
 	display_name_label.text = new_name
 	display_name = new_name
+
+
+func show_speech_bubble(text: String) -> void:
+	if not is_node_ready():
+		await ready
+	if speech_bubble and speech_bubble.has_method("show_message"):
+		speech_bubble.show_message(text)
 	

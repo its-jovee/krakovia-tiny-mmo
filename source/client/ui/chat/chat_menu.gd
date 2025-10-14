@@ -65,11 +65,13 @@ func _on_chat_message(message: Dictionary) -> void:
 	
 	peek_feed_text_display.append_text(text_to_display)
 	peek_feed_text_display.newline()
+	peek_feed_text_display.scroll_to_line(peek_feed_text_display.get_line_count() - 1)
 	
 	if full_feed.visible:
 		if current_channel == channel:
 			full_feed_text_display.append_text(text_to_display)
 			full_feed_text_display.newline()
+			full_feed_text_display.scroll_to_line(full_feed_text_display.get_line_count() - 1)
 	else:
 		reset_view()
 		peek_feed_text_display.show()

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3wa3c527k5lx"]
+[gd_scene load_steps=5 format=3 uid="uid://b3wa3c527k5lx"]
 
 [ext_resource type="PackedScene" uid="uid://6bcg7fwcl6mi" path="res://source/common/gameplay/characters/character.tscn" id="1_0ps03"]
 [ext_resource type="Script" uid="uid://bexas1o2f74ve" path="res://source/common/gameplay/characters/player/player.gd" id="2_meo3t"]
 [ext_resource type="Script" uid="uid://cibbkjmyj3j2x" path="res://source/common/gameplay/characters/player/display_name_label.gd" id="3_cxg7o"]
+[ext_resource type="PackedScene" uid="uid://cr85xjy4a2w15" path="res://source/common/gameplay/characters/player/speech_bubble.tscn" id="4_speech"]
 
 [node name="Player" instance=ExtResource("1_0ps03")]
 script = ExtResource("2_meo3t")
@@ -21,6 +22,7 @@ position = Vector2(0, -8.565)
 scale = Vector2(1, 0.985)
 
 [node name="DisplayNameLabel" type="Label" parent="." index="3"]
+z_index = 100
 offset_left = -24.0
 offset_top = 2.0
 offset_right = 213.0
@@ -33,6 +35,7 @@ vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
 [node name="HandleNameLabel" type="Label" parent="." index="4"]
+z_index = 100
 offset_left = -24.0
 offset_top = 10.0
 offset_right = 213.0
@@ -45,14 +48,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="HandOffset" parent="." index="5"]
+[node name="SpeechBubble" parent="." index="5" instance=ExtResource("4_speech")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -270.0
+offset_right = -440.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+
+[node name="HandOffset" parent="." index="6"]
 visible = false
 
 [node name="HandPivot" parent="HandOffset" index="0"]
 visible = false
 
-[node name="HurtBox" parent="." index="6"]
+[node name="HurtBox" parent="." index="7"]
 visible = false
 
-[node name="ProgressBar" parent="." index="7"]
+[node name="ProgressBar" parent="." index="8"]
 visible = false
