@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1759321603
-next_id = 28
+version = 1759321604
+next_id = 32
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -142,6 +142,26 @@ entries = Array[Dictionary]([{
 &"id": 27,
 &"path": "res://source/server/world/components/data_request_handlers/craft.get_recipes.gd",
 &"slug": &"craft.get_recipes"
+}, {
+&"hash": "e6eeebec6eee6eeeee5fefebebee1eeeee6eeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+&"id": 28,
+&"path": "res://source/server/world/components/data_request_handlers/minigame.join.gd",
+&"slug": &"minigame.join"
+}, {
+&"hash": "f7ffecfd7fff7fffff6affdcdcff2fffff7fffffffffffffffffffffffffffffbf",
+&"id": 29,
+&"path": "res://source/server/world/components/data_request_handlers/minigame.bet.gd",
+&"slug": &"minigame.bet"
+}, {
+&"hash": "a8aafade8aaa8aaaaaa7baaeededaa3aaaaa8aaaaaaaaaaaaaaaaaaaaaaaaaaaca",
+&"id": 30,
+&"path": "res://source/server/world/components/data_request_handlers/minigame.ready.gd",
+&"slug": &"minigame.ready"
+}, {
+&"hash": "b9bbebef9bbb9bbbbbb8cbbfefefbb4bbbbb9bbbbbbbbbbbbbbbbbbbbbbbbbbbdb",
+&"id": 31,
+&"path": "res://source/server/world/components/data_request_handlers/minigame.leave.gd",
+&"slug": &"minigame.leave"
 }])
 metadata/slug = &"data_request_handlers_index"
 metadata/id = 1

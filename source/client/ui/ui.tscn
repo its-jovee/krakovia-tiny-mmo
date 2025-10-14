@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://b20pv25ct6nmt"]
+[gd_scene load_steps=5 format=3 uid="uid://b20pv25ct6nmt"]
 
 [ext_resource type="Script" uid="uid://bkb1spvl3spry" path="res://source/client/ui/ui.gd" id="1_wpqoj"]
 [ext_resource type="PackedScene" uid="uid://dqt8fnt1l33eu" path="res://source/client/ui/hud/hud.tscn" id="2_equq2"]
+[ext_resource type="PackedScene" uid="uid://c4r8xqv0yj5hy" path="res://source/client/ui/minigame/invitation_popup.tscn" id="3_minigame_inv"]
+[ext_resource type="PackedScene" uid="uid://bj5x8qv0yj5hz" path="res://source/client/ui/minigame/horse_racing_ui.tscn" id="4_minigame_hr"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_wpqoj")
 
 [node name="HUD" parent="." instance=ExtResource("2_equq2")]
+
+[node name="InvitationPopup" parent="." instance=ExtResource("3_minigame_inv")]
+
+[node name="HorseRacingUI" parent="." instance=ExtResource("4_minigame_hr")]

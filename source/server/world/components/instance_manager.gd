@@ -24,6 +24,11 @@ func start_instance_manager() -> void:
 	timer.autostart = true
 	timer.timeout.connect(unload_unused_instances)
 	add_sibling(timer)
+	
+	# Add MinigameManager
+	var minigame_manager = preload("res://source/server/world/components/minigame_manager.gd").new()
+	minigame_manager.name = "MinigameManager"
+	add_child(minigame_manager)
 
 
 func configure_global_roles_and_commands() -> void:
@@ -34,6 +39,7 @@ func configure_global_roles_and_commands() -> void:
 		"/help" = load("res://source/server/world/components/chat_command/help_command.gd").new(),
 		"/set" = load("res://source/server/world/components/chat_command/set_command.gd").new(),
 		"/trade" = load("res://source/server/world/components/chat_command/trade_command.gd").new(),
+		"/join" = load("res://source/server/world/components/chat_command/join_command.gd").new(),
 		# Admin commands
 		"/give" = load("res://source/server/world/components/chat_command/give_command.gd").new(),
 		"/setgold" = load("res://source/server/world/components/chat_command/setgold_command.gd").new(),
@@ -41,11 +47,12 @@ func configure_global_roles_and_commands() -> void:
 		"/ban" = load("res://source/server/world/components/chat_command/ban_command.gd").new(),
 		"/mute" = load("res://source/server/world/components/chat_command/mute_command.gd").new(),
 		"/tp" = load("res://source/server/world/components/chat_command/tp_command.gd").new(),
+		"/startgame" = load("res://source/server/world/components/chat_command/startgame_command.gd").new(),
 	}
 
 	ServerInstance.global_role_definitions = {
 		"senior_admin": {
-			"commands": ["/heal", "/size", "/set", "/give", "/setgold", "/setlevel", "/ban", "/mute", "/tp"],
+			"commands": ["/heal", "/size", "/set", "/give", "/setgold", "/setlevel", "/ban", "/mute", "/tp", "/startgame"],
 			"priority": 5,
 		},
 		"moderator": {
@@ -53,7 +60,7 @@ func configure_global_roles_and_commands() -> void:
 			"priority": 1,
 			},
 		"default": {
-			"commands": ["/help", "/getid", "/trade"]
+			"commands": ["/help", "/getid", "/trade", "/join"]
 		}
 	}
 
@@ -176,7 +183,10 @@ func set_instance_collection() -> void:
 
 func unload_unused_instances() -> void:
 	print("Checking unload_unused_instances")
-	for instance: ServerInstance in get_children():
+	for child in get_children():
+		if not child is ServerInstance:
+			continue
+		var instance: ServerInstance = child as ServerInstance
 		if instance.instance_resource.load_at_startup:
 			continue
 		if instance.connected_peers:

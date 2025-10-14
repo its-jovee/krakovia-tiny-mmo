@@ -264,27 +264,38 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 @rpc("any_peer", "call_remote", "reliable", 1)
 func data_request(request_id: int, type: StringName, args: Dictionary) -> void:
 	var peer_id: int = multiplayer.get_remote_sender_id()
+	print("[ServerInstance] data_request received - Type: %s, Args: %s, From peer: %d" % [type, args, peer_id])
+	
 	# Rate-limit
 	#if not _rate_ok(
 		#return
 	
 	if not request_handlers.has(type):
+		print("[ServerInstance] Loading handler for type: %s" % type)
 		var script: GDScript = ContentRegistryHub.load_by_slug(
 			&"data_request_handlers",
 			type
 		) as GDScript
 		if not script:
+			print("[ServerInstance] ERROR: Could not load handler script for type: %s" % type)
 			return
 		var request_handler: DataRequestHandler = script.new() as DataRequestHandler
 		if not request_handler:
+			print("[ServerInstance] ERROR: Could not instantiate handler for type: %s" % type)
 			return
 		request_handlers[type] = request_handler
+		print("[ServerInstance] Handler loaded successfully for type: %s" % type)
+	else:
+		print("[ServerInstance] Using cached handler for type: %s" % type)
+	
+	var response_data = request_handlers[type].data_request_handler(peer_id, self, args)
+	print("[ServerInstance] Handler returned: %s" % response_data)
 	
 	data_response.rpc_id(
 		peer_id,
 		request_id,
 		type,
-		request_handlers[type].data_request_handler(peer_id, self, args)
+		response_data
 	)
 
 
