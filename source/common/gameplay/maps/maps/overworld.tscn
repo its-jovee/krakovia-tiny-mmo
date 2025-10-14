@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=4 uid="uid://sscb58nigni8"]
+[gd_scene load_steps=23 format=4 uid="uid://sscb58nigni8"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="TileSet" uid="uid://bm6rosvdjjdcd" path="res://source/common/gameplay/maps/tilesets/forest_tileset.tres" id="2_ulyvq"]
+[ext_resource type="PackedScene" uid="uid://dm3xqv0yj5mg0" path="res://source/server/world/components/minigames/minigame_zone.tscn" id="3_owdw7"]
 [ext_resource type="PackedScene" uid="uid://l6hdpgq87k1y" path="res://source/server/world/components/harvesting/nodes/forager_node_t2.tscn" id="7_jp3f0"]
 [ext_resource type="PackedScene" uid="uid://bd8sp1et2mg11" path="res://source/server/world/components/harvesting/nodes/forager_node_t3.tscn" id="8_owdw7"]
 [ext_resource type="PackedScene" uid="uid://p5jyv4fayumm" path="res://source/server/world/components/harvesting/nodes/forager_node_t4.tscn" id="9_plgjc"]
@@ -22,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b1n8mekyf4cy2" path="res://source/server/world/components/harvesting/nodes/trapper_node_t4.tscn" id="20_xrqpg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cy0yd"]
-radius = 218.51544
+radius = 139.70326
 
 [node name="Overworld" type="Node2D"]
 y_sort_enabled = true
@@ -45,6 +46,10 @@ tile_set = ExtResource("2_ulyvq")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAAlACsAAQAKABAAAAAnACsAAQAKABAAAAAqACsAAQALAA8AAAAtACsAAQALAA8AAAAxACsAAQANAA4AAAAxACgAAQANAA4AAAAZACsAAQAKAAcAAAAWACsAAQAKAAcAAAASACsAAQAHAAcAAAAOACsAAQAEAAcAAAAOACcAAQAAAAYAAAAQACEAAwAhACYAAAANACEAAwAdACQAAAAIACEAAwAVACAAAAAPABsAAwAMAB0AAAA=")
 tile_set = ExtResource("2_ulyvq")
+
+[node name="MinigameZone" parent="." instance=ExtResource("3_owdw7")]
+position = Vector2(765, 495)
+scale = Vector2(0.56, 0.56)
 
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true

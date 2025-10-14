@@ -8,10 +8,12 @@ extends PanelContainer
 
 # Betting Phase nodes
 @onready var timer_label: Label = $MarginContainer/VBoxContainer/BettingPhase/TopInfo/TimerLabel
+@onready var horse_selection_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection
+@onready var horse_buttons_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection/HorseButtonsContainer
+@onready var bet_label: Label = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/BetLabel
 @onready var bet_amount_input: LineEdit = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/BetAmountInput
 @onready var ready_button: Button = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/ReadyButton
 @onready var leave_button: Button = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/LeaveButton
-@onready var horse_buttons_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection/HorseButtonsContainer
 @onready var players_list: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/PlayersList
 @onready var players_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/PlayersList/ScrollContainer/PlayersContainer
 
@@ -74,8 +76,22 @@ func _show_phase(phase: String) -> void:
 	results_phase.hide()
 	
 	match phase:
+		"waiting":
+			betting_phase.show()
+			# Hide betting controls during waiting phase
+			horse_selection_container.hide()
+			bet_label.hide()
+			bet_amount_input.hide()
+			ready_button.disabled = true
+			ready_button.text = "Waiting for game to start..."
 		"betting":
 			betting_phase.show()
+			# Show and enable betting controls
+			horse_selection_container.show()
+			bet_label.show()
+			bet_amount_input.show()
+			bet_amount_input.editable = true
+			ready_button.text = "Ready"
 		"racing":
 			racing_phase.show()
 		"finished":
@@ -110,10 +126,11 @@ func _on_minigame_state(data: Dictionary) -> void:
 		if phase == "racing":
 			_setup_race_track()
 	
-	# Update betting phase UI
-	if phase == "betting":
+	# Update waiting/betting phase UI
+	if phase == "waiting" or phase == "betting":
 		_update_timer(time_left)
-		_update_horse_buttons(horse_odds)
+		if phase == "betting":
+			_update_horse_buttons(horse_odds)
 		_update_players_list(participants)
 
 

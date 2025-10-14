@@ -32,7 +32,7 @@ script = ExtResource("1_83xu3")
 player_id = 1
 account_name = "teste"
 display_name = "teste"
-golds = 701
+golds = 181
 inventory = {
 1: {
 "stack": 1
@@ -53,24 +53,33 @@ inventory = {
 "stack": 3
 },
 29: {
-"stack": 4
+"stack": 9
 },
 33: {
 "stack": 24
 },
 34: {
-"stack": 7
+"stack": 10
 },
 37: {
-"stack": 4
+"stack": 5
 },
 39: {
 "stack": 2
+},
+41: {
+"stack": 1
+},
+286: {
+"stack": 3
+},
+287: {
+"stack": 4
 }
 }
 available_attributes_points = 10
 level = 10
-experience = 225
+experience = 395
 guild = SubResource("Resource_vidub")
 server_roles = {
 "senior_admin": {}
@@ -281,7 +290,7 @@ player_id = 12
 account_name = "jovi2"
 display_name = "cidadao"
 character_class = "forager"
-golds = 800
+golds = 960
 inventory = {
 2: {
 "stack": 1

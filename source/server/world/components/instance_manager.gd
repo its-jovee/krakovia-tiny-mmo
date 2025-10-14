@@ -11,6 +11,10 @@ var instance_collection: Array[InstanceResource]
 
 
 func start_instance_manager() -> void:
+	print("[InstanceManager] ========================================")
+	print("[InstanceManager] START_INSTANCE_MANAGER CALLED")
+	print("[InstanceManager] ========================================")
+	
 	ServerInstance.world_server = world_server
 
 	configure_global_roles_and_commands()
@@ -26,9 +30,11 @@ func start_instance_manager() -> void:
 	add_sibling(timer)
 	
 	# Add MinigameManager
+	print("[InstanceManager] Creating MinigameManager...")
 	var minigame_manager = preload("res://source/server/world/components/minigame_manager.gd").new()
 	minigame_manager.name = "MinigameManager"
 	add_child(minigame_manager)
+	print("[InstanceManager] MinigameManager added as child")
 
 
 func configure_global_roles_and_commands() -> void:

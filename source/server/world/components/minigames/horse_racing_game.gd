@@ -3,9 +3,11 @@ extends Node
 
 var session_id: int
 var minigame_manager: MinigameManager
+var game_type: String = "horse_racing"
 
 # Game state
-var phase: String = "betting"  # "betting", "racing", "finished"
+var phase: String = "waiting"  # "waiting", "betting", "racing", "finished"
+var waiting_time_left: float = 60.0  # 1 minute before betting starts
 var participants: Dictionary = {}  # peer_id -> {horse_id, bet_amount, ready, instance, player_name}
 var horse_odds: Dictionary = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0}  # total bets per horse
 
@@ -31,26 +33,18 @@ const HORSE_NAMES: Array[String] = ["Thunder", "Lightning", "Storm", "Blaze", "S
 
 
 func _ready() -> void:
-	# Setup betting timer
-	betting_timer = Timer.new()
-	betting_timer.wait_time = BETTING_DURATION
-	betting_timer.one_shot = true
-	betting_timer.timeout.connect(_on_betting_timer_timeout)
-	add_child(betting_timer)
-	betting_timer.start()
-	
-	# Setup state broadcast timer (every second during betting)
+	# Setup state broadcast timer (every second for all phases)
 	var state_broadcast_timer = Timer.new()
 	state_broadcast_timer.wait_time = 1.0
 	state_broadcast_timer.one_shot = false
 	state_broadcast_timer.timeout.connect(func():
-		if phase == "betting":
+		if phase == "waiting" or phase == "betting":
 			broadcast_state()
 	)
 	add_child(state_broadcast_timer)
 	state_broadcast_timer.start()
 	
-	# Setup race timer
+	# Setup race timer (will be started when race begins)
 	race_timer = Timer.new()
 	race_timer.wait_time = RACE_DURATION
 	race_timer.one_shot = true
@@ -64,7 +58,35 @@ func _ready() -> void:
 	race_update_timer.timeout.connect(_broadcast_race_positions)
 	add_child(race_update_timer)
 	
-	print("[HorseRacing:%d] Game created, betting phase started" % session_id)
+	print("[HorseRacing:%d] Game created in waiting phase" % session_id)
+
+
+func _process(delta: float) -> void:
+	# Update waiting timer manually (since it's not a Timer node)
+	if phase == "waiting":
+		waiting_time_left -= delta
+		if waiting_time_left < 0:
+			waiting_time_left = 0
+
+
+func get_phase() -> String:
+	return phase
+
+
+func start_betting_phase() -> void:
+	"""Called by MinigameManager after 60-second waiting period"""
+	print("[HorseRacing:%d] Starting betting phase" % session_id)
+	phase = "betting"
+	
+	# Setup betting timer
+	betting_timer = Timer.new()
+	betting_timer.wait_time = BETTING_DURATION
+	betting_timer.one_shot = true
+	betting_timer.timeout.connect(_on_betting_timer_timeout)
+	add_child(betting_timer)
+	betting_timer.start()
+	
+	broadcast_state()
 
 
 func join_game(peer_id: int, instance: ServerInstance, player_name: String) -> Dictionary:
@@ -74,7 +96,7 @@ func join_game(peer_id: int, instance: ServerInstance, player_name: String) -> D
 		print("[HorseRacing:%d] Join failed - game is full" % session_id)
 		return {"error": "Game is full"}
 	
-	if phase != "betting":
+	if phase != "waiting" and phase != "betting":
 		print("[HorseRacing:%d] Join failed - phase is %s" % [session_id, phase])
 		return {"error": "Game has already started"}
 	
@@ -93,12 +115,13 @@ func join_game(peer_id: int, instance: ServerInstance, player_name: String) -> D
 	print("[HorseRacing:%d] Player %s joined successfully (total: %d)" % [session_id, player_name, participants.size()])
 	
 	# Send initial state to the joining player immediately
+	var time_left = waiting_time_left if phase == "waiting" else (betting_timer.time_left if betting_timer else 0.0)
 	var state_data = {
 		"session_id": session_id,
 		"phase": phase,
 		"participants": _get_participant_summary(),
 		"horse_odds": horse_odds,
-		"time_left": betting_timer.time_left,
+		"time_left": time_left,
 		"horse_names": HORSE_NAMES
 	}
 	instance.data_push.rpc_id(peer_id, &"minigame.state", state_data)
@@ -442,12 +465,18 @@ func _award_winnings(peer_id: int, amount: int, place: int) -> void:
 
 
 func broadcast_state() -> void:
+	var time_left = 0.0
+	if phase == "waiting":
+		time_left = waiting_time_left
+	elif phase == "betting":
+		time_left = betting_timer.time_left if betting_timer else 0.0
+	
 	var state_data = {
 		"session_id": session_id,
 		"phase": phase,
 		"participants": _get_participant_summary(),
 		"horse_odds": horse_odds,
-		"time_left": betting_timer.time_left if phase == "betting" else 0.0,
+		"time_left": time_left,
 		"horse_names": HORSE_NAMES
 	}
 	

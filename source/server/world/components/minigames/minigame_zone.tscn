@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm3xqv0yj5mgz"]
+
+[ext_resource type="Script" path="res://source/server/world/components/minigames/minigame_zone.gd" id="1_minigame_zone"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
+size = Vector2(400, 400)
+
+[node name="MinigameZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_minigame_zone")
+zone_name = "Game Arena"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_zone")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -220.0
+offset_right = 100.0
+offset_bottom = -180.0
+text = "🎮 Game Arena"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GroundMarker" type="Polygon2D" parent="."]
+color = Color(0.4, 0.8, 1, 0.2)
+polygon = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)
+

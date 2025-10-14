@@ -1,14 +1,13 @@
 class_name MinigameManager
 extends Node
 
-const HorseRacingGame = preload("res://source/server/world/components/minigames/horse_racing_game.gd")
-
 var world_server: WorldServer
 var instance_manager: Node
 
 var invitation_timer: Timer
 var active_sessions: Dictionary = {}  # session_id -> game instance
 var next_session_id: int = 1
+var minigame_zones: Array = []  # Array of MinigameZone references
 
 # Game types to cycle through
 var available_games: Array[String] = ["horse_racing"]
@@ -17,6 +16,7 @@ var current_game_index: int = 0
 # Invitation settings
 const INVITATION_INTERVAL: float = 900.0  # 15 minutes in seconds
 const INVITATION_DURATION: float = 30.0  # Time players have to join
+const PRE_START_DELAY: float = 60.0  # 1 minute warning before game starts
 
 
 func _ready() -> void:
@@ -32,7 +32,9 @@ func _ready() -> void:
 	add_child(invitation_timer)
 	invitation_timer.start()
 	
-	print("[MinigameManager] Started with %d minute invitation interval" % (INVITATION_INTERVAL / 60.0))
+	print("[MinigameManager] Started minigame system")
+	print("[MinigameManager] - Invitation interval: %d minutes" % (INVITATION_INTERVAL / 60.0))
+	print("[MinigameManager] - Registered zones: %d" % minigame_zones.size())
 
 
 func _on_invitation_timer_timeout() -> void:
@@ -44,10 +46,11 @@ func _on_invitation_timer_timeout() -> void:
 
 
 func send_game_invitation(game_type: String) -> void:
+	var game_name: String = get_game_display_name(game_type)
 	var session_id: int = next_session_id
 	next_session_id += 1
 	
-	# Create game session
+	# Create game session IMMEDIATELY in "waiting" phase
 	var game_session = create_game_session(game_type, session_id)
 	if not game_session:
 		print("[MinigameManager] Failed to create game session for type: %s" % game_type)
@@ -55,22 +58,31 @@ func send_game_invitation(game_type: String) -> void:
 	
 	active_sessions[session_id] = game_session
 	
-	# Broadcast invitation to all players across all instances
-	var game_name: String = get_game_display_name(game_type)
-	var invitation_message: String = "🎮 %s is starting! Type /join to participate!" % game_name
+	# Send announcement to EVERYONE
+	send_system_message("🎮 %s starting in 1 minute at the Game Arena! Hurry over to join!" % game_name)
 	
-	broadcast_to_all_players(&"minigame.invitation", {
-		"session_id": session_id,
-		"game_type": game_type,
-		"game_name": game_name,
-		"message": invitation_message,
-		"duration": INVITATION_DURATION
-	})
+	# IMMEDIATELY send popup to players already in zone
+	var players_in_zone: Array = []
+	for zone in minigame_zones:
+		players_in_zone.append_array(zone.get_players_in_zone())
 	
-	# Also send as chat message
-	send_system_message(invitation_message)
+	print("[MinigameManager] Found %d players in minigame zones" % players_in_zone.size())
 	
-	print("[MinigameManager] Sent invitation for %s (session %d)" % [game_name, session_id])
+	if players_in_zone.size() > 0:
+		for peer_id in players_in_zone:
+			send_invitation_popup(peer_id, session_id, game_type, game_name)
+	
+	print("[MinigameManager] Created session %d for %s, sent invites to %d players" % [session_id, game_name, players_in_zone.size()])
+	
+	# Wait 1 minute, then start the betting phase
+	await get_tree().create_timer(PRE_START_DELAY).timeout
+	
+	# Check if session still exists (might have been cancelled)
+	if active_sessions.has(session_id):
+		send_system_message("🎮 %s betting phase has begun!" % game_name)
+		game_session.start_betting_phase()
+	else:
+		print("[MinigameManager] Session %d was cancelled during waiting phase" % session_id)
 
 
 func create_game_session(game_type: String, session_id: int) -> Node:
@@ -114,6 +126,46 @@ func broadcast_to_all_players(event: StringName, data: Dictionary) -> void:
 			child.propagate_rpc(child.data_push.bind(event, data))
 
 
+func register_minigame_zone(zone: MinigameZone) -> void:
+	if not minigame_zones.has(zone):
+		minigame_zones.append(zone)
+		print("[MinigameManager] Registered minigame zone: %s" % zone.zone_name)
+
+
+func unregister_minigame_zone(zone: MinigameZone) -> void:
+	minigame_zones.erase(zone)
+	print("[MinigameManager] Unregistered minigame zone: %s" % zone.zone_name)
+
+
+func send_invitation_popup(peer_id: int, session_id: int, game_type: String, game_name: String) -> void:
+	"""Send invitation popup to a specific player"""
+	for child in instance_manager.get_children():
+		if child is ServerInstance:
+			if child.connected_peers.has(peer_id):
+				child.data_push.rpc_id(peer_id, &"minigame.invitation", {
+					"session_id": session_id,
+					"game_type": game_type,
+					"game_name": game_name,
+					"message": "🎮 %s is starting! Click to join!" % game_name,
+					"duration": INVITATION_DURATION
+				})
+				print("[MinigameManager] Sent popup to peer %d" % peer_id)
+				return
+
+
+func notify_player_entered_zone(peer_id: int) -> void:
+	"""Called by MinigameZone when a player enters during an active waiting phase"""
+	# Find any active session in "waiting" phase
+	for session_id in active_sessions:
+		var game_session = active_sessions[session_id]
+		if game_session.has_method("get_phase") and game_session.get_phase() == "waiting":
+			var game_type = game_session.game_type
+			var game_name = get_game_display_name(game_type)
+			send_invitation_popup(peer_id, session_id, game_type, game_name)
+			print("[MinigameManager] Sent invitation to player %d who entered zone during waiting phase" % peer_id)
+			return
+
+
 func send_system_message(message: String) -> void:
 	# Send system message to all players
 	for child in instance_manager.get_children():
@@ -124,4 +176,3 @@ func send_system_message(message: String) -> void:
 				"id": 1
 			}
 			child.propagate_rpc(child.data_push.bind(&"chat.message", chat_message))
-
