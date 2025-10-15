@@ -33,12 +33,22 @@ var current_gold: int = 0
 
 # Energy tracking
 var current_energy: float = 0.0
+var current_energy_max: float = 100.0
+
+# XP/Level tracking
+var current_exp: int = 0
+var exp_required: int = 100
+var current_level_display: int = 1
 
 # Crafting system variables
 var available_recipes: Array = []
 var selected_recipe: CraftingRecipe = null
 var player_class: String = ""
 var player_level: int = 0
+
+# Preload popup scenes to avoid runtime hitch
+const CRAFT_XP_POPUP_SCENE = preload("res://source/client/ui/hud/craft_xp_popup.tscn")
+const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.tscn")
 
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
 @onready var equipment_slots: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots
@@ -70,6 +80,10 @@ var player_level: int = 0
 @onready var recipe_grid: GridContainer = $CraftingView/HBoxContainer/VBoxContainer/RecipeList/RecipeGrid
 @onready var class_filter: OptionButton = $CraftingView/HBoxContainer/VBoxContainer/FilterContainer/ClassFilter
 @onready var search_box: LineEdit = $CraftingView/HBoxContainer/VBoxContainer/FilterContainer/SearchBox
+@onready var crafting_level_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/StatsContainer/LevelLabel
+@onready var crafting_exp_bar: ProgressBar = $CraftingView/HBoxContainer/VBoxContainer2/StatsContainer/ExpBar
+@onready var crafting_energy_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/StatsContainer/EnergyLabel
+@onready var crafting_energy_bar: ProgressBar = $CraftingView/HBoxContainer/VBoxContainer2/StatsContainer/EnergyBar
 @onready var recipe_name_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeName
 @onready var recipe_description: RichTextLabel = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeDescription
 @onready var inputs_container: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RequirementsContainer/InputsContainer
@@ -102,8 +116,14 @@ func _ready() -> void:
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	
+	# Subscribe to exp updates (for level up popup and XP bar)
+	InstanceClient.subscribe(&"exp.update", _on_exp_update)
+	
 	# Request initial gold amount
 	InstanceClient.current.request_data(&"gold.get", _on_gold_received)
+	
+	# Request initial level/exp data
+	InstanceClient.current.request_data(&"level.get", _on_level_received)
 	
 	# Setup energy tracking
 	Events.local_player_ready.connect(_on_local_player_ready)
@@ -235,17 +255,27 @@ func _on_local_player_ready(local_player: LocalPlayer) -> void:
 		return
 	ability_system_component.mirror.attribute_local_changed.connect(_on_player_attribute_changed)
 	
-	# Get initial energy value
+	# Get initial energy value and max
 	current_energy = ability_system_component.mirror.get_value(&"energy")
-	print("Inventory menu: Initial energy set to ", current_energy)
+	current_energy_max = ability_system_component.mirror.get_max(&"energy")
+	print("Inventory menu: Initial energy set to ", current_energy, "/", current_energy_max)
+	_update_crafting_bars()
 
-func _on_player_attribute_changed(attr: StringName, value: float, _max_value: float) -> void:
+func _on_player_attribute_changed(attr: StringName, value: float, max_value: float) -> void:
 	if attr == &"energy":
 		current_energy = value
-		print("Inventory menu: Energy changed to ", current_energy)
+		current_energy_max = max_value
+		print("Inventory menu: Energy changed to ", current_energy, "/", current_energy_max)
+		_update_crafting_bars()
 		# Update recipe details if we're viewing a recipe with energy cost
 		if selected_recipe and selected_recipe.energy_cost > 0:
 			_update_recipe_details()
+
+func _on_level_received(data: Dictionary) -> void:
+	current_level_display = data.get("level", 1)
+	current_exp = data.get("experience", 0)
+	exp_required = data.get("exp_required", 100)
+	_update_crafting_bars()
 
 
 func fill_inventory(inv_data: Dictionary) -> void:
@@ -832,7 +862,7 @@ func _clear_container(container: Container) -> void:
 # Helper function to create ItemSlots for crafting UI
 func _create_crafting_item_slot(item: Item, required_quantity: int, available_quantity: int) -> VBoxContainer:
 	var container = VBoxContainer.new()
-	container.custom_minimum_size = Vector2(70, 0)
+	container.custom_minimum_size = Vector2(64, 0)
 	
 	# Create the item slot panel
 	var item_slot = Panel.new()
@@ -884,23 +914,16 @@ func _create_crafting_item_slot(item: Item, required_quantity: int, available_qu
 	
 	container.add_child(item_slot)
 	
-	# Add item name below the slot
-	var name_label = Label.new()
-	name_label.text = item.item_name
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	name_label.custom_minimum_size = Vector2(70, 0)
-	container.add_child(name_label)
-	
-	# Show availability if provided (for inputs)
+	# Show availability counter below the slot (for inputs)
 	if available_quantity >= 0:
 		var avail_label = Label.new()
-		avail_label.text = "Have: %d" % available_quantity
+		avail_label.text = "%d/%d" % [available_quantity, required_quantity]
 		avail_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		avail_label.custom_minimum_size = Vector2(64, 0)
 		if available_quantity < required_quantity:
-			avail_label.modulate = Color(1, 0.5, 0.5)
+			avail_label.add_theme_color_override("font_color", Color(1, 0.5, 0.5))  # Red
 		else:
-			avail_label.modulate = Color(0.5, 1, 0.5)
+			avail_label.add_theme_color_override("font_color", Color(0.5, 1, 0.5))  # Green
 		container.add_child(avail_label)
 	
 	return container
@@ -925,20 +948,102 @@ func _on_craft_response(data: Dictionary) -> void:
 		status_label.text = "Crafted successfully!"
 		# Refresh inventory to show new items
 		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_craft)
-		var exp_text = ""
+		
+		# Show XP popup if XP was gained
 		if data.has("exp_gained") and data.exp_gained > 0:
-			exp_text = " (+" + str(data.exp_gained) + " XP)"
-		status_label.text = "Crafted successfully!" + exp_text
+			_show_craft_xp_popup(data.exp_gained)
 	else:
 		status_label.text = "Error: " + data.get("error", "Unknown error")
 
 func _on_inventory_refreshed_after_craft(inv_data: Dictionary) -> void:
 	# Update inventory data
 	fill_inventory(inv_data)
-	# Refresh the recipe list to update button states (available/unavailable)
-	_populate_recipe_list()
+	# Refresh the recipe list to update button states and maintain sorting
+	_filter_recipes()
 	# Refresh recipe details to update material counts
 	_update_recipe_details()
+
+func _show_craft_xp_popup(exp_amount: int) -> void:
+	"""Create and display a crafting XP notification popup"""
+	if not CRAFT_XP_POPUP_SCENE:
+		print("[Craft] +%d XP" % exp_amount)
+		return
+	
+	var popup: Control = CRAFT_XP_POPUP_SCENE.instantiate()
+	popup.name = "CraftXpPopup_" + str(Time.get_ticks_msec())
+	
+	# Add to the scene tree (add to parent HUD or root)
+	# We'll add it to the inventory menu itself for now
+	add_child(popup)
+	
+	# Position popup next to the cursor
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	
+	# Count existing popups to stack them
+	var existing_popups: int = 0
+	for child in get_children():
+		if child.name.begins_with("CraftXpPopup_"):
+			existing_popups += 1
+	
+	# Offset slightly to the right and stack vertically
+	popup.position = Vector2(mouse_pos.x + 20.0, mouse_pos.y - 20.0 - (existing_popups * 50.0))
+	
+	# Setup the popup
+	if popup.has_method("setup"):
+		popup.setup(exp_amount)
+
+func _on_exp_update(data: Dictionary) -> void:
+	"""Handle exp updates - show level up popup if we're in crafting view and update bars"""
+	var leveled_up: bool = data.get("leveled_up", false)
+	var new_level: int = data.get("level", 1)
+	
+	# Update stored values
+	current_level_display = new_level
+	current_exp = data.get("exp", current_exp)
+	exp_required = data.get("exp_required", exp_required)
+	
+	# Update the crafting bars
+	_update_crafting_bars()
+	
+	# Only show level up popup if we're looking at the crafting view
+	if leveled_up and crafting_view.visible:
+		_show_level_up_popup(new_level)
+
+func _update_crafting_bars() -> void:
+	"""Update the XP and Energy bars in the crafting view"""
+	if crafting_level_label:
+		crafting_level_label.text = "Level %d" % current_level_display
+	
+	if crafting_exp_bar:
+		crafting_exp_bar.max_value = exp_required
+		crafting_exp_bar.value = current_exp
+	
+	if crafting_energy_label:
+		crafting_energy_label.text = "Energy: %.0f / %.0f" % [current_energy, current_energy_max]
+	
+	if crafting_energy_bar:
+		crafting_energy_bar.max_value = current_energy_max
+		crafting_energy_bar.value = current_energy
+
+func _show_level_up_popup(new_level: int) -> void:
+	"""Create and display a level up popup on top of the crafting view"""
+	if not LEVEL_UP_POPUP_SCENE:
+		print("[LevelUp] Level %d!" % new_level)
+		return
+	
+	var popup: Control = LEVEL_UP_POPUP_SCENE.instantiate()
+	popup.name = "LevelUpPopup_" + str(Time.get_ticks_msec())
+	
+	# Add to inventory menu so it appears on top
+	add_child(popup)
+	
+	# Position at center of screen
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+	popup.position = Vector2(viewport_size.x / 2.0 - 150.0, viewport_size.y / 2.0 - 100.0)
+	
+	# Setup the popup
+	if popup.has_method("setup"):
+		popup.setup(new_level)
 
 func _on_class_filter_changed(index: int) -> void:
 	_filter_recipes()

@@ -37,4 +37,3 @@ func _process(_delta: float) -> void:
 		# Center horizontally above the player
 		var y_offset: float = -80  # Position above player head
 		global_position = parent_pos + Vector2(-16, y_offset)  # -16 to center 32px sprite
-

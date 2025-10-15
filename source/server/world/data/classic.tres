@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=72 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=75 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -32,7 +32,7 @@ script = ExtResource("1_83xu3")
 player_id = 1
 account_name = "teste"
 display_name = "teste"
-golds = 81
+golds = 52
 inventory = {
 1: {
 "stack": 1
@@ -40,20 +40,14 @@ inventory = {
 6: {
 "stack": 202
 },
-7: {
-"stack": 28
-},
 9: {
 "stack": 7
-},
-11: {
-"stack": 6
 },
 24: {
 "stack": 3
 },
 29: {
-"stack": 9
+"stack": 1
 },
 33: {
 "stack": 24
@@ -70,6 +64,15 @@ inventory = {
 41: {
 "stack": 1
 },
+126: {
+"stack": 14
+},
+127: {
+"stack": 4
+},
+176: {
+"stack": 3
+},
 286: {
 "stack": 3
 },
@@ -79,7 +82,7 @@ inventory = {
 }
 available_attributes_points = 10
 level = 10
-experience = 395
+experience = 12145
 guild = SubResource("Resource_vidub")
 server_roles = {
 "senior_admin": {}
@@ -1408,6 +1411,98 @@ inventory = {
 }
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_w2wmc"]
+script = ExtResource("1_83xu3")
+player_id = 65
+account_name = "guest167"
+display_name = ""
+golds = 8
+inventory = {
+7: {
+"stack": 8
+},
+9: {
+"stack": 10
+},
+11: {
+"stack": 1
+},
+33: {
+"stack": 4
+},
+126: {
+"stack": 4
+},
+252: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 1440
+
+[sub_resource type="Resource" id="Resource_tlnbj"]
+script = ExtResource("1_83xu3")
+player_id = 66
+account_name = "guest168"
+display_name = "minerado"
+golds = 3
+inventory = {
+6: {
+"stack": 1
+},
+7: {
+"stack": 23
+},
+9: {
+"stack": 4
+},
+11: {
+"stack": 2
+},
+33: {
+"stack": 14
+}
+}
+available_attributes_points = 10
+experience = 220
+
+[sub_resource type="Resource" id="Resource_7xcoy"]
+script = ExtResource("1_83xu3")
+player_id = 67
+account_name = "guest169"
+display_name = "forage man"
+character_class = "forager"
+golds = 65
+inventory = {
+6: {
+"stack": 1
+},
+64: {
+"stack": 17
+},
+71: {
+"stack": 1
+},
+79: {
+"stack": 1
+},
+82: {
+"stack": 6
+},
+92: {
+"stack": 3
+},
+141: {
+"stack": 80
+},
+163: {
+"stack": 10
+}
+}
+available_attributes_points = 16
+level = 3
+experience = 801
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -1448,6 +1543,9 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest164": PackedInt32Array(62),
 "guest165": PackedInt32Array(63),
 "guest166": PackedInt32Array(64),
+"guest167": PackedInt32Array(65),
+"guest168": PackedInt32Array(66),
+"guest169": PackedInt32Array(67),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -1535,9 +1633,12 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 61: SubResource("Resource_16bft"),
 62: SubResource("Resource_ybucd"),
 63: SubResource("Resource_klnyr"),
-64: SubResource("Resource_1anvw")
+64: SubResource("Resource_1anvw"),
+65: SubResource("Resource_w2wmc"),
+66: SubResource("Resource_tlnbj"),
+67: SubResource("Resource_7xcoy")
 })
-next_player_id = 64
+next_player_id = 67
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),
