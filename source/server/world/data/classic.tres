@@ -290,7 +290,7 @@ player_id = 12
 account_name = "jovi2"
 display_name = "cidadao"
 character_class = "forager"
-golds = 860
+golds = 870
 inventory = {
 2: {
 "stack": 1
@@ -306,6 +306,9 @@ inventory = {
 },
 71: {
 "stack": 10
+},
+74: {
+"stack": 1
 },
 79: {
 "stack": 1
@@ -339,6 +342,12 @@ available_attributes_points = 100
 level = 50
 server_roles = {
 "senior_admin": {}
+}
+quest_stats = {
+"by_adventurer": {
+"Farmer": 1
+},
+"total_completed": 1
 }
 
 [sub_resource type="Resource" id="Resource_6s71d"]

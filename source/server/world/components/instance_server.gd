@@ -63,6 +63,11 @@ func _ready() -> void:
 	harvest_manager = HarvestManager.new()
 	harvest_manager.name = "HarvestManager"
 	add_child(harvest_manager, true)
+	
+	# Add QuestManager
+	var quest_mgr = QuestManager.new()
+	quest_mgr.name = "QuestManager"
+	add_child(quest_mgr, true)
 
 
 func load_map(map_path: String) -> void:
@@ -101,6 +106,11 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"market.status", {"in_market": true})
+	if interaction_area is QuestBoardArea:
+		# Notify client about quest board status
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"quest_board.status", {"in_quest_board": true})
 
 func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
 	if interaction_area is MarketArea:
@@ -108,6 +118,11 @@ func _on_player_exited_interaction_area(player: Player, interaction_area: Intera
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"market.status", {"in_market": false})
+	if interaction_area is QuestBoardArea:
+		# Notify client that they left quest board
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"quest_board.status", {"in_quest_board": false})
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func ready_to_enter_instance() -> void:

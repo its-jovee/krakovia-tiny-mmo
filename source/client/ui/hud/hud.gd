@@ -31,6 +31,11 @@ func _ready() -> void:
 	menus["trade_request"] = trade_request_modal
 	InstanceClient.subscribe(&"trade.open", _on_trade_open)
 	
+	# Add quest board menu
+	var quest_board_menu = preload("res://source/client/ui/quest_board/quest_board_menu.tscn").instantiate()
+	sub_menu.add_child(quest_board_menu)
+	menus["quest_board"] = quest_board_menu
+	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	

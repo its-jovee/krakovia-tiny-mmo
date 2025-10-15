@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1759321604
-next_id = 32
+version = 1760000100
+next_id = 35
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -162,6 +162,21 @@ entries = Array[Dictionary]([{
 &"id": 31,
 &"path": "res://source/server/world/components/data_request_handlers/minigame.leave.gd",
 &"slug": &"minigame.leave"
+}, {
+&"hash": "c0ccfcfa0ccc0cccccc9dccafafafcc5ccccc0cccccccccccccccccccccccccccec",
+&"id": 32,
+&"path": "res://source/server/world/components/data_request_handlers/quest.fetch.gd",
+&"slug": &"quest.fetch"
+}, {
+&"hash": "d1ddadab1ddd1dddddd0eddbfbfbfdd6ddddd1dddddddddddddddddddddddddddfd",
+&"id": 33,
+&"path": "res://source/server/world/components/data_request_handlers/quest.complete.gd",
+&"slug": &"quest.complete"
+}, {
+&"hash": "e2eebdbc2eee2eeeeee1feedcfcfcee7eeeee2eeeeeeeeeeeeeeeeeeeeeeeeeeeae",
+&"id": 34,
+&"path": "res://source/server/world/components/data_request_handlers/quest.pin.gd",
+&"slug": &"quest.pin"
 }])
 metadata/slug = &"data_request_handlers_index"
 metadata/id = 1

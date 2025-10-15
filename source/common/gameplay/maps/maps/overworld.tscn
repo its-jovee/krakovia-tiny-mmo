@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://sscb58nigni8"]
+[gd_scene load_steps=24 format=4 uid="uid://sscb58nigni8"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="TileSet" uid="uid://bm6rosvdjjdcd" path="res://source/common/gameplay/maps/tilesets/forest_tileset.tres" id="2_ulyvq"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://cjlk4rg3fyqmu" path="res://source/server/world/components/harvesting/nodes/forager_node_t1.tscn" id="18_ysxe5"]
 [ext_resource type="PackedScene" uid="uid://benapojeyfq3q" path="res://source/server/world/components/harvesting/nodes/trapper_node_t3.tscn" id="19_lc833"]
 [ext_resource type="PackedScene" uid="uid://b1n8mekyf4cy2" path="res://source/server/world/components/harvesting/nodes/trapper_node_t4.tscn" id="20_xrqpg"]
+[ext_resource type="PackedScene" uid="uid://b5xg3rh8mq1wp" path="res://source/common/gameplay/maps/components/interaction_areas/quest_board/quest_board_area.tscn" id="22_plgjc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cy0yd"]
 radius = 139.70326
@@ -117,3 +118,6 @@ position = Vector2(132, 524)
 
 [node name="TrapperNodeT4" parent="." instance=ExtResource("20_xrqpg")]
 position = Vector2(253, 426)
+
+[node name="QuestBoardArea" parent="." instance=ExtResource("22_plgjc")]
+position = Vector2(280, 576)

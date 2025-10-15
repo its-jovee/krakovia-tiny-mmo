@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://test_market_scene"]
+[gd_scene load_steps=5 format=3 uid="uid://test_market_scene"]
 
 [ext_resource type="PackedScene" uid="uid://b3r6vglj3doxu" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.tscn" id="1_market"]
-[ext_resource type="Texture2D" path="res://assets/sprites/environment/world_tileset/grass_1.png" id="2_grass"]
+[ext_resource type="PackedScene" uid="uid://b5xg3rh8mq1wp" path="res://source/common/gameplay/maps/components/interaction_areas/quest_board/quest_board_area.tscn" id="2_questboard"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/world_tileset/grass_1.png" id="3_grass"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1"]
-texture = ExtResource("2_grass")
+texture = ExtResource("3_grass")
 texture_region_size = Vector2i(16, 16)
 
 [sub_resource type="TileSet" id="TileSet_1"]
@@ -18,6 +19,9 @@ format = 2
 
 [node name="MarketArea" parent="." instance=ExtResource("1_market")]
 position = Vector2(100, 100)
+
+[node name="QuestBoardArea" parent="." instance=ExtResource("2_questboard")]
+position = Vector2(200, 100)
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2(50, 50)

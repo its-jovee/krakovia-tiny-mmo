@@ -41,6 +41,9 @@ func get_energy_max() -> float:
 ##
 @export var server_roles: Dictionary
 
+## Quest completion statistics
+@export var quest_stats: Dictionary = {}
+
 ## Current Network ID
 var current_peer_id: int
 
