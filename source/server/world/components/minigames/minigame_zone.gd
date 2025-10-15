@@ -6,9 +6,11 @@ extends Area2D
 
 @export var zone_name: String = "Game Arena"
 @export var minigame_manager_path: NodePath
+@export var elimination_teleport_position: Vector2 = Vector2(0, 0)  ## Position where eliminated players are teleported
 
 var players_in_zone: Dictionary = {}  # peer_id -> Player
 var minigame_manager: MinigameManager
+var zone_walls: StaticBody2D = null
 
 
 func _ready() -> void:
@@ -103,6 +105,73 @@ func _is_in_server_instance() -> bool:
 				return true
 		node = node.get_parent()
 	return false
+
+
+func lock_zone() -> void:
+	"""Create invisible walls around the zone to trap players inside"""
+	if zone_walls:
+		push_warning("[MinigameZone:%s] Zone already locked!" % zone_name)
+		return
+	
+	# Get zone bounds from CollisionShape2D
+	var collision_shape = $CollisionShape2D
+	if not collision_shape or not collision_shape.shape:
+		push_error("[MinigameZone:%s] Cannot lock zone - no CollisionShape2D found!" % zone_name)
+		return
+	
+	var shape = collision_shape.shape
+	var zone_pos = global_position
+	var wall_thickness = 20.0
+	
+	zone_walls = StaticBody2D.new()
+	zone_walls.name = "ZoneWalls"
+	zone_walls.collision_layer = 1  # On layer 1 so players (mask=6) collide with it
+	zone_walls.collision_mask = 0  # Walls don't need to detect anything
+	
+	# Determine zone size based on shape type
+	var half_width = 0.0
+	var half_height = 0.0
+	
+	if shape is RectangleShape2D:
+		half_width = (shape.size.x * scale.x) / 2.0
+		half_height = (shape.size.y * scale.y) / 2.0
+	elif shape is CircleShape2D:
+		half_width = shape.radius * scale.x
+		half_height = shape.radius * scale.y
+	else:
+		push_warning("[MinigameZone:%s] Unsupported shape type for zone locking" % zone_name)
+		return
+	
+	# Create 4 walls (top, bottom, left, right)
+	var walls_data = [
+		{"name": "TopWall", "pos": Vector2(0, -half_height - wall_thickness / 2), "size": Vector2(half_width * 2 + wall_thickness * 2, wall_thickness)},
+		{"name": "BottomWall", "pos": Vector2(0, half_height + wall_thickness / 2), "size": Vector2(half_width * 2 + wall_thickness * 2, wall_thickness)},
+		{"name": "LeftWall", "pos": Vector2(-half_width - wall_thickness / 2, 0), "size": Vector2(wall_thickness, half_height * 2)},
+		{"name": "RightWall", "pos": Vector2(half_width + wall_thickness / 2, 0), "size": Vector2(wall_thickness, half_height * 2)}
+	]
+	
+	for wall_data in walls_data:
+		var wall_collision = CollisionShape2D.new()
+		wall_collision.name = wall_data.name
+		wall_collision.position = wall_data.pos
+		var wall_shape = RectangleShape2D.new()
+		wall_shape.size = wall_data.size
+		wall_collision.shape = wall_shape
+		zone_walls.add_child(wall_collision)
+		print("[MinigameZone:%s] Created wall '%s' at %v with size %v" % [zone_name, wall_data.name, wall_data.pos, wall_data.size])
+	
+	add_child(zone_walls)
+	print("[MinigameZone:%s] Zone locked - 4 walls created at global_pos %v" % [zone_name, global_position])
+
+
+func unlock_zone() -> void:
+	"""Remove invisible walls, allowing players to leave"""
+	if zone_walls:
+		zone_walls.queue_free()
+		zone_walls = null
+		print("[MinigameZone:%s] Zone unlocked - walls removed" % zone_name)
+	else:
+		print("[MinigameZone:%s] Zone was not locked" % zone_name)
 
 
 func _debug_print_tree() -> void:

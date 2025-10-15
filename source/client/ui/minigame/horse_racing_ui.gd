@@ -100,6 +100,11 @@ func _show_phase(phase: String) -> void:
 
 func _on_minigame_state(data: Dictionary) -> void:
 	var received_session_id: int = data.get("session_id", -1)
+	var game_type: String = data.get("game_type", "")
+	
+	# Only process horse racing games
+	if game_type != "horse_racing" and game_type != "":
+		return
 	
 	# If we don't have a session or this is a new session, show the UI
 	if session_id == -1 or (received_session_id != session_id and not visible):

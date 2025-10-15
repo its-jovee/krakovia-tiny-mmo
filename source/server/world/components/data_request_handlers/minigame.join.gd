@@ -37,4 +37,3 @@ func data_request_handler(
 	
 	print("[minigame.join] Join result: %s" % result)
 	return result
-

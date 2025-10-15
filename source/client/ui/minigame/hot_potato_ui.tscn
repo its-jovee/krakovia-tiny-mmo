@@ -1,0 +1,176 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3w2x8qv0ylap"]
+
+[ext_resource type="Script" path="res://source/client/ui/minigame/hot_potato_ui.gd" id="1_hot_potato"]
+
+[node name="HotPotatoUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hot_potato")
+
+[node name="FloatingTimer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="FloatingTimer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FloatingTimer/MarginContainer"]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="FloatingTimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "🥔 5.0"
+horizontal_alignment = 1
+
+[node name="SubLabel" type="Label" parent="FloatingTimer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "seconds until explosion!"
+horizontal_alignment = 1
+
+[node name="GamePanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GamePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GamePanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "🥔 Hot Potato"
+horizontal_alignment = 1
+
+[node name="WaitingPhase" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Waiting for game to start..."
+horizontal_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Game starts in: 00:60"
+horizontal_alignment = 1
+
+[node name="PlayersLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Players:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayersContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="LeaveButton" type="Button" parent="GamePanel/MarginContainer/VBoxContainer/WaitingPhase"]
+layout_mode = 2
+text = "Leave Game"
+
+[node name="ActivePhase" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PotatoHolder" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "🥔 Player has the potato"
+horizontal_alignment = 1
+
+[node name="PotatoTimer" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Potato explodes in: 5.0s"
+horizontal_alignment = 1
+
+[node name="ActivePlayersLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Active Players:"
+
+[node name="PlayersScroll" type="ScrollContainer" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayersContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase/PlayersScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EliminatedLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Eliminated:"
+
+[node name="EliminatedScroll" type="ScrollContainer" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EliminatedContainer" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer/ActivePhase/EliminatedScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FinishedPhase" type="VBoxContainer" parent="GamePanel/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="WinnerLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/FinishedPhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "🏆 Winner: PlayerName"
+horizontal_alignment = 1
+
+[node name="ItemRewardLabel" type="Label" parent="GamePanel/MarginContainer/VBoxContainer/FinishedPhase"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Reward: Item Name"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="GamePanel/MarginContainer/VBoxContainer/FinishedPhase"]
+layout_mode = 2
+text = "Close"

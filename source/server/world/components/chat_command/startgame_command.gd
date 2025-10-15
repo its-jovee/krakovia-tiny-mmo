@@ -7,7 +7,10 @@ func execute(args: PackedStringArray, peer_id: int, server_instance: ServerInsta
 	if not minigame_manager:
 		return "Minigame system not available"
 	
-	var game_type: String = "horse_racing"
+	# Use MinigameManager's rotation system to alternate games
+	var game_type: String = minigame_manager.get_next_game_in_rotation()
+	
+	# Allow manual override with command argument
 	if args.size() > 1:
 		game_type = args[1]
 	

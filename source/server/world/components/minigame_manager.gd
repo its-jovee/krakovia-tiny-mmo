@@ -10,7 +10,7 @@ var next_session_id: int = 1
 var minigame_zones: Array = []  # Array of MinigameZone references
 
 # Game types to cycle through
-var available_games: Array[String] = ["horse_racing"]
+var available_games: Array[String] = ["hot_potato", "horse_racing"]
 var current_game_index: int = 0
 
 # Invitation settings
@@ -38,9 +38,8 @@ func _ready() -> void:
 
 
 func _on_invitation_timer_timeout() -> void:
-	# Select next game type
-	var game_type: String = available_games[current_game_index]
-	current_game_index = (current_game_index + 1) % available_games.size()
+	# Select next game type using rotation system
+	var game_type: String = get_next_game_in_rotation()
 	
 	send_game_invitation(game_type)
 
@@ -74,13 +73,20 @@ func send_game_invitation(game_type: String) -> void:
 	
 	print("[MinigameManager] Created session %d for %s, sent invites to %d players" % [session_id, game_name, players_in_zone.size()])
 	
-	# Wait 1 minute, then start the betting phase
+	# Wait 1 minute, then start the game phase
 	await get_tree().create_timer(PRE_START_DELAY).timeout
 	
 	# Check if session still exists (might have been cancelled)
 	if active_sessions.has(session_id):
-		send_system_message("🎮 %s betting phase has begun!" % game_name)
-		game_session.start_betting_phase()
+		match game_type:
+			"horse_racing":
+				send_system_message("🎮 %s betting phase has begun!" % game_name)
+				game_session.start_betting_phase()
+			"hot_potato":
+				send_system_message("🎮 %s has begun! Good luck!" % game_name)
+				game_session.start_active_phase()
+			_:
+				push_warning("[MinigameManager] Unknown game type in phase start: %s" % game_type)
 	else:
 		print("[MinigameManager] Session %d was cancelled during waiting phase" % session_id)
 
@@ -93,6 +99,15 @@ func create_game_session(game_type: String, session_id: int) -> Node:
 			game.minigame_manager = self
 			add_child(game)
 			return game
+		"hot_potato":
+			var game = HotPotatoGame.new()
+			game.session_id = session_id
+			game.minigame_manager = self
+			# Pass zone reference for locking
+			if not minigame_zones.is_empty():
+				game.zone_reference = minigame_zones[0]
+			add_child(game)
+			return game
 		_:
 			print("[MinigameManager] Unknown game type: %s" % game_type)
 			return null
@@ -102,8 +117,21 @@ func get_game_display_name(game_type: String) -> String:
 	match game_type:
 		"horse_racing":
 			return "Horse Racing"
+		"hot_potato":
+			return "Hot Potato"
 		_:
 			return game_type.capitalize()
+
+
+func get_next_game_in_rotation() -> String:
+	"""Get next game in rotation and advance the index"""
+	if available_games.is_empty():
+		return "horse_racing"  # Fallback
+	
+	var game_type = available_games[current_game_index]
+	current_game_index = (current_game_index + 1) % available_games.size()
+	
+	return game_type
 
 
 func get_active_session(session_id: int):

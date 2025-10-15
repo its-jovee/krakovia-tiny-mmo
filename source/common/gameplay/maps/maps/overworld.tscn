@@ -50,6 +50,7 @@ tile_set = ExtResource("2_ulyvq")
 [node name="MinigameZone" parent="." instance=ExtResource("3_owdw7")]
 position = Vector2(765, 495)
 scale = Vector2(0.56, 0.56)
+elimination_teleport_position = Vector2(264, 816)
 
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true

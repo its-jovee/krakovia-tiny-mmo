@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxxak7qv0yl2m"]
+
+[ext_resource type="Script" path="res://source/client/local_player/potato_indicator.gd" id="1_potato"]
+
+[node name="PotatoIndicator" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+script = ExtResource("1_potato")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 24
+text = "🥔"
+horizontal_alignment = 1
+vertical_alignment = 1
+
