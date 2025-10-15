@@ -91,7 +91,9 @@ Features:
 - Auto-opens when player enters quest board area
 - Displays all 5 quests with:
   - Adventurer type
-  - Required items with player's current quantities (color-coded)
+  - **Item Slot Display**: Required items shown as panels with icons (3 per row)
+  - **Interactive Tooltips**: Hover over items to see detailed information
+  - Color-coded availability indicators (X/Y format - green when available, red when missing)
   - Gold and XP rewards
   - Pin/Complete buttons
 - **Smart Quest Ordering**:

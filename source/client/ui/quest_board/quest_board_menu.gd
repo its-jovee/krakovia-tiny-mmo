@@ -88,7 +88,7 @@ func _refresh_quest_display() -> void:
 
 func _create_quest_panel(quest_data: Dictionary) -> PanelContainer:
 	var panel = PanelContainer.new()
-	panel.custom_minimum_size = Vector2(0, 120)
+	panel.custom_minimum_size = Vector2(0, 180)  # Increased for item slots
 	
 	var margin = MarginContainer.new()
 	margin.add_theme_constant_override("margin_left", 10)
@@ -120,28 +120,24 @@ func _create_quest_panel(quest_data: Dictionary) -> PanelContainer:
 	items_label.text = "Required Items:"
 	vbox.add_child(items_label)
 	
+	# Create grid for item slots
+	var items_grid = GridContainer.new()
+	items_grid.columns = 3  # 3 items per row
+	items_grid.add_theme_constant_override("h_separation", 8)
+	items_grid.add_theme_constant_override("v_separation", 8)
+	vbox.add_child(items_grid)
+	
 	var required_items: Dictionary = quest_data.get("required_items", {})
 	for item_id in required_items.keys():
 		var quantity_required: int = required_items[item_id]
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item:
-			var item_row = HBoxContainer.new()
-			vbox.add_child(item_row)
-			
-			var item_text = Label.new()
 			var player_quantity: int = 0
 			if inventory.has(item_id):
 				player_quantity = inventory[item_id].get("stack", 0)
 			
-			item_text.text = "  • %s: %d/%d" % [item.item_name, player_quantity, quantity_required]
-			
-			# Color code based on availability
-			if player_quantity >= quantity_required:
-				item_text.add_theme_color_override("font_color", Color(0, 1, 0))  # Green
-			else:
-				item_text.add_theme_color_override("font_color", Color(1, 0.3, 0.3))  # Red
-			
-			item_row.add_child(item_text)
+			var item_slot = _create_quest_item_slot(item, quantity_required, player_quantity)
+			items_grid.add_child(item_slot)
 	
 	# Rewards
 	var rewards_label = Label.new()
@@ -222,4 +218,73 @@ func _show_notification(message: String) -> void:
 
 func _on_close_button_pressed() -> void:
 	hide()
+
+
+## Create an item slot panel for quest display (similar to crafting UI)
+func _create_quest_item_slot(item: Item, required_quantity: int, available_quantity: int) -> VBoxContainer:
+	var container = VBoxContainer.new()
+	container.custom_minimum_size = Vector2(64, 0)
+	
+	# Create the item slot panel
+	var item_slot = Panel.new()
+	item_slot.custom_minimum_size = Vector2(64, 64)
+	item_slot.mouse_filter = Control.MOUSE_FILTER_PASS
+	
+	# Connect hover events for tooltip
+	item_slot.mouse_entered.connect(func(): ItemTooltipManager.show_item_tooltip(item, item_slot.get_global_mouse_position(), item_slot))
+	item_slot.mouse_exited.connect(func(): ItemTooltipManager.hide_tooltip())
+	
+	# Add icon
+	var icon = TextureRect.new()
+	icon.name = "Icon"
+	icon.texture = item.item_icon
+	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.layout_mode = 1
+	icon.anchors_preset = Control.PRESET_CENTER
+	icon.anchor_left = 0.5
+	icon.anchor_top = 0.5
+	icon.anchor_right = 0.5
+	icon.anchor_bottom = 0.5
+	icon.offset_left = -24.0
+	icon.offset_top = -24.0
+	icon.offset_right = 24.0
+	icon.offset_bottom = 24.0
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	icon.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	icon.grow_vertical = Control.GROW_DIRECTION_BOTH
+	item_slot.add_child(icon)
+	
+	# Add quantity label to the slot
+	var amount_label = Label.new()
+	amount_label.name = "ItemAmount"
+	amount_label.text = str(required_quantity)
+	amount_label.layout_mode = 1
+	amount_label.anchors_preset = Control.PRESET_TOP_RIGHT
+	amount_label.anchor_left = 1.0
+	amount_label.anchor_top = 0.0
+	amount_label.anchor_right = 1.0
+	amount_label.anchor_bottom = 0.0
+	amount_label.offset_left = -25.0
+	amount_label.offset_top = 2.0
+	amount_label.offset_right = -2.0
+	amount_label.offset_bottom = 20.0
+	amount_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	amount_label.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	item_slot.add_child(amount_label)
+	
+	container.add_child(item_slot)
+	
+	# Show availability below the slot
+	var avail_label = Label.new()
+	avail_label.text = "%d/%d" % [available_quantity, required_quantity]
+	avail_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	avail_label.custom_minimum_size = Vector2(64, 0)
+	if available_quantity < required_quantity:
+		avail_label.add_theme_color_override("font_color", Color(1, 0.5, 0.5))  # Red
+	else:
+		avail_label.add_theme_color_override("font_color", Color(0.5, 1, 0.5))  # Green
+	container.add_child(avail_label)
+	
+	return container
 
