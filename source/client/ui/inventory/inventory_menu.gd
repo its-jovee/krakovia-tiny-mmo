@@ -587,6 +587,11 @@ func _enable_inventory_interaction():
 
 # Tab switching logic
 func _on_tab_button_pressed(tab_index: int) -> void:
+	show_tab(tab_index)
+
+
+func show_tab(tab_index: int) -> void:
+	"""Switch to a specific tab view"""
 	# Hide all views
 	$EquipmentView.hide()
 	$TradeView.hide()
@@ -877,6 +882,7 @@ func _create_crafting_item_slot(item: Item, required_quantity: int, available_qu
 	var icon = TextureRect.new()
 	icon.name = "Icon"
 	icon.texture = item.item_icon
+	icon.custom_minimum_size = Vector2(48, 48)
 	icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	icon.layout_mode = 1

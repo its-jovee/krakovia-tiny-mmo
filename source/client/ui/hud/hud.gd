@@ -18,7 +18,21 @@ var exp_required: int = 100
 @onready var level_label: Label = $LevelDisplay/VBoxContainer/LevelLabel
 @onready var exp_progress_bar: ProgressBar = $LevelDisplay/VBoxContainer/ExpProgressBar
 
+# New HBoxContainer buttons
+@onready var inventory_button: Button = $HBoxContainer/InventoryButton
+@onready var crafting_button: Button = $HBoxContainer/CraftingButton
+@onready var guild_button: Button = $HBoxContainer/GuildButton
+
 func _ready() -> void:
+	# Connect the new HBoxContainer buttons
+	if inventory_button:
+		inventory_button.pressed.connect(_on_inventory_button_pressed)
+	if crafting_button:
+		crafting_button.pressed.connect(_on_crafting_button_pressed)
+	if guild_button:
+		guild_button.pressed.connect(_on_guild_button_pressed)
+	
+	# Connect MenuOverlay buttons
 	for button: Button in $MenuOverlay/VBoxContainer.get_children():
 		if button.text.containsn("CLOSE"):
 			button.pressed.connect(_on_overlay_menu_close_button_pressed)
@@ -87,6 +101,27 @@ func _on_overlay_menu_close_button_pressed() -> void:
 	menu_overlay.hide()
 
 
+func _on_inventory_button_pressed() -> void:
+	"""Open inventory menu showing equipment view"""
+	display_menu(&"inventory")
+	# Ensure we're on the equipment tab (tab index 0)
+	if menus.has(&"inventory") and menus[&"inventory"].has_method("show_tab"):
+		menus[&"inventory"].show_tab(0)
+
+
+func _on_crafting_button_pressed() -> void:
+	"""Open inventory menu and switch to crafting tab"""
+	display_menu(&"inventory")
+	# Switch to crafting tab (tab index 4)
+	if menus.has(&"inventory") and menus[&"inventory"].has_method("show_tab"):
+		menus[&"inventory"].show_tab(4)
+
+
+func _on_guild_button_pressed() -> void:
+	"""Open guild menu"""
+	display_menu(&"guild")
+
+
 func open_player_profile(player_id: int) -> void:
 	display_menu(&"player_profile")
 	menus[&"player_profile"].open_player_profile(player_id)
@@ -113,6 +148,7 @@ func display_menu(menu_name: StringName) -> void:
 		sub_menu.add_child(new_menu)
 		menus[menu_name] = new_menu
 	menus[menu_name].show()
+	menu_overlay.hide()  # Close the menu overlay after opening a menu
 
 
 func _on_overlay_menu_button_pressed() -> void:

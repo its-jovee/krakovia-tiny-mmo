@@ -21,6 +21,10 @@ func _ready() -> void:
 	
 	if icon:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		# Constrain icon to never exceed 32x32 pixels
+		icon.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.custom_minimum_size = Vector2(32, 32)
 	if amount_label:
 		amount_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
@@ -100,6 +104,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		source_slot.icon.texture = current_texture
 		source_slot.amount_label.text = current_amount
 		source_slot.item_data = current_item_data
+		source_slot.icon.show()  # Show the icon again after swap
 		
 		# Update metadata in both slots
 		if current_texture:
