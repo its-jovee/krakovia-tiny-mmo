@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=13 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bdpfln22w1uys" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
 [ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="5_yye8g"]
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="6_qjrur"]
+[ext_resource type="Texture2D" uid="uid://1lckma8tgrri" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb6.png" id="9_o5bjo"]
+[ext_resource type="Texture2D" uid="uid://be5thvqndixxl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb39.png" id="10_s83ae"]
+[ext_resource type="Texture2D" uid="uid://wykq6t7doo8e" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb14.png" id="11_ntruf"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rchld")
@@ -190,25 +193,26 @@ text = "2
 "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 1
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -246.0
-offset_bottom = 40.0
-grow_horizontal = 0
+offset_left = -184.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 80.0
 theme_override_constants/separation = 12
 
 [node name="InventoryButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "INVENTORY"
+icon = ExtResource("9_o5bjo")
 
 [node name="CraftingButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "CRAFTING"
+icon = ExtResource("10_s83ae")
 
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "GUILD"
+icon = ExtResource("11_ntruf")
 
 [node name="MenuOverlay" type="Control" parent="."]
 visible = false
