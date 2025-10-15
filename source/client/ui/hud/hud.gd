@@ -262,7 +262,35 @@ func _show_level_up_popup(new_level: int) -> void:
 	
 	# Position at center of screen
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	popup.position = Vector2(viewport_size.x / 2.0 - 150.0, viewport_size.y / 2.0 - 100.0)
+	popup.position = Vector2(viewport_size.x / 2.0 - 200.0, viewport_size.y / 2.0 - 150.0)
+	
+	# Get unlocked recipes for this level
+	var unlocked_recipes = _get_unlocked_recipes_for_level(new_level)
 	
 	if popup.has_method("setup"):
-		popup.setup(new_level)
+		popup.setup(new_level, unlocked_recipes)
+
+
+func _get_unlocked_recipes_for_level(level: int) -> Array[String]:
+	"""Get all recipes that are unlocked at this specific level for the player's class"""
+	var unlocked: Array[String] = []
+	
+	# Get player class from local player
+	var player_class: String = ""
+	if InstanceClient.local_player:
+		player_class = InstanceClient.local_player.character_class
+	
+	# Load all recipes from registry
+	var registry = ContentRegistryHub.registry_of(&"recipes")
+	if not registry:
+		return unlocked
+	
+	# Check all recipe IDs (1-145 based on what I saw in inventory_menu.gd)
+	for recipe_id in range(1, 146):
+		var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
+		if recipe and recipe.required_level == level:
+			# If we have player class, filter by it. Otherwise show all.
+			if player_class == "" or recipe.required_class == player_class:
+				unlocked.append(String(recipe.recipe_name))
+	
+	return unlocked

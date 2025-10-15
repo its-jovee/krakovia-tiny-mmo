@@ -1039,11 +1039,26 @@ func _show_level_up_popup(new_level: int) -> void:
 	
 	# Position at center of screen
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	popup.position = Vector2(viewport_size.x / 2.0 - 150.0, viewport_size.y / 2.0 - 100.0)
+	popup.position = Vector2(viewport_size.x / 2.0 - 200.0, viewport_size.y / 2.0 - 150.0)
+	
+	# Get unlocked recipes for this level
+	var unlocked_recipes = _get_unlocked_recipes_for_level(new_level)
 	
 	# Setup the popup
 	if popup.has_method("setup"):
-		popup.setup(new_level)
+		popup.setup(new_level, unlocked_recipes)
+
+
+func _get_unlocked_recipes_for_level(level: int) -> Array[String]:
+	"""Get all recipes that are unlocked at this specific level for the player's class"""
+	var unlocked: Array[String] = []
+	
+	# Check available recipes that are unlocked at this level for player's class
+	for recipe: CraftingRecipe in available_recipes:
+		if recipe.required_level == level and recipe.required_class == player_class:
+			unlocked.append(String(recipe.recipe_name))
+	
+	return unlocked
 
 func _on_class_filter_changed(index: int) -> void:
 	_filter_recipes()
