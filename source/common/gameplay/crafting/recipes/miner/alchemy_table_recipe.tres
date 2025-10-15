@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://b8bp6s8sou1wd"]
 
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
@@ -6,9 +6,8 @@
 script = ExtResource("1_recipe")
 slug = &"alchemy_table_recipe"
 recipe_name = &"Alchemy Table"
-recipe_icon = null
 description = "Specialized workspace for potion brewing and alchemy."
-required_class = "miner"
+required_class = "trapper"
 required_level = 17
 gold_cost = 320
 energy_cost = 75.0
@@ -19,6 +18,4 @@ input_2_quantity = 10
 input_3_slug = &"iron_fittings"
 input_3_quantity = 4
 output_1_slug = &"alchemy_table"
-output_1_quantity = 1
 tags = ["tier4", "miner", "construction", "tool"]
-

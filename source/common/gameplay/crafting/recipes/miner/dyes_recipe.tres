@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://bgsdwo1prdjmi"]
 
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
@@ -6,9 +6,8 @@
 script = ExtResource("1_recipe")
 slug = &"dyes_recipe"
 recipe_name = &"Dyes"
-recipe_icon = null
 description = "Extract vibrant dyes from plants for coloring fabrics."
-required_class = "miner"
+required_class = "trapper"
 required_level = 12
 gold_cost = 35
 energy_cost = 50.0
@@ -21,4 +20,3 @@ input_3_quantity = 1
 output_1_slug = &"dyes"
 output_1_quantity = 4
 tags = ["tier3", "miner", "material", "dye"]
-

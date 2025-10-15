@@ -6,20 +6,16 @@
 [resource]
 script = ExtResource("1_recipe")
 slug = &"krak_recipe"
-recipe_name = &"KRAK - The Ultimate Forge"
+recipe_name = &"KRAK "
 recipe_icon = ExtResource("1_icon")
-description = "THE ULTIMATE FORGE. Legends speak of KRAK, an artifact so powerful it contains the essence of all three crafting disciplines. To create KRAK is to achieve mastery over reality itself. It pulses with the heartbeat of a dragon, grows with the strength of the World Tree, and shines with the light of fallen stars. Only the most dedicated players who have mastered all classes and gathered the rarest materials in existence can hope to forge this legendary item. Worth 1.25 MILLION gold!"
-required_class = "miner"
+description = "Legends speak of KRAK, an artifact so powerful it contains the essence of all three crafting disciplines. Worth 1.25 MILLION gold!"
 required_level = 30
 gold_cost = 100000
 energy_cost = 150.0
 input_1_slug = &"ultimate_forge_core"
-input_1_quantity = 1
 input_2_slug = &"celestial_convergence"
 input_2_quantity = 1
 input_3_slug = &"ultimate_endgame_2"
 input_3_quantity = 1
 output_1_slug = &"krak"
-output_1_quantity = 1
 tags = ["miner", "ultimate", "krak", "legendary", "endgame", "t6"]
-

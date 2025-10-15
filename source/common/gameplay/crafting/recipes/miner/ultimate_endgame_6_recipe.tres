@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"ultimate_endgame_6_recipe"
+recipe_name = &"Eternal Flame Relic"
+recipe_icon = ExtResource("1_icon")
+description = "Create the Eternal Flame Relic from the Eternal Flame Brazier and ancient magic. Never dies, ultimate power source. Required for Ultimate Forge Core!"
+required_class = "miner"
+required_level = 27
+gold_cost = 12000
+energy_cost = 135.0
+input_1_slug = &"eternal_flame_brazier"
+input_1_quantity = 1
+input_2_slug = &"ruby"
+input_2_quantity = 5
+input_3_slug = &"fire_herbs"
+input_3_quantity = 10
+output_1_slug = &"ultimate_endgame_6"
+output_1_quantity = 1
+tags = ["miner", "legendary", "endgame", "t6", "mega_component"]
+

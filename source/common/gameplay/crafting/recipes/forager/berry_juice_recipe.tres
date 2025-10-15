@@ -10,7 +10,7 @@ recipe_name = &"Berry Juice"
 recipe_icon = ExtResource("1_iiijh")
 description = "A sweet, revitalizing drink squeezed from wild berries, restoring a bit of strength to weary adventurers."
 required_class = "forager"
-required_level = 4
+required_level = 6
 gold_cost = 2
 energy_cost = 15.0
 input_1_slug = &"berries"
@@ -18,4 +18,3 @@ input_1_quantity = 5
 output_1_slug = &"berry_juice"
 tags = ["trapper", "trap", "bait", "t1", "solo"]
 metadata/_custom_type_script = "uid://recipe013"
-

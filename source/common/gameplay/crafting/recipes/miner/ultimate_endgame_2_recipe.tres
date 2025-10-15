@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://cban0a33y64qx"]
+
+[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"ultimate_endgame_2_recipe"
+recipe_name = &"Dragon Heart Core"
+recipe_icon = ExtResource("1_icon")
+description = "Forge the legendary Dragon Heart Core. Raw magical power incarnate. Requires the finest materials from all classes!"
+required_class = "trapper"
+required_level = 27
+gold_cost = 15000
+energy_cost = 140.0
+input_1_slug = &"adamantine_ingot"
+input_1_quantity = 10
+input_2_slug = &"diamond"
+input_2_quantity = 5
+input_3_slug = &"ancient_titan_essence"
+input_3_quantity = 3
+output_1_slug = &"ultimate_endgame_2"
+tags = ["miner", "legendary", "endgame", "t6", "mega_component"]

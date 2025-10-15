@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://cja6m11b1un3q"]
+
+[ext_resource type="Texture2D" uid="uid://c3aipbv0pcr2o" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/brazier.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"eternal_flame_brazier_recipe"
+recipe_name = &"Eternal Flame Brazier"
+recipe_icon = ExtResource("1_icon")
+description = "Craft a brazier containing an eternal flame. Never needs fuel, lights the darkest nights."
+required_class = "forager"
+required_level = 24
+gold_cost = 4500
+energy_cost = 120.0
+input_1_slug = &"bronze_ingot"
+input_1_quantity = 8
+input_2_slug = &"gold_ingot"
+input_2_quantity = 4
+input_3_slug = &"fire_herbs"
+input_3_quantity = 5
+output_1_slug = &"eternal_flame_brazier"
+tags = ["miner", "furniture", "light", "endgame", "t6"]

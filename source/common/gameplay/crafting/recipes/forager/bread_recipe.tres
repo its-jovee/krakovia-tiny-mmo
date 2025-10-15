@@ -10,13 +10,11 @@ recipe_name = &"Bread"
 recipe_icon = ExtResource("1_icon")
 description = "Bake flour into fresh bread. Essential during FAMINE events!"
 required_class = "forager"
-required_level = 2
+required_level = 4
 gold_cost = 1
 energy_cost = 8.0
 input_1_slug = &"flour"
-input_1_quantity = 1
 output_1_slug = &"bread"
 output_1_quantity = 2
 tags = ["forager", "food", "famine", "celebration", "t1", "solo"]
 metadata/_custom_type_script = "uid://recipe008"
-

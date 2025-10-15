@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://dteqielvx2wdl"]
 
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
@@ -6,9 +6,8 @@
 script = ExtResource("1_recipe")
 slug = &"silk_fabric_recipe"
 recipe_name = &"Silk Fabric"
-recipe_icon = null
 description = "Weave rare silk into luxurious fabric."
-required_class = "miner"
+required_class = "forager"
 required_level = 14
 gold_cost = 120
 energy_cost = 60.0
@@ -17,6 +16,4 @@ input_1_quantity = 3
 input_2_slug = &"gold_thread"
 input_2_quantity = 1
 output_1_slug = &"silk_fabric"
-output_1_quantity = 1
 tags = ["tier3", "miner", "textile", "fabric", "luxury"]
-

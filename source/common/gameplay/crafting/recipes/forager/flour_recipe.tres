@@ -10,6 +10,7 @@ recipe_name = &"Flour"
 recipe_icon = ExtResource("1_icon")
 description = "Grind wheat into flour. Foundation of baking."
 required_class = "forager"
+required_level = 2
 gold_cost = 3
 energy_cost = 2.0
 input_1_slug = &"wheat"

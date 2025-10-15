@@ -54,7 +54,8 @@ new_miner = [
     "crafting_supplies_recipe", "reinforced_door_recipe", "bridge_section_recipe",
     "fortification_section_recipe", "monument_base_recipe", "forge_station_recipe",
     "memorial_plaque_recipe", "alchemy_table_recipe", "premium_workshop_tools_recipe",
-    "crown_recipe", "legendary_weapon_recipe", "masterwork_armor_set_recipe", "guild_hall_section_recipe"
+    "crown_recipe", "legendary_weapon_recipe", "masterwork_armor_set_recipe", "guild_hall_section_recipe",
+    "eternal_flame_brazier_recipe", "ultimate_endgame_2_recipe", "ultimate_endgame_6_recipe"
 ]
 
 new_forager = [
@@ -157,9 +158,13 @@ metadata/id = 4
 with open("source/common/registry/indexes/recipes_index.tres", "w", encoding="utf-8", newline='\n') as f:
     f.write(output)
 
+total_new = len(new_miner) + len(new_forager) + len(new_trapper)
 print(f"✓ Updated recipes_index.tres with {len(entries)} total recipes")
 print(f"  - Kept: 83 existing recipes")
-print(f"  - Moved: 18 interdependent recipes")
-print(f"  - Added: {len(new_miner)} miner + {len(new_forager)} forager + {len(new_trapper)} trapper = {len(new_miner) + len(new_forager) + len(new_trapper)} new recipes")
+print(f"  - Moved: 18 interdependent recipes") 
+print(f"  - Added: {len(new_miner)} miner + {len(new_forager)} forager + {len(new_trapper)} trapper = {total_new} new recipes")
+print(f"  - Miner total: {83 - 18 + 5 + len(new_miner)} recipes")
+print(f"  - Forager total: {83 - 18 + 6 + len(new_forager)} recipes (estimated)")
+print(f"  - Trapper total: {83 - 18 + 7 + len(new_trapper)} recipes (estimated)")
 print(f"  - Next ID: {next_id}")
 

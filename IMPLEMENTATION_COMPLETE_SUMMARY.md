@@ -60,9 +60,9 @@
 - ✅ miner_t1_loot_table.tres (+1 item: water)
 
 ### Phase 4: New Recipes
-**Status:** ✅ COMPLETE - 92 NEW RECIPE FILES CREATED
+**Status:** ✅ COMPLETE - 95 NEW RECIPE FILES CREATED
 
-**Miner (31 recipes):**
+**Miner (34 recipes):**
 1. ✅ iron_helmet_recipe.tres
 2. ✅ iron_boots_recipe.tres
 3. ✅ iron_sword_new_recipe.tres
@@ -94,6 +94,9 @@
 29. ✅ legendary_weapon_recipe.tres
 30. ✅ masterwork_armor_set_recipe.tres
 31. ✅ guild_hall_section_recipe.tres
+32. ✅ eternal_flame_brazier_recipe.tres
+33. ✅ ultimate_endgame_2_recipe.tres (Dragon Heart Core)
+34. ✅ ultimate_endgame_6_recipe.tres (Eternal Flame Relic)
 
 **Forager (34 recipes):**
 1. ✅ olive_oil_recipe.tres
@@ -193,15 +196,15 @@
 
 After all changes:
 
-- **Miner:** 27 existing + 5 moved + 31 new = **63 recipes**
+- **Miner:** 27 existing + 5 moved + 34 new = **66 recipes**
 - **Forager:** 18 existing + 7 moved + 34 new = **59 recipes**
 - **Trapper:** 17 existing + 7 moved + 35 new = **59 recipes**
 
-**Total: 181 recipes** (perfectly balanced across classes!)
+**Total: 184 recipes** (well balanced across classes!)
 
-## 📁 FILES CREATED (97 total)
+## 📁 FILES CREATED (100 total)
 
-- 92 new recipe .tres files
+- 95 new recipe .tres files
 - 2 new loot table .tres files
 - 2 new harvest node .tscn files
 - 1 Python script (update_recipes_index.py)

@@ -10,14 +10,11 @@ recipe_name = &"Thread"
 recipe_icon = ExtResource("1_icon")
 description = "Spin plant fiber into thread. Foundation of all textile work."
 required_class = "forager"
-required_level = 4
+required_level = 5
 gold_cost = 2
 energy_cost = 15.0
 input_1_slug = &"plant_fiber"
 input_1_quantity = 4
 output_1_slug = &"thread"
-output_1_quantity = 1
 tags = ["forager", "textile", "t1", "solo"]
 metadata/_custom_type_script = "uid://recipe009"
-
-
