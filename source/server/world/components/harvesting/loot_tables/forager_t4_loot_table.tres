@@ -34,9 +34,28 @@ loot_entries = Array[Dictionary]([{
 "quantity_max": 1,
 "quantity_min": 1,
 "weight": 5.0
+}, {
+"item_slug": &"woad_plant",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"madder_root",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 8.0
+}, {
+"item_slug": &"almonds",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 6.0
 }])
 rare_bonus_entries = Array[Dictionary]([{
 "chance": 0.005,
 "item_slug": &"silk",
+"quantity": 1
+}, {
+"chance": 0.015,
+"item_slug": &"rare_seeds",
 "quantity": 1
 }])

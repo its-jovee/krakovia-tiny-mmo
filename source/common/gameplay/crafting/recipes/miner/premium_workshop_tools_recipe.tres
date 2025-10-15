@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"premium_workshop_tools_recipe"
+recipe_name = &"Premium Workshop Tools"
+recipe_icon = null
+description = "Upgrade workshop tools with adamantine for peak performance."
+required_class = "miner"
+required_level = 20
+gold_cost = 800
+energy_cost = 95.0
+input_1_slug = &"workshop_tools"
+input_1_quantity = 1
+input_2_slug = &"adamantine_ingot"
+input_2_quantity = 2
+input_3_slug = &"diamond"
+input_3_quantity = 1
+output_1_slug = &"premium_workshop_tools"
+output_1_quantity = 1
+tags = ["tier5", "miner", "tool", "upgrade"]
+

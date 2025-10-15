@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"raw_meat_processing_recipe"
+recipe_name = &"Raw Meat Processing"
+recipe_icon = null
+description = "Process raw meat into usable cuts for cooking."
+required_class = "trapper"
+required_level = 4
+gold_cost = 5
+energy_cost = 15.0
+input_1_slug = &"raw_meat"
+input_1_quantity = 3
+output_1_slug = &"rabbit_meat"
+output_1_quantity = 2
+output_2_slug = &"deer_meat"
+output_2_quantity = 1
+tags = ["tier1", "trapper", "food", "processing"]
+

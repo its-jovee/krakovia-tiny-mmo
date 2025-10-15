@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"iron_sword_new_recipe"
+recipe_name = &"Iron Sword"
+recipe_icon = null
+description = "Reliable iron sword. A warrior's companion."
+required_class = "miner"
+required_level = 10
+gold_cost = 60
+energy_cost = 50.0
+input_1_slug = &"iron_ingot"
+input_1_quantity = 3
+input_2_slug = &"oak_planks"
+input_2_quantity = 1
+output_1_slug = &"iron_sword_new"
+output_1_quantity = 1
+tags = ["tier2", "miner", "weapon", "combat", "sword"]
+

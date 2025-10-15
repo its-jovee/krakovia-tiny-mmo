@@ -34,9 +34,33 @@ loot_entries = Array[Dictionary]([{
 "quantity_max": 2,
 "quantity_min": 1,
 "weight": 10.0
+}, {
+"item_slug": &"cabbage",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"turnips",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"cotton",
+"quantity_max": 3,
+"quantity_min": 2,
+"weight": 15.0
+}, {
+"item_slug": &"resin",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
 }])
 rare_bonus_entries = Array[Dictionary]([{
 "chance": 0.01,
 "item_slug": &"silk",
+"quantity": 1
+}, {
+"chance": 0.02,
+"item_slug": &"exotic_flowers",
 "quantity": 1
 }])

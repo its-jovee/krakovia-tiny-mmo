@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"tanning_rack_recipe"
+recipe_name = &"Tanning Rack"
+recipe_icon = null
+description = "Essential equipment for processing leather."
+required_class = "forager"
+required_level = 13
+gold_cost = 75
+energy_cost = 55.0
+input_1_slug = &"pine_planks"
+input_1_quantity = 4
+input_2_slug = &"rope"
+input_2_quantity = 3
+input_3_slug = &"iron_fittings"
+input_3_quantity = 2
+output_1_slug = &"tanning_rack"
+output_1_quantity = 1
+tags = ["tier3", "forager", "tool", "construction"]
+

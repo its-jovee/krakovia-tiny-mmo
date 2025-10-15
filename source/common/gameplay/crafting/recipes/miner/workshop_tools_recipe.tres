@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"workshop_tools_recipe"
+recipe_name = &"Workshop Tools"
+recipe_icon = null
+description = "Comprehensive workshop tools for master crafting. Requires all 3 classes!"
+required_class = "miner"
+required_level = 24
+gold_cost = 2500
+energy_cost = 115.0
+input_1_slug = &"adamantine_ingot"
+input_1_quantity = 4
+input_2_slug = &"ironwood_planks"
+input_2_quantity = 4
+input_3_slug = &"masterwork_leather"
+input_3_quantity = 2
+output_1_slug = &"workshop_tools"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 0
+tags = ["tier3", "miner", "tool", "construction", "3class"]
+
+

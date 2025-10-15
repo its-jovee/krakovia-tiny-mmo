@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"feast_table_recipe"
+recipe_name = &"Feast Table"
+recipe_icon = null
+description = "Grand table laden with food for celebrations."
+required_class = "forager"
+required_level = 24
+gold_cost = 1200
+energy_cost = 120.0
+input_1_slug = &"ornate_table"
+input_1_quantity = 1
+input_2_slug = &"honey_glazed_ham"
+input_2_quantity = 2
+input_3_slug = &"luxury_pastries"
+input_3_quantity = 3
+output_1_slug = &"feast_table"
+output_1_quantity = 1
+tags = ["tier5", "forager", "furniture", "celebration", "luxury"]
+

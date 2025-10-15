@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"pillow_recipe"
+recipe_name = &"Pillow"
+recipe_icon = null
+description = "Soft pillow stuffed with cotton for comfort."
+required_class = "forager"
+required_level = 8
+gold_cost = 32
+energy_cost = 35.0
+input_1_slug = &"linen_fabric"
+input_1_quantity = 2
+input_2_slug = &"cotton"
+input_2_quantity = 3
+output_1_slug = &"pillow"
+output_1_quantity = 1
+tags = ["tier2", "forager", "household", "furniture"]
+

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"master_hunters_set_recipe"
+recipe_name = &"Master Hunter's Set"
+recipe_icon = null
+description = "Complete armor set for legendary hunters."
+required_class = "trapper"
+required_level = 25
+gold_cost = 1500
+energy_cost = 130.0
+input_1_slug = &"pristine_pelts"
+input_1_quantity = 4
+input_2_slug = &"exotic_hides"
+input_2_quantity = 3
+input_3_slug = &"ancient_titan_essence"
+input_3_quantity = 1
+output_1_slug = &"master_hunters_set"
+output_1_quantity = 1
+tags = ["tier5", "trapper", "armor", "masterwork", "set"]
+

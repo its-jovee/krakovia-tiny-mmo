@@ -44,6 +44,36 @@ loot_entries = Array[Dictionary]([{
 "quantity_max": 1,
 "quantity_min": 1,
 "weight": 5.0
+}, {
+"item_slug": &"pears",
+"quantity_max": 2,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"rye",
+"quantity_max": 3,
+"quantity_min": 2,
+"weight": 12.0
+}, {
+"item_slug": &"barley",
+"quantity_max": 3,
+"quantity_min": 2,
+"weight": 12.0
+}, {
+"item_slug": &"oats",
+"quantity_max": 3,
+"quantity_min": 2,
+"weight": 12.0
+}, {
+"item_slug": &"honey",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 10.0
+}, {
+"item_slug": &"cork",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 6.0
 }])
 rare_bonus_entries = Array[Dictionary]([{
 "chance": 0.015,
@@ -52,6 +82,10 @@ rare_bonus_entries = Array[Dictionary]([{
 }, {
 "chance": 0.015,
 "item_slug": &"rare_spices",
+"quantity": 1
+}, {
+"chance": 0.01,
+"item_slug": &"tree_sap",
 "quantity": 1
 }])
 

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"seasoned_meat_recipe"
+recipe_name = &"Seasoned Meat"
+recipe_icon = null
+description = "Season cooked meat with rare spices and herbs. Luxury food! Requires Trapper cooked meat!"
+required_class = "forager"
+required_level = 13
+gold_cost = 16
+energy_cost = 60.0
+input_1_slug = &"cooked_meat"
+input_1_quantity = 2
+input_2_slug = &"rare_spices"
+input_2_quantity = 1
+input_3_slug = &"common_herbs"
+input_3_quantity = 1
+output_1_slug = &"seasoned_meat"
+output_1_quantity = 2
+output_2_slug = &""
+output_2_quantity = 0
+tags = ["tier2", "forager", "food", "celebration", "trapper_forager"]
+
+

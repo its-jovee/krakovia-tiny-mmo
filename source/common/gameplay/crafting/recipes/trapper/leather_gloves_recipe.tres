@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"leather_gloves_recipe"
+recipe_name = &"Leather Gloves"
+recipe_icon = null
+description = "Flexible leather gloves for dexterity and protection."
+required_class = "trapper"
+required_level = 8
+gold_cost = 45
+energy_cost = 35.0
+input_1_slug = &"basic_leather"
+input_1_quantity = 2
+input_2_slug = &"thread"
+input_2_quantity = 1
+output_1_slug = &"leather_gloves"
+output_1_quantity = 1
+tags = ["tier2", "trapper", "armor", "gloves"]
+

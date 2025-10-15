@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"gathering_satchel_recipe"
+recipe_name = &"Gathering Satchel"
+recipe_icon = null
+description = "Simple satchel for gathering expeditions."
+required_class = "trapper"
+required_level = 6
+gold_cost = 28
+energy_cost = 28.0
+input_1_slug = &"basic_leather"
+input_1_quantity = 2
+input_2_slug = &"plant_fiber"
+input_2_quantity = 4
+output_1_slug = &"gathering_satchel"
+output_1_quantity = 1
+tags = ["tier1", "trapper", "storage", "bag"]
+

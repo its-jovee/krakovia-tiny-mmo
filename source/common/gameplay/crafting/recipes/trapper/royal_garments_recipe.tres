@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"royal_garments_recipe"
+recipe_name = &"Royal Garments"
+recipe_icon = null
+description = "Luxurious garments for royalty. Ultimate clothing requiring all 3 classes!"
+required_class = "trapper"
+required_level = 20
+gold_cost = 2000
+energy_cost = 95.0
+input_1_slug = &"silk"
+input_1_quantity = 3
+input_2_slug = &"masterwork_leather"
+input_2_quantity = 2
+input_3_slug = &"gold_inlay"
+input_3_quantity = 2
+output_1_slug = &"royal_garments"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 0
+tags = ["tier6", "trapper", "clothing", "luxury", "royal", "3class"]
+
+

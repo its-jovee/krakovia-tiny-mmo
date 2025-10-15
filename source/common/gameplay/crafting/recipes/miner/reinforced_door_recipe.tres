@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"reinforced_door_recipe"
+recipe_name = &"Reinforced Door"
+recipe_icon = null
+description = "Heavy door fortified with iron for security."
+required_class = "miner"
+required_level = 19
+gold_cost = 280
+energy_cost = 85.0
+input_1_slug = &"iron_fittings"
+input_1_quantity = 4
+input_2_slug = &"oak_planks"
+input_2_quantity = 6
+input_3_slug = &"nails"
+input_3_quantity = 8
+output_1_slug = &"reinforced_door"
+output_1_quantity = 1
+tags = ["tier4", "miner", "construction", "building"]
+

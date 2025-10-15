@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"perfume_recipe"
+recipe_name = &"Perfume"
+recipe_icon = null
+description = "Luxurious fragrance from exotic flowers."
+required_class = "forager"
+required_level = 13
+gold_cost = 110
+energy_cost = 55.0
+input_1_slug = &"exotic_flowers"
+input_1_quantity = 3
+input_2_slug = &"herbs_rare"
+input_2_quantity = 2
+input_3_slug = &"glass_bottle"
+input_3_quantity = 1
+output_1_slug = &"perfume"
+output_1_quantity = 1
+tags = ["tier3", "forager", "luxury", "household"]
+

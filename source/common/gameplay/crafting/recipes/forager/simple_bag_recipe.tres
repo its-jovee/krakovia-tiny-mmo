@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"simple_bag_recipe"
+recipe_name = &"Simple Bag"
+recipe_icon = null
+description = "Sew a simple bag for carrying more items. First 3-class recipe - requires ALL crafting classes!"
+required_class = "forager"
+required_level = 5
+gold_cost = 12
+energy_cost = 20.0
+input_1_slug = &"basic_fabric"
+input_1_quantity = 4
+input_2_slug = &"thread"
+input_2_quantity = 1
+input_3_slug = &"leather_cord"
+input_3_quantity = 1
+output_1_slug = &"simple_bag"
+output_1_quantity = 1
+output_2_slug = &""
+output_2_quantity = 0
+tags = ["forager", "storage", "all_classes", "t2"]
+
+

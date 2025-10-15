@@ -1,37 +1,43 @@
-[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3 uid="uid://briq3q8j3gc6u"]
+[gd_resource type="Resource" script_class="HarvestLootTable" load_steps=2 format=3 uid="uid://trapper_t5_loot"]
 
 [ext_resource type="Script" uid="uid://kp65so3ujbj8" path="res://source/server/world/components/harvesting/harvest_loot_table.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 loot_entries = Array[Dictionary]([{
-"item_slug": &"deer_hide",
+"item_slug": &"pristine_pelts",
 "quantity_max": 2,
 "quantity_min": 1,
 "weight": 35.0
 }, {
-"item_slug": &"deer_meat",
+"item_slug": &"exotic_hides",
 "quantity_max": 2,
 "quantity_min": 1,
 "weight": 30.0
 }, {
-"item_slug": &"bones",
-"quantity_max": 3,
+"item_slug": &"trophy_antlers",
+"quantity_max": 1,
 "quantity_min": 1,
 "weight": 20.0
 }, {
-"item_slug": &"animal_fat",
-"quantity_max": 2,
+"item_slug": &"musk_glands",
+"quantity_max": 1,
 "quantity_min": 1,
 "weight": 10.0
 }, {
-"item_slug": &"raw_meat",
-"quantity_max": 2,
+"item_slug": &"ancient_titan_essence",
+"quantity_max": 1,
 "quantity_min": 1,
-"weight": 20.0
+"weight": 3.0
+}, {
+"item_slug": &"bile_sacs",
+"quantity_max": 1,
+"quantity_min": 1,
+"weight": 2.0
 }])
 rare_bonus_entries = Array[Dictionary]([{
-"chance": 0.05,
-"item_slug": &"fox_fur",
+"chance": 0.005,
+"item_slug": &"ancient_titan_essence",
 "quantity": 1
 }])
+

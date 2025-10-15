@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"masterwork_armor_set_recipe"
+recipe_name = &"Masterwork Armor Set"
+recipe_icon = null
+description = "Complete set of the finest armor ever crafted."
+required_class = "miner"
+required_level = 27
+gold_cost = 3000
+energy_cost = 160.0
+input_1_slug = &"adamantine_ingot"
+input_1_quantity = 8
+input_2_slug = &"masterwork_leather"
+input_2_quantity = 4
+input_3_slug = &"essence_of_mastery"
+input_3_quantity = 1
+output_1_slug = &"masterwork_armor_set"
+output_1_quantity = 1
+tags = ["tier6", "miner", "armor", "masterwork", "combat"]
+

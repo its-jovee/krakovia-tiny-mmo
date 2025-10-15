@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"luxury_polish_recipe"
+recipe_name = &"Luxury Polish"
+recipe_icon = null
+description = "Premium polish for maintaining fine furniture and armor."
+required_class = "forager"
+required_level = 14
+gold_cost = 75
+energy_cost = 58.0
+input_1_slug = &"beeswax"
+input_1_quantity = 2
+input_2_slug = &"olive_oil"
+input_2_quantity = 1
+input_3_slug = &"exotic_flowers"
+input_3_quantity = 1
+output_1_slug = &"luxury_polish"
+output_1_quantity = 2
+tags = ["tier3", "forager", "household", "luxury"]
+

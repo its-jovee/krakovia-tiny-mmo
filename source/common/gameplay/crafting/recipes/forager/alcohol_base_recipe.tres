@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"alcohol_base_recipe"
+recipe_name = &"Alcohol Base"
+recipe_icon = null
+description = "Distill wheat into basic alcohol for medicines and tinctures."
+required_class = "forager"
+required_level = 8
+gold_cost = 18
+energy_cost = 35.0
+input_1_slug = &"wheat"
+input_1_quantity = 5
+input_2_slug = &"water"
+input_2_quantity = 3
+output_1_slug = &"alcohol_base"
+output_1_quantity = 2
+tags = ["tier2", "forager", "material", "alchemy"]
+

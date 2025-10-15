@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"display_cabinet_recipe"
+recipe_name = &"Display Cabinet"
+recipe_icon = null
+description = "Elegant cabinet with glass panes for displaying treasures."
+required_class = "forager"
+required_level = 17
+gold_cost = 280
+energy_cost = 75.0
+input_1_slug = &"cedar_planks"
+input_1_quantity = 6
+input_2_slug = &"glass_pane"
+input_2_quantity = 4
+input_3_slug = &"gold_inlay"
+input_3_quantity = 1
+output_1_slug = &"display_cabinet"
+output_1_quantity = 1
+tags = ["tier4", "forager", "furniture", "luxury"]
+

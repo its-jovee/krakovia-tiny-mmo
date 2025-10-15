@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"explorer_pack_recipe"
+recipe_name = &"Explorer Pack"
+recipe_icon = null
+description = "Professional pack for long expeditions and exploration."
+required_class = "trapper"
+required_level = 16
+gold_cost = 180
+energy_cost = 75.0
+input_1_slug = &"heavy_leather"
+input_1_quantity = 2
+input_2_slug = &"canvas"
+input_2_quantity = 2
+input_3_slug = &"metal_bands"
+input_3_quantity = 2
+output_1_slug = &"explorer_pack"
+output_1_quantity = 1
+tags = ["tier4", "trapper", "storage", "bag"]
+

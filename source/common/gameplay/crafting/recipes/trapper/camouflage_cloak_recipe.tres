@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"camouflage_cloak_recipe"
+recipe_name = &"Camouflage Cloak"
+recipe_icon = null
+description = "Specially treated cloak for blending into natural environments."
+required_class = "trapper"
+required_level = 19
+gold_cost = 280
+energy_cost = 88.0
+input_1_slug = &"exotic_hides"
+input_1_quantity = 2
+input_2_slug = &"plant_fiber"
+input_2_quantity = 5
+input_3_slug = &"herbs_rare"
+input_3_quantity = 2
+output_1_slug = &"camouflage_cloak"
+output_1_quantity = 1
+tags = ["tier4", "trapper", "clothing", "stealth"]
+
