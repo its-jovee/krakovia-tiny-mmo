@@ -34,6 +34,8 @@ var current_gold: int = 0
 # Energy tracking
 var current_energy: float = 0.0
 var current_energy_max: float = 100.0
+var _energy_update_timer: float = 0.0
+const ENERGY_UPDATE_THROTTLE: float = 0.5  # Only update UI every 0.5s
 
 # XP/Level tracking
 var current_exp: int = 0
@@ -49,6 +51,10 @@ var player_level: int = 0
 # Preload popup scenes to avoid runtime hitch
 const CRAFT_XP_POPUP_SCENE = preload("res://source/client/ui/hud/craft_xp_popup.tscn")
 const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.tscn")
+
+# View references
+@onready var equipment_view: Control = $EquipmentView
+@onready var materials_view: Control = $MaterialsView
 
 @onready var inventory_grid: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer/InventoryGrid
 @onready var equipment_slots: GridContainer = $EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots
@@ -151,9 +157,15 @@ func _ready() -> void:
 	if search_box:
 		search_box.text_changed.connect(_on_search_text_changed)
 	
-	#hide trade viewby default
+	# Initialize view visibility - hide all except equipment
+	equipment_view.show()
+	materials_view.hide()
 	trade_view.hide()
-	$EquipmentView.show()
+	crafting_view.hide()
+
+
+func _process(delta: float) -> void:
+	_energy_update_timer += delta
 
 
 func _on_visibility_changed() -> void:
@@ -168,8 +180,8 @@ func _on_visibility_changed() -> void:
 		# If we have an active trade session when becoming visible, show TradeView
 		# Note: _populate_trade_inventory() will be called in fill_inventory() after data arrives
 		if trade_session_id != -1:
-			$EquipmentView.hide()
-			$MaterialsView.hide()
+			equipment_view.hide()
+			materials_view.hide()
 			trade_view.show()
 
 func _sync_market_status_from_hud() -> void:
@@ -263,13 +275,22 @@ func _on_local_player_ready(local_player: LocalPlayer) -> void:
 
 func _on_player_attribute_changed(attr: StringName, value: float, max_value: float) -> void:
 	if attr == &"energy":
+		# Store energy values but don't update UI unless crafting view is visible
 		current_energy = value
 		current_energy_max = max_value
-		print("Inventory menu: Energy changed to ", current_energy, "/", current_energy_max)
-		_update_crafting_bars()
-		# Update recipe details if we're viewing a recipe with energy cost
-		if selected_recipe and selected_recipe.energy_cost > 0:
-			_update_recipe_details()
+		
+		# Only update UI if crafting view is visible AND enough time has passed
+		if not crafting_view.visible:
+			return
+			
+		if _energy_update_timer >= ENERGY_UPDATE_THROTTLE:
+			print("Inventory menu: Energy changed to ", current_energy, "/", current_energy_max)
+			_energy_update_timer = 0.0
+			_update_crafting_bars()
+			
+			# Only update recipe details if we have a recipe with energy cost
+			if selected_recipe and selected_recipe.energy_cost > 0:
+				_update_recipe_details()
 
 func _on_level_received(data: Dictionary) -> void:
 	current_level_display = data.get("level", 1)
@@ -409,8 +430,10 @@ func _on_trade_open(data: Dictionary):
 	their_offer_title.text = other_player_name + "'s Offer"
 	
 	# Switch to trade view
-	$EquipmentView.hide()
-	$MaterialsView.hide()
+	equipment_view.hide()
+	materials_view.hide()
+	crafting_view.hide()
+	
 	trade_view.show()
 	
 	# Populate the player inventory in trade view
@@ -561,7 +584,7 @@ func _on_gold_input_changed(new_text: String):
 
 func _close_trade():
 	trade_view.hide()
-	$EquipmentView.show()
+	equipment_view.show()
 	_reset_trade_state()
 
 func _reset_trade_state():
@@ -593,24 +616,26 @@ func _on_tab_button_pressed(tab_index: int) -> void:
 func show_tab(tab_index: int) -> void:
 	"""Switch to a specific tab view"""
 	# Hide all views
-	$EquipmentView.hide()
-	$TradeView.hide()
-	$MaterialsView.hide()
+	equipment_view.hide()
+	trade_view.hide()
+	materials_view.hide()
 	crafting_view.hide()
 	
 	# Show appropriate view based on tab
 	match tab_index:
 		0: # Equipment
-			$EquipmentView.show()
+			equipment_view.show()
 		1: # Materials  
-			$MaterialsView.show()
+			materials_view.show()
 		2: # Consumables
-			$EquipmentView.show() # For now, show equipment view
+			equipment_view.show() # For now, show equipment view
 		3: # Key Items
-			$EquipmentView.show() # For now, show equipment view
+			equipment_view.show() # For now, show equipment view
 		4: # Crafting
 			crafting_view.show()
 			_load_crafting_data()
+			# Update energy display immediately when showing crafting view
+			_update_crafting_bars()
 
 
 # Crafting system methods

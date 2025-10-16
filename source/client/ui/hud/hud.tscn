@@ -193,13 +193,14 @@ text = "2
 "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -184.0
+offset_left = -131.0
 offset_top = 40.0
-offset_right = -40.0
+offset_right = -39.0
 offset_bottom = 80.0
+grow_horizontal = 0
 theme_override_constants/separation = 12
 
 [node name="InventoryButton" type="Button" parent="HBoxContainer"]
@@ -211,6 +212,7 @@ layout_mode = 2
 icon = ExtResource("10_s83ae")
 
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 icon = ExtResource("11_ntruf")
 
