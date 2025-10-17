@@ -308,6 +308,10 @@ func _on_open_shop_pressed() -> void:
 func _on_shop_open_response(data: Dictionary) -> void:
 	if data.has("error"):
 		push_error("Failed to open shop: " + data.error)
+		# Show error notification
+		var hud = get_tree().get_root().find_child("HUD", true, false)
+		if hud and hud.has_method("show_notification"):
+			hud.show_notification(data.error, "✗ Cannot Open Shop")
 		return
 	
 	# Now add all items to the shop
@@ -333,6 +337,12 @@ func _on_shop_opened(data: Dictionary) -> void:
 	shop_open = true
 	_update_ui_state()
 	visible = false  # Hide shop setup view when shop is opened
+	
+	# Show success notification
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud and hud.has_method("show_notification"):
+		hud.show_notification("Shop opened: " + data.shop_name, "✓ Success")
+	
 	print("Shop opened successfully: ", data.shop_name)
 
 
@@ -343,11 +353,23 @@ func _on_shop_closed(data: Dictionary) -> void:
 	_refresh_shop_items()
 	# Stand up when shop closes
 	InstanceClient.current.request_data(&"state.sit", Callable(), {"on": false})
+	
+	# Show info notification
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud and hud.has_method("show_notification"):
+		hud.show_notification("Shop closed", "Shop Info")
+	
 	print("Shop closed")
 
 
 func _on_item_sold(data: Dictionary) -> void:
 	print("Item sold: ", data.quantity, "x ", data.item_name, " for ", data.total_price, " gold to ", data.buyer_name)
+	
+	# Show success notification to seller
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud and hud.has_method("show_notification"):
+		var message = "Sold %dx %s for %dg to %s" % [data.quantity, data.item_name, data.total_price, data.buyer_name]
+		hud.show_notification(message, "✓ Sale Complete")
 	
 	# Update local shop items
 	var item_id = data.item_id

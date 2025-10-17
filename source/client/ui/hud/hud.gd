@@ -366,3 +366,27 @@ func _get_unlocked_recipes_for_level(level: int) -> Array[String]:
 				unlocked.append(String(recipe.recipe_name))
 	
 	return unlocked
+
+
+## Show a simple notification message using AcceptDialog
+func show_notification(message: String, title: String = "Notification") -> void:
+	var dialog = AcceptDialog.new()
+	dialog.dialog_text = message
+	dialog.title = title
+	dialog.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	dialog.ok_button_text = "OK"
+	
+	# Add to scene
+	add_child(dialog)
+	
+	# Show popup
+	dialog.popup_centered()
+	
+	# Auto-close after confirmed or timeout
+	dialog.confirmed.connect(func(): dialog.queue_free())
+	dialog.close_requested.connect(func(): dialog.queue_free())
+	
+	# Auto-close after 5 seconds
+	await get_tree().create_timer(5.0).timeout
+	if is_instance_valid(dialog):
+		dialog.queue_free()
