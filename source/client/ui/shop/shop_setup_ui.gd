@@ -17,6 +17,7 @@ var player_inventory: Dictionary = {}
 @onready var item_name_label: Label = $AddItemDialog/VBoxContainer/ItemNameLabel
 @onready var quantity_spinbox: SpinBox = $AddItemDialog/VBoxContainer/HBoxContainer/QuantitySpinBox
 @onready var price_spinbox: SpinBox = $AddItemDialog/VBoxContainer/HBoxContainer2/PriceSpinBox
+@onready var remove_button: Button = null  # Will be created dynamically
 
 var selected_item_id: int = -1
 var selected_source: String = ""  # "inventory" or "shop" - tracks where the click came from
@@ -29,6 +30,10 @@ func _ready() -> void:
 	close_shop_button.pressed.connect(_on_close_shop_pressed)
 	close_button.pressed.connect(_on_close_button_pressed)
 	add_item_dialog.confirmed.connect(_on_add_item_confirmed)
+	add_item_dialog.custom_action.connect(_on_dialog_custom_action)
+	
+	# Create the Remove button for the dialog
+	_setup_remove_button()
 	
 	# Subscribe to shop events
 	InstanceClient.subscribe(&"shop.opened", _on_shop_opened)
@@ -40,6 +45,16 @@ func _ready() -> void:
 	
 	# Note: Item slots already handle clicks via item_slot.gd
 	# They call _on_item_slot_clicked() on their parent automatically
+
+
+func _setup_remove_button() -> void:
+	# Create a custom Remove button in the dialog
+	remove_button = add_item_dialog.add_button("Remove from Shop", false, "remove")
+
+
+func _on_dialog_custom_action(action: String) -> void:
+	if action == "remove":
+		_on_remove_button_pressed()
 
 
 
@@ -151,6 +166,9 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 		var suggested_price = item.minimum_price if item.minimum_price > 0 else 10
 		price_spinbox.value = suggested_price
 		
+		# Hide the remove button for inventory items
+		_show_remove_button(false)
+		
 		add_item_dialog.popup_centered()
 		
 	elif is_from_shop:
@@ -165,7 +183,27 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 		quantity_spinbox.value = shop_item.quantity
 		price_spinbox.value = shop_item.price
 		
+		# Show the remove button for shop items
+		_show_remove_button(true)
+		
 		add_item_dialog.popup_centered()
+
+
+func _show_remove_button(show: bool) -> void:
+	# Use the stored button reference
+	if remove_button:
+		remove_button.visible = show
+		remove_button.disabled = not show  # Also disable it when hidden
+
+
+func _on_remove_button_pressed() -> void:
+	# Remove the item from shop
+	if selected_item_id != -1:
+		shop_items.erase(selected_item_id)
+		_refresh_shop_items()
+		selected_item_id = -1
+		selected_source = ""
+		add_item_dialog.hide()
 
 
 func _on_add_item_confirmed() -> void:
@@ -294,6 +332,7 @@ func _on_shop_close_response(data: Dictionary) -> void:
 func _on_shop_opened(data: Dictionary) -> void:
 	shop_open = true
 	_update_ui_state()
+	visible = false  # Hide shop setup view when shop is opened
 	print("Shop opened successfully: ", data.shop_name)
 
 
@@ -302,6 +341,8 @@ func _on_shop_closed(data: Dictionary) -> void:
 	shop_items.clear()
 	_update_ui_state()
 	_refresh_shop_items()
+	# Stand up when shop closes
+	InstanceClient.current.request_data(&"state.sit", Callable(), {"on": false})
 	print("Shop closed")
 
 
@@ -330,3 +371,6 @@ func _update_ui_state() -> void:
 
 func _on_close_button_pressed() -> void:
 	visible = false
+	# Stand up when closing shop setup UI (if shop isn't actually open)
+	if not shop_open:
+		InstanceClient.current.request_data(&"state.sit", Callable(), {"on": false})

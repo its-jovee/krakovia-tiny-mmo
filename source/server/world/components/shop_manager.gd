@@ -10,6 +10,26 @@ var active_shops: Dictionary = {}
 var shops_by_peer: Dictionary = {}
 var next_session_id: int = 1
 
+# Grace period before checking if player stood up (gives time for animation to sync)
+const STAND_CHECK_GRACE_PERIOD: float = 1.0
+
+
+func _process(_delta: float) -> void:
+	# Check if any shop owners have stood up
+	var current_time = Time.get_ticks_msec() / 1000.0
+	for peer_id in shops_by_peer.keys():
+		var session: ShopSession = get_shop_by_peer(peer_id)
+		if session and session.instance:
+			# Skip check during grace period (allow time for sit animation to sync)
+			if current_time - session.opened_at < STAND_CHECK_GRACE_PERIOD:
+				continue
+			
+			var player = session.instance.get_player(peer_id)
+			if player and player.anim != Character.Animations.SIT:
+				print("ShopManager: Player ", peer_id, " stood up - auto-closing shop")
+				close_shop(peer_id)
+
+
 # Shop session data structure
 class ShopSession:
 	var session_id: int
@@ -20,6 +40,7 @@ class ShopSession:
 	var items_for_sale: Dictionary = {}
 	var shop_position: Vector2
 	var instance: ServerInstance
+	var opened_at: float = 0.0  # Timestamp when shop was opened
 	
 	func get_data() -> Dictionary:
 		return {
@@ -63,6 +84,22 @@ func open_shop(peer_id: int, shop_name: String, instance: ServerInstance) -> Dic
 		if trade_mgr.is_player_in_trade(peer_id):
 			return {"error": "Cannot open shop while trading"}
 	
+	# Check if player is harvesting
+	var is_harvesting: bool = false
+	for child in instance.instance_map.get_children():
+		if child is HarvestNode and child.harvesters.has(peer_id):
+			is_harvesting = true
+			break
+	if is_harvesting:
+		return {"error": "Cannot open shop while harvesting"}
+	
+	# Check if player is in a minigame
+	if instance.has_node("MinigameManager"):
+		var minigame_mgr: MinigameManager = instance.get_node("MinigameManager")
+		for session in minigame_mgr.active_sessions.values():
+			if session.has_method("is_player_in_game") and session.is_player_in_game(peer_id):
+				return {"error": "Cannot open shop while in a minigame"}
+	
 	# Validate shop name
 	if shop_name.strip_edges().is_empty():
 		shop_name = "%s's Shop" % player.player_resource.display_name
@@ -75,10 +112,16 @@ func open_shop(peer_id: int, shop_name: String, instance: ServerInstance) -> Dic
 	session.shop_name = shop_name
 	session.shop_position = player.global_position
 	session.instance = instance
+	session.opened_at = Time.get_ticks_msec() / 1000.0  # Record when shop was opened
 	
 	active_shops[next_session_id] = session
 	shops_by_peer[peer_id] = next_session_id
 	next_session_id += 1
+	
+	# Make player sit when opening shop
+	if player.state_synchronizer:
+		player.state_synchronizer.set_by_path(^":anim", Character.Animations.SIT)
+		print("ShopManager: Set player ", peer_id, " to sitting animation")
 	
 	# Notify the seller
 	instance.data_push.rpc_id(peer_id, &"shop.opened", {

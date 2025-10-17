@@ -137,6 +137,9 @@ func _on_guild_button_pressed() -> void:
 
 func _on_shop_button_pressed() -> void:
 	"""Open shop setup menu"""
+	# Make player sit down immediately when opening shop UI
+	InstanceClient.current.request_data(&"state.sit", Callable(), {"on": true})
+	
 	if menus.has(&"shop_setup"):
 		var shop_menu = menus[&"shop_setup"]
 		if shop_menu.has_method("show_menu"):

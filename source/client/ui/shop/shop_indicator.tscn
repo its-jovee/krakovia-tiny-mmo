@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://shop_indicator"]
+[gd_scene load_steps=2 format=3 uid="uid://cjaa1qpxtphv0"]
 
-[ext_resource type="Script" path="res://source/client/ui/shop/shop_indicator.gd" id="1_shop_indicator"]
+[ext_resource type="Script" uid="uid://bs3jf7rwp8617" path="res://source/client/ui/shop/shop_indicator.gd" id="1_shop_indicator"]
 
 [node name="ShopIndicator" type="Control"]
+z_index = 200
+layout_mode = 3
 anchors_preset = 0
 offset_right = 200.0
 offset_bottom = 60.0
@@ -19,23 +21,22 @@ anchor_bottom = 0.5
 offset_left = -100.0
 offset_top = -30.0
 offset_right = 100.0
-offset_bottom = 30.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -10.5
+offset_right = 40.0
+offset_bottom = 10.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ShopIconLabel" type="Label" parent="Panel/VBoxContainer"]
-layout_mode = 2
-text = "🛒 SHOP"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ShopNameLabel" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2

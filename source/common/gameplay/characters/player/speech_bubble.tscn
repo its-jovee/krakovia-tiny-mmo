@@ -10,7 +10,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="SpeechBubble" type="Control"]
-z_index = 100
+z_index = 900
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

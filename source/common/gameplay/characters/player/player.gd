@@ -80,7 +80,7 @@ func _update_shop_indicator() -> void:
 			var shop_indicator_scene = preload("res://source/client/ui/shop/shop_indicator.tscn")
 			shop_indicator = shop_indicator_scene.instantiate()
 			add_child(shop_indicator)
-			shop_indicator.position = Vector2(0, -100)  # Position above player
+			# Position is now handled by shop_indicator's _process() method (like speech bubble)
 			shop_indicator.peer_id = peer_id
 			print("Shop indicator created and added!")
 		
