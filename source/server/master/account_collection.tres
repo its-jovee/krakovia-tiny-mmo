@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=194 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=200 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -591,10 +591,52 @@ id = 188
 handle = "guest188"
 password = "6rfx$gdq-q5e"
 
+[sub_resource type="Resource" id="Resource_5p741"]
+script = ExtResource("1_wgikn")
+id = 189
+handle = "guest189"
+password = "a25y0bxbxf$2"
+
 [sub_resource type="Resource" id="Resource_k6705"]
 script = ExtResource("1_wgikn")
 id = 19
 password = "aagw#6x+c7+m"
+
+[sub_resource type="Resource" id="Resource_m82ow"]
+script = ExtResource("1_wgikn")
+id = 190
+handle = "guest190"
+password = "5pa2v#kcdrd9"
+
+[sub_resource type="Resource" id="Resource_puwv2"]
+script = ExtResource("1_wgikn")
+id = 191
+handle = "guest191"
+password = "vd81nynqpqwa"
+
+[sub_resource type="Resource" id="Resource_uiyfq"]
+script = ExtResource("1_wgikn")
+id = 192
+handle = "guest192"
+password = "npfskhnfaisv"
+
+[sub_resource type="Resource" id="Resource_ivbej"]
+script = ExtResource("1_wgikn")
+id = 193
+handle = "guest193"
+password = "b5xloq$l5dyy"
+
+[sub_resource type="Resource" id="Resource_n0paq"]
+script = ExtResource("1_wgikn")
+id = 194
+handle = "guest194"
+password = "+34lyipa1dt5"
+
+[sub_resource type="Resource" id="Resource_jerq5"]
+script = ExtResource("1_wgikn")
+id = 195
+handle = "guest195"
+password = "+toy8rb9ogo1"
 
 [sub_resource type="Resource" id="Resource_lbkgn"]
 script = ExtResource("1_wgikn")
@@ -1073,17 +1115,11 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_5p741"]
+[sub_resource type="Resource" id="Resource_f5m3u"]
 script = ExtResource("1_wgikn")
-id = 189
-handle = "guest189"
-password = "a25y0bxbxf$2"
-
-[sub_resource type="Resource" id="Resource_m82ow"]
-script = ExtResource("1_wgikn")
-id = 190
-handle = "guest190"
-password = "5pa2v#kcdrd9"
+id = 196
+handle = "guest196"
+password = "yl2$tjlgo1x6"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -1191,6 +1227,12 @@ collection = {
 "guest189": SubResource("Resource_5p741"),
 "guest19": SubResource("Resource_k6705"),
 "guest190": SubResource("Resource_m82ow"),
+"guest191": SubResource("Resource_puwv2"),
+"guest192": SubResource("Resource_uiyfq"),
+"guest193": SubResource("Resource_ivbej"),
+"guest194": SubResource("Resource_n0paq"),
+"guest195": SubResource("Resource_jerq5"),
+"guest196": SubResource("Resource_f5m3u"),
 "guest2": SubResource("Resource_lbkgn"),
 "guest20": SubResource("Resource_15j2d"),
 "guest21": SubResource("Resource_q7yn4"),
@@ -1280,4 +1322,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 191
+next_account_id = 197

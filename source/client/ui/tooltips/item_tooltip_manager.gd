@@ -8,6 +8,9 @@ var tooltip_scene: PackedScene
 var current_tooltip: Control = null
 var tooltip_layer: CanvasLayer = null
 var current_tween: Tween = null
+var current_item: Item = null
+var current_hovering_control: Control = null  # Track which control is being hovered
+var cached_position: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -69,6 +72,18 @@ func show_item_tooltip(item: Item, mouse_position: Vector2, source_control: Cont
 	if not item:
 		print("No item!")
 		return
+	
+	# If we're showing tooltip for the same control, keep cached position and just update content
+	if current_hovering_control == source_control and current_tooltip and is_instance_valid(current_tooltip) and current_tooltip.visible:
+		print("Same control - updating content only, keeping position")
+		_update_tooltip_content(item)
+		return
+	
+	print("Different control or first show - full update")
+	# Different control or first time showing - update everything
+	current_item = item
+	current_hovering_control = source_control
+	cached_position = mouse_position
 	
 	# Hide existing tooltip immediately (no animation when switching between items)
 	_hide_tooltip_immediate()
@@ -170,6 +185,10 @@ func hide_tooltip() -> void:
 	if not current_tooltip:
 		return
 	
+	# Clear tracking variables
+	current_hovering_control = null
+	current_item = null
+	
 	# Cancel any ongoing fade-in animation
 	if current_tween and current_tween.is_valid():
 		current_tween.kill()
@@ -179,8 +198,26 @@ func hide_tooltip() -> void:
 	current_tooltip.queue_free()
 	current_tooltip = null
 
+
+func _update_tooltip_content(item: Item) -> void:
+	"""Update tooltip content without changing position or recreating the tooltip"""
+	if not current_tooltip or not is_instance_valid(current_tooltip):
+		return
+	
+	current_item = item
+	
+	# Get the RichTextLabel and update its content
+	var rtl = current_tooltip.get_node_or_null("RichTextLabel")
+	if rtl:
+		var content = _create_tooltip_content(item)
+		rtl.clear()
+		rtl.text = content
+		rtl.queue_redraw()
+
+
 # Internal function to hide tooltip immediately without animation
 func _hide_tooltip_immediate() -> void:
+	# Note: Don't clear current_hovering_control here, as it's used for comparison
 	if current_tween and current_tween.is_valid():
 		current_tween.kill()
 		current_tween = null

@@ -54,6 +54,10 @@ func _on_chat_message(message: Dictionary) -> void:
 	var sender_name: String = message.get("name", "")
 	var channel: int = message.get("channel", 0)
 	var sender_id: int = message.get("id", 0)
+	
+	#sanitize user input
+	text = _sanitize_bbcode(text)
+	
 	var color_name: String = "#33caff"
 	var name_to_display: String
 	if sender_id == 1:
@@ -81,6 +85,20 @@ func _on_chat_message(message: Dictionary) -> void:
 	else:
 		channel_messages[channel] = PackedStringArray([text_to_display])
 
+func _sanitize_bbcode(text: String) -> String:
+	# Escape BBCode by replacing [ with a similar-looking character
+	# or by replacing it with the escaped version
+	text = text.replace("[", "［")  # Replace with fullwidth left bracket
+	text = text.replace("]", "］")  # Replace with fullwidth right bracket
+	return text
+	
+	# Alternative approach - escape specific tags:
+	# var dangerous_tags = ["color", "url", "b", "i", "u", "s", "code", "center", 
+	#                       "fill", "right", "font", "font_size", "rainbow", "wave"]
+	# for tag in dangerous_tags:
+	#     text = text.replace("[" + tag, "[" + tag)
+	#     text = text.replace("[/" + tag, "[/" + tag)
+	# return text
 
 func _on_fade_out_timer_timeout() -> void:
 	if peek_feed_message_edit.has_focus():

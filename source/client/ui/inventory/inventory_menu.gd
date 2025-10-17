@@ -292,12 +292,13 @@ func _on_player_attribute_changed(attr: StringName, value: float, max_value: flo
 			_energy_update_timer = 0.0
 			_update_crafting_bars()
 			
-			# Only update recipe details if we have a recipe with energy cost
+			# Only update costs/status if we have a recipe with energy cost (lightweight update)
 			if selected_recipe and selected_recipe.energy_cost > 0:
-				_update_recipe_details()
+				_update_recipe_costs_and_status()  # Don't rebuild UI, just update labels
 
 func _on_level_received(data: Dictionary) -> void:
 	current_level_display = data.get("level", 1)
+	player_level = current_level_display  # Also update player_level used for recipe filtering
 	current_exp = data.get("experience", 0)
 	exp_required = data.get("exp_required", 100)
 	_update_crafting_bars()
@@ -826,6 +827,7 @@ func _on_recipe_selected(recipe: CraftingRecipe) -> void:
 	_update_recipe_details()
 
 func _update_recipe_details() -> void:
+	"""Full update of recipe details - rebuilds UI"""
 	if not selected_recipe:
 		recipe_name_label.text = "Select a recipe"
 		recipe_description.text = "Choose a recipe from the list to see details."
@@ -869,6 +871,15 @@ func _update_recipe_details() -> void:
 		if item:
 			var item_slot = _create_crafting_item_slot(item, output.quantity, -1)  # -1 means no "Have:" text
 			output_grid.add_child(item_slot)
+	
+	# Populate costs and update status
+	_update_recipe_costs_and_status()
+
+
+func _update_recipe_costs_and_status() -> void:
+	"""Updates only the cost labels and button state - does NOT rebuild UI"""
+	if not selected_recipe:
+		return
 	
 	# Clear and populate costs (still use labels for gold/energy)
 	_clear_container(costs_list)
@@ -1050,14 +1061,17 @@ func _on_exp_update(data: Dictionary) -> void:
 	
 	# Update stored values
 	current_level_display = new_level
+	player_level = new_level  # Also update player_level used for recipe filtering
 	current_exp = data.get("exp", current_exp)
 	exp_required = data.get("exp_required", exp_required)
 	
 	# Update the crafting bars
 	_update_crafting_bars()
 	
-	# Only show level up popup if we're looking at the crafting view
+	# If player leveled up and crafting view is visible, refresh recipe list to show newly unlocked recipes
 	if leveled_up and crafting_view.visible:
+		print("Player leveled up to ", new_level, " - refreshing recipe list")
+		_filter_recipes()  # Refresh the recipe list to update available recipes
 		_show_level_up_popup(new_level)
 
 func _update_crafting_bars() -> void:
