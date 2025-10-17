@@ -126,12 +126,12 @@ const ERROR_MESSAGES: Dictionary = {
 	},
 	"character_name_too_short": {
 		"title": "Character Name Too Short",
-		"message": "Character name must be at least 3 characters long.",
+		"message": "Character name must be at least 4 characters long.",
 		"suggestion": "Try adding more characters to make it unique."
 	},
 	"character_name_too_long": {
 		"title": "Character Name Too Long",
-		"message": "Character name must be no more than 12 characters long.",
+		"message": "Character name must be no more than 16 characters long.",
 		"suggestion": "Try shortening your character name."
 	},
 	"character_invalid_class": {
@@ -148,6 +148,11 @@ const ERROR_MESSAGES: Dictionary = {
 		"title": "Not Authenticated",
 		"message": "You must be logged in to create a character.",
 		"suggestion": "Please log in first, then try creating your character."
+	},
+	"character_name_banned": {
+		"title": "Inappropriate Name",
+		"message": "This character name contains prohibited words or phrases.",
+		"suggestion": "Please choose a different name that follows our community guidelines."
 	},
 	
 	# Generic Server Errors
@@ -181,7 +186,16 @@ const SERVER_ERROR_CODES: Dictionary = {
 	# Character Creation Errors
 	7: "character_not_authenticated",
 	8: "character_invalid_class",
-	9: "character_missing_data"
+	9: "character_missing_data",
+	10: "character_name_banned"  # New: Banned/inappropriate name
+}
+
+# Character name error codes (reusing 1-3 for character creation context)
+const CHARACTER_NAME_ERROR_CODES: Dictionary = {
+	1: "character_name_empty",
+	2: "character_name_too_short",
+	3: "character_name_too_long",
+	10: "character_name_banned"
 }
 
 # Validation error mappings - using string keys to avoid collisions
@@ -211,6 +225,11 @@ static func get_error_message(error_key: String) -> Dictionary:
 
 # Get error message by server error code
 static func get_server_error_message(error_code: int) -> Dictionary:
+	# Check character name errors first (codes 1-3, 10)
+	if CHARACTER_NAME_ERROR_CODES.has(error_code):
+		var error_key = CHARACTER_NAME_ERROR_CODES[error_code]
+		return get_error_message(error_key)
+	
 	if SERVER_ERROR_CODES.has(error_code):
 		var error_key = SERVER_ERROR_CODES[error_code]
 		var error_data = get_error_message(error_key)

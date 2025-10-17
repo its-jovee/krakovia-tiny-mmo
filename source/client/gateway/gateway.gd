@@ -21,6 +21,25 @@ var menu_stack: Array[Control]
 var remember_me_enabled: bool = false
 var stored_credentials: Dictionary = {}
 
+# Banned words for character names (lowercase for case-insensitive matching)
+const BANNED_WORDS: Array[String] = [
+	# Slurs and offensive terms
+	"nigger", "nigga", "nig", "negro",
+	"faggot", "fag", "dyke",
+	"retard", "retarded",
+	"cunt", "pussy", "dick", "cock", "penis", "vagina",
+	"fuck", "shit", "ass", "bitch", "whore", "slut",
+	"hitler", "nazi", "isis",
+	"chink", "gook", "spic", "wetback", "beaner",
+	"kike", "jew", "jews",
+	"rape", "raping", "molest",
+	# Common attempts to bypass filters
+	"admin", "moderator", "gm", "gamemaster",
+	"system", "server", "official",
+	"rola", "pinto", "xereca", "cu",
+	"macaco",
+]
+
 @onready var main_panel: PanelContainer = $MainPanel
 @onready var login_panel: PanelContainer = $LoginPanel
 @onready var popup_panel: PanelContainer = $PopupPanel
@@ -429,8 +448,40 @@ func _on_character_selected(world_id: int, character_id: int) -> void:
 
 func _on_create_character_button_pressed() -> void:
 	var username_edit: LineEdit = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer2/LineEdit
-
 	var create_button: Button = $CharacterCreation/VBoxContainer/VBoxContainer/CreateButton
+	
+	# Validate character name before sending to server
+	var character_name = username_edit.text.strip_edges()  # Remove leading/trailing whitespace
+	
+	# Check if name is empty
+	if character_name.is_empty():
+		var error_data = ErrorMessages.get_error_message("character_name_empty")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
+		return
+	
+	# Check minimum length (4 characters)
+	if character_name.length() < 4:
+		var error_data = ErrorMessages.get_error_message("character_name_too_short")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
+		return
+	
+	# Check maximum length (16 characters)
+	if character_name.length() > 16:
+		var error_data = ErrorMessages.get_error_message("character_name_too_long")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
+		return
+	
+	# Check for banned words
+	if _contains_banned_word(character_name):
+		var error_data = ErrorMessages.get_error_message("character_name_banned")
+		var formatted_message = ErrorMessages.format_error_message(error_data)
+		await popup_panel.confirm_message(formatted_message)
+		return
+	
+	# Disable button to prevent double-click
 	create_button.disabled = true
 	
 	var d: Dictionary = await do_request(
@@ -439,7 +490,7 @@ func _on_create_character_button_pressed() -> void:
 		{
 			GatewayApi.KEY_TOKEN_ID: token,
 			"data": {
-				"name": username_edit.text,
+				"name": character_name,  # Use trimmed name
 				"class": selected_skin,
 			},
 			GatewayApi.KEY_ACCOUNT_HANDLE: account_name,
@@ -558,3 +609,38 @@ func fill_connection_info(_account_name: String, _account_id: int) -> void:
 	$ConnectionInfo.text = "Account-name: %s\nAccount-ID: %s" % [
 		account_name, account_id
 	]
+
+
+func _contains_banned_word(name: String) -> bool:
+	"""Check if character name contains any banned words (case-insensitive)"""
+	var lowercase_name = name.to_lower()
+	
+	# Check for exact matches
+	if lowercase_name in BANNED_WORDS:
+		print("[Gateway] Banned word detected (exact): %s" % lowercase_name)
+		return true
+	
+	# Check if name contains any banned word as substring
+	for banned_word in BANNED_WORDS:
+		if banned_word in lowercase_name:
+			print("[Gateway] Banned word detected (substring): %s in %s" % [banned_word, lowercase_name])
+			return true
+	
+	# Check for leet speak variations (basic patterns)
+	var normalized_name = lowercase_name
+	normalized_name = normalized_name.replace("0", "o")
+	normalized_name = normalized_name.replace("1", "i")
+	normalized_name = normalized_name.replace("3", "e")
+	normalized_name = normalized_name.replace("4", "a")
+	normalized_name = normalized_name.replace("5", "s")
+	normalized_name = normalized_name.replace("7", "t")
+	normalized_name = normalized_name.replace("8", "b")
+	normalized_name = normalized_name.replace("@", "a")
+	normalized_name = normalized_name.replace("$", "s")
+	
+	for banned_word in BANNED_WORDS:
+		if banned_word in normalized_name:
+			print("[Gateway] Banned word detected (leet speak): %s in %s (original: %s)" % [banned_word, normalized_name, lowercase_name])
+			return true
+	
+	return false

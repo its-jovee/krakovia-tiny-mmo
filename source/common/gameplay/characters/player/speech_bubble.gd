@@ -2,7 +2,7 @@ extends Control
 
 
 @onready var panel_container: PanelContainer = $PanelContainer
-@onready var label: Label = $PanelContainer/MarginContainer/Label
+@onready var label = $PanelContainer/MarginContainer/Label  # Can be Label or RichTextLabel
 @onready var timer: Timer = $Timer
 
 
@@ -11,6 +11,11 @@ func _ready() -> void:
 	hide()
 	modulate.a = 0.0
 	timer.timeout.connect(_on_timer_timeout)
+	
+	# Enable BBCode if it's a RichTextLabel
+	if label is RichTextLabel:
+		label.bbcode_enabled = true
+		label.fit_content = true
 
 
 func show_message(text: String) -> void:
@@ -20,11 +25,23 @@ func show_message(text: String) -> void:
 	# Set the text
 	label.text = text
 	
+	# Calculate width based on visible text (strip BBCode for calculation)
+	var visible_text = text
+	if label is RichTextLabel:
+		# Strip BBCode tags for width calculation (rough approximation)
+		var regex = RegEx.new()
+		regex.compile("\\[img=?\\d*\\][^\\[]+\\[\\/img\\]")
+		# Replace [img] with a placeholder emoji for width (approximately 16px icon = 1 char)
+		visible_text = regex.sub(visible_text, "🖼", true)
+		# Remove other BBCode tags
+		regex.compile("\\[[^\\]]+\\]")
+		visible_text = regex.sub(visible_text, "", true)
+	
 	# Constrain label width for word wrapping
-	# Min width: 60px (for short messages like "hi")
-	# Max width: 250px (for long messages, forces wrapping)
-	var text_width: float = label.get_theme_default_font().get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, label.get_theme_font_size("font_size")).x
-	var constrained_width: float = clampf(text_width, 20.0, 250.0)
+	var font = label.get_theme_default_font() if label is Label else label.get_theme_font("normal_font")
+	var font_size = label.get_theme_font_size("font_size") if label is Label else label.get_theme_font_size("normal_font_size")
+	var text_width: float = font.get_string_size(visible_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+	var constrained_width: float = clampf(text_width + 20, 60.0, 250.0)  # Add padding for icons
 	label.custom_minimum_size = Vector2(constrained_width, 0)
 	
 	# Cancel existing timer if running

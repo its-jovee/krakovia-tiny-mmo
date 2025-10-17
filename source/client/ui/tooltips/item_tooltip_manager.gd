@@ -12,6 +12,10 @@ var current_item: Item = null
 var current_hovering_control: Control = null  # Track which control is being hovered
 var cached_position: Vector2 = Vector2.ZERO
 
+# Buying message cooldown
+const BUYING_MESSAGE_COOLDOWN: float = 5.0  # 5 seconds
+var last_buying_message_time: float = -BUYING_MESSAGE_COOLDOWN  # Allow first message immediately
+
 
 func _ready() -> void:
 	print("========================================")
@@ -33,6 +37,71 @@ func _ready() -> void:
 	print("Tooltip layer created on layer 100")
 	print("ItemTooltipManager initialization COMPLETE")
 	print("========================================")
+
+
+func _input(event: InputEvent) -> void:
+	# Check if right mouse button clicked while tooltip is showing
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		if current_tooltip and is_instance_valid(current_tooltip) and current_tooltip.visible and current_item:
+			_send_buying_message(current_item.item_name, current_item)
+			get_viewport().set_input_as_handled()
+
+
+func _send_buying_message(item_name: String, item: Item = null) -> void:
+	print("=== _send_buying_message called ===")
+	print("Item name: ", item_name)
+	print("Item object: ", item)
+	
+	# Check cooldown
+	var current_time = Time.get_ticks_msec() / 1000.0
+	var time_since_last_message = current_time - last_buying_message_time
+	
+	print("Current time: ", current_time)
+	print("Last message time: ", last_buying_message_time)
+	print("Time since last: ", time_since_last_message)
+	print("Cooldown: ", BUYING_MESSAGE_COOLDOWN)
+	
+	if time_since_last_message < BUYING_MESSAGE_COOLDOWN:
+		var remaining_time = ceil(BUYING_MESSAGE_COOLDOWN - time_since_last_message)
+		print("COOLDOWN ACTIVE! Wait %.0f more seconds." % remaining_time)
+		return
+	
+	# Get item icon path from passed item or current_item
+	var icon_path = ""
+	if item and item.item_icon:
+		icon_path = item.item_icon.resource_path
+		print("Got icon from passed item: ", icon_path)
+	elif current_item and current_item.item_icon:
+		icon_path = current_item.item_icon.resource_path
+		print("Got icon from current_item: ", icon_path)
+	else:
+		print("No icon path found")
+	
+	# Format message with icon (16x16 size for chat)
+	var message_text = "Buying "
+	if not icon_path.is_empty():
+		message_text += "[img=16]" + icon_path + "[/img] "
+		print("Added icon to message")
+	message_text += item_name
+	
+	print("Final message text: ", message_text)
+	print("Sending to server...")
+	
+	InstanceClient.current.request_data(
+		&"chat.message.send",
+		func(_response): 
+			print("Chat message response: ", _response),
+		{
+			"text": message_text, 
+			"color": "#FFD700",  # Gold/yellow color
+			"system_generated": true  # Flag to indicate this is NOT user-typed
+		}
+	)
+	
+	# Update last message time
+	last_buying_message_time = current_time
+	print("Message sent! Cooldown updated.")
+	print("=== _send_buying_message complete ===")
 
 
 func _load_item_metadata() -> void:

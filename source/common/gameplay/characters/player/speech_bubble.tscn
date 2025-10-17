@@ -30,15 +30,17 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 6
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
 text = "Example message text"
-horizontal_alignment = 1
 autowrap_mode = 3
+tab_size = 2
+scroll_active = false
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

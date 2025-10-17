@@ -18,6 +18,24 @@ extends Resource
 
 @export var admin_ids: PackedInt32Array
 @export var user_roles: Dictionary[int, Array]
+
+# Banned words for character names (lowercase for case-insensitive matching)
+const BANNED_WORDS: Array[String] = [
+	# Slurs and offensive terms
+	"nigger", "nigga", "nig", "negro",
+	"faggot", "fag", "dyke",
+	"retard", "retarded",
+	"cunt", "pussy", "dick", "cock", "penis", "vagina",
+	"fuck", "shit", "ass", "bitch", "whore", "slut",
+	"hitler", "nazi", "isis",
+	"chink", "gook", "spic", "wetback", "beaner",
+	"kike", "jew", "jews",
+	"rape", "raping", "molest",
+	"admin", "moderator", "gm", "gamemaster",
+	"system", "server", "official",
+	"rola", "pinto", "xereca", "cu",
+	"macaco",
+]
 @export var guilds: Dictionary[String, Guild]
 
 ## Maps account_name to ban info
@@ -43,6 +61,25 @@ func create_player_character(handle: String, character_data: Dictionary) -> int:
 		and accounts[handle].size() > max_character_per_account
 	):
 		return -1
+	
+	# Validate character name
+	var character_name: String = character_data.get("name", "")
+	
+	# Check if name is empty
+	if character_name.is_empty():
+		return 1
+	
+	# Check minimum length (4 characters)
+	if character_name.length() < 4:
+		return 2
+	
+	# Check maximum length (16 characters)
+	if character_name.length() > 16:
+		return 3
+	
+	# Check for banned words
+	if _contains_banned_word(character_name):
+		return 10
 	
 	next_player_id += 1
 	var player_id: int = next_player_id
@@ -157,4 +194,39 @@ func remove_mute(account_name: String) -> bool:
 	if muted_players.has(account_name):
 		muted_players.erase(account_name)
 		return true
+	return false
+
+
+func _contains_banned_word(name: String) -> bool:
+	"""Check if character name contains any banned words (case-insensitive)"""
+	var lowercase_name = name.to_lower()
+	
+	# Check for exact matches
+	if lowercase_name in BANNED_WORDS:
+		print("[WorldPlayerData] Banned word detected (exact): %s" % lowercase_name)
+		return true
+	
+	# Check if name contains any banned word as substring
+	for banned_word in BANNED_WORDS:
+		if banned_word in lowercase_name:
+			print("[WorldPlayerData] Banned word detected (substring): %s in %s" % [banned_word, lowercase_name])
+			return true
+	
+	# Check for leet speak variations (basic patterns)
+	var normalized_name = lowercase_name
+	normalized_name = normalized_name.replace("0", "o")
+	normalized_name = normalized_name.replace("1", "i")
+	normalized_name = normalized_name.replace("3", "e")
+	normalized_name = normalized_name.replace("4", "a")
+	normalized_name = normalized_name.replace("5", "s")
+	normalized_name = normalized_name.replace("7", "t")
+	normalized_name = normalized_name.replace("8", "b")
+	normalized_name = normalized_name.replace("@", "a")
+	normalized_name = normalized_name.replace("$", "s")
+	
+	for banned_word in BANNED_WORDS:
+		if banned_word in normalized_name:
+			print("[WorldPlayerData] Banned word detected (leet speak): %s in %s (normalized from %s)" % [banned_word, normalized_name, lowercase_name])
+			return true
+	
 	return false

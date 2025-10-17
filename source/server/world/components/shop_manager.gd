@@ -95,7 +95,7 @@ func open_shop(peer_id: int, shop_name: String, instance: ServerInstance) -> Dic
 	
 	# Check if player is in a minigame
 	if instance.has_node("MinigameManager"):
-		var minigame_mgr: MinigameManager = instance.get_node("MinigameManager")
+		var minigame_mgr = instance.get_node("MinigameManager")
 		for session in minigame_mgr.active_sessions.values():
 			if session.has_method("is_player_in_game") and session.is_player_in_game(peer_id):
 				return {"error": "Cannot open shop while in a minigame"}

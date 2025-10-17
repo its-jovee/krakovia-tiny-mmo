@@ -10,6 +10,26 @@ var allowed_versions: Array[String] = ["0.0.8"]
 
 var connected_peers: Dictionary = {}
 
+# Banned words for character names (lowercase for case-insensitive matching)
+const BANNED_WORDS: Array[String] = [
+	# Slurs and offensive terms
+	"nigger", "nigga", "nig", "negro",
+	"faggot", "fag", "dyke",
+	"retard", "retarded",
+	"cunt", "pussy", "dick", "cock", "penis", "vagina",
+	"fuck", "shit", "ass", "bitch", "whore", "slut",
+	"hitler", "nazi", "isis",
+	"chink", "gook", "spic", "wetback", "beaner",
+	"kike", "jew", "jews",
+	"rape", "raping", "molest",
+	"admin", "moderator", "gm", "gamemaster",
+	"system", "server", "official",
+	"rola", "pinto", "xereca", "cu",
+	"penis", "vagina", "macaco",
+	"judeu", "nazista"
+	# Add more as needed
+]
+
 
 func _ready() -> void:
 	#return
@@ -149,10 +169,12 @@ func create_player_character_request(character_data: Dictionary, world_id: int) 
 		result_code = 8
 	elif character_name.is_empty():
 		result_code = 1
-	elif character_name.length() < 3:
+	elif character_name.length() < 4:  # Minimum 4 characters
 		result_code = 2
-	elif character_name.length() > 12:
+	elif character_name.length() > 16:  # Maximum 16 characters
 		result_code = 3
+	elif _contains_banned_word(character_name):
+		result_code = 10  # New error code for banned words
 
 	if result_code != OK:
 		player_character_creation_result.rpc_id(peer_id, result_code)
@@ -221,3 +243,35 @@ func request_login(world_id: int, character_id: int) -> void:
 @rpc("authority")
 func successful_login(_account_data: Dictionary, _worlds_info: Dictionary) -> void:
 	pass
+
+
+func _contains_banned_word(name: String) -> bool:
+	"""Check if character name contains any banned words (case-insensitive)"""
+	var lowercase_name = name.to_lower()
+	
+	# Check for exact matches
+	if lowercase_name in BANNED_WORDS:
+		return true
+	
+	# Check if name contains any banned word as substring
+	for banned_word in BANNED_WORDS:
+		if banned_word in lowercase_name:
+			return true
+	
+	# Check for leet speak variations (basic patterns)
+	var normalized_name = lowercase_name
+	normalized_name = normalized_name.replace("0", "o")
+	normalized_name = normalized_name.replace("1", "i")
+	normalized_name = normalized_name.replace("3", "e")
+	normalized_name = normalized_name.replace("4", "a")
+	normalized_name = normalized_name.replace("5", "s")
+	normalized_name = normalized_name.replace("7", "t")
+	normalized_name = normalized_name.replace("8", "b")
+	normalized_name = normalized_name.replace("@", "a")
+	normalized_name = normalized_name.replace("$", "s")
+	
+	for banned_word in BANNED_WORDS:
+		if banned_word in normalized_name:
+			return true
+	
+	return false

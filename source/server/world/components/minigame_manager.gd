@@ -60,6 +60,9 @@ func send_game_invitation(game_type: String) -> void:
 	# Send announcement to EVERYONE
 	send_system_message("🎮 %s starting in 1 minute at the Game Arena! Hurry over to join!" % game_name)
 	
+	# NEW: Send popup announcement to ALL players
+	send_announcement_popup("🎮 %s Starting Soon!" % game_name, "Get to the Game Arena in 1 minute to join!", 10.0)
+	
 	# IMMEDIATELY send popup to players already in zone
 	var players_in_zone: Array = []
 	for zone in minigame_zones:
@@ -220,3 +223,15 @@ func send_system_message(message: String) -> void:
 				"id": 1
 			}
 			child.propagate_rpc(child.data_push.bind(&"chat.message", chat_message))
+
+
+func send_announcement_popup(title: String, message: String, duration: float = 8.0) -> void:
+	"""Send a popup announcement to ALL players in the game"""
+	for child in instance_manager.get_children():
+		if child is ServerInstance:
+			for peer_id in child.connected_peers:
+				child.data_push.rpc_id(peer_id, &"minigame.announcement", {
+					"title": title,
+					"message": message,
+					"duration": duration
+				})

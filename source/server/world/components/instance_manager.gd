@@ -31,7 +31,7 @@ func start_instance_manager() -> void:
 	
 	# Add MinigameManager
 	print("[InstanceManager] Creating MinigameManager...")
-	var minigame_manager = preload("res://source/server/world/components/minigame_manager.gd").new()
+	var minigame_manager = load("res://source/server/world/components/minigame_manager.gd").new()
 	minigame_manager.name = "MinigameManager"
 	add_child(minigame_manager)
 	print("[InstanceManager] MinigameManager added as child")

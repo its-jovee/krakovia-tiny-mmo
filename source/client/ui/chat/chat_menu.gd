@@ -54,6 +54,7 @@ func _on_chat_message(message: Dictionary) -> void:
 	var sender_name: String = message.get("name", "")
 	var channel: int = message.get("channel", 0)
 	var sender_id: int = message.get("id", 0)
+	var custom_color: String = message.get("color", "")
 	
 	#sanitize user input
 	text = _sanitize_bbcode(text)
@@ -65,7 +66,13 @@ func _on_chat_message(message: Dictionary) -> void:
 		name_to_display = sender_name
 	else:
 		name_to_display = "[url=%d]%s[/url]" % [sender_id, sender_name]
-	var text_to_display: String = "[color=%s]%s:[/color] %s" % [color_name, name_to_display, text]
+	
+	# Use custom color for the entire message if provided
+	var text_to_display: String
+	if not custom_color.is_empty():
+		text_to_display = "[color=%s]%s: %s[/color]" % [custom_color, name_to_display, text]
+	else:
+		text_to_display = "[color=%s]%s:[/color] %s" % [color_name, name_to_display, text]
 	
 	peek_feed_text_display.append_text(text_to_display)
 	peek_feed_text_display.newline()
@@ -86,9 +93,31 @@ func _on_chat_message(message: Dictionary) -> void:
 		channel_messages[channel] = PackedStringArray([text_to_display])
 
 func _sanitize_bbcode(text: String) -> String:
-	text = text.replace("[", "［")  
-	text = text.replace("]", "］") 
-	return text
+	# First, extract and protect [img] tags
+	var protected_text = text
+	var img_pattern = RegEx.new()
+	img_pattern.compile("\\[img(?:=\\d+)?\\][^\\[]+\\[\\/img\\]")
+	
+	var matches = img_pattern.search_all(protected_text)
+	var placeholders = {}
+	var placeholder_index = 0
+	
+	# Replace [img] tags with placeholders
+	for match in matches:
+		var placeholder = "<<<IMG_PLACEHOLDER_%d>>>" % placeholder_index
+		placeholders[placeholder] = match.get_string()
+		protected_text = protected_text.replace(match.get_string(), placeholder)
+		placeholder_index += 1
+	
+	# Sanitize the rest (replace [ and ] to prevent BBCode injection)
+	protected_text = protected_text.replace("[", "［")
+	protected_text = protected_text.replace("]", "］")
+	
+	# Restore [img] tags
+	for placeholder in placeholders:
+		protected_text = protected_text.replace(placeholder, placeholders[placeholder])
+	
+	return protected_text
 	
 	# Alternative approach - escape specific tags:
 	# var dangerous_tags = ["color", "url", "b", "i", "u", "s", "code", "center", 

@@ -56,7 +56,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -160.0
-offset_right = 300.0
+offset_right = 416.0
 grow_vertical = 0
 mouse_filter = 0
 
@@ -76,7 +76,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="FullFeed" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,68 +109,74 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ary8x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FullFeed/Control/HBoxContainer/ContactPanel"]
+visible = false
 layout_mode = 2
 
 [node name="PublicLabel" type="Label" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Public"
 
 [node name="Button" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "System"
 
 [node name="Button2" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "World"
 
 [node name="Button6" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Team"
 
 [node name="Button5" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Guild"
 
 [node name="HSeparator" type="HSeparator" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxFlat_jlimx")
 
 [node name="PrivateLabel" type="Label" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Private"
 
 [node name="Button3" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = " New message"
 
 [node name="Button4" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = " New message"
 
 [node name="HSeparator2" type="HSeparator" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 5
 theme_override_styles/separator = SubResource("StyleBoxFlat_jlimx")
 
 [node name="AddButton" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 size_flags_vertical = 10
 size_flags_stretch_ratio = 4.0
 text = "Add"
-
-[node name="CloseButton" type="Button" parent="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 35)
-layout_mode = 2
-size_flags_vertical = 10
-text = "Close"
 
 [node name="VSeparator" type="VSeparator" parent="FullFeed/Control/HBoxContainer"]
 modulate = Color(0.2, 0.2, 0.2, 1)
@@ -188,6 +193,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2/HBoxContainer"]
@@ -203,6 +209,7 @@ size_flags_stretch_ratio = 0.3
 text = "Settings"
 
 [node name="HSeparator" type="HSeparator" parent="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2"]
+visible = false
 self_modulate = Color(0.2, 0.2, 0.2, 1)
 layout_mode = 2
 
@@ -237,7 +244,13 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 text = "Send"
 
+[node name="CloseButton" type="Button" parent="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+size_flags_vertical = 10
+text = "Close"
+
 [connection signal="gui_input" from="PeekFeed" to="." method="_on_peek_feed_gui_input"]
 [connection signal="timeout" from="PeekFeed/FadeOutTimer" to="." method="_on_fade_out_timer_timeout"]
-[connection signal="pressed" from="FullFeed/Control/HBoxContainer/ContactPanel/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="meta_clicked" from="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]
+[connection signal="pressed" from="FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2/HBoxContainer2/CloseButton" to="." method="_on_close_button_pressed"]

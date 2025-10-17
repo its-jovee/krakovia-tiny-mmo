@@ -37,8 +37,25 @@ func data_request_handler(
 	if text.length() > MAX_MESSAGE_LENGTH:
 		text = text.substr(0, MAX_MESSAGE_LENGTH)
 	
+	# Get optional text color (for special messages like "Buying X")
+	var text_color: String = args.get("color", "")
+	# Sanitize color to prevent injection
+	if not text_color.is_empty():
+		# Only allow valid hex colors
+		if not text_color.begins_with("#") or text_color.length() not in [4, 7]:
+			text_color = ""
+	
+	# Check if this is a system-generated message (not manually typed by user)
+	var is_system_generated: bool = args.get("system_generated", false)
+	
 	# SANITIZE BBCode tags to prevent injection attacks
-	text = _sanitize_bbcode(text)
+	# Only preserve [img] tags for system-generated messages (like buying requests)
+	if is_system_generated and not text_color.is_empty():
+		# System message with color - preserve [img] tags but sanitize other BBCode
+		text = _sanitize_bbcode_preserve_img(text)
+	else:
+		# User-typed message - sanitize ALL BBCode for security
+		text = _sanitize_bbcode(text)
 	
 	# Validate and sanitize channel
 	var channel: int = args.get("channel", 0)
@@ -52,6 +69,11 @@ func data_request_handler(
 		"id": peer_id
 		#"time": Time.get_
 	}
+	
+	# Add color if provided
+	if not text_color.is_empty():
+		message["color"] = text_color
+	
 	instance.propagate_rpc(instance.data_push.bind(&"chat.message", message))
 	return {} # ACK later #{"error": 0}
 
@@ -64,3 +86,32 @@ func _sanitize_bbcode(text: String) -> String:
 	text = text.replace("[", "［")  # Fullwidth left bracket
 	text = text.replace("]", "］")  # Fullwidth right bracket
 	return text
+
+
+# Sanitize BBCode but preserve [img] tags for special messages
+func _sanitize_bbcode_preserve_img(text: String) -> String:
+	# First, extract and protect [img] tags
+	var protected_text = text
+	var img_pattern = RegEx.new()
+	img_pattern.compile("\\[img(?:=\\d+)?\\][^\\[]+\\[\\/img\\]")
+	
+	var matches = img_pattern.search_all(protected_text)
+	var placeholders = {}
+	var placeholder_index = 0
+	
+	# Replace [img] tags with placeholders
+	for match in matches:
+		var placeholder = "<<<IMG_PLACEHOLDER_%d>>>" % placeholder_index
+		placeholders[placeholder] = match.get_string()
+		protected_text = protected_text.replace(match.get_string(), placeholder)
+		placeholder_index += 1
+	
+	# Sanitize the rest (replace [ and ] to prevent BBCode injection)
+	protected_text = protected_text.replace("[", "［")
+	protected_text = protected_text.replace("]", "］")
+	
+	# Restore [img] tags
+	for placeholder in placeholders:
+		protected_text = protected_text.replace(placeholder, placeholders[placeholder])
+	
+	return protected_text

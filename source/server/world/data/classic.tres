@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=130 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=138 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -299,7 +299,7 @@ player_id = 12
 account_name = "jovi2"
 display_name = "cidadao"
 character_class = "forager"
-golds = 45864
+golds = 45861
 inventory = {
 2: {
 "stack": 1
@@ -323,7 +323,7 @@ inventory = {
 "stack": 21
 },
 71: {
-"stack": 10
+"stack": 7
 },
 74: {
 "stack": 1
@@ -348,6 +348,9 @@ inventory = {
 },
 149: {
 "stack": 5
+},
+163: {
+"stack": 2
 },
 164: {
 "stack": 3
@@ -2431,6 +2434,74 @@ display_name = ""
 golds = 100
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_pkxta"]
+script = ExtResource("1_83xu3")
+player_id = 123
+account_name = "guest238"
+display_name = ""
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_ah604"]
+script = ExtResource("1_83xu3")
+player_id = 124
+account_name = "guest239"
+display_name = ""
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_0cqmr"]
+script = ExtResource("1_83xu3")
+player_id = 125
+account_name = "guest240"
+display_name = ""
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_h8jw5"]
+script = ExtResource("1_83xu3")
+player_id = 126
+account_name = "guest243"
+display_name = "nome dele"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_f7430"]
+script = ExtResource("1_83xu3")
+player_id = 127
+account_name = "guest245"
+display_name = "cidadao"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_3pova"]
+script = ExtResource("1_83xu3")
+player_id = 128
+account_name = "guest246"
+display_name = "teste"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_ml7g8"]
+script = ExtResource("1_83xu3")
+player_id = 129
+account_name = "guest247"
+display_name = "teste"
+character_class = "trapper"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_y6e03"]
+script = ExtResource("1_83xu3")
+player_id = 130
+account_name = "guest248"
+display_name = "lula"
+golds = 100
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -2529,6 +2600,14 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest235": PackedInt32Array(120),
 "guest236": PackedInt32Array(121),
 "guest237": PackedInt32Array(122),
+"guest238": PackedInt32Array(123),
+"guest239": PackedInt32Array(124),
+"guest240": PackedInt32Array(125),
+"guest243": PackedInt32Array(126),
+"guest245": PackedInt32Array(127),
+"guest246": PackedInt32Array(128),
+"guest247": PackedInt32Array(129),
+"guest248": PackedInt32Array(130),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -2674,9 +2753,17 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 119: SubResource("Resource_ehmy0"),
 120: SubResource("Resource_gddbp"),
 121: SubResource("Resource_hpnq5"),
-122: SubResource("Resource_jgbjx")
+122: SubResource("Resource_jgbjx"),
+123: SubResource("Resource_pkxta"),
+124: SubResource("Resource_ah604"),
+125: SubResource("Resource_0cqmr"),
+126: SubResource("Resource_h8jw5"),
+127: SubResource("Resource_f7430"),
+128: SubResource("Resource_3pova"),
+129: SubResource("Resource_ml7g8"),
+130: SubResource("Resource_y6e03")
 })
-next_player_id = 122
+next_player_id = 130
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),
