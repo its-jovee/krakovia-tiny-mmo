@@ -86,10 +86,8 @@ func _on_chat_message(message: Dictionary) -> void:
 		channel_messages[channel] = PackedStringArray([text_to_display])
 
 func _sanitize_bbcode(text: String) -> String:
-	# Escape BBCode by replacing [ with a similar-looking character
-	# or by replacing it with the escaped version
-	text = text.replace("[", "［")  # Replace with fullwidth left bracket
-	text = text.replace("]", "］")  # Replace with fullwidth right bracket
+	text = text.replace("[", "［")  
+	text = text.replace("]", "］") 
 	return text
 	
 	# Alternative approach - escape specific tags:
