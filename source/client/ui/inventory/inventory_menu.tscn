@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dia55s0a7lhnv"]
+[gd_scene load_steps=16 format=3 uid="uid://dia55s0a7lhnv"]
 
 [ext_resource type="Script" uid="uid://3kue0fgf78ik" path="res://source/client/ui/inventory/inventory_menu.gd" id="1_g6fyq"]
 [ext_resource type="Script" uid="uid://cx6ltmvpbwdng" path="res://source/client/ui/inventory/gear_slot.gd" id="2_0wccm"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cslc64xbpxpsd" path="res://source/client/ui/inventory/test_sprites/Icon321.png" id="8_3w0rw"]
 [ext_resource type="Texture2D" uid="uid://w14y1o4gi3l2" path="res://source/client/ui/inventory/test_sprites/Icon325.png" id="9_0wccm"]
 [ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="12_as6qe"]
+[ext_resource type="Texture2D" uid="uid://8o1mqudvd5ui" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb656.png" id="15_svewr"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -1900,6 +1901,7 @@ layout_mode = 2
 text = "Sell Price: 0 gold"
 
 [node name="TradeView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4282,7 +4284,6 @@ offset_bottom = 65.0
 text = "Materials"
 
 [node name="CraftingView" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4293,18 +4294,14 @@ mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CraftingView"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CraftingView/HBoxContainer"]
 layout_mode = 2
@@ -4343,8 +4340,9 @@ theme_override_constants/v_separation = 8
 columns = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="CraftingView/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 
 [node name="TabTitle2" type="Label" parent="CraftingView/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -4498,12 +4496,12 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -98.0
-offset_top = 22.0
-offset_right = -18.0
-offset_bottom = 62.0
+offset_left = -64.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 64.0
 grow_horizontal = 0
-text = "Cancel"
+icon = ExtResource("15_svewr")
 
 [node name="MenuButton" type="Button" parent="."]
 visible = false
