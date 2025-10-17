@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=239 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=241 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -891,6 +891,18 @@ id = 233
 handle = "guest233"
 password = "5#$mys8ra9mu"
 
+[sub_resource type="Resource" id="Resource_0gqmd"]
+script = ExtResource("1_wgikn")
+id = 234
+handle = "guest234"
+password = "-7cxwa1w1mm-"
+
+[sub_resource type="Resource" id="Resource_gnhmh"]
+script = ExtResource("1_wgikn")
+id = 235
+handle = "guest235"
+password = "hj$2dtl0ztwz"
+
 [sub_resource type="Resource" id="Resource_imgnp"]
 script = ExtResource("1_wgikn")
 id = 24
@@ -1343,17 +1355,17 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_0gqmd"]
+[sub_resource type="Resource" id="Resource_tn48s"]
 script = ExtResource("1_wgikn")
-id = 234
-handle = "guest234"
-password = "-7cxwa1w1mm-"
+id = 236
+handle = "guest236"
+password = "qf4q1+iqmx6r"
 
-[sub_resource type="Resource" id="Resource_gnhmh"]
+[sub_resource type="Resource" id="Resource_8mkge"]
 script = ExtResource("1_wgikn")
-id = 235
-handle = "guest235"
-password = "hj$2dtl0ztwz"
+id = 237
+handle = "guest237"
+password = "8bo8ahu7kqjq"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -1511,6 +1523,8 @@ collection = {
 "guest233": SubResource("Resource_yvkrn"),
 "guest234": SubResource("Resource_0gqmd"),
 "guest235": SubResource("Resource_gnhmh"),
+"guest236": SubResource("Resource_tn48s"),
+"guest237": SubResource("Resource_8mkge"),
 "guest24": SubResource("Resource_imgnp"),
 "guest25": SubResource("Resource_ux5pu"),
 "guest26": SubResource("Resource_tqxbd"),
@@ -1595,4 +1609,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 236
+next_account_id = 238

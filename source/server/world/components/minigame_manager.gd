@@ -194,6 +194,22 @@ func notify_player_entered_zone(peer_id: int) -> void:
 			return
 
 
+func notify_player_left_zone(peer_id: int) -> void:
+	"""Called by MinigameZone when a player leaves the zone"""
+	# Check all active sessions to see if player is participating
+	for session_id in active_sessions:
+		var game_session = active_sessions[session_id]
+		
+		# Only eliminate during active phase of Hot Potato
+		if game_session.game_type == "hot_potato":
+			if game_session.has_method("get_phase") and game_session.get_phase() == "active":
+				# Check if player is in the game
+				if game_session.active_players.has(peer_id):
+					print("[MinigameManager] Player %d left zone during active Hot Potato - eliminating!" % peer_id)
+					game_session.eliminate_player(peer_id)
+					return
+
+
 func send_system_message(message: String) -> void:
 	# Send system message to all players
 	for child in instance_manager.get_children():

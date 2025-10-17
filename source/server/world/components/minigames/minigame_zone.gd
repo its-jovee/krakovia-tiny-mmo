@@ -84,6 +84,10 @@ func _on_body_exited(body: Node2D) -> void:
 		var peer_id = body.name.to_int()
 		players_in_zone.erase(peer_id)
 		print("[MinigameZone:%s] Player %s left (total: %d)" % [zone_name, body.player_resource.display_name, players_in_zone.size()])
+		
+		# If player leaves during active game, eliminate them
+		if minigame_manager:
+			minigame_manager.notify_player_left_zone(peer_id)
 
 
 func get_players_in_zone() -> Array:

@@ -150,7 +150,7 @@ func _physics_process(delta: float) -> void:
 
 func transfer_potato(from_peer: int, to_peer: int) -> void:
 	"""Transfer potato from one player to another"""
-	print("[HotPotato:%d] Potato passed from %d to %d" % [session_id, from_peer, to_peer])
+	print("[HotPotato:%d] Potato passed from %d to %d (timer: %.1fs)" % [session_id, from_peer, to_peer, potato_timer])
 	
 	# Remove speed boost from previous holder
 	if active_players.has(from_peer):
@@ -158,7 +158,7 @@ func transfer_potato(from_peer: int, to_peer: int) -> void:
 	
 	# Give potato to new holder
 	current_potato_holder_id = to_peer
-	potato_timer = POTATO_DURATION
+	# DO NOT RESET THE TIMER - let it continue counting down
 	
 	# Apply grace period to the player who just passed (can't receive back for 1 second)
 	grace_timers[from_peer] = GRACE_PERIOD
