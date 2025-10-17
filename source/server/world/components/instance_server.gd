@@ -46,6 +46,12 @@ func _ready() -> void:
 							trade_mgr.cancel_trade(session_id, peer_id)
 							break
 				
+				# Close any active shops for this peer
+				if has_node("ShopManager"):
+					var shop_mgr: ShopManager = get_node("ShopManager")
+					if shop_mgr.has_shop(peer_id):
+						shop_mgr.close_shop(peer_id)
+				
 				despawn_player(peer_id)
 	)
 	
@@ -58,6 +64,11 @@ func _ready() -> void:
 	var trade_mgr = TradeManager.new()
 	trade_mgr.name = "TradeManager"
 	add_child(trade_mgr, true)
+	
+	# Add ShopManager
+	var shop_mgr = ShopManager.new()
+	shop_mgr.name = "ShopManager"
+	add_child(shop_mgr, true)
 	
 	# Add HarvestManager
 	harvest_manager = HarvestManager.new()

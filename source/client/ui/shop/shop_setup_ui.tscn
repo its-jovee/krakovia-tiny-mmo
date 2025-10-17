@@ -1,0 +1,1785 @@
+[gd_scene load_steps=3 format=3 uid="uid://delm2eo1g0n3k"]
+
+[ext_resource type="Script" uid="uid://d32g8oliq7823" path="res://source/client/ui/shop/shop_setup_ui.gd" id="1_shop_setup"]
+[ext_resource type="Script" uid="uid://bqi5sg3vg7bbe" path="res://source/client/ui/inventory/item_slot.gd" id="2_item_slot"]
+
+[node name="ShopSetupUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_shop_setup")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -450.0
+offset_right = 450.0
+offset_bottom = 519.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Setup Your Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopNameContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopNameContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Shop Name:"
+vertical_alignment = 1
+
+[node name="ShopNameInput" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/ShopNameContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+placeholder_text = "Enter shop name..."
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="InventoryLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Your Inventory (Click to add to shop)"
+horizontal_alignment = 1
+
+[node name="InventoryScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="InventoryGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll"]
+layout_mode = 2
+columns = 10
+
+[node name="ItemSlot" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot2" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot3" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot4" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot5" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot6" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot7" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot8" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot9" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot10" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot10"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot11" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot11"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot12" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot12"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot13" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot13"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot14" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot14"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot15" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot15"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot16" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot16"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot17" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot17"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot18" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot18"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot19" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot19"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="ItemSlot20" type="Panel" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid/ItemSlot20"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="ShopItemsLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Items in Shop (0/20)"
+horizontal_alignment = 1
+
+[node name="ShopItemsScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ShopItemsGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 8
+
+[node name="ShopSlot1" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot2" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot3" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot3"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot4" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot4"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot5" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot5"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot5"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot6" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot6"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot6"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot7" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot7"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot7"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot8" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot8"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot8"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot9" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot9"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot9"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot10" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot10"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot10"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot10"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot11" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot11"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot11"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot11"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot12" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot12"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot12"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot12"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot13" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot13"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot13"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot13"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot14" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot14"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot14"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot14"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot15" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot15"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot15"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot15"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot16" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot16"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot16"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot16"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot17" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot17"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot17"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot17"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot18" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot18"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot18"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot18"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot19" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot19"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot19"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot19"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ShopSlot20" type="Panel" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("2_item_slot")
+
+[node name="Icon" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot20"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="ItemAmount" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot20"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 1
+horizontal_alignment = 1
+
+[node name="PriceLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid/ShopSlot20"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -14.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_colors/font_color = Color(1, 0.85, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "0g"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OpenShopButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Open Shop"
+
+[node name="CloseShopButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/ButtonsContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "Close Shop"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+mouse_filter = 1
+text = "Close"
+
+[node name="AddItemDialog" type="AcceptDialog" parent="."]
+title = "Add Item to Shop"
+initial_position = 2
+size = Vector2i(400, 250)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AddItemDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 200.0
+
+[node name="ItemNameLabel" type="Label" parent="AddItemDialog/VBoxContainer"]
+layout_mode = 2
+text = "Item: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AddItemDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AddItemDialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Quantity:"
+
+[node name="QuantitySpinBox" type="SpinBox" parent="AddItemDialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="AddItemDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AddItemDialog/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Price (gold):"
+
+[node name="PriceSpinBox" type="SpinBox" parent="AddItemDialog/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+max_value = 999999.0

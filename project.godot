@@ -32,10 +32,10 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=960
 window/size/viewport_height=540
-window/size/mode=2
 window/size/window_width_override=960
 window/size/window_height_override=540
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 

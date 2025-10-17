@@ -132,6 +132,14 @@ func _ready() -> void:
 		if ui_hud and ui_hud.has_method("on_hit"):
 			ui_hud.on_hit(data)
 	)
+	
+	# Shop system subscriptions
+	subscribe(&"shop.status", _on_shop_status)
+	subscribe(&"shop.update", _on_shop_update)
+	subscribe(&"shop.opened", _on_shop_opened)
+	subscribe(&"shop.closed", _on_shop_closed)
+	subscribe(&"shop.item_sold", _on_shop_item_sold)
+	subscribe(&"shop.purchase_complete", _on_shop_purchase_complete)
 
 	subscribe(&"harvest.encourage.end", func(data: Dictionary) -> void:
 		if data.is_empty():
@@ -159,6 +167,7 @@ func ready_to_enter_instance() -> void:
 #region spawn/despawn
 @rpc("authority", "call_remote", "reliable", 0)
 func spawn_player(player_id: int) -> void:
+	print("=== CLIENT: spawn_player called for player_id: ", player_id, " ===")
 	var new_player: Player
 	
 	if player_id == multiplayer.get_unique_id():
@@ -175,6 +184,9 @@ func spawn_player(player_id: int) -> void:
 		new_player = DUMMY_PLAYER.instantiate()
 	
 	new_player.name = str(player_id)
+	# CRITICAL: Set the peer_id so shop indicators work correctly
+	new_player.peer_id = player_id
+	print("Set player.peer_id to: ", new_player.peer_id)
 	
 	players_by_peer_id[player_id] = new_player
 	
@@ -258,4 +270,76 @@ func data_push(type: StringName, data: Dictionary) -> void:
 	for handler: Callable in _data_subscriptions.get(type, []):
 		if handler.is_valid():
 			handler.call(data)
+
+
+# Shop system handlers
+func _on_shop_status(data: Dictionary) -> void:
+	"""Handle shop status updates (shop opened/closed by any player)"""
+	print("=== CLIENT: Received shop.status ===")
+	print("Data: ", data)
+	
+	if data.is_empty():
+		print("ERROR: Empty data!")
+		return
+	
+	var seller_peer_id = data.get("seller_peer_id", -1)
+	var status = data.get("status", "")
+	
+	print("Seller peer ID: ", seller_peer_id)
+	print("Status: ", status)
+	print("Available players: ", players_by_peer_id.keys())
+	
+	# Find the player and update their shop indicator
+	var player: Player = players_by_peer_id.get(seller_peer_id, null)
+	print("Found player: ", player != null)
+	
+	if player:
+		print("Player name: ", player.name)
+		print("Player peer_id before: ", player.peer_id)
+		
+		if status == "opened":
+			player.has_shop_open = true
+			player.shop_name = data.get("shop_name", "Shop")
+			player.peer_id = seller_peer_id  # Ensure peer_id is set
+			print("Shop opened - has_shop_open: ", player.has_shop_open, ", shop_name: ", player.shop_name)
+		elif status == "closed":
+			player.has_shop_open = false
+			player.shop_name = ""
+			print("Shop closed")
+	else:
+		print("ERROR: Could not find player with peer_id: ", seller_peer_id)
+
+
+func _on_shop_update(data: Dictionary) -> void:
+	"""Handle shop inventory updates"""
+	# This is primarily handled by the shop UI itself
+	pass
+
+
+func _on_shop_opened(data: Dictionary) -> void:
+	"""Handle own shop being opened"""
+	print("Your shop is now open: ", data.get("shop_name", ""))
+
+
+func _on_shop_closed(data: Dictionary) -> void:
+	"""Handle own shop being closed"""
+	print("Your shop has closed")
+
+
+func _on_shop_item_sold(data: Dictionary) -> void:
+	"""Handle item being sold from your shop"""
+	var item_name = data.get("item_name", "Unknown")
+	var quantity = data.get("quantity", 0)
+	var price = data.get("total_price", 0)
+	var buyer_name = data.get("buyer_name", "Unknown")
+	print("Sold %dx %s for %d gold to %s" % [quantity, item_name, price, buyer_name])
+
+
+func _on_shop_purchase_complete(data: Dictionary) -> void:
+	"""Handle successful purchase from another player's shop"""
+	var item_name = data.get("item_name", "Unknown")
+	var quantity = data.get("quantity", 0)
+	var price = data.get("total_price", 0)
+	var seller_name = data.get("seller_name", "Unknown")
+	print("Purchased %dx %s for %d gold from %s" % [quantity, item_name, price, seller_name])
 			

@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://shop_browse_ui"]
+
+[ext_resource type="Script" path="res://source/client/ui/shop/shop_browse_ui.gd" id="1_shop_browse"]
+
+[node name="ShopBrowseUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shop_browse")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -350.0
+offset_right = 400.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SellerLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Seller: "
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemsLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Available Items"
+horizontal_alignment = 1
+
+[node name="ItemsScroll" type="ScrollContainer" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsGrid" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer/ItemsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "Close"
+
+[node name="PurchaseDialog" type="ConfirmationDialog" parent="."]
+title = "Purchase Item"
+initial_position = 2
+size = Vector2i(400, 200)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PurchaseDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 150.0
+
+[node name="ItemLabel" type="Label" parent="PurchaseDialog/VBoxContainer"]
+layout_mode = 2
+text = "Item: "
+
+[node name="PriceLabel" type="Label" parent="PurchaseDialog/VBoxContainer"]
+layout_mode = 2
+text = "Price: "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PurchaseDialog/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PurchaseDialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Quantity:"
+
+[node name="QuantitySpinBox" type="SpinBox" parent="PurchaseDialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+
+[node name="TotalLabel" type="Label" parent="PurchaseDialog/VBoxContainer"]
+layout_mode = 2
+text = "Total: "

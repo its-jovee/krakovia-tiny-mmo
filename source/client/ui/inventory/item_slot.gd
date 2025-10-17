@@ -16,8 +16,10 @@ func _ready() -> void:
 	print("### Path: ", get_path())
 	print("######################################")
 	
-	# Enable input events for this panel
-	mouse_filter = Control.MOUSE_FILTER_PASS
+	# CRITICAL: Enable input events for this panel (override scene setting)
+	# The scene file may have mouse_filter = 2 (IGNORE), but we need it to be 0 (STOP)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	print("### Mouse filter set to: ", mouse_filter, " (should be 0 for STOP)")
 	
 	if icon:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -38,21 +40,30 @@ func _ready() -> void:
 	print("### ItemSlot connections complete for: ", name)
 
 func _on_gui_input(event: InputEvent) -> void:
+	print(">>> ItemSlot _on_gui_input called for: ", name)
+	print("    Event: ", event)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		print("    LEFT CLICK DETECTED!")
 		# Emit signal or call parent method to handle item selection
 		_handle_item_click()
 
 func _handle_item_click() -> void:
+	print(">>> _handle_item_click called for: ", name)
 	# Find the inventory menu parent and call its item selection method
 	var inventory_menu = _find_inventory_menu()
+	print("    Found parent: ", inventory_menu.name if inventory_menu else "NULL")
 	if inventory_menu and inventory_menu.has_method("_on_item_slot_clicked"):
+		print("    Calling _on_item_slot_clicked")
 		inventory_menu._on_item_slot_clicked(self)
+	else:
+		print("    ERROR: No parent with _on_item_slot_clicked method found!")
 
 func _find_inventory_menu() -> Node:
 	var current = get_parent()
 	var depth = 0
 	while current and depth < 10:  # Prevent infinite loops
-		if current.name == "Inventory" and current.has_method("_on_item_slot_clicked"):
+		# Check if parent has the required method (works for Inventory, ShopSetupUI, etc.)
+		if current.has_method("_on_item_slot_clicked"):
 			return current
 		current = current.get_parent()
 		depth += 1

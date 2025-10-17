@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://shop_indicator"]
+
+[ext_resource type="Script" path="res://source/client/ui/shop/shop_indicator.gd" id="1_shop_indicator"]
+
+[node name="ShopIndicator" type="Control"]
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 60.0
+mouse_filter = 2
+script = ExtResource("1_shop_indicator")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShopIconLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "🛒 SHOP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopNameLabel" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Shop Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true

@@ -22,6 +22,7 @@ var exp_required: int = 100
 @onready var inventory_button: Button = $HBoxContainer/InventoryButton
 @onready var crafting_button: Button = $HBoxContainer/CraftingButton
 @onready var guild_button: Button = $HBoxContainer/GuildButton
+@onready var shop_button: Button = $HBoxContainer/ShopButton
 
 func _ready() -> void:
 	# Connect the new HBoxContainer buttons
@@ -31,6 +32,8 @@ func _ready() -> void:
 		crafting_button.pressed.connect(_on_crafting_button_pressed)
 	if guild_button:
 		guild_button.pressed.connect(_on_guild_button_pressed)
+	if shop_button:
+		shop_button.pressed.connect(_on_shop_button_pressed)
 	
 	# Connect MenuOverlay buttons
 	for button: Button in $MenuOverlay/VBoxContainer.get_children():
@@ -49,6 +52,16 @@ func _ready() -> void:
 	var quest_board_menu = preload("res://source/client/ui/quest_board/quest_board_menu.tscn").instantiate()
 	sub_menu.add_child(quest_board_menu)
 	menus["quest_board"] = quest_board_menu
+	
+	# Add shop setup menu
+	var shop_setup_menu = preload("res://source/client/ui/shop/shop_setup_ui.tscn").instantiate()
+	sub_menu.add_child(shop_setup_menu)
+	menus["shop_setup"] = shop_setup_menu
+	
+	# Add shop browse menu
+	var shop_browse_menu = preload("res://source/client/ui/shop/shop_browse_ui.tscn").instantiate()
+	sub_menu.add_child(shop_browse_menu)
+	menus["shop_browse"] = shop_browse_menu
 	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
@@ -120,6 +133,26 @@ func _on_crafting_button_pressed() -> void:
 func _on_guild_button_pressed() -> void:
 	"""Open guild menu"""
 	display_menu(&"guild")
+
+
+func _on_shop_button_pressed() -> void:
+	"""Open shop setup menu"""
+	if menus.has(&"shop_setup"):
+		var shop_menu = menus[&"shop_setup"]
+		if shop_menu.has_method("show_menu"):
+			shop_menu.show_menu()
+		shop_menu.visible = true
+	else:
+		# Fallback: try to display it
+		display_menu(&"shop_setup")
+
+
+func open_player_shop(seller_peer_id: int) -> void:
+	"""Open shop browse UI for a specific seller"""
+	if menus.has(&"shop_browse"):
+		var browse_menu = menus[&"shop_browse"]
+		if browse_menu.has_method("open_shop"):
+			browse_menu.open_shop(seller_peer_id)
 
 
 func open_player_profile(player_id: int) -> void:

@@ -211,6 +211,10 @@ icon = ExtResource("9_o5bjo")
 layout_mode = 2
 icon = ExtResource("10_s83ae")
 
+[node name="ShopButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Shop"
+
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
 visible = false
 layout_mode = 2

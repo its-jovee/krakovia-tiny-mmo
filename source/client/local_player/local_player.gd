@@ -78,12 +78,7 @@ func check_inputs() -> void:
 	match input_direction:
 		Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN:
 			last_input_direction = input_direction
-	if Input.is_action_just_pressed("action"):
-		# If harvesting locally, use Encourage instead of combat action
-		if InstanceClient.local_harvest_node != "":
-			InstanceClient.current.request_data(&"harvest.encourage", Callable())
-		else:
-			pass
+	
 	interact_input = Input.is_action_just_pressed("interact")
 	if interact_input:
 		# Toggle join/leave harvesting (iteration 0 test)
