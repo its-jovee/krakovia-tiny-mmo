@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=192 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=194 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -579,6 +579,18 @@ id = 186
 handle = "guest186"
 password = "1ug-ee-+ze-t"
 
+[sub_resource type="Resource" id="Resource_mgs3p"]
+script = ExtResource("1_wgikn")
+id = 187
+handle = "guest187"
+password = "y2qsv-5+xe7e"
+
+[sub_resource type="Resource" id="Resource_ece1i"]
+script = ExtResource("1_wgikn")
+id = 188
+handle = "guest188"
+password = "6rfx$gdq-q5e"
+
 [sub_resource type="Resource" id="Resource_k6705"]
 script = ExtResource("1_wgikn")
 id = 19
@@ -1061,17 +1073,17 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_mgs3p"]
+[sub_resource type="Resource" id="Resource_5p741"]
 script = ExtResource("1_wgikn")
-id = 187
-handle = "guest187"
-password = "y2qsv-5+xe7e"
+id = 189
+handle = "guest189"
+password = "a25y0bxbxf$2"
 
-[sub_resource type="Resource" id="Resource_ece1i"]
+[sub_resource type="Resource" id="Resource_m82ow"]
 script = ExtResource("1_wgikn")
-id = 188
-handle = "guest188"
-password = "6rfx$gdq-q5e"
+id = 190
+handle = "guest190"
+password = "5pa2v#kcdrd9"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -1176,7 +1188,9 @@ collection = {
 "guest186": SubResource("Resource_dko51"),
 "guest187": SubResource("Resource_mgs3p"),
 "guest188": SubResource("Resource_ece1i"),
+"guest189": SubResource("Resource_5p741"),
 "guest19": SubResource("Resource_k6705"),
+"guest190": SubResource("Resource_m82ow"),
 "guest2": SubResource("Resource_lbkgn"),
 "guest20": SubResource("Resource_15j2d"),
 "guest21": SubResource("Resource_q7yn4"),
@@ -1266,4 +1280,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 189
+next_account_id = 191

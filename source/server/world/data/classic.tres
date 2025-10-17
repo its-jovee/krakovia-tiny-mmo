@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=91 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=93 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -1751,6 +1751,32 @@ inventory = {
 }
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_4nj78"]
+script = ExtResource("1_83xu3")
+player_id = 84
+account_name = "guest189"
+display_name = ""
+character_class = "trapper"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_pthy5"]
+script = ExtResource("1_83xu3")
+player_id = 85
+account_name = "guest190"
+display_name = ""
+character_class = "forager"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -1810,6 +1836,8 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest184": PackedInt32Array(81),
 "guest187": PackedInt32Array(82),
 "guest188": PackedInt32Array(83),
+"guest189": PackedInt32Array(84),
+"guest190": PackedInt32Array(85),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -1916,9 +1944,11 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 80: SubResource("Resource_x8wmb"),
 81: SubResource("Resource_ggx6j"),
 82: SubResource("Resource_pg1kv"),
-83: SubResource("Resource_ywcml")
+83: SubResource("Resource_ywcml"),
+84: SubResource("Resource_4nj78"),
+85: SubResource("Resource_pthy5")
 })
-next_player_id = 83
+next_player_id = 85
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),

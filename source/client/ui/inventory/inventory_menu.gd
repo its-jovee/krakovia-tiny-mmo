@@ -109,7 +109,8 @@ func _ready() -> void:
 	
 	# Trade system setup
 	your_ready_button.pressed.connect(_on_your_ready_pressed)
-	your_gold_input.text_changed.connect(_on_gold_input_changed)
+	your_gold_input.text_submitted.connect(_on_gold_input_submitted)
+	your_gold_input.gui_input.connect(_on_gold_input_gui_input)
 	close_button.pressed.connect(_on_close_button_pressed)
 
 	# Subscribe to trade events
@@ -567,23 +568,37 @@ func _on_your_ready_pressed():
 		"ready": your_ready
 	})
 
-func _on_gold_input_changed(new_text: String):
-	# Only process numeric characters
-	var numeric_only = ""
-	for c in new_text:
-		if c.is_valid_int():
-			numeric_only += c
-	
-	# Update the gold amount
-	your_trade_gold = int(numeric_only) if numeric_only != "" else 0
-	
-	# If the text contains non-numeric characters, update the field to show only numbers
-	if new_text != numeric_only:
-		your_gold_input.text = numeric_only
-		# Move cursor to end
-		your_gold_input.caret_column = numeric_only.length()
-		return  # Don't send update yet, it will be sent when the corrected text triggers this again
-	
+func _on_gold_input_gui_input(event: InputEvent):
+	"""Filter input to only allow numeric characters and prevent exceeding gold balance"""
+	if event is InputEventKey and event.pressed and not event.echo:
+		var key = event.as_text_keycode()
+		# Allow navigation keys
+		if key in ["Backspace", "Delete", "Left", "Right", "Home", "End"]:
+			return
+		
+		# Check if it's a numeric key
+		if key.is_valid_int():
+			# Preview what the text would be after this key press
+			var current_text = your_gold_input.text
+			var caret_pos = your_gold_input.caret_column
+			var preview_text = current_text.insert(caret_pos, key)
+			
+			# Check if the new value would exceed current gold
+			var preview_value = int(preview_text) if preview_text.is_valid_int() else 0
+			if preview_value > current_gold:
+				get_viewport().set_input_as_handled()
+				return
+		else:
+			# Block non-numeric keys
+			get_viewport().set_input_as_handled()
+
+func _on_gold_input_submitted(new_text: String):
+	"""Called when user presses Enter or loses focus"""
+	var gold_value = int(new_text) if new_text.is_valid_int() else 0
+	# Clamp to available gold
+	gold_value = min(gold_value, current_gold)
+	your_trade_gold = gold_value
+	your_gold_input.text = str(your_trade_gold)
 	_send_trade_update()
 
 func _close_trade():
