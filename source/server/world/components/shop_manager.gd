@@ -385,3 +385,23 @@ func _broadcast_shop_update(session: ShopSession) -> void:
 func _log_transaction(session: ShopSession, buyer_peer: int, buyer_name: String, item_id: int, item_name: String, quantity: int, price: int) -> void:
 	print("[SHOP TRANSACTION] Buyer: ", buyer_name, " (", buyer_peer, ") | Seller: ", session.seller_name, 
 		" (", session.seller_peer_id, ") | Item: ", item_name, " (", item_id, ") | Qty: ", quantity, " | Price: ", price, " gold")
+
+
+## Sync all active shops to a newly connected player
+func sync_shops_to_player(peer_id: int, instance: ServerInstance) -> void:
+	print("ShopManager: Syncing ", active_shops.size(), " active shops to new player ", peer_id)
+	
+	# Send shop status for each active shop
+	for session in active_shops.values():
+		# Only sync shops in this instance
+		if session.instance == instance:
+			var data = {
+				"status": "opened",
+				"seller_peer_id": session.seller_peer_id,
+				"seller_name": session.seller_name,
+				"shop_name": session.shop_name,
+				"position": session.shop_position
+			}
+			
+			instance.data_push.rpc_id(peer_id, &"shop.status", data)
+			print("  - Synced shop: ", session.shop_name, " (seller: ", session.seller_peer_id, ")")

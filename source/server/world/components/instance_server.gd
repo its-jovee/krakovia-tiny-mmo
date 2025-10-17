@@ -173,6 +173,11 @@ func spawn_player(peer_id: int) -> void:
 
 	connected_peers.append(peer_id)
 	_propagate_spawn(peer_id)
+	
+	# Sync existing shops to the newly connected player
+	if has_node("ShopManager"):
+		var shop_mgr: ShopManager = get_node("ShopManager")
+		shop_mgr.sync_shops_to_player(peer_id, self)
 
 
 func instantiate_player(peer_id: int) -> Player:
