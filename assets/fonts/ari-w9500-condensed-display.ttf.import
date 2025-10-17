@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://4hwkelg84yr4"
-path="res://.godot/imported/kenney_mini_square.ttf-f4549d67dc207e3d94a5e3013002571e.fontdata"
+uid="uid://blymqp1nftaf4"
+path="res://.godot/imported/ari-w9500-condensed-display.ttf-02d7a797cd4c73c202f5424a5fbed1ee.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/kenney_mini_square.ttf"
-dest_files=["res://.godot/imported/kenney_mini_square.ttf-f4549d67dc207e3d94a5e3013002571e.fontdata"]
+source_file="res://assets/fonts/ari-w9500-condensed-display.ttf"
+dest_files=["res://.godot/imported/ari-w9500-condensed-display.ttf-02d7a797cd4c73c202f5424a5fbed1ee.fontdata"]
 
 [params]
 
@@ -23,7 +23,7 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

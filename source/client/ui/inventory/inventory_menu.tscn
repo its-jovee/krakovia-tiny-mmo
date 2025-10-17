@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dia55s0a7lhnv"]
+[gd_scene load_steps=17 format=3 uid="uid://dia55s0a7lhnv"]
 
 [ext_resource type="Script" uid="uid://3kue0fgf78ik" path="res://source/client/ui/inventory/inventory_menu.gd" id="1_g6fyq"]
 [ext_resource type="Script" uid="uid://cx6ltmvpbwdng" path="res://source/client/ui/inventory/gear_slot.gd" id="2_0wccm"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cslc64xbpxpsd" path="res://source/client/ui/inventory/test_sprites/Icon321.png" id="8_3w0rw"]
 [ext_resource type="Texture2D" uid="uid://w14y1o4gi3l2" path="res://source/client/ui/inventory/test_sprites/Icon325.png" id="9_0wccm"]
 [ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="12_as6qe"]
+[ext_resource type="FontFile" uid="uid://cxbrok23pi7kt" path="res://assets/Abaddon_Fonts_v1.2/Abaddon Bold.ttf" id="15_hc0xo"]
 [ext_resource type="Texture2D" uid="uid://8o1mqudvd5ui" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb656.png" id="15_svewr"]
 
 [node name="Inventory" type="Control"]
@@ -4401,6 +4402,7 @@ layout_mode = 2
 
 [node name="RequirementsLabel" type="Label" parent="CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RequirementsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("15_hc0xo")
 theme_override_font_sizes/font_size = 14
 text = "Requirements:"
 

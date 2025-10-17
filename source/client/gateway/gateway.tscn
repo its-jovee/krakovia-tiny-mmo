@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://5wv1gfwppcnf"]
+[gd_scene load_steps=21 format=3 uid="uid://5wv1gfwppcnf"]
 
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_sg1qr"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_74q4y"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://b8x70a02a1b2d" path="res://source/client/gateway/ui/handle_validation_indicator.tscn" id="3_validation"]
 [ext_resource type="Texture2D" uid="uid://cn5blfyqokda6" path="res://assets/sprites/gui/backgrounds/fairy_forest.png" id="4_uvr2v"]
 [ext_resource type="FontFile" uid="uid://cehc3gujked8x" path="res://assets/fonts/Cinzel/static/Cinzel-Bold.ttf" id="5_opc3y"]
+[ext_resource type="FontFile" uid="uid://bo7gldkfw0d0k" path="res://assets/fonts/ari-w9500-display.ttf" id="5_tnybn"]
 [ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="6_tnybn"]
+[ext_resource type="FontFile" uid="uid://d2w082aocn7jc" path="res://assets/fonts/ari-w9500-bold.ttf" id="6_waovh"]
 [ext_resource type="StyleBox" uid="uid://bi8r7kxlh83no" path="res://source/client/gateway/ui/gradient_button.tres" id="7_waovh"]
 [ext_resource type="SpriteFrames" uid="uid://dkeeft051qhl3" path="res://source/common/gameplay/characters/sprite_frames/forager.tres" id="8_afkjb"]
 [ext_resource type="Script" uid="uid://q5rsjtg6nsto" path="res://source/client/gateway/ui/popup_panel.gd" id="9_4rdug"]
@@ -104,15 +106,10 @@ theme_override_constants/separation = 16
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_opc3y")
+theme_override_fonts/font = ExtResource("5_tnybn")
 theme_override_font_sizes/font_size = 24
-text = "Welcome"
+text = "Welcome to Kraftovia"
 horizontal_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="MainPanel/VBoxContainer"]
-custom_minimum_size = Vector2(336, 0)
-layout_mode = 2
-size_flags_horizontal = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer"]
 layout_mode = 2
@@ -122,21 +119,19 @@ theme_override_constants/separation = 16
 [node name="LoginButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(420, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_tnybn")
 theme_override_font_sizes/font_size = 18
 text = "Login"
 
 [node name="CreateAccountButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(420, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_tnybn")
 theme_override_font_sizes/font_size = 18
 text = "Create Account"
 
 [node name="GuestButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(420, 56)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("6_tnybn")
+theme_override_fonts/font = ExtResource("6_waovh")
 theme_override_font_sizes/font_size = 18
 theme_override_styles/normal = ExtResource("7_waovh")
 text = "Play as Guest"
@@ -823,4 +818,3 @@ timeout = 7.0
 [connection signal="pressed" from="LoginPanel/VBoxContainer/VBoxContainer/LoginButton" to="." method="_on_login_login_button_pressed"]
 [connection signal="pressed" from="CreateAccountPanel/VBoxContainer/VBoxContainer/CreateAccountButton" to="." method="create_account"]
 [connection signal="pressed" from="CharacterCreation/VBoxContainer/VBoxContainer/CreateButton" to="." method="_on_create_character_button_pressed"]
-
