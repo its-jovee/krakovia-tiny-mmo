@@ -25,6 +25,14 @@ var your_ready: bool = false
 var their_ready: bool = false
 var trade_locked: bool = false
 
+# Trade quantity dialog variables
+var trade_quantity_dialog: AcceptDialog = null
+var trade_quantity_label: Label = null
+var trade_quantity_spinbox: SpinBox = null
+var trade_quantity_max_button: Button = null
+var selected_trade_item_id: int = -1
+var selected_trade_item_stack: int = 0
+
 # Market/sell variables
 var in_market: bool = false
 
@@ -107,6 +115,9 @@ func _ready() -> void:
 	InstanceClient.current.request_data(&"inventory.get", fill_inventory)
 	visibility_changed.connect(_on_visibility_changed)
 	
+	# Setup trade quantity dialog
+	_setup_trade_quantity_dialog()
+	
 	# Trade system setup
 	your_ready_button.pressed.connect(_on_your_ready_pressed)
 	your_gold_input.text_submitted.connect(_on_gold_input_submitted)
@@ -166,6 +177,49 @@ func _ready() -> void:
 	materials_view.hide()
 	trade_view.hide()
 	crafting_view.hide()
+
+
+func _setup_trade_quantity_dialog() -> void:
+	"""Create trade quantity dialog"""
+	trade_quantity_dialog = AcceptDialog.new()
+	trade_quantity_dialog.title = "Trade Quantity"
+	trade_quantity_dialog.dialog_hide_on_ok = true
+	trade_quantity_dialog.min_size = Vector2(300, 150)
+	
+	var vbox = VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 10)
+	trade_quantity_dialog.add_child(vbox)
+	
+	trade_quantity_label = Label.new()
+	trade_quantity_label.text = "How many to trade?"
+	trade_quantity_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(trade_quantity_label)
+	
+	var hbox = HBoxContainer.new()
+	hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+	hbox.add_theme_constant_override("separation", 10)
+	vbox.add_child(hbox)
+	
+	var qty_label = Label.new()
+	qty_label.text = "Quantity:"
+	hbox.add_child(qty_label)
+	
+	trade_quantity_spinbox = SpinBox.new()
+	trade_quantity_spinbox.min_value = 1
+	trade_quantity_spinbox.max_value = 999
+	trade_quantity_spinbox.value = 1
+	trade_quantity_spinbox.custom_minimum_size = Vector2(100, 0)
+	hbox.add_child(trade_quantity_spinbox)
+	
+	# Add Max button
+	trade_quantity_max_button = Button.new()
+	trade_quantity_max_button.text = "Max"
+	trade_quantity_max_button.custom_minimum_size = Vector2(60, 0)
+	trade_quantity_max_button.pressed.connect(_on_trade_max_button_pressed)
+	hbox.add_child(trade_quantity_max_button)
+	
+	add_child(trade_quantity_dialog)
+	trade_quantity_dialog.confirmed.connect(_on_trade_quantity_confirmed)
 
 
 func _process(delta: float) -> void:
@@ -348,32 +402,64 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 	if trade_view.visible and not trade_locked and not your_ready:
 		var item_data = item_slot_panel.item_data
 		if item_data.has("item_id") and item_data.item_id != -1:
-			# Add item to trade
+			# Show quantity dialog instead of auto-adding
 			var item_id = item_data.item_id
-			var quantity = item_data.get("stack", 1)
-			
 			var available = inventory.get(item_id, {}).get("stack", 0)
 			var currently_offered = your_trade_items.get(item_id, 0)
+			var remaining = available - currently_offered
 			
-			if currently_offered + quantity <= available:
-				if your_trade_items.has(item_id):
-					your_trade_items[item_id] += quantity
-				else:
-					your_trade_items[item_id] = quantity
+			if remaining <= 0:
+				push_warning("No more of this item available to trade")
+				return
 			
-			_update_trade_ui()
-			_send_trade_update()
+			# Store selection and show dialog
+			selected_trade_item_id = item_id
+			selected_trade_item_stack = remaining
+			
+			var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+			if item:
+				trade_quantity_label.text = "Trade %s" % item.item_name
+				trade_quantity_spinbox.max_value = remaining
+				trade_quantity_spinbox.value = min(1, remaining)
+				trade_quantity_dialog.popup_centered()
+			
+			return
+	
+	# Original inventory logic
+	var item_data = item_slot_panel.item_data
+	if item_data.has("item") and item_data.item:
+		selected_item = item_data.item
+		selected_item_id = item_data.get("item_id", -1)
+		rich_text_label.text = item_data.item.description
+		
+		# Sync market status and update sell UI when item is selected
+		_sync_market_status_from_hud()
+		_update_sell_ui()
+
+
+func _on_trade_quantity_confirmed() -> void:
+	"""Handle trade quantity dialog confirmation"""
+	if selected_trade_item_id == -1:
+		return
+	
+	var quantity = int(trade_quantity_spinbox.value)
+	
+	if your_trade_items.has(selected_trade_item_id):
+		your_trade_items[selected_trade_item_id] += quantity
 	else:
-		# Original inventory logic
-		var item_data = item_slot_panel.item_data
-		if item_data.has("item") and item_data.item:
-			selected_item = item_data.item
-			selected_item_id = item_data.get("item_id", -1)
-			rich_text_label.text = item_data.item.description
-			
-			# Sync market status and update sell UI when item is selected
-			_sync_market_status_from_hud()
-			_update_sell_ui()
+		your_trade_items[selected_trade_item_id] = quantity
+	
+	_update_trade_ui()
+	_send_trade_update()
+	
+	# Reset selection
+	selected_trade_item_id = -1
+	selected_trade_item_stack = 0
+
+
+func _on_trade_max_button_pressed() -> void:
+	"""Set quantity to maximum available"""
+	trade_quantity_spinbox.value = trade_quantity_spinbox.max_value
 
 
 func _on_equip_button_pressed() -> void:

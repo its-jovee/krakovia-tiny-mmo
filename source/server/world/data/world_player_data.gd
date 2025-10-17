@@ -49,10 +49,8 @@ func create_player_character(handle: String, character_data: Dictionary) -> int:
 	var player_character := PlayerResource.new()
 	
 	# Temporary for fast test
-	player_character.inventory = {
-		6: {"stack": 1}, 
-	}
-	
+	player_character.inventory = {}
+	player_character.golds = 100
 	player_character.available_attributes_points = 10
 	
 	player_character.init(
