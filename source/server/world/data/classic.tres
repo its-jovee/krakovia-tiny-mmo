@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=99 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=101 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -1916,6 +1916,50 @@ inventory = {
 available_attributes_points = 10
 experience = 530
 
+[sub_resource type="Resource" id="Resource_aypxj"]
+script = ExtResource("1_83xu3")
+player_id = 92
+account_name = "guest197"
+display_name = ""
+character_class = "trapper"
+inventory = {
+6: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_u3wgd"]
+script = ExtResource("1_83xu3")
+player_id = 93
+account_name = "guest198"
+display_name = ""
+character_class = "trapper"
+golds = 1
+inventory = {
+6: {
+"stack": 1
+},
+104: {
+"stack": 17
+},
+105: {
+"stack": 18
+},
+110: {
+"stack": 5
+},
+111: {
+"stack": 4
+},
+156: {
+"stack": 8
+}
+}
+available_attributes_points = 13
+level = 2
+experience = 305
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -1983,6 +2027,8 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest194": PackedInt32Array(89),
 "guest195": PackedInt32Array(90),
 "guest196": PackedInt32Array(91),
+"guest197": PackedInt32Array(92),
+"guest198": PackedInt32Array(93),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -2097,9 +2143,11 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 88: SubResource("Resource_d5wnw"),
 89: SubResource("Resource_unf14"),
 90: SubResource("Resource_u66wq"),
-91: SubResource("Resource_y1tna")
+91: SubResource("Resource_y1tna"),
+92: SubResource("Resource_aypxj"),
+93: SubResource("Resource_u3wgd")
 })
-next_player_id = 91
+next_player_id = 93
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),
