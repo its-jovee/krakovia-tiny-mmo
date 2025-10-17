@@ -98,6 +98,9 @@ const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.
 @onready var craft_button: Button = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CraftButton
 @onready var status_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/StatusLabel
 
+# Inventory tabs reference
+@onready var inventory_tabs: Control = $InventoryTabs
+
 
 func _ready() -> void:
 	print("Inventory menu _ready() called")
@@ -429,10 +432,11 @@ func _on_trade_open(data: Dictionary):
 	your_offer_title.text = "Your Offer"
 	their_offer_title.text = other_player_name + "'s Offer"
 	
-	# Switch to trade view
+	# Switch to trade view and hide other UI elements
 	equipment_view.hide()
 	materials_view.hide()
 	crafting_view.hide()
+	inventory_tabs.hide()  # Hide tabs during trade
 	
 	trade_view.show()
 	
@@ -585,6 +589,7 @@ func _on_gold_input_changed(new_text: String):
 func _close_trade():
 	trade_view.hide()
 	equipment_view.show()
+	inventory_tabs.show()  # Show tabs again when trade closes
 	_reset_trade_state()
 
 func _reset_trade_state():
