@@ -38,9 +38,8 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/normal_font_size = 14
 bbcode_enabled = true
 text = "Example message text"
-autowrap_mode = 3
-tab_size = 2
 scroll_active = false
+tab_size = 2
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

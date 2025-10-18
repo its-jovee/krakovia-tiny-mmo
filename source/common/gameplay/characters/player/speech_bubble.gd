@@ -41,7 +41,7 @@ func show_message(text: String) -> void:
 	var font = label.get_theme_default_font() if label is Label else label.get_theme_font("normal_font")
 	var font_size = label.get_theme_font_size("font_size") if label is Label else label.get_theme_font_size("normal_font_size")
 	var text_width: float = font.get_string_size(visible_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-	var constrained_width: float = clampf(text_width + 20, 60.0, 250.0)  # Add padding for icons
+	var constrained_width: float = clampf(text_width + 0, 10.0, 250.0)  # Add padding for icons
 	label.custom_minimum_size = Vector2(constrained_width, 0)
 	
 	# Cancel existing timer if running

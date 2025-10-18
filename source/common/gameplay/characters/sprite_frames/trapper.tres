@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://v5y6komavnpb"]
+[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://v5y6komavnpb"]
 
 [ext_resource type="Texture2D" uid="uid://clh1sced2xnyq" path="res://assets/sprites/characters/wizard/wizard_idle.png" id="1_31uvx"]
 [ext_resource type="Texture2D" uid="uid://c14m3v210kxi6" path="res://assets/sprites/characters/wizard/wizard_run.png" id="2_6x4qy"]
@@ -6,18 +6,6 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncaqt"]
 atlas = ExtResource("1_31uvx")
 region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2pd45"]
-atlas = ExtResource("1_31uvx")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ne8xy"]
-atlas = ExtResource("1_31uvx")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jd6qe"]
-atlas = ExtResource("1_31uvx")
-region = Rect2(192, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lw201"]
 atlas = ExtResource("2_6x4qy")
@@ -48,15 +36,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ncaqt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2pd45")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ne8xy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jd6qe")
 }],
 "loop": true,
 "name": &"idle",

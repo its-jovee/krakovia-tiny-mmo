@@ -100,12 +100,23 @@ func _ready() -> void:
 		if ui_hud and ui_hud.has_method("on_status"):
 			ui_hud.on_status(data)
 	)
+	
+	# Harvesting tick - fires when a harvest attempt happens (for progress bar reset)
+	subscribe(&"harvest.tick", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.tick:", data)
+		var harvesting_panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if harvesting_panel and harvesting_panel.has_method("on_harvest_tick"):
+			harvesting_panel.on_harvest_tick()
+	)
 
 	# Harvesting distribution logs (iteration 0)
 	subscribe(&"harvest.distribution", func(data: Dictionary) -> void:
 		if data.is_empty():
 			return
 		print_debug("harvest.distribution:", data)
+		
 		# Refresh inventory UI if open (Inventory node root)
 		var ui: Node = get_tree().get_root().find_child("HUD", true, false)
 		if ui:

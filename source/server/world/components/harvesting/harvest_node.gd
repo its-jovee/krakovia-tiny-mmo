@@ -167,7 +167,15 @@ func _process(delta: float) -> void:
 					
 					# Roll loot for this player's harvests
 					var total_items: Dictionary = {}
+					var instance_tick: ServerInstance = get_viewport() as ServerInstance
+					
 					for _i in range(harvest_count):
+						# Send harvest.tick for EACH individual roll attempt
+						if instance_tick != null:
+							instance_tick.data_push.rpc_id(pid, &"harvest.tick", {
+								"node": String(get_path()),
+							})
+						
 						var rolled_loot: Dictionary
 						if loot_table != null:
 							rolled_loot = loot_table.roll_loot()
@@ -414,6 +422,8 @@ func _broadcast_status() -> void:
 			"earned_total": earned_total,
 			"projected_total_int": projected_total_int,
 			"next_progress": next_progress,
+			"tier": tier,  # Add tier for display
+			"node_type": String(node_type),  # Add node type for display
 		}
 		instance.data_push.rpc_id(pid, &"harvest.status", payload)
 

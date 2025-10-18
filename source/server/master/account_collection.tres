@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=271 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=294 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -1104,15 +1104,153 @@ id = 266
 handle = "guest266"
 password = "hh8o7rxmbh21"
 
+[sub_resource type="Resource" id="Resource_dogs4"]
+script = ExtResource("1_wgikn")
+id = 267
+handle = "guest267"
+password = "f5$fq71pa+o3"
+
+[sub_resource type="Resource" id="Resource_aicc8"]
+script = ExtResource("1_wgikn")
+id = 268
+handle = "guest268"
+password = "sdi4f0og643q"
+
+[sub_resource type="Resource" id="Resource_4f185"]
+script = ExtResource("1_wgikn")
+id = 269
+handle = "guest269"
+password = "sl40bmatkred"
+
 [sub_resource type="Resource" id="Resource_cnwcq"]
 script = ExtResource("1_wgikn")
 id = 27
 password = "0e1f4y4q6mar"
 
+[sub_resource type="Resource" id="Resource_21d4a"]
+script = ExtResource("1_wgikn")
+id = 270
+handle = "guest270"
+password = "bz4s0b2n$dl1"
+
+[sub_resource type="Resource" id="Resource_3ilop"]
+script = ExtResource("1_wgikn")
+id = 271
+handle = "guest271"
+password = "zhj5b5c2h1kh"
+
+[sub_resource type="Resource" id="Resource_vsaca"]
+script = ExtResource("1_wgikn")
+id = 272
+handle = "guest272"
+password = "9uq2k1nely9r"
+
+[sub_resource type="Resource" id="Resource_kpbdk"]
+script = ExtResource("1_wgikn")
+id = 273
+handle = "guest273"
+password = "xqlcnr1e04mm"
+
+[sub_resource type="Resource" id="Resource_5sgjo"]
+script = ExtResource("1_wgikn")
+id = 274
+handle = "guest274"
+password = "4gchnn2uc$5$"
+
+[sub_resource type="Resource" id="Resource_y34vi"]
+script = ExtResource("1_wgikn")
+id = 275
+handle = "guest275"
+password = "p70kowvaxq7q"
+
+[sub_resource type="Resource" id="Resource_uhdr4"]
+script = ExtResource("1_wgikn")
+id = 276
+handle = "guest276"
+password = "w4$7p27$yg2n"
+
+[sub_resource type="Resource" id="Resource_xdluo"]
+script = ExtResource("1_wgikn")
+id = 277
+handle = "guest277"
+password = "9mbyn3i3v0zk"
+
+[sub_resource type="Resource" id="Resource_lg36l"]
+script = ExtResource("1_wgikn")
+id = 278
+handle = "guest278"
+password = "h8nab6412q$#"
+
+[sub_resource type="Resource" id="Resource_mc4t4"]
+script = ExtResource("1_wgikn")
+id = 279
+handle = "guest279"
+password = "ri06qmfwgnhz"
+
 [sub_resource type="Resource" id="Resource_vyv53"]
 script = ExtResource("1_wgikn")
 id = 28
 password = "ta8xzh8ydsc#"
+
+[sub_resource type="Resource" id="Resource_b67lm"]
+script = ExtResource("1_wgikn")
+id = 280
+handle = "guest280"
+password = "wf+rt7u+bscp"
+
+[sub_resource type="Resource" id="Resource_xydjq"]
+script = ExtResource("1_wgikn")
+id = 281
+handle = "guest281"
+password = "j$u+eq2mh+ws"
+
+[sub_resource type="Resource" id="Resource_b003q"]
+script = ExtResource("1_wgikn")
+id = 282
+handle = "guest282"
+password = "fufii-$$zm7q"
+
+[sub_resource type="Resource" id="Resource_72jpn"]
+script = ExtResource("1_wgikn")
+id = 283
+handle = "guest283"
+password = "kyom7usgg99i"
+
+[sub_resource type="Resource" id="Resource_h8yv7"]
+script = ExtResource("1_wgikn")
+id = 284
+handle = "guest284"
+password = "z4vgcj2d1djf"
+
+[sub_resource type="Resource" id="Resource_n3ybk"]
+script = ExtResource("1_wgikn")
+id = 285
+handle = "guest285"
+password = "k1$r-kka7lvh"
+
+[sub_resource type="Resource" id="Resource_b3mgo"]
+script = ExtResource("1_wgikn")
+id = 286
+handle = "guest286"
+password = "3ze8t0lgt$kc"
+
+[sub_resource type="Resource" id="Resource_5wmsx"]
+script = ExtResource("1_wgikn")
+id = 287
+handle = "guest287"
+password = "2zzy6bs-nnzo"
+
+[sub_resource type="Resource" id="Resource_fb4xj"]
+script = ExtResource("1_wgikn")
+id = 288
+handle = "guest288"
+password = "aio$ektnitma"
+
+[sub_resource type="Resource" id="Resource_mt864"]
+script = ExtResource("1_wgikn")
+id = 289
+handle = "guest289"
+password = "zm0licu23esa"
 
 [sub_resource type="Resource" id="Resource_7nsc3"]
 script = ExtResource("1_wgikn")
@@ -1541,11 +1679,11 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_dogs4"]
+[sub_resource type="Resource" id="Resource_61r3w"]
 script = ExtResource("1_wgikn")
-id = 267
-handle = "guest267"
-password = "f5$fq71pa+o3"
+id = 290
+handle = "guest290"
+password = "5c19#-1g+br$"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -1738,9 +1876,32 @@ collection = {
 "guest265": SubResource("Resource_vx1tc"),
 "guest266": SubResource("Resource_sudxc"),
 "guest267": SubResource("Resource_dogs4"),
+"guest268": SubResource("Resource_aicc8"),
+"guest269": SubResource("Resource_4f185"),
 "guest27": SubResource("Resource_cnwcq"),
+"guest270": SubResource("Resource_21d4a"),
+"guest271": SubResource("Resource_3ilop"),
+"guest272": SubResource("Resource_vsaca"),
+"guest273": SubResource("Resource_kpbdk"),
+"guest274": SubResource("Resource_5sgjo"),
+"guest275": SubResource("Resource_y34vi"),
+"guest276": SubResource("Resource_uhdr4"),
+"guest277": SubResource("Resource_xdluo"),
+"guest278": SubResource("Resource_lg36l"),
+"guest279": SubResource("Resource_mc4t4"),
 "guest28": SubResource("Resource_vyv53"),
+"guest280": SubResource("Resource_b67lm"),
+"guest281": SubResource("Resource_xydjq"),
+"guest282": SubResource("Resource_b003q"),
+"guest283": SubResource("Resource_72jpn"),
+"guest284": SubResource("Resource_h8yv7"),
+"guest285": SubResource("Resource_n3ybk"),
+"guest286": SubResource("Resource_b3mgo"),
+"guest287": SubResource("Resource_5wmsx"),
+"guest288": SubResource("Resource_fb4xj"),
+"guest289": SubResource("Resource_mt864"),
 "guest29": SubResource("Resource_7nsc3"),
+"guest290": SubResource("Resource_61r3w"),
 "guest3": SubResource("Resource_5pt73"),
 "guest30": SubResource("Resource_ttt7q"),
 "guest31": SubResource("Resource_vmyp1"),
@@ -1819,4 +1980,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 268
+next_account_id = 291
