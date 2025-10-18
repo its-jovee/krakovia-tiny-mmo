@@ -50,6 +50,9 @@ const BANNED_WORDS: Array[String] = [
 
 
 func _ready() -> void:
+	# Load saved language preference first
+	TranslationManager.load_saved_language()
+	
 	$SwapButton.toggled.connect(func(toggled_on: bool):
 		if not $AudioStreamPlayer.playing:
 			$AudioStreamPlayer.play()

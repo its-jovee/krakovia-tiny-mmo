@@ -1,0 +1,130 @@
+keys,en,pt_BR
+ui_tip,Tip:,Dica:
+ui_button_confirm,Confirm,Confirmar
+ui_button_cancel,Cancel,Cancelar
+ui_button_close,Close,Fechar
+ui_button_accept,Accept,Aceitar
+ui_button_reject,Reject,Rejeitar
+ui_button_ready,Ready,Pronto
+ui_button_join,Join,Entrar
+ui_button_leave,Leave,Sair
+ui_button_login,Login,Entrar
+ui_button_logout,Logout,Sair
+ui_button_create_account,Create Account,Criar Conta
+ui_button_create_character,Create Character,Criar Personagem
+ui_button_delete,Delete,Excluir
+ui_button_save,Save,Salvar
+ui_unknown_error,Unknown Error,Erro Desconhecido
+error_handle_empty_title,Handle Required,Identificador Obrigatório
+error_handle_empty_message,"Please enter a player handle.","Por favor, insira um identificador de jogador."
+error_handle_empty_suggestion,Choose a unique handle that represents you in the game.,Escolha um identificador único que represente você no jogo.
+
+error_handle_too_short_title,Handle Too Short,Identificador Muito Curto
+error_handle_too_short_message,Handle must be at least 3 characters long.,O identificador deve ter pelo menos 3 caracteres.
+error_handle_too_short_suggestion,Try adding more characters to make it unique.,Tente adicionar mais caracteres para torná-lo único.
+
+error_handle_too_long_title,Handle Too Long,Identificador Muito Longo
+error_handle_too_long_message,Handle must be no more than 20 characters long.,O identificador deve ter no máximo 20 caracteres.
+error_handle_too_long_suggestion,Try shortening your handle while keeping it memorable.,Tente encurtar seu identificador mantendo-o memorável.
+
+error_handle_invalid_chars_title,Invalid Characters,Caracteres Inválidos
+error_handle_invalid_chars_message,"Handle can only contain letters, numbers, and underscores.","O identificador pode conter apenas letras, números e underscores."
+error_handle_invalid_chars_suggestion,Remove special characters and spaces from your handle.,Remova caracteres especiais e espaços do seu identificador.
+
+error_handle_reserved_title,Handle Reserved,Identificador Reservado
+error_handle_reserved_message,This handle is reserved and cannot be used.,Este identificador está reservado e não pode ser usado.
+error_handle_reserved_suggestion,Try a different handle that's available.,Tente um identificador diferente que esteja disponível.
+
+error_handle_already_exists_title,Handle Taken,Identificador em Uso
+error_handle_already_exists_message,This player handle is already taken.,Este identificador de jogador já está em uso.
+error_handle_already_exists_suggestion,Try adding numbers or variations to make it unique.,Tente adicionar números ou variações para torná-lo único.
+error_password_empty_title,Password Required,Senha Obrigatória
+error_password_empty_message,"Please enter a password.","Por favor, insira uma senha."
+error_password_empty_suggestion,Create a secure password to protect your account.,Crie uma senha segura para proteger sua conta.
+
+error_password_too_short_title,Password Too Short,Senha Muito Curta
+error_password_too_short_message,Password must be at least 6 characters long.,A senha deve ter pelo menos 6 caracteres.
+error_password_too_short_suggestion,Add more characters to strengthen your password.,Adicione mais caracteres para fortalecer sua senha.
+
+error_password_too_long_title,Password Too Long,Senha Muito Longa
+error_password_too_long_message,Password must be no more than 32 characters long.,A senha deve ter no máximo 32 caracteres.
+error_password_too_long_suggestion,Shorten your password while keeping it secure.,Encurte sua senha mantendo-a segura.
+
+error_password_invalid_chars_title,Invalid Characters,Caracteres Inválidos
+error_password_invalid_chars_message,"Password can only contain letters, numbers, and underscores.","A senha pode conter apenas letras, números e underscores."
+error_password_invalid_chars_suggestion,Remove special characters and spaces from your password.,Remova caracteres especiais e espaços da sua senha.
+
+error_password_weak_title,Password Too Weak,Senha Muito Fraca
+error_password_weak_message,Password is too weak and cannot be used.,A senha é muito fraca e não pode ser usada.
+error_password_weak_suggestion,"Use a mix of uppercase, lowercase, numbers, and special characters.","Use uma combinação de maiúsculas, minúsculas, números e caracteres especiais."
+
+error_password_match_failed_title,Passwords Don't Match,As Senhas Não Coincidem
+error_password_match_failed_message,The passwords you entered do not match.,As senhas que você digitou não coincidem.
+error_password_match_failed_suggestion,Make sure both password fields contain the same password.,Certifique-se de que ambos os campos de senha contenham a mesma senha.
+error_login_invalid_credentials_title,Login Failed,Falha no Login
+error_login_invalid_credentials_message,"Invalid handle or password. Please check your credentials.","Identificador ou senha inválidos. Por favor, verifique suas credenciais."
+error_login_invalid_credentials_suggestion,"Make sure your handle and password are correct, or try creating a new account.","Certifique-se de que seu identificador e senha estejam corretos, ou tente criar uma nova conta."
+
+error_login_already_connected_title,Already Logged In,Já Conectado
+error_login_already_connected_message,This account is already logged in elsewhere.,Esta conta já está conectada em outro dispositivo.
+error_login_already_connected_suggestion,"Log out from other devices or wait a few minutes and try again.","Desconecte-se de outros dispositivos ou aguarde alguns minutos e tente novamente."
+
+error_login_network_error_title,Connection Failed,Falha na Conexão
+error_login_network_error_message,Unable to connect to the server.,Não foi possível conectar ao servidor.
+error_login_network_error_suggestion,"Check your internet connection and try again.","Verifique sua conexão com a internet e tente novamente."
+
+error_login_timeout_title,Login Timeout,Tempo Esgotado
+error_login_timeout_message,Login request timed out.,A solicitação de login expirou.
+error_login_timeout_suggestion,"The server may be busy. Please try again in a moment.","O servidor pode estar ocupado. Tente novamente em instantes."
+error_network_connection_failed_title,Connection Failed,Falha na Conexão
+error_network_connection_failed_message,Unable to connect to the game server.,Não foi possível conectar ao servidor do jogo.
+error_network_connection_failed_suggestion,"Check your internet connection and ensure the game servers are online.","Verifique sua conexão com a internet e certifique-se de que os servidores do jogo estejam online."
+
+error_network_timeout_title,Request Timeout,Tempo Esgotado
+error_network_timeout_message,The request took too long to complete.,A solicitação demorou muito para ser concluída.
+error_network_timeout_suggestion,"Try again in a moment. The server may be experiencing high traffic.","Tente novamente em instantes. O servidor pode estar com tráfego intenso."
+
+error_network_server_unavailable_title,Server Unavailable,Servidor Indisponível
+error_network_server_unavailable_message,The game server is currently unavailable.,O servidor do jogo está indisponível no momento.
+error_network_server_unavailable_suggestion,Please try again later or check the game status.,Tente novamente mais tarde ou verifique o status do jogo.
+error_character_name_empty_title,Character Name Required,Nome do Personagem Obrigatório
+error_character_name_empty_message,"Please enter a character name.","Por favor, insira um nome de personagem."
+error_character_name_empty_suggestion,Choose a unique name for your character.,Escolha um nome único para seu personagem.
+
+error_character_name_too_short_title,Character Name Too Short,Nome Muito Curto
+error_character_name_too_short_message,Character name must be at least 4 characters long.,O nome do personagem deve ter pelo menos 4 caracteres.
+error_character_name_too_short_suggestion,Try adding more characters to make it unique.,Tente adicionar mais caracteres para torná-lo único.
+
+error_character_name_too_long_title,Character Name Too Long,Nome Muito Longo
+error_character_name_too_long_message,Character name must be no more than 16 characters long.,O nome do personagem deve ter no máximo 16 caracteres.
+error_character_name_too_long_suggestion,Try shortening your character name.,Tente encurtar o nome do seu personagem.
+
+error_character_invalid_class_title,Invalid Character Class,Classe de Personagem Inválida
+error_character_invalid_class_message,"Please select a valid character class.","Por favor, selecione uma classe de personagem válida."
+error_character_invalid_class_suggestion,"Choose from Miner, Forager, or Trapper.","Escolha entre Minerador, Coletor ou Caçador."
+
+error_character_missing_data_title,Incomplete Character Data,Dados do Personagem Incompletos
+error_character_missing_data_message,Character creation data is incomplete.,Os dados de criação do personagem estão incompletos.
+error_character_missing_data_suggestion,Make sure to provide both name and class for your character.,Certifique-se de fornecer nome e classe para seu personagem.
+
+error_character_not_authenticated_title,Not Authenticated,Não Autenticado
+error_character_not_authenticated_message,You must be logged in to create a character.,Você deve estar conectado para criar um personagem.
+error_character_not_authenticated_suggestion,"Please log in first, then try creating your character.","Por favor, conecte-se primeiro e depois tente criar seu personagem."
+
+error_character_name_banned_title,Inappropriate Name,Nome Inapropriado
+error_character_name_banned_message,This character name contains prohibited words or phrases.,Este nome de personagem contém palavras ou frases proibidas.
+error_character_name_banned_suggestion,"Please choose a different name that follows our community guidelines.","Por favor, escolha um nome diferente que siga nossas diretrizes da comunidade."
+error_server_error_generic_title,Server Error,Erro do Servidor
+error_server_error_generic_message,An unexpected error occurred on the server.,Ocorreu um erro inesperado no servidor.
+error_server_error_generic_suggestion,Please try again. If the problem persists, contact support.,Tente novamente. Se o problema persistir, contate o suporte.
+
+error_server_error_code_title,Server Error,Erro do Servidor
+error_server_error_code_message,Server returned error code: {code},O servidor retornou o código de erro: {code}
+error_server_error_code_suggestion,"Please try again or contact support if the problem continues.","Tente novamente ou contate o suporte se o problema continuar."
+
+error_unknown_error_title,Unknown Error,Erro Desconhecido
+error_unknown_error_message,An unexpected error occurred.,Ocorreu um erro inesperado.
+error_unknown_error_suggestion,"Please try again or contact support.","Tente novamente ou contate o suporte."
+ui_language_selector_label,Language,Idioma
+ui_language_english,English,English
+ui_language_portuguese_br,Português (BR),Português (BR)

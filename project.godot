@@ -18,6 +18,7 @@ config/icon="res://assets/project_icon/icon_svg.svg"
 
 [autoload]
 
+EventBus="*res://source/common/utils/event_bus.gd"
 Events="*res://source/client/autoload/events.gd"
 ItemTooltipManager="*res://source/client/ui/tooltips/item_tooltip_manager.gd"
 
@@ -114,6 +115,11 @@ right-click={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization/translations.en.translation", "res://localization/translations.pt_BR.translation")
+locale/fallback="en"
 
 [rendering]
 
