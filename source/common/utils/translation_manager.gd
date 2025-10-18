@@ -1,8 +1,8 @@
-class_name TranslationManager
-extends RefCounted
+extends Node
 
 ## Central translation and localization management system
 ## Handles language switching, persistence, and dynamic UI updates
+## This is an autoload singleton - access via TranslationManager global
 
 enum Language {
 	EN = 0,      ## English
@@ -28,6 +28,11 @@ const LANGUAGE_NAMES: Dictionary = {
 const SETTINGS_PATH: String = "user://settings.cfg"
 const SETTINGS_SECTION: String = "localization"
 const LANGUAGE_KEY: String = "language"
+
+
+## Called when the autoload is initialized
+func _ready() -> void:
+	load_saved_language()
 
 
 ## Set the active language and update TranslationServer
@@ -64,7 +69,7 @@ static func get_language_name(lang: Language) -> String:
 
 
 ## Load saved language preference from settings file
-static func load_saved_language() -> void:
+func load_saved_language() -> void:
 	var config := ConfigFile.new()
 	var err := config.load(SETTINGS_PATH)
 	

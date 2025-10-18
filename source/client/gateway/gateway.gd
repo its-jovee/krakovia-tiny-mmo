@@ -50,8 +50,14 @@ const BANNED_WORDS: Array[String] = [
 
 
 func _ready() -> void:
-	# Load saved language preference first
-	TranslationManager.load_saved_language()
+	# Language is now auto-loaded by TranslationManager autoload
+	
+	# Connect to language change events
+	if EventBus:
+		EventBus.language_changed.connect(_update_ui_text)
+	
+	# Update UI text initially
+	_update_ui_text()
 	
 	$SwapButton.toggled.connect(func(toggled_on: bool):
 		if not $AudioStreamPlayer.playing:
@@ -104,6 +110,93 @@ func _ready() -> void:
 	
 	# Check for saved credentials on startup
 	_check_saved_credentials()
+
+
+## Update all UI text when language changes
+func _update_ui_text() -> void:
+	# Main panel
+	if has_node("MainPanel/VBoxContainer/Label"):
+		$MainPanel/VBoxContainer/Label.text = TranslationServer.translate("gateway_welcome_title")
+	$MainPanel/VBoxContainer/VBoxContainer/LoginButton.text = TranslationServer.translate("ui_button_login")
+	$MainPanel/VBoxContainer/VBoxContainer/CreateAccountButton.text = TranslationServer.translate("ui_button_create_account")
+	$MainPanel/VBoxContainer/VBoxContainer/GuestButton.text = TranslationServer.translate("gateway_play_as_guest")
+	
+	# Login panel
+	if has_node("LoginPanel/VBoxContainer/Label"):
+		$LoginPanel/VBoxContainer/Label.text = TranslationServer.translate("ui_button_login")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/Label"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/Label.text = TranslationServer.translate("gateway_label_handle")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_handle")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/Label"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/Label.text = TranslationServer.translate("gateway_label_password")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_password")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ToggleButton"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/ToggleButton.text = TranslationServer.translate("ui_button_show")
+	if has_node("LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer3/CheckBox"):
+		$LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer3/CheckBox.text = TranslationServer.translate("gateway_label_remember_me")
+	$LoginPanel/VBoxContainer/VBoxContainer/LoginButton.text = TranslationServer.translate("ui_button_login")
+	
+	# Create account panel
+	if has_node("CreateAccountPanel/VBoxContainer/Label"):
+		$CreateAccountPanel/VBoxContainer/Label.text = TranslationServer.translate("ui_button_create_account")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/Label"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/Label.text = TranslationServer.translate("gateway_label_handle")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_handle")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/Label"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/Label.text = TranslationServer.translate("gateway_label_password")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/LineEdit"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_password")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/ToggleButton"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer/ToggleButton.text = TranslationServer.translate("ui_button_show")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/Label"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/Label.text = TranslationServer.translate("gateway_label_password_repeat")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_password_repeat")
+	if has_node("CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/ToggleButton"):
+		$CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer/ToggleButton.text = TranslationServer.translate("ui_button_show")
+	$CreateAccountPanel/VBoxContainer/VBoxContainer/CreateAccountButton.text = TranslationServer.translate("ui_button_create_account")
+	
+	# World selection
+	if has_node("WorldSelection/VBoxContainer/Label"):
+		$WorldSelection/VBoxContainer/Label.text = TranslationServer.translate("gateway_world_selection")
+	
+	# Character selection
+	if has_node("CharacterSelection/VBoxContainer/Label"):
+		$CharacterSelection/VBoxContainer/Label.text = TranslationServer.translate("gateway_character_selection")
+	
+	# Character creation
+	if has_node("CharacterCreation/VBoxContainer/Label"):
+		$CharacterCreation/VBoxContainer/Label.text = TranslationServer.translate("gateway_character_creation")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = TranslationServer.translate("gateway_label_class")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Label"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Label.text = TranslationServer.translate("gateway_label_character_name")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Label"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3/Label.text = TranslationServer.translate("gateway_label_class")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer2/LineEdit"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer2/LineEdit.placeholder_text = TranslationServer.translate("gateway_placeholder_character_name")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/CreateButton"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/CreateButton.text = TranslationServer.translate("ui_button_create_character")
+	
+	# Class buttons
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/miner"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/miner.text = TranslationServer.translate("gateway_class_miner")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/forager"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/forager.text = TranslationServer.translate("gateway_class_forager")
+	if has_node("CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/trapper"):
+		$CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer/trapper.text = TranslationServer.translate("gateway_class_trapper")
+	
+	# Back button
+	if back_button:
+		back_button.text = TranslationServer.translate("ui_button_back")
+	
+	# Popup confirm button
+	if has_node("PopupPanel/VBoxContainer/VBoxContainer/ConfirmButton"):
+		$PopupPanel/VBoxContainer/VBoxContainer/ConfirmButton.text = TranslationServer.translate("ui_button_confirm")
+
 
 
 func _setup_password_strength_indicators() -> void:

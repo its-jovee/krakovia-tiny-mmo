@@ -26,11 +26,17 @@ func _ready():
 	InstanceClient.subscribe(&"trade.complete", _on_trade_complete)
 	InstanceClient.subscribe(&"trade.cancel", _on_trade_cancel)
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	
 	# Hide modal by default
 	hide()
 	
 	# Make sure modal can be closed with Escape key
 	set_process_unhandled_key_input(true)
+	
+	# Update UI text on startup
+	_update_ui_text()
 
 func _on_trade_request_sent(data: Dictionary):
 	# Requester sees "Waiting for response..."
@@ -151,3 +157,23 @@ func _on_trade_cancel(data: Dictionary):
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.pressed and event.keycode == KEY_ESCAPE and visible:
 		close_modal()
+
+
+## Update all UI text when language changes
+func _update_ui_text() -> void:
+	"""Update trade request modal text for current language"""
+	# This function will be called when language changes
+	# Update button text based on current state
+	if current_state == State.WAITING:
+		if deny_button:
+			deny_button.text = TranslationServer.translate("ui_button_cancel")
+	elif current_state == State.RECEIVED_REQUEST:
+		if accept_button:
+			accept_button.text = TranslationServer.translate("ui_button_accept")
+		if deny_button:
+			deny_button.text = TranslationServer.translate("ui_button_reject")
+	elif current_state == State.TRADE_READY:
+		if accept_button:
+			accept_button.text = TranslationServer.translate("trade_button_open")
+		if deny_button:
+			deny_button.text = TranslationServer.translate("ui_button_cancel")

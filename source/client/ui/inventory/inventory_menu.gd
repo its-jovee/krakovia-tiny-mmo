@@ -100,8 +100,11 @@ const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.
 @onready var crafting_energy_bar: ProgressBar = $CraftingView/HBoxContainer/VBoxContainer2/StatsContainer/EnergyBar
 @onready var recipe_name_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeName
 @onready var recipe_description: RichTextLabel = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RecipeDescription
+@onready var requirements_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RequirementsContainer/RequirementsLabel
 @onready var inputs_container: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/RequirementsContainer/InputsContainer
+@onready var outputs_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/OutputsContainer/OutputsLabel
 @onready var outputs_list: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/OutputsContainer/OutputsList
+@onready var costs_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CostsContainer/CostsLabel
 @onready var costs_list: VBoxContainer = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CostsContainer/CostsList
 @onready var craft_button: Button = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/CraftButton
 @onready var status_label: Label = $CraftingView/HBoxContainer/VBoxContainer2/RecipeDetails/StatusLabel
@@ -172,17 +175,24 @@ func _ready() -> void:
 	if search_box:
 		search_box.text_changed.connect(_on_search_text_changed)
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	
 	# Initialize view visibility - hide all except equipment
 	equipment_view.show()
 	materials_view.hide()
 	trade_view.hide()
 	crafting_view.hide()
+	
+	# Update UI text on startup
+	_update_ui_text()
+
 
 
 func _setup_trade_quantity_dialog() -> void:
 	"""Create trade quantity dialog"""
 	trade_quantity_dialog = AcceptDialog.new()
-	trade_quantity_dialog.title = "Trade Quantity"
+	trade_quantity_dialog.title = TranslationServer.translate("trade_dialog_title")
 	trade_quantity_dialog.dialog_hide_on_ok = true
 	trade_quantity_dialog.min_size = Vector2(300, 150)
 	
@@ -191,7 +201,7 @@ func _setup_trade_quantity_dialog() -> void:
 	trade_quantity_dialog.add_child(vbox)
 	
 	trade_quantity_label = Label.new()
-	trade_quantity_label.text = "How many to trade?"
+	trade_quantity_label.text = TranslationServer.translate("trade_dialog_question")
 	trade_quantity_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(trade_quantity_label)
 	
@@ -201,7 +211,7 @@ func _setup_trade_quantity_dialog() -> void:
 	vbox.add_child(hbox)
 	
 	var qty_label = Label.new()
-	qty_label.text = "Quantity:"
+	qty_label.text = TranslationServer.translate("trade_dialog_label_quantity")
 	hbox.add_child(qty_label)
 	
 	trade_quantity_spinbox = SpinBox.new()
@@ -213,7 +223,7 @@ func _setup_trade_quantity_dialog() -> void:
 	
 	# Add Max button
 	trade_quantity_max_button = Button.new()
-	trade_quantity_max_button.text = "Max"
+	trade_quantity_max_button.text = TranslationServer.translate("trade_button_max")
 	trade_quantity_max_button.custom_minimum_size = Vector2(60, 0)
 	trade_quantity_max_button.pressed.connect(_on_trade_max_button_pressed)
 	hbox.add_child(trade_quantity_max_button)
@@ -971,14 +981,14 @@ func _update_recipe_costs_and_status() -> void:
 	_clear_container(costs_list)
 	if selected_recipe.gold_cost > 0:
 		var gold_label = Label.new()
-		gold_label.text = "Gold: %d (Have: %d)" % [selected_recipe.gold_cost, current_gold]
+		gold_label.text = TranslationServer.translate("crafting_cost_gold").format({"required": selected_recipe.gold_cost, "have": current_gold})
 		if current_gold < selected_recipe.gold_cost:
 			gold_label.modulate = Color(1, 0.5, 0.5)
 		costs_list.add_child(gold_label)
 	
 	if selected_recipe.energy_cost > 0:
 		var energy_label = Label.new()
-		energy_label.text = "Energy: %.1f (Have: %.1f)" % [selected_recipe.energy_cost, current_energy]
+		energy_label.text = TranslationServer.translate("crafting_cost_energy").format({"required": "%.1f" % selected_recipe.energy_cost, "have": "%.1f" % current_energy})
 		if current_energy < selected_recipe.energy_cost:
 			energy_label.modulate = Color(1, 0.5, 0.5)
 		costs_list.add_child(energy_label)
@@ -992,15 +1002,18 @@ func _update_recipe_costs_and_status() -> void:
 	craft_button.disabled = not (can_craft and has_materials and has_gold and has_energy)
 	
 	if not can_craft:
-		status_label.text = "Requires %s level %d" % [selected_recipe.required_class, selected_recipe.required_level]
+		# Get translated class name
+		var class_key = "crafting_filter_" + selected_recipe.required_class.to_lower()
+		var class_display = TranslationServer.translate(class_key)
+		status_label.text = TranslationServer.translate("crafting_status_level_required").format({"class": class_display, "level": selected_recipe.required_level})
 	elif not has_materials:
-		status_label.text = "Missing required materials"
+		status_label.text = TranslationServer.translate("crafting_status_missing_materials")
 	elif not has_gold:
-		status_label.text = "Not enough gold"
+		status_label.text = TranslationServer.translate("crafting_status_not_enough_gold")
 	elif not has_energy:
-		status_label.text = "Not enough energy"
+		status_label.text = TranslationServer.translate("crafting_status_not_enough_energy")
 	else:
-		status_label.text = "Ready to craft!"
+		status_label.text = TranslationServer.translate("crafting_status_ready")
 
 func _clear_container(container: Container) -> void:
 	for child in container.get_children():
@@ -1163,14 +1176,14 @@ func _on_exp_update(data: Dictionary) -> void:
 func _update_crafting_bars() -> void:
 	"""Update the XP and Energy bars in the crafting view"""
 	if crafting_level_label:
-		crafting_level_label.text = "Level %d" % current_level_display
+		crafting_level_label.text = TranslationServer.translate("level_display").format({"level": current_level_display})
 	
 	if crafting_exp_bar:
 		crafting_exp_bar.max_value = exp_required
 		crafting_exp_bar.value = current_exp
 	
 	if crafting_energy_label:
-		crafting_energy_label.text = "Energy: %.0f / %.0f" % [current_energy, current_energy_max]
+		crafting_energy_label.text = TranslationServer.translate("crafting_label_energy").format({"current": "%.0f" % current_energy, "max": "%.0f" % current_energy_max})
 	
 	if crafting_energy_bar:
 		crafting_energy_bar.max_value = current_energy_max
@@ -1250,3 +1263,92 @@ func _filter_recipes() -> void:
 	for recipe in filtered_recipes:
 		var recipe_button = _create_recipe_button(recipe)
 		recipe_grid.add_child(recipe_button)
+
+
+## Update all UI text when language changes
+func _update_ui_text() -> void:
+	# Equipment view labels
+	if has_node("EquipmentView/HBoxContainer/VBoxContainer/TabTitle"):
+		$EquipmentView/HBoxContainer/VBoxContainer/TabTitle.text = TranslationServer.translate("inventory_tab_equipment")
+	
+	# Sell button and labels
+	if sell_button:
+		sell_button.text = TranslationServer.translate("inventory_button_sell")
+	if sell_price_label and selected_item:
+		var sell_price = selected_item.gold_value / 2 if selected_item.gold_value > 0 else 0
+		sell_price_label.text = TranslationServer.translate("inventory_label_sell_price").format({"price": sell_price})
+	elif sell_price_label:
+		sell_price_label.text = TranslationServer.translate("inventory_label_sell_price_zero")
+	
+	# Gold labels
+	if equipment_gold_label:
+		equipment_gold_label.text = TranslationServer.translate("inventory_label_gold_display").format({"amount": current_gold})
+	if trade_gold_label:
+		trade_gold_label.text = TranslationServer.translate("inventory_label_gold_display").format({"amount": current_gold})
+	
+	# Trade view labels
+	if your_offer_title:
+		your_offer_title.text = TranslationServer.translate("trade_title_your_offer")
+	if their_offer_title:
+		their_offer_title.text = TranslationServer.translate("trade_title_their_offer")
+	if your_ready_button:
+		your_ready_button.text = TranslationServer.translate("trade_button_ready")
+	if their_ready_button:
+		their_ready_button.text = TranslationServer.translate("trade_button_ready")
+	if close_button:
+		close_button.text = TranslationServer.translate("trade_button_close")
+	
+	# Trade quantity dialog
+	if trade_quantity_dialog:
+		trade_quantity_dialog.title = TranslationServer.translate("trade_dialog_title")
+	if trade_quantity_label:
+		trade_quantity_label.text = TranslationServer.translate("trade_dialog_question")
+	if trade_quantity_max_button:
+		trade_quantity_max_button.text = TranslationServer.translate("trade_button_max")
+	
+	# Crafting view labels
+	if recipe_name_label and not selected_recipe:
+		recipe_name_label.text = TranslationServer.translate("crafting_select_recipe")
+	if recipe_description and not selected_recipe:
+		recipe_description.text = TranslationServer.translate("crafting_choose_recipe_desc")
+	if craft_button:
+		craft_button.text = TranslationServer.translate("crafting_button_craft")
+	if search_box:
+		search_box.placeholder_text = TranslationServer.translate("crafting_placeholder_search")
+	
+	# Crafting section labels
+	if requirements_label:
+		requirements_label.text = TranslationServer.translate("crafting_label_requirements")
+	if outputs_label:
+		outputs_label.text = TranslationServer.translate("crafting_label_outputs")
+	if costs_label:
+		costs_label.text = TranslationServer.translate("crafting_label_costs")
+	
+	# Update class filter if present
+	if class_filter and class_filter.item_count > 0:
+		class_filter.set_item_text(0, TranslationServer.translate("crafting_filter_all_classes"))
+		class_filter.set_item_text(1, TranslationServer.translate("crafting_filter_miner"))
+		class_filter.set_item_text(2, TranslationServer.translate("crafting_filter_forager"))
+		class_filter.set_item_text(3, TranslationServer.translate("crafting_filter_trapper"))
+	
+	# Update inventory tabs if present
+	if inventory_tabs:
+		var tab_buttons = inventory_tabs.get_children()
+		if tab_buttons.size() >= 5:
+			if tab_buttons[0] is Button:
+				tab_buttons[0].text = TranslationServer.translate("inventory_tab_equipment")
+			if tab_buttons[1] is Button:
+				tab_buttons[1].text = TranslationServer.translate("inventory_tab_materials")
+			if tab_buttons[2] is Button:
+				tab_buttons[2].text = TranslationServer.translate("inventory_tab_consumables")
+			if tab_buttons[3] is Button:
+				tab_buttons[3].text = TranslationServer.translate("inventory_tab_key_items")
+			if tab_buttons[4] is Button:
+				tab_buttons[4].text = TranslationServer.translate("inventory_tab_crafting")
+	
+	# Update crafting bars display
+	_update_crafting_bars()
+	
+	# Update recipe details if one is selected
+	if selected_recipe:
+		_update_recipe_costs_and_status()

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=260 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=262 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -1033,6 +1033,18 @@ id = 255
 handle = "guest255"
 password = "6sc9quom8tzb"
 
+[sub_resource type="Resource" id="Resource_wfcub"]
+script = ExtResource("1_wgikn")
+id = 256
+handle = "guest256"
+password = "ycjqcsjml1oc"
+
+[sub_resource type="Resource" id="Resource_5nwgj"]
+script = ExtResource("1_wgikn")
+id = 257
+handle = "guest257"
+password = "jpv3l95xaoma"
+
 [sub_resource type="Resource" id="Resource_tqxbd"]
 script = ExtResource("1_wgikn")
 id = 26
@@ -1475,11 +1487,11 @@ id = 92
 handle = "testenilson"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_wfcub"]
+[sub_resource type="Resource" id="Resource_tv8n8"]
 script = ExtResource("1_wgikn")
-id = 256
-handle = "guest256"
-password = "ycjqcsjml1oc"
+id = 258
+handle = "guest258"
+password = "cy641#b5$nt5"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -1660,6 +1672,8 @@ collection = {
 "guest254": SubResource("Resource_02gky"),
 "guest255": SubResource("Resource_obj8p"),
 "guest256": SubResource("Resource_wfcub"),
+"guest257": SubResource("Resource_5nwgj"),
+"guest258": SubResource("Resource_tv8n8"),
 "guest26": SubResource("Resource_tqxbd"),
 "guest27": SubResource("Resource_cnwcq"),
 "guest28": SubResource("Resource_vyv53"),
@@ -1742,4 +1756,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 257
+next_account_id = 259

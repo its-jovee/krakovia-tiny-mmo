@@ -14,7 +14,31 @@ ui_button_create_account,Create Account,Criar Conta
 ui_button_create_character,Create Character,Criar Personagem
 ui_button_delete,Delete,Excluir
 ui_button_save,Save,Salvar
+ui_button_back,Back,Voltar
+ui_button_guest,Guest,Convidado
+ui_button_show,Show,Mostrar
 ui_unknown_error,Unknown Error,Erro Desconhecido
+gateway_welcome_title,Welcome to Kraftovia,Bem-vindo a Kraftovia
+gateway_play_as_guest,Play as Guest,Jogar como Convidado
+gateway_label_handle,Player Handle,Identificador do Jogador
+gateway_label_password,Password,Senha
+gateway_label_password_repeat,Password Repeat,Repetir Senha
+gateway_label_remember_me,Remember Me,Lembrar de Mim
+gateway_placeholder_handle,Enter your player handle here,Digite seu identificador aqui
+gateway_placeholder_password,Enter your password here,Digite sua senha aqui
+gateway_placeholder_password_repeat,Enter your password again here,Digite sua senha novamente aqui
+gateway_world_selection,World Selection,Seleção de Mundo
+gateway_character_selection,Character Selection,Seleção de Personagem
+gateway_character_creation,Character Creation,Criação de Personagem
+gateway_label_character_name,Character Name,Nome do Personagem
+gateway_label_class,Class,Classe
+gateway_placeholder_character_name,Enter character name,Digite o nome do personagem
+gateway_class_miner,Miner,Minerador
+gateway_class_forager,Forager,Coletor
+gateway_class_trapper,Trapper,Caçador
+gateway_class_miner_desc,"Specializes in mining and crafting.","Especializado em mineração e criação."
+gateway_class_forager_desc,"Specializes in gathering and herbalism.","Especializado em coleta e herbalismo."
+gateway_class_trapper_desc,"Specializes in hunting and trapping.","Especializado em caça e armadilhas."
 error_handle_empty_title,Handle Required,Identificador Obrigatório
 error_handle_empty_message,"Please enter a player handle.","Por favor, insira um identificador de jogador."
 error_handle_empty_suggestion,Choose a unique handle that represents you in the game.,Escolha um identificador único que represente você no jogo.
@@ -128,3 +152,79 @@ error_unknown_error_suggestion,"Please try again or contact support.","Tente nov
 ui_language_selector_label,Language,Idioma
 ui_language_english,English,English
 ui_language_portuguese_br,Português (BR),Português (BR)
+
+# Inventory System
+inventory_tab_equipment,Equipment,Inventário
+inventory_tab_materials,Materials,Materiais
+inventory_tab_consumables,Consumables,Consumíveis
+inventory_tab_key_items,Key Items,Itens Chave
+inventory_tab_crafting,Crafting,Criação
+inventory_label_gold,Gold:,Ouro:
+inventory_label_gold_display,"Gold: {amount}","Ouro: {amount}"
+inventory_button_equip_unequip,Equip/Unequip,Equipar/Desequipar
+inventory_button_expand,Expand,Expandir
+inventory_button_sell,Sell Item,Vender Item
+inventory_label_sell_price,"Sell Price: {price} gold","Preço de venda: {price} ouro"
+inventory_label_sell_price_zero,Sell Price: 0 gold,Preço de venda: 0 ouro
+inventory_select_item,Select an item to see details,Selecione um item para ver detalhes
+
+# Trade System
+trade_title_your_offer,Your Offer,Sua Oferta
+trade_title_their_offer,Their Offer,Oferta Deles
+trade_label_gold,Gold,Ouro
+trade_button_ready,Ready,Pronto
+trade_button_lock,Lock,Travar
+trade_button_close,Close,Fechar
+trade_dialog_title,Trade Quantity,Quantidade para Trocar
+trade_dialog_question,How many to trade?,Quantos para trocar?
+trade_dialog_label_quantity,Quantity:,Quantidade:
+trade_button_max,Max,Máximo
+trade_request_title,Trade Request,Pedido de Troca
+trade_request_sent,"Trade Request Sent","Pedido de Troca Enviado"
+trade_waiting_response,Waiting for response...,Aguardando resposta...
+trade_request_to,"Sent trade request to {player}","Pedido de troca enviado para {player}"
+trade_description_player,"[{player}]","[{player}]"
+trade_description_wants,"would like to trade.","gostaria de trocar."
+trade_button_open,Open Trade,Abrir Troca
+
+# Market/Shop Dialog
+shop_add_item_title,Item:,Item:
+shop_label_quantity,Quantity:,Quantidade:
+shop_label_price_each,Price (each):,Preço (cada):
+
+# Crafting System
+crafting_label_level,"Level: {level}","Nível: {level}"
+crafting_label_exp,"EXP: {current} / {required}","EXP: {current} / {required}"
+crafting_label_energy,"Energy: {current} / {max}","Energia: {current} / {max}"
+crafting_select_recipe,Select a recipe,Selecione uma receita
+crafting_choose_recipe_desc,"Choose a recipe from the list to see details.","Escolha uma receita da lista para ver detalhes."
+crafting_button_craft,Craft,Criar
+crafting_label_requirements,Requirements:,Requisitos:
+crafting_label_outputs,Outputs:,Resultados:
+crafting_label_costs,Costs:,Custos:
+crafting_filter_all_classes,All Classes,Todas as Classes
+crafting_filter_miner,Miner,Minerador
+crafting_filter_forager,Forager,Coletor
+crafting_filter_trapper,Trapper,Caçador
+crafting_placeholder_search,Search recipes...,Buscar receitas...
+crafting_cost_gold,"Gold: {required} (Have: {have})","Ouro: {required} (Possui: {have})"
+crafting_cost_energy,"Energy: {required} (Have: {have})","Energia: {required} (Possui: {have})"
+crafting_status_ready,Ready to craft!,Pronto para criar!
+crafting_status_level_required,"Requires {class} level {level}","Requer {class} nível {level}"
+crafting_status_missing_materials,Missing required materials,Faltam materiais necessários
+crafting_status_not_enough_gold,Not enough gold,Ouro insuficiente
+crafting_status_not_enough_energy,Not enough energy,Energia insuficiente
+crafting_item_have,"Have: {amount}","Possui: {amount}"
+crafting_item_need_more,"Need {amount} more","Precisa de {amount} mais"
+
+# Level and XP
+level_display,"Level {level}","Nível {level}"
+exp_display,"{current} / {required} EXP","{current} / {required} EXP"
+
+# Item Tooltips
+tooltip_level_requirement,"Requires Level {level}","Requer Nível {level}"
+tooltip_class_requirement,"Requires {class}","Requer {class}"
+tooltip_stack_size,"Stack: {current}/{max}","Pilha: {current}/{max}"
+tooltip_value,"Value: {value} gold","Valor: {value} ouro"
+tooltip_durability,"Durability: {current}/{max}","Durabilidade: {current}/{max}"
+
