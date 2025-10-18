@@ -35,6 +35,10 @@ var flipped: bool = false:
 var pivot: float = 0.0:
 	set = _set_pivot
 
+# Shader animation system
+var animation_shader: ShaderMaterial = null
+var animation_time_offset: float = 0.0
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 #@onready var hand_offset: Node2D = $HandOffset
 #@onready var hand_pivot: Node2D = $HandOffset/HandPivot
@@ -53,6 +57,9 @@ func _ready() -> void:
 	# Initialize character visuals
 	sprite_frames = "miner"  # Default, will be overridden by character_class if set
 	anim = Animations.IDLE
+	
+	# Setup shader-based procedural animations
+	_setup_animation_shader()
 	
 	## NEW
 	#$AbilitySystemComponent/AttributesMirror.attribute_local_changed.connect(
@@ -120,6 +127,9 @@ func _set_anim(new_anim: Animations) -> void:
 		Animations.SIT:
 			animated_sprite.play("sit")
 	anim = new_anim
+	
+	# Update shader animation state
+	_update_animation_shader_state(new_anim)
 
 
 func _set_flip(new_flip: bool) -> void:
@@ -138,6 +148,48 @@ func _set_character_class(new_class: String):
 		"res://source/common/gameplay/characters/classes/character_collection/" + new_class + ".tres")
 	animated_sprite.sprite_frames = character_resource.character_sprite
 	character_class = new_class
+
+
+func _setup_animation_shader() -> void:
+	"""Setup procedural shader animations for breathing and squash/stretch"""
+	if not multiplayer.is_server():  # Only setup on client
+		var shader = load("res://source/client/shaders/character_animation.gdshader")
+		if shader and animated_sprite:
+			animation_shader = ShaderMaterial.new()
+			animation_shader.shader = shader
+			
+			# Randomize time offset so characters don't breathe in sync
+			animation_time_offset = randf() * TAU
+			animation_shader.set_shader_parameter("time_offset", animation_time_offset)
+			
+			# Set default parameters - expressive breathing, subtle squash/stretch
+			animation_shader.set_shader_parameter("breathing_intensity", 0.6)
+			animation_shader.set_shader_parameter("breathing_speed", 2.5)
+			animation_shader.set_shader_parameter("squash_stretch_intensity", 0.08)
+			animation_shader.set_shader_parameter("squash_stretch_speed", 4.0)
+			animation_shader.set_shader_parameter("animation_state", 0)  # Start with idle
+			
+			# Apply shader to sprite
+			animated_sprite.material = animation_shader
+
+
+func _update_animation_shader_state(new_anim: Animations) -> void:
+	"""Update shader parameters based on current animation"""
+	if not animation_shader:
+		return
+	
+	match new_anim:
+		Animations.IDLE:
+			animation_shader.set_shader_parameter("animation_state", 0)
+			animation_shader.set_shader_parameter("breathing_speed", 2.5)  # Normal breathing
+		
+		Animations.SIT:
+			animation_shader.set_shader_parameter("animation_state", 2)
+			animation_shader.set_shader_parameter("breathing_speed", 1.8)  # Slightly slower when sitting
+		
+		Animations.RUN, Animations.HARVEST:
+			animation_shader.set_shader_parameter("animation_state", 1)
+			animation_shader.set_shader_parameter("squash_stretch_speed", 5.0)  # Match movement pace
 
 
 #var primary_weapon: Weapon

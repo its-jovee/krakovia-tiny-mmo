@@ -42,7 +42,6 @@ var shop_indicator: Control = null
 # Hover detection for remote players (client-side only)
 var hover_detector: Control = null
 var is_hovered: bool = false
-var outline_material: ShaderMaterial = null
 
 
 func _init() -> void:
@@ -80,34 +79,76 @@ func _setup_hover_detection() -> void:
 	hover_detector.mouse_entered.connect(_on_mouse_entered)
 	hover_detector.mouse_exited.connect(_on_mouse_exited)
 	print("Connected mouse signals for: ", display_name)
-	
-	# Prepare outline shader material
-	var outline_shader = preload("res://source/client/shaders/player_outline.gdshader")
-	outline_material = ShaderMaterial.new()
-	outline_material.shader = outline_shader
-	outline_material.set_shader_parameter("line_color", Color(1.0, 1.0, 1.0, 1.0))  # White
-	outline_material.set_shader_parameter("line_thickness", 1.5)
-	print("Shader material prepared for: ", display_name)
 
 func _on_mouse_entered() -> void:
 	"""Called when mouse enters player area"""
 	print("Mouse entered player: ", display_name)
 	is_hovered = true
-	# Apply outline shader to sprite
-	if animated_sprite:
-		animated_sprite.material = outline_material
-		print("Applied outline material to sprite")
-	else:
-		print("WARNING: animated_sprite is null!")
+	_apply_combined_shader(true)
 
 func _on_mouse_exited() -> void:
 	"""Called when mouse exits player area"""
 	print("Mouse exited player: ", display_name)
 	is_hovered = false
-	# Remove outline shader
-	if animated_sprite:
-		animated_sprite.material = null
-		print("Removed outline material from sprite")
+	_apply_combined_shader(false)
+
+func _apply_combined_shader(with_outline: bool) -> void:
+	"""Switch between animation-only and animation+outline shader"""
+	if not animated_sprite or not animation_shader:
+		return
+	
+	if with_outline:
+		# Switch to combined shader (animation + outline)
+		var combined_shader = load("res://source/client/shaders/character_animation_outline.gdshader")
+		if combined_shader:
+			var new_material = ShaderMaterial.new()
+			new_material.shader = combined_shader
+			
+			# Copy all animation parameters from current shader
+			new_material.set_shader_parameter("time_offset", animation_time_offset)
+			new_material.set_shader_parameter("breathing_intensity", 0.6)
+			new_material.set_shader_parameter("breathing_speed", 
+				animation_shader.get_shader_parameter("breathing_speed"))
+			new_material.set_shader_parameter("squash_stretch_intensity", 0.08)
+			new_material.set_shader_parameter("squash_stretch_speed", 
+				animation_shader.get_shader_parameter("squash_stretch_speed"))
+			
+			# Copy current animation state
+			var current_state = animation_shader.get_shader_parameter("animation_state")
+			new_material.set_shader_parameter("animation_state", current_state)
+			
+			# Add outline parameters
+			new_material.set_shader_parameter("line_color", Color.WHITE)
+			new_material.set_shader_parameter("line_thickness", 1.5)
+			
+			# Apply combined shader
+			animated_sprite.material = new_material
+			animation_shader = new_material  # Update reference so future updates work
+			print("Applied combined shader (animation + outline)")
+	else:
+		# Restore animation-only shader
+		var anim_shader = load("res://source/client/shaders/character_animation.gdshader")
+		if anim_shader:
+			var new_material = ShaderMaterial.new()
+			new_material.shader = anim_shader
+			
+			# Copy animation parameters
+			new_material.set_shader_parameter("time_offset", animation_time_offset)
+			new_material.set_shader_parameter("breathing_intensity", 0.6)
+			new_material.set_shader_parameter("breathing_speed", 
+				animation_shader.get_shader_parameter("breathing_speed"))
+			new_material.set_shader_parameter("squash_stretch_intensity", 0.08)
+			new_material.set_shader_parameter("squash_stretch_speed", 
+				animation_shader.get_shader_parameter("squash_stretch_speed"))
+			
+			# Copy current animation state
+			var current_state = animation_shader.get_shader_parameter("animation_state")
+			new_material.set_shader_parameter("animation_state", current_state)
+			
+			# Apply animation-only shader
+			animated_sprite.material = new_material
+			animation_shader = new_material  # Update reference
+			print("Restored animation-only shader")
 
 func _input(event: InputEvent) -> void:
 	"""Handle input events for right-click trading"""
