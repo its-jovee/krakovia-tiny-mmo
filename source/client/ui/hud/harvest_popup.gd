@@ -14,10 +14,10 @@ func setup(item_name: String, item_icon: Texture2D, amount: int, exp_amount: int
 	if icon:
 		icon.texture = item_icon
 	if label:
-		label.text = "+%d %s" % [amount, item_name]
+		label.text = TranslationServer.translate("popup_harvest").format({"amount": amount, "item": item_name})
 	if exp_label:
 		if exp_amount > 0:
-			exp_label.text = "+%d XP" % exp_amount
+			exp_label.text = TranslationServer.translate("popup_harvest_exp").format({"exp": exp_amount})
 			exp_label.show()
 		else:
 			exp_label.hide()

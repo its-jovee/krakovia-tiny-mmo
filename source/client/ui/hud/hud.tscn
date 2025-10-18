@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=15 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -6,10 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://gofowwc2uc1h" path="res://source/client/ui/hud/energy_bar/energy_bar.tscn" id="3_energy"]
 [ext_resource type="Script" uid="uid://pkprr0ll1y44" path="res://source/client/ui/hud/item_slots.gd" id="4_8qpw0"]
 [ext_resource type="Script" uid="uid://brq8mxox5bclj" path="res://source/client/ui/hud/menu_overlay.gd" id="4_cx7qp"]
+[ext_resource type="PackedScene" uid="uid://c4y8n5xr7j3wk" path="res://source/client/ui/guide/guide_modal.tscn" id="5_guide"]
 [ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="5_yye8g"]
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="6_qjrur"]
 [ext_resource type="Texture2D" uid="uid://1lckma8tgrri" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb6.png" id="9_o5bjo"]
+[ext_resource type="Texture2D" uid="uid://b8fkitwl7xwkl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb25.png" id="10_ntruf"]
 [ext_resource type="Texture2D" uid="uid://be5thvqndixxl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb39.png" id="10_s83ae"]
+[ext_resource type="Texture2D" uid="uid://d4sfpo45g47a" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb13.png" id="11_kuylb"]
 [ext_resource type="Texture2D" uid="uid://wykq6t7doo8e" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb14.png" id="11_ntruf"]
 
 [node name="HUD" type="CanvasLayer"]
@@ -193,16 +196,31 @@ grow_horizontal = 0
 theme_override_constants/separation = 12
 
 [node name="InventoryButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_qjrur")
 icon = ExtResource("9_o5bjo")
+icon_alignment = 1
 
 [node name="CraftingButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 icon = ExtResource("10_s83ae")
+icon_alignment = 1
 
 [node name="ShopButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "Shop"
+icon = ExtResource("10_ntruf")
+icon_alignment = 1
+
+[node name="GuideButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+tooltip_text = "Game Guide"
+icon = ExtResource("11_kuylb")
+icon_alignment = 1
 
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
 visible = false
@@ -250,7 +268,10 @@ text = "CLOSE"
 [node name="SubMenu" type="CanvasLayer" parent="."]
 layer = 10
 
+[node name="GuideModal" parent="." instance=ExtResource("5_guide")]
+
 [connection signal="pressed" from="MenuButton" to="." method="_on_overlay_menu_button_pressed"]
 [connection signal="pressed" from="LevelupButton" to="." method="_on_levelup_button_pressed"]
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button" to="." method="_on_vit_button_pressed"]
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button2" to="." method="_on_button_str_pressed"]
+[connection signal="pressed" from="HBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]

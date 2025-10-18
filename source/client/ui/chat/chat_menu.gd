@@ -16,6 +16,16 @@ var fade_out_tween: Tween
 
 @onready var fade_out_timer: Timer = $PeekFeed/FadeOutTimer
 
+# Chat tab buttons
+@onready var public_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/Public
+@onready var system_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/System
+@onready var world_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/World
+@onready var team_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/Team
+@onready var guild_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/Guild
+@onready var private_tab: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer/HBoxContainer/Private
+@onready var send_button: Button = $FullFeed/Control/HBoxContainer/ChatPanel/VBoxContainer2/HBoxContainer2/Send
+@onready var close_button: Button = $FullFeed/Control/HBoxContainer/ChatPanel/HBoxContainer2/Close
+
 
 func _ready() -> void:
 	InstanceClient.current.subscribe(&"chat.message", _on_chat_message)
@@ -23,8 +33,14 @@ func _ready() -> void:
 	peek_feed_message_edit.text_submitted.connect(_on_message_edit_text_submitted.bind(peek_feed_message_edit))
 	full_feed_message_edit.text_submitted.connect(_on_message_edit_text_submitted.bind(full_feed_message_edit))
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	
 	peek_feed.show()
 	full_feed.hide()
+	
+	# Update UI text on startup
+	_update_ui_text()
 
 
 func _input(event: InputEvent) -> void:
@@ -200,3 +216,33 @@ func _on_message_edit_text_submitted(new_text: String, line_edit: LineEdit) -> v
 			Callable(), # ACK later
 			{"text": new_text, "channel": current_channel}
 		)
+
+
+## Update all UI text when language changes
+func _update_ui_text() -> void:
+	"""Update chat UI text for current language"""
+	# Update placeholder text
+	if peek_feed_message_edit:
+		peek_feed_message_edit.placeholder_text = TranslationServer.translate("chat_placeholder_message_peek")
+	if full_feed_message_edit:
+		full_feed_message_edit.placeholder_text = TranslationServer.translate("chat_placeholder_message")
+	
+	# Update tab buttons
+	if public_tab:
+		public_tab.text = TranslationServer.translate("chat_tab_public")
+	if system_tab:
+		system_tab.text = TranslationServer.translate("chat_tab_system")
+	if world_tab:
+		world_tab.text = TranslationServer.translate("chat_tab_world")
+	if team_tab:
+		team_tab.text = TranslationServer.translate("chat_tab_team")
+	if guild_tab:
+		guild_tab.text = TranslationServer.translate("chat_tab_guild")
+	if private_tab:
+		private_tab.text = TranslationServer.translate("chat_tab_private")
+	
+	# Update buttons
+	if send_button:
+		send_button.text = TranslationServer.translate("chat_button_send")
+	if close_button:
+		close_button.text = TranslationServer.translate("chat_button_close")

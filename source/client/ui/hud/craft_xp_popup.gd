@@ -10,7 +10,7 @@ var float_speed: float = 40.0
 
 func setup(exp_amount: int) -> void:
 	if label:
-		label.text = "+%d XP" % exp_amount
+		label.text = TranslationServer.translate("popup_craft_xp").format({"exp": exp_amount})
 	
 	# Start animation
 	modulate = Color(1, 1, 1, 0)  # Start transparent

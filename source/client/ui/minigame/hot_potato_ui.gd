@@ -7,6 +7,7 @@ extends Control
 
 # Game Panel
 @onready var game_panel: PanelContainer = $GamePanel
+@onready var title_label: Label = $GamePanel/MarginContainer/VBoxContainer/TitleLabel
 
 # UI Nodes
 @onready var waiting_phase: VBoxContainer = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase
@@ -14,15 +15,18 @@ extends Control
 @onready var finished_phase: VBoxContainer = $GamePanel/MarginContainer/VBoxContainer/FinishedPhase
 
 # Waiting Phase nodes
-@onready var waiting_title: Label = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/Title
+@onready var waiting_subtitle: Label = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/Title
 @onready var waiting_timer: Label = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/TimerLabel
+@onready var waiting_players_label: Label = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/PlayersLabel
 @onready var waiting_players_container: VBoxContainer = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/ScrollContainer/PlayersContainer
 @onready var leave_button_waiting: Button = $GamePanel/MarginContainer/VBoxContainer/WaitingPhase/LeaveButton
 
 # Active Phase nodes
 @onready var potato_holder_label: Label = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/PotatoHolder
 @onready var potato_timer_label: Label = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/PotatoTimer
+@onready var active_players_label: Label = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/ActivePlayersLabel
 @onready var active_players_container: VBoxContainer = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/PlayersScroll/PlayersContainer
+@onready var eliminated_label: Label = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/EliminatedLabel
 @onready var eliminated_players_container: VBoxContainer = $GamePanel/MarginContainer/VBoxContainer/ActivePhase/EliminatedScroll/EliminatedContainer
 
 # Finished Phase nodes
@@ -51,7 +55,28 @@ func _ready() -> void:
 	# Get my peer ID
 	my_peer_id = multiplayer.get_unique_id()
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	_update_ui_text()
+	
 	hide()
+
+func _update_ui_text() -> void:
+	# Update static labels
+	if title_label:
+		title_label.text = TranslationServer.translate("hotpotato_title")
+	if waiting_subtitle:
+		waiting_subtitle.text = TranslationServer.translate("hotpotato_waiting")
+	if waiting_players_label:
+		waiting_players_label.text = TranslationServer.translate("hotpotato_players_label")
+	if leave_button_waiting:
+		leave_button_waiting.text = TranslationServer.translate("hotpotato_leave")
+	if active_players_label:
+		active_players_label.text = TranslationServer.translate("hotpotato_active_players")
+	if eliminated_label:
+		eliminated_label.text = TranslationServer.translate("hotpotato_eliminated")
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_button_close")
 
 
 func show_game(session_id_param: int) -> void:
@@ -122,7 +147,8 @@ func _update_waiting_phase(time_left: float, participants: Array) -> void:
 	# Update timer
 	var minutes: int = int(time_left) / 60
 	var seconds: int = int(time_left) % 60
-	waiting_timer.text = "Game starts in: %02d:%02d" % [minutes, seconds]
+	var time_format = "%02d:%02d" % [minutes, seconds]
+	waiting_timer.text = TranslationServer.translate("hotpotato_starts_in").format({"time": time_format})
 	
 	# Update players list
 	_clear_container(waiting_players_container)
@@ -132,14 +158,15 @@ func _update_waiting_phase(time_left: float, participants: Array) -> void:
 		var is_me = peer_id == my_peer_id
 		
 		var label = Label.new()
-		label.text = "• %s%s" % [player_name, " (You)" if is_me else ""]
+		var you_suffix = TranslationServer.translate("hotpotato_player_you") if is_me else ""
+		label.text = "• %s%s" % [player_name, you_suffix]
 		label.add_theme_font_size_override("font_size", 14)
 		waiting_players_container.add_child(label)
 
 
 func _update_active_phase(time_left: float, potato_holder_id: int, participants: Array) -> void:
 	# Update potato timer (both in panel and floating)
-	potato_timer_label.text = "Potato explodes in: %.1fs" % time_left
+	potato_timer_label.text = TranslationServer.translate("hotpotato_explodes_in").format({"time": "%.1f" % time_left})
 	
 	# Only show/update floating timer if player is not eliminated
 	if not am_eliminated:
@@ -165,10 +192,10 @@ func _update_active_phase(time_left: float, potato_holder_id: int, participants:
 	
 	# Update potato holder display
 	if holder_is_me:
-		potato_holder_label.text = "🥔 YOU have the hot potato! 🥔"
+		potato_holder_label.text = TranslationServer.translate("hotpotato_holder_you")
 		potato_holder_label.add_theme_color_override("font_color", Color(1.0, 0.5, 0.5))
 	else:
-		potato_holder_label.text = "🥔 %s has the potato" % holder_name
+		potato_holder_label.text = TranslationServer.translate("hotpotato_holder_label").format({"player": holder_name})
 		potato_holder_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0))
 	
 	# Show/hide potato indicator on player in game world
@@ -187,7 +214,8 @@ func _update_active_phase(time_left: float, potato_holder_id: int, participants:
 		
 		var label = Label.new()
 		var potato_icon = "🥔 " if has_potato else ""
-		label.text = "%s%s%s" % [potato_icon, player_name, " (You)" if is_me else ""]
+		var you_suffix = TranslationServer.translate("hotpotato_player_you") if is_me else ""
+		label.text = "%s%s%s" % [potato_icon, player_name, you_suffix]
 		label.add_theme_font_size_override("font_size", 14)
 		
 		if is_eliminated:
@@ -229,7 +257,7 @@ func _on_elimination(data: Dictionary) -> void:
 		var chat_hud = get_tree().root.get_node_or_null("ClientMain/CanvasLayer/HUD/ChatHUD")
 		if chat_hud and chat_hud.has_method("add_message"):
 			chat_hud.add_message({
-				"text": "💀 You were eliminated from Hot Potato! Watch the remaining players battle it out!",
+				"text": TranslationServer.translate("hotpotato_msg_eliminated"),
 				"id": 1,  # System message
 				"name": "Game"
 			})
@@ -246,12 +274,12 @@ func _on_results(data: Dictionary) -> void:
 	var item_name = data.get("item_name", "")
 	
 	if is_winner:
-		winner_label.text = "🎉 YOU WON! 🎉"
+		winner_label.text = TranslationServer.translate("hotpotato_winner_you")
 		winner_label.add_theme_color_override("font_color", Color(1.0, 0.8, 0.0))
-		item_reward_label.text = "Reward: %s" % item_name
+		item_reward_label.text = TranslationServer.translate("hotpotato_reward").format({"item": item_name})
 		item_reward_label.show()
 	else:
-		winner_label.text = "Game Over"
+		winner_label.text = TranslationServer.translate("hotpotato_game_over")
 		winner_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0))
 		item_reward_label.hide()
 

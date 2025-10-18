@@ -228,3 +228,171 @@ tooltip_stack_size,"Stack: {current}/{max}","Pilha: {current}/{max}"
 tooltip_value,"Value: {value} gold","Valor: {value} ouro"
 tooltip_durability,"Durability: {current}/{max}","Durabilidade: {current}/{max}"
 
+# Chat System
+chat_tab_public,Public,Público
+chat_tab_system,System,Sistema
+chat_tab_world,World,Mundo
+chat_tab_team,Team,Equipe
+chat_tab_guild,Guild,Guilda
+chat_tab_private,Private,Privado
+chat_placeholder_message,Enter a message,Digite uma mensagem
+chat_placeholder_message_peek,Enter your message here,Digite sua mensagem aqui
+chat_button_send,Send,Enviar
+chat_button_close,Close,Fechar
+chat_button_add,Add,Adicionar
+chat_button_settings,Settings,Configurações
+chat_new_message,New message,Nova mensagem
+chat_label_sender,SenderName,NomeRemetente
+
+# Chat Commands
+chat_cmd_help,Help,Ajuda
+chat_cmd_whisper,Whisper,Sussurrar
+chat_cmd_party,Party,Grupo
+chat_cmd_guild_abbr,Guild,Guilda
+chat_cmd_emote,Emote,Emote
+chat_cmd_clear,Clear,Limpar
+
+# Chat System Messages
+chat_system_connected,Connected to server,Conectado ao servidor
+chat_system_disconnected,Disconnected from server,Desconectado do servidor
+chat_system_player_joined,"{player} joined the game","{player} entrou no jogo"
+chat_system_player_left,"{player} left the game","{player} saiu do jogo"
+chat_system_command_unknown,Unknown command: {cmd},Comando desconhecido: {cmd}
+chat_system_command_error,Error executing command,Erro ao executar comando
+chat_system_whisper_sent,"Whisper sent to {player}","Sussurro enviado para {player}"
+chat_system_whisper_received,"Whisper from {player}","Sussurro de {player}"
+chat_system_party_invite,"{player} invited you to a party","{player} convidou você para um grupo"
+chat_system_guild_invite,"{player} invited you to join {guild}","{player} convidou você para entrar em {guild}"
+chat_system_trade_request,"{player} wants to trade with you","{player} quer trocar com você"
+chat_system_muted,"You have been muted","Você foi silenciado"
+chat_system_unmuted,"You have been unmuted","Você não está mais silenciado"
+
+# Shop System - Browse
+shop_title,Shop,Loja
+shop_seller,"Seller: {name}","Vendedor: {name}"
+shop_seller_label,Seller:,Vendedor:
+shop_available_items,Available Items,Itens Disponíveis
+shop_no_items,No items available,Nenhum item disponível
+shop_item_label,Item:,Item:
+shop_price_label,Price:,Preço:
+shop_quantity_label,Quantity:,Quantidade:
+shop_total_label,Total:,Total:
+shop_button_buy,Buy,Comprar
+shop_button_purchase,Purchase,Comprar
+shop_gold_short,"{amount}g","{amount}o"
+
+# Shop System - Setup
+shop_setup_title,Setup Your Shop,Configure Sua Loja
+shop_setup_name_label,Shop Name:,Nome da Loja:
+shop_setup_name_placeholder,Enter shop name...,Digite o nome da loja...
+shop_setup_inventory_title,Your Inventory (Click to add to shop),Seu Inventário (Clique para adicionar à loja)
+shop_setup_items_title,"Items in Shop ({current}/{max})","Itens na Loja ({current}/{max})"
+shop_setup_items_title_default,Items in Shop (0/20),Itens na Loja (0/20)
+shop_button_open,Open Shop,Abrir Loja
+shop_button_close_shop,Close Shop,Fechar Loja
+shop_button_remove,Remove from Shop,Remover da Loja
+shop_dialog_quantity,Quantity:,Quantidade:
+shop_dialog_price,Price (gold):,Preço (ouro):
+
+# Shop System - Messages
+shop_msg_opened,Shop opened successfully,Loja aberta com sucesso
+shop_msg_closed,Shop closed,Loja fechada
+shop_msg_purchase_success,Purchase successful!,Compra realizada!
+shop_msg_purchase_failed,Purchase failed,Compra falhou
+shop_msg_sold,"{item} sold for {price} gold","{item} vendido por {price} ouro"
+shop_msg_insufficient_gold,Not enough gold,Ouro insuficiente
+shop_msg_item_unavailable,Item no longer available,Item não está mais disponível
+shop_msg_shop_full,Shop is full (20 items max),Loja está cheia (máximo 20 itens)
+shop_msg_invalid_price,Invalid price,Preço inválido
+shop_msg_invalid_quantity,Invalid quantity,Quantidade inválida
+
+# Shop Indicator
+shop_indicator_name,Shop Name,Nome da Loja
+shop_indicator_open,OPEN,ABERTO
+
+# Quest System
+quest_board_title,Quest Board,Quadro de Missões
+quest_required_items,Required Items:,Itens Necessários:
+quest_rewards,Rewards: {gold} Gold{xp} XP,"Recompensas: {gold} Ouro, {xp} XP"
+quest_button_pin,Pin,Fixar
+quest_button_unpin,Unpin,Desafixar
+quest_button_complete,Complete,Completar
+quest_pinned_indicator,⭐ PINNED,⭐ FIXADA
+quest_adventurer_type,[{type}],[{type}]
+quest_availability,{available}/{required},{available}/{required}
+
+# Quest Notifications
+quest_msg_complete,"Quest Complete! +{gold} Gold, +{xp} XP","Missão Completa! +{gold} Ouro, +{xp} XP"
+quest_msg_error,Error: {error},Erro: {error}
+quest_msg_pinned,Quest pinned,Missão fixada
+quest_msg_unpinned,Quest unpinned,Missão desafixada
+quest_msg_pin_error,Error pinning quest,Erro ao fixar missão
+quest_msg_complete_error,Error completing quest,Erro ao completar missão
+
+# HUD Display
+hud_gold,Gold: {amount},Ouro: {amount}
+hud_level,Level {level},Nível {level}
+hud_menu,Menu,Menu
+hud_settings,SETTINGS,CONFIGURAÇÕES
+hud_close,CLOSE,FECHAR
+hud_stat_vit,+VIT,+VIT
+hud_stat_str,+STR,+FOR
+hud_stat_agi,+AGI,+AGI
+hud_available_points,Available points: {points},Pontos disponíveis: {points}
+hud_tooltip_guide,Game Guide,Guia do Jogo
+
+# Popups
+popup_level_up,LEVEL UP!\nLevel {level},SUBIU DE NÍVEL!\nNível {level}
+popup_energy_gained,+{amount} Energy,+{amount} Energia
+popup_unlocked_recipes,Unlocked Recipes:,Receitas Desbloqueadas:
+popup_harvest,+{amount} {item},+{amount} {item}
+popup_harvest_exp,+{exp} XP,+{exp} XP
+
+# Hot Potato Minigame
+hotpotato_title,🥔 Hot Potato,🥔 Batata Quente
+hotpotato_waiting,Waiting for game to start...,Aguardando início do jogo...
+hotpotato_starts_in,Game starts in: {time},Jogo começa em: {time}
+hotpotato_players_label,Players:,Jogadores:
+hotpotato_leave,Leave Game,Sair do Jogo
+hotpotato_holder_label,🥔 {player} has the potato,🥔 {player} está com a batata
+hotpotato_holder_you,🥔 YOU have the hot potato! 🥔,🥔 VOCÊ está com a batata quente! 🥔
+hotpotato_explodes_in,Potato explodes in: {time}s,Batata explode em: {time}s
+hotpotato_active_players,Active Players:,Jogadores Ativos:
+hotpotato_eliminated,Eliminated:,Eliminados:
+hotpotato_winner_you,🎉 YOU WON! 🎉,🎉 VOCÊ GANHOU! 🎉
+hotpotato_game_over,Game Over,Fim de Jogo
+hotpotato_reward,Reward: {item},Recompensa: {item}
+hotpotato_player_you," (You)"," (Você)"
+hotpotato_msg_eliminated,💀 You were eliminated from Hot Potato! Watch the remaining players battle it out!,💀 Você foi eliminado da Batata Quente! Assista os jogadores restantes!
+hotpotato_seconds_until,seconds until explosion!,segundos até explodir!
+
+# Horse Racing Minigame
+horseracing_title,🐎 Horse Racing,🐎 Corrida de Cavalos
+horseracing_time_left,Time Left: {time},Tempo Restante: {time}
+horseracing_select_horse,Select Your Horse:,Selecione Seu Cavalo:
+horseracing_players_label,Players:,Jogadores:
+horseracing_bet_amount,Bet Amount:,Valor da Aposta:
+horseracing_bet_placeholder,Enter gold amount,Digite a quantidade de ouro
+horseracing_button_ready,Ready,Pronto
+horseracing_button_ready_check,Ready ✓,Pronto ✓
+horseracing_button_leave,Leave,Sair
+horseracing_waiting,Waiting for game to start...,Aguardando início do jogo...
+horseracing_race_time,Time: {time}s,Tempo: {time}s
+horseracing_race_on,🏁 THE RACE IS ON!,🏁 A CORRIDA COMEÇOU!
+horseracing_winner,🏆 Winner: {winner} | 🥈 Second: {second},🏆 Vencedor: {winner} | 🥈 Segundo: {second}
+horseracing_won_first,🎉 You won {amount} gold! (1st place),🎉 Você ganhou {amount} ouro! (1º lugar)
+horseracing_won_second,🎉 You won {amount} gold! (2nd place),🎉 Você ganhou {amount} ouro! (2º lugar)
+horseracing_lost,😔 You lost. Better luck next time!,😔 Você perdeu. Mais sorte da próxima!
+horseracing_total_pot,Total pot: {amount} gold,Prêmio total: {amount} ouro
+horseracing_prize_pool,💰 Prize Pool: {total} gold | 🥇 1st: {first} | 🥈 2nd: {second},💰 Prêmio: {total} ouro | 🥇 1º: {first} | 🥈 2º: {second}
+horseracing_players_bets,👥 Players & Their Bets:,👥 Jogadores & Suas Apostas:
+horseracing_horse_selected,✓ {horse} - {amount} gold bet (SELECTED),✓ {horse} - {amount} ouro apostado (SELECIONADO)
+horseracing_horse_selected_simple,✓ {horse} (SELECTED),✓ {horse} (SELECIONADO)
+horseracing_horse_option,🐎 {horse} - {amount} gold bet,🐎 {horse} - {amount} ouro apostado
+horseracing_horse_nobets,🐎 {horse} - 0 gold bet,🐎 {horse} - 0 ouro apostado
+horseracing_horse_list,  🐎 {horse}: {players},  🐎 {horse}: {players}
+
+# Craft XP Popup
+popup_craft_xp,+{exp} XP,+{exp} XP
+
+

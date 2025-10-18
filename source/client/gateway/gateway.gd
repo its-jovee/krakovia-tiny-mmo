@@ -598,6 +598,10 @@ func _on_create_character_button_pressed() -> void:
 		create_button.disabled = false
 		return
 	
+	# Set flag that a new character was just created (for guide auto-open)
+	EventBus.just_created_character = true
+	print("[Gateway] New character created - setting flag for guide auto-open")
+	
 	world_server.connect_to_server(
 		d["data"]["address"],
 		d["data"]["port"],

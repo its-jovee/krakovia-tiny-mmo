@@ -2,12 +2,14 @@ extends PanelContainer
 
 
 # UI Nodes
+@onready var title_label: Label = $MarginContainer/VBoxContainer/TitleLabel
 @onready var betting_phase: Control = $MarginContainer/VBoxContainer/BettingPhase
 @onready var racing_phase: Control = $MarginContainer/VBoxContainer/RacingPhase
 @onready var results_phase: Control = $MarginContainer/VBoxContainer/ResultsPhase
 
 # Betting Phase nodes
 @onready var timer_label: Label = $MarginContainer/VBoxContainer/BettingPhase/TopInfo/TimerLabel
+@onready var horse_selection_label: Label = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection/Label
 @onready var horse_selection_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection
 @onready var horse_buttons_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/HorseSelection/HorseButtonsContainer
 @onready var bet_label: Label = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/BetLabel
@@ -15,6 +17,7 @@ extends PanelContainer
 @onready var ready_button: Button = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/ReadyButton
 @onready var leave_button: Button = $MarginContainer/VBoxContainer/BettingPhase/BettingControls/LeaveButton
 @onready var players_list: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/PlayersList
+@onready var players_list_label: Label = $MarginContainer/VBoxContainer/BettingPhase/PlayersList/Label
 @onready var players_container: VBoxContainer = $MarginContainer/VBoxContainer/BettingPhase/PlayersList/ScrollContainer/PlayersContainer
 
 # Racing Phase nodes
@@ -53,7 +56,28 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"minigame.race_update", _on_race_update)
 	InstanceClient.subscribe(&"minigame.results", _on_results)
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	_update_ui_text()
+	
 	hide()
+
+func _update_ui_text() -> void:
+	# Update static labels
+	if title_label:
+		title_label.text = TranslationServer.translate("horseracing_title")
+	if horse_selection_label:
+		horse_selection_label.text = TranslationServer.translate("horseracing_select_horse")
+	if players_list_label:
+		players_list_label.text = TranslationServer.translate("horseracing_players_label")
+	if bet_label:
+		bet_label.text = TranslationServer.translate("horseracing_bet_amount")
+	if bet_amount_input:
+		bet_amount_input.placeholder_text = TranslationServer.translate("horseracing_bet_placeholder")
+	if leave_button:
+		leave_button.text = TranslationServer.translate("horseracing_button_leave")
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_button_close")
 
 
 func show_game(session_id_param: int) -> void:
@@ -83,7 +107,7 @@ func _show_phase(phase: String) -> void:
 			bet_label.hide()
 			bet_amount_input.hide()
 			ready_button.disabled = true
-			ready_button.text = "Waiting for game to start..."
+			ready_button.text = TranslationServer.translate("horseracing_waiting")
 		"betting":
 			betting_phase.show()
 			# Show and enable betting controls
@@ -91,7 +115,7 @@ func _show_phase(phase: String) -> void:
 			bet_label.show()
 			bet_amount_input.show()
 			bet_amount_input.editable = true
-			ready_button.text = "Ready"
+			ready_button.text = TranslationServer.translate("horseracing_button_ready")
 		"racing":
 			racing_phase.show()
 		"finished":
@@ -142,7 +166,8 @@ func _on_minigame_state(data: Dictionary) -> void:
 func _update_timer(time_left: float) -> void:
 	var minutes: int = int(time_left) / 60
 	var seconds: int = int(time_left) % 60
-	timer_label.text = "Time Left: %02d:%02d" % [minutes, seconds]
+	var time_format = "%02d:%02d" % [minutes, seconds]
+	timer_label.text = TranslationServer.translate("horseracing_time_left").format({"time": time_format})
 
 
 func _update_horse_buttons(horse_odds: Dictionary) -> void:
@@ -163,14 +188,20 @@ func _update_horse_buttons(horse_odds: Dictionary) -> void:
 	for i in range(horse_buttons.size()):
 		var total_bets: int = horse_odds.get(i, 0)
 		var horse_name: String = horse_names[i] if i < horse_names.size() else "Horse %d" % (i + 1)
-		horse_buttons[i].text = "🐎 %s - %d gold bet" % [horse_name, total_bets]
 		
 		# Highlight selected horse
 		if i == selected_horse:
 			horse_buttons[i].modulate = Color(1.2, 1.2, 0.6)
-			horse_buttons[i].text = "✓ %s - %d gold bet (SELECTED)" % [horse_name, total_bets]
+			if total_bets > 0:
+				horse_buttons[i].text = TranslationServer.translate("horseracing_horse_selected").format({"horse": horse_name, "amount": total_bets})
+			else:
+				horse_buttons[i].text = TranslationServer.translate("horseracing_horse_selected_simple").format({"horse": horse_name})
 		else:
 			horse_buttons[i].modulate = Color.WHITE
+			if total_bets > 0:
+				horse_buttons[i].text = TranslationServer.translate("horseracing_horse_option").format({"horse": horse_name, "amount": total_bets})
+			else:
+				horse_buttons[i].text = TranslationServer.translate("horseracing_horse_nobets").format({"horse": horse_name})
 
 
 func _update_players_list(participants: Array) -> void:
@@ -290,7 +321,7 @@ func _on_bet_response(response: Dictionary) -> void:
 		})
 		is_ready = true
 		ready_button.disabled = true
-		ready_button.text = "Ready ✓"
+		ready_button.text = TranslationServer.translate("horseracing_button_ready_check")
 
 
 func _on_leave_button_pressed() -> void:
@@ -316,7 +347,7 @@ func _setup_race_track() -> void:
 	
 	# Add title
 	var title = Label.new()
-	title.text = "🏁 THE RACE IS ON!"
+	title.text = TranslationServer.translate("horseracing_race_on")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 20)
 	race_container.add_child(title)
@@ -334,7 +365,7 @@ func _setup_race_track() -> void:
 		
 		# Highlight player's horse
 		if i == selected_horse:
-			name_label.text = "★ " + horse_names[i]
+			name_label.text = "★ " + horse_names[i]  # Keep star emoji with name
 			name_label.modulate = Color(1.0, 0.9, 0.3)  # Gold color
 		
 		hbox.add_child(name_label)
@@ -358,7 +389,11 @@ func _setup_race_track() -> void:
 	
 	# Add prize pool info
 	var prize_info = Label.new()
-	prize_info.text = "💰 Prize Pool: %d gold | 🥇 1st: %d | 🥈 2nd: %d" % [total_pot, first_place_prize, second_place_prize]
+	prize_info.text = TranslationServer.translate("horseracing_prize_pool").format({
+		"total": total_pot,
+		"first": first_place_prize,
+		"second": second_place_prize
+	})
 	prize_info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	prize_info.add_theme_font_size_override("font_size", 16)
 	race_container.add_child(prize_info)

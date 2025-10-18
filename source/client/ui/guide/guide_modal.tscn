@@ -1,0 +1,180 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4y8n5xr7j3wk"]
+
+[ext_resource type="Script" path="res://source/client/ui/guide/guide_modal.gd" id="1_guide"]
+[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="2_panel"]
+
+[node name="GuideModal" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_guide")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainPanel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(650, 500)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TitleBar" type="HBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/TitleBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "📖 Game Guide"
+
+[node name="CloseButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/TitleBar"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContentArea" type="HBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Sidebar" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SidebarTitle" type="Label" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Topics"
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar"]
+layout_mode = 2
+
+[node name="PageButtons" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Page0Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "1. Welcome & Controls"
+
+[node name="Page1Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "2. Harvesting"
+
+[node name="Page2Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "3. Crafting"
+
+[node name="Page3Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "4. Trading"
+
+[node name="Page4Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "5. Energy & Minigames"
+
+[node name="Page5Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "6. Player Shops"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea"]
+layout_mode = 2
+
+[node name="PageContent" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="PageTitle" type="Label" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Welcome & Basic Controls"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentVBox" type="VBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="GIFContainer" type="CenterContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="GIFTexture" type="TextureRect" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer/ContentVBox/GIFContainer"]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ContentText" type="RichTextLabel" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer/ContentVBox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Content goes here..."
+fit_content = true
+scroll_active = false
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BottomBar" type="HBoxContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PageIndicator" type="Label" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Page 1 of 6"
+
+[node name="PrevButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
+text = "◀ Previous"
+
+[node name="NextButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/BottomBar"]
+layout_mode = 2
+text = "Next ▶"

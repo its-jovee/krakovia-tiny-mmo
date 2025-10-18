@@ -22,6 +22,10 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"quest_board.status", _on_quest_board_status_update)
 	InstanceClient.subscribe(&"quest.update", _on_quest_update)
 	InstanceClient.subscribe(&"inventory.update", _on_inventory_update)
+	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	_update_ui_text()
 
 
 func _on_quest_board_status_update(data: Dictionary) -> void:
@@ -105,19 +109,20 @@ func _create_quest_panel(quest_data: Dictionary) -> PanelContainer:
 	vbox.add_child(header_hbox)
 	
 	var adventurer_label = Label.new()
-	adventurer_label.text = "[%s]" % quest_data.get("adventurer_type", "Unknown")
+	var adventurer_type = quest_data.get("adventurer_type", "Unknown")
+	adventurer_label.text = TranslationServer.translate("quest_adventurer_type").format({"type": adventurer_type})
 	adventurer_label.add_theme_font_size_override("font_size", 16)
 	header_hbox.add_child(adventurer_label)
 	
 	if quest_data.get("is_pinned", false):
 		var pin_indicator = Label.new()
-		pin_indicator.text = " ⭐ PINNED"
+		pin_indicator.text = " " + TranslationServer.translate("quest_pinned_indicator")
 		pin_indicator.add_theme_color_override("font_color", Color(1, 0.8, 0))
 		header_hbox.add_child(pin_indicator)
 	
 	# Required items
 	var items_label = Label.new()
-	items_label.text = "Required Items:"
+	items_label.text = TranslationServer.translate("quest_required_items")
 	vbox.add_child(items_label)
 	
 	# Create grid for item slots
@@ -143,7 +148,8 @@ func _create_quest_panel(quest_data: Dictionary) -> PanelContainer:
 	var rewards_label = Label.new()
 	var gold_reward: int = quest_data.get("gold_reward", 0)
 	var xp_reward: int = quest_data.get("xp_reward", 0)
-	rewards_label.text = "Rewards: %d Gold, %d XP" % [gold_reward, xp_reward]
+	var rewards_text = TranslationServer.translate("quest_rewards").format({"gold": gold_reward, "xp": xp_reward})
+	rewards_label.text = rewards_text
 	rewards_label.add_theme_color_override("font_color", Color(1, 0.9, 0))
 	vbox.add_child(rewards_label)
 	
@@ -153,14 +159,15 @@ func _create_quest_panel(quest_data: Dictionary) -> PanelContainer:
 	
 	# Pin button
 	var pin_button = Button.new()
-	pin_button.text = "Unpin" if quest_data.get("is_pinned", false) else "Pin"
+	var pin_key = "quest_button_unpin" if quest_data.get("is_pinned", false) else "quest_button_pin"
+	pin_button.text = TranslationServer.translate(pin_key)
 	pin_button.custom_minimum_size = Vector2(80, 0)
 	pin_button.pressed.connect(_on_pin_quest_pressed.bind(quest_data.get("quest_id", -1)))
 	button_hbox.add_child(pin_button)
 	
 	# Complete button
 	var complete_button = Button.new()
-	complete_button.text = "Complete"
+	complete_button.text = TranslationServer.translate("quest_button_complete")
 	complete_button.custom_minimum_size = Vector2(100, 0)
 	complete_button.pressed.connect(_on_complete_quest_pressed.bind(quest_data.get("quest_id", -1)))
 	
@@ -200,12 +207,14 @@ func _on_complete_quest_pressed(quest_id: int) -> void:
 	InstanceClient.current.request_data(&"quest.complete", func(response: Dictionary):
 		if response.has("error"):
 			print("Error completing quest: ", response["error"])
-			_show_notification("Error: " + response["error"])
+			var error_msg = TranslationServer.translate("quest_msg_error").format({"error": response["error"]})
+			_show_notification(error_msg)
 		elif response.has("success") and response["success"]:
 			var gold_reward: int = response.get("gold_reward", 0)
 			var xp_reward: int = response.get("xp_reward", 0)
 			var adventurer: String = response.get("adventurer_type", "")
-			_show_notification("Quest Complete! +%d Gold, +%d XP" % [gold_reward, xp_reward])
+			var complete_msg = TranslationServer.translate("quest_msg_complete").format({"gold": gold_reward, "xp": xp_reward})
+			_show_notification(complete_msg)
 			print("Quest completed! Received %d gold and %d XP from %s" % [gold_reward, xp_reward, adventurer])
 	, {"quest_id": quest_id})
 
@@ -214,6 +223,17 @@ func _show_notification(message: String) -> void:
 	print("Notification: ", message)
 	# TODO: Add proper notification UI
 	# For now just print to console
+
+
+func _update_ui_text() -> void:
+	# Update static labels
+	if title_label:
+		title_label.text = TranslationServer.translate("quest_board_title")
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_button_close")
+	
+	# Refresh quest display to update dynamic text
+	_refresh_quest_display()
 
 
 func _on_close_button_pressed() -> void:
@@ -278,7 +298,8 @@ func _create_quest_item_slot(item: Item, required_quantity: int, available_quant
 	
 	# Show availability below the slot
 	var avail_label = Label.new()
-	avail_label.text = "%d/%d" % [available_quantity, required_quantity]
+	var avail_text = TranslationServer.translate("quest_availability").format({"available": available_quantity, "required": required_quantity})
+	avail_label.text = avail_text
 	avail_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	avail_label.custom_minimum_size = Vector2(64, 0)
 	if available_quantity < required_quantity:

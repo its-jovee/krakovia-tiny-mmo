@@ -9,6 +9,7 @@ var in_market: bool = false
 var current_level: int = 1
 var current_exp: int = 0
 var exp_required: int = 100
+var has_opened_guide: bool = false  # Set to true when character is created (triggers guide auto-open)
 
 @onready var menu_overlay: Control = $MenuOverlay
 @onready var close_button: Button = $MenuOverlay/VBoxContainer/CloseButton
@@ -23,6 +24,12 @@ var exp_required: int = 100
 @onready var crafting_button: Button = $HBoxContainer/CraftingButton
 @onready var guild_button: Button = $HBoxContainer/GuildButton
 @onready var shop_button: Button = $HBoxContainer/ShopButton
+@onready var guide_button: Button = $HBoxContainer/GuideButton
+@onready var guide_modal: Control = $GuideModal
+
+# Menu overlay buttons
+@onready var settings_button: Button = $MenuOverlay/VBoxContainer/SettingsButton
+@onready var close_menu_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 
 func _ready() -> void:
 	# Connect the new HBoxContainer buttons
@@ -34,6 +41,8 @@ func _ready() -> void:
 		guild_button.pressed.connect(_on_guild_button_pressed)
 	if shop_button:
 		shop_button.pressed.connect(_on_shop_button_pressed)
+	if guide_button:
+		guide_button.pressed.connect(_on_guide_button_pressed)
 	
 	# Connect MenuOverlay buttons
 	for button: Button in $MenuOverlay/VBoxContainer.get_children():
@@ -80,6 +89,36 @@ func _ready() -> void:
 	
 	# Request initial level/exp data
 	InstanceClient.current.request_data(&"level.get", _on_level_received)
+	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	_update_ui_text()
+	
+	# Check if this is a newly created character
+	print("[Guide] HUD ready - checking just_created_character flag: ", EventBus.just_created_character)
+	if EventBus.just_created_character:
+		print("[Guide] Detected newly created character - will auto-open guide in 2 seconds")
+		EventBus.just_created_character = false  # Reset flag
+		_delayed_guide_open.call_deferred()
+	else:
+		print("[Guide] Not a newly created character, skipping auto-open")
+
+func _update_ui_text() -> void:
+	# Update gold display
+	_update_gold_display()
+	
+	# Update level display
+	_update_level_display()
+	
+	# Update menu overlay buttons
+	if settings_button:
+		settings_button.text = TranslationServer.translate("hud_settings")
+	if close_menu_button:
+		close_menu_button.text = TranslationServer.translate("hud_close")
+	
+	# Update guide tooltip
+	if guide_button:
+		guide_button.tooltip_text = TranslationServer.translate("hud_tooltip_guide")
 
 func _on_gold_received(data: Dictionary) -> void:
 	current_gold = data.get("gold", 0)
@@ -91,7 +130,7 @@ func _on_gold_update(data: Dictionary) -> void:
 
 func _update_gold_display() -> void:
 	if gold_label:
-		gold_label.text = "Gold: %d" % current_gold
+		gold_label.text = TranslationServer.translate("hud_gold").format({"amount": current_gold})
 
 func _on_market_status_update(data: Dictionary) -> void:
 	var in_market_area = data.get("in_market", false)
@@ -201,7 +240,7 @@ func _on_trade_open(data: Dictionary):
 var attributes: Dictionary
 var available_points: int:
 	set(value):
-		$LevelupButton/Control/VBoxContainer/Label.text = "Available points: %d" % value
+		$LevelupButton/Control/VBoxContainer/Label.text = TranslationServer.translate("hud_available_points").format({"points": value})
 		available_points = value
 
 func _on_levelup_button_pressed() -> void:
@@ -321,7 +360,7 @@ func _on_exp_update(data: Dictionary) -> void:
 
 func _update_level_display() -> void:
 	if level_label:
-		level_label.text = "Level %d" % current_level
+		level_label.text = TranslationServer.translate("hud_level").format({"level": current_level})
 	if exp_progress_bar:
 		exp_progress_bar.max_value = exp_required
 		exp_progress_bar.value = current_exp
@@ -390,3 +429,28 @@ func show_notification(message: String, title: String = "Notification") -> void:
 	await get_tree().create_timer(5.0).timeout
 	if is_instance_valid(dialog):
 		dialog.queue_free()
+
+
+func _on_guide_button_pressed() -> void:
+	"""Open the game guide modal"""
+	if guide_modal:
+		guide_modal.open_guide()
+
+
+func open_guide_for_new_player() -> void:
+	"""Manually open the guide (called by guide button)"""
+	if guide_modal:
+		guide_modal.open_guide()
+
+
+func _delayed_guide_open() -> void:
+	"""Delayed guide open with async support"""
+	print("[Guide] _delayed_guide_open called, waiting 2 seconds...")
+	await get_tree().create_timer(2.0).timeout
+	print("[Guide] Delay complete, checking guide_modal: ", guide_modal != null, " is_valid: ", is_instance_valid(guide_modal) if guide_modal else false)
+	if guide_modal and is_instance_valid(guide_modal):
+		print("[Guide] Opening guide modal now!")
+		guide_modal.open_guide()
+		print("[Guide] Guide modal opened successfully!")
+	else:
+		print("[Guide] ERROR: guide_modal is null or invalid!")

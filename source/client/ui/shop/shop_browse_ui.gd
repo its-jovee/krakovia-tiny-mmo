@@ -13,11 +13,13 @@ var selected_item_max_qty: int = 0
 
 @onready var title_label: Label = $Panel/MarginContainer/VBoxContainer/TitleLabel
 @onready var seller_label: Label = $Panel/MarginContainer/VBoxContainer/SellerLabel
+@onready var items_label: Label = $Panel/MarginContainer/VBoxContainer/ItemsLabel
 @onready var items_grid: GridContainer = $Panel/MarginContainer/VBoxContainer/ItemsScroll/ItemsGrid
 @onready var close_button: Button = $CloseButton
 @onready var purchase_dialog: ConfirmationDialog = $PurchaseDialog
 @onready var item_label: Label = $PurchaseDialog/VBoxContainer/ItemLabel
 @onready var price_label: Label = $PurchaseDialog/VBoxContainer/PriceLabel
+@onready var quantity_label: Label = $PurchaseDialog/VBoxContainer/HBoxContainer/QuantityLabel
 @onready var quantity_spinbox: SpinBox = $PurchaseDialog/VBoxContainer/HBoxContainer/QuantitySpinBox
 @onready var total_label: Label = $PurchaseDialog/VBoxContainer/TotalLabel
 
@@ -33,6 +35,12 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"shop.update", _on_shop_update)
 	InstanceClient.subscribe(&"shop.status", _on_shop_status)
 	InstanceClient.subscribe(&"shop.purchase_complete", _on_purchase_complete)
+	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	
+	# Update UI text on startup
+	_update_ui_text()
 
 
 func open_shop(peer_id: int) -> void:
@@ -55,7 +63,7 @@ func _on_shop_data_received(data: Dictionary) -> void:
 	shop_items = shop_data.items
 	
 	title_label.text = shop_name
-	seller_label.text = "Seller: %s" % seller_name
+	seller_label.text = TranslationServer.translate("shop_seller").format({"name": seller_name})
 	
 	_refresh_items()
 	visible = true
@@ -225,7 +233,9 @@ func _on_purchase_response(data: Dictionary) -> void:
 		# Show error notification
 		var hud = get_tree().get_root().find_child("HUD", true, false)
 		if hud and hud.has_method("show_notification"):
-			hud.show_notification("Purchase failed: " + data.error, "✗ Purchase Failed")
+			var error_msg = TranslationServer.translate("shop_msg_purchase_failed").format({"error": data.error})
+			var title = TranslationServer.translate("shop_msg_purchase_failed_title")
+			hud.show_notification(error_msg, title)
 
 
 func _on_purchase_complete(data: Dictionary) -> void:
@@ -234,8 +244,13 @@ func _on_purchase_complete(data: Dictionary) -> void:
 	# Show success notification to buyer
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("show_notification"):
-		var message = "Purchased %dx %s for %dg" % [data.quantity, data.item_name, data.total_price]
-		hud.show_notification(message, "✓ Purchase Complete")
+		var message = TranslationServer.translate("shop_msg_purchased").format({
+			"quantity": data.quantity, 
+			"item": data.item_name, 
+			"price": data.total_price
+		})
+		var title = TranslationServer.translate("shop_msg_purchase_complete")
+		hud.show_notification(message, title)
 	
 	# Inventory and gold updates are handled via separate data pushes
 
@@ -258,3 +273,23 @@ func _on_close_button_pressed() -> void:
 	visible = false
 	seller_peer_id = -1
 	shop_items.clear()
+
+
+## Update all UI text when language changes
+func _update_ui_text() -> void:
+	"""Update shop browse UI text for current language"""
+	# Update static labels
+	if items_label:
+		items_label.text = TranslationServer.translate("shop_available_items")
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_button_close")
+	
+	# Update purchase dialog labels
+	if purchase_dialog:
+		purchase_dialog.title = TranslationServer.translate("shop_button_purchase")
+	if quantity_label:
+		quantity_label.text = TranslationServer.translate("shop_quantity_label")
+	
+	# Update seller label if we have a name
+	if seller_name and seller_label:
+		seller_label.text = TranslationServer.translate("shop_seller").format({"name": seller_name})

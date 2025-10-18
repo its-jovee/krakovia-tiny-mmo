@@ -9,11 +9,11 @@ extends Control
 
 
 func setup(new_level: int, unlocked_recipes: Array[String] = []) -> void:
-	level_label.text = "LEVEL UP!\nLevel %d" % new_level
+	level_label.text = TranslationServer.translate("popup_level_up").format({"level": new_level})
 	
 	# Show energy gained
 	if energy_label:
-		energy_label.text = "+50 Energy"
+		energy_label.text = TranslationServer.translate("popup_energy_gained").format({"amount": 50})
 	
 	# Show unlocked recipes
 	if recipes_label:
@@ -22,7 +22,7 @@ func setup(new_level: int, unlocked_recipes: Array[String] = []) -> void:
 			recipes_label.visible = false
 		else:
 			recipes_label.visible = true
-			var recipes_text = "Unlocked Recipes:\n"
+			var recipes_text = TranslationServer.translate("popup_unlocked_recipes") + "\n"
 			for recipe_name in unlocked_recipes:
 				recipes_text += "• " + recipe_name + "\n"
 			recipes_label.text = recipes_text.strip_edges()

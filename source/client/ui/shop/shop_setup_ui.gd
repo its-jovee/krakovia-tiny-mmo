@@ -6,7 +6,10 @@ var shop_open: bool = false
 var shop_items: Dictionary = {}  # {item_id: {quantity: int, price: int}}
 var player_inventory: Dictionary = {}
 
+@onready var title_label: Label = $Panel/MarginContainer/VBoxContainer/TitleLabel
+@onready var shop_name_label: Label = $Panel/MarginContainer/VBoxContainer/ShopNameContainer/ShopNameLabel
 @onready var shop_name_input: LineEdit = $Panel/MarginContainer/VBoxContainer/ShopNameContainer/ShopNameInput
+@onready var inventory_label: Label = $Panel/MarginContainer/VBoxContainer/InventoryLabel
 @onready var inventory_grid: GridContainer = $Panel/MarginContainer/VBoxContainer/InventoryScroll/InventoryGrid
 @onready var shop_items_grid: GridContainer = $Panel/MarginContainer/VBoxContainer/ShopItemsScroll/ShopItemsGrid
 @onready var shop_items_label: Label = $Panel/MarginContainer/VBoxContainer/ShopItemsLabel
@@ -15,7 +18,9 @@ var player_inventory: Dictionary = {}
 @onready var close_button: Button = $CloseButton
 @onready var add_item_dialog: AcceptDialog = $AddItemDialog
 @onready var item_name_label: Label = $AddItemDialog/VBoxContainer/ItemNameLabel
+@onready var quantity_label: Label = $AddItemDialog/VBoxContainer/HBoxContainer/QuantityLabel
 @onready var quantity_spinbox: SpinBox = $AddItemDialog/VBoxContainer/HBoxContainer/QuantitySpinBox
+@onready var price_label: Label = $AddItemDialog/VBoxContainer/HBoxContainer2/PriceLabel
 @onready var price_spinbox: SpinBox = $AddItemDialog/VBoxContainer/HBoxContainer2/PriceSpinBox
 @onready var remove_button: Button = null  # Will be created dynamically
 
@@ -41,7 +46,13 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"shop.item_sold", _on_item_sold)
 	InstanceClient.subscribe(&"inventory.update", _on_inventory_update)
 	
+	# Connect to language change events
+	EventBus.language_changed.connect(_update_ui_text)
+	
 	_update_ui_state()
+	
+	# Update UI text on startup
+	_update_ui_text()
 	
 	# Note: Item slots already handle clicks via item_slot.gd
 	# They call _on_item_slot_clicked() on their parent automatically
@@ -250,8 +261,9 @@ func _refresh_shop_items() -> void:
 			if child.has_node("PriceLabel"):
 				child.get_node("PriceLabel").text = ""
 	
-	# Update label
-	shop_items_label.text = "Items in Shop (%d/20)" % shop_items.size()
+	# Update label with translation
+	var translated_text = TranslationServer.translate("shop_setup_items_title")
+	shop_items_label.text = translated_text.format({"current": shop_items.size(), "max": 20})
 	
 	# Fill slots with shop items
 	var slot_index = 0
@@ -311,7 +323,8 @@ func _on_shop_open_response(data: Dictionary) -> void:
 		# Show error notification
 		var hud = get_tree().get_root().find_child("HUD", true, false)
 		if hud and hud.has_method("show_notification"):
-			hud.show_notification(data.error, "✗ Cannot Open Shop")
+			var title = TranslationServer.translate("shop_msg_cannot_open")
+			hud.show_notification(data.error, title)
 		return
 	
 	# Now add all items to the shop
@@ -341,7 +354,9 @@ func _on_shop_opened(data: Dictionary) -> void:
 	# Show success notification
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("show_notification"):
-		hud.show_notification("Shop opened: " + data.shop_name, "✓ Success")
+		var message = TranslationServer.translate("shop_msg_opened").format({"name": data.shop_name})
+		var title = TranslationServer.translate("shop_msg_success")
+		hud.show_notification(message, title)
 	
 	print("Shop opened successfully: ", data.shop_name)
 
@@ -357,7 +372,9 @@ func _on_shop_closed(data: Dictionary) -> void:
 	# Show info notification
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("show_notification"):
-		hud.show_notification("Shop closed", "Shop Info")
+		var message = TranslationServer.translate("shop_msg_closed")
+		var title = TranslationServer.translate("shop_msg_shop_info")
+		hud.show_notification(message, title)
 	
 	print("Shop closed")
 
@@ -368,8 +385,14 @@ func _on_item_sold(data: Dictionary) -> void:
 	# Show success notification to seller
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("show_notification"):
-		var message = "Sold %dx %s for %dg to %s" % [data.quantity, data.item_name, data.total_price, data.buyer_name]
-		hud.show_notification(message, "✓ Sale Complete")
+		var message = TranslationServer.translate("shop_msg_sold").format({
+			"quantity": data.quantity, 
+			"item": data.item_name, 
+			"price": data.total_price, 
+			"buyer": data.buyer_name
+		})
+		var title = TranslationServer.translate("shop_msg_sale_complete")
+		hud.show_notification(message, title)
 	
 	# Update local shop items
 	var item_id = data.item_id
@@ -383,6 +406,39 @@ func _on_item_sold(data: Dictionary) -> void:
 func _on_inventory_update(inventory: Dictionary) -> void:
 	player_inventory = inventory
 	_refresh_inventory_grid()
+
+
+func _update_ui_text() -> void:
+	# Update static labels
+	if title_label:
+		title_label.text = TranslationServer.translate("shop_setup_title")
+	if shop_name_label:
+		shop_name_label.text = TranslationServer.translate("shop_setup_name_label")
+	if shop_name_input:
+		shop_name_input.placeholder_text = TranslationServer.translate("shop_setup_name_placeholder")
+	if inventory_label:
+		inventory_label.text = TranslationServer.translate("shop_setup_inventory_title")
+	if open_shop_button:
+		open_shop_button.text = TranslationServer.translate("shop_button_open")
+	if close_shop_button:
+		close_shop_button.text = TranslationServer.translate("shop_button_close_shop")
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_button_close")
+	
+	# Update dialog labels
+	if add_item_dialog:
+		add_item_dialog.title = TranslationServer.translate("shop_dialog_quantity")
+	if quantity_label:
+		quantity_label.text = TranslationServer.translate("shop_dialog_quantity")
+	if price_label:
+		price_label.text = TranslationServer.translate("shop_dialog_price")
+	if remove_button:
+		remove_button.text = TranslationServer.translate("shop_button_remove")
+	
+	# Update dynamic shop items label
+	var current_items = shop_items.size()
+	var translated_text = TranslationServer.translate("shop_setup_items_title")
+	shop_items_label.text = translated_text.format({"current": current_items, "max": 20})
 
 
 func _update_ui_state() -> void:
