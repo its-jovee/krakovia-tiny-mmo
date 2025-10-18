@@ -405,7 +405,7 @@ func _setup_race_track() -> void:
 	
 	# Add players betting section
 	var players_title = Label.new()
-	players_title.text = "👥 Players & Their Bets:"
+	players_title.text = TranslationServer.translate("horseracing_players_bets")
 	players_title.add_theme_font_size_override("font_size", 14)
 	race_container.add_child(players_title)
 	
@@ -440,7 +440,10 @@ func _setup_race_track() -> void:
 				else:
 					player_names.append("%s (%dg)" % [player_name, bet_amount])
 			
-			horse_label.text = "  🐎 %s: %s" % [horse_name, ", ".join(player_names)]
+			horse_label.text = TranslationServer.translate("horseracing_horse_list").format({
+				"horse": horse_name,
+				"players": ", ".join(player_names)
+			})
 			
 			# Highlight your horse
 			if is_my_horse:
@@ -456,7 +459,7 @@ func _on_race_update(data: Dictionary) -> void:
 	
 	# Update timer
 	var time_left: float = duration - elapsed
-	race_timer_label.text = "Time: %.1fs" % time_left
+	race_timer_label.text = TranslationServer.translate("horseracing_race_time").format({"time": "%.1f" % time_left})
 	
 	# Update progress bars with smooth animation
 	for horse_id in positions:
@@ -482,7 +485,10 @@ func _on_results(data: Dictionary) -> void:
 	print("  Results data: %s" % results)
 	
 	# Show results
-	winner_label.text = "🏆 Winner: %s | 🥈 Second: %s" % [winner_name, second_name]
+	winner_label.text = TranslationServer.translate("horseracing_winner").format({
+		"winner": winner_name,
+		"second": second_name
+	})
 	
 	# Check our result
 	var my_peer_id: int = multiplayer.get_unique_id()
@@ -494,14 +500,14 @@ func _on_results(data: Dictionary) -> void:
 		print("  My result: place=%d, winnings=%d" % [place, winnings])
 		
 		if place == 1:
-			winnings_label.text = "🎉 You won %d gold! (1st place)" % winnings
+			winnings_label.text = TranslationServer.translate("horseracing_won_first").format({"amount": winnings})
 		elif place == 2:
-			winnings_label.text = "🎉 You won %d gold! (2nd place)" % winnings
+			winnings_label.text = TranslationServer.translate("horseracing_won_second").format({"amount": winnings})
 		else:
-			winnings_label.text = "😔 You lost. Better luck next time!"
+			winnings_label.text = TranslationServer.translate("horseracing_lost")
 	else:
 		print("  I'm not in the results!")
-		winnings_label.text = "Total pot: %d gold" % total_pot
+		winnings_label.text = TranslationServer.translate("horseracing_total_pot").format({"amount": total_pot})
 	
 	_show_phase("finished")
 
