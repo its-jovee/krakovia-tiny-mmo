@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://trapper_t6_node_uid"]
+[gd_scene load_steps=4 format=3 uid="uid://bjetvw7ax7x3n"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
-[ext_resource type="Resource" uid="uid://trapper_t6_loot" path="res://source/server/world/components/harvesting/loot_tables/trapper_t6_loot_table.tres" id="2"]
+[ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/trapper_t6_loot_table.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_lay3s"]
 
 [node name="TrapperNodeT6" type="Node2D"]
 script = ExtResource("1")
@@ -19,3 +20,8 @@ loot_table = ExtResource("2")
 modulate = Color(0.7, 0.2, 0.05, 1)
 scale = Vector2(32, 32)
 
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.6819802, 0.2666, 0.86, 1)
+position = Vector2(0, -45)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_lay3s")

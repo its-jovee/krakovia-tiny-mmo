@@ -1,17 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://borsybdibmgfp"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://borsybdibmgfp"]
 
-[ext_resource type="Texture2D" uid="uid://dgvphuwt6jhg0" path="res://assets/sprites/characters/knight/miner_mining.png" id="1_nmmu0"]
 [ext_resource type="Texture2D" uid="uid://bye66inpdvpdy" path="res://assets/sprites/characters/knight/knight_idle.png" id="2_w4755"]
 [ext_resource type="Texture2D" uid="uid://b3qbjl2cjhlix" path="res://assets/sprites/characters/knight/knight_run.png" id="3_nf78a"]
 [ext_resource type="Texture2D" uid="uid://uhlc3vijt25x" path="res://assets/sprites/characters/sitters.png" id="4_nmmu0"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kwny6"]
-atlas = ExtResource("1_nmmu0")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f46i6"]
-atlas = ExtResource("1_nmmu0")
-region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x5r0m"]
 atlas = ExtResource("2_w4755")
@@ -31,17 +22,6 @@ region = Rect2(0, 0, 64, 64)
 
 [resource]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kwny6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f46i6")
-}],
-"loop": true,
-"name": &"harvest",
-"speed": 2.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x5r0m")

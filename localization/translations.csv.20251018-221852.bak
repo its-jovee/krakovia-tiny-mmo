@@ -1,0 +1,1012 @@
+keys,en,pt_BR
+ui_tip,Tip:,Dica:
+ui_button_confirm,Confirm,Confirmar
+ui_button_cancel,Cancel,Cancelar
+ui_button_close,Close,Fechar
+ui_button_accept,Accept,Aceitar
+ui_button_reject,Reject,Rejeitar
+ui_button_ready,Ready,Pronto
+ui_button_join,Join,Entrar
+ui_button_leave,Leave,Sair
+ui_button_login,Login,Entrar
+ui_button_logout,Logout,Sair
+ui_button_create_account,Create Account,Criar Conta
+ui_button_create_character,Create Character,Criar Personagem
+ui_button_delete,Delete,Excluir
+ui_button_save,Save,Salvar
+ui_button_back,Back,Voltar
+ui_button_guest,Guest,Convidado
+ui_button_show,Show,Mostrar
+ui_unknown_error,Unknown Error,Erro Desconhecido
+gateway_welcome_title,Welcome to Kraftovia,Bem-vindo a Kraftovia
+gateway_play_as_guest,Play as Guest,Jogar como Convidado
+gateway_label_handle,Player Handle,Identificador do Jogador
+gateway_label_password,Password,Senha
+gateway_label_password_repeat,Password Repeat,Repetir Senha
+gateway_label_remember_me,Remember Me,Lembrar de Mim
+gateway_placeholder_handle,Enter your player handle here,Digite seu identificador aqui
+gateway_placeholder_password,Enter your password here,Digite sua senha aqui
+gateway_placeholder_password_repeat,Enter your password again here,Digite sua senha novamente aqui
+gateway_world_selection,World Selection,Seleção de Mundo
+gateway_character_selection,Character Selection,Seleção de Personagem
+gateway_character_creation,Character Creation,Criação de Personagem
+gateway_label_character_name,Character Name,Nome do Personagem
+gateway_label_class,Class,Classe
+gateway_placeholder_character_name,Enter character name,Digite o nome do personagem
+gateway_class_miner,Miner,Minerador
+gateway_class_forager,Forager,Coletor
+gateway_class_trapper,Trapper,Caçador
+gateway_class_miner_desc,"Specializes in mining and crafting.","Especializado em mineração e criação."
+gateway_class_forager_desc,"Specializes in gathering and herbalism.","Especializado em coleta e herbalismo."
+gateway_class_trapper_desc,"Specializes in hunting and trapping.","Especializado em caça e armadilhas."
+error_handle_empty_title,Handle Required,Identificador Obrigatório
+error_handle_empty_message,"Please enter a player handle.","Por favor, insira um identificador de jogador."
+error_handle_empty_suggestion,Choose a unique handle that represents you in the game.,Escolha um identificador único que represente você no jogo.
+
+error_handle_too_short_title,Handle Too Short,Identificador Muito Curto
+error_handle_too_short_message,Handle must be at least 3 characters long.,O identificador deve ter pelo menos 3 caracteres.
+error_handle_too_short_suggestion,Try adding more characters to make it unique.,Tente adicionar mais caracteres para torná-lo único.
+
+error_handle_too_long_title,Handle Too Long,Identificador Muito Longo
+error_handle_too_long_message,Handle must be no more than 20 characters long.,O identificador deve ter no máximo 20 caracteres.
+error_handle_too_long_suggestion,Try shortening your handle while keeping it memorable.,Tente encurtar seu identificador mantendo-o memorável.
+
+error_handle_invalid_chars_title,Invalid Characters,Caracteres Inválidos
+error_handle_invalid_chars_message,"Handle can only contain letters, numbers, and underscores.","O identificador pode conter apenas letras, números e underscores."
+error_handle_invalid_chars_suggestion,Remove special characters and spaces from your handle.,Remova caracteres especiais e espaços do seu identificador.
+
+error_handle_reserved_title,Handle Reserved,Identificador Reservado
+error_handle_reserved_message,This handle is reserved and cannot be used.,Este identificador está reservado e não pode ser usado.
+error_handle_reserved_suggestion,Try a different handle that's available.,Tente um identificador diferente que esteja disponível.
+
+error_handle_already_exists_title,Handle Taken,Identificador em Uso
+error_handle_already_exists_message,This player handle is already taken.,Este identificador de jogador já está em uso.
+error_handle_already_exists_suggestion,Try adding numbers or variations to make it unique.,Tente adicionar números ou variações para torná-lo único.
+error_password_empty_title,Password Required,Senha Obrigatória
+error_password_empty_message,"Please enter a password.","Por favor, insira uma senha."
+error_password_empty_suggestion,Create a secure password to protect your account.,Crie uma senha segura para proteger sua conta.
+
+error_password_too_short_title,Password Too Short,Senha Muito Curta
+error_password_too_short_message,Password must be at least 6 characters long.,A senha deve ter pelo menos 6 caracteres.
+error_password_too_short_suggestion,Add more characters to strengthen your password.,Adicione mais caracteres para fortalecer sua senha.
+
+error_password_too_long_title,Password Too Long,Senha Muito Longa
+error_password_too_long_message,Password must be no more than 32 characters long.,A senha deve ter no máximo 32 caracteres.
+error_password_too_long_suggestion,Shorten your password while keeping it secure.,Encurte sua senha mantendo-a segura.
+
+error_password_invalid_chars_title,Invalid Characters,Caracteres Inválidos
+error_password_invalid_chars_message,"Password can only contain letters, numbers, and underscores.","A senha pode conter apenas letras, números e underscores."
+error_password_invalid_chars_suggestion,Remove special characters and spaces from your password.,Remova caracteres especiais e espaços da sua senha.
+
+error_password_weak_title,Password Too Weak,Senha Muito Fraca
+error_password_weak_message,Password is too weak and cannot be used.,A senha é muito fraca e não pode ser usada.
+error_password_weak_suggestion,"Use a mix of uppercase, lowercase, numbers, and special characters.","Use uma combinação de maiúsculas, minúsculas, números e caracteres especiais."
+
+error_password_match_failed_title,Passwords Don't Match,As Senhas Não Coincidem
+error_password_match_failed_message,The passwords you entered do not match.,As senhas que você digitou não coincidem.
+error_password_match_failed_suggestion,Make sure both password fields contain the same password.,Certifique-se de que ambos os campos de senha contenham a mesma senha.
+error_login_invalid_credentials_title,Login Failed,Falha no Login
+error_login_invalid_credentials_message,"Invalid handle or password. Please check your credentials.","Identificador ou senha inválidos. Por favor, verifique suas credenciais."
+error_login_invalid_credentials_suggestion,"Make sure your handle and password are correct, or try creating a new account.","Certifique-se de que seu identificador e senha estejam corretos, ou tente criar uma nova conta."
+
+error_login_already_connected_title,Already Logged In,Já Conectado
+error_login_already_connected_message,This account is already logged in elsewhere.,Esta conta já está conectada em outro dispositivo.
+error_login_already_connected_suggestion,"Log out from other devices or wait a few minutes and try again.","Desconecte-se de outros dispositivos ou aguarde alguns minutos e tente novamente."
+
+error_login_network_error_title,Connection Failed,Falha na Conexão
+error_login_network_error_message,Unable to connect to the server.,Não foi possível conectar ao servidor.
+error_login_network_error_suggestion,"Check your internet connection and try again.","Verifique sua conexão com a internet e tente novamente."
+
+error_login_timeout_title,Login Timeout,Tempo Esgotado
+error_login_timeout_message,Login request timed out.,A solicitação de login expirou.
+error_login_timeout_suggestion,"The server may be busy. Please try again in a moment.","O servidor pode estar ocupado. Tente novamente em instantes."
+error_network_connection_failed_title,Connection Failed,Falha na Conexão
+error_network_connection_failed_message,Unable to connect to the game server.,Não foi possível conectar ao servidor do jogo.
+error_network_connection_failed_suggestion,"Check your internet connection and ensure the game servers are online.","Verifique sua conexão com a internet e certifique-se de que os servidores do jogo estejam online."
+
+error_network_timeout_title,Request Timeout,Tempo Esgotado
+error_network_timeout_message,The request took too long to complete.,A solicitação demorou muito para ser concluída.
+error_network_timeout_suggestion,"Try again in a moment. The server may be experiencing high traffic.","Tente novamente em instantes. O servidor pode estar com tráfego intenso."
+
+error_network_server_unavailable_title,Server Unavailable,Servidor Indisponível
+error_network_server_unavailable_message,The game server is currently unavailable.,O servidor do jogo está indisponível no momento.
+error_network_server_unavailable_suggestion,Please try again later or check the game status.,Tente novamente mais tarde ou verifique o status do jogo.
+error_character_name_empty_title,Character Name Required,Nome do Personagem Obrigatório
+error_character_name_empty_message,"Please enter a character name.","Por favor, insira um nome de personagem."
+error_character_name_empty_suggestion,Choose a unique name for your character.,Escolha um nome único para seu personagem.
+
+error_character_name_too_short_title,Character Name Too Short,Nome Muito Curto
+error_character_name_too_short_message,Character name must be at least 4 characters long.,O nome do personagem deve ter pelo menos 4 caracteres.
+error_character_name_too_short_suggestion,Try adding more characters to make it unique.,Tente adicionar mais caracteres para torná-lo único.
+
+error_character_name_too_long_title,Character Name Too Long,Nome Muito Longo
+error_character_name_too_long_message,Character name must be no more than 16 characters long.,O nome do personagem deve ter no máximo 16 caracteres.
+error_character_name_too_long_suggestion,Try shortening your character name.,Tente encurtar o nome do seu personagem.
+
+error_character_invalid_class_title,Invalid Character Class,Classe de Personagem Inválida
+error_character_invalid_class_message,"Please select a valid character class.","Por favor, selecione uma classe de personagem válida."
+error_character_invalid_class_suggestion,"Choose from Miner, Forager, or Trapper.","Escolha entre Minerador, Coletor ou Caçador."
+
+error_character_missing_data_title,Incomplete Character Data,Dados do Personagem Incompletos
+error_character_missing_data_message,Character creation data is incomplete.,Os dados de criação do personagem estão incompletos.
+error_character_missing_data_suggestion,Make sure to provide both name and class for your character.,Certifique-se de fornecer nome e classe para seu personagem.
+
+error_character_not_authenticated_title,Not Authenticated,Não Autenticado
+error_character_not_authenticated_message,You must be logged in to create a character.,Você deve estar conectado para criar um personagem.
+error_character_not_authenticated_suggestion,"Please log in first, then try creating your character.","Por favor, conecte-se primeiro e depois tente criar seu personagem."
+
+error_character_name_banned_title,Inappropriate Name,Nome Inapropriado
+error_character_name_banned_message,This character name contains prohibited words or phrases.,Este nome de personagem contém palavras ou frases proibidas.
+error_character_name_banned_suggestion,"Please choose a different name that follows our community guidelines.","Por favor, escolha um nome diferente que siga nossas diretrizes da comunidade."
+error_server_error_generic_title,Server Error,Erro do Servidor
+error_server_error_generic_message,An unexpected error occurred on the server.,Ocorreu um erro inesperado no servidor.
+error_server_error_generic_suggestion,Please try again. If the problem persists, contact support.,Tente novamente. Se o problema persistir, contate o suporte.
+
+error_server_error_code_title,Server Error,Erro do Servidor
+error_server_error_code_message,Server returned error code: {code},O servidor retornou o código de erro: {code}
+error_server_error_code_suggestion,"Please try again or contact support if the problem continues.","Tente novamente ou contate o suporte se o problema continuar."
+
+error_unknown_error_title,Unknown Error,Erro Desconhecido
+error_unknown_error_message,An unexpected error occurred.,Ocorreu um erro inesperado.
+error_unknown_error_suggestion,"Please try again or contact support.","Tente novamente ou contate o suporte."
+ui_language_selector_label,Language,Idioma
+ui_language_english,English,English
+ui_language_portuguese_br,Português (BR),Português (BR)
+
+# Inventory System
+inventory_tab_equipment,Equipment,Inventário
+inventory_tab_materials,Materials,Materiais
+inventory_tab_consumables,Consumables,Consumíveis
+inventory_tab_key_items,Key Items,Itens Chave
+inventory_tab_crafting,Crafting,Criação
+inventory_label_gold,Gold:,Ouro:
+inventory_label_gold_display,"Gold: {amount}","Ouro: {amount}"
+inventory_button_equip_unequip,Equip/Unequip,Equipar/Desequipar
+inventory_button_expand,Expand,Expandir
+inventory_button_sell,Sell Item,Vender Item
+inventory_label_sell_price,"Sell Price: {price} gold","Preço de venda: {price} ouro"
+inventory_label_sell_price_zero,Sell Price: 0 gold,Preço de venda: 0 ouro
+inventory_select_item,Select an item to see details,Selecione um item para ver detalhes
+
+# Trade System
+trade_title_your_offer,Your Offer,Sua Oferta
+trade_title_their_offer,Their Offer,Oferta Deles
+trade_label_gold,Gold,Ouro
+trade_button_ready,Ready,Pronto
+trade_button_lock,Lock,Travar
+trade_button_close,Close,Fechar
+trade_dialog_title,Trade Quantity,Quantidade para Trocar
+trade_dialog_question,How many to trade?,Quantos para trocar?
+trade_dialog_label_quantity,Quantity:,Quantidade:
+trade_button_max,Max,Máximo
+trade_request_title,Trade Request,Pedido de Troca
+trade_request_sent,"Trade Request Sent","Pedido de Troca Enviado"
+trade_waiting_response,Waiting for response...,Aguardando resposta...
+trade_request_to,"Sent trade request to {player}","Pedido de troca enviado para {player}"
+trade_description_player,"[{player}]","[{player}]"
+trade_description_wants,"would like to trade.","gostaria de trocar."
+trade_button_open,Open Trade,Abrir Troca
+
+# Market/Shop Dialog
+shop_add_item_title,Item:,Item:
+shop_label_quantity,Quantity:,Quantidade:
+shop_label_price_each,Price (each):,Preço (cada):
+
+# Crafting System
+crafting_label_level,"Level: {level}","Nível: {level}"
+crafting_label_exp,"EXP: {current} / {required}","EXP: {current} / {required}"
+crafting_label_energy,"Energy: {current} / {max}","Energia: {current} / {max}"
+crafting_select_recipe,Select a recipe,Selecione uma receita
+crafting_choose_recipe_desc,"Choose a recipe from the list to see details.","Escolha uma receita da lista para ver detalhes."
+crafting_button_craft,Craft,Criar
+crafting_label_requirements,Requirements:,Requisitos:
+crafting_label_outputs,Outputs:,Resultados:
+crafting_label_costs,Costs:,Custos:
+crafting_filter_all_classes,All Classes,Todas as Classes
+crafting_filter_miner,Miner,Minerador
+crafting_filter_forager,Forager,Coletor
+crafting_filter_trapper,Trapper,Caçador
+crafting_placeholder_search,Search recipes...,Buscar receitas...
+crafting_cost_gold,"Gold: {required} (Have: {have})","Ouro: {required} (Possui: {have})"
+crafting_cost_energy,"Energy: {required} (Have: {have})","Energia: {required} (Possui: {have})"
+crafting_status_ready,Ready to craft!,Pronto para criar!
+crafting_status_level_required,"Requires {class} level {level}","Requer {class} nível {level}"
+crafting_status_missing_materials,Missing required materials,Faltam materiais necessários
+crafting_status_not_enough_gold,Not enough gold,Ouro insuficiente
+crafting_status_not_enough_energy,Not enough energy,Energia insuficiente
+crafting_item_have,"Have: {amount}","Possui: {amount}"
+crafting_item_need_more,"Need {amount} more","Precisa de {amount} mais"
+
+# Level and XP
+level_display,"Level {level}","Nível {level}"
+exp_display,"{current} / {required} EXP","{current} / {required} EXP"
+
+# Item Tooltips
+tooltip_level_requirement,"Requires Level {level}","Requer Nível {level}"
+tooltip_class_requirement,"Requires {class}","Requer {class}"
+tooltip_stack_size,"Stack: {current}/{max}","Pilha: {current}/{max}"
+tooltip_value,"Value: {value} gold","Valor: {value} ouro"
+tooltip_durability,"Durability: {current}/{max}","Durabilidade: {current}/{max}"
+
+# Chat System
+chat_tab_public,Public,Público
+chat_tab_system,System,Sistema
+chat_tab_world,World,Mundo
+chat_tab_team,Team,Equipe
+chat_tab_guild,Guild,Guilda
+chat_tab_private,Private,Privado
+chat_placeholder_message,Enter a message,Digite uma mensagem
+chat_placeholder_message_peek,Enter your message here,Digite sua mensagem aqui
+chat_button_send,Send,Enviar
+chat_button_close,Close,Fechar
+chat_button_add,Add,Adicionar
+chat_button_settings,Settings,Configurações
+chat_new_message,New message,Nova mensagem
+chat_label_sender,SenderName,NomeRemetente
+
+# Chat Commands
+chat_cmd_help,Help,Ajuda
+chat_cmd_whisper,Whisper,Sussurrar
+chat_cmd_party,Party,Grupo
+chat_cmd_guild_abbr,Guild,Guilda
+chat_cmd_emote,Emote,Emote
+chat_cmd_clear,Clear,Limpar
+
+# Chat System Messages
+chat_system_connected,Connected to server,Conectado ao servidor
+chat_system_disconnected,Disconnected from server,Desconectado do servidor
+chat_system_player_joined,"{player} joined the game","{player} entrou no jogo"
+chat_system_player_left,"{player} left the game","{player} saiu do jogo"
+chat_system_command_unknown,Unknown command: {cmd},Comando desconhecido: {cmd}
+chat_system_command_error,Error executing command,Erro ao executar comando
+chat_system_whisper_sent,"Whisper sent to {player}","Sussurro enviado para {player}"
+chat_system_whisper_received,"Whisper from {player}","Sussurro de {player}"
+chat_system_party_invite,"{player} invited you to a party","{player} convidou você para um grupo"
+chat_system_guild_invite,"{player} invited you to join {guild}","{player} convidou você para entrar em {guild}"
+chat_system_trade_request,"{player} wants to trade with you","{player} quer trocar com você"
+chat_system_muted,"You have been muted","Você foi silenciado"
+chat_system_unmuted,"You have been unmuted","Você não está mais silenciado"
+
+# Shop System - Browse
+shop_title,Shop,Loja
+shop_seller,"Seller: {name}","Vendedor: {name}"
+shop_seller_label,Seller:,Vendedor:
+shop_available_items,Available Items,Itens Disponíveis
+shop_no_items,No items available,Nenhum item disponível
+shop_item_label,Item:,Item:
+shop_price_label,Price:,Preço:
+shop_quantity_label,Quantity:,Quantidade:
+shop_total_label,Total:,Total:
+shop_button_buy,Buy,Comprar
+shop_button_purchase,Purchase,Comprar
+shop_gold_short,"{amount}g","{amount}o"
+
+# Shop System - Setup
+shop_setup_title,Setup Your Shop,Configure Sua Loja
+shop_setup_name_label,Shop Name:,Nome da Loja:
+shop_setup_name_placeholder,Enter shop name...,Digite o nome da loja...
+shop_setup_inventory_title,Your Inventory (Click to add to shop),Seu Inventário (Clique para adicionar à loja)
+shop_setup_items_title,"Items in Shop ({current}/{max})","Itens na Loja ({current}/{max})"
+shop_setup_items_title_default,Items in Shop (0/20),Itens na Loja (0/20)
+shop_button_open,Open Shop,Abrir Loja
+shop_button_close_shop,Close Shop,Fechar Loja
+shop_button_remove,Remove from Shop,Remover da Loja
+shop_dialog_quantity,Quantity:,Quantidade:
+shop_dialog_price,Price (gold):,Preço (ouro):
+
+# Shop System - Messages
+shop_msg_opened,Shop opened successfully,Loja aberta com sucesso
+shop_msg_closed,Shop closed,Loja fechada
+shop_msg_purchase_success,Purchase successful!,Compra realizada!
+shop_msg_purchase_failed,Purchase failed,Compra falhou
+shop_msg_sold,"{item} sold for {price} gold","{item} vendido por {price} ouro"
+shop_msg_insufficient_gold,Not enough gold,Ouro insuficiente
+shop_msg_item_unavailable,Item no longer available,Item não está mais disponível
+shop_msg_shop_full,Shop is full (20 items max),Loja está cheia (máximo 20 itens)
+shop_msg_invalid_price,Invalid price,Preço inválido
+shop_msg_invalid_quantity,Invalid quantity,Quantidade inválida
+
+# Shop Indicator
+shop_indicator_name,Shop Name,Nome da Loja
+shop_indicator_open,OPEN,ABERTO
+
+# Quest System
+quest_board_title,Quest Board,Quadro de Missões
+quest_required_items,Required Items:,Itens Necessários:
+quest_rewards,Rewards: {gold} Gold{xp} XP,"Recompensas: {gold} Ouro, {xp} XP"
+quest_button_pin,Pin,Fixar
+quest_button_unpin,Unpin,Desafixar
+quest_button_complete,Complete,Completar
+quest_pinned_indicator,⭐ PINNED,⭐ FIXADA
+quest_adventurer_type,[{type}],[{type}]
+quest_availability,{available}/{required},{available}/{required}
+
+# Quest Notifications
+quest_msg_complete,"Quest Complete! +{gold} Gold, +{xp} XP","Missão Completa! +{gold} Ouro, +{xp} XP"
+quest_msg_error,Error: {error},Erro: {error}
+quest_msg_pinned,Quest pinned,Missão fixada
+quest_msg_unpinned,Quest unpinned,Missão desafixada
+quest_msg_pin_error,Error pinning quest,Erro ao fixar missão
+quest_msg_complete_error,Error completing quest,Erro ao completar missão
+
+# HUD Display
+hud_gold,Gold: {amount},Ouro: {amount}
+hud_level,Level {level},Nível {level}
+hud_menu,Menu,Menu
+hud_settings,SETTINGS,CONFIGURAÇÕES
+hud_close,CLOSE,FECHAR
+hud_stat_vit,+VIT,+VIT
+hud_stat_str,+STR,+FOR
+hud_stat_agi,+AGI,+AGI
+hud_available_points,Available points: {points},Pontos disponíveis: {points}
+hud_tooltip_guide,Game Guide,Guia do Jogo
+
+# Popups
+popup_level_up,LEVEL UP!\nLevel {level},SUBIU DE NÍVEL!\nNível {level}
+popup_energy_gained,+{amount} Energy,+{amount} Energia
+popup_unlocked_recipes,Unlocked Recipes:,Receitas Desbloqueadas:
+popup_harvest,+{amount} {item},+{amount} {item}
+popup_harvest_exp,+{exp} XP,+{exp} XP
+
+# Hot Potato Minigame
+hotpotato_title,🥔 Hot Potato,🥔 Batata Quente
+hotpotato_waiting,Waiting for game to start...,Aguardando início do jogo...
+hotpotato_starts_in,Game starts in: {time},Jogo começa em: {time}
+hotpotato_players_label,Players:,Jogadores:
+hotpotato_leave,Leave Game,Sair do Jogo
+hotpotato_holder_label,🥔 {player} has the potato,🥔 {player} está com a batata
+hotpotato_holder_you,🥔 YOU have the hot potato! 🥔,🥔 VOCÊ está com a batata quente! 🥔
+hotpotato_explodes_in,Potato explodes in: {time}s,Batata explode em: {time}s
+hotpotato_active_players,Active Players:,Jogadores Ativos:
+hotpotato_eliminated,Eliminated:,Eliminados:
+hotpotato_winner_you,🎉 YOU WON! 🎉,🎉 VOCÊ GANHOU! 🎉
+hotpotato_game_over,Game Over,Fim de Jogo
+hotpotato_reward,Reward: {item},Recompensa: {item}
+hotpotato_player_you," (You)"," (Você)"
+hotpotato_msg_eliminated,💀 You were eliminated from Hot Potato! Watch the remaining players battle it out!,💀 Você foi eliminado da Batata Quente! Assista os jogadores restantes!
+hotpotato_seconds_until,seconds until explosion!,segundos até explodir!
+
+# Horse Racing Minigame
+horseracing_title,🐎 Horse Racing,🐎 Corrida de Cavalos
+horseracing_time_left,Time Left: {time},Tempo Restante: {time}
+horseracing_select_horse,Select Your Horse:,Selecione Seu Cavalo:
+horseracing_players_label,Players:,Jogadores:
+horseracing_bet_amount,Bet Amount:,Valor da Aposta:
+horseracing_bet_placeholder,Enter gold amount,Digite a quantidade de ouro
+horseracing_button_ready,Ready,Pronto
+horseracing_button_ready_check,Ready ✓,Pronto ✓
+horseracing_button_leave,Leave,Sair
+horseracing_waiting,Waiting for game to start...,Aguardando início do jogo...
+horseracing_race_time,Time: {time}s,Tempo: {time}s
+horseracing_race_on,🏁 THE RACE IS ON!,🏁 A CORRIDA COMEÇOU!
+horseracing_winner,🏆 Winner: {winner} | 🥈 Second: {second},🏆 Vencedor: {winner} | 🥈 Segundo: {second}
+horseracing_won_first,🎉 You won {amount} gold! (1st place),🎉 Você ganhou {amount} ouro! (1º lugar)
+horseracing_won_second,🎉 You won {amount} gold! (2nd place),🎉 Você ganhou {amount} ouro! (2º lugar)
+horseracing_lost,😔 You lost. Better luck next time!,😔 Você perdeu. Mais sorte da próxima!
+horseracing_total_pot,Total pot: {amount} gold,Prêmio total: {amount} ouro
+horseracing_prize_pool,💰 Prize Pool: {total} gold | 🥇 1st: {first} | 🥈 2nd: {second},💰 Prêmio: {total} ouro | 🥇 1º: {first} | 🥈 2º: {second}
+horseracing_players_bets,👥 Players & Their Bets:,👥 Jogadores & Suas Apostas:
+horseracing_horse_selected,✓ {horse} - {amount} gold bet (SELECTED),✓ {horse} - {amount} ouro apostado (SELECIONADO)
+horseracing_horse_selected_simple,✓ {horse} (SELECTED),✓ {horse} (SELECIONADO)
+horseracing_horse_option,🐎 {horse} - {amount} gold bet,🐎 {horse} - {amount} ouro apostado
+horseracing_horse_nobets,🐎 {horse} - 0 gold bet,🐎 {horse} - 0 ouro apostado
+horseracing_horse_list,  🐎 {horse}: {players},  🐎 {horse}: {players}
+
+# Craft XP Popup
+popup_craft_xp,+{exp} XP,+{exp} XP
+
+# Trade Request Modal
+trade_request_sent_title,[b]Trade Request Sent[/b],[b]Pedido de Troca Enviado[/b]
+trade_request_sent_waiting,Waiting for response...,Aguardando resposta...
+trade_request_sent_desc,Sent trade request to {player},Pedido de troca enviado para {player}
+trade_request_received_title,[b]Trade Request[/b],[b]Pedido de Troca[/b]
+trade_request_received_desc,would like to trade with you.,quer negociar com você.
+trade_request_accepted_title,[b]Trade Accepted![/b],[b]Troca Aceita![/b]
+trade_request_accepted_desc,is ready to trade,está pronto para negociar
+trade_request_processing_title,[b]Processing...[/b],[b]Processando...[/b]
+trade_request_processing_msg,Please wait,Por favor aguarde
+trade_request_processing_desc,Setting up trade...,Preparando troca...
+trade_button_open,Open Trade,Abrir Troca
+
+# Inventory & Equipment
+inventory_equipment_empty,Empty,Vazio
+inventory_equipment_locked,Lock,Travado
+inventory_sell_price,Sell Price: {price} gold,Preço de Venda: {price} ouro
+inventory_trade_item,Trade {item},Trocar {item}
+inventory_trade_your_offer,Your Offer,Sua Oferta
+inventory_trade_gold,Gold: {amount},Ouro: {amount}
+inventory_trade_locked,Locked,Travado
+inventory_trade_ready,Ready,Pronto
+inventory_trade_ready_check,Ready ✓,Pronto ✓
+
+# Crafting
+crafting_required_level,Level {level},Nível {level}
+crafting_select_recipe,Select a recipe,Selecione uma receita
+crafting_select_recipe_desc,Choose a recipe from the list to see details.,Escolha uma receita da lista para ver detalhes.
+crafting_recipe_not_found,Recipe not found!,Receita não encontrada!
+crafting_success,Crafted successfully!,Fabricado com sucesso!
+crafting_error,Error: {error},Erro: {error}
+
+# Shop (Additional)
+shop_no_items,No items available,Nenhum item disponível
+shop_add_item,Add to Shop: {item},Adicionar à Loja: {item}
+shop_edit_item,Edit Shop Item: {item},Editar Item da Loja: {item}
+
+# Guide Modal
+guide_page_indicator,Page {current} of {total},Página {current} de {total}
+
+# Harvesting
+harvest_tier,Tier {tier} {node},Nível {tier} {node}
+
+# Player Profile
+profile_add_friend,Add friend,Adicionar amigo
+profile_remove_friend,Remove Friend,Remover Amigo
+
+
+
+
+
+# ===================================================================
+# PHASE 4: ITEM DATABASE TRANSLATIONS (559 strings)
+# Generated from .tres resource files in source/common/gameplay/items/
+# Translation keys format: item_{slug}_name and item_{slug}_desc
+# ===================================================================
+item_wooden_bow.item_name,Bow,Bow
+item_arrows_name,Arrows,Arrows
+item_arrows_desc,Bundle of arrows. Consumable ammunition.,Bundle of arrows. Consumable ammunition.
+item_bandages_name,Bandages,Bandages
+item_bandages_desc,Simple bandages.,Simple bandages.
+item_greater_health_potion_name,Greater Health Potion,Greater Health Potion
+item_greater_health_potion_desc,Master healing potion.,Master healing potion.
+item_health_potion_name,Health Potion,Health Potion
+item_health_potion_desc,Potent healing potion.,Potent healing potion.
+item_iron_boots_name,Iron Boots,Iron Boots
+item_iron_boots_desc,Iron-reinforced boots.,Iron-reinforced boots.
+item_iron_helmet_name,Iron Helmet,Iron Helmet
+item_iron_helmet_desc,Iron helmet with leather padding.,Iron helmet with leather padding.
+item_iron_sword_name,Iron Sword,Iron Sword
+item_iron_sword_desc,Sturdy iron sword.,Sturdy iron sword.
+item_leather_chest_name,Leather Chest,Leather Chest
+item_leather_chest_desc,Leather chest armor.,Leather chest armor.
+item_legendary_siege_engine_name,Legendary Siege Engine,Legendary Siege Engine
+item_legendary_siege_engine_desc,Devastating siege weapon of incredible power. Can break any fortification.,Devastating siege weapon of incredible power. Can break any fortification.
+item_legendary_weapon_name,Dragonslayer,Dragonslayer
+item_legendary_weapon_desc,Masterwork weapon of incredible power. Too big to be called a sword.,Masterwork weapon of incredible power. Too big to be called a sword.
+item_masterwork_armor_set_name,Armor of the Hawk,Armor of the Hawk
+item_masterwork_armor_set_desc,Complete set of the finest armor.,Complete set of the finest armor.
+item_medical_kit_name,Medical Kit,Medical Kit
+item_medical_kit_desc,Complete medical kit.,Complete medical kit.
+item_minor_health_potion_name,Minor Health Potion,Minor Health Potion
+item_minor_health_potion_desc,Basic healing potion.,Basic healing potion.
+item_reinforced_bow_name,Reinforced Bow,Reinforced Bow
+item_reinforced_bow_desc,Metal-reinforced bow. High-tier ranged weapon.,Metal-reinforced bow. High-tier ranged weapon.
+item_reinforced_gloves_name,Reinforced Gloves,Reinforced Gloves
+item_reinforced_gloves_desc,Iron-reinforced leather gloves.,Iron-reinforced leather gloves.
+item_steel_chestplate_name,Steel Chestplate,Steel Chestplate
+item_steel_chestplate_desc,Master steel chestplate.,Master steel chestplate.
+item_steel_sword_name,Steel Sword,Steel Sword
+item_steel_sword_desc,Master-crafted steel sword. High-tier WAR item. Complex interdependent craft.,Master-crafted steel sword. High-tier WAR item. Complex interdependent craft.
+item_wooden_bow_name,Wooden Bow,Wooden Bow
+item_wooden_bow_desc,Simple bow.,Simple bow.
+item_bridge_section_name,Bridge Section,Bridge Section
+item_bridge_section_desc,Modular bridge section for crossing rivers and canyons.,Modular bridge section for crossing rivers and canyons.
+item_fortification_section_name,Fortification Section,Fortification Section
+item_fortification_section_desc,Heavy fortification.,Heavy fortification.
+item_grand_monument_name,Grand Monument,Grand Monument
+item_grand_monument_desc,Monumental structure celebrating great achievements. A wonder of the world.,Monumental structure celebrating great achievements. A wonder of the world.
+item_guild_hall_section_name,Guild Hall Section,Guild Hall Section
+item_guild_hall_section_desc,Structural component for building guild halls.,Structural component for building guild halls.
+item_memorial_plaque_name,Memorial Plaque,Memorial Plaque
+item_memorial_plaque_desc,Engraved plaque to commemorate important events or people.,Engraved plaque to commemorate important events or people.
+item_monument_base_name,Monument Base,Monument Base
+item_monument_base_desc,Monument foundation.,Monument foundation.
+item_reinforced_door_name,Reinforced Door,Reinforced Door
+item_reinforced_door_desc,Heavy reinforced door. Security construction.,Heavy reinforced door. Security construction.
+item_ultimate_forge_core_name,Ultimate Forge Core,Ultimate Forge Core
+item_ultimate_forge_core_desc,The Heart of Creation. A legendary mega-component combining siege weaponry\, eternal flame\, and ultimate fire magic. One of the components required to forge KRAK.,The Heart of Creation. A legendary mega-component combining siege weaponry\, eternal flame\, and ultimate fire magic. One of the components required to forge KRAK.
+item_wall_section_name,Wall Section,Wall Section
+item_wall_section_desc,Stone wall section.,Stone wall section.
+item_antidote_name,Antidote,Antidote
+item_antidote_desc,Powerful remedy that neutralizes poisons and toxins.,Powerful remedy that neutralizes poisons and toxins.
+item_beer_name,Beer,Beer
+item_beer_desc,Rich\, flavorful beer brewed with rare herbs. A favorite at celebrations and taverns.,Rich\, flavorful beer brewed with rare herbs. A favorite at celebrations and taverns.
+item_fire_resistance_potion_name,Fire Resistance Potion,Fire Resistance Potion
+item_fire_resistance_potion_desc,Grants fire resistance.,Grants fire resistance.
+item_miracle_elixir_name,Miracle Elixir,Miracle Elixir
+item_miracle_elixir_desc,Ultimate alchemical creation. Grants miraculous healing and regeneration.,Ultimate alchemical creation. Grants miraculous healing and regeneration.
+item_night_vision_potion_name,Night Vision Potion,Night Vision Potion
+item_night_vision_potion_desc,Grants night vision. Special potion.,Grants night vision. Special potion.
+item_hearty_stew_name,Hearty Stew,Hearty Stew
+item_hearty_stew_desc,Nutritious stew.,Nutritious stew.
+item_honey_glazed_ham_name,Honey-Glazed Ham,Honey-Glazed Ham
+item_honey_glazed_ham_desc,Honey-glazed boar ham.,Honey-glazed boar ham.
+item_luxury_pastries_name,Luxury Pastries,Luxury Pastries
+item_luxury_pastries_desc,Fine pastries with honey and nuts.,Fine pastries with honey and nuts.
+item_seasoned_meat_name,Seasoned Meat,Seasoned Meat
+item_seasoned_meat_desc,Expertly seasoned meat. Luxury food item.,Expertly seasoned meat. Luxury food item.
+item_spiced_roast_name,Spiced Roast,Spiced Roast
+item_spiced_roast_desc,Luxury spiced meat.,Luxury spiced meat.
+item_decorative_statue_name,Decorative Statue,Decorative Statue
+item_decorative_statue_desc,Finely carved statue for decoration. Shows artistic skill.,Finely carved statue for decoration. Shows artistic skill.
+item_display_cabinet_name,Display Cabinet,Display Cabinet
+item_display_cabinet_desc,Glass display cabinet.,Glass display cabinet.
+item_eternal_flame_brazier_name,Eternal Flame Brazier,Eternal Flame Brazier
+item_eternal_flame_brazier_desc,Brazier containing an eternal flame. Never needs fuel\, lights the darkest nights.,Brazier containing an eternal flame. Never needs fuel\, lights the darkest nights.
+item_fine_chair_name,Fine Chair,Fine Chair
+item_fine_chair_desc,Quality hardwood chair.,Quality hardwood chair.
+item_ornate_table_name,Ornate Table,Ornate Table
+item_ornate_table_desc,Magnificent marble table.,Magnificent marble table.
+item_throne_name,Throne,Throne
+item_throne_desc,Royal throne.,Royal throne.
+item_trophy_mount_name,Trophy Mount,Trophy Mount
+item_trophy_mount_desc,Mounted display for hunting trophies and rare creature parts.,Mounted display for hunting trophies and rare creature parts.
+item_copper_ring_name,Ring,Ring
+item_copper_ring_desc,Copper ring -description,Copper ring -description
+item_alchemy_table_name,Alchemy Table,Alchemy Table
+item_alchemy_table_desc,Permanent alchemy table. Guild workshop! Guild craft: hardwood + glass + quality leather + tools.,Permanent alchemy table. Guild workshop! Guild craft: hardwood + glass + quality leather + tools.
+item_forge_station_name,Forge Station,Forge Station
+item_forge_station_desc,Permanent forge station. Guild workshop! Guild craft: iron ingots + stone blocks + coal + bellows.,Permanent forge station. Guild workshop! Guild craft: iron ingots + stone blocks + coal + bellows.
+item_tanning_rack_name,Tanning Rack,Tanning Rack
+item_tanning_rack_desc,Permanent tanning rack. Guild workshop! Guild craft: oak planks + quality leather + iron fittings + tools.,Permanent tanning rack. Guild workshop! Guild craft: oak planks + quality leather + iron fittings + tools.
+item_ultimate_endgame_3_name,Celestial Forge,Celestial Forge
+item_ultimate_endgame_3_desc,Divine forge that channels starlight. Creates artifacts of legend.,Divine forge that channels starlight. Creates artifacts of legend.
+item_blanket_name,Blanket,Blanket
+item_blanket_desc,Warm blanket.,Warm blanket.
+item_candle_set_name,Candle Set,Candle Set
+item_candle_set_desc,Beeswax candles.,Beeswax candles.
+item_lantern_name,Lantern,Lantern
+item_lantern_desc,Metal lantern.,Metal lantern.
+item_luxury_polish_name,Luxury Polish,Luxury Polish
+item_luxury_polish_desc,Furniture polish. Household luxury item.,Furniture polish. Household luxury item.
+item_luxury_soap_name,Luxury Soap,Luxury Soap
+item_luxury_soap_desc,Perfumed luxury soap.,Perfumed luxury soap.
+item_perfume_name,Perfume,Perfume
+item_perfume_desc,Exotic perfume.,Exotic perfume.
+item_pillow_name,Pillow,Pillow
+item_pillow_desc,Soft pillow. Comfort item.,Soft pillow. Comfort item.
+item_soap_name,Soap,Soap
+item_soap_desc,Basic soap.,Basic soap.
+item_celestial_convergence_name,Celestial Convergence,Celestial Convergence
+item_celestial_convergence_desc,The Essence of Nature. A legendary mega-component combining the power of miracles\, trade routes\, and the World Tree itself. One of the components required to forge KRAK.,The Essence of Nature. A legendary mega-component combining the power of miracles\, trade routes\, and the World Tree itself. One of the components required to forge KRAK.
+item_champions_trophy_name,Champion's Trophy,Champion's Trophy
+item_champions_trophy_desc,Proof of ultimate hunting mastery. A legendary mega-component created from pristine pelts\, trophy antlers\, and the essence of an ancient titan. Represents the pinnacle of the trapper's craft.,Proof of ultimate hunting mastery. A legendary mega-component created from pristine pelts\, trophy antlers\, and the essence of an ancient titan. Represents the pinnacle of the trapper's craft.
+item_crown_name,Crown,Crown
+item_crown_desc,Ornate royal crown adorned with precious gems. Symbol of sovereignty.,Ornate royal crown adorned with precious gems. Symbol of sovereignty.
+item_embroidered_tapestry_name,Embroidered Tapestry,Embroidered Tapestry
+item_embroidered_tapestry_desc,Magnificent wall tapestry.,Magnificent wall tapestry.
+item_essence_of_mastery_name,Essence of Mastery,Essence of Mastery
+item_essence_of_mastery_desc,The Soul of All Crafts. A legendary mega-component combining royal jewelry\, throne\, and steel chestplate. Represents mastery across all three crafting disciplines.,The Soul of All Crafts. A legendary mega-component combining royal jewelry\, throne\, and steel chestplate. Represents mastery across all three crafting disciplines.
+item_fine_cloak_name,Fine Cloak,Fine Cloak
+item_fine_cloak_desc,Fur-lined luxury cloak.,Fur-lined luxury cloak.
+item_krak_name,KRAK - The Ultimate Forge,KRAK - The Ultimate Forge
+item_krak_desc,THE ULTIMATE FORGE. Legends speak of KRAK\, an artifact so powerful it contains the essence of all three crafting disciplines. To create KRAK is to achieve mastery over reality itself. It pulses with the heartbeat of a dragon\, grows with the strength of the World Tree\, and shines with the light of fallen stars. Only the most dedicated players who have mastered all classes and gathered the rarest materials in existence can hope to forge this legendary item.,THE ULTIMATE FORGE. Legends speak of KRAK\, an artifact so powerful it contains the essence of all three crafting disciplines. To create KRAK is to achieve mastery over reality itself. It pulses with the heartbeat of a dragon\, grows with the strength of the World Tree\, and shines with the light of fallen stars. Only the most dedicated players who have mastered all classes and gathered the rarest materials in existence can hope to forge this legendary item.
+item_leather_jacket_name,Leather Jacket,Leather Jacket
+item_leather_jacket_desc,Quality leather jacket. Practical clothing.,Quality leather jacket. Practical clothing.
+item_linen_shirt_name,Linen Shirt,Linen Shirt
+item_linen_shirt_desc,Simple linen shirt. Basic clothing.,Simple linen shirt. Basic clothing.
+item_ornate_jewelry_name,Ornate Jewelry,Ornate Jewelry
+item_ornate_jewelry_desc,Exquisite jewelry pieces with intricate designs. High value.,Exquisite jewelry pieces with intricate designs. High value.
+item_royal_garments_name,Royal Garments,Royal Garments
+item_royal_garments_desc,Royal ceremonial robes.,Royal ceremonial robes.
+item_royal_jewelry_set_name,Royal Jewelry Set,Royal Jewelry Set
+item_royal_jewelry_set_desc,Magnificent royal jewelry.,Magnificent royal jewelry.
+item_simple_jewelry_name,Simple Jewelry,Simple Jewelry
+item_simple_jewelry_desc,Simple silver jewelry.,Simple silver jewelry.
+item_ultimate_endgame_5_name,Titan\'s Crown,Titan\'s Crown
+item_ultimate_endgame_5_desc,Crown worn by the ancient titans. Grants dominion over the land.,Crown worn by the ancient titans. Grants dominion over the land.
+item_winter_coat_name,Winter Coat,Winter Coat
+item_winter_coat_desc,Thick\, warm coat for harsh winter conditions. Essential for cold climates.,Thick\, warm coat for harsh winter conditions. Essential for cold climates.
+item_adamantine_ingot_name,Adamantine Ingot,Adamantine Ingot
+item_adamantine_ingot_desc,Legendary metal ingot. Unmatched strength.,Legendary metal ingot. Unmatched strength.
+item_adamantine_ore_name,Adamantine Ore,Adamantine Ore
+item_adamantine_ore_desc,Legendary ultra-hard ore. The rarest and most valuable metal in existence.,Legendary ultra-hard ore. The rarest and most valuable metal in existence.
+item_alcohol_base_name,Alcohol Base,Alcohol Base
+item_alcohol_base_desc,Distilled alcohol. Base for potions and tinctures. Crafted from grapes.,Distilled alcohol. Base for potions and tinctures. Crafted from grapes.
+item_ale_name,Ale,Ale
+item_ale_desc,Barley ale. Celebration drink.,Barley ale. Celebration drink.
+item_almonds_name,Almonds,Almonds
+item_almonds_desc,Sweet almonds. Luxury nut for fine cooking.,Sweet almonds. Luxury nut for fine cooking.
+item_amethyst_name,Amethyst,Amethyst
+item_amethyst_desc,Purple gemstone. Beautiful and moderately valuable for jewelry.,Purple gemstone. Beautiful and moderately valuable for jewelry.
+item_ancient_titan_essence_name,Ancient Titan Essence,Ancient Titan Essence
+item_ancient_titan_essence_desc,The crystallized essence of an ancient titan. Priceless endgame drop from titan bosses.,The crystallized essence of an ancient titan. Priceless endgame drop from titan bosses.
+item_ancient_wood_planks_name,Ancient Wood Planks,Ancient Wood Planks
+item_ancient_wood_planks_desc,Luxury planks from cedar or willow. For fine furniture and nobles.,Luxury planks from cedar or willow. For fine furniture and nobles.
+item_animal_fat_name,Animal Fat,Animal Fat
+item_animal_fat_desc,Rendered animal fat. Used for cooking\, soap\, and candles.,Rendered animal fat. Used for cooking\, soap\, and candles.
+item_animal_feces_name,Animal Feces,Animal Feces
+item_animal_feces_desc,...It's exactly what it sounds like. Essential fertilizer ingredient.,...It's exactly what it sounds like. Essential fertilizer ingredient.
+item_apples_name,Apples,Apples
+item_apples_desc,Crisp apples. Used in cooking and cider-making.,Crisp apples. Used in cooking and cider-making.
+item_ash_planks_name,Ash Planks,Ash Planks
+item_ash_planks_desc,Processed ash wood planks. Strong and flexible for construction.,Processed ash wood planks. Strong and flexible for construction.
+item_ash_wood_name,Ash Wood,Ash Wood
+item_ash_wood_desc,Strong and flexible wood from ash trees. Prized for tool handles and furniture.,Strong and flexible wood from ash trees. Prized for tool handles and furniture.
+item_bait_name,Bait,Bait
+item_bait_desc,Basic bait for trapping small game.,Basic bait for trapping small game.
+item_bamboo_name,Bamboo,Bamboo
+item_bamboo_desc,Fast-growing\, extremely strong grass. Lightweight and versatile construction material.,Fast-growing\, extremely strong grass. Lightweight and versatile construction material.
+item_bamboo_planks_name,Bamboo Planks,Bamboo Planks
+item_bamboo_planks_desc,Processed bamboo planks. Lightweight yet incredibly strong.,Processed bamboo planks. Lightweight yet incredibly strong.
+item_barley_name,Barley,Barley
+item_barley_desc,Versatile barley grain. Key ingredient for ale brewing.,Versatile barley grain. Key ingredient for ale brewing.
+item_barrel_name,Barrel,Barrel
+item_barrel_desc,Wooden barrel with iron bands. Used for wine and storage.,Wooden barrel with iron bands. Used for wine and storage.
+item_basic_fabric_name,Basic Fabric,Basic Fabric
+item_basic_fabric_desc,Simple woven fabric. Used for basic clothing and bandages. Crafted from thread.,Simple woven fabric. Used for basic clothing and bandages. Crafted from thread.
+item_basic_leather_name,Basic Leather,Basic Leather
+item_basic_leather_desc,Simple tanned leather from rabbit hide. Foundation of leatherwork.,Simple tanned leather from rabbit hide. Foundation of leatherwork.
+item_bear_fur_name,Bear Fur,Bear Fur
+item_bear_fur_desc,Massive bear pelt. Ultimate winter clothing material.,Massive bear pelt. Ultimate winter clothing material.
+item_beeswax_name,Beeswax,Beeswax
+item_beeswax_desc,Natural beeswax. Essential for candles and polish.,Natural beeswax. Essential for candles and polish.
+item_bellows_name,Bellows,Bellows
+item_bellows_desc,Forge bellows. Essential smithing tool.,Forge bellows. Essential smithing tool.
+item_berries_name,Berries,Berries
+item_berries_desc,Fresh wild berries. Used for juice\, wine\, and bait.,Fresh wild berries. Used for juice\, wine\, and bait.
+item_berry_juice_name,Berry Juice,Berry Juice
+item_berry_juice_desc,A sweet\, revitalizing drink squeezed from wild berries\, restoring a bit of strength to weary adventurers.,A sweet\, revitalizing drink squeezed from wild berries\, restoring a bit of strength to weary adventurers.
+item_better_bait_name,Better Bait,Better Bait
+item_better_bait_desc,Improved bait with higher success rate. Attracts larger prey.,Improved bait with higher success rate. Attracts larger prey.
+item_bile_sacs_name,Bile Sacs,Bile Sacs
+item_bile_sacs_desc,Rare bile sacs. Medical and alchemical uses.,Rare bile sacs. Medical and alchemical uses.
+item_binding_cord_name,Binding Cord,Binding Cord
+item_binding_cord_desc,Strong cord for binding and crafting. Essential material for many recipes.,Strong cord for binding and crafting. Essential material for many recipes.
+item_birch_planks_name,Birch Planks,Birch Planks
+item_birch_planks_desc,Processed birch wood planks. Quality hardwood for construction.,Processed birch wood planks. Quality hardwood for construction.
+item_birch_wood_name,Birch Wood,Birch Wood
+item_birch_wood_desc,Light-colored birch logs. Popular for furniture.,Light-colored birch logs. Popular for furniture.
+item_blood_vials_name,Blood Vials,Blood Vials
+item_blood_vials_desc,Collected animal blood. Essential for advanced potions.,Collected animal blood. Essential for advanced potions.
+item_boar_hide_name,Boar Hide,Boar Hide
+item_boar_hide_desc,Tough boar hide. Makes heavy leather for armor. From Hunter's Trap.,Tough boar hide. Makes heavy leather for armor. From Hunter's Trap.
+item_boar_meat_name,Boar Meat,Boar Meat
+item_boar_meat_desc,Rich boar meat. Luxury food ingredient. From Hunter's Trap.,Rich boar meat. Luxury food ingredient. From Hunter's Trap.
+item_bone_name,Bone,Bone
+item_bone_desc,Animal bones used for crafting tools and ornaments.,Animal bones used for crafting tools and ornaments.
+item_bone_glue_name,Bone Glue,Bone Glue
+item_bone_glue_desc,Strong adhesive from boiled bones.,Strong adhesive from boiled bones.
+item_bone_meal_name,Bone Meal,Bone Meal
+item_bone_meal_desc,Ground bone powder. Used as fertilizer.,Ground bone powder. Used as fertilizer.
+item_bones_name,Skull,Skull
+item_bones_desc,Animal skull. Processed into bone meal and glue.,Animal skull. Processed into bone meal and glue.
+item_bread_name,Bread,Bread
+item_bread_desc,Fresh baked bread. Staple food.,Fresh baked bread. Staple food.
+item_brick_name,Brick,Brick
+item_brick_desc,Fired clay brick. Foundation of construction.,Fired clay brick. Foundation of construction.
+item_bronze_ingot_name,Bronze Ingot,Bronze Ingot
+item_bronze_ingot_desc,Bronze alloy ingot. Decorative metalwork. Crafted from copper + tin ingots.,Bronze alloy ingot. Decorative metalwork. Crafted from copper + tin ingots.
+item_cabbage_name,Cabbage,Cabbage
+item_cabbage_desc,Hearty cabbage heads. Staple vegetable for soups.,Hearty cabbage heads. Staple vegetable for soups.
+item_canvas_name,Canvas,Canvas
+item_canvas_desc,Heavy-duty canvas from hemp. Used for bags and tents.,Heavy-duty canvas from hemp. Used for bags and tents.
+item_carrots_name,Carrots,Carrots
+item_carrots_desc,Orange root vegetables. Essential stew ingredient.,Orange root vegetables. Essential stew ingredient.
+item_cedar_planks_name,Cedar Planks,Cedar Planks
+item_cedar_planks_desc,Processed cedar wood planks. Naturally resistant and aromatic.,Processed cedar wood planks. Naturally resistant and aromatic.
+item_cedar_wood_name,Cedar Wood,Cedar Wood
+item_cedar_wood_desc,Aromatic wood from cedar trees. Naturally resistant to rot and insects.,Aromatic wood from cedar trees. Naturally resistant to rot and insects.
+item_charcoal_name,Charcoal,Charcoal
+item_charcoal_desc,Charred wood fuel. Can substitute for coal in some recipes.,Charred wood fuel. Can substitute for coal in some recipes.
+item_cider_name,Cider,Cider
+item_cider_desc,Apple cider.,Apple cider.
+item_claws_name,Claws,Claws
+item_claws_desc,Sharp animal claws. Trophy decoration.,Sharp animal claws. Trophy decoration.
+item_clay_name,Clay,Clay
+item_clay_desc,Soft earthy material used for pottery and bricks.,Soft earthy material used for pottery and bricks.
+item_coal_name,Coal,Coal
+item_coal_desc,Combustible black rock. Essential fuel for smelting and heating.,Combustible black rock. Essential fuel for smelting and heating.
+item_colored_fabric_name,Colored Fabric,Colored Fabric
+item_colored_fabric_desc,Fabric dyed in vibrant colors. For decorative clothing. Crafted from fabric + dyes.,Fabric dyed in vibrant colors. For decorative clothing. Crafted from fabric + dyes.
+item_cooked_meat_name,Cooked Meat,Cooked Meat
+item_cooked_meat_desc,Simple roasted meat. Basic food. Crafted from rabbit meat.,Simple roasted meat. Basic food. Crafted from rabbit meat.
+item_copper_ingot_name,Copper Ingot,Copper Ingot
+item_copper_ingot_desc,Refined copper ingot. Foundation of metalworking. Crafted from copper ore + coal.,Refined copper ingot. Foundation of metalworking. Crafted from copper ore + coal.
+item_copper_ore_name,Copper Ore,Copper Ore
+item_copper_ore_desc,Raw copper ore extracted from mining. Used for smelting copper ingots.,Raw copper ore extracted from mining. Used for smelting copper ingots.
+item_cork_name,Cork,Cork
+item_cork_desc,Cork bark. Essential for bottle stoppers. Found in Forager's Bundles.,Cork bark. Essential for bottle stoppers. Found in Forager's Bundles.
+item_cotton_name,Cotton,Cotton
+item_cotton_desc,Soft cotton bolls. Makes comfortable fabric. Found in Woodland Bundles.,Soft cotton bolls. Makes comfortable fabric. Found in Woodland Bundles.
+item_cured_leather_name,Cured Leather,Cured Leather
+item_cured_leather_desc,Professionally cured and treated leather. Resistant and durable. Interdependent craft.,Professionally cured and treated leather. Resistant and durable. Interdependent craft.
+item_decorative_bronze_name,Decorative Bronze,Decorative Bronze
+item_decorative_bronze_desc,Ornate bronze work with patina. Luxury decoration. Crafted from bronze + malachite.,Ornate bronze work with patina. Luxury decoration. Crafted from bronze + malachite.
+item_deer_hide_name,Deer Hide,Deer Hide
+item_deer_hide_desc,Quality deer hide. Makes good leather. From Standard Trap.,Quality deer hide. Makes good leather. From Standard Trap.
+item_deer_meat_name,Deer Meat,Deer Meat
+item_deer_meat_desc,Quality venison. Good food ingredient. From Standard Trap.,Quality venison. Good food ingredient. From Standard Trap.
+item_diamond_name,Diamond,Diamond
+item_diamond_desc,Extremely rare and valuable crystal. The ultimate gemstone.,Extremely rare and valuable crystal. The ultimate gemstone.
+item_dyes_name,Dyes,Dyes
+item_dyes_desc,Vibrant fabric dyes. For colored textiles. Interdependent: dye plants + salt + fat.,Vibrant fabric dyes. For colored textiles. Interdependent: dye plants + salt + fat.
+item_electrum_ingot_name,Electrum Ingot,Electrum Ingot
+item_electrum_ingot_desc,Gold-silver alloy. Master-level jewelry material. Crafted from silver + gold ingots.,Gold-silver alloy. Master-level jewelry material. Crafted from silver + gold ingots.
+item_emerald_name,Emerald,Emerald
+item_emerald_desc,Brilliant green gemstone. Highly valued for jewelry.,Brilliant green gemstone. Highly valued for jewelry.
+item_exotic_flowers_name,Exotic Flowers,Exotic Flowers
+item_exotic_flowers_desc,Beautiful rare flowers. Used for perfume and dyes. Found in Woodland Bundles.,Beautiful rare flowers. Used for perfume and dyes. Found in Woodland Bundles.
+item_exotic_hides_name,Exotic Hides,Exotic Hides
+item_exotic_hides_desc,Rare exotic animal hides. Masterwork leather source. Rare from Hunter's Trap.,Rare exotic animal hides. Masterwork leather source. Rare from Hunter's Trap.
+item_feathers_name,Feathers,Feathers
+item_feathers_desc,Bird feathers. Used for arrows and pillows.,Bird feathers. Used for arrows and pillows.
+item_fertilizer_name,Fertilizer,Fertilizer
+item_fertilizer_desc,MEMEABLE! Potent fertilizer. 'Fertilizer shortage!' Interdependent: feces + fiber + bone meal + limestone.,MEMEABLE! Potent fertilizer. 'Fertilizer shortage!' Interdependent: feces + fiber + bone meal + limestone.
+item_fire_herbs_name,Fire Herbs,Fire Herbs
+item_fire_herbs_desc,Rare magical herbs that glow with inner heat. Essential for powerful alchemical recipes.,Rare magical herbs that glow with inner heat. Essential for powerful alchemical recipes.
+item_flax_name,Flax,Flax
+item_flax_desc,Flax plants. Processed into linen fabric. Found in Forager's Bundles.,Flax plants. Processed into linen fabric. Found in Forager's Bundles.
+item_flour_name,Flour,Flour
+item_flour_desc,Ground wheat flour. Foundation of all baking. Crafted from wheat.,Ground wheat flour. Foundation of all baking. Crafted from wheat.
+item_fox_fur_name,Fox Fur,Fox Fur
+item_fox_fur_desc,Soft fox fur. Luxury clothing material. Rare from Standard Trap.,Soft fox fur. Luxury clothing material. Rare from Standard Trap.
+item_glass_bottle_name,Glass Bottle,Glass Bottle
+item_glass_bottle_desc,Glass bottle. Essential for potions and liquids. Crafted from sand + coal.,Glass bottle. Essential for potions and liquids. Crafted from sand + coal.
+item_glass_pane_name,Glass Pane,Glass Pane
+item_glass_pane_desc,Flat glass pane. Luxury construction material. Crafted from sand + iron fittings.,Flat glass pane. Luxury construction material. Crafted from sand + iron fittings.
+item_gold_ingot_name,Gold Ingot,Gold Ingot
+item_gold_ingot_desc,Valuable gold ingot. Ultimate luxury material. Crafted from gold ore + coal.,Valuable gold ingot. Ultimate luxury material. Crafted from gold ore + coal.
+item_gold_inlay_name,Gold Inlay,Gold Inlay
+item_gold_inlay_desc,Delicate gold inlay work. Luxury furnishing component. Complex processing.,Delicate gold inlay work. Luxury furnishing component. Complex processing.
+item_gold_ore_name,Gold Ore,Gold Ore
+item_gold_ore_desc,Valuable gold ore. Highly sought after for jewelry and trade goods.,Valuable gold ore. Highly sought after for jewelry and trade goods.
+item_gold_thread_name,Gold Thread,Gold Thread
+item_gold_thread_desc,Thread woven with gold. Ultimate luxury embroidery. Interdependent: gold + thread.,Thread woven with gold. Ultimate luxury embroidery. Interdependent: gold + thread.
+item_gourds_name,Gourds,Gourds
+item_gourds_desc,Decorative gourds. Festival decorations and containers. Gourd mania is real!,Decorative gourds. Festival decorations and containers. Gourd mania is real!
+item_granite_name,Granite,Granite
+item_granite_desc,Extremely hard igneous rock. Perfect for monuments and foundations.,Extremely hard igneous rock. Perfect for monuments and foundations.
+item_grapes_name,Grapes,Grapes
+item_grapes_desc,Plump grapes. Essential for winemaking!,Plump grapes. Essential for winemaking!
+item_gravel_name,Gravel,Gravel
+item_gravel_desc,Loose small stones. Used for paths and construction foundations.,Loose small stones. Used for paths and construction foundations.
+item_hardwood_planks_name,Hardwood Planks,Hardwood Planks
+item_hardwood_planks_desc,Strong hardwood planks from maple or ash. Quality construction material. Crafted from hardwoods.,Strong hardwood planks from maple or ash. Quality construction material. Crafted from hardwoods.
+item_heavy_leather_name,Heavy Leather,Heavy Leather
+item_heavy_leather_desc,Thick boar leather. Used for armor. Interdependent: boar hide + salt + fat.,Thick boar leather. Used for armor. Interdependent: boar hide + salt + fat.
+item_hemp_name,Hemp,Hemp
+item_hemp_desc,Strong hemp fibers. Makes rope and canvas. Found in Forager's Bundles.,Strong hemp fibers. Makes rope and canvas. Found in Forager's Bundles.
+item_herbs_name,Herbs,Herbs
+item_herbs_desc,Medicinal herbs with healing properties. Essential for potions.,Medicinal herbs with healing properties. Essential for potions.
+item_herbs_common_name,Common Herbs,Common Herbs
+item_herbs_common_desc,Basic medicinal herbs. Used for potions and healing. Found in Common Bundles.,Basic medicinal herbs. Used for potions and healing. Found in Common Bundles.
+item_herbs_rare_name,Rare Herbs,Rare Herbs
+item_herbs_rare_desc,Potent medicinal herbs. Essential for advanced potions. Found in Woodland Bundles.,Potent medicinal herbs. Essential for advanced potions. Found in Woodland Bundles.
+item_honey_name,Honey,Honey
+item_honey_desc,Sweet golden honey. Luxury sweetener for food and medicine.,Sweet golden honey. Luxury sweetener for food and medicine.
+item_horns_name,Horns,Horns
+item_horns_desc,Animal horns. Trophy decoration and crafting material. From Hunter's Trap.,Animal horns. Trophy decoration and crafting material. From Hunter's Trap.
+item_indigo_plant_name,Indigo Plant,Indigo Plant
+item_indigo_plant_desc,Blue dye plant. Creates vibrant indigo dyes. Found in Premium Bundles.,Blue dye plant. Creates vibrant indigo dyes. Found in Premium Bundles.
+item_iron_fittings_name,Iron Fittings,Iron Fittings
+item_iron_fittings_desc,Iron brackets\, buckles\, and hinges. Essential components. Crafted from iron ingots.,Iron brackets\, buckles\, and hinges. Essential components. Crafted from iron ingots.
+item_iron_ingot_name,Iron Ingot,Iron Ingot
+item_iron_ingot_desc,Strong iron ingot. Essential for tools and construction.,Strong iron ingot. Essential for tools and construction.
+item_iron_ore_name,Iron Ore,Iron Ore
+item_iron_ore_desc,Raw iron ore extracted from mining. Essential for creating iron ingots.,Raw iron ore extracted from mining. Essential for creating iron ingots.
+item_iron_sword_name,Iron Sword,Iron Sword
+item_iron_sword_desc,A well-crafted iron sword. Requires components from multiple classes.,A well-crafted iron sword. Requires components from multiple classes.
+item_ironwood_name,Ironwood,Ironwood
+item_ironwood_desc,Legendary wood as strong as metal. Extremely rare.,Legendary wood as strong as metal. Extremely rare.
+item_ironwood_planks_name,Ironwood Planks,Ironwood Planks
+item_ironwood_planks_desc,Processed ironwood planks. As strong as metal\, legendary material.,Processed ironwood planks. As strong as metal\, legendary material.
+item_leather_cord_name,Leather Cord,Leather Cord
+item_leather_cord_desc,Thin leather cords for jewelry and ties.,Thin leather cords for jewelry and ties.
+item_leather_grip_name,Leather Grip,Leather Grip
+item_leather_grip_desc,A comfortable leather grip for weapons and tools.,A comfortable leather grip for weapons and tools.
+item_leather_strap_name,Leather Strap,Leather Strap
+item_leather_strap_desc,Leather straps for buckles and bindings. Essential component. Crafted from deer hide + basic leather.,Leather straps for buckles and bindings. Essential component. Crafted from deer hide + basic leather.
+item_limestone_name,Limestone,Limestone
+item_limestone_desc,Sedimentary rock used for mortar and construction.,Sedimentary rock used for mortar and construction.
+item_linen_fabric_name,Linen Fabric,Linen Fabric
+item_linen_fabric_desc,Quality linen fabric from flax. Used for clothing and linens.,Quality linen fabric from flax. Used for clothing and linens.
+item_lodestone_name,Lodestone,Lodestone
+item_lodestone_desc,Naturally magnetic iron ore. Mysterious properties valued by scholars.,Naturally magnetic iron ore. Mysterious properties valued by scholars.
+item_lye_name,Lye,Lye
+item_lye_desc,Caustic alkaline solution. Used for soap making and tanning.,Caustic alkaline solution. Used for soap making and tanning.
+item_madder_root_name,Madder Root,Madder Root
+item_madder_root_desc,Red dye plant root. Creates rich red dyes.,Red dye plant root. Creates rich red dyes.
+item_malachite_name,Malachite,Malachite
+item_malachite_desc,Bright green copper carbonate. Used for decorative bronzework.,Bright green copper carbonate. Used for decorative bronzework.
+item_maple_planks_name,Maple Planks,Maple Planks
+item_maple_planks_desc,Processed maple wood planks. Beautiful hardwood for fine furniture.,Processed maple wood planks. Beautiful hardwood for fine furniture.
+item_maple_wood_name,Maple Wood,Maple Wood
+item_maple_wood_desc,Beautiful hardwood from maple trees. Excellent for fine furniture and musical instruments.,Beautiful hardwood from maple trees. Excellent for fine furniture and musical instruments.
+item_marble_name,Marble,Marble
+item_marble_desc,Beautiful metamorphic stone used for luxury construction and decoration.,Beautiful metamorphic stone used for luxury construction and decoration.
+item_masterwork_leather_name,Masterwork Leather,Masterwork Leather
+item_masterwork_leather_desc,Perfect leather from exotic hides. Ultimate leatherwork.,Perfect leather from exotic hides. Ultimate leatherwork.
+item_medicinal_tincture_name,Medicinal Tincture,Medicinal Tincture
+item_medicinal_tincture_desc,Concentrated herbal medicine. Treats ailments and poisons.,Concentrated herbal medicine. Treats ailments and poisons.
+item_metal_bands_name,Metal Bands,Metal Bands
+item_metal_bands_desc,Bronze bands used for reinforcement. Essential for barrels and equipment.,Bronze bands used for reinforcement. Essential for barrels and equipment.
+item_mica_name,Mica,Mica
+item_mica_desc,Transparent mineral sheets. Used for windows and decorative purposes.,Transparent mineral sheets. Used for windows and decorative purposes.
+item_mortar_name,Mortar,Mortar
+item_mortar_desc,Binding mortar. Holds bricks together. Crafted from limestone + sand.,Binding mortar. Holds bricks together. Crafted from limestone + sand.
+item_mushrooms_name,Mushrooms,Mushrooms
+item_mushrooms_desc,Wild mushrooms found in forests. Used in cooking and medicine.,Wild mushrooms found in forests. Used in cooking and medicine.
+item_mushrooms_common_name,Common Mushrooms,Common Mushrooms
+item_mushrooms_common_desc,Edible forest mushrooms. Used in cooking.,Edible forest mushrooms. Used in cooking.
+item_mushrooms_special_name,Special Mushrooms,Special Mushrooms
+item_mushrooms_special_desc,Rare alchemical mushrooms.,Rare alchemical mushrooms.
+item_musk_glands_name,Musk Glands,Musk Glands
+item_musk_glands_desc,Rare musk glands. Essential perfume ingredient.,Rare musk glands. Essential perfume ingredient.
+item_nails_name,Nails,Nails
+item_nails_desc,Iron nails. Basic but essential construction component.,Iron nails. Basic but essential construction component.
+item_oak_planks_name,Oak Planks,Oak Planks
+item_oak_planks_desc,Processed oak planks. Foundation of construction and furniture.,Processed oak planks. Foundation of construction and furniture.
+item_oak_wood_name,Oak Wood,Oak Wood
+item_oak_wood_desc,Sturdy oak logs. Foundation of all woodworking.,Sturdy oak logs. Foundation of all woodworking.
+item_oats_name,Oats,Oats
+item_oats_desc,Nutritious oat grain. Makes hearty porridge.,Nutritious oat grain. Makes hearty porridge.
+item_obsidian_name,Obsidian,Obsidian
+item_obsidian_desc,Volcanic glass with razor-sharp edges. Valued for luxury items.,Volcanic glass with razor-sharp edges. Valued for luxury items.
+item_olive_oil_name,Olive Oil,Olive Oil
+item_olive_oil_desc,Pressed olive oil. Essential cooking ingredient. Crafted from olives.,Pressed olive oil. Essential cooking ingredient. Crafted from olives.
+item_olives_name,Olives,Olives
+item_olives_desc,Mediterranean olives. Pressed into valuable olive oil.,Mediterranean olives. Pressed into valuable olive oil.
+item_onions_name,Onions,Onions
+item_onions_desc,Pungent onions. Adds flavor to every dish.,Pungent onions. Adds flavor to every dish.
+item_ore_name,Ore,Ore
+item_ore_desc,DELETE ME,DELETE ME
+item_pears_name,Pears,Pears
+item_pears_desc,Sweet pears. Popular in desserts and preserves.,Sweet pears. Popular in desserts and preserves.
+item_pine_planks_name,Pine Planks,Pine Planks
+item_pine_planks_desc,Processed pine planks. Good for basic construction. Crafted from pine wood.,Processed pine planks. Good for basic construction. Crafted from pine wood.
+item_pine_wood_name,Pine Wood,Pine Wood
+item_pine_wood_desc,Soft pine logs. Good for basic construction.,Soft pine logs. Good for basic construction.
+item_plant_fiber_name,Plant Fiber,Plant Fiber
+item_plant_fiber_desc,Basic plant fibers. Foundation of all textiles.,Basic plant fibers. Foundation of all textiles.
+item_pottery_set_name,Pottery Set,Pottery Set
+item_pottery_set_desc,Basic pottery set. Useful for storage and cooking.,Basic pottery set. Useful for storage and cooking.
+item_premium_bait_name,Premium Bait,Premium Bait
+item_premium_bait_desc,Highest quality bait. Attracts even the rarest creatures.,Highest quality bait. Attracts even the rarest creatures.
+item_preserved_rations_name,Preserved Rations,Preserved Rations
+item_preserved_rations_desc,Long-lasting preserved food. WAR event essential!,Long-lasting preserved food. WAR event essential!
+item_pristine_pelts_name,Pristine Pelts,Pristine Pelts
+item_pristine_pelts_desc,Perfect condition fur pelts. Ultimate luxury material.,Perfect condition fur pelts. Ultimate luxury material.
+item_pumpkins_name,Pumpkins,Pumpkins
+item_pumpkins_desc,Large seasonal pumpkins. Harvest Festival essential!,Large seasonal pumpkins. Harvest Festival essential!
+item_quality_honey_name,Quality Honey,Quality Honey
+item_quality_honey_desc,Rare\, pure honey from wild beehives. Highly valued for its sweetness.,Rare\, pure honey from wild beehives. Highly valued for its sweetness.
+item_quality_leather_name,Quality Leather,Quality Leather
+item_quality_leather_desc,Quality deer leather treated with salt. For bags and gear.,Quality deer leather treated with salt. For bags and gear.
+item_quartz_crystal_name,Quartz Crystal,Quartz Crystal
+item_quartz_crystal_desc,Clear crystalline mineral. Used for decoration and polishing.,Clear crystalline mineral. Used for decoration and polishing.
+item_rabbit_hide_name,Rabbit Hide,Rabbit Hide
+item_rabbit_hide_desc,Soft rabbit pelt. Makes basic leather goods.,Soft rabbit pelt. Makes basic leather goods.
+item_rabbit_meat_name,Rabbit Meat,Rabbit Meat
+item_rabbit_meat_desc,Fresh rabbit meat. Basic food and bait ingredient.,Fresh rabbit meat. Basic food and bait ingredient.
+item_rare_seeds_name,Rare Seeds,Rare Seeds
+item_rare_seeds_desc,Mysterious exotic seeds. Valuable trade commodity.,Mysterious exotic seeds. Valuable trade commodity.
+item_rare_spices_name,Rare Spices,Rare Spices
+item_rare_spices_desc,Exotic spices (saffron\, cinnamon\, pepper\, ginger). Luxury food ingredient.,Exotic spices (saffron\, cinnamon\, pepper\, ginger). Luxury food ingredient.
+item_raw_meat_name,Raw Meat,Raw Meat
+item_raw_meat_desc,Fresh meat from hunted animals. Can be cooked or preserved.,Fresh meat from hunted animals. Can be cooked or preserved.
+item_resin_name,Resin,Resin
+item_resin_desc,Hardened tree resin. Used for adhesives and luxury items.,Hardened tree resin. Used for adhesives and luxury items.
+item_rivets_name,Rivets,Rivets
+item_rivets_desc,Small metal fasteners. Essential for armor and construction.,Small metal fasteners. Essential for armor and construction.
+item_rope_name,Rope,Rope
+item_rope_desc,Strong hemp rope. Construction and utility essential. Crafted from hemp.,Strong hemp rope. Construction and utility essential. Crafted from hemp.
+item_ruby_name,Ruby,Ruby
+item_ruby_desc,Deep red gemstone. The most valuable common gem.,Deep red gemstone. The most valuable common gem.
+item_rye_name,Rye,Rye
+item_rye_desc,Hardy rye grain. Makes dark bread and ale.,Hardy rye grain. Makes dark bread and ale.
+item_salt_name,Salt,Salt
+item_salt_desc,Essential mineral for food preservation and leather tanning.,Essential mineral for food preservation and leather tanning.
+item_saltpeter_name,Saltpeter,Saltpeter
+item_saltpeter_desc,Crystalline mineral used in alchemical processes.,Crystalline mineral used in alchemical processes.
+item_sand_name,Sand,Sand
+item_sand_desc,Fine granular material. Essential for glassmaking.,Fine granular material. Essential for glassmaking.
+item_sandstone_name,Sandstone,Sandstone
+item_sandstone_desc,Softer sedimentary rock used for basic construction.,Softer sedimentary rock used for basic construction.
+item_sapphire_name,Sapphire,Sapphire
+item_sapphire_desc,Striking blue gemstone. Prized by nobility for jewelry.,Striking blue gemstone. Prized by nobility for jewelry.
+item_seasoned_meat_name,Seasoned Meat,Seasoned Meat
+item_seasoned_meat_desc,Herb-seasoned meat. Quality food for celebrations!,Herb-seasoned meat. Quality food for celebrations!
+item_silk_name,Silk,Silk
+item_silk_desc,Rare luxurious silk.,Rare luxurious silk.
+item_silk_fabric_name,Silk Fabric,Silk Fabric
+item_silk_fabric_desc,Luxurious silk fabric. For nobility and royalty.,Luxurious silk fabric. For nobility and royalty.
+item_silver_fittings_name,Silver Fittings,Silver Fittings
+item_silver_fittings_desc,Delicate silver components for fine craftsmanship and jewelry.,Delicate silver components for fine craftsmanship and jewelry.
+item_silver_ingot_name,Silver Ingot,Silver Ingot
+item_silver_ingot_desc,Precious silver ingot. For jewelry and fine items.,Precious silver ingot. For jewelry and fine items.
+item_silver_ore_name,Silver Ore,Silver Ore
+item_silver_ore_desc,Precious silver ore. Used for jewelry and fine metalwork.,Precious silver ore. Used for jewelry and fine metalwork.
+item_sinew_name,Sinew,Sinew
+item_sinew_desc,Animal sinew. Strong binding material for bows and tools. From Quick Snare traps.,Animal sinew. Strong binding material for bows and tools. From Quick Snare traps.
+item_slate_name,Slate,Slate
+item_slate_desc,Fine-grained metamorphic rock used for roofing and decoration.,Fine-grained metamorphic rock used for roofing and decoration.
+item_soap_name,Soap,Soap
+item_soap_desc,Basic soap. Essential for hygiene and trade.,Basic soap. Essential for hygiene and trade.
+item_special_mushrooms_name,Special Mushrooms,Special Mushrooms
+item_special_mushrooms_desc,Rare magical mushrooms with mysterious properties. Essential for advanced alchemy.,Rare magical mushrooms with mysterious properties. Essential for advanced alchemy.
+item_stone_name,Stone,Stone
+item_stone_desc,Basic stone extracted from mining. Essential for construction.,Basic stone extracted from mining. Essential for construction.
+item_stone_block_name,Stone Block,Stone Block
+item_stone_block_desc,Carved stone blocks for construction. Foundation of great structures.,Carved stone blocks for construction. Foundation of great structures.
+item_sulfur_name,Sulfur,Sulfur
+item_sulfur_desc,Bright yellow mineral with alchemical properties.,Bright yellow mineral with alchemical properties.
+item_tallow_name,Tallow,Tallow
+item_tallow_desc,Rendered animal fat. Used for candles and leather treatment.,Rendered animal fat. Used for candles and leather treatment.
+item_teeth_name,Teeth,Teeth
+item_teeth_desc,Animal teeth. Trophy decoration.,Animal teeth. Trophy decoration.
+item_thread_name,Thread,Thread
+item_thread_desc,Basic thread spun from plant fibers. Foundation of all textiles. Crafted from plant fiber.,Basic thread spun from plant fibers. Foundation of all textiles. Crafted from plant fiber.
+item_tin_ingot_name,Tin Ingot,Tin Ingot
+item_tin_ingot_desc,Smelted tin ingot. Combined with copper to create bronze.,Smelted tin ingot. Combined with copper to create bronze.
+item_tin_ore_name,Tin Ore,Tin Ore
+item_tin_ore_desc,Soft metal ore. Combined with copper to create bronze.,Soft metal ore. Combined with copper to create bronze.
+item_topaz_name,Topaz,Topaz
+item_topaz_desc,Golden-yellow gemstone. Popular for decorative jewelry.,Golden-yellow gemstone. Popular for decorative jewelry.
+item_tree_sap_name,Tree Sap,Tree Sap
+item_tree_sap_desc,Sticky tree sap. Used as adhesive.,Sticky tree sap. Used as adhesive.
+item_trophy_antlers_name,Trophy Antlers,Trophy Antlers
+item_trophy_antlers_desc,Magnificent antlers. Valuable trophy decoration.,Magnificent antlers. Valuable trophy decoration.
+item_turnips_name,Turnips,Turnips
+item_turnips_desc,Humble root vegetables. Winter food staple.,Humble root vegetables. Winter food staple.
+item_ultimate_endgame_1_name,Philosopher's Stone,Philosopher's Stone
+item_ultimate_endgame_1_desc,Legendary artifact of ultimate transmutation. Turns base metals to gold.,Legendary artifact of ultimate transmutation. Turns base metals to gold.
+item_ultimate_endgame_2_name,Dragon Heart Core,Dragon Heart Core
+item_ultimate_endgame_2_desc,Pulsing heart of an ancient dragon. Raw magical power incarnate.,Pulsing heart of an ancient dragon. Raw magical power incarnate.
+item_ultimate_endgame_4_name,World Tree Sapling,World Tree Sapling
+item_ultimate_endgame_4_desc,Young sapling of the mythical World Tree. Will grow to touch the heavens.,Young sapling of the mythical World Tree. Will grow to touch the heavens.
+item_ultimate_endgame_6_name,Eternal Flame Relic,Eternal Flame Relic
+item_ultimate_endgame_6_desc,Relic containing an eternal flame that never dies. Ultimate power source.,Relic containing an eternal flame that never dies. Ultimate power source.
+item_walnuts_name,Walnuts,Walnuts
+item_walnuts_desc,Prized walnuts. Luxury food ingredient for pastries.,Prized walnuts. Luxury food ingredient for pastries.
+item_water_name,Water,Water
+item_water_desc,Clean water. Essential for many crafting processes.,Clean water. Essential for many crafting processes.
+item_wheat_name,Wheat,Wheat
+item_wheat_desc,Golden wheat stalks. Basis of all bread and flour.,Golden wheat stalks. Basis of all bread and flour.
+item_willow_planks_name,Willow Planks,Willow Planks
+item_willow_planks_desc,Processed willow wood planks. Flexible and perfect for curved construction.,Processed willow wood planks. Flexible and perfect for curved construction.
+item_willow_wood_name,Willow Wood,Willow Wood
+item_willow_wood_desc,Flexible wood from willow trees. Perfect for bending and weaving.,Flexible wood from willow trees. Perfect for bending and weaving.
+item_wine_name,Wine,Wine
+item_wine_desc,Fermented grape wine. Celebration essential!,Fermented grape wine. Celebration essential!
+item_woad_plant_name,Woad Plant,Woad Plant
+item_woad_plant_desc,Traditional blue dye plant. Ancient dyeing technique. Found in Premium Bundles.,Traditional blue dye plant. Ancient dyeing technique. Found in Premium Bundles.
+item_wolf_pelt_name,Wolf Pelt,Wolf Pelt
+item_wolf_pelt_desc,Thick wolf pelt. Prized for luxury clothing.,Thick wolf pelt. Prized for luxury clothing.
+item_wood_name,Wood,Wood
+item_wood_desc,Raw wood harvested from trees. Used for construction and crafting.,Raw wood harvested from trees. Used for construction and crafting.
+item_wooden_beam_name,Wooden Beam,Wooden Beam
+item_wooden_beam_desc,Reinforced wooden beam. Essential construction component.,Reinforced wooden beam. Essential construction component.
+item_wooden_handle_name,Wooden Handle,Wooden Handle
+item_wooden_handle_desc,A sturdy wooden handle for tools and weapons.,A sturdy wooden handle for tools and weapons.
+item_wool_fabric_name,Wool Fabric,Wool Fabric
+item_wool_fabric_desc,Warm wool fabric. Perfect for winter clothing.,Warm wool fabric. Perfect for winter clothing.
+item_explorer_pack_name,Explorer\'s Pack,Explorer\'s Pack
+item_explorer_pack_desc,Explorer's pack.,Explorer's pack.
+item_large_backpack_name,Large Backpack,Large Backpack
+item_large_backpack_desc,Large backpack.,Large backpack.
+item_master_satchel_name,Master\'s Satchel,Master\'s Satchel
+item_master_satchel_desc,Master-crafted satchel.,Master-crafted satchel.
+item_masters_satchel_name,Master's Satchel,Master's Satchel
+item_masters_satchel_desc,Premium storage satchel with advanced organization. For master crafters.,Premium storage satchel with advanced organization. For master crafters.
+item_simple_bag_name,Simple Bag,Simple Bag
+item_simple_bag_desc,Simple cloth bag.,Simple cloth bag.
+item_small_pouch_name,Small Pouch,Small Pouch
+item_small_pouch_desc,Small leather pouch.,Small leather pouch.
+item_storage_chest_name,Storage Chest,Storage Chest
+item_storage_chest_desc,Wooden storage chest. Household storage.,Wooden storage chest. Household storage.
+item_agricultural_tools_name,Agricultural Tools,Agricultural Tools
+item_agricultural_tools_desc,Farming tools (hoes\, rakes\, sickles).,Farming tools (hoes\, rakes\, sickles).
+item_basic_tool_set_name,Basic Tool Set,Basic Tool Set
+item_basic_tool_set_desc,Basic tools for crafting.,Basic tools for crafting.
+item_construction_kit_name,Construction Kit,Construction Kit
+item_construction_kit_desc,Complete set of tools for building and repairs.,Complete set of tools for building and repairs.
+item_crafting_supplies_name,Crafting Supplies,Crafting Supplies
+item_crafting_supplies_desc,General crafting supplies kit.,General crafting supplies kit.
+item_gathering_satchel_name,Gathering Satchel,Gathering Satchel
+item_gathering_satchel_desc,Specialized gathering bag.,Specialized gathering bag.
+item_master_trading_caravan_name,Master Trading Caravan,Master Trading Caravan
+item_master_trading_caravan_desc,Fully equipped trading caravan.,Fully equipped trading caravan.
+item_premium_workshop_tools_name,Premium Workshop Tools,Premium Workshop Tools
+item_premium_workshop_tools_desc,High-quality workshop tools.,High-quality workshop tools.
+item_workshop_tools_name,Workshop Tools,Workshop Tools
+item_workshop_tools_desc,Wrench\, pliers\, tongs\, shears.,Wrench\, pliers\, tongs\, shears.

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd8sp1et2mg11"]
+[gd_scene load_steps=4 format=3 uid="uid://bd8sp1et2mg11"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
-[ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/forager_t3_loot_table.tres" id="2"]
+[ext_resource type="Resource" uid="uid://cxxf60l1sbyhq" path="res://source/server/world/components/harvesting/loot_tables/forager_t3_loot_table.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_vkr5d"]
 
 [node name="ForagerNodeT3" type="Node2D"]
 script = ExtResource("1")
@@ -18,3 +19,9 @@ loot_table = ExtResource("2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.1, 0.5, 0.2, 1)
 scale = Vector2(32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.86, 0.73143, 0.2666, 1)
+position = Vector2(0, -35)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_vkr5d")

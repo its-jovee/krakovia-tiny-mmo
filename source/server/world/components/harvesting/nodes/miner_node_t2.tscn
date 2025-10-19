@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://djrnedid7c4ed"]
+[gd_scene load_steps=4 format=3 uid="uid://djrnedid7c4ed"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
-[ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/miner_t2_loot_table.tres" id="2"]
+[ext_resource type="Resource" uid="uid://c7vk6cl0dspjh" path="res://source/server/world/components/harvesting/loot_tables/miner_t2_loot_table.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_l8djd"]
 
 [node name="MinerNodeT2" type="Node2D"]
 script = ExtResource("1")
@@ -18,3 +19,9 @@ loot_table = ExtResource("2")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.3, 0.15, 1)
 scale = Vector2(32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
+position = Vector2(0, -30)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_l8djd")
