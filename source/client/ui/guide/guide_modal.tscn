@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4y8n5xr7j3wk"]
 
-[ext_resource type="Script" path="res://source/client/ui/guide/guide_modal.gd" id="1_guide"]
+[ext_resource type="Script" uid="uid://bpwh1typkpb4p" path="res://source/client/ui/guide/guide_modal.gd" id="1_guide"]
 [ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="2_panel"]
 
 [node name="GuideModal" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -95,11 +94,11 @@ theme_override_constants/separation = 8
 
 [node name="Page0Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "1. Welcome & Controls"
+text = "1. Boas Vindas e Controles"
 
 [node name="Page1Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "2. Harvesting"
+text = "2. Coleta"
 
 [node name="Page2Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
@@ -107,15 +106,15 @@ text = "3. Crafting"
 
 [node name="Page3Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "4. Trading"
+text = "4. Troca"
 
 [node name="Page4Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "5. Energy & Minigames"
+text = "5. Energia & Minigames"
 
 [node name="Page5Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "6. Player Shops"
+text = "6. Lojas de Jogadores"
 
 [node name="VSeparator" type="VSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea"]
 layout_mode = 2

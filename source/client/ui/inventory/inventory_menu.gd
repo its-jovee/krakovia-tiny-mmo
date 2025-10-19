@@ -658,6 +658,9 @@ func _send_trade_update():
 	})
 
 func _on_your_ready_pressed():
+	# Commit any pending gold input before marking ready
+	_commit_pending_gold_input()
+	
 	your_ready = not your_ready
 	_update_trade_ui()
 	# Send confirmation status to server
@@ -698,6 +701,30 @@ func _on_gold_input_submitted(new_text: String):
 	your_trade_gold = gold_value
 	your_gold_input.text = str(your_trade_gold)
 	_send_trade_update()
+
+func _commit_pending_gold_input() -> void:
+	"""Ensure the gold input field value is sent to server before marking ready"""
+	if not your_gold_input:
+		return
+	
+	# Parse the current text value
+	var text = your_gold_input.text.strip_edges()
+	var gold_value = 0
+	
+	if text.length() > 0:
+		# Remove thousand separators (both . and ,) and parse
+		var cleaned = text.replace(".", "").replace(",", "")
+		gold_value = int(cleaned) if cleaned.is_valid_int() else 0
+	
+	# Clamp to available gold
+	gold_value = clampi(gold_value, 0, current_gold)
+	
+	# If the parsed value differs from what we last sent, send an update
+	# (This handles the case where user typed but didn't press Enter)
+	if gold_value != your_trade_gold:
+		your_trade_gold = gold_value
+		your_gold_input.text = str(your_trade_gold)
+		_send_trade_update()
 
 func _close_trade():
 	trade_view.hide()

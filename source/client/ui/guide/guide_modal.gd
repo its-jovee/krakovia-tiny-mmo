@@ -3,7 +3,7 @@ extends Control
 ## Game Guide Modal with free navigation between pages
 
 var current_page: int = 0
-var total_pages: int = 6
+var total_pages: int = 7
 
 # Page data structure
 var pages: Array[Dictionary] = [
@@ -16,6 +16,7 @@ Este é um MMO multiplayer de coleta, criação e comércio, onde você coleta r
 
 [b]Controles Básicos:[/b]
 • [b]WASD[/b] - Mover o personagem
+- [b]E[/b] - Use para coletar itens da sua classe
 • [b]X[/b] - Use para sentar e regenerar energia rapidamente
 • [b]Clique Esquerdo[/b] - Interagir com recursos, NPCs e interface
 • [b]Clique Direito[/b] - Abrir troca com outros jogadores
@@ -32,7 +33,7 @@ Coletar recursos, criar itens valiosos, negociar com outros jogadores e construi
 1. Encontre um ponto de coleta (pedras, plantas, áreas de caça)
 2. Cada classe do mundo Krakovia tem pontos de coleta específicos, então explore!
 3. Fique parado enquanto a barra de progresso enche para coletar o recurso
-4. Itens coletados vão para o seu inventário automaticamente!
+4. Itens coletados vão para o seu inventário automaticamente.
 
 [b]Níveis de Recursos:[/b]
 • [b]Nível 1-2[/b]: Recursos iniciantes, qualquer um pode coletaras
@@ -47,7 +48,7 @@ Coletar com junto outros jogadores concede um bônus de multiplicador!
 
 [b]Custo de Energia:[/b]
 
-• Coletar itens consome energia. Se ela acabar, você não poderá coletar até regenerar!
+• Coletar itens consome energia. Se ela acabar, você não poderá coletar até regenerar.
 • Criar itens também consome energia, então gerencie-a com sabedoria!
 """
 },
@@ -57,20 +58,14 @@ Coletar com junto outros jogadores concede um bônus de multiplicador!
 	"content": """[b]Como Criar Itens:[/b]
 
 1. Clique no botão de Forjar itens na sua tela para entrar na tela de criação!
-2. Navegue pelas receitas e crie os seus melhores itens que puder
-3. Selecione uma receita para ver os requisitos!
-4. Evolua suas habilidades de criação para desbloquear receitas melhores!
-4. Cada item criado tem suas impotancia etrategica de venda e troca, então crie sabiamente
-5. Os itens serão adicionados ao seu inventário!
-
-[b]Tipos de Receita:[/b]
-• [b]Processamento[/b]: Transforma matérias-primas em materiais refinados
-• [b]Criação[/b]: Combina materiais para criar novos itens
-• [b]Avançada[/b]: Receitas complexas para itens valiosos
+2. Navegue pelas receitas e crie os melhores itens que puder
+3. Você evolui no jogo pelo crafting. Não deixe de craftar
+4. Evolua suas habilidades de criação para desbloquear receitas melhores
 
 [b]Dicas de Criação:[/b]
-• Itens de nível mais alto vendem por mais ouro!
-• Itens criados podem ser trocados com outros jogadores
+• Itens de nível mais alto vendem por mais ouro.
+- Para criar itens, você frequentemente precisará de outros jogadores
+- Você pode pedir um item no chat deixando seu mouse sobre ele e apertando o botão direito do mouse
 • Fique de olho nas receitas populares no chat para maximizar seus lucros"""
 },
 {
@@ -79,19 +74,13 @@ Coletar com junto outros jogadores concede um bônus de multiplicador!
 	"content": """[b]Métodos de Troca:[/b]
 
 [b]1. Troca Direta com Jogador:[/b]
-• Aproxime-se de outro jogador
+• Aproxime-se de outro jogador e aperte
 • [b]Clique Direito[/b] nele
 • Selecione os itens e quantidades para trocar
 • Ambos os jogadores precisam aceitar
 
 [b]2. Lojas de Jogadores:[/b]
-Monte sua própria loja para vender itens enquanto está offline!
-
-[b]Dicas de Troca:[/b]
-• Confira o valor dos itens antes de negociar
-• Seja educado e justo com outros jogadores
-• Use o chat para encontrar compradores e vendedores
-• Lojas são ótimas para gerar renda passiva"""
+Monte sua própria loja para vender itens."""
 },
 {
 	"title": "Sistema de Energia & Minijogos",
@@ -120,16 +109,15 @@ Minijogos são eventos divertidos que acontecem periodicamente:
 • São uma ótima forma de ganhar itens extras
 • Fique de olho na energia antes de participar!"""
 },
-
 {
 	"title": "Minijogos",
 	"gif": "res://assets/guides/energy.gif",
-	"content": """Eventos Minijogos[/b]
+	"content": """[b]Eventos Minijogos[/b]
 
 [b]Minijogos:[/b]
 
-Os Minijogos são eventos que acontecem periodicamente no mundo de Krakovia Kraft. [/b]
-Eles são uma maneira divertida de ganhar recompensas extras e interagir com outros jogadores.:
+Os Minijogos são eventos que acontecem periodicamente no mundo de Krakovia Kraft.
+Eles são uma maneira divertida de ganhar recompensas extras e interagir com outros jogadores.
 
 O evento é anunciado globalmente no chat, basta entrar na zona de minigame pra participar!
 
@@ -203,6 +191,7 @@ O evento é anunciado globalmente no chat, basta entrar na zona de minigame pra 
 	$CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons/Page3Button,
 	$CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons/Page4Button,
 	$CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons/Page5Button,
+	$CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons/Page6Button,
 ]
 
 

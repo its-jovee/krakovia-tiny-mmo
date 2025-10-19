@@ -4,8 +4,6 @@ extends InteractionArea
 class_name MarketArea
 ## Market area where players can sell items to NPCs for gold
 
-signal player_exited_interaction_area(player: Player, interaction_area: InteractionArea)
-
 @export var market_name: String = "Market"
 @export var sell_multiplier: float = 1.0  # Multiplier for base item prices
 
@@ -13,33 +11,24 @@ signal player_exited_interaction_area(player: Player, interaction_area: Interact
 var players_in_market: Array[Player] = []
 
 func _ready() -> void:
-	# Connect to player enter/exit events
-	# Check if signal is already connected before connecting
-	if not body_entered.is_connected(_on_body_entered):
-		body_entered.connect(_on_body_entered)
-	if not body_exited.is_connected(_on_body_exited):
-		body_exited.connect(_on_body_exited)
+	# Connect to our own handlers for market-specific logic
+	# Parent already handles the player_entered_interaction_area signal emission
+	player_entered_interaction_area.connect(_on_player_entered_market_area)
+	player_exited_interaction_area.connect(_on_player_exited_market_area)
 
-func _on_body_entered(body: Node2D) -> void:
-	if body is Player:
-		var player = body as Player
-		if not player.just_teleported:
-			players_in_market.append(player)
-			# Notify client that player entered market
-			if player.has_method("_on_entered_market"):
-				player._on_entered_market(self)
-			# Emit signal for server (this was missing!)
-			player_entered_interaction_area.emit(player, self)
+func _on_player_entered_market_area(player: Player, _area: InteractionArea) -> void:
+	"""Called when player enters market - add market-specific logic"""
+	players_in_market.append(player)
+	# Notify client that player entered market (for client-side effects)
+	if player.has_method("_on_entered_market"):
+		player._on_entered_market(self)
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is Player:
-		var player = body as Player
-		players_in_market.erase(player)
-		# Notify client that player left market
-		if player.has_method("_on_exited_market"):
-			player._on_exited_market(self)
-		# Emit signal for server
-		player_exited_interaction_area.emit(player, self)
+func _on_player_exited_market_area(player: Player, _area: InteractionArea) -> void:
+	"""Called when player exits market - remove from tracking"""
+	players_in_market.erase(player)
+	# Notify client that player left market (for client-side effects)
+	if player.has_method("_on_exited_market"):
+		player._on_exited_market(self)
 
 func is_player_in_market(player: Player) -> bool:
 	return player in players_in_market

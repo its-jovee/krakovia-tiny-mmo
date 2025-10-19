@@ -70,9 +70,11 @@ func configure_global_roles_and_commands() -> void:
 		}
 	}
 
-	if OS.has_feature("debug") or OS.has_feature("editor"):
+	# SECURITY: Only enable /selfadmin in development (editor/debug mode), never in production
+	if (OS.has_feature("debug") or OS.has_feature("editor")) and not OS.has_feature("production"):
 		ServerInstance.global_chat_commands["/selfadmin"] = load("res://source/server/world/components/chat_command/selfadmin_command.gd").new()
 		ServerInstance.global_role_definitions["default"]["commands"].append("/selfadmin")
+		print("[SECURITY WARNING] /selfadmin command is ENABLED - this should only happen in development!")
 
 
 @rpc("authority", "call_remote", "reliable", 0)
