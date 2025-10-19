@@ -7,155 +7,182 @@ var total_pages: int = 6
 
 # Page data structure
 var pages: Array[Dictionary] = [
-	{
-		"title": "Welcome & Basic Controls",
-		"gif": "res://assets/guides/welcome.gif",
-		"content": """[b]Welcome to Krakovia Kraft![/b]
+{
+	"title": "Boas-vindas & Controles Básicos",
+	"gif": "res://assets/guides/welcome.gif",
+	"content": """[b]Bem-vindo a Kraftovia![/b]
 
-This is a multiplayer crafting and trading MMO where you harvest resources, craft items, and trade with other players.
+Este é um MMO multiplayer de coleta, criação e comércio, onde você coleta recursos, cria itens e negocia com outros jogadores.
 
-[b]Basic Controls:[/b]
-• [b]WASD[/b] - Move your character
-• [b]Left Click[/b] - Interact with nodes, NPCs, UI
-• [b]Right Click[/b] - Open trade with players
-• [b]I[/b] - Open Inventory
-• [b]C[/b] - Open Crafting
+[b]Controles Básicos:[/b]
+• [b]WASD[/b] - Mover o personagem
+• [b]X[/b] - Use para sentar e regenerar energia rapidamente
+• [b]Clique Esquerdo[/b] - Interagir com recursos, NPCs e interface
+• [b]Clique Direito[/b] - Abrir troca com outros jogadores
 • [b]Enter[/b] - Chat
-• [b]ESC[/b] - Close menus
 
-[b]Your Goal:[/b]
-Harvest resources, craft valuable items, trade with players, and build your wealth!"""
-	},
-	{
-		"title": "Harvesting System",
-		"gif": "res://assets/guides/harvesting.gif",
-		"content": """[b]How to Harvest:[/b]
+[b]Seu Objetivo:[/b]
+Coletar recursos, criar itens valiosos, negociar com outros jogadores e construir sua riqueza!"""
+},
+{
+	"title": "Sistema de Coleta",
+	"gif": "res://assets/guides/harvesting.gif",
+	"content": """[b]Como Coletar:[/b]
 
-1. Find a harvesting node (rocks, plants, hunting areas)
-2. Walk up to the node and click on it
-3. Stand still while the progress bar fills
-4. Collect items when they drop!
+1. Encontre um ponto de coleta (pedras, plantas, áreas de caça)
+2. Cada classe do mundo Krakovia tem pontos de coleta específicos, então explore!
+3. Fique parado enquanto a barra de progresso enche para coletar o recurso
+4. Itens coletados vão para o seu inventário automaticamente!
 
-[b]Node Tiers:[/b]
-• [b]Tier 1-2[/b]: Beginner nodes, anyone can harvest
-• [b]Tier 3-4[/b]: Intermediate nodes, level requirement
-• [b]Tier 5-6[/b]: Advanced nodes, higher level required
+[b]Níveis de Recursos:[/b]
+• [b]Nível 1-2[/b]: Recursos iniciantes, qualquer um pode coletaras
+• [b]Nível 3-4[/b]: Recursos intermediários, requer nível mínimo
+• [b]Nível 5-6[/b]: Recursos avançados, requer nível mais alto
 
-[b]Multiplayer Bonus:[/b]
-Harvesting with other players gives a [b]multiplier bonus[/b]!
-• 2 players: 1.1x yield
-• 3 players: 1.2x yield
-• 4+ players: 1.3x yield
+[b]Bônus Multiplayer:[/b]
+Coletar com junto outros jogadores concede um bônus de multiplicador!
+• 2 jogadores: 1.1x de rendimento
+• 3 jogadores: 1.2x de rendimento
+• 4+ jogadores: 1.3x de rendimento
 
-[b]Energy Cost:[/b]
-Harvesting consumes energy. If you run out, you can't harvest until it regenerates!"""
-	},
-	{
-		"title": "Crafting System",
-		"gif": "res://assets/guides/crafting.gif",
-		"content": """[b]How to Craft:[/b]
+[b]Custo de Energia:[/b]
 
-1. Press [b]C[/b] or click the Crafting button in the HUD
-2. Browse available recipes in the left panel
-3. Select a recipe to see requirements
-4. Click [b]Craft[/b] if you have the materials
-5. Items are added to your inventory!
+• Coletar itens consome energia. Se ela acabar, você não poderá coletar até regenerar!
+• Criar itens também consome energia, então gerencie-a com sabedoria!
+"""
+},
+{
+	"title": "Sistema de Criação",
+	"gif": "res://assets/guides/crafting.gif",
+	"content": """[b]Como Criar Itens:[/b]
 
-[b]Recipe Types:[/b]
-• [b]Processing[/b]: Turn raw materials into refined goods
-• [b]Crafting[/b]: Combine materials into new items
-• [b]Advanced[/b]: Complex recipes for valuable items
+1. Clique no botão de Forjar itens na sua tela para entrar na tela de criação!
+2. Navegue pelas receitas e crie os seus melhores itens que puder
+3. Selecione uma receita para ver os requisitos!
+4. Evolua suas habilidades de criação para desbloquear receitas melhores!
+4. Cada item criado tem suas impotancia etrategica de venda e troca, então crie sabiamente
+5. Os itens serão adicionados ao seu inventário!
 
-[b]Crafting Tips:[/b]
-• Higher tier items sell for more gold
-• Some recipes unlock at higher levels
-• Crafted items can be traded with other players
-• Check the marketplace to see what's in demand!"""
-	},
-	{
-		"title": "Trading with Players",
-		"gif": "res://assets/guides/trading.gif",
-		"content": """[b]Trading Methods:[/b]
+[b]Tipos de Receita:[/b]
+• [b]Processamento[/b]: Transforma matérias-primas em materiais refinados
+• [b]Criação[/b]: Combina materiais para criar novos itens
+• [b]Avançada[/b]: Receitas complexas para itens valiosos
 
-[b]1. Direct Player Trade:[/b]
-• Walk up to another player
-• [b]Right-click[/b] on them
-• Select items and quantities to trade
-• Both players must accept
+[b]Dicas de Criação:[/b]
+• Itens de nível mais alto vendem por mais ouro!
+• Itens criados podem ser trocados com outros jogadores
+• Fique de olho nas receitas populares no chat para maximizar seus lucros"""
+},
+{
+	"title": "Comércio com Jogadores",
+	"gif": "res://assets/guides/trading.gif",
+	"content": """[b]Métodos de Troca:[/b]
 
-[b]2. Chat Advertisements:[/b]
-You can advertise in chat:
-• [b]WTS[/b] (Want To Sell): "/wts Iron Ore x50"
-• [b]WTB[/b] (Want To Buy): "/wtb Hide x30"
-• [b]WTT[/b] (Want To Trade): "/wtt Sword for Armor"
+[b]1. Troca Direta com Jogador:[/b]
+• Aproxime-se de outro jogador
+• [b]Clique Direito[/b] nele
+• Selecione os itens e quantidades para trocar
+• Ambos os jogadores precisam aceitar
 
-[b]3. Player Shops:[/b]
-Set up your own shop to sell items while you're offline!
+[b]2. Lojas de Jogadores:[/b]
+Monte sua própria loja para vender itens enquanto está offline!
 
-[b]Trading Tips:[/b]
-• Check item values before trading
-• Be polite and fair with other players
-• Use chat to find buyers/sellers
-• Player shops are great for passive income"""
-	},
-	{
-		"title": "Energy System & Minigames",
-		"gif": "res://assets/guides/energy.gif",
-		"content": """[b]Energy System:[/b]
+[b]Dicas de Troca:[/b]
+• Confira o valor dos itens antes de negociar
+• Seja educado e justo com outros jogadores
+• Use o chat para encontrar compradores e vendedores
+• Lojas são ótimas para gerar renda passiva"""
+},
+{
+	"title": "Sistema de Energia & Minijogos",
+	"gif": "res://assets/guides/energy.gif",
+	"content": """[b]Sistema de Energia:[/b]
 
-Energy is consumed when:
-• Harvesting resources
-• Participating in minigames
-• Crafting certain items
+A energia é consumida quando:
+• Coleta recursos
+• Cria certos itens
 
-Energy regenerates slowly over time. Manage it wisely!
+A energia regenera lentamente com o tempo, então use a tecla X para regenerar rapidamente, gerencie-a com sabedoria!
 
-[b]Minigames:[/b]
+[b]Minijogos:[/b]
 
-Minigames are fun events that happen periodically:
+Minijogos são eventos divertidos que acontecem periodicamente:
 
-[b]Hot Potato:[/b]
-• Players pass a "potato" to each other
-• Last player holding it when timer ends loses
-• Winners get rewards!
-• Enter the minigame zone when announced
+[b]Batata Quente:[/b]
+• Jogadores passam uma "batata" entre si
+• O último segurando quando o tempo acabar perde
+• Os vencedores recebem recompensas!
+• Entre na zona do minijogo quando for anunciado
 
-[b]Minigame Tips:[/b]
-• Server-wide announcements alert you when they start
-• Minigames are optional but rewarding
-• They're a great way to earn extra items
-• Watch your energy before joining!"""
-	},
-	{
-		"title": "Player Shops",
-		"gif": "res://assets/guides/shops.gif",
-		"content": """[b]Setting Up Your Shop:[/b]
+[b]Dicas de Minijogo:[/b]
+• Anúncios globais avisam quando eles começam
+• Minijogos são opcionais, mas recompensadores
+• São uma ótima forma de ganhar itens extras
+• Fique de olho na energia antes de participar!"""
+},
 
-1. Click the [b]Shop[/b] button in the HUD
-2. Add items from your inventory
-3. Set prices for each item
-4. Toggle your shop [b]Open[/b]
-5. Other players can buy while you're online or offline!
+{
+	"title": "Minijogos",
+	"gif": "res://assets/guides/energy.gif",
+	"content": """Eventos Minijogos[/b]
 
-[b]Shopping at Other Player Shops:[/b]
+[b]Minijogos:[/b]
 
-• Look for the [b]🏪 shop indicator[/b] above players
-• Click on them to browse their shop
-• Buy items directly with gold
-• Shops persist even when players log off
+Os Minijogos são eventos que acontecem periodicamente no mundo de Krakovia Kraft. [/b]
+Eles são uma maneira divertida de ganhar recompensas extras e interagir com outros jogadores.:
 
-[b]Shop Strategy:[/b]
-• Price competitively to attract buyers
-• Sell high-demand items (check chat!)
-• Restock regularly
-• Advertise your shop in chat
-• Position yourself in high-traffic areas
+O evento é anunciado globalmente no chat, basta entrar na zona de minigame pra participar!
 
-[b]Shop Tips:[/b]
-• You earn gold even while offline!
-• Popular items sell faster
-• Watch market trends to adjust prices"""
-	}
+[b]Eventos disponiveis:[/b]
+
+[b]Batata Quente:[/b]
+• Jogadores passam uma "batata" entre si
+• O último segurando quando o tempo acabar perde
+• Os vencedores recebem recompensas!
+• Entre na zona do minijogo quando for anunciado
+
+[b]Corrida de cavalos:[/b]
+• Aposte no seu cavalos favorito e corra contra outros jogadores
+• O vencedor recebe uma grande recompensa
+• Entre na zona do minijogo quando for anunciado
+
+[b]Dicas de Minijogo:[/b]
+• Anúncios globais avisam quando eles começam
+• Minijogos são opcionais, mas recompensadores
+• São uma ótima forma de ganhar uma grana extras
+• Fique de olho no chat para não perder!"""
+},
+{
+	"title": "Lojas de Jogadores",
+	"gif": "res://assets/guides/shops.gif",
+	"content": """[b]Como Montar Sua Loja:[/b]
+
+1. Clique no botão [b]Loja[/b] na tela principal
+2. Adicione itens do seu inventário
+3. Defina os preços de cada item
+4. Ative sua loja como [b]Aberta[/b]
+5. Outros jogadores podem comprar enquanto você está online ou afk!
+
+[b]Comprando em Lojas de Jogadores:[/b]
+
+• Procure pelo [b]Indicador de loja[/b] acima dos jogadores
+• Clique neles para ver o catálogo
+• Compre itens diretamente com ouro
+• As lojas permanecem ativas mesmo com o jogador AFK
+
+[b]Estratégia de Loja:[/b]
+• Defina preços competitivos para atrair compradores
+• Venda itens de alta demanda (verifique o chat!)
+• Reabasteça com frequência
+• Divulgue sua loja no chat
+• Posicione-se em áreas movimentadas
+
+[b]Dicas de Loja:[/b]
+• Você ganha ouro mesmo estando AFK!
+• Itens populares vendem mais rápido
+• Observe o mercado e ajuste seus preços"""
+}
+
 ]
 
 # UI References

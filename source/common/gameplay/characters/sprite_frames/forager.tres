@@ -1,7 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=10 format=3 uid="uid://dkeeft051qhl3"]
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://dkeeft051qhl3"]
 
 [ext_resource type="Texture2D" uid="uid://br3423lpwmj2v" path="res://assets/sprites/characters/rogue/rogue_idle.png" id="1_qglbu"]
 [ext_resource type="Texture2D" uid="uid://bdh02e0wcmu07" path="res://assets/sprites/characters/rogue/rogue_run.png" id="2_f4vnr"]
+[ext_resource type="Texture2D" uid="uid://uhlc3vijt25x" path="res://assets/sprites/characters/sitters.png" id="3_jn83s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6pssy"]
 atlas = ExtResource("1_qglbu")
@@ -11,25 +12,13 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("2_f4vnr")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0qo1k"]
-atlas = ExtResource("2_f4vnr")
-region = Rect2(64, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljm2s"]
 atlas = ExtResource("2_f4vnr")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ibvt0"]
-atlas = ExtResource("2_f4vnr")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g1qym"]
-atlas = ExtResource("2_f4vnr")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45yoj"]
-atlas = ExtResource("2_f4vnr")
-region = Rect2(320, 0, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xv2f"]
+atlas = ExtResource("3_jn83s")
+region = Rect2(64, 0, 64, 64)
 
 [resource]
 animations = [{
@@ -46,22 +35,18 @@ animations = [{
 "texture": SubResource("AtlasTexture_i4j6c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0qo1k")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ljm2s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ibvt0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g1qym")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_45yoj")
 }],
 "loop": true,
 "name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xv2f")
+}],
+"loop": true,
+"name": &"sit",
 "speed": 5.0
 }]
 metadata/slug = &"forager"

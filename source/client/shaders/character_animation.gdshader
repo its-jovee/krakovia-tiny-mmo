@@ -6,6 +6,9 @@ uniform float breathing_speed : hint_range(0.0, 5.0) = 2.5;
 uniform float squash_stretch_intensity : hint_range(0.0, 1.0) = 0.08;
 uniform float squash_stretch_speed : hint_range(0.0, 10.0) = 4.0;
 
+// Pixel snapping (prevents subpixel shimmer by sampling at texel centers)
+uniform bool pixel_snap = true;
+
 // Animation state (0 = idle, 1 = run/harvest, 2 = sitting)
 uniform int animation_state : hint_range(0, 2) = 0;
 
@@ -44,5 +47,11 @@ void vertex() {
 }
 
 void fragment() {
-	COLOR = texture(TEXTURE, UV);
+	vec2 uv = UV;
+	if (pixel_snap) {
+		// Snap UV to nearest texel to avoid fractional sampling between texels
+		vec2 texel = TEXTURE_PIXEL_SIZE; // 1.0 / texture_size
+		uv = floor(uv / texel + 0.5) * texel;
+	}
+	COLOR = texture(TEXTURE, uv);
 }

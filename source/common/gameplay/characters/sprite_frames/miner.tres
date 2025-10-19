@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dgvphuwt6jhg0" path="res://assets/sprites/characters/knight/miner_mining.png" id="1_nmmu0"]
 [ext_resource type="Texture2D" uid="uid://bye66inpdvpdy" path="res://assets/sprites/characters/knight/knight_idle.png" id="2_w4755"]
 [ext_resource type="Texture2D" uid="uid://b3qbjl2cjhlix" path="res://assets/sprites/characters/knight/knight_run.png" id="3_nf78a"]
-[ext_resource type="Texture2D" uid="uid://cny7jnvp6wjpt" path="res://assets/sprites/characters/knight/miner_sit.png" id="4_eu1qs"]
+[ext_resource type="Texture2D" uid="uid://uhlc3vijt25x" path="res://assets/sprites/characters/sitters.png" id="4_nmmu0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kwny6"]
 atlas = ExtResource("1_nmmu0")
@@ -25,8 +25,8 @@ region = Rect2(0, 0, 64, 64)
 atlas = ExtResource("3_nf78a")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_og1a0"]
-atlas = ExtResource("4_eu1qs")
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf78a"]
+atlas = ExtResource("4_nmmu0")
 region = Rect2(0, 0, 64, 64)
 
 [resource]
@@ -63,7 +63,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_og1a0")
+"texture": SubResource("AtlasTexture_nf78a")
 }],
 "loop": true,
 "name": &"sit",
