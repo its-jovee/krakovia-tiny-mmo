@@ -167,7 +167,8 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 		
 		selected_source = "inventory"
 		selected_item_id = item_id
-		item_name_label.text = "Add to Shop: %s" % item.item_name
+		var translated_name = ItemTooltipManager._get_translated_item_name(item)
+		item_name_label.text = TranslationServer.translate("shop_add_item").format({"item": translated_name})
 		
 		var max_qty = player_inventory[item_id].stack
 		quantity_spinbox.max_value = max_qty
@@ -188,7 +189,8 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 		selected_item_id = item_id
 		
 		var shop_item = shop_items[item_id]
-		item_name_label.text = "Edit Shop Item: %s" % item.item_name
+		var translated_name = ItemTooltipManager._get_translated_item_name(item)
+		item_name_label.text = TranslationServer.translate("shop_edit_item").format({"item": translated_name})
 		
 		quantity_spinbox.max_value = player_inventory[item_id].stack if player_inventory.has(item_id) else shop_item.quantity
 		quantity_spinbox.value = shop_item.quantity

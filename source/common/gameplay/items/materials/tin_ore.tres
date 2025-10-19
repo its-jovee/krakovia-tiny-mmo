@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://tinore001"]
 
-[ext_resource type="Texture2D" uid="uid://bfiyx2a1sa18h" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb209.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://d1btewgxonegk" path="res://assets/new_icons/ore_g.png" id="1_w7qqj"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Tin Ore"
-item_icon = ExtResource("1_icon")
+item_icon = ExtResource("1_w7qqj")
 description = "Soft metal ore. Combined with copper to create bronze."
 can_trade = true
 can_sell = true

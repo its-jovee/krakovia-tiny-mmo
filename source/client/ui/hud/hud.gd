@@ -303,7 +303,9 @@ func _on_harvest_item_received(data: Dictionary) -> void:
 		var item: Item = ContentRegistryHub.load_by_slug(&"items", slug)
 		if item and amount > 0:
 			var item_exp: int = exp_per_item * amount
-			_show_harvest_popup(item.item_name, item.item_icon, amount, item_exp)
+			# Get translated item name using ItemTooltipManager helper
+			var translated_name = ItemTooltipManager._get_translated_item_name(item)
+			_show_harvest_popup(translated_name, item.item_icon, amount, item_exp)
 
 
 func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_amount: int = 0) -> void:

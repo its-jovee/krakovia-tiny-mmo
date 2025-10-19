@@ -42,7 +42,7 @@ func apply_profile(profile: Dictionary) -> void:
 	
 	friend_button.visible = params.get("self", false)
 	message_button.visible = params.get("self", false)
-	friend_button.text = "Add friend" if params.get("friend", false) == true else "Remove Friend"
+	friend_button.text = TranslationServer.translate("profile_add_friend") if params.get("friend", false) == true else TranslationServer.translate("profile_remove_friend")
 	
 	show()
 	

@@ -203,4 +203,3 @@ common/
 ## Conclusion
 
 The Hot Potato minigame is fully implemented and ready for testing! The system integrates seamlessly with the existing minigame infrastructure and provides a fun, fast-paced alternative to Horse Racing.
-

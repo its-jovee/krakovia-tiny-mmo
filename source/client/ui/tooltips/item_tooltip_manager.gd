@@ -43,7 +43,8 @@ func _input(event: InputEvent) -> void:
 	# Check if right mouse button clicked while tooltip is showing
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		if current_tooltip and is_instance_valid(current_tooltip) and current_tooltip.visible and current_item:
-			_send_buying_message(current_item.item_name, current_item)
+			var translated_name = _get_translated_item_name(current_item)
+			_send_buying_message(translated_name, current_item)
 			get_viewport().set_input_as_handled()
 
 
@@ -296,15 +297,50 @@ func _hide_tooltip_immediate() -> void:
 		current_tooltip = null
 
 
+func _get_translated_item_name(item: Item) -> String:
+	"""Get translated item name, fallback to original if translation not found"""
+	var slug = _get_item_slug(item)
+	if slug.is_empty():
+		return String(item.item_name)
+	
+	var key = "item_" + String(slug) + "_name"
+	var translated = TranslationServer.translate(key)
+	
+	# If translation key not found, TranslationServer returns the key itself
+	# In that case, fallback to original item_name
+	if translated == key:
+		return String(item.item_name)
+	
+	return translated
+
+
+func _get_translated_item_description(item: Item) -> String:
+	"""Get translated item description, fallback to original if translation not found"""
+	var slug = _get_item_slug(item)
+	if slug.is_empty():
+		return item.description
+	
+	var key = "item_" + String(slug) + "_desc"
+	var translated = TranslationServer.translate(key)
+	
+	# If translation key not found, fallback to original description
+	if translated == key:
+		return item.description
+	
+	return translated
+
+
 func _create_tooltip_content(item: Item) -> String:
 	var content = ""
 	
-	# Item name (bold, larger)
-	content += "[b][font_size=16]" + item.item_name + "[/font_size][/b]\n"
+	# Item name (bold, larger) - use translation
+	var translated_name = _get_translated_item_name(item)
+	content += "[b][font_size=16]" + translated_name + "[/font_size][/b]\n"
 	
-	# Description
-	if item.description and item.description != "":
-		content += "[color=#CCCCCC]" + item.description + "[/color]\n"
+	# Description - use translation
+	var translated_desc = _get_translated_item_description(item)
+	if translated_desc and translated_desc != "":
+		content += "[color=#CCCCCC]" + translated_desc + "[/color]\n"
 	
 	content += "\n"
 	

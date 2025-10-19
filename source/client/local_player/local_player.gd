@@ -25,6 +25,18 @@ var zoom_transition_speed: float = 10.0 # Speed of zoom transitions
 @onready var mouse: Node2D = $MouseComponent
 
 func _ready() -> void:
+	print("[LocalPlayer] _ready() called")
+	print("[LocalPlayer] Children count: ", get_child_count())
+	for i in get_child_count():
+		var child = get_child(i)
+		print("[LocalPlayer] Child %d: %s (type: %s)" % [i, child.name, child.get_class()])
+	
+	var panel = get_node_or_null("HarvestingPanel")
+	if panel:
+		print("[LocalPlayer] ✅ HarvestingPanel found!")
+	else:
+		print("[LocalPlayer] ❌ HarvestingPanel NOT FOUND!")
+	
 	Events.local_player = self
 	Events.local_player_ready.emit(self)
 	super()
@@ -85,14 +97,11 @@ func check_inputs() -> void:
 		InstanceClient.current.request_data(&"harvest.leave", Callable(), {})
 		# Optimistically hide/reset HUD; it will re-show on joined event if join succeeds
 		InstanceClient.local_harvest_node = ""
-		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		var panel = get_node_or_null("HarvestingPanel")
 		if panel and panel.has_method("reset"):
 			panel.reset()
 		InstanceClient.current.request_data(&"harvest.join", _on_harvest_join_response, {})
-
-
-	# Enter (ui_accept) should open chat; remove temporary energy consume
-
+	
 	# Sit toggle on X
 	if Input.is_action_just_pressed("sit"):
 		is_sitting_local = not is_sitting_local
@@ -102,8 +111,8 @@ func check_inputs() -> void:
 func _on_harvest_join_response(data: Dictionary) -> void:
 	"""Handle response from harvest.join request"""
 	if not data.get("ok", false):
-		# Show error message in HarvestingPanel
-		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		# Show error message in HarvestingPanel (which is a child of LocalPlayer)
+		var panel = get_node_or_null("HarvestingPanel")
 		if panel and panel.has_method("show_error"):
 			panel.show_error(data)
 

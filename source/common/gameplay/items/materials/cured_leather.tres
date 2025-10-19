@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://bkf383ebc0uro"]
 
-[ext_resource type="Texture2D" uid="uid://budvautc5sw4b" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb202.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://omn8hatiab0q" path="res://assets/new_icons/cured.png" id="1_ga46j"]
 [ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")
 item_name = &"Cured Leather"
-item_icon = ExtResource("1_icon")
+item_icon = ExtResource("1_ga46j")
 description = "Professionally cured and treated leather. Resistant and durable. Interdependent craft."
 can_trade = true
 can_sell = true
@@ -14,4 +14,3 @@ minimum_price = 102
 stack_limit = 99
 tags = ["leather", "trapper", "interdependent", "t3"]
 metadata/_custom_type_script = "uid://nsr1timk430j"
-

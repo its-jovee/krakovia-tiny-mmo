@@ -88,7 +88,7 @@ func _refresh_items() -> void:
 	
 	if shop_items.is_empty():
 		var label = Label.new()
-		label.text = "No items available"
+		label.text = TranslationServer.translate("shop_no_items")
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		items_grid.add_child(label)
 		return

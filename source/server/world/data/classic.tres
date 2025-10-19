@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=188 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=215 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -299,7 +299,7 @@ player_id = 12
 account_name = "jovi2"
 display_name = "cidadao"
 character_class = "forager"
-golds = 45861
+golds = 45843
 inventory = {
 2: {
 "stack": 1
@@ -317,28 +317,28 @@ inventory = {
 "stack": 1
 },
 56: {
-"stack": 25
+"stack": 92
 },
 64: {
-"stack": 21
+"stack": 46
 },
 71: {
-"stack": 7
+"stack": 18
 },
 74: {
 "stack": 1
 },
 79: {
-"stack": 2
+"stack": 5
 },
 82: {
-"stack": 1
+"stack": 11
 },
 86: {
-"stack": 2
+"stack": 4
 },
 92: {
-"stack": 2
+"stack": 4
 },
 107: {
 "stack": 1
@@ -350,7 +350,7 @@ inventory = {
 "stack": 5
 },
 163: {
-"stack": 2
+"stack": 14
 },
 164: {
 "stack": 3
@@ -3200,6 +3200,423 @@ display_name = "weqeq"
 golds = 100
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_3186g"]
+script = ExtResource("1_83xu3")
+player_id = 181
+account_name = "guest316"
+display_name = "123123213213"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_0py7g"]
+script = ExtResource("1_83xu3")
+player_id = 182
+account_name = "guest317"
+display_name = "213213213"
+character_class = "trapper"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_wcp1y"]
+script = ExtResource("1_83xu3")
+player_id = 183
+account_name = "guest319"
+display_name = "213213213"
+golds = 100
+inventory = {
+7: {
+"stack": 3
+},
+33: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 25
+
+[sub_resource type="Resource" id="Resource_gmjfu"]
+script = ExtResource("1_83xu3")
+player_id = 184
+account_name = "guest320"
+display_name = "12321321"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_uqrmu"]
+script = ExtResource("1_83xu3")
+player_id = 185
+account_name = "guest321"
+display_name = "123213"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_6hqxg"]
+script = ExtResource("1_83xu3")
+player_id = 186
+account_name = "guest322"
+display_name = "qwewqe"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_srcrx"]
+script = ExtResource("1_83xu3")
+player_id = 187
+account_name = "guest324"
+display_name = "123123"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_fcdhb"]
+script = ExtResource("1_83xu3")
+player_id = 188
+account_name = "guest325"
+display_name = "teste123"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_lihc5"]
+script = ExtResource("1_83xu3")
+player_id = 189
+account_name = "guest326"
+display_name = "qweqwe"
+character_class = "forager"
+golds = 100
+inventory = {
+56: {
+"stack": 38
+},
+64: {
+"stack": 13
+},
+71: {
+"stack": 24
+},
+79: {
+"stack": 6
+},
+82: {
+"stack": 5
+},
+86: {
+"stack": 1
+},
+92: {
+"stack": 3
+}
+}
+available_attributes_points = 10
+experience = 450
+
+[sub_resource type="Resource" id="Resource_yl5ox"]
+script = ExtResource("1_83xu3")
+player_id = 190
+account_name = "guest327"
+display_name = "asdsadsadsadsa"
+golds = 100
+inventory = {
+7: {
+"stack": 2
+},
+33: {
+"stack": 2
+},
+308: {
+"stack": 4
+}
+}
+available_attributes_points = 10
+experience = 40
+
+[sub_resource type="Resource" id="Resource_3c21u"]
+script = ExtResource("1_83xu3")
+player_id = 191
+account_name = "guest328"
+display_name = "qwewqewqew"
+character_class = "trapper"
+golds = 100
+inventory = {
+104: {
+"stack": 27
+},
+105: {
+"stack": 20
+},
+110: {
+"stack": 5
+},
+111: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 270
+
+[sub_resource type="Resource" id="Resource_nm04o"]
+script = ExtResource("1_83xu3")
+player_id = 192
+account_name = "guest329"
+display_name = "wqeqwew"
+character_class = "forager"
+golds = 100
+inventory = {
+56: {
+"stack": 17
+},
+64: {
+"stack": 9
+},
+71: {
+"stack": 15
+},
+79: {
+"stack": 3
+},
+82: {
+"stack": 1
+},
+86: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 230
+
+[sub_resource type="Resource" id="Resource_m4p2a"]
+script = ExtResource("1_83xu3")
+player_id = 193
+account_name = "guest330"
+display_name = "wqewqewqe"
+golds = 100
+inventory = {
+7: {
+"stack": 1
+},
+33: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 10
+
+[sub_resource type="Resource" id="Resource_jfvsy"]
+script = ExtResource("1_83xu3")
+player_id = 194
+account_name = "guest332"
+display_name = "qweqwe"
+character_class = "trapper"
+golds = 100
+inventory = {
+104: {
+"stack": 11
+},
+105: {
+"stack": 9
+},
+110: {
+"stack": 5
+},
+111: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 130
+
+[sub_resource type="Resource" id="Resource_0acmk"]
+script = ExtResource("1_83xu3")
+player_id = 195
+account_name = "guest331"
+display_name = "qwewqeqw"
+character_class = "forager"
+golds = 100
+inventory = {
+56: {
+"stack": 17
+},
+64: {
+"stack": 7
+},
+71: {
+"stack": 3
+},
+82: {
+"stack": 3
+},
+92: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 155
+
+[sub_resource type="Resource" id="Resource_i4yrm"]
+script = ExtResource("1_83xu3")
+player_id = 196
+account_name = "guest333"
+display_name = "qwewqewqewqe"
+golds = 100
+inventory = {
+7: {
+"stack": 2
+},
+11: {
+"stack": 1
+},
+33: {
+"stack": 1
+},
+308: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 30
+
+[sub_resource type="Resource" id="Resource_gfagw"]
+script = ExtResource("1_83xu3")
+player_id = 197
+account_name = "guest334"
+display_name = "eqwewqewqe"
+character_class = "trapper"
+golds = 100
+inventory = {
+104: {
+"stack": 2
+},
+105: {
+"stack": 4
+},
+110: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 35
+
+[sub_resource type="Resource" id="Resource_ss15b"]
+script = ExtResource("1_83xu3")
+player_id = 198
+account_name = "guest335"
+display_name = "ereeere"
+golds = 100
+inventory = {
+9: {
+"stack": 1
+},
+11: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 10
+
+[sub_resource type="Resource" id="Resource_olpg7"]
+script = ExtResource("1_83xu3")
+player_id = 199
+account_name = "guest336"
+display_name = "qwewqewe"
+character_class = "trapper"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_5b50j"]
+script = ExtResource("1_83xu3")
+player_id = 200
+account_name = "guest337"
+display_name = "12321321"
+character_class = "forager"
+golds = 100
+inventory = {
+56: {
+"stack": 4
+},
+64: {
+"stack": 2
+},
+79: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 35
+
+[sub_resource type="Resource" id="Resource_pi8ok"]
+script = ExtResource("1_83xu3")
+player_id = 201
+account_name = "guest338"
+display_name = "qweqwewq"
+golds = 100
+inventory = {
+7: {
+"stack": 6
+},
+33: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 40
+
+[sub_resource type="Resource" id="Resource_l10fp"]
+script = ExtResource("1_83xu3")
+player_id = 202
+account_name = "guest341"
+display_name = "wqweqweqw"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_lwfab"]
+script = ExtResource("1_83xu3")
+player_id = 203
+account_name = "guest342"
+display_name = "qeqweqwe"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_r5wnm"]
+script = ExtResource("1_83xu3")
+player_id = 204
+account_name = "guest344"
+display_name = "qewqeq"
+character_class = "forager"
+golds = 100
+inventory = {
+56: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 5
+
+[sub_resource type="Resource" id="Resource_ce3d1"]
+script = ExtResource("1_83xu3")
+player_id = 205
+account_name = "guest345"
+display_name = "asdsadas"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_akwy3"]
+script = ExtResource("1_83xu3")
+player_id = 206
+account_name = "guest346"
+display_name = "qweqweqwew"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_dncy5"]
+script = ExtResource("1_83xu3")
+player_id = 207
+account_name = "guest347"
+display_name = "23123123213"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = Dictionary[String, PackedInt32Array]({
@@ -3355,6 +3772,33 @@ accounts = Dictionary[String, PackedInt32Array]({
 "guest311": PackedInt32Array(178),
 "guest312": PackedInt32Array(179),
 "guest313": PackedInt32Array(180),
+"guest316": PackedInt32Array(181),
+"guest317": PackedInt32Array(182),
+"guest319": PackedInt32Array(183),
+"guest320": PackedInt32Array(184),
+"guest321": PackedInt32Array(185),
+"guest322": PackedInt32Array(186),
+"guest324": PackedInt32Array(187),
+"guest325": PackedInt32Array(188),
+"guest326": PackedInt32Array(189),
+"guest327": PackedInt32Array(190),
+"guest328": PackedInt32Array(191),
+"guest329": PackedInt32Array(192),
+"guest330": PackedInt32Array(193),
+"guest331": PackedInt32Array(195),
+"guest332": PackedInt32Array(194),
+"guest333": PackedInt32Array(196),
+"guest334": PackedInt32Array(197),
+"guest335": PackedInt32Array(198),
+"guest336": PackedInt32Array(199),
+"guest337": PackedInt32Array(200),
+"guest338": PackedInt32Array(201),
+"guest341": PackedInt32Array(202),
+"guest342": PackedInt32Array(203),
+"guest344": PackedInt32Array(204),
+"guest345": PackedInt32Array(205),
+"guest346": PackedInt32Array(206),
+"guest347": PackedInt32Array(207),
 "guest66": PackedInt32Array(2),
 "guest67": PackedInt32Array(3),
 "guest71": PackedInt32Array(4),
@@ -3559,9 +4003,36 @@ players = Dictionary[int, ExtResource("1_83xu3")]({
 177: SubResource("Resource_qc3fv"),
 178: SubResource("Resource_m7b6t"),
 179: SubResource("Resource_iix4x"),
-180: SubResource("Resource_d67u7")
+180: SubResource("Resource_d67u7"),
+181: SubResource("Resource_3186g"),
+182: SubResource("Resource_0py7g"),
+183: SubResource("Resource_wcp1y"),
+184: SubResource("Resource_gmjfu"),
+185: SubResource("Resource_uqrmu"),
+186: SubResource("Resource_6hqxg"),
+187: SubResource("Resource_srcrx"),
+188: SubResource("Resource_fcdhb"),
+189: SubResource("Resource_lihc5"),
+190: SubResource("Resource_yl5ox"),
+191: SubResource("Resource_3c21u"),
+192: SubResource("Resource_nm04o"),
+193: SubResource("Resource_m4p2a"),
+194: SubResource("Resource_jfvsy"),
+195: SubResource("Resource_0acmk"),
+196: SubResource("Resource_i4yrm"),
+197: SubResource("Resource_gfagw"),
+198: SubResource("Resource_ss15b"),
+199: SubResource("Resource_olpg7"),
+200: SubResource("Resource_5b50j"),
+201: SubResource("Resource_pi8ok"),
+202: SubResource("Resource_l10fp"),
+203: SubResource("Resource_lwfab"),
+204: SubResource("Resource_r5wnm"),
+205: SubResource("Resource_ce3d1"),
+206: SubResource("Resource_akwy3"),
+207: SubResource("Resource_dncy5")
 })
-next_player_id = 180
+next_player_id = 207
 admin_ids = PackedInt32Array(1, 2)
 guilds = Dictionary[String, ExtResource("1_cio0q")]({
 "a": SubResource("Resource_ugqtu"),

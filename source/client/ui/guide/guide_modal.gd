@@ -237,7 +237,10 @@ func _load_page(page_index: int) -> void:
 		gif_texture.texture = null
 	
 	# Update page indicator
-	page_indicator.text = "Page %d of %d" % [current_page + 1, total_pages]
+	page_indicator.text = TranslationServer.translate("guide_page_indicator").format({
+		"current": current_page + 1,
+		"total": total_pages
+	})
 	
 	# Update button states
 	prev_button.disabled = (current_page == 0)

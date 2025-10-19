@@ -290,7 +290,7 @@ func _update_sell_ui() -> void:
 		sell_price_label.visible = true
 		# Calculate sell price
 		var sell_price = selected_item.minimum_price if selected_item.minimum_price > 0 else 1
-		sell_price_label.text = "Sell Price: %d gold" % sell_price
+		sell_price_label.text = TranslationServer.translate("inventory_sell_price").format({"price": sell_price})
 	else:
 		sell_button.visible = false
 		sell_price_label.visible = false
@@ -393,10 +393,10 @@ func fill_inventory(inv_data: Dictionary) -> void:
 	for equipment_slot: GearSlotButton in equipment_slots.get_children():
 		if equipment_slot.gear_slot:
 			if equipment_slot.gear_slot == null:
-				equipment_slot.text = "Empty"
+				equipment_slot.text = TranslationServer.translate("inventory_equipment_empty")
 		else:
 			equipment_slot.icon = null
-			equipment_slot.text = "Lock"
+			equipment_slot.text = TranslationServer.translate("inventory_equipment_locked")
 	
 	# If we're in a trade, populate the trade inventory now that we have the data
 	if trade_session_id != -1:
@@ -428,7 +428,8 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 			
 			var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 			if item:
-				trade_quantity_label.text = "Trade %s" % item.item_name
+				var translated_name = ItemTooltipManager._get_translated_item_name(item)
+				trade_quantity_label.text = TranslationServer.translate("inventory_trade_item").format({"item": translated_name})
 				trade_quantity_spinbox.max_value = remaining
 				trade_quantity_spinbox.value = min(1, remaining)
 				trade_quantity_dialog.popup_centered()
@@ -527,7 +528,7 @@ func _on_trade_open(data: Dictionary):
 	other_player_peer = data.get("other_peer", -1)
 	other_player_name = data.get("other_name", "Unknown")
 	
-	your_offer_title.text = "Your Offer"
+	your_offer_title.text = TranslationServer.translate("inventory_trade_your_offer")
 	their_offer_title.text = other_player_name + "'s Offer"
 	
 	# Switch to trade view and hide other UI elements
@@ -579,20 +580,20 @@ func _update_trade_ui():
 	
 	# Update gold
 	your_gold_input.text = str(your_trade_gold)
-	their_gold_label.text = "Gold: " + str(their_trade_gold)
+	their_gold_label.text = TranslationServer.translate("inventory_trade_gold").format({"amount": their_trade_gold})
 	
 	# Update button states
 	if trade_locked:
 		your_ready_button.disabled = true
-		your_ready_button.text = "Locked"
+		your_ready_button.text = TranslationServer.translate("inventory_trade_locked")
 		your_gold_input.editable = false
 		_disable_inventory_interaction()
 	else:
 		your_ready_button.disabled = false
 		if your_ready:
-			your_ready_button.text = "Ready ✓"
+			your_ready_button.text = TranslationServer.translate("inventory_trade_ready_check")
 		else:
-			your_ready_button.text = "Ready"
+			your_ready_button.text = TranslationServer.translate("inventory_trade_ready")
 		your_gold_input.editable = true
 		_enable_inventory_interaction()
 
@@ -843,7 +844,7 @@ func _create_recipe_button(recipe: CraftingRecipe) -> Button:
 	
 	# Add required level
 	var level_label = Label.new()
-	level_label.text = "Level %d" % recipe.required_level
+	level_label.text = TranslationServer.translate("crafting_required_level").format({"level": recipe.required_level})
 	level_label.add_theme_font_size_override("font_size", 12)
 	level_label.modulate = Color(0.8, 0.8, 0.8, 1.0)
 	level_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -925,8 +926,8 @@ func _on_recipe_selected(recipe: CraftingRecipe) -> void:
 func _update_recipe_details() -> void:
 	"""Full update of recipe details - rebuilds UI"""
 	if not selected_recipe:
-		recipe_name_label.text = "Select a recipe"
-		recipe_description.text = "Choose a recipe from the list to see details."
+		recipe_name_label.text = TranslationServer.translate("crafting_select_recipe")
+		recipe_description.text = TranslationServer.translate("crafting_select_recipe_desc")
 		craft_button.disabled = true
 		status_label.text = ""
 		return
@@ -1096,7 +1097,7 @@ func _on_craft_button_pressed() -> void:
 	# Get recipe ID
 	var recipe_id = ContentRegistryHub.id_from_slug(&"recipes", selected_recipe.slug)
 	if recipe_id <= 0:
-		status_label.text = "Recipe not found!"
+		status_label.text = TranslationServer.translate("crafting_recipe_not_found")
 		return
 	
 	# Request crafting from server
@@ -1106,7 +1107,7 @@ func _on_craft_button_pressed() -> void:
 
 func _on_craft_response(data: Dictionary) -> void:
 	if data.get("success", false):
-		status_label.text = "Crafted successfully!"
+		status_label.text = TranslationServer.translate("crafting_success")
 		# Refresh inventory to show new items
 		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_craft)
 		
@@ -1114,7 +1115,7 @@ func _on_craft_response(data: Dictionary) -> void:
 		if data.has("exp_gained") and data.exp_gained > 0:
 			_show_craft_xp_popup(data.exp_gained)
 	else:
-		status_label.text = "Error: " + data.get("error", "Unknown error")
+		status_label.text = TranslationServer.translate("crafting_error").format({"error": data.get("error", "Unknown error")})
 
 func _on_inventory_refreshed_after_craft(inv_data: Dictionary) -> void:
 	# Update inventory data

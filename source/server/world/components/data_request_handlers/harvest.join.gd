@@ -31,6 +31,7 @@ func data_request_handler(
 	result["remaining"] = best.remaining_amount
 	result["pool"] = best.pool_amount
 	result["tier"] = best.tier
+	result["node_type"] = best.node_type
 	result["required_class"] = best.required_class
 	result["required_level"] = best.required_level
 	return result

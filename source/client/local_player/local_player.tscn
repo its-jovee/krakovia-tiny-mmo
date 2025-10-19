@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://biqs370wdwi6m" path="res://source/client/local_player/local_player.gd" id="2_qfdgo"]
 [ext_resource type="Script" uid="uid://bt74wxkb47dp0" path="res://source/client/local_player/mouse_component.gd" id="3_7fqr5"]
 [ext_resource type="SpriteFrames" uid="uid://borsybdibmgfp" path="res://source/common/gameplay/characters/sprite_frames/miner.tres" id="3_c3w0d"]
+[ext_resource type="PackedScene" uid="uid://bdpfln22w1uys" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
 [ext_resource type="PackedScene" uid="uid://dslec2qgwwig2" path="res://source/common/gameplay/items/(unused) weapons/empty_hand/empty_hand.tscn" id="8_40bmm"]
 [ext_resource type="Script" uid="uid://d1a30n4ktgm71" path="res://source/common/network/sync/state_synchronizer.gd" id="9_gkbmr"]
 [ext_resource type="Script" uid="uid://gl2cwrrfvlkh" path="res://source/common/gameplay/combat/components/ability_system_component.gd" id="10_x5r0m"]
@@ -45,18 +46,20 @@ position = Vector2(0, -10)
 [node name="HurtBox2" type="Area2D" parent="." index="6"]
 visible = false
 
-[node name="StateSynchronizer2" type="Node" parent="." index="8" node_paths=PackedStringArray("root_node")]
+[node name="HarvestingPanel" parent="." index="10" instance=ExtResource("5_harv")]
+
+[node name="StateSynchronizer2" type="Node" parent="." index="11" node_paths=PackedStringArray("root_node")]
 script = ExtResource("9_gkbmr")
 root_node = NodePath("..")
 metadata/_custom_type_script = "uid://d1a30n4ktgm71"
 
-[node name="AbilitySystemComponent2" type="Node" parent="." index="9" node_paths=PackedStringArray("synchronizer")]
+[node name="AbilitySystemComponent2" type="Node" parent="." index="12" node_paths=PackedStringArray("synchronizer")]
 script = ExtResource("10_x5r0m")
 synchronizer = NodePath("../StateSynchronizer")
 damage_model = ExtResource("11_v004h")
 metadata/_custom_type_script = "uid://gl2cwrrfvlkh"
 
-[node name="EquipmentComponent2" type="Node" parent="." index="10" node_paths=PackedStringArray("_asc", "character")]
+[node name="EquipmentComponent2" type="Node" parent="." index="13" node_paths=PackedStringArray("_asc", "character")]
 script = ExtResource("13_darcm")
 _asc = NodePath("../AbilitySystemComponent")
 character = NodePath("..")

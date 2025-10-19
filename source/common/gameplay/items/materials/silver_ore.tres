@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MaterialItem" load_steps=3 format=3 uid="uid://5mqilxwgyoop"]
 
-[ext_resource type="Texture2D" uid="uid://bfiyx2a1sa18h" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb209.png" id="1_lkimo"]
-[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://economy_rebalance_backup/20251012_113918/items/material_item.gd" id="2_material"]
+[ext_resource type="Texture2D" uid="uid://qfg1wb8u812k" path="res://assets/new_icons/ore_h.png" id="1_lkimo"]
+[ext_resource type="Script" uid="uid://nsr1timk430j" path="res://source/common/gameplay/items/material_item.gd" id="2_material"]
 
 [resource]
 script = ExtResource("2_material")

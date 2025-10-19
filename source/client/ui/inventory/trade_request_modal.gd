@@ -43,12 +43,12 @@ func _on_trade_request_sent(data: Dictionary):
 	current_state = State.WAITING
 	other_player_name = data.get("target_name", "Player")
 	
-	title_label.text = "[b]Trade Request Sent[/b]"
-	message_label.text = "Waiting for response..."
-	description_label.text = "Sent trade request to " + other_player_name
+	title_label.text = TranslationServer.translate("trade_request_sent_title")
+	message_label.text = TranslationServer.translate("trade_request_sent_waiting")
+	description_label.text = TranslationServer.translate("trade_request_sent_desc").format({"player": other_player_name})
 	
 	accept_button.hide()
-	deny_button.text = "Cancel"
+	deny_button.text = TranslationServer.translate("ui_button_cancel")
 	deny_button.show()
 	
 	show()
@@ -59,13 +59,13 @@ func _on_trade_request(data: Dictionary):
 	requester_peer = data.get("requester_peer", -1)
 	requester_name = data.get("requester_name", "Unknown")
 	
-	title_label.text = "[b]Trade Request[/b]"
+	title_label.text = TranslationServer.translate("trade_request_received_title")
 	message_label.text = requester_name
-	description_label.text = "would like to trade with you."
+	description_label.text = TranslationServer.translate("trade_request_received_desc")
 	
-	accept_button.text = "Accept"
+	accept_button.text = TranslationServer.translate("ui_button_accept")
 	accept_button.show()
-	deny_button.text = "Deny"
+	deny_button.text = TranslationServer.translate("ui_button_reject")
 	deny_button.show()
 	
 	show()
@@ -76,14 +76,14 @@ func _on_trade_open(data: Dictionary):
 	trade_session_id = data.get("session_id", -1)
 	other_player_name = data.get("other_name", "Unknown")
 	
-	title_label.text = "[b]Trade Accepted![/b]"
+	title_label.text = TranslationServer.translate("trade_request_accepted_title")
 	message_label.text = other_player_name
-	description_label.text = "is ready to trade"
+	description_label.text = TranslationServer.translate("trade_request_accepted_desc")
 	
-	accept_button.text = "Open Trade"
+	accept_button.text = TranslationServer.translate("trade_button_open")
 	accept_button.disabled = false
 	accept_button.show()
-	deny_button.text = "Cancel"
+	deny_button.text = TranslationServer.translate("ui_button_cancel")
 	deny_button.disabled = false
 	deny_button.show()
 	
@@ -102,9 +102,9 @@ func _on_accept_pressed():
 		})
 		
 		# Show "Processing..." feedback
-		title_label.text = "[b]Processing...[/b]"
-		message_label.text = "Please wait"
-		description_label.text = "Setting up trade..."
+		title_label.text = TranslationServer.translate("trade_request_processing_title")
+		message_label.text = TranslationServer.translate("trade_request_processing_msg")
+		description_label.text = TranslationServer.translate("trade_request_processing_desc")
 		accept_button.disabled = true
 		deny_button.disabled = true
 	elif current_state == State.TRADE_READY:
@@ -162,18 +162,21 @@ func _unhandled_key_input(event: InputEvent) -> void:
 ## Update all UI text when language changes
 func _update_ui_text() -> void:
 	"""Update trade request modal text for current language"""
-	# This function will be called when language changes
-	# Update button text based on current state
+	# Update text based on current state
 	if current_state == State.WAITING:
-		if deny_button:
-			deny_button.text = TranslationServer.translate("ui_button_cancel")
+		title_label.text = TranslationServer.translate("trade_request_sent_title")
+		message_label.text = TranslationServer.translate("trade_request_sent_waiting")
+		description_label.text = TranslationServer.translate("trade_request_sent_desc").format({"player": other_player_name})
+		deny_button.text = TranslationServer.translate("ui_button_cancel")
 	elif current_state == State.RECEIVED_REQUEST:
-		if accept_button:
-			accept_button.text = TranslationServer.translate("ui_button_accept")
-		if deny_button:
-			deny_button.text = TranslationServer.translate("ui_button_reject")
+		title_label.text = TranslationServer.translate("trade_request_received_title")
+		message_label.text = requester_name
+		description_label.text = TranslationServer.translate("trade_request_received_desc")
+		accept_button.text = TranslationServer.translate("ui_button_accept")
+		deny_button.text = TranslationServer.translate("ui_button_reject")
 	elif current_state == State.TRADE_READY:
-		if accept_button:
-			accept_button.text = TranslationServer.translate("trade_button_open")
-		if deny_button:
-			deny_button.text = TranslationServer.translate("ui_button_cancel")
+		title_label.text = TranslationServer.translate("trade_request_accepted_title")
+		message_label.text = other_player_name
+		description_label.text = TranslationServer.translate("trade_request_accepted_desc")
+		accept_button.text = TranslationServer.translate("trade_button_open")
+		deny_button.text = TranslationServer.translate("ui_button_cancel")
