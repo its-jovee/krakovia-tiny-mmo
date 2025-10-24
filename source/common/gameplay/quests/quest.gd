@@ -49,4 +49,3 @@ static func from_dict(data: Dictionary) -> Quest:
 	quest.is_pinned = data.get("is_pinned", false)
 	quest.generated_at = data.get("generated_at", 0.0)
 	return quest
-

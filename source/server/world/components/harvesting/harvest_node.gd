@@ -78,9 +78,37 @@ func _ready() -> void:
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance and instance.harvest_manager:
 		instance.harvest_manager.register_node(self)
+
+
+func _broadcast_harvest_event(event_name: StringName, data: Dictionary, to_harvesters_only: bool = false) -> void:
+	"""Send harvest event only to nearby players (AOI filtering) or just harvesters"""
+	var instance_server: ServerInstance = _get_instance()
+	if instance_server == null:
+		return
 	
-	# Start with _process disabled since no one is harvesting yet
-	set_process(false)
+	# If to_harvesters_only, just send to current harvesters (for node-specific events)
+	if to_harvesters_only:
+		for peer_id in harvesters.keys():
+			instance_server.data_push.rpc_id(peer_id, event_name, data)
+		return
+	
+	# Otherwise, use spatial filtering for all nearby players
+	var my_pos: Vector2 = global_position
+	const HARVEST_VIEW_DISTANCE: float = 1500.0  # Match AOI distance
+	
+	for peer_id in instance_server.connected_peers:
+		var player: Player = instance_server.players_by_peer_id.get(peer_id)
+		if player == null:
+			continue
+		
+		# Only send to nearby players
+		if my_pos.distance_squared_to(player.global_position) <= HARVEST_VIEW_DISTANCE * HARVEST_VIEW_DISTANCE:
+			instance_server.data_push.rpc_id(peer_id, event_name, data)
+
+
+func _get_instance() -> ServerInstance:
+	"""Helper to get the ServerInstance"""
+	return get_viewport() as ServerInstance
 
 
 func _exit_tree() -> void:
@@ -111,15 +139,12 @@ func _process(delta: float) -> void:
 		_status_accum += delta
 		# Expire encourage session
 		if _enc_session_active and _clock >= _enc_session_expires_at:
-			# Broadcast session end
-			var instance_end: ServerInstance = get_viewport() as ServerInstance
-			if instance_end != null:
-				for pid_end: int in harvesters.keys():
-					instance_end.data_push.rpc_id(pid_end, &"harvest.encourage.end", {
-						"node": String(get_path()),
-						"stacks": _enc_session_stack_count,
-						"total_bonus_pct": _enc_session_cum_bonus_pct,
-					})
+			# Broadcast session end to harvesters only
+			_broadcast_harvest_event(&"harvest.encourage.end", {
+				"node": String(get_path()),
+				"stacks": _enc_session_stack_count,
+				"total_bonus_pct": _enc_session_cum_bonus_pct,
+			}, true)  # to_harvesters_only = true
 			_enc_session_active = false
 			_enc_session_contributors.clear()
 			_enc_session_stack_count = 0
@@ -170,7 +195,7 @@ func _process(delta: float) -> void:
 					var instance_tick: ServerInstance = get_viewport() as ServerInstance
 					
 					for _i in range(harvest_count):
-						# Send harvest.tick for EACH individual roll attempt
+						# Send harvest.tick for EACH individual roll attempt to the harvester
 						if instance_tick != null:
 							instance_tick.data_push.rpc_id(pid, &"harvest.tick", {
 								"node": String(get_path()),
@@ -356,11 +381,8 @@ func cleanup_peer(peer_id: int) -> void:
 
 
 func _broadcast(payload: Dictionary) -> void:
-	var instance: ServerInstance = get_viewport() as ServerInstance
-	if instance == null:
-		return
-	for pid: int in harvesters.keys():
-		instance.data_push.rpc_id(pid, &"harvest.event", payload)
+	# Use spatial filtering to broadcast events to nearby players
+	_broadcast_harvest_event(&"harvest.event", payload, false)
 
 func _broadcast_status() -> void:
 	var instance: ServerInstance = get_viewport() as ServerInstance
@@ -478,13 +500,12 @@ func request_encourage(peer_id: int) -> Dictionary:
 		_enc_session_contributors[peer_id] = true
 		_enc_session_stack_count = 1
 		_encourage_cd_until[peer_id] = _clock + encourage_cooldown
-		if instance != null:
-			for pid_s: int in harvesters.keys():
-				instance.data_push.rpc_id(pid_s, &"harvest.encourage.session", {
-					"node": String(get_path()),
-					"started_by": peer_id,
-					"window": encourage_session_window,
-				})
+		# Broadcast to harvesters only
+		_broadcast_harvest_event(&"harvest.encourage.session", {
+			"node": String(get_path()),
+			"started_by": peer_id,
+			"window": encourage_session_window,
+		}, true)  # to_harvesters_only = true
 		return {
 			"ok": true, "session_started": true, "hit": false,
 			"stack_index": 1, "time_left": encourage_session_window,
@@ -503,16 +524,15 @@ func request_encourage(peer_id: int) -> Dictionary:
 	_enc_session_cum_bonus_pct += apply_pct
 	pool_amount += pool_amount * apply_pct
 	_encourage_cd_until[peer_id] = _clock + encourage_cooldown
-	if instance != null:
-		for pid_h: int in harvesters.keys():
-			instance.data_push.rpc_id(pid_h, &"harvest.encourage.hit", {
-				"node": String(get_path()),
-				"peer": peer_id,
-				"stack_index": _enc_session_stack_count,
-				"bonus_pct_applied": apply_pct,
-				"total_bonus_pct": _enc_session_cum_bonus_pct,
-				"time_left": max(0.0, _enc_session_expires_at - _clock),
-			})
+	# Broadcast to harvesters only
+	_broadcast_harvest_event(&"harvest.encourage.hit", {
+		"node": String(get_path()),
+		"peer": peer_id,
+		"stack_index": _enc_session_stack_count,
+		"bonus_pct_applied": apply_pct,
+		"total_bonus_pct": _enc_session_cum_bonus_pct,
+		"time_left": max(0.0, _enc_session_expires_at - _clock),
+	}, true)  # to_harvesters_only = true
 	return {
 		"ok": true, "session_started": false, "hit": true,
 		"stack_index": _enc_session_stack_count,

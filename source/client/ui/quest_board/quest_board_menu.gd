@@ -309,4 +309,3 @@ func _create_quest_item_slot(item: Item, required_quantity: int, available_quant
 	container.add_child(avail_label)
 	
 	return container
-

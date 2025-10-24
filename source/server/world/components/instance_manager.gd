@@ -190,14 +190,32 @@ func set_instance_collection() -> void:
 
 
 func unload_unused_instances() -> void:
-	print("Checking unload_unused_instances")
+	print("[InstanceManager] Checking for unused instances to unload...")
+	var unloaded_count = 0
+	
 	for child in get_children():
 		if not child is ServerInstance:
 			continue
+		
 		var instance: ServerInstance = child as ServerInstance
+		
+		# Skip startup instances (like Overworld)
 		if instance.instance_resource.load_at_startup:
 			continue
-		if instance.connected_peers:
+		
+		# FIX: Check if array is empty, not just if it exists
+		if not instance.connected_peers.is_empty():
 			continue
+		
+		# Additional safety: Check if instance has been idle long enough
+		var idle_time = Time.get_ticks_msec() / 1000.0 - instance.last_accessed_time
+		if idle_time < 60.0:  # Wait 60 seconds after last player leaves
+			continue
+		
+		print("[InstanceManager] Unloading unused instance: %s (idle: %.1fs)" % [instance.name, idle_time])
 		instance.instance_resource.charged_instances.erase(instance)
 		instance.queue_free()
+		unloaded_count += 1
+	
+	if unloaded_count > 0:
+		print("[InstanceManager] Unloaded %d instances" % unloaded_count)

@@ -7,31 +7,69 @@ extends Node
 var nodes_by_id: Dictionary[int, HarvestNode] = {}
 var active_harvesters: Dictionary[int, HarvestNode] = {} # peer_id -> node
 
+# Spatial grid for O(1) lookups
+const GRID_SIZE: int = 500  # Grid cell size in pixels
+var _spatial_grid: Dictionary = {}  # Vector2i -> [HarvestNode]
+var _grid_dirty: bool = true
+
 
 func register_node(node: HarvestNode) -> void:
 	var id: int = node.get_instance_id()
 	nodes_by_id[id] = node
+	_grid_dirty = true
 
 
 func unregister_node(node: HarvestNode) -> void:
 	var id: int = node.get_instance_id()
 	nodes_by_id.erase(id)
+	_grid_dirty = true
 	# Clean up any active harvesters on this node
 	for peer_id in active_harvesters.keys():
 		if active_harvesters[peer_id] == node:
 			active_harvesters.erase(peer_id)
 
 
+func _rebuild_spatial_grid() -> void:
+	"""Rebuild spatial grid when nodes change"""
+	_spatial_grid.clear()
+	
+	for node in nodes_by_id.values():
+		var grid_coord = Vector2i(
+			int(node.global_position.x / GRID_SIZE),
+			int(node.global_position.y / GRID_SIZE)
+		)
+		if not _spatial_grid.has(grid_coord):
+			_spatial_grid[grid_coord] = []
+		_spatial_grid[grid_coord].append(node)
+	
+	_grid_dirty = false
+	print_debug("[HarvestManager] Rebuilt spatial grid: %d cells, %d nodes" % [_spatial_grid.size(), nodes_by_id.size()])
+
+
 func find_nearest_in_range(player: Player) -> HarvestNode:
+	"""Optimized lookup using spatial grid (O(1) instead of O(n))"""
+	if _grid_dirty:
+		_rebuild_spatial_grid()
+	
+	var player_pos = player.global_position
+	var grid_coord = Vector2i(int(player_pos.x / GRID_SIZE), int(player_pos.y / GRID_SIZE))
+	
 	var best: HarvestNode = null
 	var best_d2: float = INF
 	
-	for node in nodes_by_id.values():
-		if node.player_in_range(player):
-			var d2: float = player.global_position.distance_squared_to(node.global_position)
-			if d2 < best_d2:
-				best = node
-				best_d2 = d2
+	# Check 3x3 grid around player for nearby nodes
+	for dx in range(-1, 2):
+		for dy in range(-1, 2):
+			var check_grid = grid_coord + Vector2i(dx, dy)
+			if not _spatial_grid.has(check_grid):
+				continue
+			
+			for node in _spatial_grid[check_grid]:
+				if node.player_in_range(player):
+					var d2: float = player_pos.distance_squared_to(node.global_position)
+					if d2 < best_d2:
+						best = node
+						best_d2 = d2
 	
 	return best
 

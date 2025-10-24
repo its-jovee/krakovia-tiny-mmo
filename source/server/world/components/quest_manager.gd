@@ -3,10 +3,10 @@ extends Node
 ## Manages quest generation, tracking, and completion for all players
 
 
-const QUESTS_PER_PLAYER: int = 5
+const QUESTS_PER_PLAYER: int = 10
 const RESET_INTERVAL_SECONDS: int = 86400  # 24 hours
-const GOLD_REWARD_MULTIPLIER: float = 1.2
-const XP_REWARD_MULTIPLIER: float = 0.5
+const GOLD_REWARD_MULTIPLIER: float = 12.0
+const XP_REWARD_MULTIPLIER: float = 12.0
 
 # Adventurer types and their preferred item pools
 const ADVENTURER_TYPES: Dictionary = {
@@ -336,4 +336,3 @@ func _get_item_value(item: Item) -> int:
 		return 5
 	else:
 		return 10  # Default value
-

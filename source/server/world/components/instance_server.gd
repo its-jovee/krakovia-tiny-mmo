@@ -108,6 +108,11 @@ func _ready() -> void:
 	quest_mgr.name = "QuestManager"
 	add_child(quest_mgr, true)
 	
+	# Add PerformanceMonitor
+	var perf_monitor = load("res://source/server/world/components/performance_monitor.gd").new()
+	perf_monitor.name = "PerformanceMonitor"
+	add_child(perf_monitor, true)
+	
 	# Pre-load request handlers if enabled
 	_preload_request_handlers()
 
@@ -302,6 +307,7 @@ func _propagate_spawn(new_player_id: int) -> void:
 @rpc("authority", "call_remote", "reliable", 0)
 func despawn_player(peer_id: int, delete: bool = false) -> void:
 	connected_peers.remove_at(connected_peers.find(peer_id))
+	last_accessed_time = Time.get_ticks_msec() / 1000.0  # Update on player leave
 	
 	synchronizer_manager.remove_entity(peer_id)
 	synchronizer_manager.unregister_peer(peer_id)
