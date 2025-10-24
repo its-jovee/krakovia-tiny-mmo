@@ -10,6 +10,22 @@ extends Node
 @export var enable_process_tick: bool = true
 @export var owner_predict_suppress_ms: int = 120
 
+# Adaptive sync rate variables
+@export var send_rate_hz_entities_min: int = 5   # When many players
+@export var send_rate_hz_entities_max: int = 20  # When few players
+@export var player_count_threshold: int = 50
+@export var enable_adaptive_rate: bool = true
+
+# AOI System variables
+const AOI_GRID_SIZE: int = 1000  # Grid cell size in pixels
+const AOI_VIEW_DISTANCE: float = 1500.0  # How far players can "see"
+const GRID_UPDATE_INTERVAL: float = 1.0  # Rebuild grid every 1 second
+
+var _spatial_grid: Dictionary[Vector2i, Array] = {}  # grid_coord -> [eids]
+var _grid_update_timer: float = 0.0
+var _aoi_enabled: bool = true
+var _last_logged_rate: int = 0
+
 var _accum_ent := 0.0
 var _accum_props := 0.0
 
@@ -31,10 +47,27 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not enable_process_tick:
 		return
+	
+	# Update spatial grid periodically for AOI
+	if _aoi_enabled:
+		_grid_update_timer += delta
+		if _grid_update_timer >= GRID_UPDATE_INTERVAL:
+			_grid_update_timer = 0.0
+			_update_spatial_grid()
+	
 	_accum_ent += delta
 	_accum_props += delta
+	
+	# Calculate adaptive tick rate based on player count
+	var target_hz_entities: int = send_rate_hz_entities_max
+	if enable_adaptive_rate:
+		var player_count = peers.size()
+		if player_count > player_count_threshold:
+			var scale = float(player_count_threshold) / float(player_count)
+			target_hz_entities = max(send_rate_hz_entities_min, int(send_rate_hz_entities_max * scale))
+			_log_rate_change(target_hz_entities)
 
-	var eint: float = 1.0 / float(send_rate_hz_entities)
+	var eint: float = 1.0 / float(target_hz_entities)
 	var pint: float = 1.0 / float(send_rate_hz_props)
 
 	if _accum_ent >= eint:
@@ -231,9 +264,77 @@ func _send_map_updates_if_needed_to_all() -> void:
 
 # --- AOI hooks ----------------------------------------------------------------
 
-func _aoi_entities_for(_peer_id: int) -> Array:
-	# TODO: Replace with room/grid-based AOI.
-	return entities.keys()
+func _update_spatial_grid() -> void:
+	"""Rebuild spatial grid for Area of Interest calculations"""
+	_spatial_grid.clear()
+	
+	for eid: int in entities:
+		var syn: StateSynchronizer = entities[eid]
+		var pos: Variant = syn._state_by_id.get(PathRegistry.id_of(":position"))
+		if pos == null or pos is not Vector2:
+			continue
+		
+		var grid_coord = Vector2i(
+			int(pos.x / AOI_GRID_SIZE),
+			int(pos.y / AOI_GRID_SIZE)
+		)
+		
+		if not _spatial_grid.has(grid_coord):
+			_spatial_grid[grid_coord] = []
+		_spatial_grid[grid_coord].append(eid)
+
+
+func _aoi_entities_for(peer_id: int) -> Array:
+	"""Returns only entities within view distance of the given peer (AOI filtering)"""
+	if not _aoi_enabled:
+		return entities.keys()
+	
+	var syn: StateSynchronizer = entities.get(peer_id)
+	if syn == null:
+		return []
+	
+	var my_pos: Variant = syn._state_by_id.get(PathRegistry.id_of(":position"))
+	if my_pos == null or my_pos is not Vector2:
+		return entities.keys()  # Fallback to broadcast all
+	
+	var pos: Vector2 = my_pos
+	var my_grid = Vector2i(int(pos.x / AOI_GRID_SIZE), int(pos.y / AOI_GRID_SIZE))
+	var nearby: Array = []
+	
+	# Check 3x3 grid around player
+	for dx in range(-1, 2):
+		for dy in range(-1, 2):
+			var check_grid = my_grid + Vector2i(dx, dy)
+			if _spatial_grid.has(check_grid):
+				nearby.append_array(_spatial_grid[check_grid])
+	
+	# Filter by actual distance
+	var in_range: Array = []
+	for eid in nearby:
+		if eid == peer_id:
+			in_range.append(eid)  # Always include self
+			continue
+		
+		var other_syn = entities.get(eid)
+		if other_syn == null:
+			continue
+		
+		var other_pos_var = other_syn._state_by_id.get(PathRegistry.id_of(":position"))
+		if other_pos_var == null or other_pos_var is not Vector2:
+			continue
+		
+		var other_pos: Vector2 = other_pos_var
+		if pos.distance_squared_to(other_pos) <= AOI_VIEW_DISTANCE * AOI_VIEW_DISTANCE:
+			in_range.append(eid)
+	
+	return in_range
+
+
+func _log_rate_change(new_rate: int) -> void:
+	"""Log when adaptive sync rate changes"""
+	if new_rate != _last_logged_rate:
+		print("[StateSynchronizer] Adaptive rate changed: %d Hz (%d players)" % [new_rate, peers.size()])
+		_last_logged_rate = new_rate
 
 
 # --- Owner correction (server → owner only) ----------------------------------

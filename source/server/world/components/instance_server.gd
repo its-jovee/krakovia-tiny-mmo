@@ -47,6 +47,14 @@ var synchronizer_manager: StateSynchronizerManagerServer
 
 var request_handlers: Dictionary[StringName, DataRequestHandler]
 
+# Rate limiting
+var _request_timestamps: Dictionary[int, Array] = {}  # peer_id -> [timestamps]
+const RATE_LIMIT_WINDOW_MS: int = 1000  # 1 second window
+const RATE_LIMIT_MAX_REQUESTS: int = 30  # 30 requests per second
+const RATE_LIMIT_BURST_MAX: int = 10    # Max 10 requests in burst
+const RATE_LIMIT_BURST_WINDOW_MS: int = 100  # 100ms burst window
+var _rate_limit_enabled: bool = true
+
 var harvest_manager: HarvestManager
 
 
@@ -63,13 +71,16 @@ func _ready() -> void:
 							trade_mgr.cancel_trade(session_id, peer_id)
 							break
 				
-				# Close any active shops for this peer
-				if has_node("ShopManager"):
-					var shop_mgr: ShopManager = get_node("ShopManager")
-					if shop_mgr.has_shop(peer_id):
-						shop_mgr.close_shop(peer_id)
-				
-				despawn_player(peer_id)
+			# Close any active shops for this peer
+			if has_node("ShopManager"):
+				var shop_mgr: ShopManager = get_node("ShopManager")
+				if shop_mgr.has_shop(peer_id):
+					shop_mgr.close_shop(peer_id)
+			
+			# Clean up rate limiting data
+			_request_timestamps.erase(peer_id)
+			
+			despawn_player(peer_id)
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerServer.new()
@@ -348,14 +359,54 @@ func _preload_request_handlers() -> void:
 	print("[ServerInstance] Pre-loaded %d handlers (%d failed)" % [loaded_count, failed_count])
 
 
+func _rate_limit_check(peer_id: int) -> bool:
+	"""Check if peer is within rate limits (DoS protection)"""
+	if not _rate_limit_enabled:
+		return true
+	
+	var now: int = Time.get_ticks_msec()
+	
+	# Get or create timestamp array for this peer
+	if not _request_timestamps.has(peer_id):
+		_request_timestamps[peer_id] = []
+	
+	var timestamps: Array = _request_timestamps[peer_id]
+	
+	# Clean old timestamps outside the window
+	timestamps = timestamps.filter(func(ts): return now - ts < RATE_LIMIT_WINDOW_MS)
+	_request_timestamps[peer_id] = timestamps
+	
+	# Check overall rate limit
+	if timestamps.size() >= RATE_LIMIT_MAX_REQUESTS:
+		push_warning("[RateLimit] Peer %d exceeded rate limit (%d req/s)" % [peer_id, RATE_LIMIT_MAX_REQUESTS])
+		return false
+	
+	# Check burst rate limit
+	var recent_burst = timestamps.filter(func(ts): return now - ts < RATE_LIMIT_BURST_WINDOW_MS)
+	if recent_burst.size() >= RATE_LIMIT_BURST_MAX:
+		push_warning("[RateLimit] Peer %d exceeded burst limit (%d req/100ms)" % [peer_id, RATE_LIMIT_BURST_MAX])
+		return false
+	
+	# Add current timestamp
+	timestamps.append(now)
+	_request_timestamps[peer_id] = timestamps
+	return true
+
+
 @rpc("any_peer", "call_remote", "reliable", 1)
 func data_request(request_id: int, type: StringName, args: Dictionary) -> void:
 	var peer_id: int = multiplayer.get_remote_sender_id()
-	print("[ServerInstance] data_request received - Type: %s, Args: %s, From peer: %d" % [type, args, peer_id])
 	
-	# Rate-limit
-	#if not _rate_ok(
-		#return
+	# Rate-limit check
+	if not _rate_limit_check(peer_id):
+		# Send error response
+		data_response.rpc_id(peer_id, request_id, type, {
+			"error": "rate_limit_exceeded",
+			"message": "Too many requests. Please slow down."
+		})
+		return
+	
+	print("[ServerInstance] data_request received - Type: %s, Args: %s, From peer: %d" % [type, args, peer_id])
 	
 	if not request_handlers.has(type):
 		print("[ServerInstance] Loading handler for type: %s" % type)
