@@ -6,6 +6,23 @@ signal player_entered_warper(player: Player, current_instance: ServerInstance, w
 
 const PLAYER: PackedScene = preload("res://source/common/gameplay/characters/player/player.tscn")
 
+# All data request handler types to pre-load
+const REQUEST_HANDLER_TYPES: Array[StringName] = [
+	&"inventory.get", &"item.equip", &"item.sell",
+	&"craft.execute", &"craft.get_recipes",
+	&"chat.message.send", &"chat.command.exec",
+	&"shop.open", &"shop.close", &"shop.browse", 
+	&"shop.purchase", &"shop.add_item", &"shop.remove_item",
+	&"trade.update", &"trade.confirm", &"trade.cancel", &"trade.respond",
+	&"harvest.join", &"harvest.leave", &"harvest.encourage",
+	&"minigame.join", &"minigame.leave", &"minigame.ready", &"minigame.bet",
+	&"quest.fetch", &"quest.complete", &"quest.pin",
+	&"gold.get", &"level.get", &"profile.get",
+	&"attribute.get", &"attribute.spend",
+	&"guild.create", &"guild.get", &"guild.self", &"guild.search", &"guild.quit",
+	&"action.perform", &"resource.consume", &"state.sit"
+]
+
 static var world_server: WorldServer
 
 static var global_chat_commands: Dictionary[String, ChatCommand]
@@ -79,6 +96,9 @@ func _ready() -> void:
 	var quest_mgr = QuestManager.new()
 	quest_mgr.name = "QuestManager"
 	add_child(quest_mgr, true)
+	
+	# Pre-load request handlers if enabled
+	_preload_request_handlers()
 
 
 func load_map(map_path: String) -> void:
@@ -290,6 +310,42 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 	for id: int in connected_peers:
 		despawn_player.rpc_id(id, peer_id)
 #endregion
+
+
+func _preload_request_handlers() -> void:
+	"""Pre-load all data request handlers if enabled in config"""
+	# Check if preloading is enabled
+	var preload_enabled: bool = true
+	
+	# Try to get config from world server
+	if world_server and world_server.has_node("../WorldMain"):
+		var world_main: WorldMain = world_server.get_node("../WorldMain")
+		if world_main.world_config_file:
+			preload_enabled = world_main.world_config_file.get_value("performance", "preload_handlers", true)
+	
+	if not preload_enabled:
+		print("[ServerInstance] Request handler preloading disabled in config")
+		return
+	
+	print("[ServerInstance] Pre-loading %d request handlers..." % REQUEST_HANDLER_TYPES.size())
+	var loaded_count := 0
+	var failed_count := 0
+	
+	for type: StringName in REQUEST_HANDLER_TYPES:
+		var script: GDScript = ContentRegistryHub.load_by_slug(&"data_request_handlers", type) as GDScript
+		if script:
+			var request_handler: DataRequestHandler = script.new() as DataRequestHandler
+			if request_handler:
+				request_handlers[type] = request_handler
+				loaded_count += 1
+			else:
+				push_warning("[ServerInstance] Failed to instantiate handler: %s" % type)
+				failed_count += 1
+		else:
+			push_warning("[ServerInstance] Failed to load handler script: %s" % type)
+			failed_count += 1
+	
+	print("[ServerInstance] Pre-loaded %d handlers (%d failed)" % [loaded_count, failed_count])
 
 
 @rpc("any_peer", "call_remote", "reliable", 1)

@@ -6,7 +6,7 @@
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
 version = 1760000100
-next_id = 41
+next_id = 42
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -207,6 +207,11 @@ entries = Array[Dictionary]([{
 &"id": 40,
 &"path": "res://source/server/world/components/data_request_handlers/shop.browse.gd",
 &"slug": &"shop.browse"
+}, {
+&"hash": "f9ffcdee9fff9fffffff8affeededff4fffff9ffffffffffffffffffffffffffffff",
+&"id": 41,
+&"path": "res://source/server/world/components/data_request_handlers/level.get.gd",
+&"slug": &"level.get"
 }])
 metadata/slug = &"data_request_handlers_index"
 metadata/id = 1

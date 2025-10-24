@@ -18,3 +18,5 @@ theme_override_constants/table_v_separation = 2
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
+
+

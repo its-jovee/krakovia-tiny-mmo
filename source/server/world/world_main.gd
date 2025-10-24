@@ -26,6 +26,9 @@ func _ready() -> void:
 	if error:
 		printerr("World server loading configuration failed.")
 	else:
+		# Pre-load game resources if enabled in config
+		_preload_resources()
+		
 		$Database.start_database(world_info)
 		$WorldManagerClient.start_client_to_master_server(world_info)
 		$WorldServer.start_world_server()
@@ -55,3 +58,54 @@ func load_world_config(config_path: String) -> bool:
 	
 	world_config_file = config_file
 	return false
+
+
+func _preload_resources() -> void:
+	"""Pre-load game resources into memory for better performance"""
+	if world_config_file == null:
+		return
+	
+	var preload_enabled: bool = world_config_file.get_value("performance", "preload_resources", true)
+	var preload_items: bool = world_config_file.get_value("performance", "preload_items", true)
+	var preload_recipes: bool = world_config_file.get_value("performance", "preload_recipes", true)
+	
+	if not preload_enabled:
+		print("[WorldMain] Resource preloading disabled in config")
+		return
+	
+	print("[WorldMain] ========================================")
+	print("[WorldMain] PRE-LOADING GAME RESOURCES")
+	print("[WorldMain] ========================================")
+	
+	var total_start_time := Time.get_ticks_msec()
+	var total_start_memory := OS.get_static_memory_usage()
+	var total_loaded := 0
+	
+	# Preload items
+	if preload_items:
+		var item_stats := ContentRegistryHub.preload_all_content(&"items")
+		if item_stats.get("success", false):
+			total_loaded += item_stats.get("loaded_count", 0)
+	
+	# Preload recipes
+	if preload_recipes:
+		var recipe_stats := ContentRegistryHub.preload_all_content(&"recipes")
+		if recipe_stats.get("success", false):
+			total_loaded += recipe_stats.get("loaded_count", 0)
+	
+	var total_elapsed_ms := Time.get_ticks_msec() - total_start_time
+	var total_memory_increase := OS.get_static_memory_usage() - total_start_memory
+	
+	print("[WorldMain] ========================================")
+	print("[WorldMain] PRELOAD COMPLETE")
+	print("[WorldMain] Total resources: %d" % total_loaded)
+	print("[WorldMain] Total time: %.2fs" % (total_elapsed_ms / 1000.0))
+	print("[WorldMain] Memory increase: %.2f MB" % (total_memory_increase / 1024.0 / 1024.0))
+	print("[WorldMain] ========================================")
+	
+	# Display cache stats
+	var cache_stats := ContentRegistryHub.get_cache_stats()
+	print("[WorldMain] Cache: %d resources cached (enabled: %s)" % [
+		cache_stats.get("cached_count", 0),
+		cache_stats.get("enabled", false)
+	])
