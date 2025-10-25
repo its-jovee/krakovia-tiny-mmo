@@ -12,4 +12,3 @@ func data_request_handler(
 		node.player_leave(peer_id)
 		return {"ok": true}
 	return {"ok": false, "err": &"not_harvesting"}
-

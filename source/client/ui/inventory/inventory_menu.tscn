@@ -37,7 +37,6 @@ color = Color(0.184314, 0.184314, 0.184314, 0.662745)
 metadata/_edit_lock_ = true
 
 [node name="EquipmentView" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1900,6 +1899,17 @@ text = "Sell Item"
 visible = false
 layout_mode = 2
 text = "Sell Price: 0 gold"
+
+[node name="SellAllButton" type="Button" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
+visible = false
+layout_mode = 2
+disabled = true
+text = "Sell All"
+
+[node name="SellAllPriceLabel" type="Label" parent="EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Total: 0 gold"
 
 [node name="TradeView" type="Control" parent="."]
 visible = false
@@ -4285,6 +4295,7 @@ offset_bottom = 65.0
 text = "Materials"
 
 [node name="CraftingView" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
