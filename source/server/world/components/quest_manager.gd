@@ -10,24 +10,32 @@ const XP_REWARD_MULTIPLIER: float = 12.0
 
 # Adventurer types and their preferred item pools
 const ADVENTURER_TYPES: Dictionary = {
-	"Knight": ["iron_sword", "steel_sword", "steel_chestplate", "iron_helmet", "iron_boots", "health_potion", "bandages"],
-	"Archer": ["wooden_bow", "reinforced_bow", "arrows", "leather_chest", "feathers", "sinew", "raw_meat"],
-	"Mage": ["health_potion", "fire_resistance_potion", "night_vision_potion", "herbs", "quartz_crystal", "amethyst", "sapphire", "obsidian", "lodestone"],
-	"Alchemist": ["herbs", "mushrooms", "antidote", "greater_health_potion", "miracle_elixir", "sulfur", "saltpeter", "salt"],
-	"Merchant": ["simple_jewelry", "ornate_jewelry", "fine_cloak", "storage_chest", "large_backpack", "explorer_pack", "leather_jacket"],
-	"Lord": ["throne", "crown", "royal_garments", "royal_jewelry_set", "ornate_table", "fine_chair", "embroidered_tapestry", "decorative_statue"],
-	"Blacksmith": ["iron_ore", "copper_ore", "gold_ore", "silver_ore", "iron_ingot", "copper_ingot", "coal", "forge_station", "workshop_tools"],
-	"Builder": ["stone", "granite", "marble", "limestone", "wall_section", "bridge_section", "fortification_section", "construction_kit"],
-	"Chef": ["hearty_stew", "honey_glazed_ham", "spiced_roast", "seasoned_meat", "luxury_pastries", "salt", "herbs", "raw_meat", "quality_honey"],
-	"Priest": ["candle_set", "lantern", "health_potion", "bandages", "medical_kit", "memorial_plaque", "perfume", "soap"],
+	# Combat Classes
+	"Swordsman": ["steel_sword", "iron_helmet", "iron_boots", "steel_chestplate", "bandages", "iron_ore", "copper_ore"],
+	"Paladin": ["steel_sword", "steel_chestplate", "antidote", "candle_set", "lantern", "silver_ingot", "gold_ore"],
+	"Ranger": ["wooden_bow", "reinforced_bow", "arrows", "leather_chest", "feathers", "sinew", "raw_meat", "cooked_meat"],
+	"Hunter": ["arrows", "leather_chest", "feathers", "sinew", "raw_meat", "cooked_meat", "wolf_pelt", "bear_fur"],
+	"Monk": ["herbs_common", "herbs_rare", "raw_meat", "cooked_meat", "plant_fiber", "cotton", "silk"],
+	"Hero": ["steel_sword", "steel_chestplate", "iron_helmet", "iron_boots", "bandages", "gold_ore", "silver_ore"],
+	
+	# Magic Classes
+	"Mage": ["antidote", "herbs_common", "herbs_rare", "quartz_crystal", "amethyst", "sapphire", "obsidian"],
+	"High_Wizard": ["obsidian", "lodestone", "diamond", "ruby", "emerald", "sapphire", "topaz", "ancient_titan_essence"],
+	"Sorcerer": ["fire_herbs", "special_mushrooms", "obsidian", "lodestone", "sulfur", "saltpeter", "rare_spices"],
+	"Priest": ["candle_set", "lantern", "antidote", "perfume", "soap", "silver_ingot", "gold_ore"],
+	"Acolyte": ["candle_set", "lantern", "herbs_common", "plant_fiber", "cotton", "beeswax"],
+	
+	# Specialized Classes
+	"Assassin": ["antidote", "herbs_rare", "silk", "leather_chest", "leather_jacket", "wolf_pelt", "bear_fur"],
+	"Scholar": ["cotton", "silk", "beeswax", "candle_set", "lantern", "perfume", "soap", "rare_spices"],
+	"Explorer": ["storage_chest", "large_backpack", "explorer_pack", "survival_kit", "cooked_meat", "seasoned_meat", "hearty_stew"],
+	"Guard": ["iron_helmet", "iron_boots", "steel_chestplate", "steel_sword", "bandages", "iron_ore", "copper_ore"],
+	"Scout": ["leather_chest", "leather_jacket", "arrows", "feathers", "sinew", "raw_meat", "cooked_meat", "wolf_pelt"],
+	
+	# Keep some existing professions for variety
+	"Blacksmith": ["iron_ore", "copper_ore", "gold_ore", "silver_ore", "iron_ingot", "copper_ingot", "coal", "forge_station"],
 	"Farmer": ["wheat", "barley", "oats", "carrots", "onions", "cabbage", "apples", "berries", "agricultural_tools"],
-	"Jeweler": ["diamond", "ruby", "emerald", "sapphire", "topaz", "gold_ore", "silver_ore", "simple_jewelry", "ornate_jewelry", "copper_ring"],
-	"Carpenter": ["oak_wood", "pine_wood", "birch_wood", "maple_wood", "ironwood", "wooden_handle", "fine_chair", "ornate_table", "basic_tool_set"],
-	"General": ["legendary_siege_engine", "fortification_section", "steel_sword", "masterwork_armor_set", "arrows", "reinforced_bow", "wall_section"],
-	"Guild_Master": ["guild_hall_section", "forge_station", "alchemy_table", "tanning_rack", "ultimate_forge_core", "crafting_supplies", "premium_workshop_tools"],
-	"Collector": ["trophy_mount", "champions_trophy", "grand_monument", "monument_base", "celestial_convergence", "essence_of_mastery", "display_cabinet"],
-	"Tanner": ["leather_chest", "leather_grip", "leather_jacket", "tanning_rack", "sinew", "bone", "raw_hide"],
-	"Innkeeper": ["blanket", "pillow", "soap", "candle_set", "lantern", "beer", "hearty_stew", "fine_chair", "ornate_table"]
+	"Chef": ["hearty_stew", "seasoned_meat", "cooked_meat", "salt", "herbs_common", "raw_meat", "honey", "olive_oil"]
 }
 
 # Player quest data structure:

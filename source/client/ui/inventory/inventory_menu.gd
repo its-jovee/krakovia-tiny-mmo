@@ -84,6 +84,8 @@ const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.
 # Market/sell @onready references
 @onready var sell_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellButton
 @onready var sell_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellPriceLabel
+@onready var sell_all_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellAllButton
+@onready var sell_all_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellAllPriceLabel
 
 # Gold display @onready references
 @onready var equipment_gold_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/GoldDisplay/Label
@@ -158,6 +160,8 @@ func _ready() -> void:
 	# Connect sell button
 	if sell_button:
 		sell_button.pressed.connect(_on_sell_button_pressed)
+	if sell_all_button:
+		sell_all_button.pressed.connect(_on_sell_all_button_pressed)
 	
 	# Connect tab buttons
 	var inventory_tabs = $InventoryTabs
@@ -281,29 +285,20 @@ func _on_market_status_update(data: Dictionary) -> void:
 	_update_sell_ui()
 
 func _update_sell_ui() -> void:
-	if not sell_button or not sell_price_label:
+	if not _has_sell_ui_elements():
 		return
 	
-	# Use the inventory menu's own in_market variable (should be updated by market status signal)
-	if selected_item and in_market:
-		sell_button.visible = true
-		sell_price_label.visible = true
-		# Calculate sell price
-		var sell_price = selected_item.minimum_price if selected_item.minimum_price > 0 else 1
-		sell_price_label.text = TranslationServer.translate("inventory_sell_price").format({"price": sell_price})
-	else:
-		sell_button.visible = false
-		sell_price_label.visible = false
+	var should_show_sell_ui = _can_sell_item()
+	_set_sell_ui_visibility(should_show_sell_ui)
+	
+	if should_show_sell_ui:
+		_update_sell_prices()
 
 func _on_sell_button_pressed() -> void:
-	if not selected_item or not in_market:
+	if not _can_sell_item():
 		return
 	
-	# Request to sell the selected item
-	InstanceClient.current.request_data(&"item.sell", _on_sell_response, {
-		"item_id": selected_item_id,
-		"quantity": 1
-	})
+	_sell_items(1)
 
 func _on_sell_response(data: Dictionary) -> void:
 	if data.has("error"):
@@ -312,7 +307,98 @@ func _on_sell_response(data: Dictionary) -> void:
 	else:
 		print("Sold item for ", data["total_price"], " gold")
 		# Refresh inventory to show updated quantities
-		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_sell)
+
+func _on_inventory_refreshed_after_sell(inv_data: Dictionary) -> void:
+	# Update inventory data
+	fill_inventory(inv_data)
+	
+	# Check if the currently selected item is still in inventory
+	if selected_item_id != -1 and not inv_data.has(selected_item_id):
+		# Item was completely sold out, clear the selection
+		_clear_item_selection()
+	else:
+		# Update sell UI to reflect new quantities
+		_update_sell_ui()
+
+func _clear_item_selection() -> void:
+	"""Clear the current item selection and hide sell UI"""
+	selected_item = null
+	selected_item_id = -1
+	rich_text_label.text = TranslationServer.translate("inventory_select_item")
+	
+	# Hide sell UI
+	_update_sell_ui()
+
+# === SELL SYSTEM ===
+func _can_sell_item() -> bool:
+	return selected_item != null and in_market
+
+func _get_selected_item_quantity() -> int:
+	if selected_item_id == -1:
+		return 0
+	return inventory.get(selected_item_id, {}).get("stack", 0)
+
+func _get_selected_item_sell_price() -> int:
+	if not selected_item:
+		return 0
+	return selected_item.minimum_price if selected_item.minimum_price > 0 else 1
+
+func _calculate_sell_all_price() -> int:
+	if not _can_sell_item():
+		return 0
+	
+	var available_quantity = _get_selected_item_quantity()
+	var unit_price = _get_selected_item_sell_price()
+	
+	return unit_price * available_quantity
+
+func _on_sell_all_button_pressed() -> void:
+	if not _can_sell_item():
+		return
+	
+	var quantity = _get_selected_item_quantity()
+	if quantity <= 0:
+		return
+	
+	_sell_items(quantity)
+
+func _sell_items(quantity: int) -> void:
+	InstanceClient.current.request_data(&"item.sell", _on_sell_response, {
+		"item_id": selected_item_id,
+		"quantity": quantity
+	})
+
+# === UI HELPERS ===
+func _has_sell_ui_elements() -> bool:
+	return sell_button != null and sell_price_label != null and sell_all_button != null and sell_all_price_label != null
+
+func _set_sell_ui_visibility(visible: bool) -> void:
+	sell_button.visible = visible
+	sell_price_label.visible = visible
+	sell_all_button.visible = visible
+	sell_all_price_label.visible = visible
+
+func _update_sell_prices() -> void:
+	_update_unit_sell_price()
+	_update_sell_all_price()
+
+func _update_unit_sell_price() -> void:
+	var unit_price = _get_selected_item_sell_price()
+	sell_price_label.text = TranslationServer.translate("inventory_sell_price").format({"price": unit_price})
+
+func _update_sell_all_price() -> void:
+	var total_price = _calculate_sell_all_price()
+	var quantity = _get_selected_item_quantity()
+	
+	# Always update the text, even with 0 values
+	sell_all_price_label.text = TranslationServer.translate("inventory_sell_all_price").format({
+		"total_price": total_price,
+		"quantity": quantity
+	})
+	
+	# Botão desabilitado se quantidade <= 1, mas sempre visível
+	sell_all_button.disabled = quantity <= 1
 
 func _on_gold_received(data: Dictionary) -> void:
 	current_gold = data.get("gold", 0)
@@ -1302,11 +1388,12 @@ func _update_ui_text() -> void:
 	# Sell button and labels
 	if sell_button:
 		sell_button.text = TranslationServer.translate("inventory_button_sell")
-	if sell_price_label and selected_item:
-		var sell_price = selected_item.gold_value / 2 if selected_item.gold_value > 0 else 0
-		sell_price_label.text = TranslationServer.translate("inventory_label_sell_price").format({"price": sell_price})
-	elif sell_price_label:
-		sell_price_label.text = TranslationServer.translate("inventory_label_sell_price_zero")
+	if sell_all_button:
+		sell_all_button.text = TranslationServer.translate("inventory_button_sell_all")
+	
+	# Update sell prices if item is selected and we're in market
+	if selected_item and in_market:
+		_update_sell_prices()
 	
 	# Gold labels
 	if equipment_gold_label:

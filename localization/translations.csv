@@ -164,6 +164,8 @@ inventory_label_gold_display,"Gold: {amount}","Ouro: {amount}"
 inventory_button_equip_unequip,Equip/Unequip,Equipar/Desequipar
 inventory_button_expand,Expand,Expandir
 inventory_button_sell,Sell Item,Vender Item
+inventory_button_sell_all,Sell All,Vender Todos
+inventory_sell_all_price,"Total: {total_price} gold ({quantity} items)","Total: {total_price} ouro ({quantity} itens)"
 inventory_label_sell_price,"Sell Price: {price} gold","Preço de venda: {price} ouro"
 inventory_label_sell_price_zero,Sell Price: 0 gold,Preço de venda: 0 ouro
 inventory_select_item,Select an item to see details,Selecione um item para ver detalhes
