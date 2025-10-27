@@ -17,3 +17,9 @@ export_presets.cfg
 
 # Godot tmp files (https://github.com/godotengine/godot/issues/82270)
 *.tmp
+source/server/master/account_collection.tres
+QUICK_START.md
+PLAYER_SHOP_IMPLEMENTATION.md
+EXP_SYSTEM_IMPLEMENTATION.md
+COMPLETE_NODE_LIST.md
+ANIMATION_PARAMETER_ADJUSTMENTS.md
