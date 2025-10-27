@@ -1,7 +1,13 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=356 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=359 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
+
+[sub_resource type="Resource" id="Resource_ybays"]
+script = ExtResource("1_wgikn")
+id = 353
+handle = "Mafra2"
+password = "Mafra2"
 
 [sub_resource type="Resource" id="Resource_3bnnw"]
 script = ExtResource("1_wgikn")
@@ -2027,18 +2033,6 @@ id = 65
 handle = "teste"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_olsqu"]
-script = ExtResource("1_wgikn")
-id = 149
-handle = "testemestre"
-password = "teste123"
-
-[sub_resource type="Resource" id="Resource_8qqj7"]
-script = ExtResource("1_wgikn")
-id = 92
-handle = "testenilson"
-password = "teste123"
-
 [sub_resource type="Resource" id="Resource_2sswq"]
 script = ExtResource("1_wgikn")
 id = 350
@@ -2057,9 +2051,36 @@ id = 352
 handle = "teste4"
 password = "teste123"
 
+[sub_resource type="Resource" id="Resource_olsqu"]
+script = ExtResource("1_wgikn")
+id = 149
+handle = "testemestre"
+password = "teste123"
+
+[sub_resource type="Resource" id="Resource_8qqj7"]
+script = ExtResource("1_wgikn")
+id = 92
+handle = "testenilson"
+password = "teste123"
+
+[sub_resource type="Resource" id="Resource_68oo8"]
+script = ExtResource("1_wgikn")
+id = 354
+handle = "Mafra1"
+password = "Mafra1"
+
+[sub_resource type="Resource" id="Resource_ar12p"]
+script = ExtResource("1_wgikn")
+id = 355
+handle = "Mafra3"
+password = "Mafra3"
+
 [resource]
 script = ExtResource("2_e6eac")
 collection = {
+"Mafra1": SubResource("Resource_68oo8"),
+"Mafra2": SubResource("Resource_ybays"),
+"Mafra3": SubResource("Resource_ar12p"),
 "ban": SubResource("Resource_3bnnw"),
 "cidadao": SubResource("Resource_ajsh1"),
 "fulano": SubResource("Resource_up6o7"),
@@ -2414,4 +2435,4 @@ collection = {
 "testemestre": SubResource("Resource_olsqu"),
 "testenilson": SubResource("Resource_8qqj7")
 }
-next_account_id = 353
+next_account_id = 356

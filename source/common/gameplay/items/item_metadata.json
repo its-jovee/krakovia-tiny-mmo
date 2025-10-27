@@ -1,3113 +1,3113 @@
 {
   "adamantine_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Adamantine Ingot",
-        "class": "miner",
-        "level": 20,
-        "slug": "adamantine_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Adamantine Ingot",
+		"class": "miner",
+		"level": 20,
+		"slug": "adamantine_ingot_recipe"
+	  }
+	]
   },
   "adamantine_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 6,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 6,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "agricultural_tools": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Agricultural Tools",
-        "class": "miner",
-        "level": 11,
-        "slug": "agricultural_tools_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Agricultural Tools",
+		"class": "miner",
+		"level": 11,
+		"slug": "agricultural_tools_recipe"
+	  }
+	]
   },
   "alchemy_table": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Alchemy Table",
-        "class": "trapper",
-        "level": 17,
-        "slug": "alchemy_table_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Alchemy Table",
+		"class": "trapper",
+		"level": 17,
+		"slug": "alchemy_table_recipe"
+	  }
+	]
   },
   "alcohol_base": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Alcohol Base",
-        "class": "forager",
-        "level": 8,
-        "slug": "alcohol_base_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Alcohol Base",
+		"class": "forager",
+		"level": 8,
+		"slug": "alcohol_base_recipe"
+	  }
+	]
   },
   "ale": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Ale",
-        "class": "forager",
-        "level": 11,
-        "slug": "ale_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Ale",
+		"class": "forager",
+		"level": 11,
+		"slug": "ale_recipe"
+	  }
+	]
   },
   "almonds": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "amethyst": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "ancient_titan_essence": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": true
-      },
-      {
-        "class": "trapper",
-        "tier": 6,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 6,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": true
+	  },
+	  {
+		"class": "trapper",
+		"tier": 6,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 6,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "animal_fat": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "animal_feces": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "antidote": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Antidote",
-        "class": "trapper",
-        "level": 13,
-        "slug": "antidote_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Antidote",
+		"class": "trapper",
+		"level": 13,
+		"slug": "antidote_recipe"
+	  }
+	]
   },
   "apples": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "arrows": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Arrows",
-        "class": "miner",
-        "level": 8,
-        "slug": "arrows_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Arrows",
+		"class": "miner",
+		"level": 8,
+		"slug": "arrows_recipe"
+	  }
+	]
   },
   "ash_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Ash Planks",
-        "class": "forager",
-        "level": 11,
-        "slug": "ash_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Ash Planks",
+		"class": "forager",
+		"level": 11,
+		"slug": "ash_planks_recipe"
+	  }
+	]
   },
   "ash_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "bait": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bait",
-        "class": "trapper",
-        "level": 3,
-        "slug": "bait_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bait",
+		"class": "trapper",
+		"level": 3,
+		"slug": "bait_recipe"
+	  }
+	]
   },
   "bamboo": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "bamboo_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bamboo Planks",
-        "class": "forager",
-        "level": 21,
-        "slug": "bamboo_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bamboo Planks",
+		"class": "forager",
+		"level": 21,
+		"slug": "bamboo_planks_recipe"
+	  }
+	]
   },
   "bandages": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bandages",
-        "class": "trapper",
-        "level": 5,
-        "slug": "bandages_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bandages",
+		"class": "trapper",
+		"level": 5,
+		"slug": "bandages_recipe"
+	  }
+	]
   },
   "barley": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "barrel": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Barrel",
-        "class": "forager",
-        "level": 9,
-        "slug": "barrel_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Barrel",
+		"class": "forager",
+		"level": 9,
+		"slug": "barrel_recipe"
+	  }
+	]
   },
   "basic_fabric": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Basic Fabric",
-        "class": "forager",
-        "level": 12,
-        "slug": "basic_fabric_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Basic Fabric",
+		"class": "forager",
+		"level": 12,
+		"slug": "basic_fabric_recipe"
+	  }
+	]
   },
   "basic_leather": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Basic Leather",
-        "class": "trapper",
-        "level": 2,
-        "slug": "basic_leather_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Basic Leather",
+		"class": "trapper",
+		"level": 2,
+		"slug": "basic_leather_recipe"
+	  }
+	]
   },
   "basic_tool_set": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Basic Tool Set",
-        "class": "trapper",
-        "level": 7,
-        "slug": "basic_tool_set_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Basic Tool Set",
+		"class": "trapper",
+		"level": 7,
+		"slug": "basic_tool_set_recipe"
+	  }
+	]
   },
   "bear_fur": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "beer": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Beer",
-        "class": "forager",
-        "level": 10,
-        "slug": "beer_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Beer",
+		"class": "forager",
+		"level": 10,
+		"slug": "beer_recipe"
+	  }
+	]
   },
   "beeswax": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "bellows": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bellows",
-        "class": "miner",
-        "level": 9,
-        "slug": "bellows_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bellows",
+		"class": "miner",
+		"level": 9,
+		"slug": "bellows_recipe"
+	  }
+	]
   },
   "berries": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "berry_juice": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Berry Juice",
-        "class": "forager",
-        "level": 6,
-        "slug": "berry_juice_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Berry Juice",
+		"class": "forager",
+		"level": 6,
+		"slug": "berry_juice_recipe"
+	  }
+	]
   },
   "better_bait": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Better Bait",
-        "class": "trapper",
-        "level": 8,
-        "slug": "better_bait_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Better Bait",
+		"class": "trapper",
+		"level": 8,
+		"slug": "better_bait_recipe"
+	  }
+	]
   },
   "bile_sacs": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": true
-      },
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": true
+	  },
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "binding_cord": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Binding Cord",
-        "class": "trapper",
-        "level": 7,
-        "slug": "binding_cord_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Binding Cord",
+		"class": "trapper",
+		"level": 7,
+		"slug": "binding_cord_recipe"
+	  }
+	]
   },
   "birch_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Birch Planks",
-        "class": "forager",
-        "level": 9,
-        "slug": "birch_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Birch Planks",
+		"class": "forager",
+		"level": 9,
+		"slug": "birch_planks_recipe"
+	  }
+	]
   },
   "birch_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "blanket": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Blanket",
-        "class": "forager",
-        "level": 10,
-        "slug": "blanket_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Blanket",
+		"class": "forager",
+		"level": 10,
+		"slug": "blanket_recipe"
+	  }
+	]
   },
   "blood_vials": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "boar_hide": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "boar_meat": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "bone_glue": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bone Glue",
-        "class": "trapper",
-        "level": 12,
-        "slug": "bone_glue_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bone Glue",
+		"class": "trapper",
+		"level": 12,
+		"slug": "bone_glue_recipe"
+	  }
+	]
   },
   "bone_meal": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bone Meal",
-        "class": "trapper",
-        "level": 10,
-        "slug": "bone_meal_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bone Meal",
+		"class": "trapper",
+		"level": 10,
+		"slug": "bone_meal_recipe"
+	  }
+	]
   },
   "bones": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "bread": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bread",
-        "class": "forager",
-        "level": 4,
-        "slug": "bread_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bread",
+		"class": "forager",
+		"level": 4,
+		"slug": "bread_recipe"
+	  }
+	]
   },
   "brick": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Brick",
-        "class": "miner",
-        "level": 8,
-        "slug": "brick_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Brick",
+		"class": "miner",
+		"level": 8,
+		"slug": "brick_recipe"
+	  }
+	]
   },
   "bridge_section": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bridge Section",
-        "class": "forager",
-        "level": 22,
-        "slug": "bridge_section_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bridge Section",
+		"class": "forager",
+		"level": 22,
+		"slug": "bridge_section_recipe"
+	  }
+	]
   },
   "bronze_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Bronze Ingot",
-        "class": "miner",
-        "level": 6,
-        "slug": "bronze_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Bronze Ingot",
+		"class": "miner",
+		"level": 6,
+		"slug": "bronze_ingot_recipe"
+	  }
+	]
   },
   "cabbage": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "camouflage_cloak": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Camouflage Cloak",
-        "class": "trapper",
-        "level": 19,
-        "slug": "camouflage_cloak_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Camouflage Cloak",
+		"class": "trapper",
+		"level": 19,
+		"slug": "camouflage_cloak_recipe"
+	  }
+	]
   },
   "candle_set": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Candle Set",
-        "class": "forager",
-        "level": 5,
-        "slug": "candle_set_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Candle Set",
+		"class": "forager",
+		"level": 5,
+		"slug": "candle_set_recipe"
+	  }
+	]
   },
   "canvas": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Canvas",
-        "class": "trapper",
-        "level": 10,
-        "slug": "canvas_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Canvas",
+		"class": "trapper",
+		"level": 10,
+		"slug": "canvas_recipe"
+	  }
+	]
   },
   "carrots": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "cedar_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Cedar Planks",
-        "class": "forager",
-        "level": 16,
-        "slug": "cedar_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Cedar Planks",
+		"class": "forager",
+		"level": 16,
+		"slug": "cedar_planks_recipe"
+	  }
+	]
   },
   "cedar_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "celestial_convergence": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Celestial Convergence",
-        "class": "forager",
-        "level": 28,
-        "slug": "celestial_convergence_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Celestial Convergence",
+		"class": "forager",
+		"level": 28,
+		"slug": "celestial_convergence_recipe"
+	  }
+	]
   },
   "champions_trophy": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Champion's Trophy",
-        "class": "trapper",
-        "level": 28,
-        "slug": "champions_trophy_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Champion's Trophy",
+		"class": "trapper",
+		"level": 28,
+		"slug": "champions_trophy_recipe"
+	  }
+	]
   },
   "charcoal": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Charcoal",
-        "class": "forager",
-        "level": 3,
-        "slug": "charcoal_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Charcoal",
+		"class": "forager",
+		"level": 3,
+		"slug": "charcoal_recipe"
+	  }
+	]
   },
   "cider": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Cider",
-        "class": "forager",
-        "level": 9,
-        "slug": "cider_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Cider",
+		"class": "forager",
+		"level": 9,
+		"slug": "cider_recipe"
+	  }
+	]
   },
   "claws": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "clay": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "coal": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "colored_fabric": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Colored Fabric",
-        "class": "forager",
-        "level": 13,
-        "slug": "colored_fabric_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Colored Fabric",
+		"class": "forager",
+		"level": 13,
+		"slug": "colored_fabric_recipe"
+	  }
+	]
   },
   "construction_kit": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Construction Kit",
-        "class": "trapper",
-        "level": 19,
-        "slug": "construction_kit_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Construction Kit",
+		"class": "trapper",
+		"level": 19,
+		"slug": "construction_kit_recipe"
+	  }
+	]
   },
   "cooked_meat": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Cooked Meat",
-        "class": "trapper",
-        "level": 6,
-        "slug": "cooked_meat_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Cooked Meat",
+		"class": "trapper",
+		"level": 6,
+		"slug": "cooked_meat_recipe"
+	  }
+	]
   },
   "copper_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Copper Ingot",
-        "class": "miner",
-        "level": 1,
-        "slug": "copper_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Copper Ingot",
+		"class": "miner",
+		"level": 1,
+		"slug": "copper_ingot_recipe"
+	  }
+	]
   },
   "copper_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "cork": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "cotton": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "crafting_supplies": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Crafting Supplies",
-        "class": "miner",
-        "level": 7,
-        "slug": "crafting_supplies_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Crafting Supplies",
+		"class": "miner",
+		"level": 7,
+		"slug": "crafting_supplies_recipe"
+	  }
+	]
   },
   "crown": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Crown",
-        "class": "miner",
-        "level": 26,
-        "slug": "crown_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Crown",
+		"class": "miner",
+		"level": 26,
+		"slug": "crown_recipe"
+	  }
+	]
   },
   "cured_leather": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Cured Leather",
-        "class": "trapper",
-        "level": 15,
-        "slug": "cured_leather_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Cured Leather",
+		"class": "trapper",
+		"level": 15,
+		"slug": "cured_leather_recipe"
+	  }
+	]
   },
   "decorative_bronze": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Decorative Bronze",
-        "class": "miner",
-        "level": 15,
-        "slug": "decorative_bronze_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Decorative Bronze",
+		"class": "miner",
+		"level": 15,
+		"slug": "decorative_bronze_recipe"
+	  }
+	]
   },
   "decorative_statue": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Decorative Statue",
-        "class": "forager",
-        "level": 22,
-        "slug": "decorative_statue_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Decorative Statue",
+		"class": "forager",
+		"level": 22,
+		"slug": "decorative_statue_recipe"
+	  }
+	]
   },
   "decorative_vase": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Decorative Vase",
-        "class": "forager",
-        "level": 14,
-        "slug": "decorative_vase_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Decorative Vase",
+		"class": "forager",
+		"level": 14,
+		"slug": "decorative_vase_recipe"
+	  }
+	]
   },
   "deer_hide": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "deer_meat": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": [
-      {
-        "recipe_name": "Raw Meat Processing",
-        "class": "trapper",
-        "level": 4,
-        "slug": "raw_meat_processing_recipe"
-      }
-    ]
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": [
+	  {
+		"recipe_name": "Raw Meat Processing",
+		"class": "trapper",
+		"level": 4,
+		"slug": "raw_meat_processing_recipe"
+	  }
+	]
   },
   "diamond": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "display_cabinet": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Display Cabinet",
-        "class": "forager",
-        "level": 17,
-        "slug": "display_cabinet_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Display Cabinet",
+		"class": "forager",
+		"level": 17,
+		"slug": "display_cabinet_recipe"
+	  }
+	]
   },
   "dyes": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Dyes",
-        "class": "trapper",
-        "level": 12,
-        "slug": "dyes_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Dyes",
+		"class": "trapper",
+		"level": 12,
+		"slug": "dyes_recipe"
+	  }
+	]
   },
   "electrum_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Electrum Ingot",
-        "class": "miner",
-        "level": 11,
-        "slug": "electrum_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Electrum Ingot",
+		"class": "miner",
+		"level": 11,
+		"slug": "electrum_ingot_recipe"
+	  }
+	]
   },
   "embroidered_tapestry": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Embroidered Tapestry",
-        "class": "forager",
-        "level": 21,
-        "slug": "embroidered_tapestry_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Embroidered Tapestry",
+		"class": "forager",
+		"level": 21,
+		"slug": "embroidered_tapestry_recipe"
+	  }
+	]
   },
   "emerald": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "essence_of_mastery": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Essence of Mastery",
-        "class": "miner",
-        "level": 29,
-        "slug": "essence_of_mastery_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Essence of Mastery",
+		"class": "miner",
+		"level": 29,
+		"slug": "essence_of_mastery_recipe"
+	  }
+	]
   },
   "eternal_flame_brazier": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Eternal Flame Brazier",
-        "class": "forager",
-        "level": 24,
-        "slug": "eternal_flame_brazier_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Eternal Flame Brazier",
+		"class": "forager",
+		"level": 24,
+		"slug": "eternal_flame_brazier_recipe"
+	  }
+	]
   },
   "exotic_flowers": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "exotic_hides": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": true
-      },
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 6,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": true
+	  },
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 6,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "explorer_pack": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Explorer Pack",
-        "class": "trapper",
-        "level": 16,
-        "slug": "explorer_pack_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Explorer Pack",
+		"class": "trapper",
+		"level": 16,
+		"slug": "explorer_pack_recipe"
+	  }
+	]
   },
   "farming_plot_kit": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Farming Plot Kit",
-        "class": "forager",
-        "level": 20,
-        "slug": "farming_plot_kit_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Farming Plot Kit",
+		"class": "forager",
+		"level": 20,
+		"slug": "farming_plot_kit_recipe"
+	  }
+	]
   },
   "feast_table": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Feast Table",
-        "class": "forager",
-        "level": 24,
-        "slug": "feast_table_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Feast Table",
+		"class": "forager",
+		"level": 24,
+		"slug": "feast_table_recipe"
+	  }
+	]
   },
   "feathers": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "fertilizer": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fertilizer",
-        "class": "forager",
-        "level": 15,
-        "slug": "fertilizer_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fertilizer",
+		"class": "forager",
+		"level": 15,
+		"slug": "fertilizer_recipe"
+	  }
+	]
   },
   "fine_chair": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fine Chair",
-        "class": "forager",
-        "level": 13,
-        "slug": "fine_chair_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fine Chair",
+		"class": "forager",
+		"level": 13,
+		"slug": "fine_chair_recipe"
+	  }
+	]
   },
   "fine_cloak": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fine Cloak",
-        "class": "forager",
-        "level": 16,
-        "slug": "fine_cloak_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fine Cloak",
+		"class": "forager",
+		"level": 16,
+		"slug": "fine_cloak_recipe"
+	  }
+	]
   },
   "fire_herbs": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "fire_resistance_potion": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fire Resistance Potion",
-        "class": "forager",
-        "level": 20,
-        "slug": "fire_resistance_potion_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fire Resistance Potion",
+		"class": "forager",
+		"level": 20,
+		"slug": "fire_resistance_potion_recipe"
+	  }
+	]
   },
   "flax": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "flour": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Flour",
-        "class": "forager",
-        "level": 2,
-        "slug": "flour_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Flour",
+		"class": "forager",
+		"level": 2,
+		"slug": "flour_recipe"
+	  }
+	]
   },
   "forge_station": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Forge Station",
-        "class": "miner",
-        "level": 17,
-        "slug": "forge_station_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Forge Station",
+		"class": "miner",
+		"level": 17,
+		"slug": "forge_station_recipe"
+	  }
+	]
   },
   "fortification_section": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fortification Section",
-        "class": "miner",
-        "level": 23,
-        "slug": "fortification_section_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fortification Section",
+		"class": "miner",
+		"level": 23,
+		"slug": "fortification_section_recipe"
+	  }
+	]
   },
   "fox_fur": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "fruit_preserves": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fruit Preserves",
-        "class": "forager",
-        "level": 12,
-        "slug": "fruit_preserves_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fruit Preserves",
+		"class": "forager",
+		"level": 12,
+		"slug": "fruit_preserves_recipe"
+	  }
+	]
   },
   "fur_cloak": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Fur Cloak",
-        "class": "trapper",
-        "level": 15,
-        "slug": "fur_cloak_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Fur Cloak",
+		"class": "trapper",
+		"level": 15,
+		"slug": "fur_cloak_recipe"
+	  }
+	]
   },
   "gathering_satchel": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Gathering Satchel",
-        "class": "trapper",
-        "level": 6,
-        "slug": "gathering_satchel_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Gathering Satchel",
+		"class": "trapper",
+		"level": 6,
+		"slug": "gathering_satchel_recipe"
+	  }
+	]
   },
   "glass_bottle": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Glass Bottle",
-        "class": "miner",
-        "level": 7,
-        "slug": "glass_bottle_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Glass Bottle",
+		"class": "miner",
+		"level": 7,
+		"slug": "glass_bottle_recipe"
+	  }
+	]
   },
   "glass_pane": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Glass Pane",
-        "class": "miner",
-        "level": 10,
-        "slug": "glass_pane_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Glass Pane",
+		"class": "miner",
+		"level": 10,
+		"slug": "glass_pane_recipe"
+	  }
+	]
   },
   "gold_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Gold Ingot",
-        "class": "miner",
-        "level": 10,
-        "slug": "gold_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Gold Ingot",
+		"class": "miner",
+		"level": 10,
+		"slug": "gold_ingot_recipe"
+	  }
+	]
   },
   "gold_inlay": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Gold Inlay",
-        "class": "miner",
-        "level": 15,
-        "slug": "gold_inlay_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Gold Inlay",
+		"class": "miner",
+		"level": 15,
+		"slug": "gold_inlay_recipe"
+	  }
+	]
   },
   "gold_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "gold_thread": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Gold Thread",
-        "class": "miner",
-        "level": 16,
-        "slug": "gold_thread_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Gold Thread",
+		"class": "miner",
+		"level": 16,
+		"slug": "gold_thread_recipe"
+	  }
+	]
   },
   "gourds": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "grand_monument": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Grand Monument",
-        "class": "miner",
-        "level": 25,
-        "slug": "grand_monument_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Grand Monument",
+		"class": "miner",
+		"level": 25,
+		"slug": "grand_monument_recipe"
+	  }
+	]
   },
   "granite": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "grapes": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "gravel": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "greater_health_potion": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Greater Health Potion",
-        "class": "trapper",
-        "level": 18,
-        "slug": "greater_health_potion_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Greater Health Potion",
+		"class": "trapper",
+		"level": 18,
+		"slug": "greater_health_potion_recipe"
+	  }
+	]
   },
   "guild_hall_section": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Guild Hall Section",
-        "class": "miner",
-        "level": 25,
-        "slug": "guild_hall_section_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Guild Hall Section",
+		"class": "miner",
+		"level": 25,
+		"slug": "guild_hall_section_recipe"
+	  }
+	]
   },
   "health_potion_new": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Health Potion",
-        "class": "trapper",
-        "level": 12,
-        "slug": "health_potion_new_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Health Potion",
+		"class": "trapper",
+		"level": 12,
+		"slug": "health_potion_new_recipe"
+	  }
+	]
   },
   "hearty_stew": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Hearty Stew",
-        "class": "forager",
-        "level": 13,
-        "slug": "hearty_stew_recipe"
-      },
-      {
-        "recipe_name": "Hearty Stew (Trapper)",
-        "class": "trapper",
-        "level": 9,
-        "slug": "hearty_stew_trapper_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Hearty Stew",
+		"class": "forager",
+		"level": 13,
+		"slug": "hearty_stew_recipe"
+	  },
+	  {
+		"recipe_name": "Hearty Stew (Trapper)",
+		"class": "trapper",
+		"level": 9,
+		"slug": "hearty_stew_trapper_recipe"
+	  }
+	]
   },
   "heavy_leather": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Heavy Leather",
-        "class": "trapper",
-        "level": 16,
-        "slug": "heavy_leather_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Heavy Leather",
+		"class": "trapper",
+		"level": 16,
+		"slug": "heavy_leather_recipe"
+	  }
+	]
   },
   "heavy_leather_armor": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Heavy Leather Armor",
-        "class": "trapper",
-        "level": 18,
-        "slug": "heavy_leather_armor_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Heavy Leather Armor",
+		"class": "trapper",
+		"level": 18,
+		"slug": "heavy_leather_armor_recipe"
+	  }
+	]
   },
   "hemp": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "herb_tea": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Herb Tea",
-        "class": "forager",
-        "level": 6,
-        "slug": "herb_tea_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Herb Tea",
+		"class": "forager",
+		"level": 6,
+		"slug": "herb_tea_recipe"
+	  }
+	]
   },
   "herbs_common": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "herbs_rare": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "honey": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "honey_glazed_ham": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Honey Glazed Ham",
-        "class": "forager",
-        "level": 19,
-        "slug": "honey_glazed_ham_recipe"
-      },
-      {
-        "recipe_name": "Honey Glazed Ham (Trapper)",
-        "class": "trapper",
-        "level": 17,
-        "slug": "honey_glazed_ham_trapper_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Honey Glazed Ham",
+		"class": "forager",
+		"level": 19,
+		"slug": "honey_glazed_ham_recipe"
+	  },
+	  {
+		"recipe_name": "Honey Glazed Ham (Trapper)",
+		"class": "trapper",
+		"level": 17,
+		"slug": "honey_glazed_ham_trapper_recipe"
+	  }
+	]
   },
   "horns": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "hunting_bow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Hunting Bow",
-        "class": "trapper",
-        "level": 12,
-        "slug": "hunting_bow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Hunting Bow",
+		"class": "trapper",
+		"level": 12,
+		"slug": "hunting_bow_recipe"
+	  }
+	]
   },
   "hunting_trophy": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Hunting Trophy",
-        "class": "trapper",
-        "level": 17,
-        "slug": "hunting_trophy_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Hunting Trophy",
+		"class": "trapper",
+		"level": 17,
+		"slug": "hunting_trophy_recipe"
+	  }
+	]
   },
   "indigo_plant": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "iron_boots": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Iron Boots",
-        "class": "miner",
-        "level": 13,
-        "slug": "iron_boots_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Iron Boots",
+		"class": "miner",
+		"level": 13,
+		"slug": "iron_boots_recipe"
+	  }
+	]
   },
   "iron_fittings": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Iron Fittings",
-        "class": "miner",
-        "level": 14,
-        "slug": "iron_fittings_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Iron Fittings",
+		"class": "miner",
+		"level": 14,
+		"slug": "iron_fittings_recipe"
+	  }
+	]
   },
   "iron_helmet": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Iron Helmet",
-        "class": "miner",
-        "level": 12,
-        "slug": "iron_helmet_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Iron Helmet",
+		"class": "miner",
+		"level": 12,
+		"slug": "iron_helmet_recipe"
+	  }
+	]
   },
   "iron_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Iron Ingot",
-        "class": "miner",
-        "level": 3,
-        "slug": "iron_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Iron Ingot",
+		"class": "miner",
+		"level": 3,
+		"slug": "iron_ingot_recipe"
+	  }
+	]
   },
   "iron_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "iron_sword_new": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Iron Sword",
-        "class": "miner",
-        "level": 10,
-        "slug": "iron_sword_new_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Iron Sword",
+		"class": "miner",
+		"level": 10,
+		"slug": "iron_sword_new_recipe"
+	  }
+	]
   },
   "ironwood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 6,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 6,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "ironwood_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Ironwood Planks",
-        "class": "forager",
-        "level": 23,
-        "slug": "ironwood_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Ironwood Planks",
+		"class": "forager",
+		"level": 23,
+		"slug": "ironwood_planks_recipe"
+	  }
+	]
   },
   "krak": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "KRAK ",
-        "class": "miner",
-        "level": 30,
-        "slug": "krak_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "KRAK ",
+		"class": "miner",
+		"level": 30,
+		"slug": "krak_recipe"
+	  }
+	]
   },
   "lantern": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Lantern",
-        "class": "forager",
-        "level": 12,
-        "slug": "lantern_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Lantern",
+		"class": "forager",
+		"level": 12,
+		"slug": "lantern_recipe"
+	  }
+	]
   },
   "large_backpack": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Large Backpack",
-        "class": "trapper",
-        "level": 12,
-        "slug": "large_backpack_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Large Backpack",
+		"class": "trapper",
+		"level": 12,
+		"slug": "large_backpack_recipe"
+	  }
+	]
   },
   "leather_belt": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Belt",
-        "class": "trapper",
-        "level": 9,
-        "slug": "leather_belt_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Belt",
+		"class": "trapper",
+		"level": 9,
+		"slug": "leather_belt_recipe"
+	  }
+	]
   },
   "leather_boots": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Boots",
-        "class": "trapper",
-        "level": 9,
-        "slug": "leather_boots_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Boots",
+		"class": "trapper",
+		"level": 9,
+		"slug": "leather_boots_recipe"
+	  }
+	]
   },
   "leather_chest": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Chest Armor",
-        "class": "trapper",
-        "level": 11,
-        "slug": "leather_chest_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Chest Armor",
+		"class": "trapper",
+		"level": 11,
+		"slug": "leather_chest_recipe"
+	  }
+	]
   },
   "leather_cord": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Cord",
-        "class": "trapper",
-        "level": 12,
-        "slug": "leather_cord_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Cord",
+		"class": "trapper",
+		"level": 12,
+		"slug": "leather_cord_recipe"
+	  }
+	]
   },
   "leather_gloves": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Gloves",
-        "class": "trapper",
-        "level": 8,
-        "slug": "leather_gloves_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Gloves",
+		"class": "trapper",
+		"level": 8,
+		"slug": "leather_gloves_recipe"
+	  }
+	]
   },
   "leather_helmet": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Helmet",
-        "class": "trapper",
-        "level": 10,
-        "slug": "leather_helmet_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Helmet",
+		"class": "trapper",
+		"level": 10,
+		"slug": "leather_helmet_recipe"
+	  }
+	]
   },
   "leather_jacket": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Jacket",
-        "class": "trapper",
-        "level": 14,
-        "slug": "leather_jacket_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Jacket",
+		"class": "trapper",
+		"level": 14,
+		"slug": "leather_jacket_recipe"
+	  }
+	]
   },
   "leather_pants": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Pants",
-        "class": "trapper",
-        "level": 10,
-        "slug": "leather_pants_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Pants",
+		"class": "trapper",
+		"level": 10,
+		"slug": "leather_pants_recipe"
+	  }
+	]
   },
   "leather_strap": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Leather Strap",
-        "class": "trapper",
-        "level": 15,
-        "slug": "leather_strap_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Leather Strap",
+		"class": "trapper",
+		"level": 15,
+		"slug": "leather_strap_recipe"
+	  }
+	]
   },
   "legendary_bow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Legendary Bow",
-        "class": "trapper",
-        "level": 26,
-        "slug": "legendary_bow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Legendary Bow",
+		"class": "trapper",
+		"level": 26,
+		"slug": "legendary_bow_recipe"
+	  }
+	]
   },
   "legendary_siege_engine": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Legendary Siege Engine",
-        "class": "miner",
-        "level": 26,
-        "slug": "legendary_siege_engine_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Legendary Siege Engine",
+		"class": "miner",
+		"level": 26,
+		"slug": "legendary_siege_engine_recipe"
+	  }
+	]
   },
   "legendary_weapon": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Legendary Weapon",
-        "class": "miner",
-        "level": 28,
-        "slug": "legendary_weapon_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Legendary Weapon",
+		"class": "miner",
+		"level": 28,
+		"slug": "legendary_weapon_recipe"
+	  }
+	]
   },
   "limestone": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "linen_fabric": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Linen Fabric",
-        "class": "miner",
-        "level": 8,
-        "slug": "linen_fabric_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Linen Fabric",
+		"class": "miner",
+		"level": 8,
+		"slug": "linen_fabric_recipe"
+	  }
+	]
   },
   "linen_shirt": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Linen Shirt",
-        "class": "forager",
-        "level": 9,
-        "slug": "linen_shirt_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Linen Shirt",
+		"class": "forager",
+		"level": 9,
+		"slug": "linen_shirt_recipe"
+	  }
+	]
   },
   "lodestone": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "luxury_pastries": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Luxury Pastries",
-        "class": "forager",
-        "level": 16,
-        "slug": "luxury_pastries_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Luxury Pastries",
+		"class": "forager",
+		"level": 16,
+		"slug": "luxury_pastries_recipe"
+	  }
+	]
   },
   "luxury_polish": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Luxury Polish",
-        "class": "forager",
-        "level": 14,
-        "slug": "luxury_polish_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Luxury Polish",
+		"class": "forager",
+		"level": 14,
+		"slug": "luxury_polish_recipe"
+	  }
+	]
   },
   "luxury_soap": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Luxury Soap",
-        "class": "forager",
-        "level": 15,
-        "slug": "luxury_soap_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Luxury Soap",
+		"class": "forager",
+		"level": 15,
+		"slug": "luxury_soap_recipe"
+	  }
+	]
   },
   "madder_root": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "malachite": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "maple_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Maple Planks",
-        "class": "forager",
-        "level": 14,
-        "slug": "maple_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Maple Planks",
+		"class": "forager",
+		"level": 14,
+		"slug": "maple_planks_recipe"
+	  }
+	]
   },
   "maple_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "marble": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "master_hunters_set": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Master Hunter's Set",
-        "class": "trapper",
-        "level": 25,
-        "slug": "master_hunters_set_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Master Hunter's Set",
+		"class": "trapper",
+		"level": 25,
+		"slug": "master_hunters_set_recipe"
+	  }
+	]
   },
   "master_satchel": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Master Satchel",
-        "class": "trapper",
-        "level": 20,
-        "slug": "master_satchel_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Master Satchel",
+		"class": "trapper",
+		"level": 20,
+		"slug": "master_satchel_recipe"
+	  }
+	]
   },
   "master_trading_caravan": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Master Trading Caravan",
-        "class": "forager",
-        "level": 25,
-        "slug": "master_trading_caravan_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Master Trading Caravan",
+		"class": "forager",
+		"level": 25,
+		"slug": "master_trading_caravan_recipe"
+	  }
+	]
   },
   "masters_satchel": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Master's Satchel",
-        "class": "trapper",
-        "level": 23,
-        "slug": "masters_satchel_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Master's Satchel",
+		"class": "trapper",
+		"level": 23,
+		"slug": "masters_satchel_recipe"
+	  }
+	]
   },
   "masterwork_armor_set": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Masterwork Armor Set",
-        "class": "miner",
-        "level": 27,
-        "slug": "masterwork_armor_set_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Masterwork Armor Set",
+		"class": "miner",
+		"level": 27,
+		"slug": "masterwork_armor_set_recipe"
+	  }
+	]
   },
   "masterwork_leather": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Masterwork Leather",
-        "class": "trapper",
-        "level": 19,
-        "slug": "masterwork_leather_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Masterwork Leather",
+		"class": "trapper",
+		"level": 19,
+		"slug": "masterwork_leather_recipe"
+	  }
+	]
   },
   "mead": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Mead",
-        "class": "forager",
-        "level": 15,
-        "slug": "mead_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Mead",
+		"class": "forager",
+		"level": 15,
+		"slug": "mead_recipe"
+	  }
+	]
   },
   "medical_kit": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Medical Kit",
-        "class": "trapper",
-        "level": 18,
-        "slug": "medical_kit_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Medical Kit",
+		"class": "trapper",
+		"level": 18,
+		"slug": "medical_kit_recipe"
+	  }
+	]
   },
   "medicinal_tincture": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Medicinal Tincture",
-        "class": "trapper",
-        "level": 11,
-        "slug": "medicinal_tincture_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Medicinal Tincture",
+		"class": "trapper",
+		"level": 11,
+		"slug": "medicinal_tincture_recipe"
+	  }
+	]
   },
   "memorial_plaque": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Memorial Plaque",
-        "class": "miner",
-        "level": 15,
-        "slug": "memorial_plaque_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Memorial Plaque",
+		"class": "miner",
+		"level": 15,
+		"slug": "memorial_plaque_recipe"
+	  }
+	]
   },
   "metal_bands": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Metal Bands",
-        "class": "miner",
-        "level": 19,
-        "slug": "metal_bands_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Metal Bands",
+		"class": "miner",
+		"level": 19,
+		"slug": "metal_bands_recipe"
+	  }
+	]
   },
   "mica": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "minor_health_potion": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Minor Health Potion",
-        "class": "trapper",
-        "level": 6,
-        "slug": "minor_health_potion_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Minor Health Potion",
+		"class": "trapper",
+		"level": 6,
+		"slug": "minor_health_potion_recipe"
+	  }
+	]
   },
   "miracle_elixir": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Miracle Elixir",
-        "class": "trapper",
-        "level": 27,
-        "slug": "miracle_elixir_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Miracle Elixir",
+		"class": "trapper",
+		"level": 27,
+		"slug": "miracle_elixir_recipe"
+	  }
+	]
   },
   "monument_base": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Monument Base",
-        "class": "miner",
-        "level": 20,
-        "slug": "monument_base_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Monument Base",
+		"class": "miner",
+		"level": 20,
+		"slug": "monument_base_recipe"
+	  }
+	]
   },
   "mortar": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Mortar",
-        "class": "miner",
-        "level": 12,
-        "slug": "mortar_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Mortar",
+		"class": "miner",
+		"level": 12,
+		"slug": "mortar_recipe"
+	  }
+	]
   },
   "musk_glands": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": true
-      },
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": true
+	  },
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "nails": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Nails",
-        "class": "miner",
-        "level": 18,
-        "slug": "nails_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Nails",
+		"class": "miner",
+		"level": 18,
+		"slug": "nails_recipe"
+	  }
+	]
   },
   "night_vision_potion": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Night Vision Potion",
-        "class": "trapper",
-        "level": 15,
-        "slug": "night_vision_potion_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Night Vision Potion",
+		"class": "trapper",
+		"level": 15,
+		"slug": "night_vision_potion_recipe"
+	  }
+	]
   },
   "oak_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Oak Planks",
-        "class": "forager",
-        "level": 1,
-        "slug": "oak_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Oak Planks",
+		"class": "forager",
+		"level": 1,
+		"slug": "oak_planks_recipe"
+	  }
+	]
   },
   "oak_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "oats": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "obsidian": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "olive_oil": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Olive Oil",
-        "class": "forager",
-        "level": 7,
-        "slug": "olive_oil_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Olive Oil",
+		"class": "forager",
+		"level": 7,
+		"slug": "olive_oil_recipe"
+	  }
+	]
   },
   "onions": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "ornate_table": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Ornate Table",
-        "class": "forager",
-        "level": 19,
-        "slug": "ornate_table_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Ornate Table",
+		"class": "forager",
+		"level": 19,
+		"slug": "ornate_table_recipe"
+	  }
+	]
   },
   "pears": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "perfume": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Perfume",
-        "class": "forager",
-        "level": 13,
-        "slug": "perfume_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Perfume",
+		"class": "forager",
+		"level": 13,
+		"slug": "perfume_recipe"
+	  }
+	]
   },
   "pillow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Pillow",
-        "class": "forager",
-        "level": 8,
-        "slug": "pillow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Pillow",
+		"class": "forager",
+		"level": 8,
+		"slug": "pillow_recipe"
+	  }
+	]
   },
   "pine_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Pine Planks",
-        "class": "forager",
-        "level": 6,
-        "slug": "pine_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Pine Planks",
+		"class": "forager",
+		"level": 6,
+		"slug": "pine_planks_recipe"
+	  }
+	]
   },
   "pine_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "plant_fiber": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "pottery_set": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Pottery Set",
-        "class": "miner",
-        "level": 5,
-        "slug": "pottery_set_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Pottery Set",
+		"class": "miner",
+		"level": 5,
+		"slug": "pottery_set_recipe"
+	  }
+	]
   },
   "premium_bait": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Premium Bait",
-        "class": "trapper",
-        "level": 13,
-        "slug": "premium_bait_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Premium Bait",
+		"class": "trapper",
+		"level": 13,
+		"slug": "premium_bait_recipe"
+	  }
+	]
   },
   "premium_workshop_tools": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Premium Workshop Tools",
-        "class": "miner",
-        "level": 20,
-        "slug": "premium_workshop_tools_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Premium Workshop Tools",
+		"class": "miner",
+		"level": 20,
+		"slug": "premium_workshop_tools_recipe"
+	  }
+	]
   },
   "preserved_rations": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Preserved Rations",
-        "class": "forager",
-        "level": 18,
-        "slug": "preserved_rations_recipe"
-      },
-      {
-        "recipe_name": "Preserved Rations (Trapper)",
-        "class": "trapper",
-        "level": 14,
-        "slug": "preserved_rations_trapper_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Preserved Rations",
+		"class": "forager",
+		"level": 18,
+		"slug": "preserved_rations_recipe"
+	  },
+	  {
+		"recipe_name": "Preserved Rations (Trapper)",
+		"class": "trapper",
+		"level": 14,
+		"slug": "preserved_rations_trapper_recipe"
+	  }
+	]
   },
   "pristine_pelts": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": true
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 6,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": true
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 6,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "pumpkins": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "quality_leather": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Quality Leather",
-        "class": "trapper",
-        "level": 18,
-        "slug": "quality_leather_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Quality Leather",
+		"class": "trapper",
+		"level": 18,
+		"slug": "quality_leather_recipe"
+	  }
+	]
   },
   "quartz_crystal": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "quiver": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Quiver",
-        "class": "trapper",
-        "level": 8,
-        "slug": "quiver_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Quiver",
+		"class": "trapper",
+		"level": 8,
+		"slug": "quiver_recipe"
+	  }
+	]
   },
   "rabbit_hide": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "rabbit_meat": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": [
-      {
-        "recipe_name": "Raw Meat Processing",
-        "class": "trapper",
-        "level": 4,
-        "slug": "raw_meat_processing_recipe"
-      }
-    ]
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": [
+	  {
+		"recipe_name": "Raw Meat Processing",
+		"class": "trapper",
+		"level": 4,
+		"slug": "raw_meat_processing_recipe"
+	  }
+	]
   },
   "rare_seeds": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "rare_spices": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": true
-      },
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": true
+	  },
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "raw_meat": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "reinforced_bow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Reinforced Bow",
-        "class": "trapper",
-        "level": 24,
-        "slug": "reinforced_bow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Reinforced Bow",
+		"class": "trapper",
+		"level": 24,
+		"slug": "reinforced_bow_recipe"
+	  }
+	]
   },
   "reinforced_door": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Reinforced Door",
-        "class": "miner",
-        "level": 19,
-        "slug": "reinforced_door_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Reinforced Door",
+		"class": "miner",
+		"level": 19,
+		"slug": "reinforced_door_recipe"
+	  }
+	]
   },
   "reinforced_gloves": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Reinforced Gloves",
-        "class": "trapper",
-        "level": 22,
-        "slug": "reinforced_gloves_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Reinforced Gloves",
+		"class": "trapper",
+		"level": 22,
+		"slug": "reinforced_gloves_recipe"
+	  }
+	]
   },
   "resin": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "rivets": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Rivets",
-        "class": "miner",
-        "level": 17,
-        "slug": "rivets_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Rivets",
+		"class": "miner",
+		"level": 17,
+		"slug": "rivets_recipe"
+	  }
+	]
   },
   "rope": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Rope",
-        "class": "trapper",
-        "level": 8,
-        "slug": "rope_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Rope",
+		"class": "trapper",
+		"level": 8,
+		"slug": "rope_recipe"
+	  }
+	]
   },
   "royal_garments": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Royal Garments",
-        "class": "trapper",
-        "level": 20,
-        "slug": "royal_garments_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Royal Garments",
+		"class": "trapper",
+		"level": 20,
+		"slug": "royal_garments_recipe"
+	  }
+	]
   },
   "ruby": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "rye": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "salt": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "saltpeter": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "sand": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "sandstone": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "sapphire": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "seasoned_meat": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Seasoned Meat",
-        "class": "trapper",
-        "level": 13,
-        "slug": "seasoned_meat_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Seasoned Meat",
+		"class": "trapper",
+		"level": 13,
+		"slug": "seasoned_meat_recipe"
+	  }
+	]
   },
   "seed_pouch": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Seed Pouch",
-        "class": "forager",
-        "level": 10,
-        "slug": "seed_pouch_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Seed Pouch",
+		"class": "forager",
+		"level": 10,
+		"slug": "seed_pouch_recipe"
+	  }
+	]
   },
   "silk": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": true
-      },
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": true
-      },
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": true
-      },
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": true
+	  },
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": true
+	  },
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": true
+	  },
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "silk_fabric": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Silk Fabric",
-        "class": "forager",
-        "level": 14,
-        "slug": "silk_fabric_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Silk Fabric",
+		"class": "forager",
+		"level": 14,
+		"slug": "silk_fabric_recipe"
+	  }
+	]
   },
   "silver_fittings": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Silver Fittings",
-        "class": "miner",
-        "level": 17,
-        "slug": "silver_fittings_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Silver Fittings",
+		"class": "miner",
+		"level": 17,
+		"slug": "silver_fittings_recipe"
+	  }
+	]
   },
   "silver_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Silver Ingot",
-        "class": "miner",
-        "level": 8,
-        "slug": "silver_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Silver Ingot",
+		"class": "miner",
+		"level": 8,
+		"slug": "silver_ingot_recipe"
+	  }
+	]
   },
   "silver_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "simple_bag": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Simple Bag",
-        "class": "forager",
-        "level": 5,
-        "slug": "simple_bag_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Simple Bag",
+		"class": "forager",
+		"level": 5,
+		"slug": "simple_bag_recipe"
+	  }
+	]
   },
   "simple_jewelry": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Simple Jewelry",
-        "class": "miner",
-        "level": 16,
-        "slug": "simple_jewelry_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Simple Jewelry",
+		"class": "miner",
+		"level": 16,
+		"slug": "simple_jewelry_recipe"
+	  }
+	]
   },
   "sinew": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "skinning_knife": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Skinning Knife",
-        "class": "trapper",
-        "level": 6,
-        "slug": "skinning_knife_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Skinning Knife",
+		"class": "trapper",
+		"level": 6,
+		"slug": "skinning_knife_recipe"
+	  }
+	]
   },
   "slate": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "small_pouch": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Small Pouch",
-        "class": "trapper",
-        "level": 9,
-        "slug": "small_pouch_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Small Pouch",
+		"class": "trapper",
+		"level": 9,
+		"slug": "small_pouch_recipe"
+	  }
+	]
   },
   "soap": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Soap",
-        "class": "trapper",
-        "level": 8,
-        "slug": "soap_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Soap",
+		"class": "trapper",
+		"level": 8,
+		"slug": "soap_recipe"
+	  }
+	]
   },
   "special_mushrooms": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 5,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 5,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "spiced_roast": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Spiced Roast",
-        "class": "trapper",
-        "level": 19,
-        "slug": "spiced_roast_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Spiced Roast",
+		"class": "trapper",
+		"level": 19,
+		"slug": "spiced_roast_recipe"
+	  }
+	]
   },
   "steel_chestplate": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Steel Chestplate",
-        "class": "miner",
-        "level": 22,
-        "slug": "steel_chestplate_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Steel Chestplate",
+		"class": "miner",
+		"level": 22,
+		"slug": "steel_chestplate_recipe"
+	  }
+	]
   },
   "steel_sword": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Steel Sword",
-        "class": "miner",
-        "level": 21,
-        "slug": "steel_sword_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Steel Sword",
+		"class": "miner",
+		"level": 21,
+		"slug": "steel_sword_recipe"
+	  }
+	]
   },
   "stone": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "stone_block": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Stone Block",
-        "class": "miner",
-        "level": 2,
-        "slug": "stone_block_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Stone Block",
+		"class": "miner",
+		"level": 2,
+		"slug": "stone_block_recipe"
+	  }
+	]
   },
   "storage_chest": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Storage Chest",
-        "class": "forager",
-        "level": 11,
-        "slug": "storage_chest_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Storage Chest",
+		"class": "forager",
+		"level": 11,
+		"slug": "storage_chest_recipe"
+	  }
+	]
   },
   "sulfur": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "survival_kit": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Survival Kit",
-        "class": "trapper",
-        "level": 15,
-        "slug": "survival_kit_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Survival Kit",
+		"class": "trapper",
+		"level": 15,
+		"slug": "survival_kit_recipe"
+	  }
+	]
   },
   "tallow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Tallow",
-        "class": "trapper",
-        "level": 17,
-        "slug": "tallow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Tallow",
+		"class": "trapper",
+		"level": 17,
+		"slug": "tallow_recipe"
+	  }
+	]
   },
   "tanning_rack": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Tanning Rack",
-        "class": "forager",
-        "level": 13,
-        "slug": "tanning_rack_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Tanning Rack",
+		"class": "forager",
+		"level": 13,
+		"slug": "tanning_rack_recipe"
+	  }
+	]
   },
   "tanning_solution": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Tanning Solution",
-        "class": "trapper",
-        "level": 7,
-        "slug": "tanning_solution_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Tanning Solution",
+		"class": "trapper",
+		"level": 7,
+		"slug": "tanning_solution_recipe"
+	  }
+	]
   },
   "teeth": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "thread": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Thread",
-        "class": "forager",
-        "level": 5,
-        "slug": "thread_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Thread",
+		"class": "forager",
+		"level": 5,
+		"slug": "thread_recipe"
+	  }
+	]
   },
   "throne": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Throne",
-        "class": "forager",
-        "level": 27,
-        "slug": "throne_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Throne",
+		"class": "forager",
+		"level": 27,
+		"slug": "throne_recipe"
+	  }
+	]
   },
   "tin_ingot": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Tin Ingot",
-        "class": "miner",
-        "level": 4,
-        "slug": "tin_ingot_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Tin Ingot",
+		"class": "miner",
+		"level": 4,
+		"slug": "tin_ingot_recipe"
+	  }
+	]
   },
   "tin_ore": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 2,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 2,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "topaz": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "trap_kit": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Trap Kit",
-        "class": "trapper",
-        "level": 10,
-        "slug": "trap_kit_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Trap Kit",
+		"class": "trapper",
+		"level": 10,
+		"slug": "trap_kit_recipe"
+	  }
+	]
   },
   "tree_sap": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 2,
-        "is_rare": true
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 2,
+		"is_rare": true
+	  }
+	],
+	"crafted_by": []
   },
   "trophy_antlers": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 4,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 5,
-        "is_rare": false
-      },
-      {
-        "class": "trapper",
-        "tier": 6,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 4,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 5,
+		"is_rare": false
+	  },
+	  {
+		"class": "trapper",
+		"tier": 6,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "trophy_mount": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Trophy Mount",
-        "class": "trapper",
-        "level": 18,
-        "slug": "trophy_mount_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Trophy Mount",
+		"class": "trapper",
+		"level": 18,
+		"slug": "trophy_mount_recipe"
+	  }
+	]
   },
   "turnips": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "ultimate_endgame_2": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Dragon Heart Core",
-        "class": "trapper",
-        "level": 27,
-        "slug": "ultimate_endgame_2_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Dragon Heart Core",
+		"class": "trapper",
+		"level": 27,
+		"slug": "ultimate_endgame_2_recipe"
+	  }
+	]
   },
   "ultimate_endgame_6": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Eternal Flame Relic",
-        "class": "miner",
-        "level": 27,
-        "slug": "ultimate_endgame_6_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Eternal Flame Relic",
+		"class": "miner",
+		"level": 27,
+		"slug": "ultimate_endgame_6_recipe"
+	  }
+	]
   },
   "ultimate_forge_core": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Ultimate Forge Core",
-        "class": "miner",
-        "level": 28,
-        "slug": "ultimate_forge_core_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Ultimate Forge Core",
+		"class": "miner",
+		"level": 28,
+		"slug": "ultimate_forge_core_recipe"
+	  }
+	]
   },
   "vegetable_stew": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Vegetable Stew",
-        "class": "forager",
-        "level": 11,
-        "slug": "vegetable_stew_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Vegetable Stew",
+		"class": "forager",
+		"level": 11,
+		"slug": "vegetable_stew_recipe"
+	  }
+	]
   },
   "wall_section": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Wall Section",
-        "class": "miner",
-        "level": 23,
-        "slug": "wall_section_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Wall Section",
+		"class": "miner",
+		"level": 23,
+		"slug": "wall_section_recipe"
+	  }
+	]
   },
   "walnuts": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "water": {
-    "harvest_sources": [
-      {
-        "class": "miner",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "miner",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "wheat": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 1,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 1,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "willow_planks": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Willow Planks",
-        "class": "forager",
-        "level": 18,
-        "slug": "willow_planks_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Willow Planks",
+		"class": "forager",
+		"level": 18,
+		"slug": "willow_planks_recipe"
+	  }
+	]
   },
   "willow_wood": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "wine": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Wine",
-        "class": "forager",
-        "level": 9,
-        "slug": "wine_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Wine",
+		"class": "forager",
+		"level": 9,
+		"slug": "wine_recipe"
+	  }
+	]
   },
   "winter_coat": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Winter Coat",
-        "class": "forager",
-        "level": 14,
-        "slug": "winter_coat_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Winter Coat",
+		"class": "forager",
+		"level": 14,
+		"slug": "winter_coat_recipe"
+	  }
+	]
   },
   "woad_plant": {
-    "harvest_sources": [
-      {
-        "class": "forager",
-        "tier": 4,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "forager",
+		"tier": 4,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "wolf_pelt": {
-    "harvest_sources": [
-      {
-        "class": "trapper",
-        "tier": 3,
-        "is_rare": false
-      }
-    ],
-    "crafted_by": []
+	"harvest_sources": [
+	  {
+		"class": "trapper",
+		"tier": 3,
+		"is_rare": false
+	  }
+	],
+	"crafted_by": []
   },
   "wooden_beam": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Wooden Beam",
-        "class": "forager",
-        "level": 6,
-        "slug": "wooden_beam_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Wooden Beam",
+		"class": "forager",
+		"level": 6,
+		"slug": "wooden_beam_recipe"
+	  }
+	]
   },
   "wooden_bow": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Wooden Bow",
-        "class": "trapper",
-        "level": 3,
-        "slug": "wooden_bow_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Wooden Bow",
+		"class": "trapper",
+		"level": 3,
+		"slug": "wooden_bow_recipe"
+	  }
+	]
   },
   "wool_fabric": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Wool Fabric",
-        "class": "forager",
-        "level": 11,
-        "slug": "wool_fabric_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Wool Fabric",
+		"class": "forager",
+		"level": 11,
+		"slug": "wool_fabric_recipe"
+	  }
+	]
   },
   "workshop_tools": {
-    "harvest_sources": [],
-    "crafted_by": [
-      {
-        "recipe_name": "Workshop Tools",
-        "class": "miner",
-        "level": 24,
-        "slug": "workshop_tools_recipe"
-      }
-    ]
+	"harvest_sources": [],
+	"crafted_by": [
+	  {
+		"recipe_name": "Workshop Tools",
+		"class": "miner",
+		"level": 24,
+		"slug": "workshop_tools_recipe"
+	  }
+	]
   }
 }
