@@ -11,6 +11,7 @@ gradient = SubResource("Gradient_fnfxe")
 width = 32
 height = 32
 fill_from = Vector2(1, 1)
+fill_to = Vector2(0, 0.102564104)
 
 [resource]
 resource_local_to_scene = false
@@ -21,7 +22,7 @@ content_margin_right = -1.0
 content_margin_bottom = -1.0
 script = ExtResource("1_d7wpl")
 texture = SubResource("GradientTexture2D_q35d6")
-border_color = Color(0.247059, 0.419608, 0.454902, 1)
+border_color = Color(0.050980393, 0.101960786, 0.105882354, 1)
 border_width = 1.0
 segments_per_corner = 8
 pixel_snap = false

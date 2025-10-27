@@ -1,0 +1,882 @@
+[gd_scene load_steps=31 format=3 uid="uid://cmu6o7gkxy8wf"]
+
+[ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_8lokm"]
+[ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_vjpk7"]
+[ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_wexja"]
+[ext_resource type="Texture2D" uid="uid://b2accb7kvxwqf" path="res://assets/sprites/BackgMain.jpg" id="4_vjpk7"]
+[ext_resource type="FontFile" uid="uid://bo7gldkfw0d0k" path="res://assets/fonts/ari-w9500-display.ttf" id="5_78xcg"]
+[ext_resource type="Texture2D" uid="uid://c1a47i6ed3teh" path="res://assets/sprites/menu.png" id="5_wexja"]
+[ext_resource type="Texture2D" uid="uid://dlx7weuneneb2" path="res://assets/logo.png" id="6_2cxb2"]
+[ext_resource type="FontFile" uid="uid://d2w082aocn7jc" path="res://assets/fonts/ari-w9500-bold.ttf" id="7_artu7"]
+[ext_resource type="StyleBox" uid="uid://bi8r7kxlh83no" path="res://source/client/gateway/ui/gradient_button.tres" id="8_ad2pq"]
+[ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="9_3vubn"]
+[ext_resource type="StyleBox" uid="uid://b68crpdaolqw1" path="res://assets/styles/hover_black_bg.tres" id="10_78xcg"]
+[ext_resource type="PackedScene" uid="uid://b8x70a02a1b2d" path="res://source/client/gateway/ui/handle_validation_indicator.tscn" id="10_ksa1n"]
+[ext_resource type="PackedScene" uid="uid://6ds5d0praaft" path="res://source/client/gateway/ui/password_strength_indicator.tscn" id="11_6sdax"]
+[ext_resource type="FontFile" uid="uid://cehc3gujked8x" path="res://assets/fonts/Cinzel/static/Cinzel-Bold.ttf" id="12_oohnl"]
+[ext_resource type="SpriteFrames" uid="uid://dkeeft051qhl3" path="res://source/common/gameplay/characters/sprite_frames/forager.tres" id="13_0xw0t"]
+[ext_resource type="Script" uid="uid://q5rsjtg6nsto" path="res://source/client/gateway/ui/popup_panel.gd" id="14_g4w8g"]
+[ext_resource type="Script" uid="uid://dpemkfnpsptp" path="res://source/client/ui/settings/language_selector.gd" id="15_pyyng"]
+[ext_resource type="AudioStream" uid="uid://xxr4otrq1cg0" path="res://assets/audio/music/ekonia-main-theme.wav" id="16_c7g36"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q35d6"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q35d6"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_1gybq"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(0, 0, 0, 0.1, 0.23, 0.23, 0.23, 0.4, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rk5g7"]
+gradient = SubResource("Gradient_1gybq")
+fill_from = Vector2(0, 0.465812)
+fill_to = Vector2(1, 0.491453)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wexja"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ad2pq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3vubn"]
+
+[sub_resource type="Theme" id="Theme_waovh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjpk7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rky0m"]
+font = ExtResource("9_3vubn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfj0q"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0.54901963)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.29803923)
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ksa1n"]
+
+[node name="Gateway" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8lokm")
+script = ExtResource("2_vjpk7")
+
+[node name="Desert" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -300)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_wexja")
+centered = false
+
+[node name="FairyForest" type="Sprite2D" parent="."]
+position = Vector2(-99.00001, -62)
+scale = Vector2(0.47324517, 0.47324523)
+texture = ExtResource("4_vjpk7")
+centered = false
+
+[node name="FairyForest2" type="Sprite2D" parent="FairyForest"]
+position = Vector2(147.91476, 44.37446)
+scale = Vector2(1.4198567, 1.0817664)
+texture = ExtResource("5_wexja")
+centered = false
+
+[node name="BackgroundRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.99600875)
+color = Color(0.12941177, 0.12941177, 0.12941177, 0.06666667)
+
+[node name="MainPanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.0
+offset_top = -160.0
+offset_right = 54.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q35d6")
+
+[node name="PanelRect" type="TextureRect" parent="MainPanel"]
+visible = false
+material = SubResource("CanvasItemMaterial_q35d6")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_rk5g7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MainPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_78xcg")
+theme_override_font_sizes/font_size = 24
+text = "Welcome to"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MainPanel/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_2cxb2")
+stretch_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="LoginButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wexja")
+theme_override_styles/hover = ExtResource("10_78xcg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ad2pq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3vubn")
+text = "Login"
+
+[node name="CreateAccountButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 18
+text = "Create Account"
+
+[node name="GuestButton" type="Button" parent="MainPanel/VBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Play as Guest"
+
+[node name="LoginPanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -487.0
+offset_top = -167.0
+offset_right = 73.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.92)
+theme = SubResource("Theme_waovh")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vjpk7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoginPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="LoginPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 24
+text = "Login"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="LoginPanel/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoginPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Handle"
+label_settings = SubResource("LabelSettings_rky0m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AtLabel" type="Label" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "@"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
+placeholder_text = "Enter your player handle here"
+
+[node name="HandleValidationIndicator" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("10_ksa1n")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Password"
+label_settings = SubResource("LabelSettings_rky0m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
+placeholder_text = "Enter your password here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
+
+[node name="PasswordStrengthIndicator" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2" instance=ExtResource("11_6sdax")]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="RememberMeCheckBox" type="CheckBox" parent="LoginPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Remember Me"
+
+[node name="LoginButton" type="Button" parent="LoginPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Login"
+
+[node name="CreateAccountPanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -478.0
+offset_top = -221.0
+offset_right = 82.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.92, 0.92)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ksa1n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccountPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CreateAccountPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 24
+text = "Create Account"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CreateAccountPanel/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Player Handle"
+label_settings = SubResource("LabelSettings_rky0m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AtLabel" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "@"
+vertical_alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
+placeholder_text = "Enter your player handle here"
+
+[node name="HandleValidationIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer" instance=ExtResource("10_ksa1n")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Password"
+label_settings = SubResource("LabelSettings_rky0m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
+placeholder_text = "Enter your password here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
+
+[node name="PasswordStrengthIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("11_6sdax")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Password Repeat"
+label_settings = SubResource("LabelSettings_rky0m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_dfj0q")
+placeholder_text = "Enter your password again here"
+secret = true
+
+[node name="ToggleButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Show"
+
+[node name="PasswordMatchIndicator" parent="CreateAccountPanel/VBoxContainer/VBoxContainer/VBoxContainer3" instance=ExtResource("11_6sdax")]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="CreateAccountButton" type="Button" parent="CreateAccountPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(420, 56)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Create Account"
+
+[node name="WorldSelection" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q35d6")
+
+[node name="PanelRect" type="TextureRect" parent="WorldSelection"]
+visible = false
+material = SubResource("CanvasItemMaterial_q35d6")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_rk5g7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldSelection"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="WorldSelection/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_oohnl")
+theme_override_font_sizes/font_size = 24
+text = "World Selection"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="WorldSelection/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WorldSelection/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Button" type="Button" parent="WorldSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+kkkkkkkkkkkkkkkkkkkkkkkkkk
+Rules:
+Vladi
+gz
+
+Mondial"
+clip_text = true
+
+[node name="Button2" type="Button" parent="WorldSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+
+Rules:
+Vladi
+gz
+
+Mondial"
+
+[node name="Button3" type="Button" parent="WorldSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+
+Rules:
+Vladi
+gz
+
+Mondial"
+
+[node name="CharacterSelection" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q35d6")
+
+[node name="PanelRect" type="TextureRect" parent="CharacterSelection"]
+visible = false
+material = SubResource("CanvasItemMaterial_q35d6")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_rk5g7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterSelection"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CharacterSelection/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 24
+text = "Character Selection"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterSelection/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterSelection/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Button" type="Button" parent="CharacterSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+
+Rules:
+Vladi
+gz
+
+Mondial"
+
+[node name="Button2" type="Button" parent="CharacterSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+
+Rules:
+Vladi
+gz
+
+Mondial"
+
+[node name="Button3" type="Button" parent="CharacterSelection/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+text = "Sladida
+
+Rules:
+Vladi
+gz
+
+Mondial"
+
+[node name="CharacterCreation" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(560, 320)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -249.0
+offset_right = 350.0
+offset_bottom = 193.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreation"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CharacterCreation/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 24
+text = "Character Creation"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterCreation/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreation/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 18
+text = "Starting Skin"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="GridContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="miner" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Miner"
+
+[node name="forager" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Forager"
+
+[node name="trapper" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(88, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Trapper"
+
+[node name="CreateButton4" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "???"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 18
+text = "Preview"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CenterContainer"]
+custom_minimum_size = Vector2(260, 130)
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CenterContainer/Control"]
+position = Vector2(47, -14.000002)
+scale = Vector2(2.5, 2.5)
+sprite_frames = ExtResource("13_0xw0t")
+animation = &"run"
+centered = false
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("12_oohnl")
+theme_override_font_sizes/font_size = 18
+text = "Description"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Trapper
+A master of elemental forces, commanding powerful spells to devastate enemies or support allies."
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CharacterCreation/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LineEdit" type="LineEdit" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Character name"
+
+[node name="Button" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+text = "Random"
+
+[node name="CreateButton" type="Button" parent="CharacterCreation/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(210, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "Create"
+
+[node name="PopupPanel" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(700, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -160.0
+offset_right = 280.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_g4w8g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_artu7")
+theme_override_font_sizes/font_size = 24
+text = "Waiting"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 16
+alignment = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Waiting ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConfirmButton" type="Button" parent="PopupPanel/VBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(220, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("9_3vubn")
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = ExtResource("8_ad2pq")
+text = "OK"
+
+[node name="SwapButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 915.0
+offset_top = 492.0
+offset_right = 955.0
+offset_bottom = 532.0
+toggle_mode = true
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = -52.0
+offset_right = 104.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("9_3vubn")
+text = "Back"
+
+[node name="LanguageSelector" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -172.0
+offset_top = 29.0
+offset_right = -32.0
+offset_bottom = 60.0
+grow_horizontal = 0
+tooltip_text = "Select Language / Selecionar Idioma"
+script = ExtResource("15_pyyng")
+
+[node name="ConnectionInfo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 821.0
+offset_top = -49.0
+offset_right = 954.0
+offset_bottom = -4.0
+grow_vertical = 0
+text = "Not connected yet
+"
+horizontal_alignment = 3
+vertical_alignment = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_c7g36")
+volume_db = -12.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+accept_gzip = false
+timeout = 7.0
+
+[connection signal="pressed" from="MainPanel/VBoxContainer/VBoxContainer/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="MainPanel/VBoxContainer/VBoxContainer/CreateAccountButton" to="." method="_on_create_account_button_pressed"]
+[connection signal="pressed" from="MainPanel/VBoxContainer/VBoxContainer/GuestButton" to="." method="_on_guest_button_pressed"]
+[connection signal="pressed" from="LoginPanel/VBoxContainer/VBoxContainer/LoginButton" to="." method="_on_login_login_button_pressed"]
+[connection signal="pressed" from="CreateAccountPanel/VBoxContainer/VBoxContainer/CreateAccountButton" to="." method="create_account"]
+[connection signal="pressed" from="CharacterCreation/VBoxContainer/VBoxContainer/CreateButton" to="." method="_on_create_character_button_pressed"]
