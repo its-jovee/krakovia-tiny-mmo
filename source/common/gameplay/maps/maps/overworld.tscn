@@ -163,10 +163,11 @@ scale = Vector2(0.16000003, 0.16000003)
 texture = ExtResource("4_pmgut")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="World_tiles"]
-position = Vector2(482, 696.00006)
+position = Vector2(467, 682)
 scale = Vector2(1.7625004, 1.7625004)
 sprite_frames = SubResource("SpriteFrames_7nycf")
-frame_progress = 0.36363944
+autoplay = "default"
+frame_progress = 0.608652
 speed_scale = 2.0
 
 [node name="MinigameZone" parent="." instance=ExtResource("3_owdw7")]
@@ -192,10 +193,6 @@ position = Vector2(-424, 568)
 [node name="ForagerNodeT1 (1)" parent="." instance=ExtResource("18_ysxe5")]
 position = Vector2(-8, 552)
 
-[node name="ForagerNodeT1 (1)2" parent="." instance=ExtResource("18_ysxe5")]
-visible = false
-position = Vector2(491, 638)
-
 [node name="ForagerNodeT1 (2)" parent="." instance=ExtResource("18_ysxe5")]
 position = Vector2(-136, 552)
 
@@ -205,10 +202,6 @@ position = Vector2(-328, 536)
 [node name="MinerNodeT1 (1)" parent="." instance=ExtResource("17_6ybks")]
 position = Vector2(-250, 616)
 
-[node name="MinerNodeT1 (1)2" parent="." instance=ExtResource("17_6ybks")]
-visible = false
-position = Vector2(497, 641)
-
 [node name="MinerNodeT1 (2)" parent="." instance=ExtResource("17_6ybks")]
 position = Vector2(-296, 536)
 
@@ -217,10 +210,6 @@ position = Vector2(-360, 664)
 
 [node name="TrapperNodeT1 (1)" parent="." instance=ExtResource("17_2j5gi")]
 position = Vector2(-200, 664)
-
-[node name="TrapperNodeT1 (1)2" parent="." instance=ExtResource("17_2j5gi")]
-visible = false
-position = Vector2(485, 641)
 
 [node name="TrapperNodeT1 (2)" parent="." instance=ExtResource("17_2j5gi")]
 position = Vector2(-232, 520)
