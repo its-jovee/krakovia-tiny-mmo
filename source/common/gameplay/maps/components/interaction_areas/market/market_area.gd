@@ -18,6 +18,12 @@ func _ready() -> void:
 
 func _on_player_entered_market_area(player: Player, _area: InteractionArea) -> void:
 	"""Called when player enters market - add market-specific logic"""
+	# Defensive check: Ensure player_resource is initialized
+	# With the baseline sync fix, this should always be true, but we check anyway
+	if not player.player_resource:
+		print("[MarketArea] ⚠️ Player resource not yet initialized for %s, skipping" % player.name)
+		return
+	
 	players_in_market.append(player)
 	# Notify client that player entered market (for client-side effects)
 	if player.has_method("_on_entered_market"):

@@ -66,9 +66,17 @@ func _on_body_entered(body: Node2D) -> void:
 	print("[MinigameZone:%s] body_entered signal fired! Body: %s, Type: %s, is Player: %s" % [zone_name, body.name, body.get_class(), body is Player])
 	
 	if body is Player:
+		var player = body as Player
+		
+		# Defensive check: Ensure player_resource is initialized
+		# With the baseline sync fix, this should always be true, but we check anyway
+		if not player.player_resource:
+			print("[MinigameZone:%s] ⚠️ Player resource not yet initialized for %s, skipping" % [zone_name, body.name])
+			return
+		
 		var peer_id = body.name.to_int()
 		players_in_zone[peer_id] = body
-		print("[MinigameZone:%s] ✅ Player %s entered (total: %d)" % [zone_name, body.player_resource.display_name, players_in_zone.size()])
+		print("[MinigameZone:%s] ✅ Player %s entered (total: %d)" % [zone_name, player.player_resource.display_name, players_in_zone.size()])
 		
 		# Notify manager - they might get an invitation if a game is in waiting phase
 		if minigame_manager:

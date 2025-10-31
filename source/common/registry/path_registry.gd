@@ -29,6 +29,7 @@ static func _static_init() -> void:
 	register_field(":scale", WIRE_VEC2_F32)
 
 	register_field(":display_name", WIRE_VARIANT)
+	register_field(":handle_name", WIRE_VARIANT)
 	register_field(":character_class", WIRE_VARIANT)
 	
 	

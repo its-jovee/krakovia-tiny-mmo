@@ -3,11 +3,11 @@
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_8lokm"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_vjpk7"]
 [ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_wexja"]
-[ext_resource type="Texture2D" uid="uid://bxhwa35jnvik7" path="res://assets/sprites/gui/Helloweenbg.png" id="4_4rdug"]
+[ext_resource type="Texture2D" uid="uid://df0384xgjdy7h" path="res://assets/halloween_clean.png" id="4_4rdug"]
 [ext_resource type="FontFile" uid="uid://bo7gldkfw0d0k" path="res://assets/fonts/ari-w9500-display.ttf" id="5_78xcg"]
 [ext_resource type="Texture2D" uid="uid://c1a47i6ed3teh" path="res://assets/sprites/menu.png" id="5_wexja"]
-[ext_resource type="Texture2D" uid="uid://dlx7weuneneb2" path="res://assets/logo.png" id="6_2cxb2"]
 [ext_resource type="FontFile" uid="uid://d2w082aocn7jc" path="res://assets/fonts/ari-w9500-bold.ttf" id="7_artu7"]
+[ext_resource type="Texture2D" uid="uid://c0ui3swwggxrk" path="res://assets/kraftween_logo.png" id="7_q1aoo"]
 [ext_resource type="StyleBox" uid="uid://bi8r7kxlh83no" path="res://source/client/gateway/ui/gradient_button.tres" id="8_ad2pq"]
 [ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="9_3vubn"]
 [ext_resource type="StyleBox" uid="uid://b68crpdaolqw1" path="res://assets/styles/hover_black_bg.tres" id="10_78xcg"]
@@ -80,11 +80,13 @@ texture = ExtResource("3_wexja")
 centered = false
 
 [node name="FairyForest" type="Sprite2D" parent="."]
-scale = Vector2(0.63324535, 0.6332454)
+position = Vector2(-8.999999, -4.999999)
+scale = Vector2(0.50648147, 0.50648147)
 texture = ExtResource("4_4rdug")
 centered = false
 
 [node name="FairyForest2" type="Sprite2D" parent="FairyForest"]
+visible = false
 position = Vector2(-47.375088, -71.0625)
 scale = Vector2(1.0611058, 0.8084398)
 texture = ExtResource("5_wexja")
@@ -98,7 +100,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 0.99600875)
-color = Color(0.12941177, 0.12941177, 0.12941177, 0.06666667)
+color = Color(0.025840001, 0.025840001, 0.025840001, 0.41400003)
 
 [node name="MainPanel" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(560, 320)
@@ -128,7 +130,7 @@ theme_override_constants/separation = 16
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MainPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = -12
 
 [node name="Label" type="Label" parent="MainPanel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -139,8 +141,8 @@ horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="MainPanel/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
-texture = ExtResource("6_2cxb2")
-stretch_mode = 3
+texture = ExtResource("7_q1aoo")
+expand_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/VBoxContainer"]
 layout_mode = 2

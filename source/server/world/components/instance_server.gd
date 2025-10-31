@@ -6,23 +6,6 @@ signal player_entered_warper(player: Player, current_instance: ServerInstance, w
 
 const PLAYER: PackedScene = preload("res://source/common/gameplay/characters/player/player.tscn")
 
-# All data request handler types to pre-load
-const REQUEST_HANDLER_TYPES: Array[StringName] = [
-	&"inventory.get", &"item.equip", &"item.sell",
-	&"craft.execute", &"craft.get_recipes",
-	&"chat.message.send", &"chat.command.exec",
-	&"shop.open", &"shop.close", &"shop.browse", 
-	&"shop.purchase", &"shop.add_item", &"shop.remove_item",
-	&"trade.update", &"trade.confirm", &"trade.cancel", &"trade.respond",
-	&"harvest.join", &"harvest.leave", &"harvest.encourage",
-	&"minigame.join", &"minigame.leave", &"minigame.ready", &"minigame.bet",
-	&"quest.fetch", &"quest.complete", &"quest.pin",
-	&"gold.get", &"level.get", &"profile.get",
-	&"attribute.get", &"attribute.spend",
-	&"guild.create", &"guild.get", &"guild.self", &"guild.search", &"guild.quit",
-	&"action.perform", &"resource.consume", &"state.sit"
-]
-
 static var world_server: WorldServer
 
 static var global_chat_commands: Dictionary[String, ChatCommand]
@@ -47,14 +30,6 @@ var synchronizer_manager: StateSynchronizerManagerServer
 
 var request_handlers: Dictionary[StringName, DataRequestHandler]
 
-# Rate limiting
-var _request_timestamps: Dictionary[int, Array] = {}  # peer_id -> [timestamps]
-const RATE_LIMIT_WINDOW_MS: int = 1000  # 1 second window
-const RATE_LIMIT_MAX_REQUESTS: int = 30  # 30 requests per second
-const RATE_LIMIT_BURST_MAX: int = 10    # Max 10 requests in burst
-const RATE_LIMIT_BURST_WINDOW_MS: int = 100  # 100ms burst window
-var _rate_limit_enabled: bool = true
-
 var harvest_manager: HarvestManager
 
 
@@ -71,16 +46,7 @@ func _ready() -> void:
 							trade_mgr.cancel_trade(session_id, peer_id)
 							break
 				
-			# Close any active shops for this peer
-			if has_node("ShopManager"):
-				var shop_mgr: ShopManager = get_node("ShopManager")
-				if shop_mgr.has_shop(peer_id):
-					shop_mgr.close_shop(peer_id)
-			
-			# Clean up rate limiting data
-			_request_timestamps.erase(peer_id)
-			
-			despawn_player(peer_id)
+				despawn_player(peer_id)
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerServer.new()
@@ -93,11 +59,6 @@ func _ready() -> void:
 	trade_mgr.name = "TradeManager"
 	add_child(trade_mgr, true)
 	
-	# Add ShopManager
-	var shop_mgr = ShopManager.new()
-	shop_mgr.name = "ShopManager"
-	add_child(shop_mgr, true)
-	
 	# Add HarvestManager
 	harvest_manager = HarvestManager.new()
 	harvest_manager.name = "HarvestManager"
@@ -107,14 +68,6 @@ func _ready() -> void:
 	var quest_mgr = QuestManager.new()
 	quest_mgr.name = "QuestManager"
 	add_child(quest_mgr, true)
-	
-	# Add PerformanceMonitor
-	var perf_monitor = load("res://source/server/world/components/performance_monitor.gd").new()
-	perf_monitor.name = "PerformanceMonitor"
-	add_child(perf_monitor, true)
-	
-	# Pre-load request handlers if enabled
-	_preload_request_handlers()
 
 
 func load_map(map_path: String) -> void:
@@ -127,11 +80,18 @@ func load_map(map_path: String) -> void:
 	ready.connect(func():
 		if instance_map.replicated_props_container:
 			synchronizer_manager.add_container(1_000_000, instance_map.replicated_props_container)
-		for child in instance_map.get_children():
+		
+		# FIX: Search recursively for all InteractionAreas, not just direct children
+		# This ensures nested areas (like MarketArea under Components) are connected
+		var interaction_areas = instance_map.find_children("*", "InteractionArea", true, false)
+		print("[ServerInstance] Found %d InteractionArea(s) in map" % interaction_areas.size())
+		
+		for child in interaction_areas:
 			if child is InteractionArea:
 				child.player_entered_interaction_area.connect(self._on_player_entered_interaction_area)
 				if child.has_signal("player_exited_interaction_area"):
 					child.player_exited_interaction_area.connect(self._on_player_exited_interaction_area)
+				print("[ServerInstance] ✅ Connected InteractionArea: %s at path: %s" % [child.name, child.get_path()])
 		
 		# Reindex harvest nodes after map loads
 		if harvest_manager:
@@ -207,13 +167,12 @@ func spawn_player(peer_id: int) -> void:
 	synchronizer_manager.add_entity(peer_id, syn)
 	synchronizer_manager.register_peer(peer_id)
 
+	# FIX: Send baseline to existing peers BEFORE they receive spawn command
+	# This prevents race conditions where area detection fires before player data arrives
+	_send_baseline_to_existing_peers(peer_id, syn)
+
 	connected_peers.append(peer_id)
 	_propagate_spawn(peer_id)
-	
-	# Sync existing shops to the newly connected player
-	if has_node("ShopManager"):
-		var shop_mgr: ShopManager = get_node("ShopManager")
-		shop_mgr.sync_shops_to_player(peer_id, self)
 
 
 func instantiate_player(peer_id: int) -> Player:
@@ -304,10 +263,33 @@ func _propagate_spawn(new_player_id: int) -> void:
 			spawn_player.rpc_id(new_player_id, peer_id)
 
 
+## Send baseline state of a newly spawned player to all existing connected peers
+## This ensures existing players receive the new player's metadata (name, class, handle)
+## BEFORE the spawn command triggers, preventing race conditions with area detection
+func _send_baseline_to_existing_peers(new_player_id: int, syn: StateSynchronizer) -> void:
+	if connected_peers.is_empty():
+		return
+	
+	var baseline_pairs: Array = syn.capture_baseline()
+	if baseline_pairs.is_empty():
+		print("[ServerInstance] Warning: No baseline data for peer ", new_player_id)
+		return
+	
+	print("[ServerInstance] Sending baseline for new player ", new_player_id, " to ", connected_peers.size(), " existing peers")
+	print("[ServerInstance] Baseline data: ", baseline_pairs)
+	
+	# Send baseline to each existing peer using the bootstrap protocol
+	for peer_id: int in connected_peers:
+		# Package as a single-entity bootstrap
+		var objects: Array = [{ "eid": new_player_id, "pairs": baseline_pairs }]
+		var payload: PackedByteArray = WireCodec.encode_bootstrap([], objects)
+		synchronizer_manager.on_bootstrap.rpc_id(peer_id, payload)
+		print("[ServerInstance] Sent baseline to peer ", peer_id)
+
+
 @rpc("authority", "call_remote", "reliable", 0)
 func despawn_player(peer_id: int, delete: bool = false) -> void:
 	connected_peers.remove_at(connected_peers.find(peer_id))
-	last_accessed_time = Time.get_ticks_msec() / 1000.0  # Update on player leave
 	
 	synchronizer_manager.remove_entity(peer_id)
 	synchronizer_manager.unregister_peer(peer_id)
@@ -329,90 +311,14 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 #endregion
 
 
-func _preload_request_handlers() -> void:
-	"""Pre-load all data request handlers if enabled in config"""
-	# Check if preloading is enabled
-	var preload_enabled: bool = true
-	
-	# Try to get config from world server
-	if world_server and world_server.has_node("../WorldMain"):
-		var world_main: WorldMain = world_server.get_node("../WorldMain")
-		if world_main.world_config_file:
-			preload_enabled = world_main.world_config_file.get_value("performance", "preload_handlers", true)
-	
-	if not preload_enabled:
-		print("[ServerInstance] Request handler preloading disabled in config")
-		return
-	
-	print("[ServerInstance] Pre-loading %d request handlers..." % REQUEST_HANDLER_TYPES.size())
-	var loaded_count := 0
-	var failed_count := 0
-	
-	for type: StringName in REQUEST_HANDLER_TYPES:
-		var script: GDScript = ContentRegistryHub.load_by_slug(&"data_request_handlers", type) as GDScript
-		if script:
-			var request_handler: DataRequestHandler = script.new() as DataRequestHandler
-			if request_handler:
-				request_handlers[type] = request_handler
-				loaded_count += 1
-			else:
-				push_warning("[ServerInstance] Failed to instantiate handler: %s" % type)
-				failed_count += 1
-		else:
-			push_warning("[ServerInstance] Failed to load handler script: %s" % type)
-			failed_count += 1
-	
-	print("[ServerInstance] Pre-loaded %d handlers (%d failed)" % [loaded_count, failed_count])
-
-
-func _rate_limit_check(peer_id: int) -> bool:
-	"""Check if peer is within rate limits (DoS protection)"""
-	if not _rate_limit_enabled:
-		return true
-	
-	var now: int = Time.get_ticks_msec()
-	
-	# Get or create timestamp array for this peer
-	if not _request_timestamps.has(peer_id):
-		_request_timestamps[peer_id] = []
-	
-	var timestamps: Array = _request_timestamps[peer_id]
-	
-	# Clean old timestamps outside the window
-	timestamps = timestamps.filter(func(ts): return now - ts < RATE_LIMIT_WINDOW_MS)
-	_request_timestamps[peer_id] = timestamps
-	
-	# Check overall rate limit
-	if timestamps.size() >= RATE_LIMIT_MAX_REQUESTS:
-		push_warning("[RateLimit] Peer %d exceeded rate limit (%d req/s)" % [peer_id, RATE_LIMIT_MAX_REQUESTS])
-		return false
-	
-	# Check burst rate limit
-	var recent_burst = timestamps.filter(func(ts): return now - ts < RATE_LIMIT_BURST_WINDOW_MS)
-	if recent_burst.size() >= RATE_LIMIT_BURST_MAX:
-		push_warning("[RateLimit] Peer %d exceeded burst limit (%d req/100ms)" % [peer_id, RATE_LIMIT_BURST_MAX])
-		return false
-	
-	# Add current timestamp
-	timestamps.append(now)
-	_request_timestamps[peer_id] = timestamps
-	return true
-
-
 @rpc("any_peer", "call_remote", "reliable", 1)
 func data_request(request_id: int, type: StringName, args: Dictionary) -> void:
 	var peer_id: int = multiplayer.get_remote_sender_id()
-	
-	# Rate-limit check
-	if not _rate_limit_check(peer_id):
-		# Send error response
-		data_response.rpc_id(peer_id, request_id, type, {
-			"error": "rate_limit_exceeded",
-			"message": "Too many requests. Please slow down."
-		})
-		return
-	
 	print("[ServerInstance] data_request received - Type: %s, Args: %s, From peer: %d" % [type, args, peer_id])
+	
+	# Rate-limit
+	#if not _rate_ok(
+		#return
 	
 	if not request_handlers.has(type):
 		print("[ServerInstance] Loading handler for type: %s" % type)
