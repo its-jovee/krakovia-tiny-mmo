@@ -9,6 +9,7 @@ slug = &"craft_stone_block"
 recipe_name = &"Stone Block"
 recipe_icon = ExtResource("1_gk04p")
 description = "A sturdy block of carved stone used as the foundation for buildings, tools, and sturdy creations."
+required_level = 3
 gold_cost = 6
 energy_cost = 3.0
 input_1_slug = &"stone"

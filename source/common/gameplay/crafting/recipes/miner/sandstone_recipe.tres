@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://djahwhrny7yqj"]
+
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_lituk"]
+
+[resource]
+script = ExtResource("1_lituk")
+slug = &"sandstone_recipe"
+recipe_name = &"Sandstone"
+description = "Harden sand into a durable material."
+required_level = 5
+gold_cost = 15
+energy_cost = 25.0
+input_1_slug = &"sand"
+input_1_quantity = 2
+input_2_slug = &"water"
+input_2_quantity = 1
+input_3_slug = &"coal"
+input_3_quantity = 1
+output_1_slug = &"sandstone"
+output_1_quantity = 2
+tags = ["tier1", "miner", "construction"]

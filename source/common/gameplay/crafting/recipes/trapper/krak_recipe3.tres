@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bw58t88a8mikb"]
 
-[ext_resource type="Texture2D" uid="uid://cfe0iljlebxms" path="res://assets/icon.svg" id="1_eiync"]
+[ext_resource type="Texture2D" uid="uid://ckohi63fjsgr6" path="res://icon.png" id="1_dq42r"]
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="2_svjbx"]
 
 [resource]
 script = ExtResource("2_svjbx")
-slug = &"krak_recipe"
+slug = &"krak_trapper_recipe"
 recipe_name = &"KRAK "
-recipe_icon = ExtResource("1_eiync")
+recipe_icon = ExtResource("1_dq42r")
 description = "Legends speak of KRAK, an artifact so powerful it contains the essence of all three crafting disciplines. Worth 1.25 MILLION gold!"
 required_class = "trapper"
 required_level = 30

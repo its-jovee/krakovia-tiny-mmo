@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"items"
-version = 1760000000
-next_id = 318
+version = 1761913149
+next_id = 319
 entries = Array[Dictionary]([{
 &"hash": "5e2c9ea62f0834942e7633d440ac9054423ada15a996d1c1aabf760508c1c423",
 &"id": 1,
@@ -1577,6 +1577,11 @@ entries = Array[Dictionary]([{
 &"id": 317,
 &"path": "res://source/common/gameplay/items/luxury/krak.tres",
 &"slug": &"krak"
+}, {
+&"hash": "",
+&"id": 318,
+&"path": "res://source/common/gameplay/items/combat/wooden_bow.tres",
+&"slug": &"wooden_bow"
 }])
 metadata/slug = &"items_index"
 metadata/id = 2

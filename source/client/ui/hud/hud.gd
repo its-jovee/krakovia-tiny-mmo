@@ -398,8 +398,16 @@ func _get_unlocked_recipes_for_level(level: int) -> Array[String]:
 	if not registry:
 		return unlocked
 	
-	# Check all recipe IDs (1-145 based on what I saw in inventory_menu.gd)
-	for recipe_id in range(1, 146):
+	# Load the content index to get all recipe entries
+	var recipes_index: ContentIndex = load("res://source/common/registry/indexes/recipes_index.tres")
+	if not recipes_index:
+		return unlocked
+	
+	# Iterate through all entries in the registry
+	for entry in recipes_index.entries:
+		var recipe_id: int = entry.get(&"id", 0)
+		if recipe_id == 0:
+			continue
 		var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
 		if recipe and recipe.required_level == level:
 			# If we have player class, filter by it. Otherwise show all.

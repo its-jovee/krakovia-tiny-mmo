@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=218 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=220 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -401,25 +401,36 @@ player_id = 15
 account_name = "teste"
 display_name = "test"
 character_class = "forager"
+golds = 8954
 inventory = {
 6: {
 "stack": 1
 },
 56: {
-"stack": 6
+"stack": 4
 },
 64: {
-"stack": 3
+"stack": 14
 },
 82: {
-"stack": 1
+"stack": 3
 },
 86: {
 "stack": 1
+},
+92: {
+"stack": 1
+},
+141: {
+"stack": 32
+},
+163: {
+"stack": 4
 }
 }
-available_attributes_points = 10
-experience = 55
+available_attributes_points = 13
+level = 2
+experience = 1215
 
 [sub_resource type="Resource" id="Resource_1eduu"]
 script = ExtResource("1_83xu3")
@@ -3655,6 +3666,81 @@ character_class = "forager"
 golds = 100
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_dvwas"]
+script = ExtResource("1_83xu3")
+player_id = 211
+account_name = "teste5"
+display_name = "asdasdasd"
+golds = 89635
+inventory = {
+7: {
+"stack": 999
+},
+9: {
+"stack": 4974
+},
+11: {
+"stack": 1
+},
+33: {
+"stack": 4885
+},
+37: {
+"stack": 34
+},
+39: {
+"stack": 4937
+},
+126: {
+"stack": 8
+},
+173: {
+"stack": 30
+},
+252: {
+"stack": 5031
+},
+302: {
+"stack": 1
+},
+308: {
+"stack": 5997
+}
+}
+available_attributes_points = 28
+level = 7
+experience = 822
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_3em7y"]
+script = ExtResource("1_83xu3")
+player_id = 212
+account_name = "teste6"
+display_name = "cidado"
+character_class = "trapper"
+golds = 8993
+inventory = {
+104: {
+"stack": 1
+},
+105: {
+"stack": 11
+},
+110: {
+"stack": 9
+},
+111: {
+"stack": 4
+},
+156: {
+"stack": 7
+}
+}
+available_attributes_points = 10
+experience = 1945
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -3860,7 +3946,8 @@ accounts = {
 "mrteste": PackedInt32Array(21),
 "senhormestre": PackedInt32Array(166),
 "teste": PackedInt32Array(1, 15, 19),
-"teste6": PackedInt32Array(210),
+"teste5": PackedInt32Array(211),
+"teste6": PackedInt32Array(210, 212),
 "testemestre": PackedInt32Array(52),
 "testenilson": PackedInt32Array(18, 20)
 }
@@ -4074,9 +4161,11 @@ players = {
 207: SubResource("Resource_dncy5"),
 208: SubResource("Resource_pto0p"),
 209: SubResource("Resource_8ev4s"),
-210: SubResource("Resource_pc3pc")
+210: SubResource("Resource_pc3pc"),
+211: SubResource("Resource_dvwas"),
+212: SubResource("Resource_3em7y")
 }
-next_player_id = 210
+next_player_id = 212
 admin_ids = PackedInt32Array(1, 2)
 guilds = {
 "a": SubResource("Resource_ugqtu"),

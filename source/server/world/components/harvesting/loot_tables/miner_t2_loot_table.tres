@@ -20,11 +20,6 @@ loot_entries = Array[Dictionary]([{
 "quantity_min": 1,
 "weight": 15.0
 }, {
-"item_slug": &"sandstone",
-"quantity_max": 1,
-"quantity_min": 1,
-"weight": 15.0
-}, {
 "item_slug": &"gravel",
 "quantity_max": 2,
 "quantity_min": 1,

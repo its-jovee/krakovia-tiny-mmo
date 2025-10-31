@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"recipes"
-version = 1760000003
-next_id = 205
+version = 1761915882
+next_id = 208
 entries = Array[Dictionary]([{
 &"hash": "c2fc9df6cc5ea33a6e840bebde008cd107cf12270f2486512a176c6cf68edd96",
 &"id": 1,
@@ -1027,6 +1027,21 @@ entries = Array[Dictionary]([{
 &"id": 204,
 &"path": "res://source/common/gameplay/crafting/recipes/trapper/legendary_bow_recipe.tres",
 &"slug": &"legendary_bow_recipe"
+}, {
+&"hash": "b1873dc4ee37fd87c58f997b5485c37d3eb7818dd29ec1d2d281f4eb044824e4",
+&"id": 205,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/krak_recipe2.tres",
+&"slug": &"krak_forager_recipe"
+}, {
+&"hash": "e87a11c628d576d59d7507bd26b7e58979723db16e3f50627595fa729dea33fb",
+&"id": 206,
+&"path": "res://source/common/gameplay/crafting/recipes/trapper/krak_recipe3.tres",
+&"slug": &"krak_trapper_recipe"
+}, {
+&"hash": "a94038d6a0ebd85aae806e26c59c8b59667f89f7a6b7e6c34807bbe1430a179e",
+&"id": 207,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/sandstone_recipe.tres",
+&"slug": &"sandstone_recipe"
 }])
 metadata/slug = &"recipes_index"
 metadata/id = 4

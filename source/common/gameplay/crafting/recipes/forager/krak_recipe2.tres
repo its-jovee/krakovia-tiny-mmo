@@ -1,22 +1,22 @@
 [gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://uh4fktmp56d4"]
 
-[ext_resource type="Texture2D" uid="uid://cfe0iljlebxms" path="res://assets/icon.svg" id="1_xsyki"]
+[ext_resource type="Texture2D" uid="uid://ckohi63fjsgr6" path="res://icon.png" id="1_80e8x"]
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="2_5b12n"]
 
 [resource]
 script = ExtResource("2_5b12n")
-slug = &"krak_recipe"
+slug = &"krak_forager_recipe"
 recipe_name = &"KRAK "
-recipe_icon = ExtResource("1_xsyki")
+recipe_icon = ExtResource("1_80e8x")
 description = "Legends speak of KRAK, an artifact so powerful it contains the essence of all three crafting disciplines. Worth 1.25 MILLION gold!"
 required_class = "forager"
 required_level = 30
 gold_cost = 100000
 energy_cost = 150.0
-input_1_slug = &"adamantine_ingot"
-input_2_slug = &"ancient_titan_essence"
+input_1_slug = &"champions_trophy"
+input_2_slug = &"celestial_convergence"
 input_2_quantity = 1
-input_3_slug = &"silk"
+input_3_slug = &"essence_of_mastery"
 input_3_quantity = 1
 output_1_slug = &"krak"
 tags = ["miner", "ultimate", "krak", "legendary", "endgame", "t6"]

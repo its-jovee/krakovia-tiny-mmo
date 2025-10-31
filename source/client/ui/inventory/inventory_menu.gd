@@ -889,14 +889,23 @@ func _on_recipes_received(data: Dictionary) -> void:
 	var registry = ContentRegistryHub.registry_of(&"recipes")
 	if registry:
 		print("✅ Recipes registry found")
-		# Get all recipe IDs and load them
-		for recipe_id in range (1,146):
-			var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
-			if recipe:
-				print("✅ Loaded recipe: ", recipe.recipe_name)
-				available_recipes.append(recipe)
-			else:
-				print("❌ Failed to load recipe ID: ", recipe_id)
+		# Load the content index to get all recipe entries
+		var recipes_index: ContentIndex = load("res://source/common/registry/indexes/recipes_index.tres")
+		if recipes_index:
+			print("✅ Recipes index loaded with ", recipes_index.entries.size(), " entries")
+			# Iterate through all entries in the registry
+			for entry in recipes_index.entries:
+				var recipe_id: int = entry.get(&"id", 0)
+				if recipe_id == 0:
+					continue
+				var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
+				if recipe:
+					print("✅ Loaded recipe: ", recipe.recipe_name, " (ID: ", recipe_id, ")")
+					available_recipes.append(recipe)
+				else:
+					print("❌ Failed to load recipe ID: ", recipe_id)
+		else:
+			print("❌ Failed to load recipes index!")
 	else:
 		print("❌ Recipes registry not found!")
 	
