@@ -10,14 +10,16 @@ extends Resource
 ## [codeblock]
 ## print(accounts) # {"horizon": [6, 14], "another_guy": [2]}
 ## [/codeblock]
-@export var accounts: Dictionary[String, PackedInt32Array]
+## NOTE: Not using typed dictionary due to Godot serialization issues with PackedInt32Array
+@export var accounts: Dictionary = {}
 @export var max_character_per_account: int = 3
 
-@export var players: Dictionary[int, PlayerResource]
+@export var players: Dictionary = {}
 @export var next_player_id: int = 0
 
 @export var admin_ids: PackedInt32Array
-@export var user_roles: Dictionary[int, Array]
+## NOTE: Not using typed dictionary due to potential Godot serialization issues
+@export var user_roles: Dictionary = {}
 
 # Banned words for character names (lowercase for case-insensitive matching)
 const BANNED_WORDS: Array[String] = [
@@ -36,17 +38,18 @@ const BANNED_WORDS: Array[String] = [
 	"rola", "pinto", "xereca", "cu",
 	"macaco",
 ]
-@export var guilds: Dictionary[String, Guild]
+## NOTE: Not using typed dictionary due to potential Godot serialization issues
+@export var guilds: Dictionary = {}
 
 ## Maps account_name to ban info
 ## Structure: {"account_name": {"reason": String, "until": int (unix timestamp), "banned_by": String}}
 ## until == 0 means permanent ban
-@export var banned_players: Dictionary[String, Dictionary] = {}
+@export var banned_players: Dictionary = {}
 
 ## Maps account_name to mute info
 ## Structure: {"account_name": {"reason": String, "until": int (unix timestamp), "muted_by": String}}
 ## until == 0 means permanent mute
-@export var muted_players: Dictionary[String, Dictionary] = {}
+@export var muted_players: Dictionary = {}
 
 
 func get_player_resource(player_id: int) -> PlayerResource:
@@ -56,10 +59,13 @@ func get_player_resource(player_id: int) -> PlayerResource:
 
 
 func create_player_character(handle: String, character_data: Dictionary) -> int:
+	print("[WorldPlayerData] create_player_character called for handle: '%s'" % handle)
+	
 	if (
 		accounts.has(handle)
-		and accounts[handle].size() > max_character_per_account
+		and accounts[handle].size() >= max_character_per_account
 	):
+		print("[WorldPlayerData] Character creation failed - account has %d/%d characters" % [accounts[handle].size(), max_character_per_account])
 		return -1
 	
 	# Validate character name
@@ -97,23 +103,46 @@ func create_player_character(handle: String, character_data: Dictionary) -> int:
 	players[player_id] = player_character
 	if accounts.has(handle):
 		accounts[handle].append(player_id)
+		print("[WorldPlayerData] Added character %d to existing account '%s' (now has %d characters)" % [player_id, handle, accounts[handle].size()])
 	else:
 		accounts[handle] = [player_id] as PackedInt32Array
+		print("[WorldPlayerData] Created new account entry for '%s' with character %d" % [handle, player_id])
+	
+	print("[WorldPlayerData] Character created successfully - ID: %d, Name: '%s', Class: %s" % [player_id, character_name, character_data["class"]])
 	return player_id
 
 
 func get_account_characters(handle: String) -> Dictionary:
 	var data: Dictionary#[int, Dictionary]
 	
+	print("[WorldPlayerData] get_account_characters called for handle: '%s'" % handle)
+	print("[WorldPlayerData] accounts.has(handle): %s" % accounts.has(handle))
+	
 	if accounts.has(handle):
-		for player_id: int in accounts[handle]:
+		var character_ids: PackedInt32Array = accounts[handle]
+		print("[WorldPlayerData] Found %d character IDs for handle '%s': %s" % [character_ids.size(), handle, character_ids])
+		
+		for player_id: int in character_ids:
 			var player_character := get_player_resource(player_id)
 			if player_character:
+				print("[WorldPlayerData] Found character %d: %s (class: %s, level: %d)" % [player_id, player_character.display_name, player_character.character_class, player_character.level])
 				data[player_id] = {
 					"name": player_character.display_name,
 					"class": player_character.character_class,
 					"level": player_character.level
 				}
+			else:
+				print("[WorldPlayerData] WARNING: Character ID %d exists in accounts but not in players!" % player_id)
+	else:
+		print("[WorldPlayerData] Handle '%s' not found in accounts dictionary" % handle)
+		print("[WorldPlayerData] Accounts dictionary type: %s" % typeof(accounts))
+		print("[WorldPlayerData] Accounts dictionary size: %d" % accounts.size())
+		var keys_array = accounts.keys()
+		print("[WorldPlayerData] Keys array type: %s, size: %d" % [typeof(keys_array), keys_array.size()])
+		if keys_array.size() > 0:
+			print("[WorldPlayerData] First few account handles: %s" % str(keys_array.slice(0, 5)))
+	
+	print("[WorldPlayerData] Returning %d characters for handle '%s'" % [data.size(), handle])
 	return data
 
 

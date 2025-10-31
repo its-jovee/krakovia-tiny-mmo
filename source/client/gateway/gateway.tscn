@@ -854,18 +854,22 @@ script = ExtResource("15_pyyng")
 
 [node name="ConnectionInfo" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 821.0
-offset_top = -49.0
-offset_right = 954.0
-offset_bottom = -4.0
+offset_left = -142.0
+offset_top = -55.0
+offset_right = -9.0
+offset_bottom = -10.0
+grow_horizontal = 0
 grow_vertical = 0
 text = "Not connected yet
 "
 horizontal_alignment = 3
 vertical_alignment = 3
+text_direction = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_c7g36")

@@ -19,7 +19,13 @@ func _on_peer_connected(peer_id: int) -> void:
 
 func _on_peer_disconnected(peer_id: int) -> void:
 	print("Gateway: %d is disconnected to GatewayManager." % peer_id)
-
+	# Development safeguard: clear any lingering peer bindings when a gateway drops.
+	# In multi-gateway production, track gateway->peer mapping instead of clearing all.
+	if database and database.account_collection and database.account_collection.collection:
+		for handle in database.account_collection.collection.keys():
+			var acc: AccountResource = database.account_collection.collection[handle]
+			if acc != null and acc.peer_id != 0:
+				acc.peer_id = 0
 
 @rpc("authority")
 func update_worlds_info(_worlds_info: Dictionary) -> void:

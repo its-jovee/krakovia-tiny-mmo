@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=41 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
@@ -117,18 +117,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="Environment" id="Environment_mvj6e"]
-background_mode = 3
-tonemap_mode = 2
-tonemap_exposure = 0.96
-glow_intensity = 0.57
-glow_strength = 0.6
-glow_bloom = 0.21
-glow_blend_mode = 1
-glow_hdr_threshold = 0.1
-adjustment_enabled = true
-adjustment_contrast = 1.23
 
 [node name="Overworld" type="Node2D"]
 y_sort_enabled = true
@@ -475,6 +463,3 @@ position = Vector2(1032, 424)
 position = Vector2(989, 775)
 
 [node name="Area16" type="Node" parent="Components"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_mvj6e")

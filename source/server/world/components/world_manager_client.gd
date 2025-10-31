@@ -59,12 +59,21 @@ func player_disconnected(_username: String) -> void:
 
 @rpc("authority")
 func create_player_character_request(gateway_id: int, peer_id: int, handle: String, character_data: Dictionary) -> void:
+	var result_code := database.player_data.create_player_character(handle, character_data)
+	
+	# Immediately save the database after character creation
+	if result_code > 0:  # result_code > 0 means success (it's the player_id)
+		print("[WorldManagerClient] Character created successfully for %s, saving database..." % handle)
+		database.save_world_database()
+	else:
+		print("[WorldManagerClient] Character creation failed with code: %d" % result_code)
+	
 	player_character_creation_result.rpc_id(
 		1,
 		gateway_id,
 		peer_id,
 		handle,
-		database.player_data.create_player_character(handle, character_data)
+		result_code
 	)
 
 

@@ -29,15 +29,60 @@ func configure_database(world_info: Dictionary) -> void:
 		database_path = "."
 	database_path += str(world_info["name"] + ".tres").to_lower()
 	
+	print("[WorldDatabase] Using database path: %s" % database_path)
+	
 	# Load configuration settings
 	_load_config()
 
 
 func load_world_database() -> void:
 	if ResourceLoader.exists(database_path, "WorldPlayerData"):
-		player_data = ResourceLoader.load(database_path, "WorldPlayerData")
+		# In editor, use CACHE_MODE_IGNORE to force reload from disk
+		# This prevents stale cached data between editor runs
+		if OS.has_feature("editor"):
+			player_data = ResourceLoader.load(database_path, "WorldPlayerData", ResourceLoader.CACHE_MODE_IGNORE)
+			print("[WorldDatabase] Loaded database from disk (cache ignored) - %d players, %d accounts" % [player_data.players.size(), player_data.accounts.size()])
+		else:
+			player_data = ResourceLoader.load(database_path, "WorldPlayerData")
+			print("[WorldDatabase] Loaded database - %d players, %d accounts" % [player_data.players.size(), player_data.accounts.size()])
+		
+		# Debug: Check accounts dictionary integrity
+		print("[WorldDatabase] Accounts dict type: %s, Players dict type: %s" % [typeof(player_data.accounts), typeof(player_data.players)])
+		if player_data.accounts.size() > 0:
+			var first_account_key = player_data.accounts.keys()[0]
+			print("[WorldDatabase] First account key type: %s, value: %s" % [typeof(first_account_key), first_account_key])
+		
+		# Unconditional normalization: break any stale typed dictionaries and persist once
+		# 1) Duplicate into fresh plain Dictionaries (deep copy)
+		player_data.players = player_data.players.duplicate(true)
+		player_data.accounts = player_data.accounts.duplicate(true)
+		if typeof(player_data.guilds) == TYPE_DICTIONARY:
+			player_data.guilds = player_data.guilds.duplicate(true)
+		else:
+			player_data.guilds = {}
+		
+		# 2) Rebuild accounts mapping from players if it is missing or smaller
+		var rebuilt_accounts := {}
+		for _pid in player_data.players.keys():
+			var pid: int = _pid
+			var p = player_data.players[pid]
+			if p and not String(p.account_name).is_empty():
+				var h := String(p.account_name)
+				if not rebuilt_accounts.has(h):
+					rebuilt_accounts[h] = PackedInt32Array()
+				rebuilt_accounts[h].append(pid)
+		# Only replace when it's strictly better or original is empty
+		if rebuilt_accounts.size() >= player_data.accounts.size():
+			player_data.accounts = rebuilt_accounts
+		
+		# 3) Persist normalized structure once so future runs load clean dicts
+		save_world_database()
+
+		# Fix data integrity after loading (handles typed dictionary corruption)
+		_fix_database_integrity()
 	else:
 		player_data = WorldPlayerData.new()
+		print("[WorldDatabase] No existing database found, created new WorldPlayerData")
 
 
 func setup_auto_save() -> void:
@@ -85,35 +130,19 @@ func send_system_message(message: String) -> void:
 
 func save_world_database() -> void:
 	"""
-	Save the database atomically with backup rotation.
-	Uses a temporary file and atomic rename to prevent corruption.
+	Save the database directly to the target path. Atomic rename disabled per request.
 	"""
 	var start_time := Time.get_ticks_msec()
 	
-	# Create temp file path
-	var temp_path := database_path + ".tmp.%d" % Time.get_ticks_msec()
-	
-	# Save to temp file first
-	var error: Error = ResourceSaver.save(player_data, temp_path)
+	# Direct save
+	var error: Error = ResourceSaver.save(player_data, database_path)
 	if error != OK:
-		printerr("[WorldDatabase] ERROR: Failed to save to temp file: %s" % error_string(error))
-		# Try to clean up temp file
-		if FileAccess.file_exists(temp_path):
-			DirAccess.remove_absolute(temp_path)
+		printerr("[WorldDatabase] ERROR: Failed to save database: %s" % error_string(error))
 		return
 	
-	# Create backup if enabled and main database exists
+	# Optional backup after successful save (kept enabled if configured)
 	if backup_on_save and FileAccess.file_exists(database_path):
 		_create_backup()
-	
-	# Atomic rename: temp -> main
-	error = DirAccess.rename_absolute(temp_path, database_path)
-	if error != OK:
-		printerr("[WorldDatabase] ERROR: Failed to rename temp to main: %s" % error_string(error))
-		# Try to clean up temp file
-		if FileAccess.file_exists(temp_path):
-			DirAccess.remove_absolute(temp_path)
-		return
 	
 	# Log stats if enabled
 	if log_save_stats:
@@ -129,8 +158,10 @@ func _create_backup() -> void:
 	"""Create a timestamped backup of the current database file"""
 	var timestamp := Time.get_datetime_string_from_system().replace(":", "-")
 	var backup_path := "%s.backup.%s" % [database_path, timestamp]
+	var abs_main := ProjectSettings.globalize_path(database_path)
+	var abs_backup := ProjectSettings.globalize_path(backup_path)
 	
-	var error := DirAccess.copy_absolute(database_path, backup_path)
+	var error := DirAccess.copy_absolute(abs_main, abs_backup)
 	if error != OK:
 		push_warning("[WorldDatabase] Failed to create backup: %s" % error_string(error))
 	else:
@@ -143,16 +174,17 @@ func _cleanup_old_backups() -> void:
 	var dir_path := database_path.get_base_dir()
 	var file_name := database_path.get_file()
 	var backup_prefix := file_name + ".backup."
+	var abs_dir := ProjectSettings.globalize_path(dir_path)
 	
 	# Find all backup files
 	var backups: Array[String] = []
-	var dir := DirAccess.open(dir_path)
+	var dir := DirAccess.open(abs_dir)
 	if dir:
 		dir.list_dir_begin()
 		var file_name_iter := dir.get_next()
 		while file_name_iter != "":
 			if file_name_iter.begins_with(backup_prefix):
-				backups.append(dir_path.path_join(file_name_iter))
+				backups.append(abs_dir.path_join(file_name_iter))
 			file_name_iter = dir.get_next()
 		dir.list_dir_end()
 	
@@ -254,6 +286,98 @@ func _get_file_size(path: String) -> int:
 		file.close()
 		return size
 	return 0
+
+
+func _fix_database_integrity() -> void:
+	"""
+	Fix database integrity issues after loading.
+	Handles corrupted typed dictionaries from older versions.
+	"""
+	var fixed_issues := 0
+	var needs_full_rebuild := false
+	
+	# Test if accounts dictionary is functional (typed dict serialization bug)
+	# Typed dicts can read old keys but can't add/retrieve new string keys
+	var accounts_functional := true
+	var test_handle := "__integrity_test__"
+	var test_value := PackedInt32Array([999999])
+	
+	# Try to add and retrieve a test key
+	player_data.accounts[test_handle] = test_value
+	if not player_data.accounts.has(test_handle):
+		print("[WorldDatabase] CRITICAL: accounts dictionary is corrupted (typed dict bug - can't add new keys) - forcing rebuild...")
+		accounts_functional = false
+		needs_full_rebuild = true
+		fixed_issues += 1
+	else:
+		# Clean up test key
+		player_data.accounts.erase(test_handle)
+	
+	# Test if players dictionary is functional
+	var players_functional := true
+	if player_data.players.size() > 0:
+		var test_key = player_data.players.keys()[0]
+		if not player_data.players.has(test_key):
+			print("[WorldDatabase] CRITICAL: players dictionary is corrupted (typed dict bug) - forcing rebuild...")
+			players_functional = false
+			needs_full_rebuild = true
+			fixed_issues += 1
+	
+	# If dictionaries are corrupted, rebuild them
+	if needs_full_rebuild:
+		print("[WorldDatabase] Rebuilding dictionaries from corrupted typed format...")
+		
+		# Rebuild players dict if needed
+		if not players_functional and player_data.players.size() > 0:
+			var old_players = player_data.players
+			var new_players := {}
+			print("[WorldDatabase] Attempting to recover %d players..." % old_players.size())
+			
+			var recovered := 0
+			for key in old_players.keys():
+				var value = old_players[key]
+				if value != null:
+					new_players[key] = value
+					recovered += 1
+			
+			player_data.players = new_players
+			print("[WorldDatabase] Recovered %d players" % recovered)
+		
+		# Rebuild accounts dict from players
+		var old_accounts = player_data.accounts
+		var new_accounts := {}
+		
+		print("[WorldDatabase] Rebuilding accounts dictionary from %d players..." % player_data.players.size())
+		
+		for player_id in player_data.players.keys():
+			var player_res = player_data.players[player_id]
+			if player_res and String(player_res.account_name) != "":
+				var handle: String = player_res.account_name
+				if not new_accounts.has(handle):
+					new_accounts[handle] = PackedInt32Array()
+				new_accounts[handle].append(player_id)
+		
+		player_data.accounts = new_accounts
+		print("[WorldDatabase] Rebuilt accounts dictionary - now has %d accounts" % player_data.accounts.size())
+	
+	# Final check: if accounts is still empty but players exist, rebuild
+	if player_data.accounts.size() == 0 and player_data.players.size() > 0:
+		print("[WorldDatabase] Accounts dict empty but players exist - rebuilding...")
+		for player_id in player_data.players.keys():
+			var player_res = player_data.players[player_id]
+			if player_res and String(player_res.account_name) != "":
+				var handle: String = player_res.account_name
+				if not player_data.accounts.has(handle):
+					player_data.accounts[handle] = PackedInt32Array()
+				player_data.accounts[handle].append(player_id)
+				fixed_issues += 1
+		print("[WorldDatabase] Rebuilt accounts dictionary - now has %d accounts" % player_data.accounts.size())
+	
+	if fixed_issues > 0:
+		print("[WorldDatabase] Fixed %d database integrity issues - saving corrected database..." % fixed_issues)
+		save_world_database()
+	else:
+		print("[WorldDatabase] Database integrity check passed")
 
 
 func _notification(what: int) -> void:
