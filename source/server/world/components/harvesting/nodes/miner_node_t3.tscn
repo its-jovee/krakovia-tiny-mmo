@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://t417sdlww3ce"]
+[gd_scene load_steps=7 format=3 uid="uid://t417sdlww3ce"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
 [ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/miner_t3_loot_table.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://wb2gas6dhk2j" path="res://assets/sprites/environment/world_tileset/Forest/Props.png" id="3_dld1q"]
 [ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_v0s00"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lqcof"]
+radius = 8.0
+height = 36.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uiv33"]
+polygon = PackedVector2Array(-11, -12, -18, -3, -18, 2, -10, 8, -2, 8, 3, 2, 6, -7, 16, -12, 12, -20, 5, -24, -1, -24, -6, -20)
 
 [node name="MinerNodeT3" type="Node2D"]
 script = ExtResource("1")
@@ -16,12 +24,25 @@ required_level = 11
 tier = 3
 loot_table = ExtResource("2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.4, 0.2, 0.1, 1)
-scale = Vector2(32, 32)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_dld1q")
+region_enabled = true
+region_rect = Rect2(5, 272, 37, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 6)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_lqcof")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+position = Vector2(0, 8)
+occluder = SubResource("OccluderPolygon2D_uiv33")
+
+[node name="Class_Signal" type="Sprite2D" parent="."]
 modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
 position = Vector2(0, -40)
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.334375, 0.334375)
 texture = ExtResource("3_v0s00")

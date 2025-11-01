@@ -3674,13 +3674,16 @@ display_name = "asdasdasd"
 golds = 89635
 inventory = {
 7: {
-"stack": 999
+"stack": 1003
 },
 9: {
-"stack": 4974
+"stack": 4976
 },
 11: {
 "stack": 1
+},
+29: {
+"stack": 7
 },
 33: {
 "stack": 4885
@@ -3700,16 +3703,22 @@ inventory = {
 252: {
 "stack": 5031
 },
+286: {
+"stack": 4
+},
+287: {
+"stack": 5
+},
 302: {
 "stack": 1
 },
 308: {
-"stack": 5997
+"stack": 6000
 }
 }
 available_attributes_points = 28
 level = 7
-experience = 822
+experience = 1027
 server_roles = {
 "senior_admin": {}
 }

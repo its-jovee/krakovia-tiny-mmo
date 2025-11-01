@@ -23,6 +23,7 @@ size = Vector2(16, 32)
 script = ExtResource("2_qfdgo")
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
+offset = Vector2(0, -32)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
@@ -104,3 +105,9 @@ debug_color = Color(0.846048, 0.237298, 0.730831, 0.42)
 [node name="AttributesMirror2" type="Node" parent="AbilitySystemComponent" index="0"]
 script = ExtResource("12_225ue")
 metadata/_custom_type_script = "uid://natfmyvgikpe"
+
+[node name="PointLight2D" parent="." index="22"]
+color = Color(0.5, 0.2585, 0.185, 1)
+energy = 0.6
+shadow_filter = 1
+shadow_filter_smooth = 25.0

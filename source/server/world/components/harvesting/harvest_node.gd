@@ -78,6 +78,34 @@ func _ready() -> void:
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance and instance.harvest_manager:
 		instance.harvest_manager.register_node(self)
+	
+	# Setup floating shader on client side
+	_setup_floating_shader()
+
+
+func _setup_floating_shader() -> void:
+	"""Setup floating animation shader for Class_Signal sprite on client side only"""
+	if multiplayer.is_server():
+		return  # Only setup on client
+	
+	var signal_sprite: Sprite2D = get_node_or_null("Class_Signal")
+	if not signal_sprite:
+		return  # Class_Signal node doesn't exist
+	
+	var shader: Shader = load("res://source/client/shaders/floating_signal.gdshader")
+	if not shader:
+		return
+	
+	var shader_material: ShaderMaterial = ShaderMaterial.new()
+	shader_material.shader = shader
+	
+	# Set shader parameters
+	shader_material.set_shader_parameter("float_speed", 1.5)
+	shader_material.set_shader_parameter("float_amplitude", 8.0)
+	shader_material.set_shader_parameter("time_offset", randf() * TAU)  # Randomize timing
+	
+	# Apply shader to sprite
+	signal_sprite.material = shader_material
 
 
 func _broadcast_harvest_event(event_name: StringName, data: Dictionary, to_harvesters_only: bool = false) -> void:
