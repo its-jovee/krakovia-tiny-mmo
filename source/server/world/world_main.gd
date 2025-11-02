@@ -93,6 +93,13 @@ func _preload_resources() -> void:
 		if recipe_stats.get("success", false):
 			total_loaded += recipe_stats.get("loaded_count", 0)
 	
+	# Preload data request handlers
+	var preload_handlers: bool = world_config_file.get_value("performance", "preload_handlers", true)
+	if preload_handlers:
+		var handler_stats := ContentRegistryHub.preload_all_content(&"data_request_handlers")
+		if handler_stats.get("success", false):
+			total_loaded += handler_stats.get("loaded_count", 0)
+	
 	var total_elapsed_ms := Time.get_ticks_msec() - total_start_time
 	var total_memory_increase := OS.get_static_memory_usage() - total_start_memory
 	

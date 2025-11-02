@@ -18,10 +18,10 @@ extends Item
 
 
 func _init() -> void:
-	# Equipment items should be tradeable
+	# Equipment items should be tradeable by default
 	can_trade = true
-	can_sell = true
 	stack_limit = 1  # Equipment doesn't stack
+	# Note: can_sell is controlled per-item in the .tres file (defaults to false from Item class)
 
 
 func can_equip(player: Player) -> bool:

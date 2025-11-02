@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=230 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=231 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -41,19 +41,19 @@ inventory = {
 "stack": 202
 },
 7: {
-"stack": 8
+"stack": 15
 },
 9: {
 "stack": 7
 },
 11: {
-"stack": 3
+"stack": 5
 },
 24: {
 "stack": 3
 },
 33: {
-"stack": 27
+"stack": 29
 },
 34: {
 "stack": 10
@@ -92,7 +92,7 @@ inventory = {
 "stack": 3
 },
 308: {
-"stack": 11
+"stack": 15
 },
 319: {
 "stack": 1
@@ -100,7 +100,7 @@ inventory = {
 }
 available_attributes_points = 10
 level = 10
-experience = 12280
+experience = 12355
 guild = SubResource("Resource_vidub")
 server_roles = {
 "senior_admin": {}
@@ -3907,6 +3907,34 @@ server_roles = {
 "senior_admin": {}
 }
 
+[sub_resource type="Resource" id="Resource_aaui0"]
+script = ExtResource("1_83xu3")
+player_id = 223
+account_name = "teste3"
+display_name = "ranhento"
+character_class = "trapper"
+appearance_head_id = "head_d"
+golds = 600
+inventory = {
+104: {
+"stack": 4
+},
+105: {
+"stack": 2
+},
+110: {
+"stack": 1
+},
+319: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 35
+server_roles = {
+"senior_admin": {}
+}
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -4113,6 +4141,7 @@ accounts = {
 "senhormestre": PackedInt32Array(166),
 "teste": PackedInt32Array(1, 15, 19),
 "teste2": PackedInt32Array(222),
+"teste3": PackedInt32Array(223),
 "teste5": PackedInt32Array(211, 213, 220),
 "teste6": PackedInt32Array(210, 212, 215),
 "teste7": PackedInt32Array(214, 217, 218),
@@ -4342,9 +4371,10 @@ players = {
 219: SubResource("Resource_hxtwh"),
 220: SubResource("Resource_v6mnh"),
 221: SubResource("Resource_sed81"),
-222: SubResource("Resource_1kqp4")
+222: SubResource("Resource_1kqp4"),
+223: SubResource("Resource_aaui0")
 }
-next_player_id = 222
+next_player_id = 223
 admin_ids = PackedInt32Array(1, 2)
 guilds = {
 "a": SubResource("Resource_ugqtu"),

@@ -332,7 +332,7 @@ func _clear_item_selection() -> void:
 
 # === SELL SYSTEM ===
 func _can_sell_item() -> bool:
-	return selected_item != null and in_market
+	return selected_item != null and in_market and selected_item.can_sell
 
 func _get_selected_item_quantity() -> int:
 	if selected_item_id == -1:

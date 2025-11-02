@@ -10,8 +10,7 @@ radius = 2.0
 height = 12.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x5c8a"]
-cull_mode = 1
-polygon = PackedVector2Array(-8, -9, -10, -8, -10, -4, -12, -3, -12, 0, -12, 6, -5, 6, -6, 2, 1, 0, 3, 1, 6, 0, 8, 1, 14, 1, 15, -1, 13, -6, 9, -6, 7, -9, 16, -18, 11, -21, 7, -23, 3, -22, 1, -20, -2, -19, -3, -18, -3, -17, -5, -6)
+polygon = PackedVector2Array(-8, -9, -10, -8, -10, -4, -12, -3, -12, 0, -12, 6, -5, 6, 3, 6, 2, 4, 5, 2, 6, 0, 8, 1, 14, 1, 15, -1, 19, -4, 19, -7, 19, -12, 16, -18, 11, -21, 7, -23, 3, -22, 1, -20, -2, -19, -3, -18, -3, -17, -5, -6)
 
 [node name="TrapperNodeT3" type="Node2D"]
 script = ExtResource("1")

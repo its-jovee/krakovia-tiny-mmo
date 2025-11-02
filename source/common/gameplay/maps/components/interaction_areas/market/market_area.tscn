@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://dfxctfxndtyhk" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.gd" id="1_market"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_market"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwrah"]
+radius = 48.0
 
 [node name="MarketArea" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_market")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_market")
+shape = SubResource("CircleShape2D_xwrah")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -18,10 +18,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -32.0
-offset_top = -10.0
-offset_right = 32.0
-offset_bottom = 10.0
-text = "Market"
+offset_left = -16.0
+offset_top = -8.000001
+offset_right = 45.0
+offset_bottom = 12.999999
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.525, 0.525)
+text = "Mercado"
 horizontal_alignment = 1
 vertical_alignment = 1
