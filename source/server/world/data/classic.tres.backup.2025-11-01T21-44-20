@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=220 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=230 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -32,7 +32,7 @@ script = ExtResource("1_83xu3")
 player_id = 1
 account_name = "teste"
 display_name = "teste"
-golds = 61
+golds = 561
 inventory = {
 1: {
 "stack": 1
@@ -40,14 +40,20 @@ inventory = {
 6: {
 "stack": 202
 },
+7: {
+"stack": 15
+},
 9: {
 "stack": 7
+},
+11: {
+"stack": 5
 },
 24: {
 "stack": 3
 },
 33: {
-"stack": 23
+"stack": 29
 },
 34: {
 "stack": 10
@@ -56,7 +62,7 @@ inventory = {
 "stack": 5
 },
 39: {
-"stack": 1
+"stack": 2
 },
 41: {
 "stack": 1
@@ -84,11 +90,17 @@ inventory = {
 },
 287: {
 "stack": 3
+},
+308: {
+"stack": 15
+},
+319: {
+"stack": 1
 }
 }
 available_attributes_points = 10
 level = 10
-experience = 12145
+experience = 12355
 guild = SubResource("Resource_vidub")
 server_roles = {
 "senior_admin": {}
@@ -3750,6 +3762,151 @@ inventory = {
 available_attributes_points = 10
 experience = 1945
 
+[sub_resource type="Resource" id="Resource_gns7v"]
+script = ExtResource("1_83xu3")
+player_id = 213
+account_name = "teste5"
+display_name = "sfgddsgsdgds"
+appearance_head_id = "head_d"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_lvwp6"]
+script = ExtResource("1_83xu3")
+player_id = 214
+account_name = "teste7"
+display_name = "sdgsdgsdgsd"
+appearance_head_id = "head_d"
+golds = 100
+inventory = {
+7: {
+"stack": 1
+},
+9: {
+"stack": 1
+},
+33: {
+"stack": 1
+},
+308: {
+"stack": 4
+}
+}
+available_attributes_points = 10
+experience = 35
+
+[sub_resource type="Resource" id="Resource_qtslh"]
+script = ExtResource("1_83xu3")
+player_id = 215
+account_name = "teste6"
+display_name = "asdsadas"
+appearance_head_id = "head_c"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_xmyd8"]
+script = ExtResource("1_83xu3")
+player_id = 216
+account_name = "teste8"
+display_name = "filhao"
+appearance_head_id = "head_b"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_hhtd3"]
+script = ExtResource("1_83xu3")
+player_id = 217
+account_name = "teste7"
+display_name = "sdasdsadsa"
+appearance_head_id = "head_d"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_alqs3"]
+script = ExtResource("1_83xu3")
+player_id = 218
+account_name = "teste7"
+display_name = "cacador"
+character_class = "trapper"
+appearance_head_id = "head_d"
+equipped_accessory_id = 319
+golds = 1100
+inventory = {
+104: {
+"stack": 13
+},
+105: {
+"stack": 7
+},
+110: {
+"stack": 5
+},
+111: {
+"stack": 2
+},
+319: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+experience = 135
+server_roles = {
+"senior_admin": {}
+}
+
+[sub_resource type="Resource" id="Resource_hxtwh"]
+script = ExtResource("1_83xu3")
+player_id = 219
+account_name = "teste8"
+display_name = "filhao"
+appearance_head_id = "head_b"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_v6mnh"]
+script = ExtResource("1_83xu3")
+player_id = 220
+account_name = "teste5"
+display_name = "snoopy"
+character_class = "forager"
+appearance_head_id = "head_c"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_sed81"]
+script = ExtResource("1_83xu3")
+player_id = 221
+account_name = "teste8"
+display_name = "sleepy"
+character_class = "forager"
+appearance_head_id = "head_c"
+equipped_accessory_id = 319
+golds = 100
+inventory = {
+319: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_1kqp4"]
+script = ExtResource("1_83xu3")
+player_id = 222
+account_name = "teste2"
+display_name = "benza"
+character_class = "forager"
+appearance_head_id = "head_d"
+golds = 600
+inventory = {
+319: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+server_roles = {
+"senior_admin": {}
+}
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -3955,8 +4112,11 @@ accounts = {
 "mrteste": PackedInt32Array(21),
 "senhormestre": PackedInt32Array(166),
 "teste": PackedInt32Array(1, 15, 19),
-"teste5": PackedInt32Array(211),
-"teste6": PackedInt32Array(210, 212),
+"teste2": PackedInt32Array(222),
+"teste5": PackedInt32Array(211, 213, 220),
+"teste6": PackedInt32Array(210, 212, 215),
+"teste7": PackedInt32Array(214, 217, 218),
+"teste8": PackedInt32Array(216, 219, 221),
 "testemestre": PackedInt32Array(52),
 "testenilson": PackedInt32Array(18, 20)
 }
@@ -4172,9 +4332,19 @@ players = {
 209: SubResource("Resource_8ev4s"),
 210: SubResource("Resource_pc3pc"),
 211: SubResource("Resource_dvwas"),
-212: SubResource("Resource_3em7y")
+212: SubResource("Resource_3em7y"),
+213: SubResource("Resource_gns7v"),
+214: SubResource("Resource_lvwp6"),
+215: SubResource("Resource_qtslh"),
+216: SubResource("Resource_xmyd8"),
+217: SubResource("Resource_hhtd3"),
+218: SubResource("Resource_alqs3"),
+219: SubResource("Resource_hxtwh"),
+220: SubResource("Resource_v6mnh"),
+221: SubResource("Resource_sed81"),
+222: SubResource("Resource_1kqp4")
 }
-next_player_id = 212
+next_player_id = 222
 admin_ids = PackedInt32Array(1, 2)
 guilds = {
 "a": SubResource("Resource_ugqtu"),

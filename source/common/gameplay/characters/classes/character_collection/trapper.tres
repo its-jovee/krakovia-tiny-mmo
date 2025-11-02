@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://7ha2uyyv6r5e"]
 
 [ext_resource type="Script" uid="uid://b41gujk35w421" path="res://source/common/gameplay/combat/ability/ability.gd" id="1_avffo"]
-[ext_resource type="SpriteFrames" uid="uid://v5y6komavnpb" path="res://source/common/gameplay/characters/sprite_frames/trapper.tres" id="2_vs5xq"]
+[ext_resource type="SpriteFrames" uid="uid://v5y6komavnpb" path="res://source/common/gameplay/characters/sprite_frames/composite/trapper/base/trapper.tres" id="2_vs5xq"]
 [ext_resource type="Script" uid="uid://b2tgdabbgoor" path="res://source/common/gameplay/characters/classes/character_resource.gd" id="3_wlykr"]
 
 [resource]

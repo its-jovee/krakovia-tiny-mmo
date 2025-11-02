@@ -73,6 +73,15 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 	if icon.texture == null:
 		return null
 	
+	# Debug: Check what we're dragging
+	if item_data.has("item"):
+		var item = item_data.item
+		print("[ItemSlot] Starting drag: %s (Class: %s, Is EquipmentItem: %s)" % [
+			item.item_name if item else "NULL",
+			item.get_class() if item else "NULL",
+			item is EquipmentItem if item else false
+		])
+	
 	# Create drag data with all necessary information
 	var drag_data = {
 		"texture": icon.texture,

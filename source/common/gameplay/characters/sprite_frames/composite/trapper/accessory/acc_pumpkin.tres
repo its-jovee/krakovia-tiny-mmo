@@ -1,0 +1,49 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cr7ic40f6x1tm"]
+
+[ext_resource type="Texture2D" uid="uid://2apb0a3lx5ms" path="res://assets/sprites/characters/composite/trapper/accessory/acc-pumpkin.png" id="1_gdlle"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8w5c"]
+atlas = ExtResource("1_gdlle")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trjqn"]
+atlas = ExtResource("1_gdlle")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x111f"]
+atlas = ExtResource("1_gdlle")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a6itq"]
+atlas = ExtResource("1_gdlle")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8w5c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trjqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x111f")
+}],
+"loop": true,
+"name": &"run",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a6itq")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]

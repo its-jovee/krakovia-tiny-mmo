@@ -14,6 +14,7 @@ var token: int = randi()
 
 var current_world_id: int
 var selected_skin: String = "forager"
+var selected_head_index: int = 0  # Current head selection (0-based)
 
 var menu_stack: Array[Control]
 
@@ -82,6 +83,15 @@ func _ready() -> void:
 	
 	var animated_sprite_2d: AnimatedSprite2D = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CenterContainer/Control/AnimatedSprite2D
 	animated_sprite_2d.play(&"run")
+	
+	# Create head preview sprite as child of body sprite
+	var head_preview_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
+	head_preview_sprite.name = "HeadPreview"
+	head_preview_sprite.position = Vector2(-1, 1)  # Fine-tune alignment (1px left, 1px down)
+	head_preview_sprite.offset = Vector2.ZERO
+	head_preview_sprite.centered = false  # Match body sprite centering
+	animated_sprite_2d.add_child(head_preview_sprite)
+	
 	var v_box_container: GridContainer = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer
 	for button: Button in v_box_container.get_children():
 		button.pressed.connect(
@@ -89,11 +99,29 @@ func _ready() -> void:
 			# Use button.name for the slug; keep text as the display label
 			var slug := button.name.to_lower()
 			var sprite = ContentRegistryHub.load_by_slug(&"sprites", slug)
+			
+			# Fallback: Try loading from new composite structure if registry fails
 			if not sprite:
+				var composite_path := "res://source/common/gameplay/characters/sprite_frames/composite/%s/base/%s.tres" % [slug, slug]
+				if ResourceLoader.exists(composite_path):
+					sprite = load(composite_path)
+			
+			# Final fallback: Try old location
+			if not sprite:
+				var old_path := "res://source/common/gameplay/characters/sprite_frames/%s.tres" % slug
+				if ResourceLoader.exists(old_path):
+					sprite = load(old_path)
+			
+			if not sprite:
+				push_error("Could not load sprite for class: %s" % slug)
 				return
+			
 			selected_skin = slug
 			animated_sprite_2d.sprite_frames = sprite
 			animated_sprite_2d.play(&"run")
+			
+			# Update head preview for new class
+			_update_head_preview()
 		)
 	
 	# Setup password strength indicators
@@ -110,6 +138,9 @@ func _ready() -> void:
 	
 	# Check for saved credentials on startup
 	_check_saved_credentials()
+	
+	# Initialize head preview for character creation
+	_update_head_preview()
 
 
 ## Update all UI text when language changes
@@ -588,6 +619,7 @@ func _on_create_character_button_pressed() -> void:
 			"data": {
 				"name": character_name,  # Use trimmed name
 				"class": selected_skin,
+				"head": ["head_a", "head_b", "head_c", "head_d"][selected_head_index],  # Send head ID as string
 			},
 			GatewayApi.KEY_ACCOUNT_HANDLE: account_name,
 			GatewayApi.KEY_WORLD_ID: current_world_id
@@ -744,3 +776,78 @@ func _contains_banned_word(name: String) -> bool:
 			return true
 	
 	return false
+
+
+func _on_head_previous_button_pressed() -> void:
+	"""Navigate to previous head option"""
+	var head_count = CompositePartRegistry.get_head_count(selected_skin)
+	if head_count == 0:
+		return
+	
+	selected_head_index = (selected_head_index - 1 + head_count) % head_count
+	_update_head_preview()
+
+
+func _on_head_next_button_pressed() -> void:
+	"""Navigate to next head option"""
+	var head_count = CompositePartRegistry.get_head_count(selected_skin)
+	if head_count == 0:
+		return
+	
+	selected_head_index = (selected_head_index + 1) % head_count
+	_update_head_preview()
+
+
+func _update_head_preview() -> void:
+	"""Update the character preview with the selected head"""
+	var head_names := ["A", "B", "C", "D"]
+	var head_ids := ["head_a", "head_b", "head_c", "head_d"]
+	
+	# Update label
+	var head_label: Label = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HeadSelection/HeadLabel
+	if head_label:
+		head_label.text = "Head: %s" % head_names[selected_head_index]
+	
+	# Update head sprite preview
+	var body_sprite: AnimatedSprite2D = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CenterContainer/Control/AnimatedSprite2D
+	var head_sprite: AnimatedSprite2D = body_sprite.get_node_or_null("HeadPreview")
+	
+	if not head_sprite:
+		push_warning("Gateway: Head preview sprite not found")
+		return
+	
+	# Load head sprite frames for selected class and head
+	var head_id: String = head_ids[selected_head_index]
+	var head_path: String = CompositePartRegistry.get_animated_spriteframes_path(
+		selected_skin,
+		CompositePartRegistry.Layer.HEAD,
+		head_id
+	)
+	
+	if ResourceLoader.exists(head_path):
+		head_sprite.sprite_frames = load(head_path)
+		head_sprite.visible = true
+		
+		# Match the body animation AND frame for perfect sync
+		var current_anim := body_sprite.animation if body_sprite.is_playing() else &"run"
+		var current_frame := body_sprite.frame if body_sprite.is_playing() else 0
+		
+		head_sprite.play(current_anim)
+		head_sprite.set_frame_and_progress(current_frame, body_sprite.get_frame_progress())
+		
+		# Connect to body's frame_changed signal to keep them synced
+		if not body_sprite.frame_changed.is_connected(_sync_head_to_body):
+			body_sprite.frame_changed.connect(_sync_head_to_body)
+	else:
+		push_warning("Gateway: Head sprite not found at: %s" % head_path)
+		head_sprite.visible = false
+
+
+func _sync_head_to_body() -> void:
+	"""Keep head animation frame-synced with body"""
+	var body_sprite: AnimatedSprite2D = $CharacterCreation/VBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/CenterContainer/Control/AnimatedSprite2D
+	var head_sprite: AnimatedSprite2D = body_sprite.get_node_or_null("HeadPreview")
+	
+	if head_sprite and head_sprite.visible and head_sprite.sprite_frames:
+		if head_sprite.animation == body_sprite.animation:
+			head_sprite.set_frame_and_progress(body_sprite.frame, body_sprite.get_frame_progress())

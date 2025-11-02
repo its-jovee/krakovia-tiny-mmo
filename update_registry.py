@@ -237,7 +237,7 @@ def scan_filesystem_items(project_root):
     
     found_items = {}
     item_dirs = [
-        'materials', 'combat', 'consumables', 'construction', 'food',
+        'materials', 'combat', 'consumables', 'construction', 'equipment', 'food',
         'furniture', 'gears', 'guild', 'household', 'luxury', 'storage', 'tools'
     ]
     
@@ -534,7 +534,7 @@ def main():
     if missing_valid_items:
         print(f"Updating items_index.tres with {len(missing_valid_items)} new items...")
         if update_items_index(items_index_path, missing_valid_items):
-            print("  ✓ Items registry updated successfully")
+            print("  [OK] Items registry updated successfully")
         else:
             print("  ✗ Failed to update items registry")
         print()
@@ -542,7 +542,7 @@ def main():
     if missing_valid_recipes:
         print(f"Updating recipes_index.tres with {len(missing_valid_recipes)} new recipes...")
         if update_recipes_index(recipes_index_path, missing_valid_recipes):
-            print("  ✓ Recipes registry updated successfully")
+            print("  [OK] Recipes registry updated successfully")
         else:
             print("  ✗ Failed to update recipes registry")
         print()

@@ -192,6 +192,8 @@ func instantiate_player(peer_id: int) -> Player:
 		syn.set_by_path(^":character_class", new_player.player_resource.character_class)
 		syn.set_by_path(^":display_name", new_player.player_resource.display_name)
 		syn.set_by_path(^":handle_name", new_player.player_resource.account_name)
+		syn.set_by_path(^":appearance_head_id", new_player.player_resource.appearance_head_id)
+		syn.set_by_path(^":equipped_accessory_id", new_player.player_resource.equipped_accessory_id)
 
 		var asc: AbilitySystemComponent = new_player.ability_system_component
 		

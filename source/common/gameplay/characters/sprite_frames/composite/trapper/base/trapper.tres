@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://v5y6komavnpb"]
+
+[ext_resource type="Texture2D" uid="uid://dp0anikpyrgsi" path="res://assets/sprites/characters/composite/trapper/body/trapper-base.png" id="1_v4ypf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmp51"]
+atlas = ExtResource("1_v4ypf")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hsxo"]
+atlas = ExtResource("1_v4ypf")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f54co"]
+atlas = ExtResource("1_v4ypf")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_017eb"]
+atlas = ExtResource("1_v4ypf")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmp51")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hsxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f54co")
+}],
+"loop": true,
+"name": &"run",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_017eb")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]
+metadata/slug = &"trapper"
+metadata/id = 3

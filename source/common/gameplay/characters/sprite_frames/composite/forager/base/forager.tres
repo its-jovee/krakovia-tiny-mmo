@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dkeeft051qhl3"]
+
+[ext_resource type="Texture2D" uid="uid://bxkdc2v12aksj" path="res://assets/sprites/characters/composite/forager/body/forager-base.png" id="1_o3is8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8wyf"]
+atlas = ExtResource("1_o3is8")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mocau"]
+atlas = ExtResource("1_o3is8")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nl2tv"]
+atlas = ExtResource("1_o3is8")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mucqi"]
+atlas = ExtResource("1_o3is8")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8wyf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mocau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nl2tv")
+}],
+"loop": true,
+"name": &"run",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mucqi")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]
+metadata/slug = &"forager"
+metadata/id = 2

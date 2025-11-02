@@ -1,0 +1,57 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://bp550ygalmnx0"]
+
+[ext_resource type="Texture2D" uid="uid://bwhsj305x4ce2" path="res://assets/sprites/characters/composite/miner/head/head-c.png" id="1_jc1a3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uc3n"]
+atlas = ExtResource("1_jc1a3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pq8p"]
+atlas = ExtResource("1_jc1a3")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjl57"]
+atlas = ExtResource("1_jc1a3")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc5xx"]
+atlas = ExtResource("1_jc1a3")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uc3n")
+}],
+"loop": true,
+"name": &"harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uc3n")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pq8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjl57")
+}],
+"loop": true,
+"name": &"run",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fc5xx")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]

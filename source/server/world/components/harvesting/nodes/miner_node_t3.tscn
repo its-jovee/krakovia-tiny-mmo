@@ -10,7 +10,8 @@ radius = 8.0
 height = 36.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uiv33"]
-polygon = PackedVector2Array(-11, -12, -18, -3, -18, 2, -10, 8, -2, 8, 3, 2, 6, -7, 16, -12, 12, -20, 5, -24, -1, -24, -6, -20)
+cull_mode = 2
+polygon = PackedVector2Array(-11, -12, -18, -3, -18, 2, -10, 8, 9, 8, 13, 6, 18, -2, 16, -12, 12, -20, 5, -24, -1, -24, -6, -20)
 
 [node name="MinerNodeT3" type="Node2D"]
 script = ExtResource("1")

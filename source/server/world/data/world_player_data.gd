@@ -96,9 +96,13 @@ func create_player_character(handle: String, character_data: Dictionary) -> int:
 	player_character.golds = 100
 	player_character.available_attributes_points = 10
 	
+	# Get appearance data (defaults to "head_a" if not provided)
+	var head_id: String = character_data.get("head", "head_a")
+	
 	player_character.init(
 		player_id, handle,
-		character_data["name"], character_data["class"]
+		character_data["name"], character_data["class"],
+		head_id
 	)
 	players[player_id] = player_character
 	if accounts.has(handle):

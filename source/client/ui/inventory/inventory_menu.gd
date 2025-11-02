@@ -461,9 +461,28 @@ func fill_inventory(inv_data: Dictionary) -> void:
 	# Clear all slots first
 	_clear_all_inventory_slots()
 	
+	# Get equipped item ID to exclude from grid
+	var local_player = Events.local_player
+	if local_player == null:
+		local_player = get_tree().get_root().find_child("LocalPlayer", true, false)
+	var equipped_id: int = -1
+	if local_player and local_player.player_resource:
+		equipped_id = local_player.player_resource.equipped_accessory_id
+	
 	# Fill slots with items
 	for item_id: int in inv_data.keys():
+		# Skip equipped items - they show in equipment slot instead
+		if item_id == equipped_id:
+			print("[Inventory] Skipping equipped item ID %d (shown in AccessorySlot)" % item_id)
+			continue
+		
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		print("[Inventory] Loaded item ID %d: %s (Class: %s, Is EquipmentItem: %s)" % [
+			item_id,
+			item.item_name if item else "NULL",
+			item.get_class() if item else "NULL",
+			item is EquipmentItem if item else false
+		])
 		if item:
 			var entry: Dictionary = inv_data[item_id]
 			var stack: int = int(entry.get("stack", 1))
@@ -475,14 +494,19 @@ func fill_inventory(inv_data: Dictionary) -> void:
 				gear_slots_cache.set(item_slot_panel, item)
 				slot_index += 1
 	
-	# Update equipment slots
-	for equipment_slot: GearSlotButton in equipment_slots.get_children():
-		if equipment_slot.gear_slot:
-			if equipment_slot.gear_slot == null:
-				equipment_slot.text = TranslationServer.translate("inventory_equipment_empty")
-		else:
-			equipment_slot.icon = null
-			equipment_slot.text = TranslationServer.translate("inventory_equipment_locked")
+	# Update equipment slots (skip new Panel-based slots like EquipmentSlot)
+	for child in equipment_slots.get_children():
+		if child is GearSlotButton:
+			var equipment_slot: GearSlotButton = child as GearSlotButton
+			if equipment_slot.gear_slot:
+				if equipment_slot.gear_slot == null:
+					equipment_slot.text = TranslationServer.translate("inventory_equipment_empty")
+			else:
+				equipment_slot.icon = null
+				equipment_slot.text = TranslationServer.translate("inventory_equipment_locked")
+	
+	# Sync AccessorySlot with equipped item
+	_sync_accessory_slot()
 	
 	# If we're in a trade, populate the trade inventory now that we have the data
 	if trade_session_id != -1:
@@ -529,6 +553,63 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 		selected_item_id = item_data.get("item_id", -1)
 		rich_text_label.text = item_data.item.description
 		
+		print("[Inventory] Selected item: %s (Class: %s, Is EquipmentItem: %s)" % [
+			selected_item.item_name,
+			selected_item.get_class(),
+			selected_item is EquipmentItem
+		])
+		
+		if selected_item is EquipmentItem:
+			var eq_item = selected_item as EquipmentItem
+			print("[Inventory] EquipmentItem slot: %s (key: %s)" % [
+				eq_item.slot.display_name if eq_item.slot else "NULL",
+				eq_item.slot.key if eq_item.slot else "NULL"
+			])
+		
+		# Show equip button for equipment items
+		var equip_hbox = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer")
+		var equip_button = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
+		
+		if selected_item is EquipmentItem:
+			print("[Inventory] EquipmentItem detected!")
+			var equipment_item := selected_item as EquipmentItem
+			
+			# Check if this item is currently equipped
+			var local_player = Events.local_player
+			if local_player == null:
+				local_player = get_tree().get_root().find_child("LocalPlayer", true, false)
+			
+			var is_equipped := false
+			if local_player and local_player.player_resource:
+				# Check if this item ID matches the equipped accessory ID
+				is_equipped = (local_player.player_resource.equipped_accessory_id == selected_item_id)
+			
+			print("  → Item equipped: %s" % is_equipped)
+			
+			if equip_hbox:
+				equip_hbox.visible = true
+			
+			if equip_button:
+				# Show "Equip" or "Unequip" based on current state
+				if is_equipped:
+					equip_button.text = "Unequip"
+				else:
+					equip_button.text = "Equip"
+				
+				equip_button.visible = true
+				equip_button.disabled = false
+				
+				# Reconnect signal to handle both equip and unequip
+				if equip_button.pressed.is_connected(_on_equip_button_pressed):
+					equip_button.pressed.disconnect(_on_equip_button_pressed)
+				equip_button.pressed.connect(_on_equip_button_pressed)
+				
+				print("  → Button text: '%s', visible: %s" % [equip_button.text, equip_button.visible])
+		else:
+			# Hide equip button for non-equipment items
+			if equip_hbox and not (selected_item is GearItem or selected_item is WeaponItem):
+				equip_hbox.visible = false
+		
 		# Sync market status and update sell UI when item is selected
 		_sync_market_status_from_hud()
 		_update_sell_ui()
@@ -560,6 +641,11 @@ func _on_trade_max_button_pressed() -> void:
 
 
 func _on_equip_button_pressed() -> void:
+	print("\n========== EQUIP BUTTON PRESSED ==========")
+	print("[Inventory] Selected item: %s" % (selected_item.item_name if selected_item else "NULL"))
+	print("[Inventory] Selected item ID: %d" % selected_item_id)
+	print("[Inventory] Item type: %s" % (selected_item.get_class() if selected_item else "NULL"))
+	
 	if selected_item is GearItem or selected_item is WeaponItem:
 		if selected_item_id != -1:
 			InstanceClient.current.request_data(
@@ -567,6 +653,156 @@ func _on_equip_button_pressed() -> void:
 				Callable(),
 				{"id": selected_item_id}
 			)
+	elif selected_item is EquipmentItem:
+		# Handle equipment items (cosmetic accessories)
+		print("[Inventory] ✅ Item is EquipmentItem!")
+		
+		var equipment_item := selected_item as EquipmentItem
+		var slot_type: String = "accessory"
+		if equipment_item.slot:
+			slot_type = equipment_item.slot.key
+		
+		# Get the button to check its text
+		var equip_button = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
+		if not equip_button:
+			print("  ✗ No equip button found!")
+			return
+		
+		# Check button text to determine action (simpler than checking equipped state again)
+		var is_unequip: bool = (equip_button.text == "Unequip")
+		print("  → Button text: '%s', Action: %s" % [equip_button.text, "UNEQUIP" if is_unequip else "EQUIP"])
+		
+		if is_unequip:
+			# UNEQUIP
+			print("[Inventory] Unequipping EquipmentItem...")
+			print("  → Sending server request: item.unequip_cosmetic")
+			print("  → Slot: %s" % slot_type)
+			
+			InstanceClient.current.request_data(
+				&"item.unequip_cosmetic",
+				func(response: Dictionary):
+					print("[Inventory] Unequip response received: %s" % response)
+					if response.get("ok", false):
+						print("  ✅ Successfully unequipped from %s slot!" % response.get("unequipped_slot", "slot"))
+						# Update button to show "Equip"
+						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
+						if btn:
+							btn.text = "Equip"
+						
+						# Clear the AccessorySlot visual
+						var accessory_slot = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots/AccessorySlot")
+						if accessory_slot and accessory_slot.has_method("clear_slot"):
+							accessory_slot.clear_slot()
+							print("  → Cleared AccessorySlot visual")
+						
+						# Refresh inventory to show item back in grid
+						InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+					else:
+						print("  ✗ Failed to unequip: %s" % response.get("error", "Unknown error")),
+				{
+					"slot": slot_type
+				}
+			)
+		else:
+			# EQUIP
+			print("[Inventory] Equipping EquipmentItem...")
+			print("  → Sending server request: item.equip_cosmetic")
+			print("  → Item ID: %d, Slot: %s" % [selected_item_id, slot_type])
+			
+			InstanceClient.current.request_data(
+				&"item.equip_cosmetic",
+				func(response: Dictionary):
+					print("[Inventory] Equip response received: %s" % response)
+					if response.get("ok", false):
+						print("  ✅ Successfully equipped %s!" % response.get("item_name", "item"))
+						# Update button to show "Unequip"
+						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
+						if btn:
+							btn.text = "Unequip"
+						
+						# Update the AccessorySlot visual
+						var accessory_slot = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots/AccessorySlot")
+						if accessory_slot and accessory_slot.has_method("set_equipped_item"):
+							accessory_slot.set_equipped_item(selected_item_id, selected_item)
+							print("  → Updated AccessorySlot visual with %s" % selected_item.item_name)
+						
+						# Refresh inventory to remove item from grid
+						InstanceClient.current.request_data(&"inventory.get", fill_inventory)
+					else:
+						print("  ✗ Failed to equip: %s" % response.get("error", "Unknown error")),
+				{
+					"item_id": selected_item_id,
+					"slot": slot_type
+				}
+			)
+
+
+func _sync_accessory_slot() -> void:
+	"""Sync the AccessorySlot visual with the player's equipped item"""
+	var local_player = Events.local_player
+	if local_player == null:
+		local_player = get_tree().get_root().find_child("LocalPlayer", true, false)
+	
+	if not local_player or not local_player.player_resource:
+		return
+	
+	var equipped_id: int = local_player.player_resource.equipped_accessory_id
+	var accessory_slot = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots/AccessorySlot")
+	
+	if not accessory_slot:
+		return
+	
+	if equipped_id == -1:
+		# Nothing equipped - clear slot
+		if accessory_slot.has_method("clear_slot"):
+			accessory_slot.clear_slot()
+	else:
+		# Item equipped - show it in slot
+		var item: Item = ContentRegistryHub.load_by_id(&"items", equipped_id)
+		if item and item is EquipmentItem:
+			if accessory_slot.has_method("set_equipped_item"):
+				accessory_slot.set_equipped_item(equipped_id, item)
+				print("[Inventory] Synced AccessorySlot with equipped item: %s" % item.item_name)
+
+
+func _find_equipment_slot_for_item(item: EquipmentItem) -> Node:
+	"""Find the equipment slot node that matches the item's slot property"""
+	if not item.slot:
+		print("[Inventory] Item has no slot property!")
+		return null
+	
+	if not equipment_slots:
+		print("[Inventory] equipment_slots not found!")
+		return null
+	
+	print("[Inventory] Looking for slot matching: %s" % item.slot.key)
+	print("[Inventory] Available equipment slots:")
+	for child in equipment_slots.get_children():
+		if child is EquipmentSlot:
+			var slot = child as EquipmentSlot
+			print("  - EquipmentSlot '%s': slot key = %s" % [slot.name, slot.gear_slot.key if slot.gear_slot else "NULL"])
+		elif child is GearSlotButton:
+			var slot = child as GearSlotButton
+			print("  - GearSlotButton '%s': slot key = %s" % [slot.name, slot.gear_slot.key if slot.gear_slot else "NULL"])
+	
+	# Iterate through all equipment slots to find a match
+	for child in equipment_slots.get_children():
+		# Check EquipmentSlot (Panel-based)
+		if child is EquipmentSlot:
+			var slot = child as EquipmentSlot
+			if slot.gear_slot and item.slot and slot.gear_slot.key == item.slot.key:
+				print("  ✅ Found matching EquipmentSlot: %s (key: %s)" % [slot.name, slot.gear_slot.key])
+				return slot
+		
+		# Check GearSlotButton (Button-based) - though EquipmentItem might not use these
+		if child is GearSlotButton:
+			var slot = child as GearSlotButton
+			if slot.gear_slot and item.slot and slot.gear_slot.key == item.slot.key:
+				print("  ✅ Found matching GearSlotButton: %s (key: %s)" % [slot.name, slot.gear_slot.key])
+				return slot
+	
+	print("  ✗ No matching slot found!")
+	return null
 
 
 func _clear_all_inventory_slots() -> void:

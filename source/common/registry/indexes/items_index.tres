@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"items"
-version = 1761913149
-next_id = 319
+version = 1762027842
+next_id = 320
 entries = Array[Dictionary]([{
 &"hash": "5e2c9ea62f0834942e7633d440ac9054423ada15a996d1c1aabf760508c1c423",
 &"id": 1,
@@ -1582,6 +1582,11 @@ entries = Array[Dictionary]([{
 &"id": 318,
 &"path": "res://source/common/gameplay/items/combat/wooden_bow.tres",
 &"slug": &"wooden_bow"
+}, {
+&"hash": "58af78fe54c86758d6abaacb59db45d96334eaa82f9f44208fec7bff1742178d",
+&"id": 319,
+&"path": "res://source/common/gameplay/items/equipment/pumpkin_head_item.tres",
+&"slug": &"pumpkin_head"
 }])
 metadata/slug = &"items_index"
 metadata/id = 2

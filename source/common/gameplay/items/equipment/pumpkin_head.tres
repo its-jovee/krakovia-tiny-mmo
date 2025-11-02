@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EquipmentResource" load_steps=5 format=3 uid="uid://bwm1qs4t423j3"]
+
+[ext_resource type="Script" uid="uid://r55rq0al7k2w" path="res://source/common/gameplay/items/equipment/equipment_resource.gd" id="1_6s86b"]
+[ext_resource type="SpriteFrames" uid="uid://6kxgdo3r4kr4" path="res://source/common/gameplay/characters/sprite_frames/composite/miner/accessory/acc_pumpkin.tres" id="2_swica"]
+[ext_resource type="SpriteFrames" uid="uid://cijhii0ixmjpn" path="res://source/common/gameplay/characters/sprite_frames/composite/forager/accessory/acc_pumpkin.tres" id="3_3frcq"]
+[ext_resource type="SpriteFrames" uid="uid://cr7ic40f6x1tm" path="res://source/common/gameplay/characters/sprite_frames/composite/trapper/accessory/acc_pumpkin.tres" id="4_3frcq"]
+
+[resource]
+script = ExtResource("1_6s86b")
+item_id = "pumpkin_head"
+display_name = "Pumpkin Head"
+description = "Spooky pumpkin head! Awarded for participating in Kraftovia Halloween event 2025."
+sprite_frames_by_class = {
+"forager": ExtResource("3_3frcq"),
+"miner": ExtResource("2_swica"),
+"trapper": ExtResource("4_3frcq")
+}
+is_animated = true
+metadata/_custom_type_script = "uid://r55rq0al7k2w"

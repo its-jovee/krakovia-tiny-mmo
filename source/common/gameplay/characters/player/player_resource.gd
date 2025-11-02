@@ -28,6 +28,14 @@ func get_energy_max() -> float:
 @export var display_name: String = "Player"
 @export var character_class: String = "miner"
 
+## Appearance customization
+@export var appearance_head_id: String = "head_a"  # Head/face variant (head_a, head_b, head_c, head_d)
+@export var appearance_hair_id: String = "none"  # Disabled initially
+@export var appearance_accessory_id: String = "none"  # Disabled initially
+
+## Equipped cosmetic items (item IDs)
+@export var equipped_accessory_id: int = -1  # -1 = nothing equipped
+
 @export var golds: int
 @export var inventory: Dictionary
 
@@ -52,12 +60,14 @@ func init(
 	_player_id: int,
 	_account_name: String,
 	_display_name: String = display_name,
-	_character_class: String = character_class
+	_character_class: String = character_class,
+	_appearance_head_id: String = "head_a"
 ) -> void:
 	player_id = _player_id
 	account_name = _account_name
 	display_name = _display_name
 	character_class = _character_class
+	appearance_head_id = _appearance_head_id
 
 
 
@@ -135,3 +145,12 @@ func level_up() -> void:
 		_level_up_single_step()
 	if level >= MAX_LEVEL:
 		return
+
+
+func get_appearance_data() -> Dictionary:
+	"""Get appearance data for syncing"""
+	return {
+		"head": appearance_head_id,
+		"hair": appearance_hair_id,
+		"accessory": appearance_accessory_id
+	}

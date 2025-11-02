@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EquipmentItem" load_steps=5 format=3 uid="uid://c3fsxe0osxc4s"]
+
+[ext_resource type="Script" uid="uid://cskmerlfp77nl" path="res://source/common/gameplay/items/equipment_item.gd" id="1_script"]
+[ext_resource type="Resource" uid="uid://bwm1qs4t423j3" path="res://source/common/gameplay/items/equipment/pumpkin_head.tres" id="2_equipment"]
+[ext_resource type="Texture2D" uid="uid://cp5wu8wgmk5cy" path="res://assets/new_icons/pumpkin_head.png" id="2_tojku"]
+[ext_resource type="Resource" uid="uid://c28oyh1ydf6qf" path="res://source/common/gameplay/items/item_slot/slots/accessory.tres" id="3_slot"]
+
+[resource]
+script = ExtResource("1_script")
+equipment = ExtResource("2_equipment")
+slot = ExtResource("3_slot")
+item_name = &"Pumpkin Head"
+item_icon = ExtResource("2_tojku")
+description = "A spooky pumpkin head perfect for Halloween! Wear it proudly as you gather resources and terrify your fellow adventurers."
+minimum_price = 500
+stack_limit = 1
+tags = ["cosmetic", "equipment", "halloween", "accessory"]
+metadata/slug = &"pumpkin_head"

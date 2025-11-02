@@ -1,0 +1,61 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://dmonoib5ahwc7"]
+
+[ext_resource type="Texture2D" uid="uid://by1grdgirum4l" path="res://assets/sprites/characters/composite/forager/head/head-d.png" id="2_tdowb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2nec"]
+atlas = ExtResource("2_tdowb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m0eq"]
+atlas = ExtResource("2_tdowb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h20nt"]
+atlas = ExtResource("2_tdowb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mpu6c"]
+atlas = ExtResource("2_tdowb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnkm3"]
+atlas = ExtResource("2_tdowb")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2nec")
+}],
+"loop": true,
+"name": &"harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m0eq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h20nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mpu6c")
+}],
+"loop": true,
+"name": &"run",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnkm3")
+}],
+"loop": true,
+"name": &"sit",
+"speed": 5.0
+}]

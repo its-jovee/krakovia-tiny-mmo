@@ -10,20 +10,24 @@
 [node name="Player" instance=ExtResource("1_0ps03")]
 script = ExtResource("2_meo3t")
 
-[node name="AnimatedSprite2D" parent="." index="0"]
+[node name="PointLight2D" type="PointLight2D" parent="." index="0"]
+position = Vector2(0, -26)
+energy = 0.2
+shadow_enabled = true
+texture = ExtResource("6_gkhtr")
+texture_scale = 0.4
+
+[node name="AnimatedSprite2D" parent="." index="1"]
 scale = Vector2(0.8, 0.8)
 sprite_frames = null
+animation = &""
 frame_progress = 0.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
 position = Vector2(0, -23.465)
 scale = Vector2(0.8, 0.8)
 
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, -8.565)
-scale = Vector2(1, 0.985)
-
-[node name="DisplayNameLabel" type="Label" parent="." index="3"]
+[node name="DisplayNameLabel" type="Label" parent="." index="4"]
 z_index = 100
 offset_left = -24.0
 offset_top = 2.0
@@ -36,7 +40,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="HandleNameLabel" type="Label" parent="." index="4"]
+[node name="HandleNameLabel" type="Label" parent="." index="5"]
 z_index = 100
 offset_left = -24.0
 offset_top = 10.0
@@ -50,7 +54,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="SpeechBubble" parent="." index="5" instance=ExtResource("4_speech")]
+[node name="SpeechBubble" parent="." index="6" instance=ExtResource("4_speech")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -64,23 +68,20 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 
-[node name="PotatoIndicator" parent="." index="6" instance=ExtResource("5_potato")]
+[node name="PotatoIndicator" parent="." index="7" instance=ExtResource("5_potato")]
 
-[node name="HandOffset" parent="." index="7"]
+[node name="CollisionShape2D" parent="." index="8"]
+position = Vector2(0, -8.565)
+scale = Vector2(1, 0.985)
+
+[node name="HandOffset" parent="." index="9"]
 visible = false
 
 [node name="HandPivot" parent="HandOffset" index="0"]
 visible = false
 
-[node name="HurtBox" parent="." index="8"]
+[node name="HurtBox" parent="." index="10"]
 visible = false
 
-[node name="ProgressBar" parent="." index="9"]
+[node name="ProgressBar" parent="." index="11"]
 visible = false
-
-[node name="PointLight2D" type="PointLight2D" parent="." index="13"]
-position = Vector2(0, -26)
-energy = 0.2
-shadow_enabled = true
-texture = ExtResource("6_gkhtr")
-texture_scale = 0.4

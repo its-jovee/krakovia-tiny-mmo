@@ -32,6 +32,12 @@ static func _static_init() -> void:
 	register_field(":handle_name", WIRE_VARIANT)
 	register_field(":character_class", WIRE_VARIANT)
 	
+	# Appearance customization
+	register_field(":appearance_head_id", WIRE_VARIANT)
+	
+	# Equipped cosmetic items
+	register_field(":equipped_accessory_id", WIRE_VARIANT)
+	
 	
 	# Stat fields are registered at run-time.
 	#register_field("AbilitySystemComponent/AttributesMirror:health",       WIRE_F32)
