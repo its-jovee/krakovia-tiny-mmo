@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
 [ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/trapper_t3_loot_table.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://wb2gas6dhk2j" path="res://assets/sprites/environment/world_tileset/Forest/Props.png" id="3_qvdq3"]
-[ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_vvv5y"]
+[ext_resource type="Texture2D" uid="uid://ck4c08oxjufmi" path="res://assets/logo_trapper.svg" id="4_qvdq3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qii6f"]
 radius = 2.0
 height = 12.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x5c8a"]
+cull_mode = 1
 polygon = PackedVector2Array(-8, -9, -10, -8, -10, -4, -12, -3, -12, 0, -12, 6, -5, 6, 3, 6, 2, 4, 5, 2, 6, 0, 8, 1, 14, 1, 15, -1, 19, -4, 19, -7, 19, -12, 16, -18, 11, -21, 7, -23, 3, -22, 1, -20, -2, -19, -3, -18, -3, -17, -5, -6)
 
 [node name="TrapperNodeT3" type="Node2D"]
@@ -45,4 +46,4 @@ occluder = SubResource("OccluderPolygon2D_x5c8a")
 modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
 position = Vector2(0, -40)
 scale = Vector2(0.334375, 0.334375)
-texture = ExtResource("3_vvv5y")
+texture = ExtResource("4_qvdq3")

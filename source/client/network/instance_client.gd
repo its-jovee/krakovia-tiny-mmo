@@ -206,7 +206,7 @@ func spawn_player(player_id: int) -> void:
 		#instance_map.add_child(new_player)
 	
 	var sync: StateSynchronizer = new_player.state_synchronizer
-	synchronizer_manager.add_entity(player_id, sync) 
+	synchronizer_manager.add_entity(player_id, sync)
 
 
 @rpc("authority", "call_remote", "reliable", 0)
@@ -353,4 +353,3 @@ func _on_shop_purchase_complete(data: Dictionary) -> void:
 	var price = data.get("total_price", 0)
 	var seller_name = data.get("seller_name", "Unknown")
 	print("Purchased %dx %s for %d gold from %s" % [quantity, item_name, price, seller_name])
-			

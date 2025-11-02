@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8os1hudjrj8v"]
+[gd_scene load_steps=9 format=3 uid="uid://b8os1hudjrj8v"]
 
 [ext_resource type="Texture2D" uid="uid://bq8l351wpiq48" path="res://assets/sprites/characters/circle_shadow.png" id="1_td78a"]
 [ext_resource type="Shader" uid="uid://bupa13prwyjpq" path="res://source/client/shaders/character_animation.gdshader" id="2_8raur"]
 [ext_resource type="Texture2D" uid="uid://b54eyqkccllao" path="res://assets/sprites/characters/special/monster.png" id="2_h3a30"]
+[ext_resource type="Script" uid="uid://df64mvdmhhyam" path="res://source/server/world/components/monsters/halloween_monster.gd" id="3_monster"]
 [ext_resource type="Texture2D" uid="uid://dwa6amkc2ljub" path="res://assets/light.png" id="4_8raur"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8raur"]
@@ -22,8 +23,9 @@ light_mode = 2
 polygon = PackedVector2Array(-1, 0, -5, 0, -8, -4, -9, -6, 5, -6, 6, -3, 3, 0)
 
 [node name="monster_halloween" type="Node2D"]
-z_index = -1
+y_sort_enabled = true
 material = SubResource("ShaderMaterial_8raur")
+script = ExtResource("3_monster")
 
 [node name="shadow" type="Sprite2D" parent="."]
 visible = false

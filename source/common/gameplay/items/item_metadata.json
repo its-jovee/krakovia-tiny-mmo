@@ -156,7 +156,7 @@
       {
         "recipe_name": "Arrows",
         "class": "miner",
-        "level": 8,
+        "level": 10,
         "slug": "arrows_recipe"
       }
     ]
@@ -321,7 +321,7 @@
       {
         "recipe_name": "Bellows",
         "class": "miner",
-        "level": 6,
+        "level": 9,
         "slug": "bellows_recipe"
       }
     ]
@@ -522,7 +522,7 @@
       {
         "recipe_name": "Bronze Ingot",
         "class": "miner",
-        "level": 6,
+        "level": 7,
         "slug": "bronze_ingot_recipe"
       }
     ]
@@ -565,7 +565,7 @@
       {
         "recipe_name": "Canvas",
         "class": "miner",
-        "level": 7,
+        "level": 12,
         "slug": "canvas_recipe"
       }
     ]
@@ -1152,7 +1152,7 @@
       {
         "recipe_name": "Glass Bottle",
         "class": "miner",
-        "level": 7,
+        "level": 4,
         "slug": "glass_bottle_recipe"
       }
     ]
@@ -1461,7 +1461,7 @@
       {
         "recipe_name": "Iron Fittings",
         "class": "miner",
-        "level": 14,
+        "level": 8,
         "slug": "iron_fittings_recipe"
       }
     ]
@@ -1483,7 +1483,7 @@
       {
         "recipe_name": "Iron Ingot",
         "class": "miner",
-        "level": 3,
+        "level": 7,
         "slug": "iron_ingot_recipe"
       }
     ]
@@ -1543,7 +1543,7 @@
         "recipe_name": "KRAK ",
         "class": "forager",
         "level": 30,
-        "slug": "krak_recipe"
+        "slug": "krak_forager_recipe"
       },
       {
         "recipe_name": "KRAK ",
@@ -1561,7 +1561,7 @@
         "recipe_name": "KRAK ",
         "class": "trapper",
         "level": 30,
-        "slug": "krak_recipe"
+        "slug": "krak_trapper_recipe"
       }
     ]
   },
@@ -2273,6 +2273,29 @@
     ],
     "crafted_by": []
   },
+  "pumpkin_head": {
+    "harvest_sources": [],
+    "crafted_by": [
+      {
+        "recipe_name": "Pumpkin Head (Forager)",
+        "class": "forager",
+        "level": 1,
+        "slug": "pumpkin_head_forager_recipe"
+      },
+      {
+        "recipe_name": "Pumpkin Head (Miner)",
+        "class": "miner",
+        "level": 1,
+        "slug": "pumpkin_head_miner_recipe"
+      },
+      {
+        "recipe_name": "Pumpkin Head (Trapper)",
+        "class": "trapper",
+        "level": 1,
+        "slug": "pumpkin_head_trapper_recipe"
+      }
+    ]
+  },
   "pumpkins": {
     "harvest_sources": [
       {
@@ -2504,14 +2527,15 @@
     "crafted_by": []
   },
   "sandstone": {
-    "harvest_sources": [
+    "harvest_sources": [],
+    "crafted_by": [
       {
+        "recipe_name": "Sandstone",
         "class": "miner",
-        "tier": 2,
-        "is_rare": false
+        "level": 5,
+        "slug": "sandstone_recipe"
       }
-    ],
-    "crafted_by": []
+    ]
   },
   "sapphire": {
     "harvest_sources": [
@@ -2747,7 +2771,7 @@
       {
         "recipe_name": "Stone Block",
         "class": "miner",
-        "level": 2,
+        "level": 3,
         "slug": "stone_block_recipe"
       }
     ]
@@ -2855,7 +2879,7 @@
       {
         "recipe_name": "Tin Ingot",
         "class": "miner",
-        "level": 4,
+        "level": 6,
         "slug": "tin_ingot_recipe"
       }
     ]

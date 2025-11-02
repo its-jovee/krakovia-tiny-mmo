@@ -47,6 +47,9 @@ func _ready() -> void:
 							break
 				
 				despawn_player(peer_id)
+				# Ensure database captures persisted energy immediately on disconnect
+				if world_server and world_server.database:
+					world_server.database.save_world_database()
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerServer.new()
@@ -96,6 +99,9 @@ func load_map(map_path: String) -> void:
 		# Reindex harvest nodes after map loads
 		if harvest_manager:
 			harvest_manager.reindex_existing()
+		
+		# Initialize Halloween Monster if present
+		_initialize_halloween_monster()
 		)
 
 
@@ -201,7 +207,9 @@ func instantiate_player(peer_id: int) -> Player:
 		
 		var new_energy_max: float = player_resource.get_energy_max()
 		player_stats[&"energy_max"] = new_energy_max
-		player_stats[&"energy"] = new_energy_max
+		# Restore energy from persisted value if available; otherwise start full
+		var start_energy: float = player_resource.current_energy if player_resource.current_energy >= 0.0 else new_energy_max
+		player_stats[&"energy"] = clamp(start_energy, 0.0, new_energy_max)
 		
 		var stats_from_attributes: Dictionary[StringName, float] = player_resource.get_stats_from_attributes()
 		for stat_name: StringName in stats_from_attributes:
@@ -298,6 +306,12 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 	
 	var player: Player = players_by_peer_id[peer_id]
 	if player:
+		# Persist current energy to PlayerResource before removing the player
+		var asc: AbilitySystemComponent = player.ability_system_component
+		if asc:
+			var energy_max: float = asc.get_max(&"energy")
+			var energy_cur: float = asc.get_value(&"energy")
+			player.player_resource.current_energy = clamp(energy_cur, 0.0, energy_max)
 		# Cleanup harvesting memberships (now uses manager)
 		if harvest_manager:
 			harvest_manager.cleanup_peer(peer_id)
@@ -371,6 +385,19 @@ func propagate_rpc(callable: Callable) -> void:
 func get_player(peer_id: int) -> Player:
 	var p: Player = players_by_peer_id.get(peer_id, null)
 	return p
+
+
+func _initialize_halloween_monster() -> void:
+	# Find the monster in the map
+	var monster: HalloweenMonster = instance_map.find_child("monster_halloween", true, false) as HalloweenMonster
+	if not monster:
+		# No monster in this map (normal for non-overworld maps)
+		return
+	
+	# Initialize the monster (static, no movement needed)
+	monster.initialize(self)
+	print("[ServerInstance] ✅ Halloween Monster initialized as static hazard")
+
 
 func _get_peer_id_for_player(player: Player) -> int:
 	# Find the peer_id for this player by searching through the mapping

@@ -49,6 +49,9 @@ func get_energy_max() -> float:
 ##
 @export var server_roles: Dictionary
 
+## Persisted runtime state
+@export var current_energy: float = -1.0
+
 ## Quest completion statistics
 @export var quest_stats: Dictionary = {}
 

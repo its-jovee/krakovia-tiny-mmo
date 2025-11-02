@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
 [ext_resource type="Resource" uid="uid://bxf88ywgfmcwc" path="res://source/server/world/components/harvesting/loot_tables/forager_t1_loot_table.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_q5wk4"]
 [ext_resource type="Texture2D" uid="uid://wb2gas6dhk2j" path="res://assets/sprites/environment/world_tileset/Forest/Props.png" id="3_urtot"]
+[ext_resource type="Texture2D" uid="uid://dmymngpplciqu" path="res://assets/logo_forager.svg" id="4_urtot"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_clpia"]
 radius = 3.0
 height = 24.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e6l08"]
+cull_mode = 1
 polygon = PackedVector2Array(-14, -6, -16, 1, -15, 6, -12, 9, -8, 11, -2, 11, 10, 11, 11, 7, 15, 4, 13, 1, 14, -1, 11, -8, 7, -10, 3, -11, -3, -11, -6, -11, -9, -10)
 
 [node name="ForagerNodeT1" type="Node2D"]
@@ -39,7 +40,6 @@ shape = SubResource("CapsuleShape2D_clpia")
 occluder = SubResource("OccluderPolygon2D_e6l08")
 
 [node name="Class_Signal" type="Sprite2D" parent="."]
-modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
 position = Vector2(0, -30)
 scale = Vector2(0.334375, 0.334375)
-texture = ExtResource("3_q5wk4")
+texture = ExtResource("4_urtot")

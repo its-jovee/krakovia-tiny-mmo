@@ -12,7 +12,7 @@ static func base_url() -> String:
 	# Auto-detect environment
 	if OS.has_feature("template"):
 		# Production (exported build)
-		return "https://kraftovia.com"
+		return "http://35.247.214.159:8090"
 	else:
 		# Development (Godot editor)
 		return "http://127.0.0.1:8090"
