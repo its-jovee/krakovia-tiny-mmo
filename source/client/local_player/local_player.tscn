@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://biqs370wdwi6m" path="res://source/client/local_player/local_player.gd" id="2_qfdgo"]
 [ext_resource type="Script" uid="uid://bt74wxkb47dp0" path="res://source/client/local_player/mouse_component.gd" id="3_7fqr5"]
 [ext_resource type="PackedScene" uid="uid://bdpfln22w1uys" path="res://source/client/ui/hud/harvesting/HarvestingPanel.tscn" id="5_harv"]
-[ext_resource type="PackedScene" uid="uid://dslec2qgwwig2" path="res://source/common/gameplay/items/(unused) weapons/empty_hand/empty_hand.tscn" id="8_40bmm"]
 [ext_resource type="Script" uid="uid://d1a30n4ktgm71" path="res://source/common/network/sync/state_synchronizer.gd" id="9_gkbmr"]
 [ext_resource type="Script" uid="uid://gl2cwrrfvlkh" path="res://source/common/gameplay/combat/components/ability_system_component.gd" id="10_x5r0m"]
+[ext_resource type="Texture2D" uid="uid://dwa6amkc2ljub" path="res://assets/light.png" id="11_f46i6"]
 [ext_resource type="Texture2D" uid="uid://bq8l351wpiq48" path="res://assets/sprites/characters/circle_shadow.png" id="11_kwny6"]
 [ext_resource type="Resource" uid="uid://djprqmldadljv" path="res://source/common/gameplay/combat/damage_model/DamageModelResource.tres" id="11_v004h"]
 [ext_resource type="Script" uid="uid://natfmyvgikpe" path="res://source/common/gameplay/combat/components/attributes_mirror.gd" id="12_225ue"]
@@ -19,6 +19,7 @@ size = Vector2(16, 18.5)
 size = Vector2(16, 32)
 
 [node name="LocalPlayer" instance=ExtResource("1_5bye1")]
+collision_layer = 1
 script = ExtResource("2_qfdgo")
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
@@ -41,14 +42,12 @@ script = ExtResource("3_7fqr5")
 position = Vector2(0, -6.75)
 shape = SubResource("RectangleShape2D_3w1m3")
 
-[node name="PointLight2D" parent="." index="3"]
+[node name="PointLight2D" parent="." index="4"]
+visible = false
 color = Color(0.5, 0.2585, 0.185, 1)
 energy = 0.6
-shadow_filter = 1
 shadow_filter_smooth = 25.0
-
-[node name="AnimatedSprite2D" parent="." index="4"]
-speed_scale = 1.2
+shadow_item_cull_mask = 3
 
 [node name="HandOffset2" type="Node2D" parent="." index="5"]
 visible = false
@@ -57,7 +56,11 @@ position = Vector2(0, -10)
 [node name="HurtBox2" type="Area2D" parent="." index="6"]
 visible = false
 
-[node name="Sprite2D" parent="." index="7"]
+[node name="AnimatedSprite2D" parent="." index="8"]
+speed_scale = 1.2
+
+[node name="Sprite2D" parent="." index="9"]
+visible = false
 texture = ExtResource("11_kwny6")
 
 [node name="HarvestingPanel" parent="." index="10" instance=ExtResource("5_harv")]
@@ -79,29 +82,6 @@ script = ExtResource("13_darcm")
 _asc = NodePath("../AbilitySystemComponent")
 character = NodePath("..")
 
-[node name="RightHandSpot2" type="Node2D" parent="HandOffset/HandPivot" index="0"]
-visible = false
-position = Vector2(15, 0)
-
-[node name="LeftHandSpot2" type="Node2D" parent="HandOffset/HandPivot" index="1"]
-visible = false
-position = Vector2(-15, 0)
-scale = Vector2(-1, 1)
-
-[node name="RightRig2" type="Node2D" parent="HandOffset/HandPivot" index="2"]
-visible = false
-
-[node name="LeftRig2" type="Node2D" parent="HandOffset/HandPivot" index="3"]
-visible = false
-
-[node name="EmptyHand2" parent="HandOffset/HandPivot/RightHandSpot" index="0" instance=ExtResource("8_40bmm")]
-visible = false
-position = Vector2(0, 0)
-
-[node name="EmptyHand2" parent="HandOffset/HandPivot/LeftHandSpot" index="0" instance=ExtResource("8_40bmm")]
-visible = false
-position = Vector2(0, 0)
-
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_eyotc")
@@ -110,3 +90,11 @@ debug_color = Color(0.846048, 0.237298, 0.730831, 0.42)
 [node name="AttributesMirror2" type="Node" parent="AbilitySystemComponent" index="0"]
 script = ExtResource("12_225ue")
 metadata/_custom_type_script = "uid://natfmyvgikpe"
+
+[node name="PointLight2D2" type="PointLight2D" parent="." index="25"]
+position = Vector2(0, -40)
+color = Color(1, 0.61, 0.61, 1)
+energy = 1.03
+range_item_cull_mask = 3
+shadow_enabled = true
+texture = ExtResource("11_f46i6")

@@ -41,7 +41,7 @@ func _setup_sprite_layers() -> void:
 	base_sprite = AnimatedSprite2D.new()
 	base_sprite.name = "BaseSprite"
 	base_sprite.sprite_frames = null
-	base_sprite.offset = Vector2(0, -30)  # Shift up to align with character position
+	base_sprite.offset = Vector2(0, 0)  # No offset - handled by parent position
 	base_sprite.scale = Vector2(0.8, 0.8)
 	add_child(base_sprite)
 	
@@ -49,7 +49,7 @@ func _setup_sprite_layers() -> void:
 	hair_sprite = AnimatedSprite2D.new()
 	hair_sprite.name = "HairSprite"
 	hair_sprite.sprite_frames = null
-	hair_sprite.offset = Vector2(0, -30)  # Match base offset
+	hair_sprite.offset = Vector2(0, 0)  # No offset - handled by parent position
 	hair_sprite.scale = Vector2(0.8, 0.8)
 	hair_sprite.visible = false  # Disabled initially
 	add_child(hair_sprite)
@@ -58,7 +58,7 @@ func _setup_sprite_layers() -> void:
 	head_sprite = AnimatedSprite2D.new()
 	head_sprite.name = "HeadSprite"
 	head_sprite.sprite_frames = null
-	head_sprite.offset = Vector2(0, -30)  # Match base offset
+	head_sprite.offset = Vector2(0, 0)  # No offset - handled by parent position
 	head_sprite.scale = Vector2(0.8, 0.8)
 	add_child(head_sprite)
 	
@@ -66,7 +66,7 @@ func _setup_sprite_layers() -> void:
 	accessory_sprite = AnimatedSprite2D.new()
 	accessory_sprite.name = "AccessorySprite"
 	accessory_sprite.sprite_frames = null
-	accessory_sprite.offset = Vector2(0, -30)  # Match base offset for perfect alignment
+	accessory_sprite.offset = Vector2(0, 0)  # No offset - handled by parent position
 	accessory_sprite.scale = Vector2(0.8, 0.8)
 	accessory_sprite.visible = false  # Disabled initially
 	add_child(accessory_sprite)

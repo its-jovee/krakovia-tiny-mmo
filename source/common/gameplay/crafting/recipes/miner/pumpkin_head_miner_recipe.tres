@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=3 format=3 uid="uid://bls3ke5ohstgv"]
+
+[ext_resource type="Texture2D" uid="uid://cp5wu8wgmk5cy" path="res://assets/new_icons/pumpkin_head.png" id="1_icon"]
+[ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
+
+[resource]
+script = ExtResource("1_recipe")
+slug = &"pumpkin_head_miner_recipe"
+recipe_name = &"Pumpkin Head (Miner)"
+recipe_icon = ExtResource("1_icon")
+description = "Craft a festive pumpkin head accessory! Requires level 12 items from other classes."
+required_class = "miner"
+required_level = 1
+gold_cost = 100
+energy_cost = 20.0
+input_1_slug = &"lantern"
+input_1_quantity = 1
+input_2_slug = &"leather_cord"
+input_2_quantity = 1
+output_1_slug = &"pumpkin_head"
+tags = ["miner", "cosmetic", "halloween", "event"]
+metadata/_custom_type_script = "uid://recipe_pumpkin_miner"
+

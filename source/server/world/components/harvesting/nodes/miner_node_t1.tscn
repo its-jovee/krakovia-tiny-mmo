@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_u3ewm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7dvsx"]
-radius = 2.0
+radius = 3.0
 height = 14.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l4br0"]

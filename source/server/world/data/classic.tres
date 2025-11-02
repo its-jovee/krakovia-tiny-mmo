@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=231 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=234 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_83xu3"]
 [ext_resource type="Script" path="res://source/server/world/data/guild.gd" id="1_cio0q"]
@@ -32,6 +32,7 @@ script = ExtResource("1_83xu3")
 player_id = 1
 account_name = "teste"
 display_name = "teste"
+equipped_accessory_id = 319
 golds = 561
 inventory = {
 1: {
@@ -65,7 +66,7 @@ inventory = {
 "stack": 2
 },
 41: {
-"stack": 1
+"stack": 2
 },
 56: {
 "stack": 1
@@ -86,7 +87,7 @@ inventory = {
 "stack": 3
 },
 286: {
-"stack": 3
+"stack": 4
 },
 287: {
 "stack": 3
@@ -95,12 +96,12 @@ inventory = {
 "stack": 15
 },
 319: {
-"stack": 1
+"stack": 2
 }
 }
 available_attributes_points = 10
 level = 10
-experience = 12355
+experience = 12375
 guild = SubResource("Resource_vidub")
 server_roles = {
 "senior_admin": {}
@@ -3935,6 +3936,36 @@ server_roles = {
 "senior_admin": {}
 }
 
+[sub_resource type="Resource" id="Resource_1rf42"]
+script = ExtResource("1_83xu3")
+player_id = 224
+account_name = "teste3"
+display_name = "asdsdsad"
+character_class = "forager"
+appearance_head_id = "head_c"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_t6euy"]
+script = ExtResource("1_83xu3")
+player_id = 225
+account_name = "teste3"
+display_name = "qweqweqwe"
+character_class = "trapper"
+appearance_head_id = "head_c"
+golds = 100
+available_attributes_points = 10
+
+[sub_resource type="Resource" id="Resource_sfnne"]
+script = ExtResource("1_83xu3")
+player_id = 226
+account_name = "teste4"
+display_name = "saasdsadsad"
+character_class = "forager"
+appearance_head_id = "head_d"
+golds = 100
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -4141,7 +4172,8 @@ accounts = {
 "senhormestre": PackedInt32Array(166),
 "teste": PackedInt32Array(1, 15, 19),
 "teste2": PackedInt32Array(222),
-"teste3": PackedInt32Array(223),
+"teste3": PackedInt32Array(223, 224, 225),
+"teste4": PackedInt32Array(226),
 "teste5": PackedInt32Array(211, 213, 220),
 "teste6": PackedInt32Array(210, 212, 215),
 "teste7": PackedInt32Array(214, 217, 218),
@@ -4372,9 +4404,12 @@ players = {
 220: SubResource("Resource_v6mnh"),
 221: SubResource("Resource_sed81"),
 222: SubResource("Resource_1kqp4"),
-223: SubResource("Resource_aaui0")
+223: SubResource("Resource_aaui0"),
+224: SubResource("Resource_1rf42"),
+225: SubResource("Resource_t6euy"),
+226: SubResource("Resource_sfnne")
 }
-next_player_id = 223
+next_player_id = 226
 admin_ids = PackedInt32Array(1, 2)
 guilds = {
 "a": SubResource("Resource_ugqtu"),

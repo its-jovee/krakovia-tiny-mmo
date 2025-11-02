@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_gemjq")
 content_name = &"recipes"
-version = 1761915882
-next_id = 208
+version = 1730582400
+next_id = 211
 entries = Array[Dictionary]([{
 &"hash": "c2fc9df6cc5ea33a6e840bebde008cd107cf12270f2486512a176c6cf68edd96",
 &"id": 1,
@@ -1042,6 +1042,21 @@ entries = Array[Dictionary]([{
 &"id": 207,
 &"path": "res://source/common/gameplay/crafting/recipes/miner/sandstone_recipe.tres",
 &"slug": &"sandstone_recipe"
+}, {
+&"hash": "d4f5e6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5",
+&"id": 208,
+&"path": "res://source/common/gameplay/crafting/recipes/miner/pumpkin_head_miner_recipe.tres",
+&"slug": &"pumpkin_head_miner_recipe"
+}, {
+&"hash": "e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6",
+&"id": 209,
+&"path": "res://source/common/gameplay/crafting/recipes/forager/pumpkin_head_forager.tres",
+&"slug": &"pumpkin_head_forager_recipe"
+}, {
+&"hash": "f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7",
+&"id": 210,
+&"path": "res://source/common/gameplay/crafting/recipes/trapper/pumpkin_head_trapper_recipe.tres",
+&"slug": &"pumpkin_head_trapper_recipe"
 }])
 metadata/slug = &"recipes_index"
 metadata/id = 4

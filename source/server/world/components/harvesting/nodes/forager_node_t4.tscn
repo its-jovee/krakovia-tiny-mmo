@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://p5jyv4fayumm"]
+[gd_scene load_steps=7 format=3 uid="uid://p5jyv4fayumm"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
 [ext_resource type="Resource" uid="uid://vltqo5xekxjb" path="res://source/server/world/components/harvesting/loot_tables/forager_t4_loot_table.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://wb2gas6dhk2j" path="res://assets/sprites/environment/world_tileset/Forest/Props.png" id="3_45vmp"]
 [ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_sgsyp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_45vmp"]
+radius = 7.0
+height = 34.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eirte"]
+polygon = PackedVector2Array(-9, -5, -13, -2, -13, 3, -12, 9, -5, 10, -1, 14, 2, 11, 9, 15, 11, 10, 13, 13, 15, 12, 19, 12, 21, 13, 23, 12, 28, 10, 31, 6, 33, 3, 33, -2, 30, -7, 28, -7, 28, -9, 24, -12, 23, -16, 20, -15, 19, -17, 14, -15, 10, -17, 4, -15, -1, -16, 0, -13, -5, -10, -8, -8)
 
 [node name="ForagerNodeT4" type="Node2D"]
 script = ExtResource("1")
@@ -15,12 +23,25 @@ required_level = 16
 tier = 4
 loot_table = ExtResource("2")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.08, 0.45, 0.15, 1)
-scale = Vector2(32, 32)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(0.86, 0.73143, 0.2666, 1)
-position = Vector2(0, -48)
-scale = Vector2(0.2, 0.2)
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("3_45vmp")
+region_enabled = true
+region_rect = Rect2(65, 16, 47, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 8)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_45vmp")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+position = Vector2(-10, 1)
+occluder = SubResource("OccluderPolygon2D_eirte")
+
+[node name="Class_Signal" type="Sprite2D" parent="."]
+modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
+position = Vector2(0, -40)
+scale = Vector2(0.334375, 0.334375)
 texture = ExtResource("3_sgsyp")

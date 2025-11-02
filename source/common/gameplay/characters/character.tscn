@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://6bcg7fwcl6mi"]
+[gd_scene load_steps=13 format=3 uid="uid://6bcg7fwcl6mi"]
 
 [ext_resource type="Script" uid="uid://bu6yn6ww7d7c8" path="res://source/common/gameplay/characters/character.gd" id="1_uqmoo"]
-[ext_resource type="SpriteFrames" uid="uid://bqcsne8jhbmi8" path="res://source/common/gameplay/characters/sprite_frames/miner.tres" id="2_pypn5"]
-[ext_resource type="Script" path="res://source/common/gameplay/characters/composite_sprite.gd" id="2_composite"]
-[ext_resource type="PackedScene" uid="uid://dslec2qgwwig2" path="res://source/common/gameplay/items/(unused) weapons/empty_hand/empty_hand.tscn" id="3_eddh2"]
+[ext_resource type="Script" uid="uid://ffjar3i7qn6t" path="res://source/common/gameplay/characters/composite_sprite.gd" id="2_composite"]
+[ext_resource type="SpriteFrames" uid="uid://bii2ihhnupf5" path="res://source/common/gameplay/characters/sprite_frames/miner.tres" id="2_pypn5"]
 [ext_resource type="Script" uid="uid://d1a30n4ktgm71" path="res://source/common/network/sync/state_synchronizer.gd" id="5_eyotc"]
 [ext_resource type="Script" uid="uid://gl2cwrrfvlkh" path="res://source/common/gameplay/combat/components/ability_system_component.gd" id="6_fg3fs"]
 [ext_resource type="Resource" uid="uid://djprqmldadljv" path="res://source/common/gameplay/combat/damage_model/DamageModelResource.tres" id="6_k71qx"]
@@ -25,6 +24,7 @@ bg_color = Color(0.694118, 0.101961, 0.14902, 0.705882)
 [node name="Character" type="CharacterBody2D"]
 y_sort_enabled = true
 texture_filter = 1
+collision_layer = 7
 collision_mask = 6
 script = ExtResource("1_uqmoo")
 
@@ -42,28 +42,6 @@ script = ExtResource("2_composite")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_3w1m3")
-
-[node name="HandOffset" type="Node2D" parent="."]
-position = Vector2(0, -10)
-
-[node name="HandPivot" type="Node2D" parent="HandOffset"]
-
-[node name="RightHandSpot" type="Node2D" parent="HandOffset/HandPivot"]
-position = Vector2(15, 0)
-
-[node name="EmptyHand" parent="HandOffset/HandPivot/RightHandSpot" instance=ExtResource("3_eddh2")]
-position = Vector2(0, 0)
-
-[node name="LeftHandSpot" type="Node2D" parent="HandOffset/HandPivot"]
-position = Vector2(-15, 0)
-scale = Vector2(-1, 1)
-
-[node name="EmptyHand" parent="HandOffset/HandPivot/LeftHandSpot" instance=ExtResource("3_eddh2")]
-position = Vector2(0, 0)
-
-[node name="RightRig" type="Node2D" parent="HandOffset/HandPivot"]
-
-[node name="LeftRig" type="Node2D" parent="HandOffset/HandPivot"]
 
 [node name="HurtBox" type="Area2D" parent="."]
 

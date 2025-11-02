@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cims2v8edqxgj" path="res://icon.svg" id="3_vkr5d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_etei8"]
-radius = 3.0
+height = 44.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_grt34"]
 polygon = PackedVector2Array(-23, 2, -23, 4, -23, 8, -20, 10, -14, 12, -9, 14, -1, 15, 15, 14, 22, 8, 23, 0, 20, -3, 19, -7, 16, -9, 13, -11, 13, -14, 9, -15, 4, -15, -5, -15, -11, -15, -12, -10, -17, -8, -19, -4, -23, -1)
@@ -32,11 +32,12 @@ region_enabled = true
 region_rect = Rect2(65, 112, 47, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 9)
+position = Vector2(0, 5)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_etei8")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
 occluder = SubResource("OccluderPolygon2D_grt34")
 
 [node name="Class_Signal" type="Sprite2D" parent="."]

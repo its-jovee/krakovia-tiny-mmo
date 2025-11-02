@@ -1,33 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3wa3c527k5lx"]
+[gd_scene load_steps=9 format=3 uid="uid://b3wa3c527k5lx"]
 
 [ext_resource type="PackedScene" uid="uid://6bcg7fwcl6mi" path="res://source/common/gameplay/characters/character.tscn" id="1_0ps03"]
 [ext_resource type="Script" uid="uid://bexas1o2f74ve" path="res://source/common/gameplay/characters/player/player.gd" id="2_meo3t"]
+[ext_resource type="Texture2D" uid="uid://bq8l351wpiq48" path="res://assets/sprites/characters/circle_shadow.png" id="3_30vcx"]
 [ext_resource type="Script" uid="uid://cibbkjmyj3j2x" path="res://source/common/gameplay/characters/player/display_name_label.gd" id="3_cxg7o"]
 [ext_resource type="PackedScene" uid="uid://cr85xjy4a2w15" path="res://source/common/gameplay/characters/player/speech_bubble.tscn" id="4_speech"]
 [ext_resource type="PackedScene" uid="uid://dxxak7qv0yl2m" path="res://source/client/local_player/potato_indicator.tscn" id="5_potato"]
 [ext_resource type="Texture2D" uid="uid://dwa6amkc2ljub" path="res://assets/light.png" id="6_gkhtr"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gkhtr"]
+polygon = PackedVector2Array(-7, -19, -27, 0, 28, 0, 7, -19)
+
 [node name="Player" instance=ExtResource("1_0ps03")]
 script = ExtResource("2_meo3t")
 
-[node name="PointLight2D" type="PointLight2D" parent="." index="0"]
-position = Vector2(0, -26)
-energy = 0.2
+[node name="Sprite2D2" type="Sprite2D" parent="." index="0"]
+z_index = -1
+position = Vector2(0.4000015, -23.065006)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_30vcx")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+position = Vector2(0, -40)
+color = Color(1, 0.61, 0.61, 1)
+energy = 1.03
+range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("6_gkhtr")
-texture_scale = 0.4
 
-[node name="AnimatedSprite2D" parent="." index="1"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." index="2"]
+visible = false
+position = Vector2(0, 16)
+occluder = SubResource("OccluderPolygon2D_gkhtr")
+
+[node name="AnimatedSprite2D" parent="." index="3"]
 scale = Vector2(0.8, 0.8)
 sprite_frames = null
 animation = &""
 frame_progress = 0.0
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" type="Sprite2D" parent="." index="4"]
 position = Vector2(0, -23.465)
 scale = Vector2(0.8, 0.8)
 
-[node name="DisplayNameLabel" type="Label" parent="." index="4"]
+[node name="CompositeSprite" parent="." index="5"]
+position = Vector2(1, -24)
+
+[node name="DisplayNameLabel" type="Label" parent="." index="6"]
 z_index = 100
 offset_left = -24.0
 offset_top = 2.0
@@ -40,7 +59,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="HandleNameLabel" type="Label" parent="." index="5"]
+[node name="HandleNameLabel" type="Label" parent="." index="7"]
 z_index = 100
 offset_left = -24.0
 offset_top = 10.0
@@ -54,7 +73,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="SpeechBubble" parent="." index="6" instance=ExtResource("4_speech")]
+[node name="SpeechBubble" parent="." index="8" instance=ExtResource("4_speech")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -68,20 +87,14 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 
-[node name="PotatoIndicator" parent="." index="7" instance=ExtResource("5_potato")]
+[node name="PotatoIndicator" parent="." index="9" instance=ExtResource("5_potato")]
 
-[node name="CollisionShape2D" parent="." index="8"]
-position = Vector2(0, -8.565)
+[node name="CollisionShape2D" parent="." index="10"]
+position = Vector2(0, 0)
 scale = Vector2(1, 0.985)
 
-[node name="HandOffset" parent="." index="9"]
+[node name="HurtBox" parent="." index="11"]
 visible = false
 
-[node name="HandPivot" parent="HandOffset" index="0"]
-visible = false
-
-[node name="HurtBox" parent="." index="10"]
-visible = false
-
-[node name="ProgressBar" parent="." index="11"]
+[node name="ProgressBar" parent="." index="12"]
 visible = false
