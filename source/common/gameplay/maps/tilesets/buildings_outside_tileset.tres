@@ -1994,9 +1994,11 @@ texture = ExtResource("3_qb5oe")
 7:25/0 = 0
 8:25/0 = 0
 9:25/0 = 0
+0:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ttogd"]
 texture = ExtResource("3_iprdf")
+use_texture_padding = false
 0:4/0 = 0
 0:4/0/z_index = 1
 1:4/0 = 0
@@ -2187,6 +2189,8 @@ texture = ExtResource("3_iprdf")
 0:8/0 = 0
 0:9/0 = 0
 0:10/0 = 0
+0:11/0 = 0
+0:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mvj2w"]
 texture = ExtResource("5_psdwt")

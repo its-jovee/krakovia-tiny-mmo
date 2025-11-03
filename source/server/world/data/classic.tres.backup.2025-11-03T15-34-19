@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -13,12 +13,24 @@ appearance_head_id = "head_b"
 golds = 100
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_ni45q"]
+script = ExtResource("1_ni45q")
+player_id = 2
+account_name = "Mafra"
+display_name = "Mafra"
+character_class = "forager"
+golds = 100
+available_attributes_points = 10
+current_energy = 100.0
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
+"Mafra": PackedInt32Array(2),
 "jovee": PackedInt32Array(1)
 }
 players = {
-1: SubResource("Resource_ugqtu")
+1: SubResource("Resource_ugqtu"),
+2: SubResource("Resource_ni45q")
 }
-next_player_id = 1
+next_player_id = 2
