@@ -23,7 +23,8 @@ texture = ExtResource("3_30vcx")
 [node name="PointLight2D" type="PointLight2D" parent="." index="1"]
 position = Vector2(0, -40)
 color = Color(1, 0.61, 0.61, 1)
-energy = 1.03
+energy = 1.5
+blend_mode = 1
 range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("6_gkhtr")

@@ -74,4 +74,3 @@ func add_rare_bonus(item_slug: StringName, chance: float, quantity: int = 1) -> 
 		"chance": chance,
 		"quantity": quantity
 	})
-

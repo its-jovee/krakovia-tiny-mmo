@@ -48,13 +48,25 @@ func _init() -> void:
 	pass
 
 func _ready() -> void:
+	
 	super._ready()
+	
+	if has_node("PointLight2D"):
+		var light = $PointLight2D
+		light.blend_mode = PointLight2D.BLEND_MODE_MIX
+		light.energy = 1.0
+		print("PointLight2D configurado para BLEND_MODE_MIX no player: ", display_name)
+	else:
+		print("Aviso: Player sem PointLight2D!")
+		
 	# Only setup hover detection for remote players (not local player)
 	# Check if we're on client and this is not the local player
 	print("Player _ready: peer_id=", peer_id, " local_id=", multiplayer.get_unique_id(), " is_server=", multiplayer.is_server())
 	if not multiplayer.is_server() and peer_id != -1 and peer_id != multiplayer.get_unique_id():
 		print("Setting up hover detection for remote player: ", display_name, " (peer_id: ", peer_id, ")")
 		call_deferred("_setup_hover_detection")
+
+
 
 func _setup_hover_detection() -> void:
 	"""Setup mouse hover detection for remote players"""

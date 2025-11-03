@@ -144,7 +144,6 @@ script = ExtResource("1_i04l1")
 metadata/_custom_type_script = "uid://7mbux4mybta0"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 color = Color(0.20740001, 0.23834004, 0.34, 1)
 
 [node name="GeminiGeneratedImage4Bzhfy4Bzhfy4Bzh" type="Sprite2D" parent="."]
