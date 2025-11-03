@@ -11,8 +11,8 @@ const KEY_CHAR_ID := "c-id"
 static func base_url() -> String:
 	# Auto-detect environment
 	if OS.has_feature("template"):
-		# Production (exported build)
-		return "http://35.247.214.159:8090"
+		# Production (exported build) - use Caddy HTTPS
+		return "https://kraftovia.com"
 	else:
 		# Development (Godot editor)
 		return "http://127.0.0.1:8090"

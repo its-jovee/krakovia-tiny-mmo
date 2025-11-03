@@ -20,7 +20,7 @@ func _on_connection_succeeded() -> void:
 	print("Successfully connected to the Gateway as %d!" % multiplayer.get_unique_id())
 	
 	# Auto-detect environment
-	var address = "35.247.214.159" if OS.has_feature("template") else "127.0.0.1"
+	var address = "kraftovia.com/ws" if OS.has_feature("template") else "127.0.0.1"
 	var port = 443 if OS.has_feature("template") else 8087
 	
 	fetch_server_info.rpc_id(

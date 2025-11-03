@@ -56,9 +56,16 @@ func handle_connection(connection: StreamPeerTCP) -> void:
 	var method: String = header[0]
 	var path: String = header[1]
 	
-	var payload: Dictionary = JSON.parse_string(
-		as_string.get_slice("\r\n\r\n", 1)
-	)
+	# Parse JSON body safely
+	var body_string: String = as_string.get_slice("\r\n\r\n", 1)
+	var payload: Dictionary = {}
+	
+	if not body_string.is_empty():
+		var parsed = JSON.parse_string(body_string)
+		if parsed != null and parsed is Dictionary:
+			payload = parsed
+		else:
+			print("[HTTPServer] Failed to parse JSON body, using empty dict")
 	
 	var handler: Callable = router.find_route_handler(
 		HTTPClient.Method.METHOD_POST,
