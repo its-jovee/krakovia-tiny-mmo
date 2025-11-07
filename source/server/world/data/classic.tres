@@ -36,8 +36,12 @@ account_name = "Mafra"
 display_name = "Mafra"
 character_class = "forager"
 golds = 100
-available_attributes_points = 10
-current_energy = 100.0
+available_attributes_points = 67
+level = 20
+server_roles = {
+"senior_admin": {}
+}
+current_energy = 119.13092500000027
 
 [sub_resource type="Resource" id="Resource_7bb4l"]
 script = ExtResource("1_ni45q")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CraftingRecipe" load_steps=2 format=3 uid="uid://deyj01vlrr0gg"]
 
 [ext_resource type="Script" uid="uid://coo6kcmigwdal" path="res://source/common/gameplay/crafting/crafting_recipe.gd" id="1_recipe"]
 
@@ -6,7 +6,6 @@
 script = ExtResource("1_recipe")
 slug = &"ornate_table_recipe"
 recipe_name = &"Ornate Table"
-recipe_icon = null
 description = "Grand dining table adorned with precious metals."
 required_class = "forager"
 required_level = 6
@@ -14,7 +13,7 @@ gold_cost = 25
 energy_cost = 30.0
 input_1_slug = &"oak_planks"
 input_1_quantity = 4
+input_2_slug = &"candle_set_recipe"
+input_2_quantity = 2
 output_1_slug = &"ornate_table"
-output_1_quantity = 1
 tags = ["tier4", "forager", "furniture", "luxury"]
-
