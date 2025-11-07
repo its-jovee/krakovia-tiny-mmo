@@ -3,11 +3,11 @@
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_8lokm"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_vjpk7"]
 [ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_wexja"]
-[ext_resource type="Texture2D" uid="uid://df0384xgjdy7h" path="res://assets/halloween_clean.png" id="4_4rdug"]
+[ext_resource type="Texture2D" uid="uid://b2accb7kvxwqf" path="res://assets/sprites/BackgMain.jpg" id="4_4rdug"]
 [ext_resource type="FontFile" uid="uid://bo7gldkfw0d0k" path="res://assets/fonts/ari-w9500-display.ttf" id="5_78xcg"]
 [ext_resource type="Texture2D" uid="uid://c1a47i6ed3teh" path="res://assets/sprites/menu.png" id="5_wexja"]
 [ext_resource type="FontFile" uid="uid://d2w082aocn7jc" path="res://assets/fonts/ari-w9500-bold.ttf" id="7_artu7"]
-[ext_resource type="Texture2D" uid="uid://c0ui3swwggxrk" path="res://assets/kraftween_logo.png" id="7_q1aoo"]
+[ext_resource type="Texture2D" uid="uid://dlx7weuneneb2" path="res://assets/logo.png" id="7_q1aoo"]
 [ext_resource type="StyleBox" uid="uid://bi8r7kxlh83no" path="res://source/client/gateway/ui/gradient_button.tres" id="8_ad2pq"]
 [ext_resource type="FontFile" uid="uid://cr1d4ugttxggp" path="res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf" id="9_3vubn"]
 [ext_resource type="StyleBox" uid="uid://b68crpdaolqw1" path="res://assets/styles/hover_black_bg.tres" id="10_78xcg"]
@@ -80,7 +80,7 @@ texture = ExtResource("3_wexja")
 centered = false
 
 [node name="FairyForest" type="Sprite2D" parent="."]
-position = Vector2(-8.999999, -4.999999)
+position = Vector2(-28, -46.000004)
 scale = Vector2(0.50648147, 0.50648147)
 texture = ExtResource("4_4rdug")
 centered = false
