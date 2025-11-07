@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1760000100
+version = 1760000101
 next_id = 44
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
@@ -78,7 +78,7 @@ entries = Array[Dictionary]([{
 &"path": "res://source/server/world/components/data_request_handlers/harvest.leave.gd",
 &"slug": &"harvest.leave"
 }, {
-&"hash": "d37dfcae1fee1cc9dc0af9cdddca6ea7c1fecdededfba7c8d9eafbacbdcedf",
+&"hash": "d37dfcae1fee1cc9dc0af9cdddca6ea7c1fecdededfba7c8d9eafbacbdcedf01",
 &"id": 15,
 &"path": "res://source/server/world/components/data_request_handlers/inventory.get.gd",
 &"slug": &"inventory.get"

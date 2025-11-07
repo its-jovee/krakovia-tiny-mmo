@@ -6,4 +6,12 @@ func data_request_handler(
 	instance: ServerInstance,
 	args: Dictionary
 ) -> Dictionary:
-	return instance.players_by_peer_id[peer_id].player_resource.inventory
+	# Check if player exists
+	if not instance.players_by_peer_id.has(peer_id):
+		return {"error": "Player not found"}
+	
+	var player = instance.players_by_peer_id[peer_id]
+	if not player or not player.player_resource:
+		return {"error": "Player resource not available"}
+	
+	return player.player_resource.inventory

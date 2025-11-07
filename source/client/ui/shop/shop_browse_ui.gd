@@ -55,6 +55,11 @@ func open_shop(peer_id: int) -> void:
 func _on_shop_data_received(data: Dictionary) -> void:
 	if data.has("error"):
 		push_error("Failed to browse shop: " + data.error)
+		# Show error notification to user
+		var hud = get_tree().get_root().find_child("HUD", true, false)
+		if hud and hud.has_method("show_notification"):
+			var title = TranslationServer.translate("shop_msg_cannot_open")
+			hud.show_notification(data.error, title)
 		return
 	
 	var shop_data = data.shop_data

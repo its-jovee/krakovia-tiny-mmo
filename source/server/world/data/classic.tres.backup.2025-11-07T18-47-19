@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -10,8 +10,24 @@ account_name = "jovee"
 display_name = "jovee"
 character_class = "trapper"
 appearance_head_id = "head_b"
+equipped_accessory_id = 319
 golds = 100
+inventory = {
+104: {
+"stack": 2
+},
+105: {
+"stack": 1
+},
+319: {
+"stack": 1
+}
+}
 available_attributes_points = 10
+experience = 15
+server_roles = {
+"senior_admin": {}
+}
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -41,18 +57,30 @@ golds = 100
 available_attributes_points = 10
 current_energy = 100.0
 
+[sub_resource type="Resource" id="Resource_tcuqq"]
+script = ExtResource("1_ni45q")
+player_id = 5
+account_name = "teste"
+display_name = "teste"
+character_class = "forager"
+appearance_head_id = "head_b"
+golds = 100
+available_attributes_points = 10
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
 "Mafra": PackedInt32Array(2),
 "Mafra1": PackedInt32Array(3),
 "Mafra2": PackedInt32Array(4),
-"jovee": PackedInt32Array(1)
+"jovee": PackedInt32Array(1),
+"teste": PackedInt32Array(5)
 }
 players = {
 1: SubResource("Resource_ugqtu"),
 2: SubResource("Resource_ni45q"),
 3: SubResource("Resource_7bb4l"),
-4: SubResource("Resource_oscd5")
+4: SubResource("Resource_oscd5"),
+5: SubResource("Resource_tcuqq")
 }
-next_player_id = 4
+next_player_id = 5

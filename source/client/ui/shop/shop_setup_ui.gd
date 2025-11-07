@@ -80,6 +80,17 @@ func show_menu(inventory: Dictionary = {}) -> void:
 func _on_inventory_received(inv_data: Dictionary) -> void:
 	print("=== SHOP SETUP: _on_inventory_received ===")
 	print("Inventory data received: ", inv_data)
+	
+	# Check for error
+	if inv_data.has("error"):
+		push_error("Failed to get inventory: " + inv_data.error)
+		var hud = get_tree().get_root().find_child("HUD", true, false)
+		if hud and hud.has_method("show_notification"):
+			var title = TranslationServer.translate("shop_msg_cannot_open")
+			hud.show_notification(inv_data.error, title)
+		visible = false
+		return
+	
 	print("Inventory size: ", inv_data.size())
 	player_inventory = inv_data
 	_refresh_inventory_grid()

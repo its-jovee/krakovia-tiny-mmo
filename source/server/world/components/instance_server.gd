@@ -46,6 +46,12 @@ func _ready() -> void:
 							trade_mgr.cancel_trade(session_id, peer_id)
 							break
 				
+				# Close any open shops for this peer
+				if has_node("ShopManager"):
+					var shop_mgr: ShopManager = get_node("ShopManager")
+					if shop_mgr.has_shop(peer_id):
+						shop_mgr.close_shop(peer_id)
+				
 				despawn_player(peer_id)
 				# Ensure database captures persisted energy immediately on disconnect
 				if world_server and world_server.database:
@@ -71,6 +77,11 @@ func _ready() -> void:
 	var quest_mgr = QuestManager.new()
 	quest_mgr.name = "QuestManager"
 	add_child(quest_mgr, true)
+	
+	# Add ShopManager
+	var shop_mgr = ShopManager.new()
+	shop_mgr.name = "ShopManager"
+	add_child(shop_mgr, true)
 
 
 func load_map(map_path: String) -> void:
@@ -179,6 +190,11 @@ func spawn_player(peer_id: int) -> void:
 
 	connected_peers.append(peer_id)
 	_propagate_spawn(peer_id)
+	
+	# Sync all active shops to the new player
+	if has_node("ShopManager"):
+		var shop_mgr: ShopManager = get_node("ShopManager")
+		shop_mgr.sync_shops_to_player(peer_id, self)
 
 
 func instantiate_player(peer_id: int) -> Player:
