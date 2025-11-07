@@ -11,10 +11,10 @@ display_name = "jovee"
 character_class = "trapper"
 appearance_head_id = "head_b"
 equipped_accessory_id = 319
-golds = 100
+golds = 103
 inventory = {
 104: {
-"stack": 2
+"stack": 1
 },
 105: {
 "stack": 1
@@ -64,7 +64,12 @@ account_name = "teste"
 display_name = "teste"
 character_class = "forager"
 appearance_head_id = "head_b"
-golds = 100
+golds = 97
+inventory = {
+104: {
+"stack": 1
+}
+}
 available_attributes_points = 10
 
 [resource]

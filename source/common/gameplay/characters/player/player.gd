@@ -54,7 +54,7 @@ func _ready() -> void:
 	if has_node("PointLight2D"):
 		var light = $PointLight2D
 		light.blend_mode = PointLight2D.BLEND_MODE_MIX
-		light.energy = 1.0
+		light.energy = 0.1
 		print("PointLight2D configurado para BLEND_MODE_MIX no player: ", display_name)
 	else:
 		print("Aviso: Player sem PointLight2D!")

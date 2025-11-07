@@ -15,21 +15,25 @@ polygon = PackedVector2Array(-7, -19, -27, 0, 28, 0, 7, -19)
 script = ExtResource("2_meo3t")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." index="0"]
+physics_interpolation_mode = 2
 z_index = -1
 position = Vector2(0.4000015, -23.065006)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_30vcx")
 
 [node name="PointLight2D" type="PointLight2D" parent="." index="1"]
+physics_interpolation_mode = 2
+visible = false
 position = Vector2(0, -40)
 color = Color(1, 0.61, 0.61, 1)
-energy = 1.5
+energy = 0.7
 blend_mode = 1
 range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("6_gkhtr")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="2"]
+physics_interpolation_mode = 2
 visible = false
 position = Vector2(0, 16)
 occluder = SubResource("OccluderPolygon2D_gkhtr")
@@ -41,6 +45,7 @@ animation = &""
 frame_progress = 0.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="4"]
+physics_interpolation_mode = 2
 position = Vector2(0, -23.465)
 scale = Vector2(0.8, 0.8)
 
@@ -91,6 +96,7 @@ scale = Vector2(0.6, 0.6)
 [node name="PotatoIndicator" parent="." index="9" instance=ExtResource("5_potato")]
 
 [node name="CollisionShape2D" parent="." index="10"]
+physics_interpolation_mode = 2
 position = Vector2(0, 0)
 scale = Vector2(1, 0.985)
 

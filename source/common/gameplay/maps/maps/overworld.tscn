@@ -1,13 +1,11 @@
-[gd_scene load_steps=47 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=43 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
 [ext_resource type="TileSet" uid="uid://bm6rosvdjjdcd" path="res://source/common/gameplay/maps/tilesets/forest_tileset.tres" id="2_ulyvq"]
 [ext_resource type="TileSet" uid="uid://bac235cdm8sb6" path="res://source/common/gameplay/maps/tilesets/buildings_outside_tileset.tres" id="3_gimy5"]
 [ext_resource type="PackedScene" uid="uid://dm3xqv0yj5mg0" path="res://source/server/world/components/minigames/minigame_zone.tscn" id="3_owdw7"]
-[ext_resource type="Shader" uid="uid://c632eu5japvws" path="res://source/client/shaders/floating_signal.gdshader" id="5_u3weo"]
 [ext_resource type="Texture2D" uid="uid://crxravjgslu2h" path="res://assets/sprites/gui/campfire-sheet.png" id="5_uytus"]
-[ext_resource type="Texture2D" uid="uid://dx74naf6cj3df" path="res://assets/sprites/environment/pumpkin.png" id="6_6ybks"]
 [ext_resource type="Texture2D" uid="uid://dwa6amkc2ljub" path="res://assets/light.png" id="8_6ybks"]
 [ext_resource type="PackedScene" uid="uid://b2ckixon7ryh6" path="res://source/common/gameplay/maps/components/interaction_areas/warper/warper.tscn" id="9_vhwke"]
 [ext_resource type="PackedScene" uid="uid://l6hdpgq87k1y" path="res://source/server/world/components/harvesting/nodes/forager_node_t2.tscn" id="12_slgwh"]
@@ -61,18 +59,6 @@ shader_parameter/scale = 0.01
 vertices = PackedVector2Array(-74, 2509.8281, 92.39844, 2603.8906, -21.476563, 2629.1875, -260.10938, 2438.2969, -74, 2301.3828, -645.96875, 2040.5938, 254.29688, 2733.1328, 222.71094, 2657.3125, 378.0078, 2649.9219, 690.8906, 2678.5625, 621.8672, 2560.5, 824.3125, 2521.5938, 731.0703, 2434.4922, 931.0625, 2382, 650.40625, 2144.1172, 705.39844, 1963.4375, -782.2969, 1083.4297, -955.02344, 918.5625, -734.1406, 587.2422, 13.859375, 465.9297, 127.046875, 708.46875, 1701.4766, 496.65625, 1883.6797, 948.1875, 1743.9219, 1041.3672, 1142.0625, 1293.3516, 897.1875, 1130.1094, 874.1094, 983.90625, 897.4922, 820.21094, 1056.7031, 629.1797, 1669.6328, 2115.4219, 1451.3438, 2286.9297, 1126.5625, 2382, 784.6797, 1781.1094, 968.0703, 1541.9063, 1637.9922, 1688.2734, 1646.0391, 1277.9219, 1138.2578, 425.2578, 1821.2188, 41.65625, 1113.2891, 242.11719, 1496.7578, -472.71094, 767.53125, -924.52344, 925.9297, 119.921875, 740.1797, -33.523438, 97.67969, -581.6172, 503.89844, -66.109375, -401.5703, -614.4922, -216.3125, -629.9297, 145.64063, -9.109375, -503.1875, -411.27344, -629.15625, 56.507813, -685, -95.0625, 30.15625, 197.10938, -718.10156, 242.46875, -758.3281, 1419.0078, 189.53125, 825.6328, 174.15625, 910.21094, 142.1875, 1086.0313, 102.078125, 1262.5078, -573.25, 1571.9063, 85.92969, 1480.5781, 118.03125, 1649.1172, 125.9375, 1854.7891, 86.60156, 1996.4375, -0.71875, 2171.1016, -530.3281, 2414.461, -638.1094, 2252.789)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5), PackedInt32Array(6, 7, 8, 9), PackedInt32Array(9, 8, 10, 11), PackedInt32Array(11, 10, 12, 13), PackedInt32Array(13, 12, 14, 15), PackedInt32Array(16, 17, 18, 19, 20), PackedInt32Array(21, 22, 23, 24, 25, 26, 27, 28), PackedInt32Array(29, 30, 31, 13, 15, 32, 33, 34), PackedInt32Array(34, 33, 24, 35), PackedInt32Array(23, 35, 24), PackedInt32Array(21, 28, 36, 37), PackedInt32Array(37, 36, 38, 39), PackedInt32Array(40, 39, 38, 41, 42, 43), PackedInt32Array(43, 42, 44), PackedInt32Array(45, 46, 43, 44, 47, 48), PackedInt32Array(49, 50, 48, 47, 51), PackedInt32Array(52, 49, 51, 19, 18), PackedInt32Array(53, 16, 20, 54, 55, 56, 57, 58), PackedInt32Array(58, 57, 59), PackedInt32Array(5, 58, 59, 60, 61, 62, 63, 4), PackedInt32Array(5, 3, 64, 65)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(120, 2608, -64, 2504, -64, 2304, 8, 2176, 96, 2000, 136, 1856, 128, 1648, 96, 1480, 112, 1264, 152, 1088, 184, 912, 200, 824, 136, 704, 24, 464, 40, 200, 152, 0, 504, -56, 736, -24, 920, 128, 1104, 248, 1128, 424, 1048, 624, 888, 816, 864, 984, 888, 1136, 1128, 1296, 960, 1536, 776, 1776, 696, 1960, 640, 2144, 720, 2432, 616, 2552, 376, 2640, 208, 2648, 248, 2744, 696, 2688, 832, 2528, 936, 2392, 1128, 2392, 1456, 2296, 1680, 2120, 1648, 1688, 1656, 1280, 1752, 1048, 1896, 952, 1712, 496, 1832, 40, 1504, -480, 768, -936, 96, -592, -216, -640, -408, -624, -512, -416, -696, -96, -640, 56, -728, 240, -744, 584, -968, 920, -792, 1088, -768, 1424, -584, 1576, -656, 2040, -648, 2256, -536, 2424, -264, 2448, -24, 2640)])
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ysxe5"]
-shader = ExtResource("5_u3weo")
-shader_parameter/float_speed = 1.5
-shader_parameter/float_amplitude = 8.0
-shader_parameter/time_offset = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jp3f0"]
-shader = ExtResource("5_u3weo")
-shader_parameter/float_speed = 1.5
-shader_parameter/float_amplitude = 8.0
-shader_parameter/time_offset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvj6e"]
 atlas = ExtResource("5_uytus")
@@ -144,16 +130,9 @@ script = ExtResource("1_i04l1")
 metadata/_custom_type_script = "uid://7mbux4mybta0"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.20740001, 0.23834004, 0.34, 1)
+color = Color(0.9870729, 0.9406385, 0.76586115, 1)
 
 [node name="GeminiGeneratedImage4Bzhfy4Bzhfy4Bzh" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(579, 1046.0001)
-scale = Vector2(4.465625, 4.4656253)
-texture = ExtResource("2_mvj6e")
-
-[node name="GeminiGeneratedImage4Bzhfy4Bzhfy4Bzh2" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(579, 1046.0001)
 scale = Vector2(4.465625, 4.4656253)
@@ -222,55 +201,6 @@ position = Vector2(386, 132)
 tile_map_data = PackedByteArray("AAAZACUAAwAGAAEAAADf//7/AwAFAAoAAADf////AwAFAAsAAADg//7/AwAGAAoAAADg////AwAGAAsAAADh//7/AwAHAAoAAADh////AwAHAAsAAADi//7/AwAIAAoAAADi////AwAIAAsAAADT//7/AwAFAAoAAADT////AwAFAAsAAADU//7/AwAGAAoAAADU////AwAGAAsAAADV//7/AwAHAAoAAADV////AwAHAAsAAADW//7/AwAIAAoAAADW////AwAIAAsAAADd/wAAAwADAAkAAADY/wAAAwADAAkAAAAWACAAAAAAAAQAAAAWACEAAAAAAAMAAAAWACIAAAAAAAQAAAAWACMAAAAAAAUAAAAXAB8AAAABAAMAAAAXACAAAAABAAIAAAAXACEAAAABAAMAAAAXACIAAAABAAQAAAAXACMAAAABAAUAAAAYAB8AAAACAAIAAAAYACAAAAACAAIAAAAYACEAAAACAAMAAAAYACIAAAACAAIAAAAZAB4AAAADAAIAAAAZAB8AAAADAAEAAAAZACAAAAADAAIAAAAZACEAAAADAAMAAAAZACIAAAACAAIAAAAaAB4AAAAEAAIAAAAaAB8AAAAEAAEAAAAaACAAAAAEAAIAAAAaACEAAAAEAAMAAAAaACIAAAAFAAgAAAAbAB8AAAAGAAIAAAAbACAAAAAFAAIAAAAbACEAAAAFAAMAAAAbACIAAAAFAAgAAAAcAB8AAAAGAAMAAAAcACAAAAAGAAIAAAAcACEAAAAGAAMAAAAcACIAAAAGAAQAAAAcACMAAAAGAAUAAAAdACAAAAAHAAQAAAAdACEAAAAHAAMAAAAdACIAAAAHAAQAAAAdACMAAAAHAAUAAAAWAB0AAAAAAAMAAAAWAB4AAAAAAAQAAAAWAB8AAAAAAAMAAAAXABwAAAABAAIAAAAXAB0AAAABAAMAAAAXAB4AAAABAAIAAAAYABwAAAACAAIAAAAYAB0AAAACAAIAAAAYAB4AAAACAAIAAAAZABsAAAADAAEAAAAZABwAAAADAAIAAAAZAB0AAAADAAEAAAAaABsAAAAEAAEAAAAaABwAAAAEAAIAAAAaAB0AAAAEAAEAAAAbABwAAAAFAAIAAAAbAB0AAAAGAAIAAAAbAB4AAAAFAAIAAAAcABwAAAAGAAIAAAAcAB0AAAAGAAMAAAAcAB4AAAAGAAIAAAAdAB0AAAAHAAMAAAAdAB4AAAAHAAQAAAAdAB8AAAAHAAMAAAAWABsAAAAAAAIAAAAWABwAAAAAAAMAAAAXABoAAAABAAEAAAAXABsAAAABAAIAAAAYABoAAAACAAEAAAAYABsAAAACAAIAAAAZABkAAAADAAAAAAAZABoAAAADAAEAAAAaABkAAAAEAAAAAAAaABoAAAAEAAEAAAAbABoAAAAFAAEAAAAbABsAAAAFAAIAAAAcABoAAAAGAAEAAAAcABsAAAAGAAIAAAAdABsAAAAHAAIAAAAdABwAAAAHAAMAAAA=")
 tile_set = ExtResource("3_gimy5")
 
-[node name="Halloweenpumpkin3" type="Sprite2D" parent="World_tiles v1"]
-material = SubResource("ShaderMaterial_ysxe5")
-position = Vector2(451.00003, 201)
-rotation = -0.0075225383
-scale = Vector2(-0.38473672, 0.38473672)
-texture = ExtResource("6_6ybks")
-
-[node name="PointLight2D3" type="PointLight2D" parent="World_tiles v1/Halloweenpumpkin3"]
-position = Vector2(-270.307, 2.0334778)
-rotation = 3.1340702
-scale = Vector2(0.9006679, -0.9006679)
-color = Color(0.8199448, 0.5234898, 0.18939996, 1)
-energy = 0.87
-shadow_enabled = true
-texture = ExtResource("8_6ybks")
-texture_scale = 0.55
-
-[node name="Halloweenpumpkin4" type="Sprite2D" parent="World_tiles v1"]
-material = SubResource("ShaderMaterial_jp3f0")
-position = Vector2(555, 201)
-rotation = -0.0075225383
-scale = Vector2(0.385, 0.385)
-texture = ExtResource("6_6ybks")
-
-[node name="PointLight2D2" type="PointLight2D" parent="World_tiles v1/Halloweenpumpkin4"]
-position = Vector2(-270.12222, -2.0319977)
-rotation = 0.0075225383
-scale = Vector2(0.90005195, 0.90005195)
-color = Color(0.8199448, 0.5234898, 0.18939996, 1)
-energy = 0.87
-shadow_enabled = true
-texture = ExtResource("8_6ybks")
-texture_scale = 0.55
-
-[node name="Halloweenpumpkin5" type="Sprite2D" parent="World_tiles v1"]
-modulate = Color(1, 1, 1, 0.31764707)
-position = Vector2(523, 1185)
-rotation = -0.0075225383
-scale = Vector2(2.9640803, 2.9640803)
-texture = ExtResource("6_6ybks")
-
-[node name="Halloweenpumpkin6" type="Sprite2D" parent="World_tiles v1"]
-modulate = Color(1, 1, 1, 0.31764707)
-z_index = -1
-position = Vector2(507, 345)
-rotation = -0.0075225383
-scale = Vector2(2.9640803, 2.9640803)
-texture = ExtResource("6_6ybks")
-
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="World_tiles v1"]
 position = Vector2(448, 2376)
 scale = Vector2(3.1064076, 3.1064076)
@@ -319,23 +249,7 @@ position = Vector2(504, 288)
 
 [node name="monster_halloween" parent="Components" instance=ExtResource("13_ysxe5")]
 material = null
-position = Vector2(-336, -560)
-
-[node name="monster_halloween2" parent="Components" instance=ExtResource("13_ysxe5")]
-material = null
-position = Vector2(883, -407)
-
-[node name="monster_halloween3" parent="Components" instance=ExtResource("13_ysxe5")]
-material = null
-position = Vector2(1712, 80)
-
-[node name="monster_halloween4" parent="Components" instance=ExtResource("13_ysxe5")]
-material = null
-position = Vector2(1656, 744)
-
-[node name="monster_halloween5" parent="Components" instance=ExtResource("13_ysxe5")]
-material = null
-position = Vector2(1656, 744)
+position = Vector2(97, 2645)
 
 [node name="MinigameZone" parent="Components" instance=ExtResource("3_owdw7")]
 position = Vector2(528, 1184)

@@ -43,7 +43,6 @@ position = Vector2(0, -6.75)
 shape = SubResource("RectangleShape2D_3w1m3")
 
 [node name="PointLight2D" parent="." index="4"]
-visible = false
 color = Color(0.5, 0.2585, 0.185, 1)
 energy = 0.6
 shadow_filter_smooth = 25.0
@@ -92,9 +91,10 @@ script = ExtResource("12_225ue")
 metadata/_custom_type_script = "uid://natfmyvgikpe"
 
 [node name="PointLight2D2" type="PointLight2D" parent="." index="25"]
+physics_interpolation_mode = 2
 position = Vector2(0, -40)
 color = Color(1, 0.61, 0.61, 1)
-energy = 1.03
+energy = 0.1
 range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("11_f46i6")
