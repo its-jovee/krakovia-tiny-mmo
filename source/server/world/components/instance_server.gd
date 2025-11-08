@@ -340,6 +340,19 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 	
 	for id: int in connected_peers:
 		despawn_player.rpc_id(id, peer_id)
+
+
+func broadcast_player_collision_mode(enabled: bool) -> void:
+	"""Enable or disable player-to-player collision for all clients (used by minigames)"""
+	print("[ServerInstance] Broadcasting collision mode: ", enabled)
+	for peer_id: int in connected_peers:
+		set_player_collision_mode.rpc_id(peer_id, enabled)
+
+
+@rpc("authority", "call_remote", "reliable", 0)
+func set_player_collision_mode(enabled: bool) -> void:
+	# Client-side handler stub (actual implementation in InstanceClient)
+	pass
 #endregion
 
 

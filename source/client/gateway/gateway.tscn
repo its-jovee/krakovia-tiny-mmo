@@ -80,7 +80,8 @@ texture = ExtResource("3_wexja")
 centered = false
 
 [node name="FairyForest" type="Sprite2D" parent="."]
-position = Vector2(-28, -46.000004)
+visible = false
+position = Vector2(-7.999998, -9.9999695)
 scale = Vector2(0.50648147, 0.50648147)
 texture = ExtResource("4_4rdug")
 centered = false

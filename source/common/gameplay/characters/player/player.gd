@@ -31,6 +31,7 @@ var shop_name: String = "":
 		_update_shop_indicator()
 
 var peer_id: int = -1
+var is_remote_player: bool = false  # True for remote players on client
 
 @onready var syn: StateSynchronizer = $StateSynchronizer
 @onready var display_name_label: Label = $DisplayNameLabel
@@ -46,6 +47,13 @@ var is_hovered: bool = false
 
 func _init() -> void:
 	pass
+
+func _physics_process(_delta: float) -> void:
+	# Remote players on client: always keep velocity zero (positions are synced from server)
+	# But still call move_and_slide() so they act as solid obstacles for collision
+	if is_remote_player:
+		velocity = Vector2.ZERO
+		move_and_slide()  # Participate in physics collision without moving
 
 func _ready() -> void:
 	
@@ -203,6 +211,25 @@ func show_speech_bubble(text: String) -> void:
 		await ready
 	if speech_bubble and speech_bubble.has_method("show_message"):
 		speech_bubble.show_message(text)
+
+
+func set_player_collision_enabled(enabled: bool) -> void:
+	"""Enable or disable player-to-player collision (used by minigames/PvP zones)"""
+	if multiplayer.is_server():
+		return  # Server-side players always have collision for physics authority
+	
+	# Only affects remote players on clients
+	if peer_id == multiplayer.get_unique_id():
+		return  # Don't modify local player collision
+	
+	if enabled:
+		# Enable collision - remote player becomes solid obstacle
+		collision_layer = 1  # On layer 1 (same as all players)
+		collision_mask = 7   # Collide with players (1), objects (2), walls (4)
+	else:
+		# Disable collision - remote player is non-solid
+		collision_layer = 0  # Not on any layer
+		collision_mask = 6   # Still collide with objects (2) and walls (4), not players
 
 
 func _update_shop_indicator() -> void:

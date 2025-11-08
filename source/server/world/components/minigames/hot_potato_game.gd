@@ -58,6 +58,12 @@ func start_active_phase() -> void:
 		zone_reference.lock_zone()
 		print("[HotPotato:%d] Zone locked" % session_id)
 	
+	# Enable player-to-player collision for body blocking gameplay
+	var server_instance = _get_server_instance()
+	if server_instance:
+		server_instance.broadcast_player_collision_mode(true)
+		print("[HotPotato:%d] Player collision enabled" % session_id)
+	
 	# Clear grace timers (fresh start)
 	grace_timers.clear()
 	
@@ -237,6 +243,12 @@ func end_game() -> void:
 	# Unlock zone
 	if zone_reference:
 		zone_reference.unlock_zone()
+	
+	# Disable player-to-player collision when game ends
+	var server_instance = _get_server_instance()
+	if server_instance:
+		server_instance.broadcast_player_collision_mode(false)
+		print("[HotPotato:%d] Player collision disabled" % session_id)
 	
 	# Determine winner
 	if active_players.size() == 1:
@@ -422,3 +434,12 @@ func _on_player_disconnected(peer_id: int) -> void:
 			
 			if active_players.size() <= 1:
 				end_game()
+
+
+func _get_server_instance() -> ServerInstance:
+	"""Find the ServerInstance in the tree"""
+	var instance_manager = minigame_manager.instance_manager
+	for child in instance_manager.get_children():
+		if child is ServerInstance:
+			return child
+	return null

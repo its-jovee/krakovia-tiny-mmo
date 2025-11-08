@@ -193,6 +193,14 @@ func spawn_player(player_id: int) -> void:
 		local_player.synchronizer_manager = synchronizer_manager
 	else:
 		new_player = DUMMY_PLAYER.instantiate()
+		# Mark as remote player so it keeps velocity at zero
+		new_player.is_remote_player = true
+		# Remote players: no collision with other players by default (prevents griefing/dragging)
+		# Positions are authority-synced from server, not physics-driven
+		new_player.collision_layer = 0  # Not on any collision layer
+		new_player.collision_mask = 6   # Still detect walls (2) and objects (4)
+		new_player.velocity = Vector2.ZERO
+		# Physics stays enabled for collision detection, but velocity is locked to zero
 	
 	new_player.name = str(player_id)
 	# CRITICAL: Set the peer_id so shop indicators work correctly
@@ -223,6 +231,16 @@ func despawn_player(player_id: int) -> void:
 		var pnl: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
 		if pnl and pnl.has_method("reset"):
 			pnl.reset()
+
+
+@rpc("authority", "call_remote", "reliable", 0)
+func set_player_collision_mode(enabled: bool) -> void:
+	"""Toggle player-to-player collision for all remote players (used by minigames)"""
+	print("[InstanceClient] Setting player collision mode: ", enabled)
+	for peer_id: int in players_by_peer_id:
+		var player: Player = players_by_peer_id[peer_id]
+		if player and is_instance_valid(player):
+			player.set_player_collision_enabled(enabled)
 #endregion
 
 
