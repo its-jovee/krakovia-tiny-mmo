@@ -10,6 +10,13 @@ func data_request_handler(
 	if not player:
 		return {"ok": false, "err": &"no_player"}
 
+	# Check if player is sitting - they must stand up first
+	if player.ability_system_component:
+		var asc: AbilitySystemComponent = player.ability_system_component
+		asc.ensure_attr(&"is_sitting", 0.0, 1.0)
+		if asc.get_value(&"is_sitting") > 0.5:
+			return {"ok": false, "err": &"must_stand_first"}
+
 	# Use HarvestManager to find nearest node (eliminates tree scan)
 	var best: HarvestNode = instance.harvest_manager.find_nearest_in_range(player)
 	if best == null:

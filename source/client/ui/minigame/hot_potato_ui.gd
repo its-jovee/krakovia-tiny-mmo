@@ -247,6 +247,9 @@ func _on_elimination(data: Dictionary) -> void:
 		if potato_indicator:
 			potato_indicator.hide_potato()
 	
+	# Force a full refresh of all potato indicators (prevents stuck indicators)
+	_update_potato_indicators(-1)  # -1 = hide all, will be updated on next state broadcast
+	
 	if eliminated_peer == my_peer_id:
 		am_eliminated = true
 		

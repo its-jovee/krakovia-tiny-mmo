@@ -99,3 +99,4 @@ energy = 0.1
 range_item_cull_mask = 3
 shadow_enabled = true
 texture = ExtResource("11_f46i6")
+texture_scale = 0.08

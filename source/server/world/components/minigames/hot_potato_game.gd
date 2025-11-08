@@ -138,6 +138,13 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var holder = active_players[current_potato_holder_id]
+	
+	# Validate holder exists and is valid
+	if not is_instance_valid(holder):
+		print("[HotPotato:%d] ERROR: Potato holder reference is invalid!" % session_id)
+		assign_random_potato()
+		return
+	
 	for peer_id in active_players:
 		if peer_id == current_potato_holder_id:
 			continue
@@ -147,6 +154,12 @@ func _physics_process(delta: float) -> void:
 			continue
 		
 		var other = active_players[peer_id]
+		
+		# Validate other player exists and is valid
+		if not is_instance_valid(other):
+			print("[HotPotato:%d] WARNING: Invalid player reference for peer %d, skipping" % [session_id, peer_id])
+			continue
+		
 		var distance = holder.global_position.distance_to(other.global_position)
 		
 		if distance < TOUCH_DISTANCE:
@@ -211,18 +224,18 @@ func eliminate_player(peer_id: int) -> void:
 		remove_speed_boost(peer_id)
 		current_potato_holder_id = -1
 	
-	# Teleport player outside the zone
-	if zone_reference and zone_reference.elimination_teleport_position != Vector2.ZERO:
-		player.just_teleported = true
-		player.syn.set_by_path(^":position", zone_reference.elimination_teleport_position)
-		print("[HotPotato:%d] Teleported eliminated player to %v" % [session_id, zone_reference.elimination_teleport_position])
-	
-	# Move to eliminated list (store name for UI)
+	# Move to eliminated list BEFORE teleporting (prevents double elimination race condition)
 	eliminated_players[peer_id] = player_name
 	active_players.erase(peer_id)
 	
 	# Clear grace period for eliminated player
 	grace_timers.erase(peer_id)
+	
+	# Teleport player outside the zone AFTER removing from active_players
+	if zone_reference and zone_reference.elimination_teleport_position != Vector2.ZERO:
+		player.just_teleported = true
+		player.syn.set_by_path(^":position", zone_reference.elimination_teleport_position)
+		print("[HotPotato:%d] Teleported eliminated player to %v" % [session_id, zone_reference.elimination_teleport_position])
 	
 	# Notify clients
 	_broadcast_elimination(peer_id)

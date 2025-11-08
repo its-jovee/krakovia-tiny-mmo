@@ -100,8 +100,9 @@ func check_inputs() -> void:
 
 	# Sit toggle on X
 	if Input.is_action_just_pressed("sit"):
-		is_sitting_local = not is_sitting_local
-		InstanceClient.current.request_data(&"state.sit", Callable(), {"on": is_sitting_local})
+		if InstanceClient.local_harvest_node == "":
+			is_sitting_local = not is_sitting_local
+			InstanceClient.current.request_data(&"state.sit", Callable(), {"on": is_sitting_local})
 
 
 func _on_harvest_join_response(data: Dictionary) -> void:
@@ -171,10 +172,10 @@ func update_zoom(delta: float) -> void:
 
 func update_animation(delta: float) -> void:
 	# Determine animation based on current state
-	if is_sitting_local:
-		anim = Animations.SIT
-	elif InstanceClient.local_harvest_node != "":
+	if InstanceClient.local_harvest_node != "":
 		anim = Animations.HARVEST
+	elif is_sitting_local:
+		anim = Animations.SIT
 	elif input_direction:
 		anim = Animations.RUN
 	else:

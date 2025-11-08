@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -70,10 +70,38 @@ character_class = "forager"
 appearance_head_id = "head_b"
 golds = 97
 inventory = {
+56: {
+"stack": 41
+},
+64: {
+"stack": 24
+},
+71: {
+"stack": 22
+},
+79: {
+"stack": 2
+},
+82: {
+"stack": 10
+},
+86: {
+"stack": 1
+},
 104: {
 "stack": 1
 }
 }
+available_attributes_points = 10
+experience = 500
+
+[sub_resource type="Resource" id="Resource_8u1r5"]
+script = ExtResource("1_ni45q")
+player_id = 6
+account_name = "cidadao"
+display_name = "cidadao"
+appearance_head_id = "head_b"
+golds = 100
 available_attributes_points = 10
 
 [resource]
@@ -82,6 +110,7 @@ accounts = {
 "Mafra": PackedInt32Array(2),
 "Mafra1": PackedInt32Array(3),
 "Mafra2": PackedInt32Array(4),
+"cidadao": PackedInt32Array(6),
 "jovee": PackedInt32Array(1),
 "teste": PackedInt32Array(5)
 }
@@ -90,6 +119,7 @@ players = {
 2: SubResource("Resource_ni45q"),
 3: SubResource("Resource_7bb4l"),
 4: SubResource("Resource_oscd5"),
-5: SubResource("Resource_tcuqq")
+5: SubResource("Resource_tcuqq"),
+6: SubResource("Resource_8u1r5")
 }
-next_player_id = 5
+next_player_id = 6

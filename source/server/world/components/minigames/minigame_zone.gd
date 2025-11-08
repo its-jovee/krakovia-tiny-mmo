@@ -89,9 +89,16 @@ func _on_body_exited(body: Node2D) -> void:
 	print("[MinigameZone:%s] body_exited signal fired! Body: %s" % [zone_name, body.name])
 	
 	if body is Player:
+		var player = body as Player
+		
+		# Don't process exits caused by teleportation (prevents double elimination)
+		if player.just_teleported:
+			print("[MinigameZone:%s] Player %s exited due to teleport, ignoring" % [zone_name, body.name])
+			return
+		
 		var peer_id = body.name.to_int()
 		players_in_zone.erase(peer_id)
-		print("[MinigameZone:%s] Player %s left (total: %d)" % [zone_name, body.player_resource.display_name, players_in_zone.size()])
+		print("[MinigameZone:%s] Player %s left (total: %d)" % [zone_name, player.player_resource.display_name, players_in_zone.size()])
 		
 		# If player leaves during active game, eliminate them
 		if minigame_manager:
