@@ -110,11 +110,15 @@ text = "4. Troca"
 
 [node name="Page4Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "5. Energia & Minigames"
+text = "5. Energia"
 
 [node name="Page5Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
 layout_mode = 2
-text = "6. Lojas de Jogadores"
+text = "6. Minigames"
+
+[node name="Page6Button" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/Sidebar/PageButtons"]
+layout_mode = 2
+text = "7. Lojas de Jogadores"
 
 [node name="VSeparator" type="VSeparator" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea"]
 layout_mode = 2
@@ -140,10 +144,12 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="GIFContainer" type="CenterContainer" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer/ContentVBox"]
+visible = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="GIFTexture" type="TextureRect" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/ContentArea/PageContent/ScrollContainer/ContentVBox/GIFContainer"]
+visible = false
 custom_minimum_size = Vector2(400, 200)
 layout_mode = 2
 expand_mode = 1

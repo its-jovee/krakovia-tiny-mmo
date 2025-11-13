@@ -196,6 +196,8 @@ O evento é anunciado globalmente no chat, basta entrar na zona de minigame pra 
 
 
 func _ready() -> void:
+	
+	
 	# Connect signals
 	close_button.pressed.connect(_on_close_pressed)
 	prev_button.pressed.connect(_on_prev_pressed)
