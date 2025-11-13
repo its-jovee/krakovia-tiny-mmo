@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8vp2n4q7xhkt"]
 
-[ext_resource type="Script" path="res://source/client/ui/quest_board/quest_board_menu.gd" id="1_questboard_menu"]
+[ext_resource type="Script" uid="uid://c603prrtpojr0" path="res://source/client/ui/quest_board/quest_board_menu.gd" id="1_questboard_menu"]
 
 [node name="QuestBoardMenu" type="Control"]
 layout_mode = 3
@@ -18,12 +18,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -400.0
-offset_top = -300.0
-offset_right = 400.0
-offset_bottom = 300.0
+offset_left = -343.0
+offset_top = -247.0
+offset_right = 457.0
+offset_bottom = 353.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.84000003, 0.84000003)
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 layout_mode = 1
@@ -66,4 +67,3 @@ offset_right = -20.0
 offset_bottom = 60.0
 grow_horizontal = 0
 text = "Close"
-
