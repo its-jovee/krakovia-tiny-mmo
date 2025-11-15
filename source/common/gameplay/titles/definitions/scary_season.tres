@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"scary_season"
+title_name = "Scary Season"
+description = "Participated in Halloween 2025 event."
+rarity = 3
+rarity_color = Color(1, 0.843137, 0, 1)
+condition_type = 6
+target_value = 1
+required_class = ""
+item_category = ""
+
+

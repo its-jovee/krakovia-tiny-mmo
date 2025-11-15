@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"party_animal"
+title_name = "Party Animal"
+description = "Join 100 harvest parties (2+ players)."
+rarity = 1
+rarity_color = Color(0.290196, 0.564706, 0.886275, 1)
+condition_type = 7
+target_value = 100
+required_class = ""
+item_category = ""
+
+

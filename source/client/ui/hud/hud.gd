@@ -25,6 +25,7 @@ var has_opened_guide: bool = false  # Set to true when character is created (tri
 @onready var guild_button: Button = $HBoxContainer/GuildButton
 @onready var shop_button: Button = $HBoxContainer/ShopButton
 @onready var guide_button: Button = $HBoxContainer/GuideButton
+@onready var titles_button: Button = $HBoxContainer/TitlesButton
 @onready var guide_modal: Control = $GuideModal
 
 # Menu overlay buttons
@@ -37,6 +38,8 @@ func _ready() -> void:
 		inventory_button.pressed.connect(_on_inventory_button_pressed)
 	if crafting_button:
 		crafting_button.pressed.connect(_on_crafting_button_pressed)
+	if titles_button:
+		titles_button.pressed.connect(_on_titles_button_pressed)
 	if guild_button:
 		guild_button.pressed.connect(_on_guild_button_pressed)
 	if shop_button:
@@ -71,6 +74,11 @@ func _ready() -> void:
 	var shop_browse_menu = preload("res://source/client/ui/shop/shop_browse_ui.tscn").instantiate()
 	sub_menu.add_child(shop_browse_menu)
 	menus["shop_browse"] = shop_browse_menu
+	
+	# Add titles menu
+	var titles_menu = preload("res://source/client/ui/titles/titles_menu.tscn").instantiate()
+	sub_menu.add_child(titles_menu)
+	menus["titles"] = titles_menu
 	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
@@ -195,6 +203,11 @@ func open_player_shop(seller_peer_id: int) -> void:
 		var browse_menu = menus[&"shop_browse"]
 		if browse_menu.has_method("open_shop"):
 			browse_menu.open_shop(seller_peer_id)
+
+
+func _on_titles_button_pressed() -> void:
+	"""Open titles menu"""
+	display_menu(&"titles")
 
 
 func open_player_profile(player_id: int) -> void:

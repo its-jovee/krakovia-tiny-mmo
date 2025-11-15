@@ -10,6 +10,12 @@ var display_name: String = "Unknown":
 var handle_name: String = " ":
 	set = _set_handle_name
 
+var title_text: String = "":
+	set = _set_title_text
+
+var title_rarity: int = 0:
+	set = _set_title_rarity
+
 var is_in_pvp_zone: bool = false
 var just_teleported: bool = false:
 	set(value):
@@ -34,6 +40,7 @@ var peer_id: int = -1
 var is_remote_player: bool = false  # True for remote players on client
 
 @onready var syn: StateSynchronizer = $StateSynchronizer
+@onready var title_label: RichTextLabel = $TitleLabel
 @onready var display_name_label: Label = $DisplayNameLabel
 @onready var handle_name_label: Label = $HandleNameLabel
 @onready var speech_bubble: Control = $SpeechBubble
@@ -202,8 +209,62 @@ func _set_handle_name(new_handle: String) -> void:
 		handle_name_label.text = "@" + new_handle
 
 func _set_display_name(new_name: String) -> void:
-	display_name_label.text = new_name
 	display_name = new_name
+	_update_display_name_label()
+
+func _set_title_text(new_title: String) -> void:
+	title_text = new_title
+	_update_display_name_label()
+
+func _set_title_rarity(new_rarity: int) -> void:
+	title_rarity = new_rarity
+	_update_display_name_label()
+
+func _update_display_name_label() -> void:
+	if not is_node_ready():
+		return
+	
+	# Update the display name (always show it normally)
+	display_name_label.text = display_name
+	display_name_label.add_theme_color_override("font_color", Color.WHITE)
+	
+	# Handle title label
+	if title_text.is_empty():
+		# No title: hide the label
+		title_label.visible = false
+		title_label.text = ""
+	else:
+		# Show and update title with BBCode (bold + wave for rare titles)
+		title_label.visible = true
+		
+		var rarity_color: Color = _get_title_rarity_color(title_rarity)
+		var color_hex: String = rarity_color.to_html(false)
+		var title_upper: String = title_text.to_upper()
+		
+		# Apply wave effect for rare+ titles (rarity >= 1)
+		# Wrap in [center] tag for proper centering
+		var formatted_text: String
+		if title_rarity >= 1:
+			# Rare, Epic, Legendary get wave effect
+			formatted_text = "[center][wave][b][color=#%s]%s[/color][/b][/wave][/center]" % [color_hex, title_upper]
+		else:
+			# Common just gets bold and color
+			formatted_text = "[center][b][color=#%s]%s[/color][/b][/center]" % [color_hex, title_upper]
+		
+		title_label.text = formatted_text
+
+func _get_title_rarity_color(rarity: int) -> Color:
+	match rarity:
+		0: # COMMON
+			return Color.WHITE
+		1: # RARE
+			return Color("#4A90E2")
+		2: # EPIC
+			return Color("#9B59B6")
+		3: # LEGENDARY
+			return Color("#FFD700")
+		_:
+			return Color.WHITE
 
 
 func show_speech_bubble(text: String) -> void:

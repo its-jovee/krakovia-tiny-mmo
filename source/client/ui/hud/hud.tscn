@@ -222,6 +222,13 @@ tooltip_text = "Game Guide"
 icon = ExtResource("11_kuylb")
 icon_alignment = 1
 
+[node name="TitlesButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+tooltip_text = "Titles"
+text = "T"
+icon_alignment = 1
+
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
 visible = false
 layout_mode = 2
@@ -275,3 +282,4 @@ layer = 10
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button" to="." method="_on_vit_button_pressed"]
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button2" to="." method="_on_button_str_pressed"]
 [connection signal="pressed" from="HBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/TitlesButton" to="." method="_on_titles_button_pressed"]

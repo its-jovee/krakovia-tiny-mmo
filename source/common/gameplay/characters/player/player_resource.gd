@@ -55,6 +55,9 @@ func get_energy_max() -> float:
 ## Quest completion statistics
 @export var quest_stats: Dictionary = {}
 
+## Selected title (character-specific, even though unlocks are account-wide)
+@export var selected_title_slug: String = ""
+
 ## Current Network ID
 var current_peer_id: int
 

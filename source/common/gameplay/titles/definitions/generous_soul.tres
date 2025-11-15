@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"generous_soul"
+title_name = "Generous Soul"
+description = "Give away items worth 1,000,000 gold."
+rarity = 2
+rarity_color = Color(0.607843, 0.34902, 0.713726, 1)
+condition_type = 4
+target_value = 1000000
+required_class = ""
+item_category = ""
+
+

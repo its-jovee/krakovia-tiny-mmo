@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"master_trapper"
+title_name = "Master Trapper"
+description = "Craft 500 items as a Trapper class."
+rarity = 2
+rarity_color = Color(0.607843, 0.34902, 0.713726, 1)
+condition_type = 0
+target_value = 500
+required_class = "trapper"
+item_category = ""
+
+
+

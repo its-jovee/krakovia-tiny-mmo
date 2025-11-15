@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"legendary_artisan"
+title_name = "Legendary Artisan"
+description = "Craft 5,000 items total across all classes."
+rarity = 3
+rarity_color = Color(1, 0.843137, 0, 1)
+condition_type = 0
+target_value = 5000
+required_class = ""
+item_category = ""
+
+
+

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -23,11 +23,13 @@ inventory = {
 "stack": 1
 }
 }
-available_attributes_points = 10
+available_attributes_points = 97
+level = 30
 experience = 15
 server_roles = {
 "senior_admin": {}
 }
+current_energy = 100.0
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -35,13 +37,28 @@ player_id = 2
 account_name = "Mafra"
 display_name = "Mafra"
 character_class = "forager"
-golds = 100
+golds = 95
+inventory = {
+56: {
+"stack": 1
+},
+64: {
+"stack": 4
+},
+71: {
+"stack": 1
+},
+141: {
+"stack": 4
+}
+}
 available_attributes_points = 67
 level = 20
+experience = 290
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 160.20807666666695
+current_energy = 370.85340100000104
 
 [sub_resource type="Resource" id="Resource_7bb4l"]
 script = ExtResource("1_ni45q")
@@ -74,10 +91,10 @@ inventory = {
 "stack": 41
 },
 64: {
-"stack": 21
+"stack": 24
 },
 71: {
-"stack": 21
+"stack": 22
 },
 79: {
 "stack": 2
@@ -93,7 +110,7 @@ inventory = {
 }
 }
 available_attributes_points = 10
-experience = 480
+experience = 500
 
 [sub_resource type="Resource" id="Resource_8u1r5"]
 script = ExtResource("1_ni45q")
@@ -104,6 +121,80 @@ appearance_head_id = "head_b"
 golds = 100
 available_attributes_points = 10
 
+[sub_resource type="Resource" id="Resource_vidub"]
+script = ExtResource("1_ni45q")
+player_id = 7
+account_name = "jovee"
+display_name = "asdsadsad"
+appearance_head_id = "head_d"
+golds = 42
+inventory = {
+7: {
+"stack": 806
+},
+9: {
+"stack": 3
+},
+11: {
+"stack": 1
+},
+33: {
+"stack": 11
+},
+126: {
+"stack": 58
+},
+308: {
+"stack": 5
+}
+}
+available_attributes_points = 19
+level = 4
+experience = 2180
+server_roles = {
+"senior_admin": {}
+}
+selected_title_slug = "apprentice_smith"
+
+[sub_resource type="Resource" id="Resource_eyapk"]
+script = ExtResource("1_ni45q")
+player_id = 8
+account_name = "jovee"
+display_name = "asdasd"
+character_class = "forager"
+appearance_head_id = "head_d"
+inventory = {
+56: {
+"stack": 885
+},
+64: {
+"stack": 10
+},
+71: {
+"stack": 10
+},
+79: {
+"stack": 3
+},
+82: {
+"stack": 3
+},
+86: {
+"stack": 1
+},
+141: {
+"stack": 980
+}
+}
+available_attributes_points = 13
+level = 2
+experience = 3250
+server_roles = {
+"senior_admin": {}
+}
+current_energy = 150.0
+selected_title_slug = "founder"
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -111,7 +202,7 @@ accounts = {
 "Mafra1": PackedInt32Array(3),
 "Mafra2": PackedInt32Array(4),
 "cidadao": PackedInt32Array(6),
-"jovee": PackedInt32Array(1),
+"jovee": PackedInt32Array(1, 7, 8),
 "teste": PackedInt32Array(5)
 }
 players = {
@@ -120,6 +211,24 @@ players = {
 3: SubResource("Resource_7bb4l"),
 4: SubResource("Resource_oscd5"),
 5: SubResource("Resource_tcuqq"),
-6: SubResource("Resource_8u1r5")
+6: SubResource("Resource_8u1r5"),
+7: SubResource("Resource_vidub"),
+8: SubResource("Resource_eyapk")
 }
-next_player_id = 6
+next_player_id = 8
+account_titles = {
+"jovee": {
+"progress": {
+"all_classes_max_level": 1,
+"crafts_collector": 20,
+"crafts_miner": 28,
+"crafts_total": 48,
+"event_founder": 1,
+"harvests_collector": 52,
+"harvests_miner": 6,
+"max_level_collector": 2,
+"max_level_miner": 4
+},
+"unlocked": [&"apprentice_smith", &"apprentice_collector", &"founder"]
+}
+}

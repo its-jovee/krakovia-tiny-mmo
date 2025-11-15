@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"apprentice_smith"
+title_name = "Apprentice Smith"
+description = "Craft 10 items as a Miner class."
+rarity = 0
+rarity_color = Color(1, 1, 1, 1)
+condition_type = 0
+target_value = 10
+required_class = "miner"
+item_category = ""
+
+

@@ -270,6 +270,36 @@ func _process(delta: float) -> void:
 								"exp_gained": exp_gained
 							})
 							
+							# Track title progress for harvesting
+							if TitleProgressTracker.instance:
+								var player_node: Player = instance.get_player(pid)
+								if player_node and player_node.player_resource:
+									var player_data: WorldPlayerData = instance.world_server.database.player_data
+									var account_name: String = player_node.player_resource.account_name
+									
+									# Track harvest by node class
+									var node_class: String = String(required_class)
+									if not node_class.is_empty():
+										# Convert forager to collector for title display
+										if node_class == "forager":
+											node_class = "collector"
+										
+										# Count total items harvested from this node
+										var total_qty: int = 0
+										for item_slug in total_items.keys():
+											total_qty += int(total_items[item_slug])
+										
+										if total_qty > 0:
+											TitleProgressTracker.instance.increment_progress(account_name, "harvests_%s" % node_class, total_qty, player_data, pid, instance)
+									
+									# Track party participation (if 2+ players)
+									if harvesters.size() >= 2:
+										TitleProgressTracker.instance.increment_progress(account_name, "parties_joined", 1, player_data, pid, instance)
+									
+									# Check for harvest-related title unlocks
+									TitleProgressTracker.instance.check_and_unlock(account_name, TitleResource.ConditionType.HARVEST_COUNT, pid, instance)
+									TitleProgressTracker.instance.check_and_unlock(account_name, TitleResource.ConditionType.PARTY_COUNT, pid, instance)
+							
 							# Update earned total for UI display
 							h["earned_total"] = float(h.get("earned_total", 0.0)) + float(harvest_count)
 				

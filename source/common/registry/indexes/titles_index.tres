@@ -1,0 +1,134 @@
+[gd_resource type="Resource" script_class="ContentIndex" load_steps=2 format=3 uid="uid://ctitlesindex001"]
+
+[ext_resource type="Script" uid="uid://0wmtcxri41vp" path="res://source/common/registry/content_index.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+content_name = &"titles"
+version = 1763157600
+next_id = 25
+entries = Array[Dictionary]([{
+&"hash": "",
+&"id": 1,
+&"path": "res://source/common/gameplay/titles/definitions/apprentice_smith.tres",
+&"slug": &"apprentice_smith"
+}, {
+&"hash": "",
+&"id": 2,
+&"path": "res://source/common/gameplay/titles/definitions/master_smith.tres",
+&"slug": &"master_smith"
+}, {
+&"hash": "",
+&"id": 3,
+&"path": "res://source/common/gameplay/titles/definitions/benchmaxer.tres",
+&"slug": &"benchmaxer"
+}, {
+&"hash": "",
+&"id": 4,
+&"path": "res://source/common/gameplay/titles/definitions/grand_miner.tres",
+&"slug": &"grand_miner"
+}, {
+&"hash": "",
+&"id": 5,
+&"path": "res://source/common/gameplay/titles/definitions/grand_forager.tres",
+&"slug": &"grand_forager"
+}, {
+&"hash": "",
+&"id": 6,
+&"path": "res://source/common/gameplay/titles/definitions/grand_trapper.tres",
+&"slug": &"grand_trapper"
+}, {
+&"hash": "",
+&"id": 7,
+&"path": "res://source/common/gameplay/titles/definitions/grand_master.tres",
+&"slug": &"grand_master"
+}, {
+&"hash": "",
+&"id": 8,
+&"path": "res://source/common/gameplay/titles/definitions/rock_breaker.tres",
+&"slug": &"rock_breaker"
+}, {
+&"hash": "",
+&"id": 9,
+&"path": "res://source/common/gameplay/titles/definitions/timber_lord.tres",
+&"slug": &"timber_lord"
+}, {
+&"hash": "",
+&"id": 10,
+&"path": "res://source/common/gameplay/titles/definitions/berry_picker.tres",
+&"slug": &"berry_picker"
+}, {
+&"hash": "",
+&"id": 11,
+&"path": "res://source/common/gameplay/titles/definitions/merchant_prince.tres",
+&"slug": &"merchant_prince"
+}, {
+&"hash": "",
+&"id": 12,
+&"path": "res://source/common/gameplay/titles/definitions/shopkeeper.tres",
+&"slug": &"shopkeeper"
+}, {
+&"hash": "",
+&"id": 13,
+&"path": "res://source/common/gameplay/titles/definitions/generous_soul.tres",
+&"slug": &"generous_soul"
+}, {
+&"hash": "",
+&"id": 14,
+&"path": "res://source/common/gameplay/titles/definitions/scary_season.tres",
+&"slug": &"scary_season"
+}, {
+&"hash": "",
+&"id": 15,
+&"path": "res://source/common/gameplay/titles/definitions/founder.tres",
+&"slug": &"founder"
+}, {
+&"hash": "",
+&"id": 16,
+&"path": "res://source/common/gameplay/titles/definitions/party_animal.tres",
+&"slug": &"party_animal"
+}, {
+&"hash": "",
+&"id": 17,
+&"path": "res://source/common/gameplay/titles/definitions/apprentice_collector.tres",
+&"slug": &"apprentice_collector"
+}, {
+&"hash": "",
+&"id": 18,
+&"path": "res://source/common/gameplay/titles/definitions/apprentice_trapper.tres",
+&"slug": &"apprentice_trapper"
+}, {
+&"hash": "",
+&"id": 19,
+&"path": "res://source/common/gameplay/titles/definitions/expert_collector.tres",
+&"slug": &"expert_collector"
+}, {
+&"hash": "",
+&"id": 20,
+&"path": "res://source/common/gameplay/titles/definitions/expert_trapper.tres",
+&"slug": &"expert_trapper"
+}, {
+&"hash": "",
+&"id": 21,
+&"path": "res://source/common/gameplay/titles/definitions/master_miner.tres",
+&"slug": &"master_miner"
+}, {
+&"hash": "",
+&"id": 22,
+&"path": "res://source/common/gameplay/titles/definitions/master_collector.tres",
+&"slug": &"master_collector"
+}, {
+&"hash": "",
+&"id": 23,
+&"path": "res://source/common/gameplay/titles/definitions/master_trapper.tres",
+&"slug": &"master_trapper"
+}, {
+&"hash": "",
+&"id": 24,
+&"path": "res://source/common/gameplay/titles/definitions/legendary_artisan.tres",
+&"slug": &"legendary_artisan"
+}])
+metadata/slug = &"titles_index"
+metadata/id = 6
+
+

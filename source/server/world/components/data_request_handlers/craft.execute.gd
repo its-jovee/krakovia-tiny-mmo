@@ -74,6 +74,23 @@ func data_request_handler(
 	
 	# Calculate and award EXP based on recipe level
 	var exp_gained: int = _calculate_crafting_exp(recipe, player_res, instance, peer_id)
+	
+	# Track title progress for crafting
+	if TitleProgressTracker.instance:
+		var player_data: WorldPlayerData = instance.world_server.database.player_data
+		var account_name: String = player_res.account_name
+		
+		# Increment total crafts
+		TitleProgressTracker.instance.increment_progress(account_name, "crafts_total", 1, player_data, peer_id, instance)
+		
+		# Increment class-specific crafts (convert forager to collector for titles)
+		var class_for_title: String = player_res.character_class
+		if class_for_title == "forager":
+			class_for_title = "collector"
+		TitleProgressTracker.instance.increment_progress(account_name, "crafts_%s" % class_for_title, 1, player_data, peer_id, instance)
+		
+		# Check for craft-related title unlocks
+		TitleProgressTracker.instance.check_and_unlock(account_name, TitleResource.ConditionType.CRAFT_COUNT, peer_id, instance)
 		
 	# Push updates to client
 	instance.data_push.rpc_id(peer_id, &"inventory.update", player_res.inventory)
@@ -105,6 +122,20 @@ func _calculate_crafting_exp(recipe: CraftingRecipe, player_res: PlayerResource,
 		player_res.level_up()
 		leveled_up = true
 		print("Player %s leveled up from crafting: %d -> %d" % [player_res.display_name, old_level, player_res.level])
+		
+		# Track title progress for level milestones
+		if TitleProgressTracker.instance:
+			var player_data: WorldPlayerData = instance.world_server.database.player_data
+			var account_name: String = player_res.account_name
+			
+			# Update max level for this class (convert forager to collector for titles)
+			var class_for_title: String = player_res.character_class
+			if class_for_title == "forager":
+				class_for_title = "collector"
+			TitleProgressTracker.instance.set_progress(account_name, "max_level_%s" % class_for_title, player_res.level, player_data, peer_id, instance)
+			
+			# Check for level-related title unlocks
+			TitleProgressTracker.instance.check_level_titles(account_name, peer_id, instance)
 	
 	# Update energy max on level-up
 	if leveled_up:

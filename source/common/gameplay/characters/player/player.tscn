@@ -51,10 +51,25 @@ scale = Vector2(0.8, 0.8)
 [node name="CompositeSprite" parent="." index="5"]
 position = Vector2(1, -24)
 
-[node name="DisplayNameLabel" type="Label" parent="." index="6"]
+[node name="TitleLabel" type="RichTextLabel" parent="." index="6"]
+visible = false
 z_index = 100
 offset_left = -24.0
-offset_top = 2.0
+offset_top = 2.9999998
+offset_right = 213.0
+offset_bottom = 27.0
+scale = Vector2(0.2, 0.2)
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "123"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="DisplayNameLabel" type="Label" parent="." index="7"]
+z_index = 100
+offset_left = -24.0
+offset_top = 6.0
 offset_right = 213.0
 offset_bottom = 47.0
 scale = Vector2(0.2, 0.2)
@@ -64,10 +79,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="HandleNameLabel" type="Label" parent="." index="7"]
+[node name="HandleNameLabel" type="Label" parent="." index="8"]
 z_index = 100
 offset_left = -24.0
-offset_top = 10.0
+offset_top = 14.0
 offset_right = 213.0
 offset_bottom = 40.0
 scale = Vector2(0.2, 0.2)
@@ -78,7 +93,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_cxg7o")
 
-[node name="SpeechBubble" parent="." index="8" instance=ExtResource("4_speech")]
+[node name="PotatoIndicator" parent="." index="9" instance=ExtResource("5_potato")]
+
+[node name="SpeechBubble" parent="." index="10" instance=ExtResource("4_speech")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -92,15 +109,13 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
 
-[node name="PotatoIndicator" parent="." index="9" instance=ExtResource("5_potato")]
-
-[node name="CollisionShape2D" parent="." index="10"]
+[node name="CollisionShape2D" parent="." index="11"]
 physics_interpolation_mode = 2
 position = Vector2(0, 0)
 scale = Vector2(1, 0.985)
 
-[node name="HurtBox" parent="." index="11"]
+[node name="HurtBox" parent="." index="12"]
 visible = false
 
-[node name="ProgressBar" parent="." index="12"]
+[node name="ProgressBar" parent="." index="13"]
 visible = false

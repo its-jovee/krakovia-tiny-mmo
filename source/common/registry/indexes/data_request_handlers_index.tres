@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1760000101
-next_id = 44
+version = 1763157600
+next_id = 46
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -222,6 +222,16 @@ entries = Array[Dictionary]([{
 &"id": 43,
 &"path": "res://source/server/world/components/data_request_handlers/item.unequip_cosmetic.gd",
 &"slug": &"item.unequip_cosmetic"
+}, {
+&"hash": "",
+&"id": 44,
+&"path": "res://source/server/world/components/data_request_handlers/titles.get.gd",
+&"slug": &"titles.get"
+}, {
+&"hash": "",
+&"id": 45,
+&"path": "res://source/server/world/components/data_request_handlers/titles.select.gd",
+&"slug": &"titles.select"
 }])
 metadata/slug = &"data_request_handlers_index"
 metadata/id = 1

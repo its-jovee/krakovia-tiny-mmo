@@ -82,6 +82,11 @@ func _ready() -> void:
 	var shop_mgr = ShopManager.new()
 	shop_mgr.name = "ShopManager"
 	add_child(shop_mgr, true)
+	
+	# Add TitleProgressTracker
+	var title_tracker = TitleProgressTracker.new()
+	title_tracker.name = "TitleProgressTracker"
+	add_child(title_tracker, true)
 
 
 func load_map(map_path: String) -> void:
@@ -191,6 +196,17 @@ func spawn_player(peer_id: int) -> void:
 	connected_peers.append(peer_id)
 	_propagate_spawn(peer_id)
 	
+	# Automatically grant Alpha Tester title to all players
+	if TitleProgressTracker.instance and player.player_resource:
+		var account_name: String = player.player_resource.account_name
+		var player_data: WorldPlayerData = world_server.database.player_data
+		
+		# Set the event flag for Alpha Tester
+		TitleProgressTracker.instance.set_progress(account_name, "event_founder", 1, player_data, peer_id, self)
+		
+		# Check if they should unlock the Alpha Tester title
+		TitleProgressTracker.instance.check_and_unlock(account_name, TitleResource.ConditionType.EVENT_FLAG, peer_id, self)
+	
 	# Sync all active shops to the new player
 	if has_node("ShopManager"):
 		var shop_mgr: ShopManager = get_node("ShopManager")
@@ -216,6 +232,20 @@ func instantiate_player(peer_id: int) -> Player:
 		syn.set_by_path(^":handle_name", new_player.player_resource.account_name)
 		syn.set_by_path(^":appearance_head_id", new_player.player_resource.appearance_head_id)
 		syn.set_by_path(^":equipped_accessory_id", new_player.player_resource.equipped_accessory_id)
+		
+		# Sync title information
+		var title_slug: String = player_resource.selected_title_slug
+		if not title_slug.is_empty():
+			var title: TitleResource = ContentRegistryHub.load_by_slug(&"titles", StringName(title_slug))
+			if title:
+				syn.set_by_path(^":title_text", title.title_name)
+				syn.set_by_path(^":title_rarity", title.rarity)
+			else:
+				syn.set_by_path(^":title_text", "")
+				syn.set_by_path(^":title_rarity", 0)
+		else:
+			syn.set_by_path(^":title_text", "")
+			syn.set_by_path(^":title_rarity", 0)
 
 		var asc: AbilitySystemComponent = new_player.ability_system_component
 		

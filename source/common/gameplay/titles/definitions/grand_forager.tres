@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TitleResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/common/gameplay/titles/title_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+slug = &"grand_forager"
+title_name = "Grand Collector"
+description = "Reach level 30 as a Collector."
+rarity = 1
+rarity_color = Color(0.290196, 0.564706, 0.886275, 1)
+condition_type = 1
+target_value = 30
+required_class = "collector"
+item_category = ""
+
+

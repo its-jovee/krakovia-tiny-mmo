@@ -161,6 +161,25 @@ func _ready() -> void:
 			ui_hud.on_end(data)
 	)
 	
+	# Title unlocked notification
+	subscribe(&"title.unlocked", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("title.unlocked:", data)
+		_show_title_unlocked_notification(data)
+	)
+	
+	# Title progress update
+	subscribe(&"title.progress", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("title.progress:", data)
+		# Notify titles menu if it's open
+		var titles_menu = get_tree().get_root().find_child("TitlesMenu", true, false)
+		if titles_menu and titles_menu.visible and titles_menu.has_method("on_progress_update"):
+			titles_menu.on_progress_update(data)
+	)
+	
 	synchronizer_manager = StateSynchronizerManagerClient.new()
 	synchronizer_manager.name = "StateSynchronizerManager"
 
@@ -371,3 +390,58 @@ func _on_shop_purchase_complete(data: Dictionary) -> void:
 	var price = data.get("total_price", 0)
 	var seller_name = data.get("seller_name", "Unknown")
 	print("Purchased %dx %s for %d gold from %s" % [quantity, item_name, price, seller_name])
+
+
+func _show_title_unlocked_notification(data: Dictionary) -> void:
+	"""Show a toast notification when a title is unlocked (top right corner)"""
+	var notification_scene = preload("res://source/client/ui/notifications/title_unlocked_notification.tscn")
+	var notification = notification_scene.instantiate()
+	
+	# Set notification content
+	var title_label: Label = notification.get_node("MarginContainer/VBoxContainer/TitleLabel")
+	var desc_label: Label = notification.get_node("MarginContainer/VBoxContainer/DescriptionLabel")
+	
+	var title_name: String = data.get("name", "Unknown Title")
+	var description: String = data.get("description", "")
+	var rarity: int = data.get("rarity", 0)
+	
+	title_label.text = title_name
+	desc_label.text = description
+	
+	# Apply rarity color
+	var rarity_color: Color = _get_rarity_color(rarity)
+	title_label.add_theme_color_override("font_color", rarity_color)
+	
+	# Find HUD and add notification to it
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud:
+		hud.add_child(notification)
+		# Position at top right corner (toast style)
+		var viewport_size: Vector2 = get_viewport().get_visible_rect().size
+		notification.position = Vector2(viewport_size.x - 420.0, 20.0)
+	else:
+		# Fallback: add to self but it won't be positioned correctly
+		add_child(notification)
+	
+	notification.visible = true
+	
+	# Play animation
+	var anim_player: AnimationPlayer = notification.get_node("AnimationPlayer")
+	if anim_player:
+		anim_player.play("show")
+		await anim_player.animation_finished
+		notification.queue_free()
+
+
+func _get_rarity_color(rarity: int) -> Color:
+	match rarity:
+		0: # COMMON
+			return Color.WHITE
+		1: # RARE
+			return Color("#4A90E2")
+		2: # EPIC
+			return Color("#9B59B6")
+		3: # LEGENDARY
+			return Color("#FFD700")
+		_:
+			return Color.WHITE

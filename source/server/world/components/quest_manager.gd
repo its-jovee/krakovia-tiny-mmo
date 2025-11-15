@@ -173,6 +173,20 @@ func complete_quest(peer_id: int, quest_id: int, instance: Node) -> Dictionary:
 			leveled_up = true
 			print("Player %s leveled up from quest: %d -> %d" % [player_res.display_name, old_level, player_res.level])
 		
+		# Track title progress for level milestones
+		if TitleProgressTracker.instance:
+			var player_data: WorldPlayerData = instance.world_server.database.player_data
+			var account_name: String = player_res.account_name
+			
+			# Update max level for this class (convert forager to collector for titles)
+			var class_for_title: String = player_res.character_class
+			if class_for_title == "forager":
+				class_for_title = "collector"
+			TitleProgressTracker.instance.set_progress(account_name, "max_level_%s" % class_for_title, player_res.level, player_data, peer_id, instance)
+			
+			# Check for level-related title unlocks
+			TitleProgressTracker.instance.check_level_titles(account_name, peer_id, instance)
+		
 		# Update energy max on level-up
 		if leveled_up:
 			var asc: AbilitySystemComponent = player.ability_system_component

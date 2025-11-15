@@ -51,6 +51,10 @@ const BANNED_WORDS: Array[String] = [
 ## until == 0 means permanent mute
 @export var muted_players: Dictionary = {}
 
+## Account-wide title unlocks and progress tracking
+## Structure: {"account_name": {"unlocked": [slug1, slug2, ...], "progress": {"crafts_total": 50, "crafts_miner": 30, ...}}}
+@export var account_titles: Dictionary = {}
+
 
 func get_player_resource(player_id: int) -> PlayerResource:
 	if players.has(player_id):

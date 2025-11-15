@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_cc7ov")
 content_name = &"indexes"
-version = 1759585099
-next_id = 6
+version = 1763157500
+next_id = 7
 entries = Array[Dictionary]([{
 &"hash": "acccbd68e6bf640bdb8b9fc8e837ae45295698c10015a56e29674a0f0a799b60",
 &"id": 1,
@@ -32,4 +32,9 @@ entries = Array[Dictionary]([{
 &"id": 5,
 &"path": "res://source/common/registry/indexes/sprites_index.tres",
 &"slug": &"sprites_index"
+}, {
+&"hash": "",
+&"id": 6,
+&"path": "res://source/common/registry/indexes/titles_index.tres",
+&"slug": &"titles_index"
 }])
