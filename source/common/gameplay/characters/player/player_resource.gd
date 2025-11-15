@@ -58,6 +58,12 @@ func get_energy_max() -> float:
 ## Selected title (character-specific, even though unlocks are account-wide)
 @export var selected_title_slug: String = ""
 
+## Quick-Switch: Last logout timestamp (unix time) for energy regeneration
+@export var last_logout_time: float = 0.0
+
+## Quick-Switch: Last known position for respawning at same location
+@export var last_position: Vector2 = Vector2.ZERO
+
 ## Current Network ID
 var current_peer_id: int
 

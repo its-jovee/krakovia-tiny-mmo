@@ -179,20 +179,29 @@ func _set_pivot(new_pivot: float) -> void:
 
 
 func _set_character_class(new_class: String):
+	print("[Character] _set_character_class called: old='%s', new='%s', is_ready=%s" % [character_class, new_class, is_node_ready()])
+	
 	character_class = new_class
 	character_resource = ResourceLoader.load(
 		"res://source/common/gameplay/characters/classes/character_collection/" + new_class + ".tres")
 	
-	if composite_sprite:
+	if composite_sprite and is_node_ready():
+		print("[Character] Updating CompositeSprite appearance to: %s (head: %s)" % [new_class, appearance_head_id])
 		composite_sprite.set_appearance(new_class, appearance_head_id)
-	else:
+		print("[Character] CompositeSprite updated successfully")
+	elif is_node_ready() and animated_sprite:
 		animated_sprite.sprite_frames = character_resource.character_sprite
+	else:
+		print("[Character] Skipping sprite update: composite_sprite=%s, is_ready=%s" % [composite_sprite != null, is_node_ready()])
 
 
 func _set_appearance_head(new_head_id: String) -> void:
+	print("[Character] _set_appearance_head called: old='%s', new='%s'" % [appearance_head_id, new_head_id])
+	
 	appearance_head_id = new_head_id
 	
 	if composite_sprite and is_node_ready():
+		print("[Character] Updating CompositeSprite head to: %s" % new_head_id)
 		composite_sprite.set_appearance(character_class, new_head_id)
 
 

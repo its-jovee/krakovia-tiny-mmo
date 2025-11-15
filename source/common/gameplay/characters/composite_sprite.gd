@@ -114,6 +114,8 @@ func _setup_animation_shader() -> void:
 
 func set_appearance(char_class: String, head: String, hair: String = "none", accessory: String = "none") -> void:
 	"""Set the complete appearance of the character"""
+	print("[CompositeSprite] set_appearance called: class='%s' -> '%s', head='%s' -> '%s'" % [character_class, char_class, head_id, head])
+	
 	character_class = char_class
 	head_id = head
 	hair_id = hair
@@ -123,6 +125,7 @@ func set_appearance(char_class: String, head: String, hair: String = "none", acc
 	_load_head_sprite()
 	# Hair and accessory disabled initially
 	
+	print("[CompositeSprite] Appearance set complete, sprites loaded")
 	appearance_changed.emit()
 
 
@@ -337,3 +340,19 @@ func apply_shader_to_all_layers(shader_material: ShaderMaterial) -> void:
 		accessory_sprite.material = shader_material.duplicate()
 	
 	animation_shader = shader_material
+
+
+func clear_shader_from_all_layers() -> void:
+	"""Remove all shader materials from sprite layers"""
+	print("[CompositeSprite] Clearing shaders from all layers")
+	if base_sprite:
+		base_sprite.material = null
+	if hair_sprite:
+		hair_sprite.material = null
+	if head_sprite:
+		head_sprite.material = null
+	if accessory_sprite:
+		accessory_sprite.material = null
+	
+	# Clear the shader reference
+	animation_shader = null

@@ -17,6 +17,9 @@ inventory = {
 "stack": 1
 },
 105: {
+"stack": 2
+},
+111: {
 "stack": 1
 },
 319: {
@@ -29,7 +32,9 @@ experience = 15
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 100.0
+current_energy = 971.6858753129818
+last_logout_time = 1763227815.297
+last_position = Vector2(808.58386, 482.3684)
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -136,7 +141,7 @@ inventory = {
 "stack": 3
 },
 11: {
-"stack": 1
+"stack": 2
 },
 33: {
 "stack": 11
@@ -145,16 +150,19 @@ inventory = {
 "stack": 58
 },
 308: {
-"stack": 5
+"stack": 8
 }
 }
 available_attributes_points = 19
 level = 4
-experience = 2180
+experience = 2200
 server_roles = {
 "senior_admin": {}
 }
+current_energy = 250.0
 selected_title_slug = "apprentice_smith"
+last_logout_time = 1763227784.217
+last_position = Vector2(607.74744, 354.24817)
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -165,19 +173,19 @@ character_class = "forager"
 appearance_head_id = "head_d"
 inventory = {
 56: {
-"stack": 885
+"stack": 908
 },
 64: {
-"stack": 10
+"stack": 16
 },
 71: {
-"stack": 10
+"stack": 15
 },
 79: {
 "stack": 3
 },
 82: {
-"stack": 3
+"stack": 5
 },
 86: {
 "stack": 1
@@ -188,12 +196,14 @@ inventory = {
 }
 available_attributes_points = 13
 level = 2
-experience = 3250
+experience = 3430
 server_roles = {
 "senior_admin": {}
 }
 current_energy = 150.0
 selected_title_slug = "founder"
+last_logout_time = 1763227851.092
+last_position = Vector2(559.75354, 302.64478)
 
 [resource]
 script = ExtResource("2_83xu3")
@@ -224,11 +234,15 @@ account_titles = {
 "crafts_miner": 28,
 "crafts_total": 48,
 "event_founder": 1,
-"harvests_collector": 52,
-"harvests_miner": 6,
+"harvests_collector": 88,
+"harvests_miner": 10,
+"harvests_trapper": 2,
 "max_level_collector": 2,
 "max_level_miner": 4
 },
 "unlocked": [&"apprentice_smith", &"apprentice_collector", &"founder"]
 }
+}
+account_switch_cooldowns = {
+"jovee": 1763227815.297
 }

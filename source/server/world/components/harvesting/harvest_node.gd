@@ -412,6 +412,11 @@ func player_leave(peer_id: int) -> bool:
 			"count": max(0, get_count() - 1),
 			"multiplier": compute_multiplier(max(0, get_count() - 1)),
 		})
+		
+		# Notify harvest manager to remove from active_harvesters
+		if instance.harvest_manager:
+			instance.harvest_manager.active_harvesters.erase(peer_id)
+	
 	harvesters.erase(peer_id)
 	
 	# Disable processing when last harvester leaves (but keep enabled during cooldown)

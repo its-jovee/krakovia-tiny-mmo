@@ -99,6 +99,11 @@ func cleanup_peer(peer_id: int) -> void:
 	active_harvesters.erase(peer_id)
 
 
+func is_peer_harvesting(peer_id: int) -> bool:
+	"""Check if a peer is currently harvesting any node"""
+	return active_harvesters.has(peer_id)
+
+
 func reindex_existing() -> void:
 	"""Scan for harvest nodes already in the tree (for hot reload/map load)"""
 	nodes_by_id.clear()

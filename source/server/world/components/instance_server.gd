@@ -164,10 +164,12 @@ func ready_to_enter_instance() -> void:
 func spawn_player(peer_id: int) -> void:
 	var player: Player
 	var spawn_index: int = 0
+	var saved_position: Vector2 = Vector2.ZERO
 	
 	if awaiting_peers.has(peer_id):
 		player = awaiting_peers[peer_id]["player"]
 		spawn_index = awaiting_peers[peer_id]["target_id"]
+		saved_position = awaiting_peers[peer_id].get("saved_position", Vector2.ZERO)
 		awaiting_peers.erase(peer_id)
 	else:
 		player = instantiate_player(peer_id)
@@ -181,7 +183,15 @@ func spawn_player(peer_id: int) -> void:
 	
 	#NEW
 	var syn: StateSynchronizer = player.syn
-	player.state_synchronizer.set_by_path(^":position", instance_map.get_spawn_position(spawn_index))
+	
+	# Use saved position if available, otherwise use spawn point
+	var spawn_position: Vector2
+	if saved_position != Vector2.ZERO:
+		spawn_position = saved_position
+	else:
+		spawn_position = instance_map.get_spawn_position(spawn_index)
+	
+	player.state_synchronizer.set_by_path(^":position", spawn_position)
 
 	print_debug("baseline server pairs:", syn.capture_baseline())
 	
@@ -224,6 +234,10 @@ func instantiate_player(peer_id: int) -> Player:
 	new_player.name = str(peer_id)
 	new_player.player_resource = player_resource
 	new_player.character_resource = character_resource
+	
+	# Set appearance properties BEFORE adding to tree so CompositeSprite can initialize correctly
+	new_player.character_class = player_resource.character_class
+	new_player.appearance_head_id = player_resource.appearance_head_id
 	
 	new_player.ready.connect(func():
 		var syn: StateSynchronizer = new_player.state_synchronizer
@@ -358,6 +372,11 @@ func despawn_player(peer_id: int, delete: bool = false) -> void:
 			var energy_max: float = asc.get_max(&"energy")
 			var energy_cur: float = asc.get_value(&"energy")
 			player.player_resource.current_energy = clamp(energy_cur, 0.0, energy_max)
+		
+		# Quick-Switch: Save position and logout time
+		player.player_resource.last_position = player.global_position
+		player.player_resource.last_logout_time = Time.get_unix_time_from_system()
+		
 		# Cleanup harvesting memberships (now uses manager)
 		if harvest_manager:
 			harvest_manager.cleanup_peer(peer_id)

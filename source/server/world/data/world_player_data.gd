@@ -55,6 +55,10 @@ const BANNED_WORDS: Array[String] = [
 ## Structure: {"account_name": {"unlocked": [slug1, slug2, ...], "progress": {"crafts_total": 50, "crafts_miner": 30, ...}}}
 @export var account_titles: Dictionary = {}
 
+## Quick-Switch: Track last switch time per account (account_name -> unix timestamp)
+## Used to enforce 30-second cooldown between character switches
+@export var account_switch_cooldowns: Dictionary = {}
+
 
 func get_player_resource(player_id: int) -> PlayerResource:
 	if players.has(player_id):

@@ -48,7 +48,9 @@ func _ready() -> void:
 		$Camera2D.zoom = Vector2.ONE * target_zoom
 	else:
 		target_zoom = 1.0
-		$Camera2D.zoom = Vector2.ONE * target_zoom
+	
+	# Subscribe to character switch complete event
+	InstanceClient.subscribe(&"character.switch.complete", _on_character_switch_complete)
 
 
 func _physics_process(delta: float) -> void:
@@ -250,6 +252,19 @@ func _set_character_class(new_class: String):
 	)
 	animated_sprite.sprite_frames = character_resource.character_sprite
 	character_class = new_class
+
+func _on_character_switch_complete(data: Dictionary) -> void:
+	"""Handle character switch completion"""
+	print("[LocalPlayer] Character switch complete")
+	
+	var new_class: String = data.get("character_class", "")
+	var new_name: String = data.get("character_name", "")
+	
+	print("[LocalPlayer] New character: %s (class: %s)" % [new_name, new_class])
+	
+	# The StateSynchronizer will automatically update the appearance
+	# based on the server's character_class and appearance_head_id properties
+
 
 func _on_entered_market(market_area: MarketArea) -> void:
 	print("Entered market: ", market_area.market_name)

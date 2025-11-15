@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=20 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -7,13 +7,24 @@
 [ext_resource type="Script" uid="uid://pkprr0ll1y44" path="res://source/client/ui/hud/item_slots.gd" id="4_8qpw0"]
 [ext_resource type="Script" uid="uid://brq8mxox5bclj" path="res://source/client/ui/hud/menu_overlay.gd" id="4_cx7qp"]
 [ext_resource type="PackedScene" uid="uid://c4y8n5xr7j3wk" path="res://source/client/ui/guide/guide_modal.tscn" id="5_guide"]
-[ext_resource type="StyleBox" uid="uid://dmt25bssm06ca" path="res://source/client/ui/hud/harvesting/general_panel.tres" id="5_yye8g"]
 [ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="6_qjrur"]
+[ext_resource type="PackedScene" uid="uid://b5oufmwlg5lga" path="res://source/client/ui/hud/character_portrait/character_portrait.tscn" id="7_charport"]
 [ext_resource type="Texture2D" uid="uid://1lckma8tgrri" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb6.png" id="9_o5bjo"]
 [ext_resource type="Texture2D" uid="uid://b8fkitwl7xwkl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb25.png" id="10_ntruf"]
 [ext_resource type="Texture2D" uid="uid://be5thvqndixxl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb39.png" id="10_s83ae"]
+[ext_resource type="Texture2D" uid="uid://b5g4rf24ako53" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb12.png" id="11_dxemd"]
 [ext_resource type="Texture2D" uid="uid://d4sfpo45g47a" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb13.png" id="11_kuylb"]
 [ext_resource type="Texture2D" uid="uid://wykq6t7doo8e" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb14.png" id="11_ntruf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dxemd"]
+
+[sub_resource type="Theme" id="Theme_qdlgh"]
+Panel/styles/panel = SubResource("StyleBoxEmpty_dxemd")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kuylb"]
+
+[sub_resource type="Theme" id="Theme_dxemd"]
+Panel/styles/panel = SubResource("StyleBoxEmpty_kuylb")
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rchld")
@@ -21,22 +32,58 @@ script = ExtResource("1_rchld")
 [node name="HealthBar" parent="." instance=ExtResource("2_klco5")]
 visible = false
 
-[node name="EnergyBar" parent="." instance=ExtResource("3_energy")]
-anchors_preset = -1
-offset_left = -360.0
-offset_top = -408.35498
-offset_right = -360.0
-offset_bottom = -408.35498
-grow_vertical = 1
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 916.0
+offset_bottom = 112.0
+theme_override_constants/separation = 16
 
-[node name="GoldDisplay" type="Panel" parent="."]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 150.0
-offset_bottom = 60.0
-theme_override_styles/panel = ExtResource("5_yye8g")
+[node name="CharacterPortrait" parent="HBoxContainer2" instance=ExtResource("7_charport")]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="GoldDisplay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(240, 0)
+layout_direction = 2
+layout_mode = 2
+theme = ExtResource("6_qjrur")
+theme_override_constants/separation = 0
+
+[node name="LevelDisplay" type="Panel" parent="HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = SubResource("Theme_qdlgh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/VBoxContainer/LevelDisplay"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 29.0
+grow_horizontal = 2
+
+[node name="LevelLabel" type="Label" parent="HBoxContainer2/VBoxContainer/LevelDisplay/VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="ExpProgressBar" type="ProgressBar" parent="HBoxContainer2/VBoxContainer/LevelDisplay/VBoxContainer"]
+layout_mode = 2
+show_percentage = false
+
+[node name="EnergyBar" parent="HBoxContainer2/VBoxContainer" instance=ExtResource("3_energy")]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="GoldDisplay" type="Panel" parent="HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_direction = 2
+layout_mode = 2
+theme = SubResource("Theme_dxemd")
+
+[node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer/GoldDisplay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,33 +91,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Gold: 0"
-horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="LevelDisplay" type="Panel" parent="."]
-offset_left = 20.0
-offset_top = 70.0
-offset_right = 200.0
-offset_bottom = 100.0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-theme_override_styles/panel = ExtResource("5_yye8g")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelDisplay"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 29.0
-grow_horizontal = 2
-
-[node name="LevelLabel" type="Label" parent="LevelDisplay/VBoxContainer"]
-layout_mode = 2
-text = "Level 1"
-horizontal_alignment = 1
-
-[node name="ExpProgressBar" type="ProgressBar" parent="LevelDisplay/VBoxContainer"]
-layout_mode = 2
-show_percentage = false
 
 [node name="MenuButton" type="Button" parent="."]
 visible = false
@@ -215,18 +236,18 @@ layout_mode = 2
 icon = ExtResource("10_ntruf")
 icon_alignment = 1
 
+[node name="TitlesButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+tooltip_text = "Titles"
+icon = ExtResource("11_dxemd")
+icon_alignment = 1
+
 [node name="GuideButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 tooltip_text = "Game Guide"
 icon = ExtResource("11_kuylb")
-icon_alignment = 1
-
-[node name="TitlesButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-tooltip_text = "Titles"
-text = "T"
 icon_alignment = 1
 
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
@@ -276,10 +297,11 @@ text = "CLOSE"
 layer = 10
 
 [node name="GuideModal" parent="." instance=ExtResource("5_guide")]
+visible = false
 
 [connection signal="pressed" from="MenuButton" to="." method="_on_overlay_menu_button_pressed"]
 [connection signal="pressed" from="LevelupButton" to="." method="_on_levelup_button_pressed"]
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button" to="." method="_on_vit_button_pressed"]
 [connection signal="pressed" from="LevelupButton/Control/VBoxContainer/Button2" to="." method="_on_button_str_pressed"]
-[connection signal="pressed" from="HBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/TitlesButton" to="." method="_on_titles_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/GuideButton" to="." method="_on_guide_button_pressed"]

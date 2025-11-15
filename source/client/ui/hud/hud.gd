@@ -14,10 +14,10 @@ var has_opened_guide: bool = false  # Set to true when character is created (tri
 @onready var menu_overlay: Control = $MenuOverlay
 @onready var close_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 @onready var sub_menu: CanvasLayer = $SubMenu
-@onready var gold_label: Label = $GoldDisplay/Label
-@onready var level_display: Panel = $LevelDisplay
-@onready var level_label: Label = $LevelDisplay/VBoxContainer/LevelLabel
-@onready var exp_progress_bar: ProgressBar = $LevelDisplay/VBoxContainer/ExpProgressBar
+@onready var gold_label: Label = $HBoxContainer2/VBoxContainer/GoldDisplay/Label
+@onready var level_display: Panel = $HBoxContainer2/VBoxContainer/LevelDisplay
+@onready var level_label: Label = $HBoxContainer2/VBoxContainer/LevelDisplay/VBoxContainer/LevelLabel
+@onready var exp_progress_bar: ProgressBar = $HBoxContainer2/VBoxContainer/LevelDisplay/VBoxContainer/ExpProgressBar
 
 # New HBoxContainer buttons
 @onready var inventory_button: Button = $HBoxContainer/InventoryButton
