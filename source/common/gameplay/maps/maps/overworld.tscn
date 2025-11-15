@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=44 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://cey1mg75dsmuu" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.tscn" id="28_mvj6e"]
 [ext_resource type="PackedScene" uid="uid://dtww4ymumin8s" path="res://source/server/world/components/harvesting/nodes/trapper_node_t5.tscn" id="28_sbo1b"]
 [ext_resource type="PackedScene" uid="uid://cgjjklyojxnyf" path="res://source/server/world/components/harvesting/nodes/miner_node_t6.tscn" id="29_112bs"]
+[ext_resource type="PackedScene" uid="uid://bvn8k3x2y7q1m" path="res://source/common/gameplay/maps/components/interaction_areas/storage_chest/storage_chest_area.tscn" id="29_storage_chest"]
 [ext_resource type="PackedScene" uid="uid://ddgr823fxbbek" path="res://source/server/world/components/harvesting/nodes/forager_node_t6.tscn" id="30_2aujs"]
 [ext_resource type="PackedScene" uid="uid://bjetvw7ax7x3n" path="res://source/server/world/components/harvesting/nodes/trapper_node_t6.tscn" id="31_7nycf"]
 
@@ -257,6 +258,9 @@ elimination_teleport_position = Vector2(264, 816.29)
 
 [node name="QuestBoardArea" parent="Components" instance=ExtResource("22_plgjc")]
 position = Vector2(504, 248)
+
+[node name="StorageChestArea" parent="Components" instance=ExtResource("29_storage_chest")]
+position = Vector2(308, 229)
 
 [node name="MinerNodeT2(1)" parent="." instance=ExtResource("24_bd110")]
 position = Vector2(1392, 720)

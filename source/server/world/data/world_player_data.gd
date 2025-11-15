@@ -59,6 +59,10 @@ const BANNED_WORDS: Array[String] = [
 ## Used to enforce 30-second cooldown between character switches
 @export var account_switch_cooldowns: Dictionary = {}
 
+## Family Crest: Account-wide storage system
+## Structure: {"account_name": {item_id: {"stack": int}, ...}}
+@export var account_storage: Dictionary = {}
+
 
 func get_player_resource(player_id: int) -> PlayerResource:
 	if players.has(player_id):

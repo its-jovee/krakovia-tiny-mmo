@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -205,6 +205,43 @@ selected_title_slug = "founder"
 last_logout_time = 1763227851.092
 last_position = Vector2(559.75354, 302.64478)
 
+[sub_resource type="Resource" id="Resource_ijlu0"]
+script = ExtResource("1_ni45q")
+player_id = 9
+account_name = "filhodedeus"
+display_name = "filhao"
+character_class = "forager"
+golds = 100
+inventory = {
+71: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+experience = 30
+current_energy = 100.0
+last_logout_time = 1763229063.624
+last_position = Vector2(310.66788, 332.16885)
+
+[sub_resource type="Resource" id="Resource_dn36l"]
+script = ExtResource("1_ni45q")
+player_id = 10
+account_name = "filhodedeus"
+display_name = "cidadao"
+golds = 100
+inventory = {
+56: {
+"stack": 2
+},
+64: {
+"stack": 2
+}
+}
+available_attributes_points = 10
+current_energy = 100.0
+last_logout_time = 1763229067.844
+last_position = Vector2(370.91876, 329.91943)
+
 [resource]
 script = ExtResource("2_83xu3")
 accounts = {
@@ -212,6 +249,7 @@ accounts = {
 "Mafra1": PackedInt32Array(3),
 "Mafra2": PackedInt32Array(4),
 "cidadao": PackedInt32Array(6),
+"filhodedeus": PackedInt32Array(9, 10),
 "jovee": PackedInt32Array(1, 7, 8),
 "teste": PackedInt32Array(5)
 }
@@ -223,10 +261,19 @@ players = {
 5: SubResource("Resource_tcuqq"),
 6: SubResource("Resource_8u1r5"),
 7: SubResource("Resource_vidub"),
-8: SubResource("Resource_eyapk")
+8: SubResource("Resource_eyapk"),
+9: SubResource("Resource_ijlu0"),
+10: SubResource("Resource_dn36l")
 }
-next_player_id = 8
+next_player_id = 10
 account_titles = {
+"filhodedeus": {
+"progress": {
+"event_founder": 1,
+"harvests_collector": 6
+},
+"unlocked": [&"founder"]
+},
 "jovee": {
 "progress": {
 "all_classes_max_level": 1,
@@ -244,5 +291,9 @@ account_titles = {
 }
 }
 account_switch_cooldowns = {
+"filhodedeus": 1763229063.624,
 "jovee": 1763227815.297
+}
+account_storage = {
+"filhodedeus": {}
 }

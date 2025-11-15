@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1763157600
-next_id = 48
+version = 1731700000
+next_id = 52
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
 &"id": 1,
@@ -242,6 +242,26 @@ entries = Array[Dictionary]([{
 &"id": 47,
 &"path": "res://source/server/world/components/data_request_handlers/character.list.gd",
 &"slug": &"character.list"
+}, {
+&"hash": "",
+&"id": 48,
+&"path": "res://source/server/world/components/data_request_handlers/storage.get.gd",
+&"slug": &"storage.get"
+}, {
+&"hash": "",
+&"id": 49,
+&"path": "res://source/server/world/components/data_request_handlers/storage.deposit.gd",
+&"slug": &"storage.deposit"
+}, {
+&"hash": "",
+&"id": 50,
+&"path": "res://source/server/world/components/data_request_handlers/storage.withdraw.gd",
+&"slug": &"storage.withdraw"
+}, {
+&"hash": "",
+&"id": 51,
+&"path": "res://source/server/world/components/data_request_handlers/storage.info.gd",
+&"slug": &"storage.info"
 }])
 metadata/slug = &"data_request_handlers_index"
 metadata/id = 1

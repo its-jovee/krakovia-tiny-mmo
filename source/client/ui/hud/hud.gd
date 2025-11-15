@@ -80,11 +80,19 @@ func _ready() -> void:
 	sub_menu.add_child(titles_menu)
 	menus["titles"] = titles_menu
 	
+	# Add storage menu
+	var storage_menu = preload("res://source/client/ui/storage/storage_menu.tscn").instantiate()
+	sub_menu.add_child(storage_menu)
+	menus["storage"] = storage_menu
+	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	
 	# Subscribe to market status updates
 	InstanceClient.subscribe(&"market.status", _on_market_status_update)
+	
+	# Subscribe to storage chest status updates
+	InstanceClient.subscribe(&"storage_chest.status", _on_storage_chest_status_update)
 	
 	# Subscribe to harvest item notifications
 	InstanceClient.subscribe(&"harvest.item_received", _on_harvest_item_received)
@@ -156,6 +164,22 @@ func set_market_status(in_market_area: bool) -> void:
 
 func get_market_status() -> bool:
 	return in_market
+
+func _on_storage_chest_status_update(data: Dictionary) -> void:
+	var in_storage_area = data.get("in_storage_area", false)
+	print("HUD received storage chest status: ", in_storage_area)
+	if in_storage_area:
+		# Auto-open storage menu when entering area
+		if menus.has(&"storage"):
+			var storage_menu = menus[&"storage"]
+			if storage_menu.has_method("show_menu"):
+				storage_menu.show_menu()
+			else:
+				storage_menu.visible = true
+	else:
+		# Auto-close storage menu when leaving area
+		if menus.has(&"storage"):
+			menus[&"storage"].visible = false
 
 func _on_overlay_menu_close_button_pressed() -> void:
 	menu_overlay.hide()

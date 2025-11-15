@@ -140,6 +140,11 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"quest_board.status", {"in_quest_board": true})
+	if interaction_area is StorageChestArea:
+		# Notify client about storage chest status
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"storage_chest.status", {"in_storage_area": true})
 
 func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
 	if interaction_area is MarketArea:
@@ -152,6 +157,11 @@ func _on_player_exited_interaction_area(player: Player, interaction_area: Intera
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"quest_board.status", {"in_quest_board": false})
+	if interaction_area is StorageChestArea:
+		# Notify client that they left storage chest
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"storage_chest.status", {"in_storage_area": false})
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func ready_to_enter_instance() -> void:
