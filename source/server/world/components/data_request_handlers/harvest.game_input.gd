@@ -4,7 +4,7 @@ extends DataRequestHandler
 func data_request_handler(
 	peer_id: int,
 	instance: ServerInstance,
-	_args: Dictionary
+	args: Dictionary
 ) -> Dictionary:
 	var player: Player = instance.players_by_peer_id.get(peer_id, null)
 	if not player:
@@ -15,4 +15,7 @@ func data_request_handler(
 	if target == null:
 		return {"ok": false, "err": &"not_harvesting"}
 
-	return target.request_encourage(peer_id)
+	# Forward input to harvest node for processing
+	return target.handle_harvest_game_input(peer_id, args)
+
+

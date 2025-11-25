@@ -7,8 +7,8 @@
 z_index = 900
 layout_mode = 3
 anchors_preset = 0
-offset_right = 300.0
-offset_bottom = 80.0
+offset_right = 320.0
+offset_bottom = 140.0
 mouse_filter = 2
 script = ExtResource("1")
 
@@ -43,11 +43,39 @@ layout_mode = 2
 text = "Tier 1 Miner Node"
 horizontal_alignment = 1
 
+[node name="NodeHealthBar" type="ProgressBar" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/background = null
+theme_override_styles/fill = null
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
 [node name="ProgressBar" type="ProgressBar" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 show_percentage = false
 
+[node name="GameContainer" type="Control" parent="Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="FeedbackLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 1, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "PERFECT!"
+horizontal_alignment = 1
+
+[node name="StreakLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6, 0.2, 1)
+theme_override_font_sizes/font_size = 12
+text = "Streak: 5"
+horizontal_alignment = 1
+
 [node name="InfoLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "1 Player • 1.00x Multiplier"
+text = "1 Player • 1.00x • Press SPACE on beat!"
 horizontal_alignment = 1

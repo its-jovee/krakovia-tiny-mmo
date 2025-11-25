@@ -84,12 +84,26 @@ func check_inputs() -> void:
 	match input_direction:
 		Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN:
 			last_input_direction = input_direction
-	if Input.is_action_just_pressed("action"):
-		# If harvesting locally, use Encourage instead of combat action
-		if InstanceClient.local_harvest_node != "":
-			InstanceClient.current.request_data(&"harvest.encourage", Callable())
-		else:
-			pass
+	# Handle harvest game input (Space/action button)
+	if InstanceClient.local_harvest_node != "":
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel:
+			# For precision game: track hold/release
+			if panel.current_game_type == &"precision":
+				if Input.is_action_just_pressed("action"):
+					panel.start_precision_hold()
+				elif Input.is_action_just_released("action"):
+					var input_data: Dictionary = panel.release_precision_hold()
+					if not input_data.is_empty():
+						InstanceClient.current.request_data(&"harvest.game_input", Callable(), input_data)
+			# For rhythm and steady_aim: just press
+			elif Input.is_action_just_pressed("action"):
+				var input_data: Dictionary = panel.handle_game_input()
+				if not input_data.is_empty():
+					InstanceClient.current.request_data(&"harvest.game_input", Callable(), input_data)
+	elif Input.is_action_just_pressed("action"):
+		# Combat action (future)
+		pass
 	interact_input = Input.is_action_just_pressed("interact")
 	if interact_input:
 		# Toggle join/leave harvesting (iteration 0 test)

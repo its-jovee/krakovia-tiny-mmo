@@ -41,4 +41,11 @@ func data_request_handler(
 	result["node_type"] = best.node_type
 	result["required_class"] = best.required_class
 	result["required_level"] = best.required_level
+	
+	# Add harvest game info
+	result["harvest_game_type"] = best.harvest_game_type
+	result["game_beat_interval"] = best.game_beat_interval
+	if best.harvest_game_type != &"none":
+		result["game_config"] = HarvestNode.GAME_CONFIGS.get(best.harvest_game_type, {})
+	
 	return result

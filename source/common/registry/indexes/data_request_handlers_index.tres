@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_r6qed")
 content_name = &"data_request_handlers"
-version = 1731700000
+version = 1732500000
 next_id = 53
 entries = Array[Dictionary]([{
 &"hash": "2413f95341030f9da9729a95f81304193f071b90f2a277b738f1ae0ae1c64e74",
@@ -63,10 +63,10 @@ entries = Array[Dictionary]([{
 &"path": "res://source/server/world/components/data_request_handlers/guild.self.gd",
 &"slug": &"guild.self"
 }, {
-&"hash": "a04ac9db8cbb8ff6af7cb6faaf3ebd4f8c9bab5abcd3e4f5a6b7c8d9eafbac",
+&"hash": "",
 &"id": 12,
-&"path": "res://source/server/world/components/data_request_handlers/harvest.encourage.gd",
-&"slug": &"harvest.encourage"
+&"path": "res://source/server/world/components/data_request_handlers/harvest.game_input.gd",
+&"slug": &"harvest.game_input"
 }, {
 &"hash": "b15bdaec9dcc9aa7ba8dc7abbae4ce5a9dacbc6bcde4f5a6b7c8d9eafbacbd",
 &"id": 13,

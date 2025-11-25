@@ -125,23 +125,72 @@ func _ready() -> void:
 				InstanceClient.current.request_data(&"inventory.get", inv_menu.fill_inventory)
 	)
 
-	# Encourage start and bonus
-	subscribe(&"harvest.encourage.session", func(data: Dictionary) -> void:
+	# Harvest game events - Rhythm (Miner)
+	subscribe(&"harvest.rhythm.beat", func(data: Dictionary) -> void:
 		if data.is_empty():
 			return
-		print_debug("harvest.encourage.session:", data)
-		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
-		if ui_hud and ui_hud.has_method("on_session"):
-			ui_hud.on_session(data)
+		print_debug("harvest.rhythm.beat:", data)
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_rhythm_beat"):
+			panel.on_rhythm_beat(data)
 	)
-
-	subscribe(&"harvest.encourage.hit", func(data: Dictionary) -> void:
+	
+	# Harvest game events - Precision (Collector)
+	subscribe(&"harvest.precision.window", func(data: Dictionary) -> void:
 		if data.is_empty():
 			return
-		print_debug("harvest.encourage.hit:", data)
-		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
-		if ui_hud and ui_hud.has_method("on_hit"):
-			ui_hud.on_hit(data)
+		print_debug("harvest.precision.window:", data)
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_precision_window"):
+			panel.on_precision_window(data)
+	)
+	
+	# Harvest game events - Steady Aim (Trapper)
+	subscribe(&"harvest.aim.window", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.aim.window:", data)
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_aim_window"):
+			panel.on_aim_window(data)
+	)
+	
+	# Harvest game feedback (performance result)
+	subscribe(&"harvest.game.feedback", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.game.feedback:", data)
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_game_feedback"):
+			panel.on_game_feedback(data)
+	)
+	
+	# Harvest game sync bonus (multiple players hit together)
+	subscribe(&"harvest.game.sync", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		print_debug("harvest.game.sync:", data)
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_sync_bonus"):
+			panel.on_sync_bonus(data)
+	)
+	
+	# Harvest node health updates
+	subscribe(&"harvest.node_health", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_node_health"):
+			panel.on_node_health(data)
+	)
+	
+	# Harvest damage events (for damage popups)
+	subscribe(&"harvest.damage", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		var panel: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
+		if panel and panel.has_method("on_damage"):
+			panel.on_damage(data)
 	)
 	
 	# Shop system subscriptions
@@ -151,15 +200,6 @@ func _ready() -> void:
 	subscribe(&"shop.closed", _on_shop_closed)
 	subscribe(&"shop.item_sold", _on_shop_item_sold)
 	subscribe(&"shop.purchase_complete", _on_shop_purchase_complete)
-
-	subscribe(&"harvest.encourage.end", func(data: Dictionary) -> void:
-		if data.is_empty():
-			return
-		print_debug("harvest.encourage.end:", data)
-		var ui_hud: Node = get_tree().get_root().find_child("HarvestingPanel", true, false)
-		if ui_hud and ui_hud.has_method("on_end"):
-			ui_hud.on_end(data)
-	)
 	
 	# Title unlocked notification
 	subscribe(&"title.unlocked", func(data: Dictionary) -> void:

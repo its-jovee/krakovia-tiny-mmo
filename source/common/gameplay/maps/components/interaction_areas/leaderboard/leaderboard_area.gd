@@ -29,3 +29,4 @@ func _on_player_exited_leaderboard(player: Player, _area: InteractionArea) -> vo
 func is_player_at_board(player: Player) -> bool:
 	return player in players_at_board
 
+

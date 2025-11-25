@@ -357,7 +357,7 @@ func _on_harvest_item_received(data: Dictionary) -> void:
 
 
 func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_amount: int = 0) -> void:
-	"""Create and display a harvest notification popup"""
+	"""Create and display a harvest notification popup in top-right corner"""
 	# Load the popup scene
 	var popup_scene = preload("res://source/client/ui/hud/harvest_popup.tscn")
 	if not popup_scene:
@@ -371,17 +371,19 @@ func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_am
 	popup.name = "HarvestPopup_" + str(Time.get_ticks_msec())
 	add_child(popup)
 	
-	# Position popup at bottom-center of screen, stacking vertically if multiple exist
+	# Position popup at top-right of screen, stacking downward
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
-	var base_y: float = viewport_size.y - 100.0
+	var popup_width: float = 240.0
+	var base_x: float = viewport_size.x - popup_width - 20.0  # 20px from right edge
+	var base_y: float = 100.0  # Start from top
 	
-	# Count existing popups to stack them
+	# Count existing popups to stack them downward
 	var existing_popups: int = 0
 	for child in get_children():
 		if child.name.begins_with("HarvestPopup_"):
 			existing_popups += 1
 	
-	popup.position = Vector2(viewport_size.x / 2.0 - 120.0, base_y - (existing_popups * 50.0))
+	popup.position = Vector2(base_x, base_y + (existing_popups * 55.0))
 	
 	# Setup the popup
 	if popup.has_method("setup"):

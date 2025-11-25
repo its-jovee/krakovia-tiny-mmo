@@ -9,11 +9,6 @@ extends Node2D
 @export var cooldown_seconds: float = 300.0
 @export var max_move_during_tick: float = 1.0
 @export var energy_cost_per_sec: float = 5.0 / 30.0
-@export var encourage_session_window: float = 10.0
-@export var encourage_cooldown: float = 10.0
-@export var encourage_bonus_pct: float = 0.25
-@export var encourage_max_stacks: int = 5
-@export var encourage_max_total_bonus_pct: float = 1.0
 
 ## Class/Level restriction fields
 @export var required_class: StringName = &"" ## Empty = any class, or &"miner"/&"forager"/&"trapper"
@@ -23,6 +18,50 @@ extends Node2D
 ## Loot table for drops (if null, uses legacy ITEM_BY_NODE_TYPE)
 @export var loot_table: HarvestLootTable = null
 
+# ============================================================================
+# HARVEST GAME CONFIGURATION CONSTANTS
+# ============================================================================
+
+# Yield multipliers based on performance
+const PASSIVE_YIELD_MULT: float = 0.25
+const PERFECT_YIELD_MULT: float = 2.0
+const GOOD_YIELD_MULT: float = 1.3
+const MISS_YIELD_MULT: float = 0.5
+
+# Energy cost multipliers
+const PASSIVE_ENERGY_MULT: float = 0.5
+const ACTIVE_NORMAL_ENERGY_MULT: float = 1.0
+const MISS_ENERGY_PENALTY_MULT: float = 2.5
+
+# Sync bonuses when multiple players hit together
+const SYNC_BONUS_2_PLAYERS: float = 1.2
+const SYNC_BONUS_3_PLUS: float = 1.5
+const SYNC_WINDOW_MS: int = 300  # ±300ms for synchronized hits
+
+# Game timing configurations per class
+const GAME_CONFIGS: Dictionary = {
+	&"rhythm": {  # Miner - fast beats with clear zones
+		"beat_interval": 0.7,  # Fast! Every 0.7 seconds
+		"perfect_window_ms": 150,  # Tight perfect zone
+		"good_window_ms": 350,  # Generous good zone
+	},
+	&"precision": {  # Collector/Forager
+		"window_duration": 2.5,  # Slightly faster
+		"optimal_zone_start": 0.42,
+		"optimal_zone_end": 0.58,
+		"good_zone_start": 0.30,
+		"good_zone_end": 0.70,
+	},
+	&"steady_aim": {  # Trapper - faster shrinking
+		"window_duration": 1.8,  # Faster! (was 2.5)
+		"perfect_radius": 0.18,  # Slightly bigger (was 0.15)
+		"good_radius": 0.40,  # Slightly bigger (was 0.35)
+	}
+}
+
+# ============================================================================
+# NODE STATE
+# ============================================================================
 
 var harvesters: Dictionary[int, Dictionary] = {}
 var multiplier: float = 1.0
@@ -36,12 +75,20 @@ var remaining_amount: float = 0.0
 var pool_amount: float = 0.0
 var state: StringName = &"full" # full | partial | depleted | cooldown
 var _cooldown_clock: float = 0.0
-var _enc_session_active: bool = false
-var _enc_session_expires_at: float = 0.0
-var _enc_session_contributors: Dictionary[int, bool] = {}
-var _enc_session_stack_count: int = 0
-var _enc_session_cum_bonus_pct: float = 0.0
-var _encourage_cd_until: Dictionary[int, float] = {}
+
+# ============================================================================
+# HARVEST GAME STATE
+# ============================================================================
+
+var harvest_game_type: StringName = &"none"  # "rhythm", "precision", "steady_aim", "none"
+var game_beat_interval: float = 1.5
+var game_clock: float = 0.0
+var game_last_event_time: float = 0.0
+var game_current_beat_id: int = 0  # Unique ID for each beat/window
+
+# Track synchronized hits within current beat window
+var sync_window_hits: Array[Dictionary] = []  # [{peer_id: int, timestamp_ms: int, performance: StringName}]
+var last_sync_bonus_applied: float = 1.0
 
 const ITEM_BY_NODE_TYPE := {
 	&"ore": &"ore",
@@ -73,14 +120,36 @@ func _ready() -> void:
 	add_to_group(&"harvest_nodes")
 	remaining_amount = max(remaining_amount, max_amount)
 	_update_state()
+	_determine_game_type()
 	
-	# Register with HarvestManager
+	# Register with HarvestManager (server only)
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance and instance.harvest_manager:
 		instance.harvest_manager.register_node(self)
 	
-	# Setup floating shader on client side
+	# Setup floating shader and health bar on client side
 	_setup_floating_shader()
+	
+	# Enable processing on client for health bar timer
+	if not multiplayer.is_server():
+		set_process(true)
+
+
+func _determine_game_type() -> void:
+	"""Determine harvest game type based on required_class"""
+	match required_class:
+		&"miner":
+			harvest_game_type = &"rhythm"
+			game_beat_interval = GAME_CONFIGS[&"rhythm"]["beat_interval"]
+		&"forager", &"collector":
+			harvest_game_type = &"precision"
+			game_beat_interval = GAME_CONFIGS[&"precision"]["window_duration"]
+		&"trapper":
+			harvest_game_type = &"steady_aim"
+			game_beat_interval = GAME_CONFIGS[&"steady_aim"]["window_duration"]
+		_:
+			harvest_game_type = &"none"
+			game_beat_interval = 1.5
 
 
 func _setup_floating_shader() -> void:
@@ -106,6 +175,17 @@ func _setup_floating_shader() -> void:
 	
 	# Apply shader to sprite
 	signal_sprite.material = shader_material
+	
+	# Setup health bar for client
+	_setup_client_health_bar()
+
+
+
+func _setup_client_health_bar() -> void:
+	"""Client-side health bar is now handled by HarvestingPanel"""
+	pass
+
+
 
 
 func _broadcast_harvest_event(event_name: StringName, data: Dictionary, to_harvesters_only: bool = false) -> void:
@@ -140,16 +220,20 @@ func _get_instance() -> ServerInstance:
 
 
 func _exit_tree() -> void:
-	# Unregister from HarvestManager
+	# Unregister from HarvestManager (server)
 	var instance: ServerInstance = get_viewport() as ServerInstance
 	if instance and instance.harvest_manager:
 		instance.harvest_manager.unregister_node(self)
 
 
 func _process(delta: float) -> void:
+	# Client-side: nothing to do
 	if not multiplayer.is_server():
 		return
+	
 	_clock += delta
+	game_clock += delta
+	
 	# Handle cooldown lifecycle
 	if state == &"cooldown":
 		_cooldown_clock += delta
@@ -165,50 +249,61 @@ func _process(delta: float) -> void:
 	if harvesters.size() > 0 and (state == &"full" or state == &"partial"):
 		_tick_accum += delta
 		_status_accum += delta
-		# Expire encourage session
-		if _enc_session_active and _clock >= _enc_session_expires_at:
-			# Broadcast session end to harvesters only
-			_broadcast_harvest_event(&"harvest.encourage.end", {
-				"node": String(get_path()),
-				"stacks": _enc_session_stack_count,
-				"total_bonus_pct": _enc_session_cum_bonus_pct,
-			}, true)  # to_harvesters_only = true
-			_enc_session_active = false
-			_enc_session_contributors.clear()
-			_enc_session_stack_count = 0
-			_enc_session_cum_bonus_pct = 0.0
+		
+		# Generate game events (beats/windows) for active harvest games
+		_generate_game_events()
+		
 		while _tick_accum >= _tick_interval:
 			_tick_accum -= _tick_interval
 			var count: int = get_count()
 			multiplier = compute_multiplier(count)
 			var base_rate: float = base_yield_per_sec * multiplier
 			var ids: Array = harvesters.keys().duplicate()
+			
 			for pid_any in ids:
 				var pid: int = int(pid_any)
 				var h: Dictionary = harvesters.get(pid, {})
 				var player: Player = _get_player(pid)
 				if player == null:
 					continue
+				
 				# Stop if the player moved since last tick (must stand still)
 				var last_pos: Vector2 = h.get("last_pos", player.global_position)
 				if player.global_position.distance_to(last_pos) > max_move_during_tick:
 					player_leave(pid)
 					continue
+				
+				# Calculate performance-based multipliers
+				var performance: StringName = h.get("last_performance", &"passive")
+				var yield_mult: float = _get_yield_multiplier(performance)
+				var energy_mult: float = _get_energy_multiplier(performance)
+				
+				# Apply sync bonus if player participated in sync
+				var sync_bonus: float = h.get("sync_bonus", 1.0)
+				yield_mult *= sync_bonus
+				
+				# Pay energy cost (modified by performance)
 				var asc: AbilitySystemComponent = player.get_node_or_null(^"AbilitySystemComponent")
 				if asc != null:
-					# Use resource system so regen pauses during harvesting
-					var paid: bool = asc.try_pay_costs({&"energy": energy_cost_per_sec}, {&"reason": &"harvest"})
+					var energy_cost: float = energy_cost_per_sec * energy_mult
+					var paid: bool = asc.try_pay_costs({&"energy": energy_cost}, {&"reason": &"harvest"})
 					if not paid:
 						player_leave(pid)
 						continue
-				var produce: float = base_rate
+				
+				# Calculate produce with performance multiplier
+				var produce: float = base_rate * yield_mult
 				if remaining_amount <= 0.0:
 					produce = 0.0
 				else:
 					produce = min(produce, remaining_amount)
 				remaining_amount -= produce
 				
-				# NEW: Immediate distribution with fractional accumulation
+				# Reset performance for next tick (player must actively participate each tick)
+				h["last_performance"] = &"passive"
+				h["sync_bonus"] = 1.0
+				
+				# Immediate distribution with fractional accumulation
 				var harvest_pool: float = float(h.get("harvest_pool", 0.0)) + produce
 				h["harvest_pool"] = harvest_pool
 				
@@ -307,6 +402,7 @@ func _process(delta: float) -> void:
 				h["joined_at"] = float(h.get("joined_at", _clock))
 				h["last_pos"] = player.global_position
 				harvesters[pid] = h
+				
 				# If node is depleted, stop everyone and enter cooldown
 				if remaining_amount <= 0.0:
 					_on_depleted()
@@ -318,6 +414,389 @@ func _process(delta: float) -> void:
 			_status_accum = 0.0
 			_broadcast_status()
 
+
+# ============================================================================
+# HARVEST GAME EVENT GENERATION
+# ============================================================================
+
+func _generate_game_events() -> void:
+	"""Generate game events (beats/windows) for active harvest games"""
+	if harvest_game_type == &"none":
+		return
+	
+	if harvesters.size() == 0:
+		return
+	
+	# Check if it's time for a new game event
+	if game_clock - game_last_event_time >= game_beat_interval:
+		game_last_event_time = game_clock
+		game_current_beat_id += 1
+		
+		# Clear previous sync window hits
+		sync_window_hits.clear()
+		
+		match harvest_game_type:
+			&"rhythm":
+				_broadcast_rhythm_beat()
+			&"precision":
+				_broadcast_precision_window()
+			&"steady_aim":
+				_broadcast_aim_window()
+
+
+func _broadcast_rhythm_beat() -> void:
+	"""Send rhythm beat event to all harvesters"""
+	var config: Dictionary = GAME_CONFIGS[&"rhythm"]
+	_broadcast_harvest_event(&"harvest.rhythm.beat", {
+		"node": String(get_path()),
+		"beat_id": game_current_beat_id,
+		"timestamp_ms": int(game_clock * 1000),
+		"perfect_window_ms": config["perfect_window_ms"],
+		"good_window_ms": config["good_window_ms"],
+		"next_beat_in": game_beat_interval,
+	}, true)
+
+
+func _broadcast_precision_window() -> void:
+	"""Send precision window event to all harvesters"""
+	var config: Dictionary = GAME_CONFIGS[&"precision"]
+	_broadcast_harvest_event(&"harvest.precision.window", {
+		"node": String(get_path()),
+		"beat_id": game_current_beat_id,
+		"timestamp_ms": int(game_clock * 1000),
+		"window_duration": config["window_duration"],
+		"optimal_zone_start": config["optimal_zone_start"],
+		"optimal_zone_end": config["optimal_zone_end"],
+		"good_zone_start": config["good_zone_start"],
+		"good_zone_end": config["good_zone_end"],
+	}, true)
+
+
+func _broadcast_aim_window() -> void:
+	"""Send steady aim window event to all harvesters"""
+	var config: Dictionary = GAME_CONFIGS[&"steady_aim"]
+	_broadcast_harvest_event(&"harvest.aim.window", {
+		"node": String(get_path()),
+		"beat_id": game_current_beat_id,
+		"timestamp_ms": int(game_clock * 1000),
+		"window_duration": config["window_duration"],
+		"perfect_radius": config["perfect_radius"],
+		"good_radius": config["good_radius"],
+	}, true)
+
+
+# ============================================================================
+# HARVEST GAME INPUT HANDLING
+# ============================================================================
+
+func handle_harvest_game_input(peer_id: int, input_data: Dictionary) -> Dictionary:
+	"""Handle player input for harvest game - returns performance feedback"""
+	if not multiplayer.is_server():
+		return {"ok": false, "err": &"not_server"}
+	
+	if not harvesters.has(peer_id):
+		return {"ok": false, "err": &"not_harvesting"}
+	
+	var h: Dictionary = harvesters.get(peer_id, {})
+	var client_timestamp_ms: int = int(input_data.get("timestamp_ms", 0))
+	var input_game_type: StringName = input_data.get("game_type", &"")
+	
+	# Validate game type matches
+	if input_game_type != harvest_game_type:
+		return {"ok": false, "err": &"wrong_game_type"}
+	
+	# Calculate performance based on game type
+	var performance: StringName = &"miss"
+	var timing_offset_ms: int = 0
+	
+	match harvest_game_type:
+		&"rhythm":
+			var offset_from_beat: int = int(input_data.get("offset_from_beat_ms", 9999))
+			var result: Dictionary = _evaluate_rhythm_input(offset_from_beat)
+			performance = result["performance"]
+			timing_offset_ms = result["offset_ms"]
+		&"precision":
+			var release_position: float = float(input_data.get("release_position", 0.5))
+			performance = _evaluate_precision_input(release_position)
+		&"steady_aim":
+			var aim_radius: float = float(input_data.get("aim_radius", 1.0))
+			performance = _evaluate_aim_input(aim_radius)
+	
+	# Update harvester state with performance
+	h["last_performance"] = performance
+	
+	# Update streak
+	var current_streak: int = int(h.get("rhythm_streak", 0))
+	if performance == &"miss":
+		current_streak = 0
+	else:
+		current_streak += 1
+	h["rhythm_streak"] = current_streak
+	
+	# Track hit for synchronization detection
+	if performance != &"miss":
+		sync_window_hits.append({
+			"peer_id": peer_id,
+			"timestamp_ms": client_timestamp_ms,
+			"performance": performance,
+		})
+		
+		# Check for synchronized hits and apply bonus
+		_check_and_apply_sync_bonus()
+	
+	harvesters[peer_id] = h
+	
+	# Get instance for broadcasting
+	var instance: ServerInstance = _get_instance()
+	
+	# Calculate damage based on performance
+	var yield_mult: float = _get_yield_multiplier(performance)
+	var base_damage: float = base_yield_per_sec * yield_mult * (1.0 + current_streak * 0.05)  # 5% bonus per streak
+	var damage_dealt: float = minf(base_damage, remaining_amount)
+	
+	# Apply damage to node
+	var old_remaining: float = remaining_amount
+	remaining_amount = maxf(0.0, remaining_amount - damage_dealt)
+	var actual_damage: float = old_remaining - remaining_amount
+	
+	# Roll for loot - every successful roll = guaranteed loot
+	var items_given: Array[Dictionary] = []
+	var exp_gained: int = 0
+	var roll_chance: float = 0.0  # The chance % shown to player
+	var roll_value: float = 0.0   # The actual dice roll (lower = better)
+	var roll_hit: bool = false    # Did the roll succeed?
+	
+	if actual_damage > 0 and instance != null:
+		var player: Player = instance.get_player(peer_id)
+		if player:
+			# Calculate loot chance based on performance
+			match performance:
+				&"perfect":
+					roll_chance = 1.0  # 100% - always hits
+				&"good":
+					roll_chance = 0.65  # 65% chance
+				&"miss":
+					roll_chance = 0.15  # 15% chance (low but possible)
+				_:
+					roll_chance = 0.25  # Passive: 25%
+			
+			# Roll the dice!
+			roll_value = randf()
+			roll_hit = roll_value <= roll_chance
+			
+			# Every hit = guaranteed loot
+			if roll_hit:
+				var items_to_give: int = 1
+				
+				# Perfect can give bonus items
+				if performance == &"perfect" and randf() < 0.3:
+					items_to_give += 1
+				
+				# Get and give loot
+				var loot_items: Dictionary = _get_loot_items(items_to_give)
+				for item_slug: StringName in loot_items:
+					var qty: int = int(loot_items[item_slug])
+					if qty > 0 and instance.give_item(peer_id, item_slug, qty):
+						items_given.append({"slug": item_slug, "amount": qty})
+				
+				# Award EXP for items received
+				if items_given.size() > 0:
+					exp_gained = _award_exp_for_items(peer_id, items_to_give, instance)
+					
+					# Send item notification popup (same as passive harvesting)
+					instance.data_push.rpc_id(peer_id, &"harvest.item_received", {
+						"node": String(get_path()),
+						"items": items_given,
+						"exp_gained": exp_gained
+					})
+	
+	# Check for depletion
+	if remaining_amount <= 0:
+		_on_depleted()
+	
+	# Send feedback to player with damage info
+	var feedback_data: Dictionary = {
+		"node": String(get_path()),
+		"performance": performance,
+		"streak": current_streak,
+		"timing_offset_ms": timing_offset_ms,
+		"yield_mult": yield_mult,
+		"damage": actual_damage,
+		"remaining": remaining_amount,
+		"max_amount": max_amount,
+		"items": items_given,
+		"exp": exp_gained,
+		# Roll info for visual feedback
+		"roll_chance": roll_chance,
+		"roll_value": roll_value,
+		"roll_hit": roll_hit,
+	}
+	
+	if instance != null:
+		instance.data_push.rpc_id(peer_id, &"harvest.game.feedback", feedback_data)
+		
+		# Broadcast damage to all nearby players for visual feedback
+		var damage_data: Dictionary = {
+			"node": String(get_path()),
+			"damage": actual_damage,
+			"performance": performance,
+			"remaining": remaining_amount,
+			"max_amount": max_amount,
+			"peer_id": peer_id,
+		}
+		_broadcast_harvest_event(&"harvest.damage", damage_data, false)
+	
+	return {
+		"ok": true,
+		"performance": performance,
+		"streak": current_streak,
+	}
+
+
+func _evaluate_rhythm_input(offset_from_beat_ms: int) -> Dictionary:
+	"""Evaluate rhythm input timing and return performance"""
+	var config: Dictionary = GAME_CONFIGS[&"rhythm"]
+	var perfect_window: int = int(config["perfect_window_ms"])
+	var good_window: int = int(config["good_window_ms"])
+	
+	# The offset is how many ms after the beat the player pressed
+	# Ideal timing is right when beat happens (offset ~0)
+	# But we also allow hitting slightly early (negative offset not possible with current impl)
+	var offset_ms: int = abs(offset_from_beat_ms)
+	
+	var performance: StringName = &"miss"
+	if offset_ms <= perfect_window:
+		performance = &"perfect"
+	elif offset_ms <= good_window:
+		performance = &"good"
+	
+	return {
+		"performance": performance,
+		"offset_ms": offset_from_beat_ms,
+	}
+
+
+func _evaluate_precision_input(release_position: float) -> StringName:
+	"""Evaluate precision release position and return performance"""
+	var config: Dictionary = GAME_CONFIGS[&"precision"]
+	var optimal_start: float = config["optimal_zone_start"]
+	var optimal_end: float = config["optimal_zone_end"]
+	var good_start: float = config["good_zone_start"]
+	var good_end: float = config["good_zone_end"]
+	
+	if release_position >= optimal_start and release_position <= optimal_end:
+		return &"perfect"
+	elif release_position >= good_start and release_position <= good_end:
+		return &"good"
+	return &"miss"
+
+
+func _evaluate_aim_input(aim_radius: float) -> StringName:
+	"""Evaluate steady aim radius and return performance"""
+	var config: Dictionary = GAME_CONFIGS[&"steady_aim"]
+	var perfect_radius: float = config["perfect_radius"]
+	var good_radius: float = config["good_radius"]
+	
+	if aim_radius <= perfect_radius:
+		return &"perfect"
+	elif aim_radius <= good_radius:
+		return &"good"
+	return &"miss"
+
+
+func _check_and_apply_sync_bonus() -> void:
+	"""Check if multiple players hit within sync window and apply bonus"""
+	if sync_window_hits.size() < 2:
+		return
+	
+	# Group hits by timestamp proximity
+	var synced_peers: Array[int] = []
+	for i in range(sync_window_hits.size()):
+		var hit_i: Dictionary = sync_window_hits[i]
+		var peer_i: int = int(hit_i["peer_id"])
+		if peer_i in synced_peers:
+			continue
+		
+		var sync_group: Array[int] = [peer_i]
+		for j in range(i + 1, sync_window_hits.size()):
+			var hit_j: Dictionary = sync_window_hits[j]
+			var peer_j: int = int(hit_j["peer_id"])
+			if peer_j in synced_peers:
+				continue
+			
+			var time_diff: int = abs(int(hit_i["timestamp_ms"]) - int(hit_j["timestamp_ms"]))
+			if time_diff <= SYNC_WINDOW_MS:
+				sync_group.append(peer_j)
+		
+		# Apply sync bonus if 2+ players in sync
+		if sync_group.size() >= 2:
+			var sync_bonus: float = SYNC_BONUS_2_PLAYERS if sync_group.size() == 2 else SYNC_BONUS_3_PLUS
+			
+			for pid in sync_group:
+				if harvesters.has(pid):
+					var h: Dictionary = harvesters[pid]
+					h["sync_bonus"] = sync_bonus
+					harvesters[pid] = h
+				synced_peers.append(pid)
+			
+			# Broadcast sync event to all participants
+			var instance: ServerInstance = _get_instance()
+			if instance != null:
+				for pid in sync_group:
+					instance.data_push.rpc_id(pid, &"harvest.game.sync", {
+						"node": String(get_path()),
+						"sync_count": sync_group.size(),
+						"sync_bonus": sync_bonus,
+						"synced_peers": sync_group,
+					})
+
+
+func _get_loot_items(count: int) -> Dictionary:
+	"""Get items from loot table (or legacy fallback)"""
+	var result: Dictionary = {}
+	for _i in range(count):
+		var rolled: Dictionary
+		if loot_table != null:
+			rolled = loot_table.roll_loot()
+		else:
+			# Legacy behavior
+			var slug: StringName = ITEM_BY_NODE_TYPE.get(node_type, &"ore")
+			rolled = {slug: 1}
+		
+		for item_slug in rolled.keys():
+			var qty: int = int(rolled[item_slug])
+			result[item_slug] = int(result.get(item_slug, 0)) + qty
+	
+	return result
+
+
+func _get_yield_multiplier(performance: StringName) -> float:
+	"""Get yield multiplier based on performance"""
+	match performance:
+		&"perfect":
+			return PERFECT_YIELD_MULT
+		&"good":
+			return GOOD_YIELD_MULT
+		&"miss":
+			return MISS_YIELD_MULT
+		_:  # passive
+			return PASSIVE_YIELD_MULT
+
+
+func _get_energy_multiplier(performance: StringName) -> float:
+	"""Get energy cost multiplier based on performance"""
+	match performance:
+		&"perfect", &"good":
+			return ACTIVE_NORMAL_ENERGY_MULT
+		&"miss":
+			return MISS_ENERGY_PENALTY_MULT
+		_:  # passive
+			return PASSIVE_ENERGY_MULT
+
+
+# ============================================================================
+# PLAYER JOIN/LEAVE
+# ============================================================================
 
 func player_in_range(player: Player) -> bool:
 	if player == null:
@@ -340,6 +819,7 @@ func compute_multiplier(count: int) -> float:
 		return 1.3
 	else:
 		return 1.5
+
 
 func _update_state() -> void:
 	if remaining_amount <= 0.0:
@@ -377,11 +857,23 @@ func player_join(peer_id: int, player: Player) -> Dictionary:
 	if harvesters.has(peer_id):
 		return {"ok": true, "already_joined": true}
 	
-	harvesters[peer_id] = {"joined_at": _clock, "accum_time": 0.0, "last_pos": player.global_position, "earned_total": 0.0}
+	# Initialize harvester with game state
+	harvesters[peer_id] = {
+		"joined_at": _clock,
+		"accum_time": 0.0,
+		"last_pos": player.global_position,
+		"earned_total": 0.0,
+		"harvest_pool": 0.0,
+		"last_performance": &"passive",
+		"rhythm_streak": 0,
+		"sync_bonus": 1.0,
+	}
 	
 	# Enable processing when first harvester joins
 	if harvesters.size() == 1:
 		set_process(true)
+		# Reset game clock so first beat comes after interval
+		game_last_event_time = game_clock
 	
 	multiplier = compute_multiplier(get_count())
 	_broadcast({
@@ -438,14 +930,12 @@ func player_leave(peer_id: int) -> bool:
 func cleanup_peer(peer_id: int) -> void:
 	if harvesters.has(peer_id):
 		player_leave(peer_id)
-	_encourage_cd_until.erase(peer_id)
-	if _enc_session_active:
-		_enc_session_contributors.erase(peer_id)
 
 
 func _broadcast(payload: Dictionary) -> void:
 	# Use spatial filtering to broadcast events to nearby players
 	_broadcast_harvest_event(&"harvest.event", payload, false)
+
 
 func _broadcast_status() -> void:
 	var instance: ServerInstance = get_viewport() as ServerInstance
@@ -485,7 +975,7 @@ func _broadcast_status() -> void:
 	else:
 		for pid_zero in pid_list:
 			shares[pid_zero] = 0
-	# Send per-peer payloads
+	# Send per-peer payloads to harvesters
 	for pid: int in pid_list:
 		var h: Dictionary = harvesters.get(pid, {})
 		var earned_total: int = int(h.get("earned_total", 0))
@@ -507,10 +997,36 @@ func _broadcast_status() -> void:
 			"earned_total": earned_total,
 			"projected_total_int": projected_total_int,
 			"next_progress": next_progress,
-			"tier": tier,  # Add tier for display
-			"node_type": String(node_type),  # Add node type for display
+			"tier": tier,
+			"node_type": String(node_type),
+			# Add harvest game info
+			"harvest_game_type": harvest_game_type,
+			"streak": int(h.get("rhythm_streak", 0)),
+			"last_performance": h.get("last_performance", &"passive"),
 		}
 		instance.data_push.rpc_id(pid, &"harvest.status", payload)
+	
+	# Broadcast node health to ALL nearby players (for health bar display)
+	_broadcast_node_health()
+
+
+func _broadcast_node_health() -> void:
+	"""Broadcast node health/remaining amount to all nearby players for health bar display"""
+	var instance: ServerInstance = _get_instance()
+	if instance == null:
+		return
+	
+	var health_data: Dictionary = {
+		"node": String(get_path()),
+		"remaining": remaining_amount,
+		"max_amount": max_amount,
+		"state": state,
+		"harvester_count": harvesters.size(),
+	}
+	
+	# Send to all nearby players (not just harvesters)
+	_broadcast_harvest_event(&"harvest.node_health", health_data, false)
+
 
 func _get_player(peer_id: int) -> Player:
 	var instance: ServerInstance = get_viewport() as ServerInstance
@@ -518,9 +1034,9 @@ func _get_player(peer_id: int) -> Player:
 		return null
 	return instance.get_player(peer_id)
 
+
 func _on_depleted() -> void:
 	# Transition to cooldown, stop all harvesters, and notify
-	# No need to distribute since we're doing immediate distribution
 	state = &"cooldown"
 	_cooldown_clock = 0.0
 	pool_amount = 0.0  # Reset pool
@@ -530,78 +1046,14 @@ func _on_depleted() -> void:
 	
 	var ids: Array = harvesters.keys().duplicate()
 	for pid_any in ids:
-		# notify leaving
 		player_leave(int(pid_any))
-		_encourage_cd_until.erase(int(pid_any))
-		if _enc_session_active:
-			_enc_session_contributors.erase(int(pid_any))
 	_broadcast_status()
+
 
 func _distribute(reason: StringName) -> void:
 	# DEPRECATED: No longer used with immediate distribution system
 	# Kept for backward compatibility but does nothing
-	# All distribution now happens immediately in the harvest tick
 	pass
-
-
-func request_encourage(peer_id: int) -> Dictionary:
-	if not multiplayer.is_server():
-		return {"ok": false, "err": &"not_server"}
-	if not harvesters.has(peer_id):
-		return {"ok": false, "err": &"not_harvesting"}
-	var cd_until: float = float(_encourage_cd_until.get(peer_id, 0.0))
-	if cd_until > _clock:
-		return {"ok": false, "err": &"cooldown", "cd_remaining": cd_until - _clock}
-	var instance: ServerInstance = get_viewport() as ServerInstance
-	# If no session active, start it with this contributor
-	if not _enc_session_active:
-		_enc_session_active = true
-		_enc_session_expires_at = _clock + encourage_session_window
-		_enc_session_contributors.clear()
-		_enc_session_stack_count = 0
-		_enc_session_cum_bonus_pct = 0.0
-		_enc_session_contributors[peer_id] = true
-		_enc_session_stack_count = 1
-		_encourage_cd_until[peer_id] = _clock + encourage_cooldown
-		# Broadcast to harvesters only
-		_broadcast_harvest_event(&"harvest.encourage.session", {
-			"node": String(get_path()),
-			"started_by": peer_id,
-			"window": encourage_session_window,
-		}, true)  # to_harvesters_only = true
-		return {
-			"ok": true, "session_started": true, "hit": false,
-			"stack_index": 1, "time_left": encourage_session_window,
-			"cd_remaining": encourage_cooldown
-		}
-	# Session active: check caps and uniqueness
-	if _enc_session_contributors.has(peer_id):
-		return {"ok": false, "err": &"already_contributed", "time_left": _enc_session_expires_at - _clock}
-	if _enc_session_stack_count >= encourage_max_stacks or _enc_session_cum_bonus_pct >= encourage_max_total_bonus_pct:
-		return {"ok": false, "err": &"cap_reached", "time_left": _enc_session_expires_at - _clock}
-	# Apply stack
-	var remaining_pct: float = encourage_max_total_bonus_pct - _enc_session_cum_bonus_pct
-	var apply_pct: float = min(encourage_bonus_pct, remaining_pct)
-	_enc_session_contributors[peer_id] = true
-	_enc_session_stack_count += 1
-	_enc_session_cum_bonus_pct += apply_pct
-	pool_amount += pool_amount * apply_pct
-	_encourage_cd_until[peer_id] = _clock + encourage_cooldown
-	# Broadcast to harvesters only
-	_broadcast_harvest_event(&"harvest.encourage.hit", {
-		"node": String(get_path()),
-		"peer": peer_id,
-		"stack_index": _enc_session_stack_count,
-		"bonus_pct_applied": apply_pct,
-		"total_bonus_pct": _enc_session_cum_bonus_pct,
-		"time_left": max(0.0, _enc_session_expires_at - _clock),
-	}, true)  # to_harvesters_only = true
-	return {
-		"ok": true, "session_started": false, "hit": true,
-		"stack_index": _enc_session_stack_count,
-		"cd_remaining": encourage_cooldown,
-		"time_left": max(0.0, _enc_session_expires_at - _clock)
-	}
 
 
 func _calculate_exp_per_item() -> int:

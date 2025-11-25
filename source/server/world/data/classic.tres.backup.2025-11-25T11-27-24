@@ -14,13 +14,16 @@ equipped_accessory_id = 319
 golds = 103
 inventory = {
 104: {
-"stack": 1
+"stack": 108
 },
 105: {
-"stack": 2
+"stack": 85
+},
+110: {
+"stack": 40
 },
 111: {
-"stack": 1
+"stack": 19
 },
 319: {
 "stack": 1
@@ -32,9 +35,9 @@ experience = 15
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 999.8777313129838
-last_logout_time = 1763231683.303
-last_position = Vector2(304.94138, 239.87413)
+current_energy = 1550.0
+last_logout_time = 1764074821.814
+last_position = Vector2(166.62776, 365.63248)
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -135,34 +138,37 @@ appearance_head_id = "head_d"
 golds = 42
 inventory = {
 7: {
-"stack": 806
+"stack": 905
 },
 9: {
-"stack": 3
+"stack": 39
 },
 11: {
-"stack": 2
+"stack": 17
 },
 33: {
-"stack": 11
+"stack": 80
+},
+39: {
+"stack": 15
 },
 126: {
 "stack": 58
 },
 308: {
-"stack": 8
+"stack": 91
 }
 }
 available_attributes_points = 19
 level = 4
-experience = 2200
+experience = 3215
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 250.0
+current_energy = 66.42151566030957
 selected_title_slug = "apprentice_smith"
-last_logout_time = 1763231689.078
-last_position = Vector2(390.9073, 332.08997)
+last_logout_time = 1764079940.757
+last_position = Vector2(266.97903, 318.76996)
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -173,37 +179,40 @@ character_class = "forager"
 appearance_head_id = "head_d"
 inventory = {
 56: {
-"stack": 908
+"stack": 1041
 },
 64: {
-"stack": 16
+"stack": 58
 },
 71: {
-"stack": 15
+"stack": 72
 },
 79: {
-"stack": 3
+"stack": 14
 },
 82: {
-"stack": 5
+"stack": 27
 },
 86: {
-"stack": 1
+"stack": 8
+},
+92: {
+"stack": 2
 },
 141: {
 "stack": 980
 }
 }
-available_attributes_points = 13
-level = 2
-experience = 3430
+available_attributes_points = 16
+level = 3
+experience = 511
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 150.0
+current_energy = 163.01371200000003
 selected_title_slug = "founder"
-last_logout_time = 1763231710.932
-last_position = Vector2(431.35376, 312.47693)
+last_logout_time = 1764079982.004
+last_position = Vector2(197.1745, 401.07468)
 
 [sub_resource type="Resource" id="Resource_ijlu0"]
 script = ExtResource("1_ni45q")
@@ -341,9 +350,9 @@ account_titles = {
 "crafts_miner": 28,
 "crafts_total": 48,
 "event_founder": 1,
-"harvests_collector": 88,
-"harvests_miner": 10,
-"harvests_trapper": 2,
+"harvests_collector": 207,
+"harvests_miner": 136,
+"harvests_trapper": 145,
 "max_level_collector": 2,
 "max_level_miner": 4
 },
@@ -359,7 +368,7 @@ account_titles = {
 }
 account_switch_cooldowns = {
 "filhodedeus": 1763230194.547,
-"jovee": 1763231689.078,
+"jovee": 1764079982.004,
 "maluco": 1763231188.254
 }
 account_storage = {
