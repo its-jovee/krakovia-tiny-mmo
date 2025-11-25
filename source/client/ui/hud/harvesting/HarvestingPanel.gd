@@ -594,13 +594,13 @@ func _spawn_damage_popup(
 	roll_hit: bool,
 	items: Array
 ) -> void:
-	"""Spawn separate damage and roll popups with different animations"""
+	"""Spawn separate damage and roll popups with stacking"""
 	var panel_node = get_node_or_null("Panel")
 	var panel_width: float = panel_node.size.x if panel_node else 200.0
 	var center_x: float = panel_width / 2.0
 	
 	# =========================================================================
-	# POPUP 1: DAMAGE (left side, rises slower)
+	# POPUP 1: DAMAGE (left side)
 	# =========================================================================
 	var dmg_text: String = "-%.1f" % damage
 	var dmg_color: Color
@@ -610,11 +610,11 @@ func _spawn_damage_popup(
 	match performance:
 		&"perfect":
 			dmg_color = Color(0.4, 1.0, 0.6)  # Bright green
-			dmg_scale = 1.5
+			dmg_scale = 1.4
 			dmg_effect = &"wave"
 		&"good":
 			dmg_color = Color(1.0, 0.95, 0.3)  # Yellow
-			dmg_scale = 1.2
+			dmg_scale = 1.15
 			dmg_effect = &"wave"
 		&"miss":
 			dmg_color = Color(1.0, 0.5, 0.5)  # Red
@@ -625,17 +625,16 @@ func _spawn_damage_popup(
 			dmg_scale = 0.7
 			dmg_effect = &"none"
 	
-	# Spawn damage popup (left side, drifts left)
-	var dmg_x: float = center_x + randf_range(-40, -10)
+	# Spawn damage popup (left side) - CHAOTIC!
 	var dmg_popup = DamagePopupScene.instantiate()
 	dmg_popup.text = dmg_text
 	dmg_popup.popup_color = dmg_color
-	dmg_popup.position = Vector2(dmg_x, -20)
+	dmg_popup.position = Vector2(center_x + randf_range(-70, -20), randf_range(-35, -15))
 	dmg_popup.start_scale = dmg_scale
 	dmg_popup.effect_type = dmg_effect
-	dmg_popup.rise_speed = 35.0  # Slower rise
-	dmg_popup.lifetime = 1.0
-	dmg_popup.drift_direction = -1.0  # Drift left
+	dmg_popup.rise_speed = randf_range(30.0, 50.0)  # Random rise speed
+	dmg_popup.lifetime = randf_range(0.9, 1.3)
+	dmg_popup.drift_direction = randf_range(-1.5, -0.5)  # Drift left
 	add_child(dmg_popup)
 	
 	# =========================================================================
@@ -666,18 +665,19 @@ func _spawn_damage_popup(
 		roll_scale = 1.0
 		roll_effect = &"shake"
 	
-	# Spawn roll popup (right side, drifts right)
-	var roll_x: float = center_x + randf_range(10, 40)
+	# Spawn roll popup (right side) - CHAOTIC!
 	var roll_popup = DamagePopupScene.instantiate()
 	roll_popup.text = roll_text
 	roll_popup.popup_color = roll_color
-	roll_popup.position = Vector2(roll_x, -30)  # Start higher
+	roll_popup.position = Vector2(center_x + randf_range(20, 70), randf_range(-40, -10))
 	roll_popup.start_scale = roll_scale
 	roll_popup.effect_type = roll_effect
-	roll_popup.rise_speed = 55.0  # Faster rise
-	roll_popup.lifetime = 1.4
-	roll_popup.drift_direction = 1.0  # Drift right
+	roll_popup.rise_speed = randf_range(40.0, 65.0)  # Faster rise
+	roll_popup.lifetime = randf_range(1.0, 1.4)
+	roll_popup.drift_direction = randf_range(0.5, 1.5)  # Drift right
 	add_child(roll_popup)
+
+
 
 
 # ============================================================================

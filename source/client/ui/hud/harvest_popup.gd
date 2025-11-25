@@ -5,9 +5,8 @@ extends Control
 @onready var label: Label = $Panel/HBoxContainer/Label
 @onready var exp_label: Label = $Panel/HBoxContainer/ExpLabel
 
-var lifetime: float = 2.5
+var lifetime: float = 2.0
 var elapsed: float = 0.0
-var float_speed: float = 30.0
 
 
 func setup(item_name: String, item_icon: Texture2D, amount: int, exp_amount: int = 0) -> void:
@@ -28,27 +27,26 @@ func setup(item_name: String, item_icon: Texture2D, amount: int, exp_amount: int
 
 
 func _animate_in() -> void:
-	# Fade in and float up animation
+	# Fade in with scale pop
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
 	
 	# Fade in
-	tween.tween_property(self, "modulate:a", 1.0, 0.3)
+	tween.tween_property(self, "modulate:a", 1.0, 0.2)
 	
 	# Scale pop
-	tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.2)
-	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_delay(0.2)
+	scale = Vector2(0.8, 0.8)
+	tween.tween_property(self, "scale", Vector2(1.05, 1.05), 0.15).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_delay(0.15)
 
 
 func _process(delta: float) -> void:
 	elapsed += delta
 	
-	# Float upward
-	position.y -= float_speed * delta
-	
-	# Start fading out after 1.5 seconds
-	if elapsed > 1.5:
-		modulate.a = max(0.0, 1.0 - ((elapsed - 1.5) / 1.0))
+	# Start fading out after showing for a bit
+	if elapsed > 1.2:
+		var fade_progress: float = (elapsed - 1.2) / 0.8
+		modulate.a = max(0.0, 1.0 - fade_progress)
 	
 	# Remove after lifetime
 	if elapsed >= lifetime:

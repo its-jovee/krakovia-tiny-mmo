@@ -11,6 +11,11 @@ var current_exp: int = 0
 var exp_required: int = 100
 var has_opened_guide: bool = false  # Set to true when character is created (triggers guide auto-open)
 
+# Harvest popup queue system
+var _harvest_popup_queue: Array[Dictionary] = []
+var _last_popup_time_ms: int = 0
+const POPUP_MIN_INTERVAL_MS: int = 100  # Minimum 100ms between popups
+
 @onready var menu_overlay: Control = $MenuOverlay
 @onready var close_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 @onready var sub_menu: CanvasLayer = $SubMenu
@@ -129,6 +134,12 @@ func _ready() -> void:
 		_delayed_guide_open.call_deferred()
 	else:
 		print("[Guide] Not a newly created character, skipping auto-open")
+
+
+func _process(_delta: float) -> void:
+	# Process the harvest popup queue
+	_process_popup_queue()
+
 
 func _update_ui_text() -> void:
 	# Update gold display
@@ -343,6 +354,7 @@ func _on_harvest_item_received(data: Dictionary) -> void:
 	if total_items > 0 and exp_gained > 0:
 		exp_per_item = int(float(exp_gained) / float(total_items))
 	
+	# Queue each item for display
 	for item_dict in items:
 		var slug: StringName = item_dict.get("slug", &"")
 		var amount: int = int(item_dict.get("amount", 0))
@@ -351,9 +363,32 @@ func _on_harvest_item_received(data: Dictionary) -> void:
 		var item: Item = ContentRegistryHub.load_by_slug(&"items", slug)
 		if item and amount > 0:
 			var item_exp: int = exp_per_item * amount
-			# Get translated item name using ItemTooltipManager helper
 			var translated_name = ItemTooltipManager._get_translated_item_name(item)
-			_show_harvest_popup(translated_name, item.item_icon, amount, item_exp)
+			_queue_harvest_popup(translated_name, item.item_icon, amount, item_exp)
+
+
+func _queue_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_amount: int) -> void:
+	"""Add a popup to the queue for display"""
+	_harvest_popup_queue.append({
+		"name": item_name,
+		"icon": icon,
+		"amount": amount,
+		"exp": exp_amount
+	})
+
+
+func _process_popup_queue() -> void:
+	"""Process the popup queue - called from _process"""
+	if _harvest_popup_queue.is_empty():
+		return
+	
+	var now_ms: int = Time.get_ticks_msec()
+	
+	# Check if enough time has passed since last popup
+	if now_ms - _last_popup_time_ms >= POPUP_MIN_INTERVAL_MS:
+		var popup_data: Dictionary = _harvest_popup_queue.pop_front()
+		_show_harvest_popup(popup_data["name"], popup_data["icon"], popup_data["amount"], popup_data["exp"])
+		_last_popup_time_ms = now_ms
 
 
 func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_amount: int = 0) -> void:
@@ -371,19 +406,21 @@ func _show_harvest_popup(item_name: String, icon: Texture2D, amount: int, exp_am
 	popup.name = "HarvestPopup_" + str(Time.get_ticks_msec())
 	add_child(popup)
 	
-	# Position popup at top-right of screen, stacking downward
+	# Position popup at top-right of screen
 	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 	var popup_width: float = 240.0
+	var popup_height: float = 50.0
 	var base_x: float = viewport_size.x - popup_width - 20.0  # 20px from right edge
 	var base_y: float = 100.0  # Start from top
 	
-	# Count existing popups to stack them downward
-	var existing_popups: int = 0
+	# Push existing popups down to make room for the new one
 	for child in get_children():
-		if child.name.begins_with("HarvestPopup_"):
-			existing_popups += 1
+		if child.name.begins_with("HarvestPopup_") and child != popup:
+			var tween = create_tween()
+			tween.tween_property(child, "position:y", child.position.y + popup_height + 8.0, 0.12).set_ease(Tween.EASE_OUT)
 	
-	popup.position = Vector2(base_x, base_y + (existing_popups * 55.0))
+	# New popup appears at the top (most recent first)
+	popup.position = Vector2(base_x, base_y)
 	
 	# Setup the popup
 	if popup.has_method("setup"):

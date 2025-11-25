@@ -138,37 +138,37 @@ appearance_head_id = "head_d"
 golds = 42
 inventory = {
 7: {
-"stack": 905
+"stack": 947
 },
 9: {
-"stack": 39
+"stack": 54
 },
 11: {
-"stack": 17
+"stack": 24
 },
 33: {
-"stack": 80
+"stack": 108
 },
 39: {
-"stack": 15
+"stack": 21
 },
 126: {
 "stack": 58
 },
 308: {
-"stack": 91
+"stack": 136
 }
 }
 available_attributes_points = 19
 level = 4
-experience = 3215
+experience = 3645
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 66.42151566030957
+current_energy = 109.70678566031063
 selected_title_slug = "apprentice_smith"
-last_logout_time = 1764079940.757
-last_position = Vector2(266.97903, 318.76996)
+last_logout_time = 1764086463.143
+last_position = Vector2(260.56024, 375.53732)
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -351,7 +351,7 @@ account_titles = {
 "crafts_total": 48,
 "event_founder": 1,
 "harvests_collector": 207,
-"harvests_miner": 136,
+"harvests_miner": 181,
 "harvests_trapper": 145,
 "max_level_collector": 2,
 "max_level_miner": 4
