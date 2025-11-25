@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -32,9 +32,9 @@ experience = 15
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 971.6858753129818
-last_logout_time = 1763227815.297
-last_position = Vector2(808.58386, 482.3684)
+current_energy = 999.8777313129838
+last_logout_time = 1763231683.303
+last_position = Vector2(304.94138, 239.87413)
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -161,8 +161,8 @@ server_roles = {
 }
 current_energy = 250.0
 selected_title_slug = "apprentice_smith"
-last_logout_time = 1763227784.217
-last_position = Vector2(607.74744, 354.24817)
+last_logout_time = 1763231689.078
+last_position = Vector2(390.9073, 332.08997)
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -202,8 +202,8 @@ server_roles = {
 }
 current_energy = 150.0
 selected_title_slug = "founder"
-last_logout_time = 1763227851.092
-last_position = Vector2(559.75354, 302.64478)
+last_logout_time = 1763231710.932
+last_position = Vector2(431.35376, 312.47693)
 
 [sub_resource type="Resource" id="Resource_ijlu0"]
 script = ExtResource("1_ni45q")
@@ -239,8 +239,64 @@ inventory = {
 }
 available_attributes_points = 10
 current_energy = 100.0
-last_logout_time = 1763229067.844
-last_position = Vector2(370.91876, 329.91943)
+last_logout_time = 1763230194.547
+last_position = Vector2(503.13705, 309.69638)
+
+[sub_resource type="Resource" id="Resource_r72w2"]
+script = ExtResource("1_ni45q")
+player_id = 11
+account_name = "filhodedeus"
+display_name = "lolasdsad"
+appearance_head_id = "head_b"
+golds = 100
+available_attributes_points = 10
+current_energy = 100.0
+last_logout_time = 1763230218.326
+last_position = Vector2(503.74725, 310.66403)
+
+[sub_resource type="Resource" id="Resource_hl36p"]
+script = ExtResource("1_ni45q")
+player_id = 12
+account_name = "maluco"
+display_name = "maluco1"
+golds = 100
+inventory = {
+56: {
+"stack": 1
+},
+71: {
+"stack": 1
+},
+86: {
+"stack": 1
+}
+}
+available_attributes_points = 10
+current_energy = 100.0
+last_logout_time = 1763231207.223
+last_position = Vector2(287.7333, 282.9129)
+
+[sub_resource type="Resource" id="Resource_jspr0"]
+script = ExtResource("1_ni45q")
+player_id = 13
+account_name = "maluco"
+display_name = "maluco2"
+character_class = "forager"
+appearance_head_id = "head_c"
+golds = 100
+inventory = {
+56: {
+"stack": 5
+},
+64: {
+"stack": 5
+}
+}
+available_attributes_points = 10
+experience = 65
+current_energy = 100.0
+last_logout_time = 1763231534.368
+last_position = Vector2(339.6359, 202.95854)
 
 [resource]
 script = ExtResource("2_83xu3")
@@ -249,8 +305,9 @@ accounts = {
 "Mafra1": PackedInt32Array(3),
 "Mafra2": PackedInt32Array(4),
 "cidadao": PackedInt32Array(6),
-"filhodedeus": PackedInt32Array(9, 10),
+"filhodedeus": PackedInt32Array(9, 10, 11),
 "jovee": PackedInt32Array(1, 7, 8),
+"maluco": PackedInt32Array(12, 13),
 "teste": PackedInt32Array(5)
 }
 players = {
@@ -263,9 +320,12 @@ players = {
 7: SubResource("Resource_vidub"),
 8: SubResource("Resource_eyapk"),
 9: SubResource("Resource_ijlu0"),
-10: SubResource("Resource_dn36l")
+10: SubResource("Resource_dn36l"),
+11: SubResource("Resource_r72w2"),
+12: SubResource("Resource_hl36p"),
+13: SubResource("Resource_jspr0")
 }
-next_player_id = 10
+next_player_id = 13
 account_titles = {
 "filhodedeus": {
 "progress": {
@@ -288,12 +348,21 @@ account_titles = {
 "max_level_miner": 4
 },
 "unlocked": [&"apprentice_smith", &"apprentice_collector", &"founder"]
+},
+"maluco": {
+"progress": {
+"event_founder": 1,
+"harvests_collector": 13
+},
+"unlocked": [&"founder"]
 }
 }
 account_switch_cooldowns = {
-"filhodedeus": 1763229063.624,
-"jovee": 1763227815.297
+"filhodedeus": 1763230194.547,
+"jovee": 1763231689.078,
+"maluco": 1763231188.254
 }
 account_storage = {
-"filhodedeus": {}
+"filhodedeus": {},
+"maluco": {}
 }

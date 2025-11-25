@@ -24,6 +24,9 @@ var is_on_cooldown: bool = false
 @onready var cooldown_overlay: Panel = $CooldownOverlay
 @onready var cooldown_label: Label = $CooldownOverlay/CooldownLabel
 
+# Character creation modal reference (set by HUD)
+var character_creation_modal = null
+
 
 func _ready() -> void:
 	dropdown_panel.hide()
@@ -214,11 +217,30 @@ func _on_character_switch_complete_portrait(data: Dictionary) -> void:
 	_update_display()
 
 
+func set_character_creation_modal(modal) -> void:
+	"""Set the character creation modal reference (called by HUD)"""
+	character_creation_modal = modal
+	
+	# Connect to the character_created signal
+	if character_creation_modal and not character_creation_modal.is_connected("character_created", _on_character_created):
+		character_creation_modal.character_created.connect(_on_character_created)
+
+
 func _on_create_character_pressed() -> void:
 	dropdown_panel.hide()
-	# TODO: Trigger character creation flow
-	# This would require integrating with the gateway's character creation UI
-	print("[CharacterPortrait] Create character pressed - not yet implemented")
+	print("[CharacterPortrait] Opening character creation modal")
+	
+	if not character_creation_modal:
+		print("[CharacterPortrait] ERROR: Character creation modal not set!")
+		return
+	
+	character_creation_modal.show_modal()
+
+
+func _on_character_created() -> void:
+	"""Called when a new character is created - refresh the character list"""
+	print("[CharacterPortrait] Character created - refreshing list")
+	_request_character_list()
 
 
 func start_cooldown(duration: float) -> void:

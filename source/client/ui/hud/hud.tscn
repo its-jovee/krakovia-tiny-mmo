@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dqt8fnt1l33eu"]
+[gd_scene load_steps=21 format=3 uid="uid://dqt8fnt1l33eu"]
 
 [ext_resource type="Script" uid="uid://dshitaaapbs6x" path="res://source/client/ui/hud/hud.gd" id="1_rchld"]
 [ext_resource type="PackedScene" uid="uid://rncsatpcsbm" path="res://source/client/ui/hud/health_bar/health_bar.tscn" id="2_klco5"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b5g4rf24ako53" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb12.png" id="11_dxemd"]
 [ext_resource type="Texture2D" uid="uid://d4sfpo45g47a" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb13.png" id="11_kuylb"]
 [ext_resource type="Texture2D" uid="uid://wykq6t7doo8e" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb14.png" id="11_ntruf"]
+[ext_resource type="PackedScene" uid="uid://bp5vk2b8a1234" path="res://source/client/ui/hud/character_creation_modal.tscn" id="18_charcreate"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dxemd"]
 
@@ -298,6 +299,9 @@ layer = 10
 
 [node name="GuideModal" parent="." instance=ExtResource("5_guide")]
 visible = false
+
+[node name="CharacterCreationModal" parent="." instance=ExtResource("18_charcreate")]
+layer = 15
 
 [connection signal="pressed" from="MenuButton" to="." method="_on_overlay_menu_button_pressed"]
 [connection signal="pressed" from="LevelupButton" to="." method="_on_levelup_button_pressed"]

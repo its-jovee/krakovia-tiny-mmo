@@ -27,12 +27,18 @@ var has_opened_guide: bool = false  # Set to true when character is created (tri
 @onready var guide_button: Button = $HBoxContainer/GuideButton
 @onready var titles_button: Button = $HBoxContainer/TitlesButton
 @onready var guide_modal: Control = $GuideModal
+@onready var character_creation_modal: Control = $CharacterCreationModal
+@onready var character_portrait: Control = $HBoxContainer2/CharacterPortrait
 
 # Menu overlay buttons
 @onready var settings_button: Button = $MenuOverlay/VBoxContainer/SettingsButton
 @onready var close_menu_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 
 func _ready() -> void:
+	# Wire up character portrait with character creation modal
+	if character_portrait and character_creation_modal:
+		character_portrait.set_character_creation_modal(character_creation_modal)
+	
 	# Connect the new HBoxContainer buttons
 	if inventory_button:
 		inventory_button.pressed.connect(_on_inventory_button_pressed)
@@ -84,6 +90,11 @@ func _ready() -> void:
 	var storage_menu = preload("res://source/client/ui/storage/storage_menu.tscn").instantiate()
 	sub_menu.add_child(storage_menu)
 	menus["storage"] = storage_menu
+	
+	# Add leaderboard menu
+	var leaderboard_menu = preload("res://source/client/ui/leaderboard/leaderboard_menu.tscn").instantiate()
+	sub_menu.add_child(leaderboard_menu)
+	menus["leaderboard"] = leaderboard_menu
 	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)

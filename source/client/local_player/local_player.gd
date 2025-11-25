@@ -22,6 +22,10 @@ var max_zoom: float = 4.0    # Maximum zoom level (same as slider)
 var target_zoom: float = 1.0 # Target zoom for smooth transitions
 var zoom_transition_speed: float = 10.0 # Speed of zoom transitions
 
+# Cached menu references for performance
+var _leaderboard_menu: Control = null
+var _quest_board_menu: Control = null
+
 @onready var mouse: Node2D = $MouseComponent
 
 func _ready() -> void:
@@ -157,6 +161,8 @@ func adjust_zoom(zoom_delta: float) -> void:
 		return
 	if _is_quest_board_open():
 		return
+	if _is_leaderboard_open():
+		return
 	
 	# Update target zoom
 	target_zoom = clampf(target_zoom + zoom_delta, min_zoom, max_zoom)
@@ -237,12 +243,25 @@ func _is_crafting_view_open() -> bool:
 
 
 func _is_quest_board_open() -> bool:
-	# Check if the quest board menu is open
-	var quest_board_menu = get_tree().get_root().find_child("QuestBoardMenu", true, false)
-	if quest_board_menu == null:
+	# Cache the reference if not already cached
+	if _quest_board_menu == null or not is_instance_valid(_quest_board_menu):
+		_quest_board_menu = get_tree().get_root().find_child("QuestBoardMenu", true, false)
+	
+	if _quest_board_menu == null:
 		return false
 	
-	return quest_board_menu.is_visible_in_tree()
+	return _quest_board_menu.is_visible_in_tree()
+
+
+func _is_leaderboard_open() -> bool:
+	# Cache the reference if not already cached
+	if _leaderboard_menu == null or not is_instance_valid(_leaderboard_menu):
+		_leaderboard_menu = get_tree().get_root().find_child("LeaderboardMenu", true, false)
+	
+	if _leaderboard_menu == null:
+		return false
+	
+	return _leaderboard_menu.is_visible_in_tree()
 
 
 func _set_character_class(new_class: String):

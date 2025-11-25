@@ -87,6 +87,14 @@ func _ready() -> void:
 	var title_tracker = TitleProgressTracker.new()
 	title_tracker.name = "TitleProgressTracker"
 	add_child(title_tracker, true)
+	
+	# Add LeaderboardManager
+	var LeaderboardManagerClass = load("res://source/server/world/components/leaderboard_manager.gd")
+	if LeaderboardManagerClass:
+		var leaderboard_mgr = LeaderboardManagerClass.new()
+		leaderboard_mgr.name = "LeaderboardManager"
+		leaderboard_mgr.world_server = world_server
+		add_child(leaderboard_mgr, true)
 
 
 func load_map(map_path: String) -> void:
@@ -145,6 +153,12 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"storage_chest.status", {"in_storage_area": true})
+	# Check for LeaderboardArea by name since runtime type checking is tricky
+	if interaction_area.name == "LeaderboardArea":
+		# Notify client about leaderboard status
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"leaderboard.status", {"in_leaderboard": true})
 
 func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
 	if interaction_area is MarketArea:
@@ -162,6 +176,12 @@ func _on_player_exited_interaction_area(player: Player, interaction_area: Intera
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"storage_chest.status", {"in_storage_area": false})
+	# Check for LeaderboardArea by name since runtime type checking is tricky
+	if interaction_area.name == "LeaderboardArea":
+		# Notify client that they left leaderboard
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:  # Only notify actual connected clients
+			data_push.rpc_id(peer_id, &"leaderboard.status", {"in_leaderboard": false})
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func ready_to_enter_instance() -> void:
