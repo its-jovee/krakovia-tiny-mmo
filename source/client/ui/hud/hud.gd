@@ -101,11 +101,20 @@ func _ready() -> void:
 	sub_menu.add_child(leaderboard_menu)
 	menus["leaderboard"] = leaderboard_menu
 	
+	# Add market browse UI (for buying from NPCs)
+	var market_browse_menu = preload("res://source/client/ui/market/market_browse_ui.tscn").instantiate()
+	market_browse_menu.visibility_changed.connect(_on_submenu_visiblity_changed.bind(market_browse_menu))
+	sub_menu.add_child(market_browse_menu)
+	menus[&"market_browse"] = market_browse_menu
+	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	
 	# Subscribe to market status updates
 	InstanceClient.subscribe(&"market.status", _on_market_status_update)
+	
+	# Subscribe to vendor status updates (for NPC vendor interaction)
+	InstanceClient.subscribe(&"vendor.status", _on_vendor_status_update)
 	
 	# Subscribe to storage chest status updates
 	InstanceClient.subscribe(&"storage_chest.status", _on_storage_chest_status_update)
@@ -175,6 +184,22 @@ func _on_market_status_update(data: Dictionary) -> void:
 	print("HUD received market status: ", in_market_area)
 	set_market_status(in_market_area)
 
+
+func _on_vendor_status_update(data: Dictionary) -> void:
+	var in_vendor = data.get("in_vendor", false)
+	var vendor_info = data.get("vendor", {})
+	var vendor_name = vendor_info.get("name", "Vendor")
+	print("[HUD] Vendor status: in_vendor=%s, vendor=%s" % [in_vendor, vendor_name])
+	
+	if in_vendor:
+		# Auto-open the vendor UI when entering a vendor area
+		open_vendor_ui()
+	else:
+		# Close vendor UI when leaving vendor area
+		if menus.has(&"market_browse"):
+			menus[&"market_browse"].visible = false
+
+
 func set_market_status(in_market_area: bool) -> void:
 	in_market = in_market_area
 	# Update UI to show market status if needed
@@ -183,9 +208,29 @@ func set_market_status(in_market_area: bool) -> void:
 			gold_label.modulate = Color.GREEN
 		else:
 			gold_label.modulate = Color.WHITE
+	
+	# Auto-open market browse when entering market (optional behavior)
+	# Uncomment the line below to enable auto-open:
+	# if in_market:
+	# 	open_market_browse()
 
 func get_market_status() -> bool:
 	return in_market
+
+
+func open_market_browse() -> void:
+	"""Legacy - redirects to open_vendor_ui"""
+	open_vendor_ui()
+
+
+func open_vendor_ui() -> void:
+	"""Open vendor UI for buying/selling items"""
+	if menus.has(&"market_browse"):
+		var vendor_menu = menus[&"market_browse"]
+		if vendor_menu.has_method("open_vendor"):
+			vendor_menu.open_vendor()
+		elif vendor_menu.has_method("open_market"):
+			vendor_menu.open_market()  # Fallback for old method name
 
 func _on_storage_chest_status_update(data: Dictionary) -> void:
 	var in_storage_area = data.get("in_storage_area", false)

@@ -3,8 +3,12 @@ extends Node
 
 
 var database_path: String
+var market_data_path: String
+var vendors_data_path: String
 
 var player_data: WorldPlayerData
+var market_data: MarketData
+var vendors_data: Dictionary = {}  # {vendor_id: VendorData}
 
 var auto_save_timer: Timer
 var save_warning_timer: Timer
@@ -19,17 +23,26 @@ var config_file: ConfigFile
 func start_database(world_info: Dictionary) -> void:
 	configure_database(world_info)
 	load_world_database()
+	load_market_data()
+	load_vendors_data()
 	setup_auto_save()
 
 
 func configure_database(world_info: Dictionary) -> void:
+	var base_path: String
 	if OS.has_feature("editor"):
-		database_path = "res://source/server/world/data/"
+		base_path = "res://source/server/world/data/"
 	else:
-		database_path = "."
-	database_path += str(world_info["name"] + ".tres").to_lower()
+		base_path = "."
+	
+	var world_name = str(world_info["name"]).to_lower()
+	database_path = base_path + world_name + ".tres"
+	market_data_path = base_path + world_name + "_market.tres"
+	vendors_data_path = base_path + world_name + "_vendors.tres"
 	
 	print("[WorldDatabase] Using database path: %s" % database_path)
+	print("[WorldDatabase] Using market data path: %s" % market_data_path)
+	print("[WorldDatabase] Using vendors data path: %s" % vendors_data_path)
 	
 	# Load configuration settings
 	_load_config()
@@ -85,6 +98,95 @@ func load_world_database() -> void:
 		print("[WorldDatabase] No existing database found, created new WorldPlayerData")
 
 
+func load_market_data() -> void:
+	"""Load market data (supply/demand state) for dynamic pricing"""
+	if ResourceLoader.exists(market_data_path, "MarketData"):
+		if OS.has_feature("editor"):
+			market_data = ResourceLoader.load(market_data_path, "MarketData", ResourceLoader.CACHE_MODE_IGNORE)
+		else:
+			market_data = ResourceLoader.load(market_data_path, "MarketData")
+		print("[WorldDatabase] Loaded market data - %d items with supply data" % market_data.item_supply.size())
+		
+		# Apply time-based decay on load
+		market_data.apply_decay()
+	else:
+		market_data = MarketData.new()
+		print("[WorldDatabase] No existing market data found, created new MarketData")
+
+
+func save_market_data() -> void:
+	"""Save market data to disk"""
+	if not market_data:
+		return
+	
+	var error: Error = ResourceSaver.save(market_data, market_data_path)
+	if error != OK:
+		printerr("[WorldDatabase] ERROR: Failed to save market data: %s" % error_string(error))
+
+
+func load_vendors_data() -> void:
+	"""Load vendor data (per-vendor supply/demand state) for regional pricing"""
+	if ResourceLoader.exists(vendors_data_path):
+		var loaded_resource = ResourceLoader.load(vendors_data_path, "", ResourceLoader.CACHE_MODE_IGNORE)
+		if loaded_resource is Resource:
+			# The resource stores vendors_data as an exported Dictionary
+			var vendors_res = loaded_resource as Resource
+			if vendors_res.has_method("get") or "vendors" in vendors_res:
+				vendors_data = vendors_res.get("vendors") if vendors_res.get("vendors") else {}
+			else:
+				# Try to load from the dictionary property directly
+				for prop in vendors_res.get_property_list():
+					if prop["name"] == "vendors":
+						vendors_data = vendors_res.vendors
+						break
+		print("[WorldDatabase] Loaded vendors data - %d vendors" % vendors_data.size())
+		
+		# Apply decay to all vendors on load
+		for vendor_id in vendors_data.keys():
+			var vendor: VendorData = vendors_data[vendor_id]
+			if vendor:
+				vendor.apply_decay()
+	else:
+		vendors_data = {}
+		print("[WorldDatabase] No existing vendors data found, starting fresh")
+
+
+func save_vendors_data() -> void:
+	"""Save all vendor data to disk"""
+	if vendors_data.is_empty():
+		return
+	
+	# Create a wrapper resource to store the vendors dictionary
+	var wrapper = VendorsDataWrapper.new()
+	wrapper.vendors = vendors_data
+	
+	var error: Error = ResourceSaver.save(wrapper, vendors_data_path)
+	if error != OK:
+		printerr("[WorldDatabase] ERROR: Failed to save vendors data: %s" % error_string(error))
+	else:
+		print("[WorldDatabase] Saved vendors data - %d vendors" % vendors_data.size())
+
+
+func get_vendor_data(vendor_id: String) -> VendorData:
+	"""Get or create vendor data for a specific vendor"""
+	if vendors_data.has(vendor_id):
+		return vendors_data[vendor_id]
+	
+	# Create new vendor data
+	var vendor = VendorData.new()
+	vendor.vendor_id = vendor_id
+	vendors_data[vendor_id] = vendor
+	return vendor
+
+
+func register_vendor(vendor_id: String, vendor_name: String, item_catalog: Array[int]) -> VendorData:
+	"""Register a vendor with initial configuration"""
+	var vendor = get_vendor_data(vendor_id)
+	vendor.vendor_name = vendor_name
+	vendor.item_catalog = item_catalog
+	return vendor
+
+
 func setup_auto_save() -> void:
 	# Auto-save timer - saves every 30 seconds
 	auto_save_timer = Timer.new()
@@ -108,6 +210,19 @@ func _send_save_warning() -> void:
 
 func _auto_save() -> void:
 	save_world_database()
+	save_market_data()
+	save_vendors_data()
+	
+	# Apply market price decay periodically (for global market)
+	if market_data:
+		market_data.apply_decay()
+	
+	# Apply decay to all vendors
+	for vendor_id in vendors_data.keys():
+		var vendor: VendorData = vendors_data[vendor_id]
+		if vendor:
+			vendor.apply_decay()
+	
 	#send_system_message("✅ World data saved successfully!")
 
 
@@ -384,3 +499,5 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		print("[WorldDatabase] Server closing, performing final save...")
 		save_world_database()
+		save_market_data()
+		save_vendors_data()

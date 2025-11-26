@@ -124,6 +124,9 @@ func load_map(map_path: String) -> void:
 		if harvest_manager:
 			harvest_manager.reindex_existing()
 		
+		# Initialize vendor data for all vendors in the map
+		_initialize_vendors()
+		
 		# Initialize Halloween Monster if present
 		_initialize_halloween_monster()
 		)
@@ -143,6 +146,8 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"market.status", {"in_market": true})
+			# Also push current market prices for dynamic pricing display
+			_push_market_prices(peer_id, interaction_area as MarketArea)
 	if interaction_area is QuestBoardArea:
 		# Notify client about quest board status
 		var peer_id = _get_peer_id_for_player(player)
@@ -159,6 +164,16 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"leaderboard.status", {"in_leaderboard": true})
+	if interaction_area is VendorArea:
+		# Notify client about vendor - this auto-opens the vendor UI
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:
+			var vendor = interaction_area as VendorArea
+			print("[ServerInstance] Player %d entered VendorArea: %s (%s)" % [peer_id, vendor.vendor_name, vendor.vendor_id])
+			data_push.rpc_id(peer_id, &"vendor.status", {
+				"in_vendor": true,
+				"vendor": vendor.get_vendor_info()
+			})
 
 func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
 	if interaction_area is MarketArea:
@@ -182,6 +197,58 @@ func _on_player_exited_interaction_area(player: Player, interaction_area: Intera
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:  # Only notify actual connected clients
 			data_push.rpc_id(peer_id, &"leaderboard.status", {"in_leaderboard": false})
+	if interaction_area is VendorArea:
+		# Notify client that they left vendor area
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:
+			data_push.rpc_id(peer_id, &"vendor.status", {"in_vendor": false})
+
+
+func _push_market_prices(peer_id: int, market: MarketArea) -> void:
+	"""Push current market prices and supply levels to client for display"""
+	var market_data = _get_market_data()
+	if market_data == null:
+		return
+	
+	# Get active supply levels (items with non-equilibrium prices)
+	var supply_levels = market_data.get_active_supply_levels()
+	
+	# Build price multipliers dictionary for client
+	var price_multipliers = {}
+	for item_id in supply_levels.keys():
+		price_multipliers[item_id] = market_data.get_price_multiplier(item_id)
+	
+	data_push.rpc_id(peer_id, &"market.prices", {
+		"market_name": market.market_name,
+		"supply_levels": supply_levels,
+		"price_multipliers": price_multipliers
+	})
+
+
+func _push_market_prices_global(peer_id: int) -> void:
+	"""Push current market prices without a specific market reference (for vendors)"""
+	var market_data = _get_market_data()
+	if market_data == null:
+		return
+	
+	var supply_levels = market_data.get_active_supply_levels()
+	var price_multipliers = {}
+	for item_id in supply_levels.keys():
+		price_multipliers[item_id] = market_data.get_price_multiplier(item_id)
+	
+	data_push.rpc_id(peer_id, &"market.prices", {
+		"market_name": "Market",
+		"supply_levels": supply_levels,
+		"price_multipliers": price_multipliers
+	})
+
+
+func _get_market_data() -> MarketData:
+	"""Get MarketData from WorldDatabase"""
+	if world_server and world_server.database:
+		return world_server.database.market_data
+	return null
+
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func ready_to_enter_instance() -> void:
@@ -505,6 +572,29 @@ func _initialize_halloween_monster() -> void:
 	# Initialize the monster (static, no movement needed)
 	monster.initialize(self)
 	print("[ServerInstance] ✅ Halloween Monster initialized as static hazard")
+
+
+func _initialize_vendors() -> void:
+	"""Initialize all VendorArea nodes with their persistent data"""
+	if not world_server or not world_server.database:
+		return
+	
+	var vendors = instance_map.find_children("*", "VendorArea", true, false)
+	print("[ServerInstance] Initializing %d vendor(s)..." % vendors.size())
+	
+	for vendor_node in vendors:
+		if vendor_node is VendorArea:
+			var vendor = vendor_node as VendorArea
+			if vendor.vendor_id.is_empty():
+				push_warning("[ServerInstance] VendorArea '%s' has no vendor_id! Generating one." % vendor.name)
+				vendor.vendor_id = "vendor_%s_%d" % [vendor.name.to_lower(), vendor.get_instance_id()]
+			
+			vendor.initialize_vendor_data(world_server.database)
+			print("[ServerInstance] ✅ Vendor '%s' (%s) initialized - %d items" % [
+				vendor.vendor_name, 
+				vendor.vendor_id, 
+				vendor.item_catalog.size()
+			])
 
 
 func _get_peer_id_for_player(player: Player) -> int:

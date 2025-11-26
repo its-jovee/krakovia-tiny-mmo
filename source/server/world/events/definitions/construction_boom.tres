@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "construction_boom"
+title = "Construction Boom!"
+description = "New buildings going up everywhere! Building materials in high demand."
+icon = "🏗️"
+affected_items = {
+12: 0.5,
+10: 0.5,
+11: 0.3,
+8: 0.3
+}
+vendor_type_multipliers = {
+"blacksmith": 1.3,
+"general": 1.2
+}
+duration_minutes = 30
+selection_weight = 1.0
+

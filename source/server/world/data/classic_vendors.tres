@@ -1,0 +1,225 @@
+[gd_resource type="Resource" script_class="VendorsDataWrapper" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/data/vendors_data_wrapper.gd" id="1_d44kn"]
+[ext_resource type="Script" path="res://source/server/world/data/vendor_data.gd" id="2_8yaue"]
+
+[sub_resource type="Resource" id="Resource_n875h"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_blacksmith"
+vendor_name = "Blacksmith Gorm"
+vendor_icon = "⚒️"
+item_catalog = Array[int]([24, 25, 128, 129, 130, 131, 186, 187, 191, 192, 193, 194, 195, 134, 135, 136, 137, 303, 304, 305])
+buy_multiplier = 0.75
+sell_multiplier = 1.25
+stock = {
+24: 19,
+25: 10,
+28: 10,
+128: 10,
+129: 10,
+130: 10,
+131: 10,
+134: 10,
+135: 10,
+136: 10,
+137: 10,
+186: 10,
+187: 10,
+191: 10,
+192: 10,
+193: 10,
+194: 10,
+195: 10,
+303: 10,
+304: 10,
+305: 10
+}
+
+[sub_resource type="Resource" id="Resource_o6pyv"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_carpenter"
+vendor_name = "Oakley the Builder"
+vendor_icon = "🪵"
+item_catalog = Array[int]([141, 142, 143, 144, 294, 295, 296, 297, 298, 299, 300, 26, 145, 146, 147, 312, 176, 177, 233, 234, 235, 236, 237, 252])
+stock = {
+26: 10,
+34: 10,
+35: 10,
+36: 10,
+37: 10,
+38: 10,
+141: 10,
+142: 10,
+143: 10,
+144: 10,
+145: 10,
+146: 10,
+147: 10,
+176: 10,
+177: 10,
+233: 10,
+234: 10,
+235: 10,
+236: 10,
+237: 10,
+252: 10,
+294: 10,
+295: 10,
+296: 10,
+297: 10,
+298: 10,
+299: 10,
+300: 10,
+312: 10
+}
+
+[sub_resource type="Resource" id="Resource_6pxeu"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_general"
+vendor_name = "Old Mercer"
+item_catalog = Array[int]([201, 202, 203, 204, 205, 206, 254, 207, 208, 209, 210, 211, 212, 258, 213, 214, 310, 215, 216, 217, 218, 219, 220, 148, 149, 150, 151, 152, 153, 154, 155, 309, 156, 157, 158, 159, 160, 161, 162, 27, 180, 278, 279, 281])
+buy_multiplier = 0.65
+sell_multiplier = 1.35
+stock = {
+27: 1,
+39: 10,
+40: 10,
+41: 10,
+42: 10,
+43: 10,
+148: 10,
+149: 10,
+150: 10,
+151: 10,
+152: 10,
+153: 10,
+154: 10,
+155: 10,
+156: 10,
+157: 10,
+158: 10,
+159: 10,
+160: 10,
+161: 10,
+162: 10,
+180: 10,
+201: 10,
+202: 10,
+203: 10,
+204: 10,
+205: 10,
+206: 10,
+207: 10,
+208: 10,
+209: 10,
+210: 10,
+211: 10,
+212: 10,
+213: 2,
+214: 10,
+215: 10,
+216: 10,
+217: 10,
+218: 10,
+219: 18,
+220: 10,
+254: 10,
+258: 10,
+278: 10,
+279: 10,
+281: 10,
+309: 10,
+310: 10
+}
+
+[sub_resource type="Resource" id="Resource_8pqgd"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_grocer"
+vendor_name = "Farmer Bramble"
+vendor_icon = "🌾"
+item_catalog = Array[int]([164, 165, 166, 168, 169, 170, 221, 222, 223, 224, 248, 249, 167, 163, 171, 20, 313])
+buy_multiplier = 0.65
+stock = {
+20: 10,
+163: 10,
+164: 10,
+165: 10,
+166: 10,
+167: 10,
+168: 10,
+169: 10,
+170: 10,
+171: 10,
+221: 10,
+222: 10,
+223: 10,
+224: 10,
+248: 10,
+249: 10,
+313: 10
+}
+
+[sub_resource type="Resource" id="Resource_lel5i"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_herbalist"
+vendor_name = "Dr. Willowroot"
+vendor_icon = "🌿"
+item_catalog = Array[int]([1, 197, 198, 199, 225, 226, 253, 275, 196, 200, 251])
+sell_multiplier = 1.35
+stock = {
+1: 10,
+196: 10,
+197: 10,
+198: 10,
+199: 10,
+200: 10,
+225: 10,
+226: 10,
+251: 10,
+253: 10,
+275: 10
+}
+
+[sub_resource type="Resource" id="Resource_wfw3v"]
+script = ExtResource("2_8yaue")
+vendor_id = "town_jeweler"
+vendor_name = "Gemma Sparkle"
+vendor_icon = "💎"
+item_catalog = Array[int]([2, 227, 228, 261, 255, 138, 139, 140, 311, 229, 230, 231, 232, 239, 271])
+buy_multiplier = 0.6
+sell_multiplier = 1.5
+stock = {
+2: 10,
+44: 10,
+45: 10,
+46: 10,
+47: 10,
+48: 10,
+49: 10,
+50: 10,
+138: 10,
+139: 10,
+140: 10,
+227: 10,
+228: 10,
+229: 10,
+230: 10,
+231: 10,
+232: 10,
+239: 10,
+255: 10,
+261: 10,
+271: 10,
+311: 10
+}
+
+[resource]
+script = ExtResource("1_d44kn")
+vendors = {
+"town_blacksmith": SubResource("Resource_n875h"),
+"town_carpenter": SubResource("Resource_o6pyv"),
+"town_general": SubResource("Resource_6pxeu"),
+"town_grocer": SubResource("Resource_8pqgd"),
+"town_herbalist": SubResource("Resource_lel5i"),
+"town_jeweler": SubResource("Resource_wfw3v")
+}

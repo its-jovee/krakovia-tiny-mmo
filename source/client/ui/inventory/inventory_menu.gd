@@ -33,9 +33,6 @@ var trade_quantity_max_button: Button = null
 var selected_trade_item_id: int = -1
 var selected_trade_item_stack: int = 0
 
-# Market/sell variables
-var in_market: bool = false
-
 # Gold tracking
 var current_gold: int = 0
 
@@ -81,11 +78,6 @@ const LEVEL_UP_POPUP_SCENE = preload("res://source/client/ui/hud/level_up_popup.
 @onready var player_inv_grid: GridContainer = $TradeView/Screen/HBoxContainer/PlayerInv/InventoryGrid
 @onready var close_button: Button = $CloseButton
 
-# Market/sell @onready references
-@onready var sell_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellButton
-@onready var sell_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellPriceLabel
-@onready var sell_all_button: Button = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellAllButton
-@onready var sell_all_price_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/SellAllPriceLabel
 
 # Gold display @onready references
 @onready var equipment_gold_label: Label = $EquipmentView/HBoxContainer/VBoxContainer2/GoldDisplay/Label
@@ -135,10 +127,6 @@ func _ready() -> void:
 	InstanceClient.subscribe(&"trade.complete", _on_trade_complete)
 	InstanceClient.subscribe(&"trade.cancel", _on_trade_cancel)
 	
-	# Subscribe to market status updates
-	print("Subscribing to market.status signal")
-	InstanceClient.subscribe(&"market.status", _on_market_status_update)
-	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	
@@ -156,12 +144,6 @@ func _ready() -> void:
 	# If local player already exists, set it up immediately
 	if Events.local_player:
 		_on_local_player_ready(Events.local_player)
-	
-	# Connect sell button
-	if sell_button:
-		sell_button.pressed.connect(_on_sell_button_pressed)
-	if sell_all_button:
-		sell_all_button.pressed.connect(_on_sell_all_button_pressed)
 	
 	# Connect tab buttons
 	var inventory_tabs = $InventoryTabs
@@ -241,164 +223,15 @@ func _process(delta: float) -> void:
 
 
 func _on_visibility_changed() -> void:
-	print("Inventory menu visibility changed: ", is_visible_in_tree())
 	if is_visible_in_tree():
 		InstanceClient.current.request_data(&"inventory.get", fill_inventory)
-		# Request fresh gold amount when opening inventory
 		InstanceClient.current.request_data(&"gold.get", _on_gold_received)
-		# Always sync market status from HUD when inventory becomes visible
-		_sync_market_status_from_hud()
 		
 		# If we have an active trade session when becoming visible, show TradeView
-		# Note: _populate_trade_inventory() will be called in fill_inventory() after data arrives
 		if trade_session_id != -1:
 			equipment_view.hide()
 			materials_view.hide()
 			trade_view.show()
-
-func _sync_market_status_from_hud() -> void:
-	# Try to find HUD through the UI scene structure
-	var ui = get_viewport().get_node_or_null("UI")
-	var hud = null
-	if ui:
-		hud = ui.get_node_or_null("HUD")
-	
-	print("UI node found: ", ui != null)
-	print("HUD node found: ", hud != null)
-	if hud:
-		print("HUD has get_market_status method: ", hud.has_method("get_market_status"))
-		if hud.has_method("get_market_status"):
-			var hud_market_status = hud.get_market_status()
-			print("HUD market status: ", hud_market_status)
-			in_market = hud_market_status
-			print("Inventory synced market status from HUD: ", in_market)
-			_update_sell_ui()
-		else:
-			print("HUD does not have get_market_status method")
-	else:
-		print("HUD node not found")
-
-func _on_market_status_update(data: Dictionary) -> void:
-	print("Inventory received market status signal: ", data)
-	in_market = data.get("in_market", false)
-	print("Inventory received market status: ", in_market)
-	_update_sell_ui()
-
-func _update_sell_ui() -> void:
-	if not _has_sell_ui_elements():
-		return
-	
-	var should_show_sell_ui = _can_sell_item()
-	_set_sell_ui_visibility(should_show_sell_ui)
-	
-	if should_show_sell_ui:
-		_update_sell_prices()
-
-func _on_sell_button_pressed() -> void:
-	if not _can_sell_item():
-		return
-	
-	_sell_items(1)
-
-func _on_sell_response(data: Dictionary) -> void:
-	if data.has("error"):
-		print("Sell error: ", data["error"])
-		# Could show error message to user
-	else:
-		print("Sold item for ", data["total_price"], " gold")
-		# Refresh inventory to show updated quantities
-		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_sell)
-
-func _on_inventory_refreshed_after_sell(inv_data: Dictionary) -> void:
-	# Update inventory data
-	fill_inventory(inv_data)
-	
-	# Check if the currently selected item is still in inventory
-	if selected_item_id != -1 and not inv_data.has(selected_item_id):
-		# Item was completely sold out, clear the selection
-		_clear_item_selection()
-	else:
-		# Update sell UI to reflect new quantities
-		_update_sell_ui()
-
-func _clear_item_selection() -> void:
-	"""Clear the current item selection and hide sell UI"""
-	selected_item = null
-	selected_item_id = -1
-	rich_text_label.text = TranslationServer.translate("inventory_select_item")
-	
-	# Hide sell UI
-	_update_sell_ui()
-
-# === SELL SYSTEM ===
-func _can_sell_item() -> bool:
-	return selected_item != null and in_market and selected_item.can_sell
-
-func _get_selected_item_quantity() -> int:
-	if selected_item_id == -1:
-		return 0
-	return inventory.get(selected_item_id, {}).get("stack", 0)
-
-func _get_selected_item_sell_price() -> int:
-	if not selected_item:
-		return 0
-	return selected_item.minimum_price if selected_item.minimum_price > 0 else 1
-
-func _calculate_sell_all_price() -> int:
-	if not _can_sell_item():
-		return 0
-	
-	var available_quantity = _get_selected_item_quantity()
-	var unit_price = _get_selected_item_sell_price()
-	
-	return unit_price * available_quantity
-
-func _on_sell_all_button_pressed() -> void:
-	if not _can_sell_item():
-		return
-	
-	var quantity = _get_selected_item_quantity()
-	if quantity <= 0:
-		return
-	
-	_sell_items(quantity)
-
-func _sell_items(quantity: int) -> void:
-	InstanceClient.current.request_data(&"item.sell", _on_sell_response, {
-		"item_id": selected_item_id,
-		"quantity": quantity
-	})
-
-# === UI HELPERS ===
-func _has_sell_ui_elements() -> bool:
-	return sell_button != null and sell_price_label != null and sell_all_button != null and sell_all_price_label != null
-
-func _set_sell_ui_visibility(visible: bool) -> void:
-	sell_button.visible = visible
-	sell_price_label.visible = visible
-	sell_all_button.visible = visible
-	sell_all_price_label.visible = visible
-
-func _update_sell_prices() -> void:
-	_update_unit_sell_price()
-	_update_sell_all_price()
-
-func _update_unit_sell_price() -> void:
-	var unit_price = _get_selected_item_sell_price()
-	sell_price_label.text = TranslationServer.translate("inventory_sell_price").format({"price": unit_price})
-
-func _update_sell_all_price() -> void:
-	var total_price = _calculate_sell_all_price()
-	var quantity = _get_selected_item_quantity()
-	
-	# Always update the text, even with 0 values
-	sell_all_price_label.text = TranslationServer.translate("inventory_sell_all_price").format({
-		"total_price": total_price,
-		"quantity": quantity
-	})
-	
-	# Botão desabilitado se quantidade <= 1, mas sempre visível
-	sell_all_button.disabled = quantity <= 1
 
 func _on_gold_received(data: Dictionary) -> void:
 	current_gold = data.get("gold", 0)
@@ -609,10 +442,6 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 			# Hide equip button for non-equipment items
 			if equip_hbox and not (selected_item is GearItem or selected_item is WeaponItem):
 				equip_hbox.visible = false
-		
-		# Sync market status and update sell UI when item is selected
-		_sync_market_status_from_hud()
-		_update_sell_ui()
 
 
 func _on_trade_quantity_confirmed() -> void:
@@ -1629,16 +1458,6 @@ func _update_ui_text() -> void:
 	# Equipment view labels
 	if has_node("EquipmentView/HBoxContainer/VBoxContainer/TabTitle"):
 		$EquipmentView/HBoxContainer/VBoxContainer/TabTitle.text = TranslationServer.translate("inventory_tab_equipment")
-	
-	# Sell button and labels
-	if sell_button:
-		sell_button.text = TranslationServer.translate("inventory_button_sell")
-	if sell_all_button:
-		sell_all_button.text = TranslationServer.translate("inventory_button_sell_all")
-	
-	# Update sell prices if item is selected and we're in market
-	if selected_item and in_market:
-		_update_sell_prices()
 	
 	# Gold labels
 	if equipment_gold_label:

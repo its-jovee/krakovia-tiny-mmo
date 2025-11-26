@@ -24,6 +24,12 @@ extends Resource
 ## Optional free-form tags for filters/crafting
 @export var tags: PackedStringArray = []
 
+# Crafting & Value
+## Is this a crafted/processed item? (worth more than raw materials)
+@export var is_crafted: bool = false
+## Tier/quality level (higher = rarer, more valuable)
+@export_range(1, 5) var tier: int = 1
+
 
 func is_stackable() -> bool:
 	return stack_limit != 1

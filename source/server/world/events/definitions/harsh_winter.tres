@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "harsh_winter"
+title = "Harsh Winter Approaching"
+description = "Stock up on food and fuel! Temperatures dropping rapidly."
+icon = "❄️"
+affected_items = {
+9: 0.5,
+12: 0.4,
+21: 0.4,
+13: 0.3,
+18: 0.3,
+20: 0.2
+}
+vendor_type_multipliers = {
+"food": 1.5,
+"general": 1.2
+}
+duration_minutes = 35
+selection_weight = 0.8
+

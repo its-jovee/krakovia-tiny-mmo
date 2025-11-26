@@ -330,6 +330,20 @@ func _get_translated_item_description(item: Item) -> String:
 	return translated
 
 
+# Market price context (set by market UI before showing tooltip)
+var market_context: Dictionary = {}  # {buy_price, price_multiplier, supply_level}
+
+
+func set_market_context(context: Dictionary) -> void:
+	"""Set market price context for next tooltip"""
+	market_context = context
+
+
+func clear_market_context() -> void:
+	"""Clear market price context"""
+	market_context = {}
+
+
 func _create_tooltip_content(item: Item) -> String:
 	var content = ""
 	
@@ -344,9 +358,62 @@ func _create_tooltip_content(item: Item) -> String:
 	
 	content += "\n"
 	
-	# Sell price
-	if item.can_sell and item.minimum_price > 0:
-		content += "[color=#FFD700]Sell Price: " + str(item.minimum_price) + " gold[/color]\n"
+	# Market/vendor price info (if in market context)
+	if not market_context.is_empty():
+		var price = market_context.get("price", 0)
+		var base_price = market_context.get("base_price", price)
+		var supply = market_context.get("supply_level", 0.0)
+		var is_sell = market_context.get("is_sell", false)
+		var stock = market_context.get("stock", -1)
+		
+		# Calculate price change from base
+		var price_changed = (price != base_price) and base_price > 0
+		var percent_change = 0
+		if price_changed:
+			percent_change = int(((float(price) / float(base_price)) - 1.0) * 100)
+		
+		# Show price with comparison to base
+		var price_label = "Sell Price" if is_sell else "Buy Price"
+		
+		if price_changed:
+			if percent_change > 0:
+				# Price went UP
+				if is_sell:
+					# Good for seller - green
+					content += "[color=#FFD700][b]%s: %d gold[/b][/color] [color=#66FF66]← +%d%% from %d[/color]\n" % [price_label, price, abs(percent_change), base_price]
+				else:
+					# Bad for buyer - red
+					content += "[color=#FFD700][b]%s: %d gold[/b][/color] [color=#FF6666]← +%d%% from %d[/color]\n" % [price_label, price, abs(percent_change), base_price]
+			else:
+				# Price went DOWN
+				if is_sell:
+					# Bad for seller - red
+					content += "[color=#FFD700][b]%s: %d gold[/b][/color] [color=#FF6666]← %d%% from %d[/color]\n" % [price_label, price, percent_change, base_price]
+				else:
+					# Good for buyer - green
+					content += "[color=#FFD700][b]%s: %d gold[/b][/color] [color=#66FF66]← %d%% from %d[/color]\n" % [price_label, price, percent_change, base_price]
+		else:
+			content += "[color=#FFD700][b]%s: %d gold[/b][/color]\n" % [price_label, price]
+		
+		# Show stock for buy items
+		if not is_sell and stock >= 0:
+			if stock > 0:
+				content += "[color=#88FF88]In Stock: " + str(stock) + "[/color]\n"
+			else:
+				content += "[color=#FF6666]Out of Stock[/color]\n"
+		
+		# Show market condition hint
+		if absf(supply) > 0.1:
+			if supply < 0:
+				content += "[color=#AAAAAA]📈 High demand[/color]\n"
+			else:
+				content += "[color=#AAAAAA]📉 Oversupply[/color]\n"
+		
+		content += "\n"
+	# Regular sell price (when not at vendor)
+	elif item.can_sell and item.minimum_price > 0:
+		content += "[color=#FFD700]Base Price: " + str(item.minimum_price) + " gold[/color]\n"
+		content += "[color=#888888](Visit a vendor to buy/sell)[/color]\n"
 	
 	# Get item slug from registry
 	var item_slug = _get_item_slug(item)

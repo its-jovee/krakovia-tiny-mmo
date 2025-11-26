@@ -6,25 +6,35 @@
 radius = 48.0
 
 [node name="MarketArea" type="Area2D"]
-collision_layer = 0
 script = ExtResource("1_market")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xwrah")
 
+[node name="StallBase" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0.545, 0.271, 0.075, 1)
+polygon = PackedVector2Array(-12, -8, 12, -8, 12, 8, -12, 8)
+
+[node name="StallCounter" type="Polygon2D" parent="."]
+position = Vector2(0, -10)
+color = Color(0.824, 0.706, 0.549, 1)
+polygon = PackedVector2Array(-14, -3, 14, -3, 14, 3, -14, 3)
+
+[node name="StallRoof" type="Polygon2D" parent="."]
+position = Vector2(0, -16)
+color = Color(0.8, 0.2, 0.1, 1)
+polygon = PackedVector2Array(-16, -4, 16, -4, 14, 4, -14, 4)
+
 [node name="Label" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -26.000004
-offset_right = 45.0
-offset_bottom = -5.000004
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.525, 0.525)
-text = "Mercado"
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = -18.0
+theme_override_colors/font_color = Color(1, 0.843, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 10
+text = "Market"
 horizontal_alignment = 1
 vertical_alignment = 1

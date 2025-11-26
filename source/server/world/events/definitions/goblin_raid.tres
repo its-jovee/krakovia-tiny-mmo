@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "goblin_raid"
+title = "Goblin Raid Incoming!"
+description = "The militia needs supplies! Weapons, armor, and healing items in high demand."
+icon = "⚔️"
+affected_items = {
+1: 0.5,
+4: 0.3,
+25: 0.4
+}
+vendor_type_multipliers = {
+"blacksmith": 1.5,
+"general": 1.0
+}
+duration_minutes = 30
+selection_weight = 1.0
+

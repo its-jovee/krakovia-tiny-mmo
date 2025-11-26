@@ -11,19 +11,28 @@ display_name = "jovee"
 character_class = "trapper"
 appearance_head_id = "head_b"
 equipped_accessory_id = 319
-golds = 103
+golds = 40
 inventory = {
+27: {
+"stack": 9
+},
+42: {
+"stack": 1
+},
 104: {
-"stack": 108
+"stack": 13
 },
 105: {
-"stack": 85
+"stack": 80
 },
 110: {
-"stack": 40
+"stack": 19
 },
 111: {
-"stack": 19
+"stack": 2
+},
+213: {
+"stack": 8
 },
 319: {
 "stack": 1
@@ -36,8 +45,8 @@ server_roles = {
 "senior_admin": {}
 }
 current_energy = 1550.0
-last_logout_time = 1764074821.814
-last_position = Vector2(166.62776, 365.63248)
+last_logout_time = 1764158309.867
+last_position = Vector2(637.6573, 336.0591)
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -135,22 +144,25 @@ player_id = 7
 account_name = "jovee"
 display_name = "asdsadsad"
 appearance_head_id = "head_d"
-golds = 42
+golds = 35
 inventory = {
 7: {
-"stack": 947
+"stack": 911
 },
 9: {
-"stack": 54
+"stack": 55
 },
 11: {
 "stack": 24
 },
+24: {
+"stack": 2
+},
 33: {
-"stack": 108
+"stack": 115
 },
 39: {
-"stack": 21
+"stack": 25
 },
 126: {
 "stack": 58
@@ -161,14 +173,14 @@ inventory = {
 }
 available_attributes_points = 19
 level = 4
-experience = 3645
+experience = 3700
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 109.70678566031063
-selected_title_slug = "apprentice_smith"
-last_logout_time = 1764086463.143
-last_position = Vector2(260.56024, 375.53732)
+current_energy = 250.0
+selected_title_slug = "founder"
+last_logout_time = 1764165547.416
+last_position = Vector2(370.35532, 300.0934)
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -351,8 +363,8 @@ account_titles = {
 "crafts_total": 48,
 "event_founder": 1,
 "harvests_collector": 207,
-"harvests_miner": 181,
-"harvests_trapper": 145,
+"harvests_miner": 187,
+"harvests_trapper": 157,
 "max_level_collector": 2,
 "max_level_miner": 4
 },
@@ -368,7 +380,7 @@ account_titles = {
 }
 account_switch_cooldowns = {
 "filhodedeus": 1763230194.547,
-"jovee": 1764079982.004,
+"jovee": 1764158309.867,
 "maluco": 1763231188.254
 }
 account_storage = {

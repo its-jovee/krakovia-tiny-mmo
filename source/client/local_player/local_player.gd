@@ -139,6 +139,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if _is_mouse_over_crafting_view():
 			return
+		if _is_ui_panel_open():
+			return
 		match event.button_index:
 			MOUSE_BUTTON_WHEEL_UP:
 			# Zoom in
@@ -165,6 +167,31 @@ func _is_mouse_over_crafting_view():
 	
 	# Check if mouse is within the crafting view bounds
 	return crafting_rect.has_point(mouse_pos)
+
+
+func _is_ui_panel_open() -> bool:
+	"""Check if any UI panel that should block zoom is open"""
+	# Check market browse UI
+	var market_ui = get_tree().get_root().find_child("MarketBrowseUI", true, false)
+	if market_ui and market_ui.is_visible_in_tree():
+		return true
+	
+	# Check shop browse UI
+	var shop_ui = get_tree().get_root().find_child("ShopBrowseUI", true, false)
+	if shop_ui and shop_ui.is_visible_in_tree():
+		return true
+	
+	# Check quest board
+	var quest_ui = get_tree().get_root().find_child("QuestBoardMenu", true, false)
+	if quest_ui and quest_ui.is_visible_in_tree():
+		return true
+	
+	# Check storage menu
+	var storage_ui = get_tree().get_root().find_child("StorageMenu", true, false)
+	if storage_ui and storage_ui.is_visible_in_tree():
+		return true
+	
+	return false
 	
 	
 func adjust_zoom(zoom_delta: float) -> void:

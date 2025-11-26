@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "alchemist_convention"
+title = "Alchemist Convention"
+description = "Potion makers gather! Herbs and reagents in high demand."
+icon = "🧪"
+affected_items = {
+15: 0.6,
+14: 0.4,
+1: -0.3
+}
+vendor_type_multipliers = {
+"herbalist": 1.5,
+"general": 1.0
+}
+duration_minutes = 25
+selection_weight = 0.9
+
