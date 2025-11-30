@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "market_day"
+title = "Market Day!"
+description = "The weekly market is bustling! General goods are discounted across the board."
+icon = "🛒"
+affected_items = {
+1: -0.3,
+9: -0.3,
+12: -0.2,
+13: -0.2,
+18: -0.2
+}
+vendor_type_multipliers = {
+"general": 1.4,
+"food": 1.2
+}
+duration_minutes = 30
+selection_weight = 1.0
+time_restriction = 1
+

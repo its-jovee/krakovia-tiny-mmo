@@ -22,4 +22,5 @@ vendor_type_multipliers = {
 }
 duration_minutes = 35
 selection_weight = 0.8
+time_restriction = 2
 

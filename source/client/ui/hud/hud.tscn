@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://pkprr0ll1y44" path="res://source/client/ui/hud/item_slots.gd" id="4_8qpw0"]
 [ext_resource type="Script" uid="uid://brq8mxox5bclj" path="res://source/client/ui/hud/menu_overlay.gd" id="4_cx7qp"]
 [ext_resource type="PackedScene" uid="uid://c4y8n5xr7j3wk" path="res://source/client/ui/guide/guide_modal.tscn" id="5_guide"]
-[ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="6_qjrur"]
+[ext_resource type="Theme" uid="uid://kraftovia_main_theme" path="res://assets/themes/theme_kraftovia.tres" id="6_qjrur"]
 [ext_resource type="PackedScene" uid="uid://b5oufmwlg5lga" path="res://source/client/ui/hud/character_portrait/character_portrait.tscn" id="7_charport"]
 [ext_resource type="Texture2D" uid="uid://1lckma8tgrri" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb6.png" id="9_o5bjo"]
 [ext_resource type="Texture2D" uid="uid://b8fkitwl7xwkl" path="res://assets/Raven Fantasy Icons/Separated Files/32x32/fb25.png" id="10_ntruf"]
@@ -92,6 +92,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Gold: 0"
+vertical_alignment = 1
+
+[node name="TimeDisplay" type="Panel" parent="HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_direction = 2
+layout_mode = 2
+theme = SubResource("Theme_dxemd")
+
+[node name="TimeLabel" type="Label" parent="HBoxContainer2/VBoxContainer/TimeDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.85, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Day"
 vertical_alignment = 1
 
 [node name="MenuButton" type="Button" parent="."]
@@ -218,43 +236,50 @@ grow_horizontal = 0
 theme_override_constants/separation = 12
 
 [node name="InventoryButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("6_qjrur")
 icon = ExtResource("9_o5bjo")
 icon_alignment = 1
+flat = false
 
 [node name="CraftingButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 icon = ExtResource("10_s83ae")
 icon_alignment = 1
+flat = false
 
 [node name="ShopButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 icon = ExtResource("10_ntruf")
 icon_alignment = 1
+flat = false
 
 [node name="TitlesButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Titles"
 icon = ExtResource("11_dxemd")
 icon_alignment = 1
+flat = false
 
 [node name="GuideButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Game Guide"
 icon = ExtResource("11_kuylb")
 icon_alignment = 1
+flat = false
 
 [node name="GuildButton" type="Button" parent="HBoxContainer"]
 visible = false
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 icon = ExtResource("11_ntruf")
+icon_alignment = 1
+flat = false
 
 [node name="MenuOverlay" type="Control" parent="."]
 visible = false

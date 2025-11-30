@@ -39,6 +39,9 @@ const POPUP_MIN_INTERVAL_MS: int = 100  # Minimum 100ms between popups
 @onready var settings_button: Button = $MenuOverlay/VBoxContainer/SettingsButton
 @onready var close_menu_button: Button = $MenuOverlay/VBoxContainer/CloseButton
 
+# Time display
+@onready var time_label: Label = $HBoxContainer2/VBoxContainer/TimeDisplay/TimeLabel
+
 func _ready() -> void:
 	# Wire up character portrait with character creation modal
 	if character_portrait and character_creation_modal:
@@ -107,6 +110,12 @@ func _ready() -> void:
 	sub_menu.add_child(market_browse_menu)
 	menus[&"market_browse"] = market_browse_menu
 	
+	# Add worker hire menu
+	var worker_hire_menu = preload("res://source/client/ui/worker/worker_hire_ui.tscn").instantiate()
+	worker_hire_menu.visibility_changed.connect(_on_submenu_visiblity_changed.bind(worker_hire_menu))
+	sub_menu.add_child(worker_hire_menu)
+	menus[&"worker_hire"] = worker_hire_menu
+	
 	# Subscribe to gold updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	
@@ -115,6 +124,12 @@ func _ready() -> void:
 	
 	# Subscribe to vendor status updates (for NPC vendor interaction)
 	InstanceClient.subscribe(&"vendor.status", _on_vendor_status_update)
+	
+	# Subscribe to worker area status updates (for hired worker NPCs)
+	InstanceClient.subscribe(&"worker.area.status", _on_worker_area_status_update)
+	
+	# Subscribe to worker item collection notifications (shows popups like harvest)
+	InstanceClient.subscribe(&"worker.items_received", _on_worker_items_received)
 	
 	# Subscribe to storage chest status updates
 	InstanceClient.subscribe(&"storage_chest.status", _on_storage_chest_status_update)
@@ -148,6 +163,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Process the harvest popup queue
 	_process_popup_queue()
+	
+	# Update time display
+	_update_time_display()
 
 
 func _update_ui_text() -> void:
@@ -179,6 +197,36 @@ func _update_gold_display() -> void:
 	if gold_label:
 		gold_label.text = TranslationServer.translate("hud_gold").format({"amount": current_gold})
 
+
+func _update_time_display() -> void:
+	if not time_label:
+		return
+	
+	var day_night = InstanceClient.day_night_cycle
+	if not day_night:
+		time_label.text = "..."
+		return
+	
+	var phase = day_night.get_phase_name()
+	
+	# Set color based on phase
+	match phase:
+		"Dawn":
+			time_label.add_theme_color_override("font_color", Color(1.0, 0.7, 0.4))
+		"Day":
+			time_label.add_theme_color_override("font_color", Color(1.0, 0.95, 0.7))
+		"Dusk":
+			time_label.add_theme_color_override("font_color", Color(1.0, 0.6, 0.4))
+		"Evening":
+			time_label.add_theme_color_override("font_color", Color(0.7, 0.6, 0.85))
+		"Night", "Late Night":
+			time_label.add_theme_color_override("font_color", Color(0.6, 0.7, 0.9))
+		_:
+			time_label.add_theme_color_override("font_color", Color(0.85, 0.8, 0.6))
+	
+	time_label.text = phase
+
+
 func _on_market_status_update(data: Dictionary) -> void:
 	var in_market_area = data.get("in_market", false)
 	print("HUD received market status: ", in_market_area)
@@ -198,6 +246,29 @@ func _on_vendor_status_update(data: Dictionary) -> void:
 		# Close vendor UI when leaving vendor area
 		if menus.has(&"market_browse"):
 			menus[&"market_browse"].visible = false
+
+
+func _on_worker_area_status_update(data: Dictionary) -> void:
+	var in_worker_area = data.get("in_worker_area", false)
+	var worker_type = data.get("worker_type", "")
+	var worker_name = data.get("worker_name", "Worker")
+	print("[HUD] Worker area status: in_area=%s, type=%s, name=%s" % [in_worker_area, worker_type, worker_name])
+	
+	if in_worker_area and worker_type != "":
+		# Auto-open the worker hire UI when entering a worker area
+		open_worker_ui(worker_type)
+	else:
+		# Close worker UI when leaving worker area
+		if menus.has(&"worker_hire"):
+			menus[&"worker_hire"].visible = false
+
+
+func open_worker_ui(worker_type: String) -> void:
+	"""Open the worker hire UI for a specific worker type"""
+	if menus.has(&"worker_hire"):
+		var worker_menu = menus[&"worker_hire"]
+		if worker_menu.has_method("open_worker"):
+			worker_menu.open_worker(worker_type)
 
 
 func set_market_status(in_market_area: bool) -> void:
@@ -242,11 +313,19 @@ func _on_storage_chest_status_update(data: Dictionary) -> void:
 			if storage_menu.has_method("show_menu"):
 				storage_menu.show_menu()
 			else:
-				storage_menu.visible = true
+				# Animate open if show_menu not available
+				if has_node("/root/UIAnimations"):
+					get_node("/root/UIAnimations").animate_panel_open(storage_menu)
+				else:
+					storage_menu.visible = true
 	else:
 		# Auto-close storage menu when leaving area
 		if menus.has(&"storage"):
-			menus[&"storage"].visible = false
+			var storage_menu = menus[&"storage"]
+			if has_node("/root/UIAnimations"):
+				get_node("/root/UIAnimations").animate_panel_close(storage_menu)
+			else:
+				storage_menu.visible = false
 
 func _on_overlay_menu_close_button_pressed() -> void:
 	menu_overlay.hide()
@@ -326,7 +405,18 @@ func display_menu(menu_name: StringName) -> void:
 		new_menu.visibility_changed.connect(_on_submenu_visiblity_changed.bind(new_menu))
 		sub_menu.add_child(new_menu)
 		menus[menu_name] = new_menu
-	menus[menu_name].show()
+	
+	# Play open sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_open()
+	
+	# Animate menu open
+	var menu = menus[menu_name]
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_panel_open(menu)
+	else:
+		menu.show()
+	
 	menu_overlay.hide()  # Close the menu overlay after opening a menu
 
 
@@ -383,6 +473,22 @@ func _on_button_str_pressed() -> void:
 			Callable(),
 			{"attr": "strenght"}
 		)
+
+
+func _on_worker_items_received(data: Dictionary) -> void:
+	"""Handle worker collection notifications and show popup (like harvest)"""
+	var items: Array = data.get("items", [])
+	
+	# Queue each item for display (no EXP for worker collection)
+	for item_dict in items:
+		var slug: StringName = item_dict.get("slug", &"")
+		var amount: int = int(item_dict.get("amount", 0))
+		
+		# Get item details from registry
+		var item: Item = ContentRegistryHub.load_by_slug(&"items", slug)
+		if item and amount > 0:
+			var translated_name = ItemTooltipManager._get_translated_item_name(item)
+			_queue_harvest_popup(translated_name, item.item_icon, amount, 0)
 
 
 func _on_harvest_item_received(data: Dictionary) -> void:
@@ -497,7 +603,12 @@ func _update_level_display() -> void:
 		level_label.text = TranslationServer.translate("hud_level").format({"level": current_level})
 	if exp_progress_bar:
 		exp_progress_bar.max_value = exp_required
-		exp_progress_bar.value = current_exp
+		# Animate progress bar value change
+		if has_node("/root/UIAnimations"):
+			var anim = get_node("/root/UIAnimations")
+			anim.animate_bar_fill(exp_progress_bar, current_exp)
+		else:
+			exp_progress_bar.value = current_exp
 
 
 func _show_level_up_popup(new_level: int) -> void:
@@ -514,6 +625,12 @@ func _show_level_up_popup(new_level: int) -> void:
 	
 	if popup.has_method("setup"):
 		popup.setup(new_level, unlocked_recipes)
+	
+	# Play success sound and animate
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_success()
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_popup_in(popup)
 
 
 func _get_unlocked_recipes_for_level(level: int) -> Array[String]:

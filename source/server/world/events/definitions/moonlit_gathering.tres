@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "moonlit_gathering"
+title = "Moonlit Gathering"
+description = "Rare nocturnal herbs bloom under the moonlight. Herbalists pay premium prices!"
+icon = "🌙"
+affected_items = {
+14: 0.6,
+15: 0.5,
+16: 0.4
+}
+vendor_type_multipliers = {
+"herbalist": 1.5,
+"general": 1.0
+}
+duration_minutes = 25
+selection_weight = 0.9
+time_restriction = 2
+

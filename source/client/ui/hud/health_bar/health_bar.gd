@@ -23,7 +23,11 @@ func _on_target_attribute_changed(attr: StringName, value: float, max_value: flo
 
 
 func _on_health_changed(new_health: float) -> void:
-	progress_bar.value = new_health
+	# Animate progress bar value change
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_bar_fill(progress_bar, new_health)
+	else:
+		progress_bar.value = new_health
 	update_label()
 
 

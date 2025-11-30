@@ -174,6 +174,26 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 				"in_vendor": true,
 				"vendor": vendor.get_vendor_info()
 			})
+	if interaction_area is WorkerArea:
+		# Notify client about worker area - this auto-opens the worker hire UI
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:
+			var worker = interaction_area as WorkerArea
+			print("[ServerInstance] Player %d entered WorkerArea: %s (%s)" % [peer_id, worker.worker_name, worker.worker_type])
+			
+			# Check if player has completed jobs for this worker
+			var has_completed = false
+			if player.player_resource:
+				var completed = player.player_resource.get_completed_jobs(worker.worker_type)
+				has_completed = completed.size() > 0
+			
+			data_push.rpc_id(peer_id, &"worker.area.status", {
+				"in_worker_area": true,
+				"worker_type": worker.worker_type,
+				"worker_name": worker.worker_name,
+				"worker_icon": worker.worker_icon,
+				"has_completed_jobs": has_completed
+			})
 
 func _on_player_exited_interaction_area(player: Player, interaction_area: InteractionArea) -> void:
 	if interaction_area is MarketArea:
@@ -202,6 +222,11 @@ func _on_player_exited_interaction_area(player: Player, interaction_area: Intera
 		var peer_id = _get_peer_id_for_player(player)
 		if peer_id != 0:
 			data_push.rpc_id(peer_id, &"vendor.status", {"in_vendor": false})
+	if interaction_area is WorkerArea:
+		# Notify client that they left worker area
+		var peer_id = _get_peer_id_for_player(player)
+		if peer_id != 0:
+			data_push.rpc_id(peer_id, &"worker.area.status", {"in_worker_area": false})
 
 
 func _push_market_prices(peer_id: int, market: MarketArea) -> void:
@@ -302,6 +327,10 @@ func spawn_player(peer_id: int) -> void:
 
 	connected_peers.append(peer_id)
 	_propagate_spawn(peer_id)
+	
+	# Send current game time to new player
+	if world_server and world_server.get_game_time_manager():
+		world_server.get_game_time_manager().send_time_to_peer(self, peer_id)
 	
 	# Automatically grant Alpha Tester title to all players
 	if TitleProgressTracker.instance and player.player_resource:

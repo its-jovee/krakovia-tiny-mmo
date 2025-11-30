@@ -16,6 +16,10 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	if visible:
+		# Play open sound
+		if has_node("/root/UISounds"):
+			get_node("/root/UISounds").play_open()
+		
 		# Request titles data when menu opens
 		InstanceClient.current.request_data(&"titles.get", _on_titles_received, {})
 
@@ -109,7 +113,7 @@ func _create_title_row(title_data: Dictionary) -> void:
 	if is_unlocked:
 		# Show "Unlocked" badge
 		var unlocked_label: Label = Label.new()
-		unlocked_label.text = "✓ Unlocked"
+		unlocked_label.text = "Unlocked"
 		unlocked_label.add_theme_color_override("font_color", Color(0.3, 0.9, 0.3, 1.0))
 		unlocked_label.add_theme_font_size_override("font_size", 12)
 		unlocked_label.custom_minimum_size = Vector2(180, 0)
@@ -129,7 +133,14 @@ func _create_title_row(title_data: Dictionary) -> void:
 		var progress_bar: ProgressBar = ProgressBar.new()
 		progress_bar.min_value = 0
 		progress_bar.max_value = target
-		progress_bar.value = progress
+		# Animate initial value
+		progress_bar.value = 0
+		# Animate to actual value after a short delay
+		if has_node("/root/UIAnimations"):
+			await get_tree().create_timer(0.1).timeout
+			get_node("/root/UIAnimations").animate_bar_fill(progress_bar, progress)
+		else:
+			progress_bar.value = progress
 		progress_bar.show_percentage = false
 		progress_bar.custom_minimum_size = Vector2(150, 20)
 		progress_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -151,7 +162,7 @@ func _create_title_row(title_data: Dictionary) -> void:
 	
 	if is_unlocked:
 		if title_slug == selected_title_slug:
-			equip_button.text = "✓ Equipped"
+			equip_button.text = "Equipped"
 			equip_button.disabled = false
 			equip_button.pressed.connect(func(): _unequip_title())
 		else:
@@ -203,7 +214,15 @@ func _unequip_title() -> void:
 
 
 func _on_close_pressed() -> void:
-	hide()
+	# Play close sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_close()
+	
+	# Animate menu close
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_panel_close(self)
+	else:
+		hide()
 
 
 func on_progress_update(data: Dictionary) -> void:

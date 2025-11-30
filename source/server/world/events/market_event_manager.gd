@@ -22,6 +22,9 @@ var next_event_time: int = 0
 ## Reference to WorldServer for broadcasting
 var world_server: WorldServer = null
 
+## Reference to GameTimeManager for time-based filtering
+var game_time_manager: GameTimeManager = null
+
 ## Timer for checking event state
 var _check_timer: Timer
 
@@ -93,23 +96,39 @@ func _end_current_event() -> void:
 
 
 func _pick_weighted_event() -> MarketEvent:
-	"""Pick a random event using selection weights"""
-	var total_weight: float = 0.0
+	"""Pick a random event using selection weights, filtered by time of day"""
+	# Get current time of day for filtering
+	var current_time: float = 0.25  # Default to mid-day if no time manager
+	if game_time_manager:
+		current_time = game_time_manager.get_time_of_day()
+	
+	# Filter events that are valid for current time
+	var valid_events: Array[MarketEvent] = []
 	for event in event_pool:
+		if event.is_valid_for_time(current_time):
+			valid_events.append(event)
+	
+	if valid_events.is_empty():
+		print("[MarketEventManager] No events valid for current time (%.2f), using any event" % current_time)
+		valid_events = event_pool.duplicate()
+	
+	# Calculate total weight of valid events
+	var total_weight: float = 0.0
+	for event in valid_events:
 		total_weight += event.selection_weight
 	
 	if total_weight <= 0:
-		return event_pool.pick_random()
+		return valid_events.pick_random()
 	
 	var roll = randf() * total_weight
 	var cumulative: float = 0.0
 	
-	for event in event_pool:
+	for event in valid_events:
 		cumulative += event.selection_weight
 		if roll <= cumulative:
 			return event
 	
-	return event_pool.back()
+	return valid_events.back()
 
 
 func _broadcast_event_to_all_players(active: bool) -> void:

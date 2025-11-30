@@ -318,7 +318,7 @@ func on_game_feedback(data: Dictionary) -> void:
 	match performance:
 		&"perfect":
 			if items.size() > 0:
-				feedback_text = "★ PERFECT! ★"
+				feedback_text = "PERFECT!"
 			else:
 				feedback_text = "PERFECT!"
 			feedback_color = Color(0.2, 1.0, 0.4)  # Green
@@ -648,7 +648,7 @@ func _spawn_damage_popup(
 	
 	if performance == &"perfect":
 		# Perfect is always a crit
-		roll_text = "★ CRIT! ★"
+		roll_text = "CRIT!"
 		roll_color = Color(1.0, 0.85, 0.2)  # Gold
 		roll_scale = 1.6
 		roll_effect = &"rainbow"
@@ -779,7 +779,11 @@ func _refresh() -> void:
 		if node_health_bar:
 			node_health_bar.visible = true
 			node_health_bar.max_value = node_max_amount
-			node_health_bar.value = node_remaining
+			# Animate progress bar value change
+			if has_node("/root/UIAnimations"):
+				get_node("/root/UIAnimations").animate_bar_fill(node_health_bar, node_remaining)
+			else:
+				node_health_bar.value = node_remaining
 			# Color based on health percentage
 			var health_pct: float = node_remaining / max(node_max_amount, 1.0)
 			var bar_style = StyleBoxFlat.new()
@@ -834,7 +838,7 @@ func _refresh() -> void:
 				feedback_label.add_theme_color_override("font_color", feedback_color)
 			elif sync_active:
 				feedback_label.visible = true
-				feedback_label.text = "⚡ SYNC x%d! (%.1fx)" % [sync_count, sync_bonus]
+				feedback_label.text = "SYNC x%d! (%.1fx)" % [sync_count, sync_bonus]
 				feedback_label.add_theme_color_override("font_color", Color(0.4, 0.8, 1.0))
 			else:
 				feedback_label.visible = false
@@ -843,7 +847,7 @@ func _refresh() -> void:
 		if streak_label:
 			if current_streak > 0 and current_game_type != &"none":
 				streak_label.visible = true
-				streak_label.text = "🔥 Streak: %d" % current_streak
+				streak_label.text = "Streak: %d" % current_streak
 			else:
 				streak_label.visible = false
 	else:

@@ -77,9 +77,58 @@ func _ready() -> void:
 
 
 func _update_label() -> void:
+	# Update the label to show vendor name with icon (using RichTextLabel for BBCode)
 	var label = get_node_or_null("Label")
-	if label and label is Label:
-		label.text = "%s %s" % [vendor_icon, vendor_name]
+	if not label:
+		return
+	
+	# Use icon texture if UIIcons autoload is available
+	if Engine.has_singleton("UIIcons"):
+		var icon_key := _get_vendor_icon_key()
+		var icon_bbcode := UIIcons.bbcode(icon_key, 16, 16)
+		
+		if label is RichTextLabel:
+			if not icon_bbcode.is_empty():
+				label.text = "%s %s" % [icon_bbcode, vendor_name]
+			else:
+				label.text = vendor_name
+		else:
+			# Fallback for regular Label
+			label.text = vendor_name
+	else:
+		# No icon system - just show name (no emoji)
+		label.text = vendor_name
+
+
+func _get_vendor_icon_key() -> String:
+	"""Map vendor icon emoji or vendor_type to icon key"""
+	# Map emojis to icon keys
+	match vendor_icon:
+		"⚒️":
+			return "blacksmith"
+		"🌿":
+			return "herbalist"
+		"🌾":
+			return "grocer"
+		"💎":
+			return "jeweler"
+		"🪵":
+			return "carpenter"
+		"🏪":
+			return "vendor"
+		_:
+			# Try to map vendor_type to icon key
+			match vendor_type:
+				"blacksmith":
+					return "blacksmith"
+				"herbalist":
+					return "herbalist"
+				"food":
+					return "grocer"
+				"luxury":
+					return "jeweler"
+				_:
+					return "vendor"  # Default
 
 
 func _get_configuration_warnings() -> PackedStringArray:
@@ -147,10 +196,69 @@ func sells_item(item_id: int) -> bool:
 
 ## Check if this vendor BUYS a specific item from players
 func buys_item(item_id: int) -> bool:
+	# Always buy items that are inputs to our recipes
+	if _is_recipe_input(item_id):
+		return true
+	
 	var actual_buy_catalog = buy_catalog if not buy_catalog.is_empty() else item_catalog
 	if actual_buy_catalog.is_empty():
 		return true  # Empty = buys everything
 	return item_id in actual_buy_catalog
+
+
+func _is_recipe_input(item_id: int) -> bool:
+	"""Check if an item is an input to any of our stock recipes"""
+	for recipe in stock_recipes.values():
+		if recipe is Dictionary and recipe.has(item_id):
+			return true
+	return false
+
+
+func get_all_recipe_inputs() -> Array[int]:
+	"""Get all unique input item IDs from all recipes"""
+	var inputs: Array[int] = []
+	for recipe in stock_recipes.values():
+		if recipe is Dictionary:
+			for input_id in recipe.keys():
+				if input_id not in inputs:
+					inputs.append(input_id)
+	return inputs
+
+
+## Get how much of an item the vendor still needs to buy
+## Returns -1 if unlimited (not a recipe input), 0 if fully stocked, or the quantity needed
+func get_max_buy_quantity(item_id: int) -> int:
+	if not _is_recipe_input(item_id):
+		return -1  # Not a recipe input, buy unlimited (or based on buy_catalog rules)
+	
+	if not _vendor_data:
+		return 10  # Fallback
+	
+	var total_needed: int = 0
+	
+	for output_id in stock_recipes.keys():
+		var recipe = stock_recipes[output_id]
+		if recipe.has(item_id):
+			var amount_per_craft: int = recipe[item_id]
+			
+			# Calculate how many more of this output we can make (up to max stock)
+			var current_stock = _vendor_data.get_stock(output_id)
+			var producing = _vendor_data.get_production_amount(output_id)
+			var max_stock = _vendor_data.max_stock_per_item
+			var can_produce_more = maxi(0, max_stock - current_stock - producing)
+			
+			# How much of this input we need for that
+			var needed_for_output = can_produce_more * amount_per_craft
+			
+			# Subtract any pending materials we already have
+			var pending_amount = 0
+			if _vendor_data.pending_materials.has(output_id):
+				pending_amount = _vendor_data.pending_materials[output_id].get(item_id, 0)
+			needed_for_output = maxi(0, needed_for_output - pending_amount)
+			
+			total_needed += needed_for_output
+	
+	return total_needed
 
 
 ## Legacy compatibility
@@ -169,7 +277,7 @@ func get_buy_price(item: Item, item_id: int, event_multiplier: float = 1.0) -> i
 
 
 ## Get sell price (what vendor pays to buy FROM player)
-## This includes specialty bonuses and crafted item bonuses
+## This includes specialty bonuses, crafted item bonuses, and demand premium
 func get_sell_price(item: Item, item_id: int, event_multiplier: float = 1.0) -> int:
 	var base_sell_price: int
 	if _vendor_data:
@@ -190,7 +298,37 @@ func get_sell_price(item: Item, item_id: int, event_multiplier: float = 1.0) -> 
 	if item.is_crafted:
 		bonus_mult *= crafted_bonus
 	
+	# Demand premium: if this item is needed for production of out-of-stock goods, pay more
+	var demand_bonus = _calculate_demand_premium(item_id)
+	bonus_mult *= demand_bonus
+	
 	return int(floor(float(base_sell_price) * bonus_mult))
+
+
+## Calculate demand premium for a material based on output stock levels
+## Returns 1.0 if no premium, up to 1.5 if desperately needed
+func _calculate_demand_premium(input_item_id: int) -> float:
+	if stock_recipes.is_empty() or not _vendor_data:
+		return 1.0
+	
+	var max_premium = 1.0
+	
+	# Check each recipe that uses this input
+	for output_id in stock_recipes.keys():
+		var recipe = stock_recipes[output_id]
+		if recipe.has(input_item_id):
+			# This input is used for this output
+			var current_stock = _vendor_data.get_stock(output_id)
+			var max_stock = _vendor_data.max_stock_per_item
+			
+			# Calculate how "desperate" we are for this output
+			# At 0 stock: 50% premium, at half stock: 25% premium, at full: no premium
+			var stock_ratio = float(current_stock) / float(max_stock)
+			var premium = 1.0 + (0.5 * (1.0 - stock_ratio))  # 1.0 to 1.5
+			
+			max_premium = maxf(max_premium, premium)
+	
+	return max_premium
 
 
 ## Check if an item is a specialty for this vendor (in their buy_catalog)
@@ -269,13 +407,21 @@ func _process_recipe_conversion(input_item_id: int, quantity: int) -> void:
 	for output_id in stock_recipes.keys():
 		var recipe: Dictionary = stock_recipes[output_id]
 		if recipe.has(input_item_id):
-			var required = recipe[input_item_id]
-			# Calculate how many outputs we can make
-			var outputs = quantity / required
-			if outputs > 0:
-				_vendor_data.add_stock(output_id, outputs)
-				print("[VendorArea] %s: Converted %d of item %d → %d stock of item %d" % [
-					vendor_name, quantity, input_item_id, outputs, output_id
+			# Add materials to pending production
+			var started = _vendor_data.add_materials(
+				output_id, 
+				input_item_id, 
+				quantity, 
+				recipe, 
+				production_time_seconds
+			)
+			if started > 0:
+				print("[VendorArea] %s: Started producing %d of item %d (from %d of item %d)" % [
+					vendor_name, started, output_id, quantity, input_item_id
+				])
+			else:
+				print("[VendorArea] %s: Stockpiled %d of item %d for item %d" % [
+					vendor_name, quantity, input_item_id, output_id
 				])
 
 
@@ -285,27 +431,111 @@ func get_catalog_for_client(event_multiplier: float = 1.0) -> Dictionary:
 	var sell_catalog_result: Array[Dictionary] = []  # Items player can BUY from vendor
 	var buy_catalog_result: Array[Dictionary] = []  # Items vendor will BUY from player
 	
+	# Process any completed production first
+	if _vendor_data:
+		_vendor_data.process_production()
+	
+	# Get production status
+	var production_status: Dictionary = {}
+	if _vendor_data:
+		production_status = _vendor_data.get_production_status(stock_recipes)
+	
 	# Items vendor sells to players (with stock info)
 	for item_id in item_catalog:
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
 		if item and item.can_sell:
-			sell_catalog_result.append({
+			var entry = {
 				"id": item_id,
 				"price": get_buy_price(item, item_id, event_multiplier),
 				"supply": get_supply_level(item_id),
 				"stock": get_stock(item_id)  # How many available
-			})
+			}
+			
+			# Add production info if applicable
+			if production_status.has(item_id):
+				var prod = production_status[item_id]
+				entry["producing"] = prod.get("producing", 0)
+				entry["next_ready_in"] = prod.get("next_ready_in", 0)
+				entry["stock_full"] = prod.get("stock_full", false)
+				entry["pending"] = prod.get("pending", {})
+				entry["needed"] = prod.get("needed", {})
+			
+			# Add recipe requirements if this item has a recipe
+			if stock_recipes.has(item_id):
+				entry["recipe"] = stock_recipes[item_id]
+			
+			sell_catalog_result.append(entry)
 	
-	# Items vendor buys from players
-	var actual_buy_catalog = buy_catalog if not buy_catalog.is_empty() else item_catalog
+	# Build reverse lookup: input_id -> [output_ids it produces]
+	# Also calculate max needed for each input to fill all output stocks
+	var input_produces: Dictionary = {}  # {input_id: [{output_id, output_name, needs}, ...]}
+	var input_max_needed: Dictionary = {}  # {input_id: max_quantity_vendor_needs}
+	
+	for output_id in stock_recipes.keys():
+		var recipe = stock_recipes[output_id]
+		var output_item: Item = ContentRegistryHub.load_by_id(&"items", output_id)
+		var output_name = output_item.item_name if output_item else "Unknown"
+		
+		# Calculate how many more of this output we can make (up to max stock)
+		var current_stock = get_stock(output_id) if _vendor_data else 0
+		var producing = _vendor_data.get_production_amount(output_id) if _vendor_data else 0
+		var max_stock = _vendor_data.max_stock_per_item if _vendor_data else 10
+		var can_produce_more = maxi(0, max_stock - current_stock - producing)
+		
+		for input_id in recipe.keys():
+			var amount_per_craft: int = recipe[input_id]
+			
+			if not input_produces.has(input_id):
+				input_produces[input_id] = []
+			input_produces[input_id].append({
+				"id": output_id,
+				"name": output_name,
+				"needs": amount_per_craft
+			})
+			
+			# Calculate how much of this input we still need
+			var needed_for_output = can_produce_more * amount_per_craft
+			# Subtract any pending materials we already have
+			var pending_amount = 0
+			if _vendor_data and _vendor_data.pending_materials.has(output_id):
+				pending_amount = _vendor_data.pending_materials[output_id].get(input_id, 0)
+			needed_for_output = maxi(0, needed_for_output - pending_amount)
+			
+			input_max_needed[input_id] = input_max_needed.get(input_id, 0) + needed_for_output
+	
+	# Items vendor buys from players (include all recipe inputs)
+	var actual_buy_catalog = buy_catalog.duplicate() if not buy_catalog.is_empty() else item_catalog.duplicate()
+	
+	# Add all recipe inputs to buy catalog
+	var recipe_inputs = get_all_recipe_inputs()
+	for input_id in recipe_inputs:
+		if input_id not in actual_buy_catalog:
+			actual_buy_catalog.append(input_id)
+	
 	for item_id in actual_buy_catalog:
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
-		if item and item.can_sell:
-			buy_catalog_result.append({
+		if item:  # Remove can_sell check - vendor needs these materials!
+			var price = get_sell_price(item, item_id, event_multiplier)
+			
+			# Ensure minimum price of 1g for items vendor needs
+			if input_produces.has(item_id) and price < 1:
+				price = maxi(1, int(ceil(float(item.minimum_price) * buy_multiplier)))
+				if price < 1:
+					price = 1  # Absolute floor
+			
+			var entry = {
 				"id": item_id,
-				"price": get_sell_price(item, item_id, event_multiplier),
+				"price": price,
 				"supply": get_supply_level(item_id)
-			})
+			}
+			
+			# Add "produces" info and max buy quantity if this is a recipe input
+			if input_produces.has(item_id):
+				entry["produces"] = input_produces[item_id]
+				entry["is_needed"] = true  # Mark as needed for production
+				entry["max_buy"] = input_max_needed.get(item_id, 0)  # Cap on how much vendor will buy
+			
+			buy_catalog_result.append(entry)
 	
 	return {
 		"sells": sell_catalog_result,  # What player can buy

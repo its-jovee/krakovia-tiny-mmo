@@ -11,31 +11,100 @@ display_name = "jovee"
 character_class = "trapper"
 appearance_head_id = "head_b"
 equipped_accessory_id = 319
-golds = 40
+golds = 59610
 inventory = {
+9: {
+"stack": 2
+},
+11: {
+"stack": 1
+},
+24: {
+"stack": 22
+},
 27: {
 "stack": 9
+},
+29: {
+"stack": 900
+},
+33: {
+"stack": 15
 },
 42: {
 "stack": 1
 },
+56: {
+"stack": 28
+},
+64: {
+"stack": 10
+},
+71: {
+"stack": 11
+},
+79: {
+"stack": 1
+},
+86: {
+"stack": 1
+},
 104: {
-"stack": 13
+"stack": 28
 },
 105: {
-"stack": 80
+"stack": 79
 },
 110: {
-"stack": 19
+"stack": 14
 },
 111: {
-"stack": 2
+"stack": 3
+},
+127: {
+"stack": 200
+},
+128: {
+"stack": 9
+},
+164: {
+"stack": 10
+},
+166: {
+"stack": 10
+},
+168: {
+"stack": 10
+},
+180: {
+"stack": 3
+},
+198: {
+"stack": 10
+},
+199: {
+"stack": 10
+},
+201: {
+"stack": 1
+},
+202: {
+"stack": 5
+},
+203: {
+"stack": 10
 },
 213: {
 "stack": 8
 },
-319: {
-"stack": 1
+279: {
+"stack": 2
+},
+281: {
+"stack": 10
+},
+308: {
+"stack": 19
 }
 }
 available_attributes_points = 97
@@ -45,8 +114,22 @@ server_roles = {
 "senior_admin": {}
 }
 current_energy = 1550.0
-last_logout_time = 1764158309.867
-last_position = Vector2(637.6573, 336.0591)
+last_logout_time = 1764194370.029
+last_position = Vector2(501.5343, -35.77033)
+worker_burnout = {
+"forager": {
+"hire_count": 0,
+"last_reset": 1764193883
+},
+"miner": {
+"hire_count": 0,
+"last_reset": 1764194210
+},
+"trapper": {
+"hire_count": 1,
+"last_reset": 1764177344
+}
+}
 
 [sub_resource type="Resource" id="Resource_ni45q"]
 script = ExtResource("1_ni45q")
@@ -144,13 +227,13 @@ player_id = 7
 account_name = "jovee"
 display_name = "asdsadsad"
 appearance_head_id = "head_d"
-golds = 35
+golds = 171
 inventory = {
 7: {
-"stack": 911
+"stack": 899
 },
 9: {
-"stack": 55
+"stack": 27
 },
 11: {
 "stack": 24
@@ -179,8 +262,22 @@ server_roles = {
 }
 current_energy = 250.0
 selected_title_slug = "founder"
-last_logout_time = 1764165547.416
-last_position = Vector2(370.35532, 300.0934)
+last_logout_time = 1764194389.886
+last_position = Vector2(544.7814, 345.46967)
+worker_burnout = {
+"forager": {
+"hire_count": 0,
+"last_reset": 1764174157
+},
+"miner": {
+"hire_count": 0,
+"last_reset": 1764174074
+},
+"trapper": {
+"hire_count": 0,
+"last_reset": 1764174155
+}
+}
 
 [sub_resource type="Resource" id="Resource_eyapk"]
 script = ExtResource("1_ni45q")
@@ -221,10 +318,16 @@ experience = 511
 server_roles = {
 "senior_admin": {}
 }
-current_energy = 163.01371200000003
+current_energy = 200.0
 selected_title_slug = "founder"
-last_logout_time = 1764079982.004
-last_position = Vector2(197.1745, 401.07468)
+last_logout_time = 1764174071.716
+last_position = Vector2(512.534, 586.16003)
+worker_burnout = {
+"miner": {
+"hire_count": 0,
+"last_reset": 1764174053
+}
+}
 
 [sub_resource type="Resource" id="Resource_ijlu0"]
 script = ExtResource("1_ni45q")
@@ -380,10 +483,30 @@ account_titles = {
 }
 account_switch_cooldowns = {
 "filhodedeus": 1763230194.547,
-"jovee": 1764158309.867,
+"jovee": 1764194370.029,
 "maluco": 1763231188.254
 }
 account_storage = {
 "filhodedeus": {},
+"jovee": {
+24: {
+"stack": 1
+},
+104: {
+"stack": 3
+},
+105: {
+"stack": 11
+},
+128: {
+"stack": 1
+},
+201: {
+"stack": 14
+},
+319: {
+"stack": 1
+}
+},
 "maluco": {}
 }

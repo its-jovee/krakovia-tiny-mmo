@@ -77,7 +77,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	"""Handle dropping an item on this equipment slot"""
-	print("[GearSlotButton] _drop_data called! 🎉")
+	print("[GearSlotButton] _drop_data called!")
 	
 	if not data is Dictionary or not data.has("item_data"):
 		print("  ✗ Invalid data in drop")

@@ -32,7 +32,7 @@ theme_override_constants/separation = 15
 [node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "🐎 Horse Racing"
+text = "Horse Racing"
 horizontal_alignment = 1
 
 [node name="BettingPhase" type="Control" parent="MarginContainer/VBoxContainer"]
@@ -177,7 +177,7 @@ anchor_right = 1.0
 offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 20
-text = "🏆 Winner: Thunder"
+text = "Winner: Thunder"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -189,7 +189,7 @@ offset_top = 60.0
 offset_bottom = 110.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 18
-text = "🎉 You won 500 gold!"
+text = "You won 500 gold!"
 horizontal_alignment = 1
 vertical_alignment = 1
 

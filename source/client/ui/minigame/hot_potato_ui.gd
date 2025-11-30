@@ -170,7 +170,7 @@ func _update_active_phase(time_left: float, potato_holder_id: int, participants:
 	
 	# Only show/update floating timer if player is not eliminated
 	if not am_eliminated:
-		floating_timer_label.text = "🥔 %.1f" % time_left
+		floating_timer_label.text = "%.1f" % time_left
 		
 		# Change color based on urgency
 		if time_left < 2.0:
@@ -213,7 +213,7 @@ func _update_active_phase(time_left: float, potato_holder_id: int, participants:
 		var is_me = peer_id == my_peer_id
 		
 		var label = Label.new()
-		var potato_icon = "🥔 " if has_potato else ""
+		var potato_icon = "[!] " if has_potato else ""
 		var you_suffix = TranslationServer.translate("hotpotato_player_you") if is_me else ""
 		label.text = "%s%s%s" % [potato_icon, player_name, you_suffix]
 		label.add_theme_font_size_override("font_size", 14)

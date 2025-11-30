@@ -73,10 +73,22 @@ func _ready() -> void:
 	menu_stack.append(main_panel)
 	back_button.hide()
 	back_button.pressed.connect(func():
+		if has_node("/root/UISounds"):
+			get_node("/root/UISounds").play_back()
+		
 		if menu_stack.size():
-			menu_stack.pop_back().hide()
+			var current = menu_stack.pop_back()
+			if has_node("/root/UIAnimations"):
+				get_node("/root/UIAnimations").animate_panel_close(current)
+			else:
+				current.hide()
+			
 			if menu_stack.size():
-				menu_stack.back().show()
+				var prev = menu_stack.back()
+				if has_node("/root/UIAnimations"):
+					get_node("/root/UIAnimations").animate_panel_open(prev)
+				else:
+					prev.show()
 			if menu_stack.size() < 2:
 				back_button.hide()
 		)
@@ -387,11 +399,27 @@ func do_request(
 
 
 func _show(next: Control, can_back: bool = true) -> void:
+	# Play transition sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_open()
+	
+	# Animate out the current panel
 	if menu_stack.size():
-		menu_stack.back().hide()
+		var current = menu_stack.back()
+		if has_node("/root/UIAnimations"):
+			await get_node("/root/UIAnimations").animate_panel_close(current).finished
+		else:
+			current.hide()
+	
 	if not can_back:
 		menu_stack.clear()
-	next.show()
+	
+	# Animate in the next panel
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_panel_open(next)
+	else:
+		next.show()
+	
 	menu_stack.append(next)
 	back_button.visible = can_back
 

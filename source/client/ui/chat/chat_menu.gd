@@ -61,6 +61,10 @@ func open_chat() -> void:
 	reset_view()
 	peek_feed_message_edit.grab_focus()
 	fade_out_timer.stop()
+	
+	# Play open sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_open()
 
 
 func _on_chat_message(message: Dictionary) -> void:
@@ -161,8 +165,17 @@ func _on_peek_feed_gui_input(event: InputEvent) -> void:
 		fade_out_timer.start()
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		# Play open sound
+		if has_node("/root/UISounds"):
+			get_node("/root/UISounds").play_open()
+		
 		peek_feed.hide()
 		full_feed.show()
+		
+		# Animate full feed opening
+		if has_node("/root/UIAnimations"):
+			get_node("/root/UIAnimations").fade_in(full_feed)
+		
 		full_feed_text_display.clear()
 		full_feed_text_display.text = ""
 		for message: String in channel_messages[0]:
@@ -171,6 +184,10 @@ func _on_peek_feed_gui_input(event: InputEvent) -> void:
 
 
 func _on_close_button_pressed() -> void:
+	# Play close sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_close()
+	
 	peek_feed.show()
 	reset_view()
 	full_feed.hide()

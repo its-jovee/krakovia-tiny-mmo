@@ -59,7 +59,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
-text = "📖 Game Guide"
+text = "Game Guide"
 
 [node name="CloseButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/TitleBar"]
 custom_minimum_size = Vector2(32, 32)
@@ -178,8 +178,8 @@ text = "Page 1 of 6"
 
 [node name="PrevButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/BottomBar"]
 layout_mode = 2
-text = "◀ Previous"
+text = "< Previous"
 
 [node name="NextButton" type="Button" parent="CenterContainer/MainPanel/MarginContainer/VBoxContainer/BottomBar"]
 layout_mode = 2
-text = "Next ▶"
+text = "Next >"

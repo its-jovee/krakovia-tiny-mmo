@@ -405,9 +405,9 @@ func _create_tooltip_content(item: Item) -> String:
 		# Show market condition hint
 		if absf(supply) > 0.1:
 			if supply < 0:
-				content += "[color=#AAAAAA]📈 High demand[/color]\n"
+				content += "[color=#AAAAAA]High demand[/color]\n"
 			else:
-				content += "[color=#AAAAAA]📉 Oversupply[/color]\n"
+				content += "[color=#AAAAAA]Oversupply[/color]\n"
 		
 		content += "\n"
 	# Regular sell price (when not at vendor)

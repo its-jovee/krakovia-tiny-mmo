@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "royal_inspection"
+title = "Royal Inspection"
+description = "The King's inspectors are visiting! Quality crafted goods fetch premium prices."
+icon = "👑"
+affected_items = {
+4: 0.5,
+10: 0.4,
+11: 0.4,
+25: 0.3
+}
+vendor_type_multipliers = {
+"blacksmith": 1.5,
+"general": 1.2
+}
+duration_minutes = 25
+selection_weight = 0.8
+time_restriction = 1
+

@@ -46,6 +46,13 @@ func data_request_handler(
 	if not vendor.buys_item(item_id):
 		return {"error": "This vendor doesn't buy that item"}
 	
+	# Check if vendor needs this material - cap quantity to what they need
+	var max_buy = vendor.get_max_buy_quantity(item_id)
+	if max_buy == 0:
+		return {"error": "Vendor doesn't need any more of that material"}
+	elif max_buy > 0 and quantity > max_buy:
+		quantity = max_buy  # Cap to what vendor needs
+	
 	# Get current event multiplier (if any)
 	var event_mult = _get_event_multiplier(instance, item_id, vendor.vendor_type)
 	

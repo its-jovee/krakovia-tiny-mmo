@@ -8,19 +8,19 @@ func _ready() -> void:
 	
 	# Test 1: Check if CraftingRecipe class exists
 	if ClassDB.class_exists("CraftingRecipe"):
-		print("✅ CraftingRecipe class found")
+		print("[OK] CraftingRecipe class found")
 	else:
 		print("❌ CraftingRecipe class not found")
 	
 	# Test 2: Check if recipes registry exists
 	var registry = ContentRegistryHub.registry_of(&"recipes")
 	if registry:
-		print("✅ Recipes registry found")
+		print("[OK] Recipes registry found")
 		
 		# Test loading a recipe
 		var recipe = ContentRegistryHub.load_by_id(&"recipes", 1)
 		if recipe:
-			print("✅ Recipe loaded: ", recipe.recipe_name)
+			print("[OK] Recipe loaded: ", recipe.recipe_name)
 			print("   - Class: ", recipe.required_class)
 			print("   - Level: ", recipe.required_level)
 			print("   - Gold cost: ", recipe.gold_cost)
@@ -44,19 +44,19 @@ func _ready() -> void:
 	# Test 3: Check if items registry has new items
 	var items_registry = ContentRegistryHub.registry_of(&"items")
 	if items_registry:
-		print("✅ Items registry found")
+		print("[OK] Items registry found")
 		
 		# Test loading some new items
 		var copper_ore = ContentRegistryHub.load_by_id(&"items", 7)
 		if copper_ore:
-			print("✅ Copper Ore loaded: ", copper_ore.item_name)
+			print("[OK] Copper Ore loaded: ", copper_ore.item_name)
 			print("   - Tags: ", copper_ore.tags)
 		else:
 			print("❌ Failed to load Copper Ore")
 		
 		var copper_ingot = ContentRegistryHub.load_by_id(&"items", 24)
 		if copper_ingot:
-			print("✅ Copper Ingot loaded: ", copper_ingot.item_name)
+			print("[OK] Copper Ingot loaded: ", copper_ingot.item_name)
 			print("   - Tags: ", copper_ingot.tags)
 		else:
 			print("❌ Failed to load Copper Ingot")
@@ -66,19 +66,19 @@ func _ready() -> void:
 	# Test 4: Check data request handlers
 	var handlers_registry = ContentRegistryHub.registry_of(&"data_request_handlers")
 	if handlers_registry:
-		print("✅ Data request handlers registry found")
+		print("[OK] Data request handlers registry found")
 		
 		# Check if craft handlers exist
 		var craft_execute_id = ContentRegistryHub.id_from_slug(&"data_request_handlers", &"craft.execute")
 		var craft_get_recipes_id = ContentRegistryHub.id_from_slug(&"data_request_handlers", &"craft.get_recipes")
 		
 		if craft_execute_id > 0:
-			print("✅ craft.execute handler registered (ID: ", craft_execute_id, ")")
+			print("[OK] craft.execute handler registered (ID: ", craft_execute_id, ")")
 		else:
 			print("❌ craft.execute handler not found")
 			
 		if craft_get_recipes_id > 0:
-			print("✅ craft.get_recipes handler registered (ID: ", craft_get_recipes_id, ")")
+			print("[OK] craft.get_recipes handler registered (ID: ", craft_get_recipes_id, ")")
 		else:
 			print("❌ craft.get_recipes handler not found")
 	else:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://cmu6o7gkxy8wf"]
 
-[ext_resource type="Theme" uid="uid://cf1ayo3dckj67" path="res://source/client/gateway/ui/theme_navy.tres" id="1_8lokm"]
+[ext_resource type="Theme" uid="uid://kraftovia_main_theme" path="res://assets/themes/theme_kraftovia.tres" id="1_8lokm"]
 [ext_resource type="Script" uid="uid://ch86ljq7iwgv8" path="res://source/client/gateway/gateway.gd" id="2_vjpk7"]
 [ext_resource type="Texture2D" uid="uid://cfihbj71a4y35" path="res://assets/sprites/gui/backgrounds/desert.png" id="3_wexja"]
 [ext_resource type="Texture2D" uid="uid://60uabqpkv07j" path="res://assets/login_screen.png" id="4_4rdug"]

@@ -3,6 +3,13 @@ extends Resource
 ## Defines a market event that affects item prices globally.
 ## Events are triggered periodically and broadcast to all players.
 
+## Time restriction for when this event can occur
+enum TimeRestriction {
+	ANY,        ## Can occur at any time
+	DAY_ONLY,   ## Only during day (0.0 - 0.5)
+	NIGHT_ONLY  ## Only during night (0.5 - 1.0)
+}
+
 ## Unique identifier for this event
 @export var event_id: String = ""
 
@@ -32,6 +39,9 @@ extends Resource
 ## Minimum/maximum rarity weight for random selection
 ## Higher weight = more likely to be picked
 @export var selection_weight: float = 1.0
+
+## Time restriction - when this event can occur
+@export var time_restriction: TimeRestriction = TimeRestriction.ANY
 
 
 ## Get the price multiplier for an item during this event
@@ -79,4 +89,29 @@ func get_client_info() -> Dictionary:
 		"duration_minutes": duration_minutes,
 		"affected_item_count": affected_items.size()
 	}
+
+
+## Check if this event is valid for the given time of day
+## time_of_day: float from 0.0 to 1.0 (0.0-0.5 = day, 0.5-1.0 = night)
+func is_valid_for_time(time_of_day: float) -> bool:
+	match time_restriction:
+		TimeRestriction.ANY:
+			return true
+		TimeRestriction.DAY_ONLY:
+			return time_of_day < 0.5
+		TimeRestriction.NIGHT_ONLY:
+			return time_of_day >= 0.5
+	return true
+
+
+## Get the time restriction as a string for display
+func get_time_restriction_string() -> String:
+	match time_restriction:
+		TimeRestriction.ANY:
+			return "Any Time"
+		TimeRestriction.DAY_ONLY:
+			return "Day Only"
+		TimeRestriction.NIGHT_ONLY:
+			return "Night Only"
+	return "Any Time"
 

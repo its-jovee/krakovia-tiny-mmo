@@ -70,7 +70,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 			return false
 		
 		var can_equip = equipment_item.can_equip(local_player)
-		print("  ✅ Can equip: %s" % can_equip)
+		print("  [OK] Can equip: %s" % can_equip)
 		return can_equip
 	
 	# Check if it's a gear item for this slot
@@ -86,7 +86,7 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	"""Handle dropping an item on this equipment slot"""
-	print("[EquipmentSlot] _drop_data called! 🎉")
+	print("[EquipmentSlot] _drop_data called!")
 	
 	if not data is Dictionary or not data.has("item_data"):
 		print("  ✗ Invalid data in drop")
@@ -114,7 +114,7 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 			func(response: Dictionary):
 				print("[EquipmentSlot] Equip response: %s" % response)
 				if response.get("ok", false):
-					print("  ✅ Successfully equipped %s via drag-and-drop!" % response.get("item_name", "item"))
+					print("  [OK] Successfully equipped %s via drag-and-drop!" % response.get("item_name", "item"))
 					# Server will sync, which will trigger visual update
 				else:
 					print("  ✗ Failed to equip: %s" % response.get("error", "Unknown error")),
@@ -151,7 +151,7 @@ func _gui_input(event: InputEvent) -> void:
 					func(response: Dictionary):
 						print("[EquipmentSlot] Unequip response: %s" % response)
 						if response.get("ok", false):
-							print("  ✅ Successfully unequipped via click!")
+							print("  [OK] Successfully unequipped via click!")
 						else:
 							print("  ✗ Failed to unequip: %s" % response.get("error", "Unknown error")),
 					{

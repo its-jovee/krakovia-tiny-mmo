@@ -30,35 +30,31 @@ func data_request_handler(
 
 
 func _build_catalog_with_event_prices(vendor: VendorArea, event_manager: Node) -> Dictionary:
-	"""Build catalog with per-item event price modifiers applied"""
-	var sell_catalog_result: Array[Dictionary] = []  # Items player can BUY from vendor
-	var buy_catalog_result: Array[Dictionary] = []   # Items vendor will BUY from player
-	
+	"""Build catalog with per-item event price modifiers applied and production info"""
 	var vendor_type = vendor.vendor_type
 	
-	# Items vendor sells to players (with stock info)
-	for item_id in vendor.item_catalog:
-		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
-		if item and item.can_sell:
-			var event_mult = _get_item_event_multiplier(event_manager, item_id, vendor_type)
-			sell_catalog_result.append({
-				"id": item_id,
-				"price": vendor.get_buy_price(item, item_id, event_mult),
-				"supply": vendor.get_supply_level(item_id),
-				"stock": vendor.get_stock(item_id)
-			})
+	# Get full catalog from vendor (includes production info)
+	var base_catalog = vendor.get_catalog_for_client(1.0)
+	var sell_catalog_result: Array[Dictionary] = []
+	var buy_catalog_result: Array[Dictionary] = []
 	
-	# Items vendor buys from players
-	var actual_buy_catalog = vendor.buy_catalog if not vendor.buy_catalog.is_empty() else vendor.item_catalog
-	for item_id in actual_buy_catalog:
+	# Apply event multipliers to sell items (player buys)
+	for entry in base_catalog.get("sells", []):
+		var item_id = entry.get("id", 0)
 		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
-		if item and item.can_sell:
+		if item:
 			var event_mult = _get_item_event_multiplier(event_manager, item_id, vendor_type)
-			buy_catalog_result.append({
-				"id": item_id,
-				"price": vendor.get_sell_price(item, item_id, event_mult),
-				"supply": vendor.get_supply_level(item_id)
-			})
+			entry["price"] = vendor.get_buy_price(item, item_id, event_mult)
+		sell_catalog_result.append(entry)
+	
+	# Apply event multipliers to buy items (vendor buys from player)
+	for entry in base_catalog.get("buys", []):
+		var item_id = entry.get("id", 0)
+		var item: Item = ContentRegistryHub.load_by_id(&"items", item_id)
+		if item:
+			var event_mult = _get_item_event_multiplier(event_manager, item_id, vendor_type)
+			entry["price"] = vendor.get_sell_price(item, item_id, event_mult)
+		buy_catalog_result.append(entry)
 	
 	return {
 		"sells": sell_catalog_result,

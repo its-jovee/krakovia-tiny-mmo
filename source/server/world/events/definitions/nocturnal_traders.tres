@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="MarketEvent" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/server/world/events/market_event.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+event_id = "nocturnal_traders"
+title = "Nocturnal Traders"
+description = "Mysterious merchants emerge from the shadows with rare goods at bargain prices."
+icon = "🦇"
+affected_items = {
+24: -0.4,
+25: -0.3,
+7: -0.3,
+8: -0.2
+}
+vendor_type_multipliers = {
+"general": 1.3,
+"blacksmith": 1.2
+}
+duration_minutes = 20
+selection_weight = 0.7
+time_restriction = 2
+

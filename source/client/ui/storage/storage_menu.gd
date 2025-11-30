@@ -82,13 +82,30 @@ func _create_item_slot() -> Panel:
 	return slot
 
 func show_menu() -> void:
-	visible = true
+	# Play open sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_open()
+	
+	# Animate menu open
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_panel_open(self)
+	else:
+		visible = true
+	
 	# Request fresh data from server
 	InstanceClient.current.request_data(&"storage.get", _on_storage_received, {})
 	InstanceClient.current.request_data(&"inventory.get", _on_inventory_received, {})
 
 func _on_close_button_pressed() -> void:
-	visible = false
+	# Play close sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_close()
+	
+	# Animate menu close
+	if has_node("/root/UIAnimations"):
+		get_node("/root/UIAnimations").animate_panel_close(self)
+	else:
+		visible = false
 
 func _on_storage_received(data: Dictionary) -> void:
 	if data.has("error"):

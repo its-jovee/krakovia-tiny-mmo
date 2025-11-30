@@ -45,6 +45,9 @@ func charge_new_instance(map_path: String, instance_id: String) -> void:
 	new_instance.add_child(map, true)
 	add_child(new_instance, true)
 	
+	# Set up day/night cycle
+	_setup_day_night_cycle(map)
+	
 	# Charge different type of UI/HUD and clear old one,
 	# for mini game / special instances that would require unique HUD ? 
 	
@@ -53,4 +56,31 @@ func charge_new_instance(map_path: String, instance_id: String) -> void:
 	if not current_ui:
 		current_ui = preload("res://source/client/ui/ui.tscn").instantiate()
 		add_child(current_ui)
+
+
+func _setup_day_night_cycle(map: Map) -> void:
+	"""Set up the day/night cycle for the loaded map"""
+	# Find the CanvasModulate in the map
+	var canvas_modulate: CanvasModulate = null
+	for child in map.get_children():
+		if child is CanvasModulate:
+			canvas_modulate = child
+			break
+	
+	if not canvas_modulate:
+		# Try finding it recursively
+		canvas_modulate = map.find_child("CanvasModulate", true, false) as CanvasModulate
+	
+	if canvas_modulate:
+		# Create and set up the DayNightCycle
+		var day_night = DayNightCycle.new()
+		day_night.name = "DayNightCycle"
+		map.add_child(day_night)
+		day_night.set_canvas_modulate(canvas_modulate)
+		
+		# Store reference for time updates
+		InstanceClient.day_night_cycle = day_night
+		print("[InstanceManager] Day/night cycle connected to CanvasModulate")
+	else:
+		print("[InstanceManager] No CanvasModulate found in map - day/night cycle disabled")
 	

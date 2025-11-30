@@ -44,6 +44,15 @@ extends Resource
 ## Stock replenishment rate per hour (toward base_stock)
 @export var stock_replenish_rate: float = 2.0
 
+## === PRODUCTION SYSTEM ===
+## Pending materials accumulated for recipes
+## {output_item_id: {input_item_id: accumulated_count, ...}}
+@export var pending_materials: Dictionary = {}
+
+## Production queue - items being crafted
+## {output_item_id: {start_time: int, amount: int}}
+@export var production_queue: Dictionary = {}
+
 
 ## Check if this vendor deals in a specific item
 func has_item(item_id: int) -> bool:
@@ -223,4 +232,155 @@ func initialize_stock(sell_catalog: Array[int]) -> void:
 	for item_id in sell_catalog:
 		if not stock.has(item_id):
 			stock[item_id] = base_stock_per_item
+
+
+## === PRODUCTION MANAGEMENT ===
+
+## Add materials toward producing an output item
+## Returns the number of items that started production
+func add_materials(output_item_id: int, input_item_id: int, quantity: int, recipe: Dictionary, production_time: float) -> int:
+	if not pending_materials.has(output_item_id):
+		pending_materials[output_item_id] = {}
+	
+	# Add the materials
+	var pending = pending_materials[output_item_id]
+	pending[input_item_id] = pending.get(input_item_id, 0) + quantity
+	
+	# Check if we have enough of ALL inputs to start production
+	var can_produce = _calculate_producible(output_item_id, recipe)
+	
+	if can_produce > 0:
+		# Consume materials
+		for input_id in recipe.keys():
+			var needed_per = recipe[input_id]
+			pending[input_id] = pending.get(input_id, 0) - (needed_per * can_produce)
+		
+		# Start production (add to existing queue if already producing)
+		_start_production(output_item_id, can_produce, production_time)
+	
+	return can_produce
+
+
+## Calculate how many items we can produce with current pending materials
+func _calculate_producible(output_item_id: int, recipe: Dictionary) -> int:
+	if not pending_materials.has(output_item_id):
+		return 0
+	
+	var pending = pending_materials[output_item_id]
+	var min_producible = 999999
+	
+	for input_id in recipe.keys():
+		var needed_per = recipe[input_id]
+		var have = pending.get(input_id, 0)
+		var can_make = have / needed_per
+		min_producible = mini(min_producible, can_make)
+	
+	# Check stock limit
+	var current_stock = get_stock(output_item_id)
+	var in_production = get_production_amount(output_item_id)
+	var room_for = max_stock_per_item - current_stock - in_production
+	
+	return clampi(min_producible, 0, room_for)
+
+
+## Start production of items
+func _start_production(output_item_id: int, amount: int, production_time: float) -> void:
+	if amount <= 0:
+		return
+	
+	var now = int(Time.get_unix_time_from_system())
+	
+	if production_queue.has(output_item_id):
+		# Add to existing production
+		production_queue[output_item_id]["amount"] = production_queue[output_item_id].get("amount", 0) + amount
+	else:
+		# Start new production
+		production_queue[output_item_id] = {
+			"start_time": now,
+			"amount": amount,
+			"time_per_item": production_time
+		}
+
+
+## Get how many items are currently in production
+func get_production_amount(output_item_id: int) -> int:
+	if not production_queue.has(output_item_id):
+		return 0
+	return production_queue[output_item_id].get("amount", 0)
+
+
+## Check and complete production (call periodically or on interaction)
+func process_production() -> Dictionary:
+	"""Process production queue and complete items. Returns completed items {item_id: amount}"""
+	var now = int(Time.get_unix_time_from_system())
+	var completed: Dictionary = {}
+	
+	for output_id in production_queue.keys():
+		var prod = production_queue[output_id]
+		var start_time = prod.get("start_time", now)
+		var amount = prod.get("amount", 0)
+		var time_per_item = prod.get("time_per_item", 30.0)
+		
+		var elapsed = now - start_time
+		var items_ready = int(elapsed / time_per_item)
+		items_ready = mini(items_ready, amount)
+		
+		if items_ready > 0:
+			# Add to stock
+			add_stock(output_id, items_ready)
+			completed[output_id] = items_ready
+			
+			# Update production queue
+			prod["amount"] = amount - items_ready
+			prod["start_time"] = start_time + int(items_ready * time_per_item)
+			
+			if prod["amount"] <= 0:
+				production_queue.erase(output_id)
+	
+	return completed
+
+
+## Get production status for client display
+## Returns {output_item_id: {producing: int, time_remaining: int, pending_materials: {...}}}
+func get_production_status(recipes: Dictionary) -> Dictionary:
+	var now = int(Time.get_unix_time_from_system())
+	var status: Dictionary = {}
+	
+	for output_id in recipes.keys():
+		var recipe = recipes[output_id]
+		var info: Dictionary = {
+			"producing": 0,
+			"time_remaining": 0,
+			"next_ready_in": 0,
+			"pending": {},
+			"needed": recipe.duplicate(),
+			"can_produce": 0,
+			"stock_full": false
+		}
+		
+		# Check pending materials
+		if pending_materials.has(output_id):
+			info["pending"] = pending_materials[output_id].duplicate()
+		
+		# Check production queue
+		if production_queue.has(output_id):
+			var prod = production_queue[output_id]
+			info["producing"] = prod.get("amount", 0)
+			var time_per_item = prod.get("time_per_item", 30.0)
+			var elapsed = now - prod.get("start_time", now)
+			var time_for_next = time_per_item - fmod(elapsed, time_per_item)
+			info["next_ready_in"] = int(time_for_next)
+			info["time_remaining"] = int((info["producing"] * time_per_item) - elapsed)
+		
+		# Check if stock is full
+		var current_stock = get_stock(output_id)
+		var in_production = get_production_amount(output_id)
+		if current_stock + in_production >= max_stock_per_item:
+			info["stock_full"] = true
+		else:
+			info["can_produce"] = _calculate_producible(output_id, recipe)
+		
+		status[output_id] = info
+	
+	return status
 

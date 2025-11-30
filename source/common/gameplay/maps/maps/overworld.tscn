@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=47 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://bkw7x3m8pq2yl" path="res://source/common/gameplay/maps/components/interaction_areas/leaderboard/leaderboard_area.tscn" id="30_leaderboard"]
 [ext_resource type="PackedScene" uid="uid://bjetvw7ax7x3n" path="res://source/server/world/components/harvesting/nodes/trapper_node_t6.tscn" id="31_7nycf"]
 [ext_resource type="PackedScene" uid="uid://b2qvx8n3f5hak" path="res://source/common/gameplay/maps/components/interaction_areas/vendor/vendor_area.tscn" id="32_vendor"]
+[ext_resource type="PackedScene" uid="uid://cworkerarea1" path="res://source/common/gameplay/maps/components/interaction_areas/worker/worker_area.tscn" id="33_worker"]
 
 [sub_resource type="Shader" id="Shader_pmgut"]
 code = "shader_type canvas_item;
@@ -370,6 +371,27 @@ specialty_bonus = 1.1
 crafted_bonus = 1.1
 production_time_seconds = 40.0
 natural_restock_minutes = 20.0
+
+[node name="MinerWorker" parent="Components" instance=ExtResource("33_worker")]
+position = Vector2(380, 420)
+worker_type = "miner"
+worker_name = "Rocky the Miner"
+worker_icon = "⛏️"
+worker_description = "A seasoned miner who knows every vein in the mountain. Pay Rocky to dig up ores and minerals for you while you tend to other business. The longer he works, the better the haul!"
+
+[node name="ForagerWorker" parent="Components" instance=ExtResource("33_worker")]
+position = Vector2(500, 380)
+worker_type = "forager"
+worker_name = "Fern the Gatherer"
+worker_icon = "🌿"
+worker_description = "A forest-born herbalist who can find plants others would miss. Fern will forage for herbs, wood, and forest treasures on your behalf. She's especially good with rare finds!"
+
+[node name="TrapperWorker" parent="Components" instance=ExtResource("33_worker")]
+position = Vector2(620, 420)
+worker_type = "trapper"
+worker_name = "Hunter Jack"
+worker_icon = "🏹"
+worker_description = "An expert tracker who's hunted across every terrain. Jack will set traps and bring back hides, meat, and other creature materials. His patience always pays off!"
 
 [node name="MinerNodeT2(1)" parent="." instance=ExtResource("24_bd110")]
 position = Vector2(1392, 720)

@@ -18,9 +18,13 @@ var connected_players: Dictionary[int, PlayerResource]
 
 var _decay_timer: Timer
 var _event_manager: MarketEventManager
+var _game_time_manager: GameTimeManager
 
 
 func start_world_server() -> void:
+	# Set up game time manager (must be first for other managers to use)
+	_setup_game_time_manager()
+	
 	# Set up market price decay timer
 	_setup_market_decay_timer()
 	
@@ -107,11 +111,21 @@ func _on_market_decay_tick() -> void:
 		print("[WorldServer] Market prices decayed toward equilibrium")
 
 
+func _setup_game_time_manager() -> void:
+	"""Initialize the game time manager for day/night cycle"""
+	_game_time_manager = GameTimeManager.new()
+	_game_time_manager.name = "GameTimeManager"
+	_game_time_manager.world_server = self
+	add_child(_game_time_manager)
+	print("[WorldServer] Game time manager started")
+
+
 func _setup_event_manager() -> void:
 	"""Initialize the market event manager"""
 	_event_manager = MarketEventManager.new()
 	_event_manager.name = "MarketEventManager"
 	_event_manager.world_server = self
+	_event_manager.game_time_manager = _game_time_manager
 	_event_manager.event_interval_minutes = event_interval_minutes
 	
 	# Load event definitions from resources
@@ -149,3 +163,8 @@ func _load_event_pool() -> void:
 func get_event_manager() -> MarketEventManager:
 	"""Get the market event manager"""
 	return _event_manager
+
+
+func get_game_time_manager() -> GameTimeManager:
+	"""Get the game time manager"""
+	return _game_time_manager

@@ -64,6 +64,14 @@ func get_energy_max() -> float:
 ## Quick-Switch: Last known position for respawning at same location
 @export var last_position: Vector2 = Vector2.ZERO
 
+## Hired Worker System - active jobs
+## Each job: {worker_type: String, tier: int, start_time: int, duration_seconds: int}
+@export var worker_jobs: Array[Dictionary] = []
+
+## Hired Worker System - burnout tracking (cost increases with repeated hires)
+## Structure: {worker_type: {hire_count: int, last_reset: int (unix timestamp)}}
+@export var worker_burnout: Dictionary = {}
+
 ## Current Network ID
 var current_peer_id: int
 
@@ -166,3 +174,97 @@ func get_appearance_data() -> Dictionary:
 		"hair": appearance_hair_id,
 		"accessory": appearance_accessory_id
 	}
+
+
+## === HIRED WORKER SYSTEM ===
+
+const WORKER_DAY_DURATION: int = 45 * 60  # 45 minutes in seconds
+const WORKER_BURNOUT_MULTIPLIER: float = 1.25  # 25% increase per hire
+
+## Get burnout info for a worker type, resetting if a new "day" has started
+func get_worker_burnout(worker_type: String) -> Dictionary:
+	var now = int(Time.get_unix_time_from_system())
+	
+	if not worker_burnout.has(worker_type):
+		worker_burnout[worker_type] = {"hire_count": 0, "last_reset": now}
+	
+	var info = worker_burnout[worker_type]
+	var elapsed = now - info.get("last_reset", now)
+	
+	# Reset if a "day" (45 min) has passed
+	if elapsed >= WORKER_DAY_DURATION:
+		info["hire_count"] = 0
+		info["last_reset"] = now
+	
+	return info
+
+
+## Calculate the cost with burnout multiplier applied
+func calculate_worker_cost(worker_type: String, base_cost: int) -> int:
+	var info = get_worker_burnout(worker_type)
+	var hire_count = info.get("hire_count", 0)
+	var multiplier = pow(WORKER_BURNOUT_MULTIPLIER, hire_count)
+	return int(ceil(base_cost * multiplier))
+
+
+## Increment hire count for burnout tracking
+func increment_worker_hire(worker_type: String) -> void:
+	var info = get_worker_burnout(worker_type)
+	info["hire_count"] = info.get("hire_count", 0) + 1
+
+
+## Get time until burnout resets (in seconds)
+func get_burnout_reset_time(worker_type: String) -> int:
+	var info = get_worker_burnout(worker_type)
+	var now = int(Time.get_unix_time_from_system())
+	var elapsed = now - info.get("last_reset", now)
+	return maxi(0, WORKER_DAY_DURATION - elapsed)
+
+
+## Add a new worker job
+func add_worker_job(worker_type: String, tier: int, duration_seconds: int) -> void:
+	var job = {
+		"worker_type": worker_type,
+		"tier": tier,
+		"start_time": int(Time.get_unix_time_from_system()),
+		"duration_seconds": duration_seconds
+	}
+	worker_jobs.append(job)
+
+
+## Get all jobs for a specific worker type
+func get_worker_jobs(worker_type: String) -> Array[Dictionary]:
+	var jobs: Array[Dictionary] = []
+	for job in worker_jobs:
+		if job.get("worker_type") == worker_type:
+			jobs.append(job)
+	return jobs
+
+
+## Get completed jobs ready for collection
+func get_completed_jobs(worker_type: String = "") -> Array[Dictionary]:
+	var now = int(Time.get_unix_time_from_system())
+	var completed: Array[Dictionary] = []
+	
+	for job in worker_jobs:
+		if worker_type != "" and job.get("worker_type") != worker_type:
+			continue
+		var end_time = job.get("start_time", 0) + job.get("duration_seconds", 0)
+		if now >= end_time:
+			completed.append(job)
+	
+	return completed
+
+
+## Remove a specific job (after collection)
+func remove_worker_job(job: Dictionary) -> bool:
+	var idx = worker_jobs.find(job)
+	if idx >= 0:
+		worker_jobs.remove_at(idx)
+		return true
+	return false
+
+
+## Check if player has any completed jobs (for visual indicator)
+func has_completed_worker_jobs() -> bool:
+	return get_completed_jobs().size() > 0

@@ -33,9 +33,9 @@ texture = ExtResource("6_gkhtr")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="." index="2"]
 physics_interpolation_mode = 2
-visible = false
 position = Vector2(0, 16)
 occluder = SubResource("OccluderPolygon2D_gkhtr")
+occluder_light_mask = 1
 
 [node name="AnimatedSprite2D" parent="." index="3"]
 scale = Vector2(0.8, 0.8)

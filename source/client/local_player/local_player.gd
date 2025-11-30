@@ -191,6 +191,11 @@ func _is_ui_panel_open() -> bool:
 	if storage_ui and storage_ui.is_visible_in_tree():
 		return true
 	
+	# Check worker hire UI
+	var worker_ui = get_tree().get_root().find_child("WorkerHireUI", true, false)
+	if worker_ui and worker_ui.is_visible_in_tree():
+		return true
+	
 	return false
 	
 	

@@ -8,6 +8,7 @@ const DUMMY_PLAYER: PackedScene = preload("res://source/common/gameplay/characte
 static var current: InstanceClient
 static var local_player: LocalPlayer
 static var local_harvest_node: String = ""
+static var day_night_cycle: DayNightCycle = null
 
 var players_by_peer_id: Dictionary[int, Player]
 
@@ -218,6 +219,15 @@ func _ready() -> void:
 		var titles_menu = get_tree().get_root().find_child("TitlesMenu", true, false)
 		if titles_menu and titles_menu.visible and titles_menu.has_method("on_progress_update"):
 			titles_menu.on_progress_update(data)
+	)
+	
+	# Day/night cycle time updates
+	subscribe(&"game.time", func(data: Dictionary) -> void:
+		if data.is_empty():
+			return
+		# Forward to DayNightCycle if it exists
+		if day_night_cycle:
+			day_night_cycle._on_time_update(data)
 	)
 	
 	synchronizer_manager = StateSynchronizerManagerClient.new()

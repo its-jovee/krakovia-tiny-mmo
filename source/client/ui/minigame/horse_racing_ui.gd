@@ -224,7 +224,7 @@ func _update_players_list(participants: Array) -> void:
 		var player_peer: int = p.get("peer_id", -1)
 		var bet: int = p.get("bet_amount", 0)
 		var ready: bool = p.get("ready", false)
-		var ready_text: String = "✓" if ready else "○"
+		var ready_text: String = "[+]" if ready else "[ ]"
 		
 		var horse_name: String = ""
 		var horse_id: int = p.get("horse_id", -1)
@@ -236,7 +236,7 @@ func _update_players_list(participants: Array) -> void:
 		var me_indicator: String = " (You)" if is_me else ""
 		
 		if bet > 0 and horse_name != "":
-			label.text = "%s %s%s: 🐎%s - %dg" % [ready_text, player_name, me_indicator, horse_name, bet]
+			label.text = "%s %s%s: %s - %dg" % [ready_text, player_name, me_indicator, horse_name, bet]
 			if ready:
 				label.modulate = Color(0.7, 1.0, 0.7)  # Green tint for ready
 		else:
@@ -261,11 +261,11 @@ func _on_horse_selected(horse_id: int) -> void:
 		if i == selected_horse:
 			horse_buttons[i].modulate = Color(1.2, 1.2, 0.6)
 			var horse_name: String = horse_names[i] if i < horse_names.size() else "Horse %d" % (i + 1)
-			horse_buttons[i].text = "✓ %s (SELECTED)" % horse_name
+			horse_buttons[i].text = "%s (SELECTED)" % horse_name
 		else:
 			horse_buttons[i].modulate = Color.WHITE
 			var horse_name: String = horse_names[i] if i < horse_names.size() else "Horse %d" % (i + 1)
-			horse_buttons[i].text = "🐎 %s - 0 gold bet" % horse_name
+			horse_buttons[i].text = "%s - 0 gold bet" % horse_name
 
 
 func _on_bet_amount_changed(new_text: String) -> void:

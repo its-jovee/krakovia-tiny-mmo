@@ -484,7 +484,7 @@ func _on_equip_button_pressed() -> void:
 			)
 	elif selected_item is EquipmentItem:
 		# Handle equipment items (cosmetic accessories)
-		print("[Inventory] ✅ Item is EquipmentItem!")
+		print("[Inventory] Item is EquipmentItem!")
 		
 		var equipment_item := selected_item as EquipmentItem
 		var slot_type: String = "accessory"
@@ -512,7 +512,7 @@ func _on_equip_button_pressed() -> void:
 				func(response: Dictionary):
 					print("[Inventory] Unequip response received: %s" % response)
 					if response.get("ok", false):
-						print("  ✅ Successfully unequipped from %s slot!" % response.get("unequipped_slot", "slot"))
+						print("  [OK] Successfully unequipped from %s slot!" % response.get("unequipped_slot", "slot"))
 						# Update button to show "Equip"
 						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
 						if btn:
@@ -543,7 +543,7 @@ func _on_equip_button_pressed() -> void:
 				func(response: Dictionary):
 					print("[Inventory] Equip response received: %s" % response)
 					if response.get("ok", false):
-						print("  ✅ Successfully equipped %s!" % response.get("item_name", "item"))
+						print("  [OK] Successfully equipped %s!" % response.get("item_name", "item"))
 						# Update button to show "Unequip"
 						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
 						if btn:
@@ -620,14 +620,14 @@ func _find_equipment_slot_for_item(item: EquipmentItem) -> Node:
 		if child is EquipmentSlot:
 			var slot = child as EquipmentSlot
 			if slot.gear_slot and item.slot and slot.gear_slot.key == item.slot.key:
-				print("  ✅ Found matching EquipmentSlot: %s (key: %s)" % [slot.name, slot.gear_slot.key])
+				print("  [OK] Found matching EquipmentSlot: %s (key: %s)" % [slot.name, slot.gear_slot.key])
 				return slot
 		
 		# Check GearSlotButton (Button-based) - though EquipmentItem might not use these
 		if child is GearSlotButton:
 			var slot = child as GearSlotButton
 			if slot.gear_slot and item.slot and slot.gear_slot.key == item.slot.key:
-				print("  ✅ Found matching GearSlotButton: %s (key: %s)" % [slot.name, slot.gear_slot.key])
+				print("  [OK] Found matching GearSlotButton: %s (key: %s)" % [slot.name, slot.gear_slot.key])
 				return slot
 	
 	print("  ✗ No matching slot found!")
@@ -657,6 +657,10 @@ func _get_next_panel_slot(start_index: int) -> Panel:
 
 # Trade system functions
 func _on_close_button_pressed():
+	# Play close sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_close()
+	
 	if trade_view.visible:
 		# Cancel trade if in trade view
 		if trade_session_id != -1:
@@ -665,8 +669,11 @@ func _on_close_button_pressed():
 			})
 		_close_trade()
 	else:
-		# Normal close behavior
-		hide()
+		# Normal close behavior with animation
+		if has_node("/root/UIAnimations"):
+			get_node("/root/UIAnimations").animate_panel_close(self)
+		else:
+			hide()
 
 func _on_trade_open(data: Dictionary):
 	_reset_trade_state()
@@ -906,32 +913,68 @@ func _enable_inventory_interaction():
 
 # Tab switching logic
 func _on_tab_button_pressed(tab_index: int) -> void:
+	# Play tab switch sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_select()
 	show_tab(tab_index)
 
 
 func show_tab(tab_index: int) -> void:
 	"""Switch to a specific tab view"""
-	# Hide all views
-	equipment_view.hide()
-	trade_view.hide()
-	materials_view.hide()
-	crafting_view.hide()
+	# Play tab switch sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_select()
 	
-	# Show appropriate view based on tab
+	# Get the view to show
+	var target_view: Control = null
 	match tab_index:
 		0: # Equipment
-			equipment_view.show()
+			target_view = equipment_view
 		1: # Materials  
-			materials_view.show()
+			target_view = materials_view
 		2: # Consumables
-			equipment_view.show() # For now, show equipment view
+			target_view = equipment_view # For now, show equipment view
 		3: # Key Items
-			equipment_view.show() # For now, show equipment view
+			target_view = equipment_view # For now, show equipment view
 		4: # Crafting
-			crafting_view.show()
+			target_view = crafting_view
 			_load_crafting_data()
 			# Update energy display immediately when showing crafting view
 			_update_crafting_bars()
+	
+	# Animate tab switch with crossfade
+	var anim = _get_ui_animations()
+	if anim and target_view:
+		# Find current visible view
+		var current_view: Control = null
+		if equipment_view.visible:
+			current_view = equipment_view
+		elif materials_view.visible:
+			current_view = materials_view
+		elif crafting_view.visible:
+			current_view = crafting_view
+		elif trade_view.visible:
+			current_view = trade_view
+		
+		# Hide all views first
+		equipment_view.hide()
+		trade_view.hide()
+		materials_view.hide()
+		crafting_view.hide()
+		
+		# Show and animate the target view
+		if current_view and current_view != target_view:
+			anim.crossfade(current_view, target_view, 0.15)
+		else:
+			anim.fade_in(target_view, 0.15)
+	else:
+		# Fallback: just show/hide without animation
+		equipment_view.hide()
+		trade_view.hide()
+		materials_view.hide()
+		crafting_view.hide()
+		if target_view:
+			target_view.show()
 
 
 # Crafting system methods
@@ -953,11 +996,11 @@ func _on_recipes_received(data: Dictionary) -> void:
 	available_recipes.clear()
 	var registry = ContentRegistryHub.registry_of(&"recipes")
 	if registry:
-		print("✅ Recipes registry found")
+		print("[OK] Recipes registry found")
 		# Load the content index to get all recipe entries
 		var recipes_index: ContentIndex = load("res://source/common/registry/indexes/recipes_index.tres")
 		if recipes_index:
-			print("✅ Recipes index loaded with ", recipes_index.entries.size(), " entries")
+			print("[OK] Recipes index loaded with ", recipes_index.entries.size(), " entries")
 			# Iterate through all entries in the registry
 			for entry in recipes_index.entries:
 				var recipe_id: int = entry.get(&"id", 0)
@@ -965,7 +1008,7 @@ func _on_recipes_received(data: Dictionary) -> void:
 					continue
 				var recipe: CraftingRecipe = ContentRegistryHub.load_by_id(&"recipes", recipe_id)
 				if recipe:
-					print("✅ Loaded recipe: ", recipe.recipe_name, " (ID: ", recipe_id, ")")
+					print("[OK] Loaded recipe: ", recipe.recipe_name, " (ID: ", recipe_id, ")")
 					available_recipes.append(recipe)
 				else:
 					print("❌ Failed to load recipe ID: ", recipe_id)
@@ -1281,6 +1324,10 @@ func _on_craft_button_pressed() -> void:
 	if not selected_recipe:
 		return
 	
+	# Play click sound
+	if has_node("/root/UISounds"):
+		get_node("/root/UISounds").play_click()
+	
 	# Get recipe ID
 	var recipe_id = ContentRegistryHub.id_from_slug(&"recipes", selected_recipe.slug)
 	if recipe_id <= 0:
@@ -1294,6 +1341,10 @@ func _on_craft_button_pressed() -> void:
 
 func _on_craft_response(data: Dictionary) -> void:
 	if data.get("success", false):
+		# Play success sound
+		if has_node("/root/UISounds"):
+			get_node("/root/UISounds").play_success()
+		
 		status_label.text = TranslationServer.translate("crafting_success")
 		# Refresh inventory to show new items
 		InstanceClient.current.request_data(&"inventory.get", _on_inventory_refreshed_after_craft)
@@ -1302,6 +1353,9 @@ func _on_craft_response(data: Dictionary) -> void:
 		if data.has("exp_gained") and data.exp_gained > 0:
 			_show_craft_xp_popup(data.exp_gained)
 	else:
+		# Play error sound
+		if has_node("/root/UISounds"):
+			get_node("/root/UISounds").play_error()
 		status_label.text = TranslationServer.translate("crafting_error").format({"error": data.get("error", "Unknown error")})
 
 func _on_inventory_refreshed_after_craft(inv_data: Dictionary) -> void:
@@ -1368,14 +1422,24 @@ func _update_crafting_bars() -> void:
 	
 	if crafting_exp_bar:
 		crafting_exp_bar.max_value = exp_required
-		crafting_exp_bar.value = current_exp
+		# Animate progress bar value change
+		var anim = _get_ui_animations()
+		if anim:
+			anim.animate_bar_fill(crafting_exp_bar, current_exp)
+		else:
+			crafting_exp_bar.value = current_exp
 	
 	if crafting_energy_label:
 		crafting_energy_label.text = TranslationServer.translate("crafting_label_energy").format({"current": "%.0f" % current_energy, "max": "%.0f" % current_energy_max})
 	
 	if crafting_energy_bar:
 		crafting_energy_bar.max_value = current_energy_max
-		crafting_energy_bar.value = current_energy
+		# Animate progress bar value change
+		var anim = _get_ui_animations()
+		if anim:
+			anim.animate_bar_fill(crafting_energy_bar, current_energy)
+		else:
+			crafting_energy_bar.value = current_energy
 
 func _show_level_up_popup(new_level: int) -> void:
 	"""Create and display a level up popup on top of the crafting view"""
@@ -1531,3 +1595,14 @@ func _update_ui_text() -> void:
 	# Update recipe details if one is selected
 	if selected_recipe:
 		_update_recipe_costs_and_status()
+
+
+# =============================================================================
+# HELPER FUNCTIONS
+# =============================================================================
+
+func _get_ui_animations() -> Node:
+	"""Get UIAnimations autoload singleton"""
+	if has_node("/root/UIAnimations"):
+		return get_node("/root/UIAnimations")
+	return null

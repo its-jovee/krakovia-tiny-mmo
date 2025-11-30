@@ -48,13 +48,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-text = "🏪 Vendor"
+text = "Vendor"
 vertical_alignment = 1
 
 [node name="CloseButton" type="Button" parent="Panel/MarginContainer/VBoxContainer/HeaderContainer"]
 custom_minimum_size = Vector2(80, 32)
 layout_mode = 2
-text = "✕ Close"
+text = "Close"
 
 [node name="EventBanner" type="Panel" parent="Panel/MarginContainer/VBoxContainer"]
 visible = false
@@ -72,7 +72,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.3, 1)
 theme_override_font_sizes/font_size = 12
-text = "📢 Market Event Active!"
+text = "Market Event Active!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -90,7 +90,7 @@ layout_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.84, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = "💰 0 Gold"
+text = "0 Gold"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -102,7 +102,7 @@ theme_override_constants/separation = 10
 [node name="SearchBox" type="LineEdit" parent="Panel/MarginContainer/VBoxContainer/FilterContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "🔍 Search items..."
+placeholder_text = "Search items..."
 
 [node name="TabContainer" type="TabContainer" parent="Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -180,7 +180,7 @@ theme_override_constants/separation = 4
 [node name="RatesTitle" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Info/InfoScroll/InfoContent/RatesSection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "💰 Trading Rates"
+text = "Trading Rates"
 
 [node name="RatesLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Info/InfoScroll/InfoContent/RatesSection"]
 layout_mode = 2
@@ -197,7 +197,7 @@ theme_override_constants/separation = 4
 [node name="ProductionTitle" type="Label" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Info/InfoScroll/InfoContent/ProductionSection"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "⚙️ Production"
+text = "Production"
 
 [node name="ProductionLabel" type="RichTextLabel" parent="Panel/MarginContainer/VBoxContainer/TabContainer/Info/InfoScroll/InfoContent/ProductionSection"]
 layout_mode = 2
@@ -234,15 +234,21 @@ text = "Price: "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TransactionDialog/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="QuantityLabel" type="Label" parent="TransactionDialog/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Quantity:"
+text = "Qty:"
 
 [node name="QuantitySpinBox" type="SpinBox" parent="TransactionDialog/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
+
+[node name="MaxButton" type="Button" parent="TransactionDialog/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Max"
 
 [node name="TotalLabel" type="Label" parent="TransactionDialog/VBoxContainer"]
 layout_mode = 2

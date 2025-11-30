@@ -38,6 +38,7 @@ var player_inventory: Dictionary = {}
 @onready var item_label: Label = $TransactionDialog/VBoxContainer/ItemLabel
 @onready var price_label: Label = $TransactionDialog/VBoxContainer/PriceLabel
 @onready var quantity_spinbox: SpinBox = $TransactionDialog/VBoxContainer/HBoxContainer/QuantitySpinBox
+@onready var max_button: Button = $TransactionDialog/VBoxContainer/HBoxContainer/MaxButton
 @onready var total_label: Label = $TransactionDialog/VBoxContainer/TotalLabel
 @onready var gold_label: Label = $Panel/MarginContainer/VBoxContainer/InfoContainer/GoldContainer/GoldLabel
 @onready var event_banner: Panel = $Panel/MarginContainer/VBoxContainer/EventBanner
@@ -49,7 +50,7 @@ var player_inventory: Dictionary = {}
 @onready var production_label: RichTextLabel = $Panel/MarginContainer/VBoxContainer/TabContainer/Info/InfoScroll/InfoContent/ProductionSection/ProductionLabel
 
 # For responsive grid columns
-const MIN_ITEM_WIDTH: int = 110
+const MIN_ITEM_WIDTH: int = 95
 const MAX_COLUMNS: int = 8
 const MIN_COLUMNS: int = 2
 
@@ -62,6 +63,7 @@ func _ready() -> void:
 	close_button.pressed.connect(_on_close_button_pressed)
 	transaction_dialog.confirmed.connect(_on_transaction_confirmed)
 	quantity_spinbox.value_changed.connect(_on_quantity_changed)
+	max_button.pressed.connect(_on_max_button_pressed)
 	
 	if search_box:
 		search_box.text_changed.connect(_on_search_changed)
@@ -127,9 +129,8 @@ func _on_catalog_received(data: Dictionary) -> void:
 	
 	# Update title with vendor info
 	var vendor_name = vendor_info.get("name", "Vendor")
-	var vendor_icon = vendor_info.get("icon", "🏪")
 	if title_label:
-		title_label.text = "%s %s" % [vendor_icon, vendor_name]
+		title_label.text = vendor_name
 	
 	# Show event banner if active
 	_update_event_banner()
@@ -153,7 +154,6 @@ func _update_event_banner() -> void:
 		event_banner.visible = true
 		var event_label = event_banner.get_node_or_null("Label")
 		if event_label:
-			var icon = current_event.get("icon", "📢")
 			var title = current_event.get("title", "Market Event")
 			var description = current_event.get("description", "")
 			var affected_items: Array = current_event.get("affected_items", [])
@@ -162,9 +162,9 @@ func _update_event_banner() -> void:
 			var price_info = _format_event_price_changes(affected_items)
 			
 			if price_info.is_empty():
-				event_label.text = "%s %s - %s" % [icon, title, description]
+				event_label.text = "%s - %s" % [title, description]
 			else:
-				event_label.text = "%s %s | %s" % [icon, title, price_info]
+				event_label.text = "%s | %s" % [title, price_info]
 	else:
 		event_banner.visible = false
 
@@ -186,9 +186,9 @@ func _format_event_price_changes(affected_item_ids: Array) -> String:
 				# If supply is negative (scarce), prices are up
 				# Event affects demand, so negative supply = high demand = price up
 				if supply < -0.05:
-					changes.append("📈 %s" % item.item_name)
+					changes.append("[+] %s" % item.item_name)
 				elif supply > 0.05:
-					changes.append("📉 %s" % item.item_name)
+					changes.append("[-] %s" % item.item_name)
 	
 	# Also check buy catalog
 	for catalog_entry in buy_catalog:
@@ -198,9 +198,9 @@ func _format_event_price_changes(affected_item_ids: Array) -> String:
 			if item and not _item_already_listed(changes, item.item_name):
 				var supply = catalog_entry.get("supply", 0.0)
 				if supply < -0.05:
-					changes.append("📈 %s" % item.item_name)
+					changes.append("[+] %s" % item.item_name)
 				elif supply > 0.05:
-					changes.append("📉 %s" % item.item_name)
+					changes.append("[-] %s" % item.item_name)
 	
 	if changes.is_empty():
 		return "Prices affected!"
@@ -249,8 +249,13 @@ func _refresh_buy_items() -> void:
 		var buy_price = item_data.get("price", 0)
 		var supply = item_data.get("supply", 0.0)
 		var stock = item_data.get("stock", 0)
+		var producing = item_data.get("producing", 0)
+		var next_ready_in = item_data.get("next_ready_in", 0)
+		var stock_full = item_data.get("stock_full", false)
+		var recipe = item_data.get("recipe", {})
+		var pending = item_data.get("pending", {})
 		
-		var slot = _create_buy_item_slot(item, item_id, buy_price, supply, stock)
+		var slot = _create_buy_item_slot(item, item_id, buy_price, supply, stock, producing, next_ready_in, stock_full, recipe, pending)
 		buy_grid.add_child(slot)
 
 
@@ -274,11 +279,17 @@ func _refresh_sell_items() -> void:
 	var vendor_buy_prices: Dictionary = {}
 	var vendor_buy_ids: Array = []
 	var supply_levels: Dictionary = {}
+	var produces_info: Dictionary = {}  # item_id -> [{id, name, needs}, ...]
+	var max_buy_qty: Dictionary = {}  # item_id -> max quantity vendor will buy
 	for item_data in buy_catalog:
 		var item_id = item_data.get("id", 0)
 		vendor_buy_prices[item_id] = item_data.get("price", 0)
 		supply_levels[item_id] = item_data.get("supply", 0.0)
 		vendor_buy_ids.append(item_id)
+		if item_data.has("produces"):
+			produces_info[item_id] = item_data.get("produces", [])
+		if item_data.has("max_buy"):
+			max_buy_qty[item_id] = item_data.get("max_buy", -1)  # -1 = unlimited
 	
 	# Display items from inventory that vendor will buy
 	var has_sellable_items = false
@@ -301,8 +312,14 @@ func _refresh_sell_items() -> void:
 		
 		var sell_price = vendor_buy_prices.get(item_id, int(item.minimum_price * 0.7))
 		var supply = supply_levels.get(item_id, 0.0)
+		var produces = produces_info.get(item_id, [])
+		var max_buy = max_buy_qty.get(item_id, -1)  # -1 = unlimited
 		
-		var slot = _create_item_slot(item, item_id, sell_price, supply, true, stack)
+		# Skip items that vendor doesn't need anymore
+		if max_buy == 0:
+			continue
+		
+		var slot = _create_item_slot(item, item_id, sell_price, supply, true, stack, produces, max_buy)
 		sell_grid.add_child(slot)
 		has_sellable_items = true
 	
@@ -321,7 +338,6 @@ func _refresh_info_tab() -> void:
 		return
 	
 	var vendor_name = vendor_info.get("name", "Merchant")
-	var vendor_icon = vendor_info.get("icon", "🏪")
 	var vendor_type = vendor_info.get("type", "general")
 	var description = vendor_info.get("description", "A friendly merchant.")
 	var buy_mult = vendor_info.get("buy_multiplier", 0.7)
@@ -331,7 +347,7 @@ func _refresh_info_tab() -> void:
 	var recipes: Array = vendor_info.get("recipes", [])
 	
 	# Description section
-	var desc_text = "[b]%s %s[/b]\n" % [vendor_icon, vendor_name]
+	var desc_text = "[b]%s[/b]\n" % vendor_name
 	desc_text += "[color=#AAAAAA]%s specialist[/color]\n\n" % vendor_type.capitalize()
 	desc_text += "[i]%s[/i]" % description
 	description_label.text = desc_text
@@ -349,7 +365,7 @@ func _refresh_info_tab() -> void:
 	rates_text += "[color=#66FF66]Sells to you:[/color] %d%% above base price\n\n" % sell_percent
 	
 	# Show profit opportunities
-	rates_text += "[b]💰 Profit Opportunities:[/b]\n"
+	rates_text += "[b]Profit Opportunities:[/b]\n"
 	if specialty_percent > 0:
 		rates_text += "[color=#88FF88]• Specialty items: +%d%% bonus[/color]\n" % specialty_percent
 		rates_text += "  [color=#AAAAAA](Items this vendor needs)[/color]\n"
@@ -404,84 +420,150 @@ func _format_time(seconds: float) -> String:
 		return "%.1f hours" % hours
 
 
-func _create_item_slot(item: Item, item_id: int, price: int, supply: float, is_sell: bool, stack: int = 0) -> Panel:
+func _create_item_slot(item: Item, item_id: int, price: int, supply: float, is_sell: bool, stack: int = 0, produces: Array = [], max_buy: int = -1) -> Panel:
 	"""Create a compact item slot for selling to vendor"""
 	var slot_panel = Panel.new()
-	slot_panel.custom_minimum_size = Vector2(100, 130)
+	slot_panel.custom_minimum_size = Vector2(85, 105)
 	slot_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slot_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	var vbox = VBoxContainer.new()
-	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	vbox.add_theme_constant_override("separation", 1)
-	slot_panel.add_child(vbox)
+	# Calculate effective max sellable (min of stack and vendor's need)
+	var effective_max = stack
+	if max_buy >= 0:
+		effective_max = mini(stack, max_buy)
 	
-	# Icon with stack overlay
-	var icon_container = CenterContainer.new()
-	icon_container.custom_minimum_size = Vector2(0, 40)
-	vbox.add_child(icon_container)
+	# Highlight if this is a needed material
+	if not produces.is_empty():
+		var style = StyleBoxFlat.new()
+		style.bg_color = Color(0.12, 0.18, 0.1, 1.0)
+		style.border_color = Color(0.4, 0.7, 0.3)
+		style.border_width_bottom = 3
+		slot_panel.add_theme_stylebox_override("panel", style)
 	
+	# Make the whole panel clickable
+	slot_panel.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			_on_action_button_pressed(item_id, price, item.item_name, true, effective_max)
+	)
+	
+	# Use a Control for absolute positioning - set mouse to pass so panel gets events
+	var container = Control.new()
+	container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	container.mouse_filter = Control.MOUSE_FILTER_PASS
+	slot_panel.add_child(container)
+	
+	# Center icon (80 width - 40 icon = 40, so offset 20)
 	var icon = TextureRect.new()
-	icon.custom_minimum_size = Vector2(36, 36)
+	icon.custom_minimum_size = Vector2(40, 40)
+	icon.size = Vector2(40, 40)
+	icon.position = Vector2(20, 6)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if item.item_icon:
 		icon.texture = item.item_icon
-	icon_container.add_child(icon)
+	container.add_child(icon)
 	
-	# Item name + stack
-	var name_label = Label.new()
-	var display_name = item.item_name if item.item_name.length() <= 12 else item.item_name.left(11) + "…"
-	if is_sell and stack > 1:
-		name_label.text = "%s ×%d" % [display_name, stack]
+	# Stack count in upper-right corner (show how much vendor will buy vs what player has)
+	var stack_lbl = Label.new()
+	stack_lbl.position = Vector2(52, 2)
+	stack_lbl.add_theme_font_size_override("font_size", 11)
+	stack_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	stack_lbl.add_theme_constant_override("outline_size", 2)
+	stack_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if max_buy >= 0 and max_buy < stack:
+		# Show limited: e.g. "×5/20" (vendor needs 5 of your 20)
+		stack_lbl.text = "×%d" % mini(stack, max_buy)
+		stack_lbl.add_theme_color_override("font_color", Color(1.0, 0.9, 0.5))  # Yellow = limited
 	else:
-		name_label.text = display_name
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 9)
-	name_label.custom_minimum_size = Vector2(0, 14)
-	vbox.add_child(name_label)
+		stack_lbl.text = "×%d" % stack
+		stack_lbl.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))
+	container.add_child(stack_lbl)
 	
-	# Price + Trend (compact)
-	var price_hbox = HBoxContainer.new()
-	price_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	price_hbox.add_theme_constant_override("separation", 2)
-	vbox.add_child(price_hbox)
-	
+	# Price in bottom-left corner of icon area
 	var price_lbl = Label.new()
-	price_lbl.text = "%dg" % price
-	price_lbl.add_theme_font_size_override("font_size", 10)
+	price_lbl.position = Vector2(2, 44)
+	price_lbl.add_theme_font_size_override("font_size", 11)
 	price_lbl.add_theme_color_override("font_color", Color(1.0, 0.84, 0.0))
-	price_hbox.add_child(price_lbl)
+	price_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	price_lbl.add_theme_constant_override("outline_size", 2)
+	price_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	price_lbl.text = "%dg" % price
+	container.add_child(price_lbl)
 	
-	# Trend indicator
+	# Trend indicator in bottom-right of icon area
 	var trend = _get_trend_indicator(supply, is_sell)
 	if trend.text != "" and trend.text != "→":
 		var trend_lbl = Label.new()
-		trend_lbl.text = trend.text
-		trend_lbl.add_theme_font_size_override("font_size", 9)
+		trend_lbl.position = Vector2(52, 44)
+		trend_lbl.add_theme_font_size_override("font_size", 10)
 		trend_lbl.add_theme_color_override("font_color", trend.color)
-		price_hbox.add_child(trend_lbl)
+		trend_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+		trend_lbl.add_theme_constant_override("outline_size", 2)
+		trend_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		trend_lbl.text = trend.text
+		container.add_child(trend_lbl)
 	
-	# Sell button
-	var btn = Button.new()
-	btn.text = "Sell"
-	btn.custom_minimum_size = Vector2(70, 22)
-	btn.add_theme_font_size_override("font_size", 10)
-	btn.pressed.connect(_on_action_button_pressed.bind(item_id, price, item.item_name, true, stack))
-	vbox.add_child(btn)
+	# Item name at bottom
+	var name_label = Label.new()
+	name_label.position = Vector2(0, 60)
+	name_label.size = Vector2(80, 18)
+	var display_name = item.item_name if item.item_name.length() <= 12 else item.item_name.left(11) + "…"
+	name_label.text = display_name
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 10)
+	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(name_label)
 	
-	# Tooltip
+	# "Produces" info at very bottom - show how much vendor needs
+	var info_lbl = Label.new()
+	info_lbl.position = Vector2(0, 78)
+	info_lbl.size = Vector2(85, 22)
+	info_lbl.add_theme_font_size_override("font_size", 11)
+	info_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	info_lbl.add_theme_constant_override("outline_size", 2)
+	info_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	info_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if not produces.is_empty():
+		if max_buy > 0:
+			# Show how much vendor needs
+			info_lbl.text = "Need %d" % max_buy
+			info_lbl.add_theme_color_override("font_color", Color(0.5, 1.0, 0.5))
+		elif max_buy == 0:
+			info_lbl.text = "Stocked"
+			info_lbl.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+		else:
+			# Show what it produces
+			var first_output = produces[0].get("name", "?")
+			if first_output.length() > 10:
+				first_output = first_output.left(9) + "..."
+			info_lbl.text = "> %s" % first_output
+			info_lbl.add_theme_color_override("font_color", Color(0.5, 1.0, 0.5))
+	else:
+		info_lbl.text = "Sellable"
+		info_lbl.add_theme_color_override("font_color", Color(0.8, 0.8, 0.7))
+	
+	container.add_child(info_lbl)
+	
+	# Tooltip and hover effect
 	var base_price = item.minimum_price if item.minimum_price > 0 else 1
 	slot_panel.mouse_entered.connect(func():
+		# Hover effect - brighten
+		slot_panel.modulate = Color(1.2, 1.2, 1.2, 1.0)
 		ItemTooltipManager.set_market_context({
 			"price": price,
 			"base_price": base_price,
 			"supply_level": supply,
-			"is_sell": is_sell
+			"is_sell": is_sell,
+			"produces": produces
 		})
 		ItemTooltipManager.show_item_tooltip(item, slot_panel.get_global_mouse_position(), slot_panel)
 	)
 	slot_panel.mouse_exited.connect(func():
+		# Reset modulate
+		slot_panel.modulate = Color(1, 1, 1, 1)
 		ItemTooltipManager.clear_market_context()
 		ItemTooltipManager.hide_tooltip()
 	)
@@ -489,104 +571,173 @@ func _create_item_slot(item: Item, item_id: int, price: int, supply: float, is_s
 	return slot_panel
 
 
-func _create_buy_item_slot(item: Item, item_id: int, price: int, supply: float, stock: int) -> Panel:
-	"""Create an item slot for buying from vendor (with stock display)"""
+func _create_buy_item_slot(item: Item, item_id: int, price: int, supply: float, stock: int, producing: int = 0, next_ready_in: int = 0, stock_full: bool = false, recipe: Dictionary = {}, pending: Dictionary = {}) -> Panel:
+	"""Create a compact item slot for buying from vendor"""
 	var slot_panel = Panel.new()
-	slot_panel.custom_minimum_size = Vector2(100, 140)
+	slot_panel.custom_minimum_size = Vector2(85, 105)
 	slot_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	slot_panel.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	# Dim if out of stock
-	if stock <= 0:
-		slot_panel.modulate = Color(0.5, 0.5, 0.5, 0.8)
+	# Store original modulate for hover effect
+	var base_modulate = Color(1, 1, 1, 1) if stock > 0 else Color(0.5, 0.5, 0.5, 0.8)
+	slot_panel.modulate = base_modulate
 	
-	var vbox = VBoxContainer.new()
-	vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	vbox.add_theme_constant_override("separation", 1)
-	slot_panel.add_child(vbox)
+	# Make the whole panel clickable (if in stock)
+	if stock > 0:
+		slot_panel.gui_input.connect(func(event):
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+				_on_action_button_pressed(item_id, price, item.item_name, false, stock)
+		)
 	
-	# Icon
-	var icon_container = CenterContainer.new()
-	icon_container.custom_minimum_size = Vector2(0, 40)
-	vbox.add_child(icon_container)
+	# Use a Control for absolute positioning - set mouse to pass so panel gets events
+	var container = Control.new()
+	container.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	container.mouse_filter = Control.MOUSE_FILTER_PASS
+	slot_panel.add_child(container)
 	
+	# Center icon (80 width - 40 icon = 40, so offset 20)
 	var icon = TextureRect.new()
-	icon.custom_minimum_size = Vector2(36, 36)
+	icon.custom_minimum_size = Vector2(40, 40)
+	icon.size = Vector2(40, 40)
+	icon.position = Vector2(20, 6)
 	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if item.item_icon:
 		icon.texture = item.item_icon
-	icon_container.add_child(icon)
+	container.add_child(icon)
 	
-	# Item name (truncated if too long)
-	var name_label = Label.new()
-	var display_name = item.item_name if item.item_name.length() <= 12 else item.item_name.left(11) + "…"
-	name_label.text = display_name
-	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_label.add_theme_font_size_override("font_size", 9)
-	name_label.custom_minimum_size = Vector2(0, 14)
-	vbox.add_child(name_label)
-	
-	# Stock display (compact)
+	# Stock in upper-right corner
 	var stock_lbl = Label.new()
+	stock_lbl.position = Vector2(52, 2)
+	stock_lbl.add_theme_font_size_override("font_size", 11)
+	stock_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	stock_lbl.add_theme_constant_override("outline_size", 2)
+	stock_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if stock > 0:
-		stock_lbl.text = "×%d" % stock
-		stock_lbl.add_theme_color_override("font_color", Color(0.7, 0.9, 0.7))
+		stock_lbl.text = "x%d" % stock
+		stock_lbl.add_theme_color_override("font_color", Color(0.8, 1.0, 0.8))
 	else:
-		stock_lbl.text = "✕ None"
+		stock_lbl.text = "0"
 		stock_lbl.add_theme_color_override("font_color", Color(1.0, 0.4, 0.4))
-	stock_lbl.add_theme_font_size_override("font_size", 9)
-	stock_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(stock_lbl)
+	container.add_child(stock_lbl)
 	
-	# Price + Trend (compact)
-	var price_hbox = HBoxContainer.new()
-	price_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-	price_hbox.add_theme_constant_override("separation", 2)
-	vbox.add_child(price_hbox)
-	
+	# Price in bottom-left corner of icon area
 	var price_lbl = Label.new()
-	price_lbl.text = "%dg" % price
-	price_lbl.add_theme_font_size_override("font_size", 10)
+	price_lbl.position = Vector2(2, 44)
+	price_lbl.add_theme_font_size_override("font_size", 11)
 	price_lbl.add_theme_color_override("font_color", Color(1.0, 0.84, 0.0))
-	price_hbox.add_child(price_lbl)
+	price_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	price_lbl.add_theme_constant_override("outline_size", 2)
+	price_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	price_lbl.text = "%dg" % price
+	container.add_child(price_lbl)
 	
-	# Trend indicator
+	# Trend indicator in bottom-right of icon area
 	var trend = _get_trend_indicator(supply, false)
 	if trend.text != "" and trend.text != "→":
 		var trend_lbl = Label.new()
-		trend_lbl.text = trend.text
-		trend_lbl.add_theme_font_size_override("font_size", 9)
+		trend_lbl.position = Vector2(52, 44)
+		trend_lbl.add_theme_font_size_override("font_size", 10)
 		trend_lbl.add_theme_color_override("font_color", trend.color)
-		price_hbox.add_child(trend_lbl)
+		trend_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+		trend_lbl.add_theme_constant_override("outline_size", 2)
+		trend_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		trend_lbl.text = trend.text
+		container.add_child(trend_lbl)
 	
-	# Buy button
-	var btn = Button.new()
-	btn.text = "Buy"
-	btn.custom_minimum_size = Vector2(70, 22)
-	btn.add_theme_font_size_override("font_size", 10)
-	btn.disabled = (stock <= 0)
-	btn.pressed.connect(_on_action_button_pressed.bind(item_id, price, item.item_name, false, stock))
-	vbox.add_child(btn)
+	# Item name at bottom
+	var name_label = Label.new()
+	name_label.position = Vector2(0, 60)
+	name_label.size = Vector2(80, 18)
+	var display_name = item.item_name if item.item_name.length() <= 12 else item.item_name.left(11) + "…"
+	name_label.text = display_name
+	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_label.add_theme_font_size_override("font_size", 10)
+	name_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	container.add_child(name_label)
 	
-	# Tooltip
+	# Production status at very bottom - make it prominent!
+	var prod_lbl = Label.new()
+	prod_lbl.position = Vector2(0, 78)
+	prod_lbl.size = Vector2(80, 22)
+	prod_lbl.add_theme_font_size_override("font_size", 11)
+	prod_lbl.add_theme_color_override("font_outline_color", Color.BLACK)
+	prod_lbl.add_theme_constant_override("outline_size", 2)
+	prod_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	prod_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	if stock_full:
+		prod_lbl.text = "Full"
+		prod_lbl.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
+	elif producing > 0:
+		var mins = next_ready_in / 60
+		var secs = next_ready_in % 60
+		prod_lbl.text = "+%d in %d:%02d" % [producing, mins, secs]
+		prod_lbl.add_theme_color_override("font_color", Color(0.4, 0.9, 1.0))
+	elif stock <= 0 and not recipe.is_empty():
+		prod_lbl.text = "Need mats"
+		prod_lbl.add_theme_color_override("font_color", Color(1.0, 0.7, 0.4))
+	elif stock <= 0:
+		prod_lbl.text = "Out"
+		prod_lbl.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+	else:
+		# In stock - show that instead of blank
+		prod_lbl.text = "In stock"
+		prod_lbl.add_theme_color_override("font_color", Color(0.5, 0.9, 0.5))
+	
+	container.add_child(prod_lbl)
+	
+	# Tooltip and hover effect
 	var base_price = item.minimum_price if item.minimum_price > 0 else 1
 	slot_panel.mouse_entered.connect(func():
+		# Hover effect - brighten
+		if stock > 0:
+			slot_panel.modulate = Color(1.2, 1.2, 1.2, 1.0)
 		ItemTooltipManager.set_market_context({
 			"price": price,
 			"base_price": base_price,
 			"supply_level": supply,
 			"stock": stock,
-			"is_sell": false
+			"is_sell": false,
+			"producing": producing,
+			"next_ready_in": next_ready_in,
+			"recipe": recipe,
+			"pending": pending
 		})
 		ItemTooltipManager.show_item_tooltip(item, slot_panel.get_global_mouse_position(), slot_panel)
 	)
 	slot_panel.mouse_exited.connect(func():
+		# Reset modulate
+		slot_panel.modulate = base_modulate
 		ItemTooltipManager.clear_market_context()
 		ItemTooltipManager.hide_tooltip()
 	)
 	
 	return slot_panel
+
+
+func _format_recipe_needs(recipe: Dictionary, pending: Dictionary) -> String:
+	"""Format a recipe's needs into a short display string"""
+	var parts: Array[String] = []
+	for input_id in recipe.keys():
+		var needed = recipe[input_id]
+		var have = pending.get(input_id, 0)
+		var remaining = maxi(0, needed - have)
+		
+		if remaining > 0:
+			var input_item: Item = _get_cached_item(input_id)
+			var name = "?"
+			if input_item:
+				name = input_item.item_name
+				if name.length() > 8:
+					name = name.left(7) + "…"
+			parts.append("%d %s" % [remaining, name])
+	
+	if parts.is_empty():
+		return "Ready to craft"
+	
+	return "Need: %s" % ", ".join(parts)
 
 
 func _get_trend_indicator(supply: float, is_sell: bool) -> Dictionary:
@@ -632,18 +783,22 @@ func _on_action_button_pressed(item_id: int, price: int, item_name: String, is_s
 	is_selling = is_sell_action
 	
 	transaction_dialog.title = "Sell Item" if is_selling else "Buy Item"
-	item_label.text = "Item: %s" % item_name
-	price_label.text = "Price: %d gold %s" % [price, "each" if not is_selling else ""]
+	item_label.text = item_name
+	price_label.text = "%d gold each" % price
 	
 	# Calculate max quantity
 	var max_qty = 99
 	if is_selling:
 		max_qty = max_stack
 	else:
+		# Limit by stock AND by gold
+		max_qty = max_stack  # max_stack is the stock when buying
 		if price > 0:
-			max_qty = mini(99, current_gold / price)
+			var afford = current_gold / price
+			max_qty = mini(max_qty, afford)
 	
-	quantity_spinbox.max_value = maxi(1, max_qty)
+	max_qty = maxi(1, max_qty)
+	quantity_spinbox.max_value = max_qty
 	quantity_spinbox.value = 1
 	
 	_update_total_label()
@@ -652,6 +807,10 @@ func _on_action_button_pressed(item_id: int, price: int, item_name: String, is_s
 
 func _on_quantity_changed(_value: float) -> void:
 	_update_total_label()
+
+
+func _on_max_button_pressed() -> void:
+	quantity_spinbox.value = quantity_spinbox.max_value
 
 
 func _update_total_label() -> void:
@@ -807,7 +966,7 @@ func _on_market_event(data: Dictionary) -> void:
 
 func _update_gold_display() -> void:
 	if gold_label:
-		gold_label.text = "💰 %d Gold" % current_gold
+		gold_label.text = "%d Gold" % current_gold
 
 
 func _on_close_button_pressed() -> void:
