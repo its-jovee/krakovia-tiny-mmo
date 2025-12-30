@@ -198,12 +198,18 @@ vendor_id = "town_herbalist"
 vendor_name = "Dr. Willowroot"
 vendor_icon = "🌿"
 item_catalog = Array[int]([1, 197, 198, 199, 225, 226, 253, 275, 196, 200, 251])
+local_supply = {
+79: {
+"last_transaction": 1767061971,
+"level": 0.02
+}
+}
 sell_multiplier = 1.35
 stock = {
-1: 10,
+1: 50,
 196: 10,
 197: 10,
-198: 0,
+198: 50,
 199: 0,
 200: 10,
 225: 10,
@@ -216,19 +222,20 @@ pending_materials = {
 1: {
 15: 120
 },
+197: {
+79: 0
+},
 198: {
 15: 100
+},
+251: {
+79: 1
 }
 }
 production_queue = {
-1: {
-"amount": 40,
-"start_time": 1764178860,
-"time_per_item": 30.0
-},
-198: {
-"amount": 50,
-"start_time": 1764178860,
+197: {
+"amount": 1,
+"start_time": 1767061971,
 "time_per_item": 30.0
 }
 }

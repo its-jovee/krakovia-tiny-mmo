@@ -463,6 +463,8 @@ func _get_item_slug(item: Item) -> StringName:
 
 
 func _adjust_tooltip_position(tooltip: Control, source: Variant) -> void:
+	if not tooltip or not is_instance_valid(tooltip):
+		return
 	var viewport_size = get_viewport().get_visible_rect().size
 	var tooltip_size = tooltip.size
 	var final_pos = tooltip.position  # Use current position as starting point

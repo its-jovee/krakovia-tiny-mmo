@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=46 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://b1n8mekyf4cy2" path="res://source/server/world/components/harvesting/nodes/trapper_node_t4.tscn" id="25_5vi16"]
 [ext_resource type="PackedScene" uid="uid://c8hqyoytiiw14" path="res://source/server/world/components/harvesting/nodes/forager_node_t5.tscn" id="26_lc833"]
 [ext_resource type="PackedScene" uid="uid://cwg2hceaerok5" path="res://source/server/world/components/harvesting/nodes/miner_node_t5.tscn" id="27_xrqpg"]
-[ext_resource type="PackedScene" uid="uid://cey1mg75dsmuu" path="res://source/common/gameplay/maps/components/interaction_areas/market/market_area.tscn" id="28_mvj6e"]
 [ext_resource type="PackedScene" uid="uid://dtww4ymumin8s" path="res://source/server/world/components/harvesting/nodes/trapper_node_t5.tscn" id="28_sbo1b"]
 [ext_resource type="PackedScene" uid="uid://cgjjklyojxnyf" path="res://source/server/world/components/harvesting/nodes/miner_node_t6.tscn" id="29_112bs"]
 [ext_resource type="PackedScene" uid="uid://bvn8k3x2y7q1m" path="res://source/common/gameplay/maps/components/interaction_areas/storage_chest/storage_chest_area.tscn" id="29_storage_chest"]
@@ -241,12 +240,8 @@ visible = false
 y_sort_enabled = true
 position = Vector2(-172, -210)
 
-[node name="MarketArea" parent="." instance=ExtResource("28_mvj6e")]
-position = Vector2(512.00006, 480)
-scale = Vector2(4.19, 4.19)
-
 [node name="Spawn" parent="." instance=ExtResource("9_vhwke")]
-position = Vector2(504, 288)
+position = Vector2(511, 347)
 
 [node name="Components" type="Node" parent="."]
 
@@ -260,7 +255,7 @@ scale = Vector2(1.08, 1.08)
 elimination_teleport_position = Vector2(264, 816.29)
 
 [node name="QuestBoardArea" parent="Components" instance=ExtResource("22_plgjc")]
-position = Vector2(504, 248)
+position = Vector2(505, 246)
 
 [node name="StorageChestArea" parent="Components" instance=ExtResource("29_storage_chest")]
 position = Vector2(348, 201)
@@ -275,83 +270,323 @@ position = Vector2(580, 520)
 vendor_id = "town_blacksmith"
 vendor_name = "Blacksmith Gorm"
 vendor_icon = "⚒️"
-vendor_type = "blacksmith"
-vendor_description = "A gruff but honest craftsman who's been forging metal for thirty years. Gorm pays fairly for quality ore and takes pride in every ingot he produces. His weapons are known throughout the region for their durability."
 item_catalog = Array[int]([24, 25, 128, 129, 130, 131, 186, 187, 191, 192, 193, 194, 195, 134, 135, 136, 137, 303, 304, 305])
 buy_catalog = Array[int]([7, 8, 9, 30, 31, 32, 55, 286, 291])
-stock_recipes = {24: {7: 3}, 25: {8: 3}, 128: {30: 3}, 129: {24: 2, 128: 1}, 130: {31: 3}, 131: {32: 3}, 186: {25: 3}, 187: {25: 5, 9: 2}, 191: {25: 4}, 135: {25: 1}, 136: {25: 1}, 137: {25: 2}}
+stock_recipes = {
+24: {
+7: 3
+},
+25: {
+8: 3
+},
+128: {
+30: 3
+},
+129: {
+24: 2,
+128: 1
+},
+130: {
+31: 3
+},
+131: {
+32: 3
+},
+135: {
+25: 1
+},
+136: {
+25: 1
+},
+137: {
+25: 2
+},
+186: {
+25: 3
+},
+187: {
+9: 2,
+25: 5
+},
+191: {
+25: 4
+}
+}
 buy_multiplier = 0.75
 sell_multiplier = 1.25
+vendor_type = "blacksmith"
 specialty_bonus = 1.35
 crafted_bonus = 1.2
+vendor_description = "A gruff but honest craftsman who's been forging metal for thirty years. Gorm pays fairly for quality ore and takes pride in every ingot he produces. His weapons are known throughout the region for their durability."
 production_time_seconds = 45.0
 natural_restock_minutes = 20.0
 
 [node name="Herbalist" parent="Components" instance=ExtResource("32_vendor")]
-position = Vector2(640, 300)
+position = Vector2(588, 790)
 vendor_id = "town_herbalist"
 vendor_name = "Dr. Willowroot"
 vendor_icon = "🌿"
-vendor_type = "herbalist"
-vendor_description = "A wise healer who brews potions from the forest's bounty. Dr. Willowroot is always seeking rare herbs and mushrooms for her experiments. Her remedies are expensive but worth every coin when you're in dire need."
 item_catalog = Array[int]([1, 197, 198, 199, 225, 226, 253, 275, 196, 200, 251])
 buy_catalog = Array[int]([15, 79, 80, 81, 290, 14, 89, 90, 292, 93, 100, 13])
-stock_recipes = {1: {15: 2}, 197: {79: 1}, 198: {15: 2}, 199: {80: 3}, 225: {89: 2}, 226: {81: 2, 290: 1}, 253: {90: 1}, 196: {82: 2}, 251: {79: 1, 89: 1}}
-buy_multiplier = 0.7
+stock_recipes = {
+1: {
+15: 2
+},
+196: {
+82: 2
+},
+197: {
+79: 1
+},
+198: {
+15: 2
+},
+199: {
+80: 3
+},
+225: {
+89: 2
+},
+226: {
+81: 2,
+290: 1
+},
+251: {
+79: 1,
+89: 1
+},
+253: {
+90: 1
+}
+}
 sell_multiplier = 1.35
+vendor_type = "herbalist"
 specialty_bonus = 1.4
 crafted_bonus = 1.25
+vendor_description = "A wise healer who brews potions from the forest's bounty. Dr. Willowroot is always seeking rare herbs and mushrooms for her experiments. Her remedies are expensive but worth every coin when you're in dire need."
 production_time_seconds = 30.0
 natural_restock_minutes = 25.0
 
 [node name="Grocer" parent="Components" instance=ExtResource("32_vendor")]
-position = Vector2(360, 300)
+position = Vector2(586, 642)
 vendor_id = "town_grocer"
 vendor_name = "Farmer Bramble"
 vendor_icon = "🌾"
-vendor_type = "food"
-vendor_description = "A cheerful farmer who sells fresh produce from his fields. Bramble buys raw ingredients at lower prices but his prepared foods are always fresh and filling. Best time to sell is right after harvest!"
 item_catalog = Array[int]([164, 165, 166, 168, 169, 170, 221, 222, 223, 224, 248, 249, 167, 163, 171, 20, 313])
 buy_catalog = Array[int]([13, 16, 17, 18, 21, 20, 66, 67, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 88, 105, 107, 109])
-stock_recipes = {164: {18: 3, 308: 1}, 165: {21: 2}, 166: {21: 2, 92: 1}, 168: {67: 5}, 169: {73: 4}, 170: {17: 4}, 221: {21: 2, 75: 2, 76: 1}, 222: {21: 3, 92: 2}, 249: {13: 3}, 167: {16: 4}, 163: {18: 2}, 171: {165: 2, 41: 1}, 20: {88: 2}, 313: {21: 2, 15: 1}}
+stock_recipes = {
+20: {
+88: 2
+},
+163: {
+18: 2
+},
+164: {
+18: 3,
+308: 1
+},
+165: {
+21: 2
+},
+166: {
+21: 2,
+92: 1
+},
+167: {
+16: 4
+},
+168: {
+67: 5
+},
+169: {
+73: 4
+},
+170: {
+17: 4
+},
+171: {
+41: 1,
+165: 2
+},
+221: {
+21: 2,
+75: 2,
+76: 1
+},
+222: {
+21: 3,
+92: 2
+},
+249: {
+13: 3
+},
+313: {
+15: 1,
+21: 2
+}
+}
 buy_multiplier = 0.65
-sell_multiplier = 1.3
+vendor_type = "food"
 specialty_bonus = 1.3
 crafted_bonus = 1.2
+vendor_description = "A cheerful farmer who sells fresh produce from his fields. Bramble buys raw ingredients at lower prices but his prepared foods are always fresh and filling. Best time to sell is right after harvest!"
 production_time_seconds = 20.0
 natural_restock_minutes = 15.0
 
 [node name="Carpenter" parent="Components" instance=ExtResource("32_vendor")]
-position = Vector2(280, 420)
+position = Vector2(443, 429)
 vendor_id = "town_carpenter"
 vendor_name = "Oakley the Builder"
 vendor_icon = "🪵"
-vendor_type = "general"
-vendor_description = "A skilled woodworker who crafts everything from simple handles to elaborate furniture. Oakley is always in need of quality timber and pays well for exotic woods. His crafted goods are built to last generations."
 item_catalog = Array[int]([141, 142, 143, 144, 294, 295, 296, 297, 298, 299, 300, 26, 145, 146, 147, 312, 176, 177, 233, 234, 235, 236, 237, 252])
 buy_catalog = Array[int]([12, 56, 57, 58, 59, 60, 61, 62, 63, 103, 282, 283, 284, 285, 10, 11, 34, 35, 36, 37, 38, 39, 40, 287, 288])
-stock_recipes = {141: {56: 3}, 142: {57: 3}, 143: {63: 3}, 294: {60: 3}, 295: {59: 3}, 296: {61: 3}, 297: {62: 3}, 298: {103: 3}, 299: {63: 3}, 300: {58: 3}, 26: {12: 2}, 145: {12: 5}, 146: {141: 4, 137: 2}, 147: {12: 4}, 176: {11: 4}, 177: {34: 2, 39: 1}, 252: {10: 4}, 233: {176: 5, 177: 2}, 234: {143: 3, 134: 2}, 235: {141: 2}, 236: {143: 4, 174: 1}, 237: {143: 3, 139: 1}}
-buy_multiplier = 0.7
-sell_multiplier = 1.3
+stock_recipes = {
+26: {
+12: 2
+},
+141: {
+56: 3
+},
+142: {
+57: 3
+},
+143: {
+63: 3
+},
+145: {
+12: 5
+},
+146: {
+137: 2,
+141: 4
+},
+147: {
+12: 4
+},
+176: {
+11: 4
+},
+177: {
+34: 2,
+39: 1
+},
+233: {
+176: 5,
+177: 2
+},
+234: {
+134: 2,
+143: 3
+},
+235: {
+141: 2
+},
+236: {
+143: 4,
+174: 1
+},
+237: {
+139: 1,
+143: 3
+},
+252: {
+10: 4
+},
+294: {
+60: 3
+},
+295: {
+59: 3
+},
+296: {
+61: 3
+},
+297: {
+62: 3
+},
+298: {
+103: 3
+},
+299: {
+63: 3
+},
+300: {
+58: 3
+}
+}
 specialty_bonus = 1.35
 crafted_bonus = 1.25
-production_time_seconds = 60.0
-natural_restock_minutes = 30.0
+vendor_description = "A skilled woodworker who crafts everything from simple handles to elaborate furniture. Oakley is always in need of quality timber and pays well for exotic woods. His crafted goods are built to last generations."
 
 [node name="Jeweler" parent="Components" instance=ExtResource("32_vendor")]
-position = Vector2(720, 420)
+position = Vector2(440, 731)
 vendor_id = "town_jeweler"
 vendor_name = "Gemma Sparkle"
 vendor_icon = "💎"
-vendor_type = "luxury"
-vendor_description = "An eccentric artisan with an eye for rare gems. Gemma pays premium prices for precious stones and metals, but her exquisite jewelry comes at a steep cost. She claims each piece holds a bit of magic."
 item_catalog = Array[int]([2, 227, 228, 261, 255, 138, 139, 140, 311, 229, 230, 231, 232, 239, 271])
 buy_catalog = Array[int]([44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 289, 31, 32])
-stock_recipes = {2: {7: 2}, 227: {130: 1, 44: 1}, 228: {131: 3, 45: 1, 46: 1, 54: 1}, 261: {130: 2, 47: 2}, 255: {131: 5, 54: 2, 45: 2}, 138: {129: 2}, 139: {131: 1}, 140: {130: 2}, 229: {152: 3, 154: 1}, 230: {157: 3}, 231: {150: 2}, 232: {152: 4, 154: 2}, 239: {152: 5, 154: 3, 131: 2}, 271: {116: 2, 155: 3}}
+stock_recipes = {
+2: {
+7: 2
+},
+138: {
+129: 2
+},
+139: {
+131: 1
+},
+140: {
+130: 2
+},
+227: {
+44: 1,
+130: 1
+},
+228: {
+45: 1,
+46: 1,
+54: 1,
+131: 3
+},
+229: {
+152: 3,
+154: 1
+},
+230: {
+157: 3
+},
+231: {
+150: 2
+},
+232: {
+152: 4,
+154: 2
+},
+239: {
+131: 2,
+152: 5,
+154: 3
+},
+255: {
+45: 2,
+54: 2,
+131: 5
+},
+261: {
+47: 2,
+130: 2
+},
+271: {
+116: 2,
+155: 3
+}
+}
 buy_multiplier = 0.6
 sell_multiplier = 1.5
+vendor_type = "luxury"
 specialty_bonus = 1.5
 crafted_bonus = 1.3
+vendor_description = "An eccentric artisan with an eye for rare gems. Gemma pays premium prices for precious stones and metals, but her exquisite jewelry comes at a steep cost. She claims each piece holds a bit of magic."
 production_time_seconds = 90.0
 natural_restock_minutes = 45.0
 
@@ -359,35 +594,131 @@ natural_restock_minutes = 45.0
 position = Vector2(440, 560)
 vendor_id = "town_general"
 vendor_name = "Old Mercer"
-vendor_icon = "🏪"
-vendor_type = "general"
-vendor_description = "The town's oldest merchant who's seen it all. Old Mercer buys almost anything you bring and stocks a wide variety of goods. His prices are fair, though he drives a harder bargain than the specialists."
 item_catalog = Array[int]([201, 202, 203, 204, 205, 206, 254, 207, 208, 209, 210, 211, 212, 258, 213, 214, 310, 215, 216, 217, 218, 219, 220, 148, 149, 150, 151, 152, 153, 154, 155, 309, 156, 157, 158, 159, 160, 161, 162, 27, 180, 278, 279, 281])
 buy_catalog = Array[int]([4, 19, 22, 23, 82, 83, 84, 85, 86, 87, 91, 104, 106, 108, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 280])
-stock_recipes = {27: {23: 2}, 148: {83: 2}, 149: {82: 4}, 150: {83: 4}, 151: {84: 5}, 152: {86: 4}, 153: {149: 2, 184: 1}, 155: {125: 1}, 309: {125: 1}, 156: {104: 3}, 157: {106: 2}, 158: {108: 2}, 159: {156: 1}, 160: {156: 1}, 161: {157: 3}, 162: {157: 2, 41: 1}, 180: {82: 5}, 213: {172: 2, 87: 1}, 214: {134: 2, 173: 1}, 310: {113: 2, 182: 1}, 219: {155: 2, 110: 3}, 220: {155: 3}, 201: {25: 2, 12: 3}, 202: {25: 1, 12: 2}, 203: {25: 3, 12: 4}, 207: {156: 1}, 208: {149: 2, 159: 2}, 209: {151: 4, 159: 4}, 212: {141: 6, 134: 4}}
+stock_recipes = {
+27: {
+23: 2
+},
+148: {
+83: 2
+},
+149: {
+82: 4
+},
+150: {
+83: 4
+},
+151: {
+84: 5
+},
+152: {
+86: 4
+},
+153: {
+149: 2,
+184: 1
+},
+155: {
+125: 1
+},
+156: {
+104: 3
+},
+157: {
+106: 2
+},
+158: {
+108: 2
+},
+159: {
+156: 1
+},
+160: {
+156: 1
+},
+161: {
+157: 3
+},
+162: {
+41: 1,
+157: 2
+},
+180: {
+82: 5
+},
+201: {
+12: 3,
+25: 2
+},
+202: {
+12: 2,
+25: 1
+},
+203: {
+12: 4,
+25: 3
+},
+207: {
+156: 1
+},
+208: {
+149: 2,
+159: 2
+},
+209: {
+151: 4,
+159: 4
+},
+212: {
+134: 4,
+141: 6
+},
+213: {
+87: 1,
+172: 2
+},
+214: {
+134: 2,
+173: 1
+},
+219: {
+110: 3,
+155: 2
+},
+220: {
+155: 3
+},
+309: {
+125: 1
+},
+310: {
+113: 2,
+182: 1
+}
+}
 buy_multiplier = 0.65
 sell_multiplier = 1.35
 specialty_bonus = 1.1
 crafted_bonus = 1.1
+vendor_description = "The town's oldest merchant who's seen it all. Old Mercer buys almost anything you bring and stocks a wide variety of goods. His prices are fair, though he drives a harder bargain than the specialists."
 production_time_seconds = 40.0
 natural_restock_minutes = 20.0
 
 [node name="MinerWorker" parent="Components" instance=ExtResource("33_worker")]
-position = Vector2(380, 420)
-worker_type = "miner"
+position = Vector2(1150, 250)
 worker_name = "Rocky the Miner"
-worker_icon = "⛏️"
 worker_description = "A seasoned miner who knows every vein in the mountain. Pay Rocky to dig up ores and minerals for you while you tend to other business. The longer he works, the better the haul!"
 
 [node name="ForagerWorker" parent="Components" instance=ExtResource("33_worker")]
-position = Vector2(500, 380)
+position = Vector2(153, 806)
 worker_type = "forager"
 worker_name = "Fern the Gatherer"
 worker_icon = "🌿"
 worker_description = "A forest-born herbalist who can find plants others would miss. Fern will forage for herbs, wood, and forest treasures on your behalf. She's especially good with rare finds!"
 
 [node name="TrapperWorker" parent="Components" instance=ExtResource("33_worker")]
-position = Vector2(620, 420)
+position = Vector2(-289, 491)
 worker_type = "trapper"
 worker_name = "Hunter Jack"
 worker_icon = "🏹"

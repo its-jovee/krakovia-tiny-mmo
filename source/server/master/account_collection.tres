@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="AccountResourceCollection" load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://source/server/master/account_models/account.gd" id="1_wgikn"]
 [ext_resource type="Script" path="res://source/server/master/account_models/account_collection.gd" id="2_e6eac"]
@@ -38,17 +38,23 @@ script = ExtResource("1_wgikn")
 handle = "jovee"
 password = "Jovee2640"
 
+[sub_resource type="Resource" id="Resource_47dsw"]
+script = ExtResource("1_wgikn")
+id = 7
+handle = "maluco"
+password = "maluco123"
+
 [sub_resource type="Resource" id="Resource_obwkj"]
 script = ExtResource("1_wgikn")
 id = 4
 handle = "teste"
 password = "teste123"
 
-[sub_resource type="Resource" id="Resource_47dsw"]
+[sub_resource type="Resource" id="Resource_w6h2b"]
 script = ExtResource("1_wgikn")
-id = 7
-handle = "maluco"
-password = "maluco123"
+id = 8
+handle = "teste123"
+password = "teste123"
 
 [resource]
 script = ExtResource("2_e6eac")
@@ -60,6 +66,7 @@ collection = {
 "filhodedeus": SubResource("Resource_kbbby"),
 "jovee": SubResource("Resource_e6eac"),
 "maluco": SubResource("Resource_47dsw"),
-"teste": SubResource("Resource_obwkj")
+"teste": SubResource("Resource_obwkj"),
+"teste123": SubResource("Resource_w6h2b")
 }
-next_account_id = 8
+next_account_id = 9

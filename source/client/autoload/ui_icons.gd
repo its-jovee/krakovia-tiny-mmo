@@ -292,7 +292,7 @@ func replace_emoji(text: String) -> String:
 		"⚙️": bbcode("gear"),
 		
 		# Vendors
-		"🏪": bbcode("vendor"),
+		" ": bbcode("vendor"),
 		"🌿": bbcode("herbalist"),
 		"🌾": bbcode("grocer"),
 		"💎": bbcode("jeweler"),
@@ -331,4 +331,3 @@ func preload_common() -> void:
 	var common := ["gold", "checkmark", "close", "star", "fire", "lightning", "timer"]
 	for key in common:
 		get_icon(key)
-
