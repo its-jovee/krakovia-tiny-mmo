@@ -18,7 +18,9 @@ func add_entity(eid: int, sync: StateSynchronizer) -> void:
 
 	# Drain pending baseline/deltas for this entity.
 	var base: Array = _pending_baseline.get(eid, [])
+	print("[SyncManager] add_entity(%d) - pending baseline size: %d" % [eid, base.size()])
 	if base.size() > 0:
+		print("[SyncManager] Applying pending baseline for entity %d: %s" % [eid, base])
 		sync.apply_baseline(base)
 		_pending_baseline.erase(eid)
 
@@ -74,7 +76,7 @@ func on_bootstrap(payload: PackedByteArray) -> void:
 
 	# Updated already applied inside codec
 	#var updates: Array = msg.get("map_updates", [])
-	
+
 	#if updates.size() > 0:
 		#PathRegistry.apply_map_updates(updates)
 
@@ -83,10 +85,13 @@ func on_bootstrap(payload: PackedByteArray) -> void:
 		var obj: Dictionary = obj_any
 		var eid: int = int(obj.get("eid", -1))
 		var pairs: Array = obj.get("pairs", [])
+		print("[SyncManager] on_bootstrap for entity %d, pairs: %s" % [eid, pairs])
 		var syn: StateSynchronizer = entities.get(eid, null)
 		if syn == null:
+			print("[SyncManager] Entity %d not registered yet, storing in pending" % eid)
 			_pending_baseline[eid] = pairs
 		else:
+			print("[SyncManager] Entity %d already registered, applying directly" % eid)
 			syn.apply_baseline(pairs)
 
 

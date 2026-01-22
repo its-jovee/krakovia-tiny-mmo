@@ -16,6 +16,9 @@ static func _put_u16(spb: StreamPeerBuffer, v: int) -> void:
 static func _put_u32(spb: StreamPeerBuffer, v: int) -> void:
 	spb.put_u32(v)
 
+static func _put_i32(spb: StreamPeerBuffer, v: int) -> void:
+	spb.put_32(v)
+
 
 static func _put_f32(spb: StreamPeerBuffer, v: float) -> void:
 	spb.put_float(v)
@@ -39,6 +42,9 @@ static func _get_u16(spb: StreamPeerBuffer) -> int:
 static func _get_u32(spb: StreamPeerBuffer) -> int:
 	return spb.get_u32()
 
+static func _get_i32(spb: StreamPeerBuffer) -> int:
+	return spb.get_32()
+
 
 static func _get_f32(spb: StreamPeerBuffer) -> float:
 	return spb.get_float()
@@ -58,7 +64,7 @@ static func _encode_value(spb: StreamPeerBuffer, wire_type: int, value: Variant)
 			var b: bool = bool(value)
 			_put_u8(spb, 1 if b else 0)
 		PathRegistry.WIRE_I32:
-			_put_u32(spb, int(value))
+			_put_i32(spb, int(value))
 		PathRegistry.WIRE_F32:
 			_put_f32(spb, float(value))
 		PathRegistry.WIRE_VEC2_F32:
@@ -73,7 +79,7 @@ static func _decode_value(spb: StreamPeerBuffer, wire_type: int) -> Variant:
 		PathRegistry.WIRE_BOOL:
 			return _get_u8(spb) != 0
 		PathRegistry.WIRE_I32:
-			return _get_u32(spb)
+			return _get_i32(spb)
 		PathRegistry.WIRE_F32:
 			return _get_f32(spb)
 		PathRegistry.WIRE_VEC2_F32:
@@ -84,7 +90,7 @@ static func _decode_value(spb: StreamPeerBuffer, wire_type: int) -> Variant:
 
 static func encode_entity_block(eid: int, pairs: Array) -> PackedByteArray:
 	var spb: StreamPeerBuffer = StreamPeerBuffer.new()
-	_put_u32(spb, eid)
+	_put_i32(spb, eid)
 	var n: int = pairs.size()
 	_put_u16(spb, n)
 	for i in range(n):
@@ -116,7 +122,7 @@ static func encode_delta(blocks: Array) -> PackedByteArray:
 	for i in range(block_count):
 		var block: Dictionary = blocks[i]
 		var eid: int = int(block["eid"])
-		_put_u32(spb, eid)
+		_put_i32(spb, eid)
 
 		var pairs: Array = block.get("pairs", [])
 		var pair_count: int = pairs.size()
@@ -140,7 +146,7 @@ static func decode_delta(data: PackedByteArray) -> Array:
 	var out: Array = []
 
 	for _i in range(block_count):
-		var eid: int = _get_u32(spb)
+		var eid: int = _get_i32(spb)
 		var pair_count: int = _get_u16(spb)
 		var pairs: Array = []
 
@@ -180,7 +186,7 @@ static func encode_bootstrap(map_updates: Array, objects: Array) -> PackedByteAr
 	for i in range(obj_count):
 		var obj: Dictionary = objects[i]
 		var eid: int = int(obj["eid"])
-		_put_u32(spb, eid)
+		_put_i32(spb, eid)
 
 		var pairs: Array = obj.get("pairs", [])
 		var pair_count: int = pairs.size()
@@ -217,7 +223,7 @@ static func decode_bootstrap(data: PackedByteArray) -> Dictionary:
 	var obj_count: int = _get_u16(spb)
 	var objects: Array = []
 	for _j in range(obj_count):
-		var eid: int = _get_u32(spb)
+		var eid: int = _get_i32(spb)
 		var pair_count: int = _get_u16(spb)
 		var pairs: Array = []
 

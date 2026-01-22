@@ -96,6 +96,12 @@ func _ready() -> void:
 		leaderboard_mgr.world_server = world_server
 		add_child(leaderboard_mgr, true)
 
+	# Add BotManager
+	var bot_mgr = BotManager.new()
+	bot_mgr.name = "BotManager"
+	bot_mgr.server_instance = self
+	add_child(bot_mgr, true)
+
 
 func load_map(map_path: String) -> void:
 	if instance_map:
@@ -129,6 +135,11 @@ func load_map(map_path: String) -> void:
 		
 		# Initialize Halloween Monster if present
 		_initialize_halloween_monster()
+
+		# Spawn bots from BotSpawnPoint markers in the map
+		if has_node("BotManager"):
+			var bot_mgr: BotManager = get_node("BotManager")
+			bot_mgr.spawn_bots_from_map()
 		)
 
 
@@ -347,6 +358,11 @@ func spawn_player(peer_id: int) -> void:
 	if has_node("ShopManager"):
 		var shop_mgr: ShopManager = get_node("ShopManager")
 		shop_mgr.sync_shops_to_player(peer_id, self)
+
+	# Sync all bots to the new player
+	if has_node("BotManager"):
+		var bot_mgr: BotManager = get_node("BotManager")
+		bot_mgr.send_bots_to_peer(peer_id)
 
 
 func instantiate_player(peer_id: int) -> Player:
