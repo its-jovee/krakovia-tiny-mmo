@@ -4,9 +4,9 @@ extends Node
 ## Smoothly transitions CanvasModulate color and shadow direction based on server time.
 
 ## Color palette for different times of day
-const DAWN_COLOR = Color(1.0, 0.85, 0.7)       # Warm orange sunrise
-const DAY_COLOR = Color(1.0, 0.985, 0.92)      # Bright warm daylight
-const DUSK_COLOR = Color(1.0, 0.7, 0.55)       # Orange/red sunset
+const DAWN_COLOR = Color(0.90, 0.78, 0.62)     # Warm orange sunrise
+const DAY_COLOR = Color(0.88, 0.87, 0.82)      # Soft warm daylight
+const DUSK_COLOR = Color(0.90, 0.65, 0.50)     # Orange/red sunset
 const EVENING_COLOR = Color(0.6, 0.55, 0.75)   # Purple twilight
 const NIGHT_COLOR = Color(0.4, 0.45, 0.7)      # Cool blue night
 const MIDNIGHT_COLOR = Color(0.25, 0.28, 0.5)  # Deep blue midnight
