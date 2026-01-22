@@ -53,7 +53,11 @@ func data_request_handler(
 	var status = worker.get_player_status(player_resource)
 	status["worker_type"] = worker_type
 	instance.data_push.rpc_id(peer_id, &"worker.status", status)
-	
+
+	# Notify BotManager that worker is now busy (will walk away)
+	if worker.has_method("notify_worker_hired"):
+		worker.notify_worker_hired()
+
 	print("[worker.hire] Player %s hired %s tier %d for %d gold (burnout count: %d)" % [
 		player_resource.display_name,
 		worker_type,
@@ -80,4 +84,6 @@ func _get_player_worker(player: Player, instance: ServerInstance, worker_type: S
 			if player in worker.players_at_worker:
 				return worker
 	return null
+
+
 

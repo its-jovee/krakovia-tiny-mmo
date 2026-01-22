@@ -13,6 +13,13 @@ class_name WorkerArea
 		if Engine.is_editor_hint():
 			update_configuration_warnings()
 
+## Unique identifier for this worker (used by BotManager)
+@export var worker_id: String = "":
+	set(value):
+		worker_id = value
+		if Engine.is_editor_hint():
+			update_configuration_warnings()
+
 ## Display name shown to players
 @export var worker_name: String = "Hired Worker":
 	set(value):
@@ -24,6 +31,9 @@ class_name WorkerArea
 
 ## Description/personality blurb for the UI
 @export_multiline var worker_description: String = "A skilled worker ready to gather resources for you."
+
+# Bot entity ID when the worker is spawned as a walking bot
+var _bot_entity_id: int = 0
 
 # Tier configuration - base costs before burnout multiplier
 const TIER_BASE_COSTS: Array[int] = [200, 500, 1000, 2000, 4000, 8000]
@@ -189,6 +199,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
 	if worker_type.is_empty():
 		warnings.append("worker_type must be set (miner, forager, or trapper)")
+	if worker_id.is_empty():
+		warnings.append("worker_id should be set for BotManager integration (e.g., 'town_miner')")
 	return warnings
 
 
@@ -208,12 +220,32 @@ func _on_player_entered_worker(player: Player, _area: InteractionArea) -> void:
 	print("[WorkerArea] Player %s entered %s" % [player.name, worker_name])
 	if player not in players_at_worker:
 		players_at_worker.append(player)
+	# Pause bot wandering when a player enters
+	_notify_bot_interaction(true, player.global_position)
 
 
 func _on_player_exited_worker(player: Player, _area: InteractionArea) -> void:
 	"""Called when player exits worker area"""
 	print("[WorkerArea] Player %s exited %s" % [player.name, worker_name])
 	players_at_worker.erase(player)
+	# Resume bot wandering if no players left
+	if players_at_worker.is_empty():
+		_notify_bot_interaction(false, Vector2.ZERO)
+
+
+func _notify_bot_interaction(interacting: bool, player_pos: Vector2) -> void:
+	"""Tell the worker bot to pause or resume wandering"""
+	if worker_id.is_empty():
+		return
+	var bot_mgr = _get_bot_manager()
+	if not bot_mgr:
+		return
+	if interacting:
+		if bot_mgr.has_method("pause_worker_for_interaction"):
+			bot_mgr.pause_worker_for_interaction(worker_id, player_pos)
+	else:
+		if bot_mgr.has_method("resume_worker_wandering"):
+			bot_mgr.resume_worker_wandering(worker_id)
 
 
 ## Get base cost for a tier (before burnout)
@@ -324,3 +356,65 @@ func get_player_status(player_resource: PlayerResource) -> Dictionary:
 		"current_costs": tier_costs
 	}
 
+
+# === BOT MANAGER INTEGRATION ===
+
+
+## Called by instance_server to spawn the worker bot
+func spawn_worker_bot() -> void:
+	if worker_id.is_empty():
+		# Generate an ID if not set
+		worker_id = "%s_%s" % [worker_type, name.to_lower().replace(" ", "_")]
+
+	var bot_mgr: Node = _get_bot_manager()
+	if bot_mgr and bot_mgr.has_method("spawn_worker_bot"):
+		_bot_entity_id = bot_mgr.spawn_worker_bot(self)
+		print("[WorkerArea] Spawned worker bot for %s (entity %d)" % [worker_name, _bot_entity_id])
+
+		# Hide the static visual since the bot is now the visual representation
+		if _bot_entity_id != 0:
+			_hide_static_visual()
+
+
+## Hide the static worker visual and label (the bot replaces them)
+func _hide_static_visual() -> void:
+	var worker_visual = get_node_or_null("WorkerVisual")
+	if worker_visual:
+		worker_visual.visible = false
+
+	var label = get_node_or_null("Label")
+	if label:
+		label.visible = false
+
+
+## Notify BotManager that this worker has been hired (should leave)
+func notify_worker_hired() -> void:
+	if worker_id.is_empty():
+		return
+
+	var bot_mgr: Node = _get_bot_manager()
+	if bot_mgr and bot_mgr.has_method("set_worker_busy"):
+		bot_mgr.set_worker_busy(worker_id, true)
+		print("[WorkerArea] Worker %s is now busy (hired)" % worker_name)
+
+
+## Notify BotManager that this worker's job is complete (should return)
+func notify_worker_job_complete() -> void:
+	if worker_id.is_empty():
+		return
+
+	var bot_mgr: Node = _get_bot_manager()
+	if bot_mgr and bot_mgr.has_method("set_worker_busy"):
+		bot_mgr.set_worker_busy(worker_id, false)
+		print("[WorkerArea] Worker %s job complete (returning)" % worker_name)
+
+
+## Get reference to BotManager (only works on server)
+func _get_bot_manager() -> Node:
+	# Walk up to find ServerInstance
+	var node: Node = self
+	while node:
+		if node is SubViewport and node.has_node("BotManager"):
+			return node.get_node("BotManager")
+		node = node.get_parent()
+	return null

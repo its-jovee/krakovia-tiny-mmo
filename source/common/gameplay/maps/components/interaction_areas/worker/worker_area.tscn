@@ -1,18 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://cworkerarea1"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/maps/components/interaction_areas/worker/worker_area.gd" id="1_worker"]
+[ext_resource type="Script" uid="uid://bikdss7nir2ck" path="res://source/common/gameplay/maps/components/interaction_areas/worker/worker_area.gd" id="1_worker"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 40.0
 
 [node name="WorkerArea" type="Area2D"]
 script = ExtResource("1_worker")
-worker_name = "Hired Worker"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1")
 
 [node name="WorkerVisual" type="Node2D" parent="."]
+visible = false
 position = Vector2(0, -16)
 
 [node name="Body" type="Polygon2D" parent="WorkerVisual"]
@@ -49,7 +49,7 @@ theme_override_colors/font_color = Color(0.4, 0.9, 0.4, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 12
-text = "Hired Worker"
+text = "⛏️ Hired Worker"
 horizontal_alignment = 1
 
 [node name="TimerLabel" type="Label" parent="."]
@@ -77,5 +77,3 @@ theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 24
 text = "!"
 horizontal_alignment = 1
-
-

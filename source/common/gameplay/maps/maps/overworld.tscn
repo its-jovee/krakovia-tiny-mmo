@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://lwxqt1qfpgd1"]
+[gd_scene load_steps=47 format=4 uid="uid://lwxqt1qfpgd1"]
 
 [ext_resource type="Script" uid="uid://7mbux4mybta0" path="res://source/common/gameplay/maps/map.gd" id="1_i04l1"]
 [ext_resource type="Texture2D" uid="uid://cgpmhegq8dvqv" path="res://assets/sprites/environment/Gemini_Generated_Image_4bzhfy4bzhfy4bzh.png" id="2_mvj6e"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b2ckixon7ryh6" path="res://source/common/gameplay/maps/components/interaction_areas/warper/warper.tscn" id="9_vhwke"]
 [ext_resource type="PackedScene" uid="uid://l6hdpgq87k1y" path="res://source/server/world/components/harvesting/nodes/forager_node_t2.tscn" id="12_slgwh"]
 [ext_resource type="PackedScene" uid="uid://b8os1hudjrj8v" path="res://assets/sprites/characters/special/monster_halloween.tscn" id="13_ysxe5"]
+[ext_resource type="PackedScene" path="res://source/server/world/components/bots/bot_spawn_point.tscn" id="15_sbo1b"]
 [ext_resource type="PackedScene" uid="uid://j8nm4u1y8isn" path="res://source/server/world/components/harvesting/nodes/trapper_node_t1.tscn" id="17_2j5gi"]
 [ext_resource type="PackedScene" uid="uid://dw7lujftr0ltt" path="res://source/server/world/components/harvesting/nodes/trapper_node_t2.tscn" id="17_5vi16"]
 [ext_resource type="PackedScene" uid="uid://dlk03so1mwnco" path="res://source/server/world/components/harvesting/nodes/miner_node_t1.tscn" id="17_6ybks"]
@@ -707,11 +708,13 @@ natural_restock_minutes = 20.0
 
 [node name="MinerWorker" parent="Components" instance=ExtResource("33_worker")]
 position = Vector2(1150, 250)
+worker_id = "town_miner"
 worker_name = "Rocky the Miner"
 worker_description = "A seasoned miner who knows every vein in the mountain. Pay Rocky to dig up ores and minerals for you while you tend to other business. The longer he works, the better the haul!"
 
 [node name="ForagerWorker" parent="Components" instance=ExtResource("33_worker")]
 position = Vector2(153, 806)
+worker_id = "town_forager"
 worker_type = "forager"
 worker_name = "Fern the Gatherer"
 worker_icon = "🌿"
@@ -719,6 +722,7 @@ worker_description = "A forest-born herbalist who can find plants others would m
 
 [node name="TrapperWorker" parent="Components" instance=ExtResource("33_worker")]
 position = Vector2(-289, 491)
+worker_id = "town_trapper"
 worker_type = "trapper"
 worker_name = "Hunter Jack"
 worker_icon = "🏹"
@@ -726,6 +730,49 @@ worker_description = "An expert tracker who's hunted across every terrain. Jack 
 
 [node name="MinerNodeT2(1)" parent="." instance=ExtResource("24_bd110")]
 position = Vector2(1392, 720)
+
+[node name="BotSpawnPoint" parent="." instance=ExtResource("15_sbo1b")]
+position = Vector2(689, 412)
+bot_name = "Old Thomas"
+bot_class = "miner"
+wander_radius = 200.0
+dialogue_pool = "The mine's been good to us lately.
+Remember when the cave collapsed? Dark times.
+I've been mining these hills for forty years.
+The youngsters don't know real work anymore."
+
+[node name="BotSpawnPoint2" parent="." instance=ExtResource("15_sbo1b")]
+position = Vector2(450, 550)
+bot_name = "Martha"
+bot_class = "forager"
+wander_radius = 180.0
+appearance_head_id = "head_b"
+dialogue_pool = "The herbs are blooming beautifully this season.
+Have you tried the stew at the tavern?
+My grandmother taught me everything about plants.
+Be careful near the forest edge..."
+
+[node name="BotSpawnPoint3" parent="." instance=ExtResource("15_sbo1b")]
+position = Vector2(850, 300)
+bot_name = "Young Erik"
+bot_class = "trapper"
+wander_radius = 150.0
+appearance_head_id = "head_c"
+dialogue_pool = "Caught three rabbits yesterday!
+The wolves have been coming closer lately.
+Anyone seen my hunting knife?
+I heard there's treasure in the old ruins."
+
+[node name="BotSpawnPoint4" parent="." instance=ExtResource("15_sbo1b")]
+position = Vector2(300, 400)
+bot_name = "Grandmother Willow"
+bot_class = "forager"
+wander_radius = 120.0
+appearance_head_id = "head_a"
+dialogue_pool = "Back in my day, we had real adventures.
+The market prices are too high these days.
+Have you paid your respects at the shrine?
+My bones ache... rain is coming."
 
 [node name="MinerNodeT2(2)" parent="." instance=ExtResource("24_bd110")]
 position = Vector2(991, -247)

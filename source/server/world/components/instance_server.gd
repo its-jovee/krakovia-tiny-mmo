@@ -136,7 +136,10 @@ func load_map(map_path: String) -> void:
 		# Initialize Halloween Monster if present
 		_initialize_halloween_monster()
 
-		# Spawn bots from BotSpawnPoint markers in the map
+		# Spawn worker bots (Rocky, Fern, Jack walking near their stations)
+		_initialize_worker_bots()
+
+		# Spawn ambient bots from BotSpawnPoint markers in the map
 		if has_node("BotManager"):
 			var bot_mgr: BotManager = get_node("BotManager")
 			bot_mgr.spawn_bots_from_map()
@@ -640,6 +643,24 @@ func _initialize_vendors() -> void:
 				vendor.vendor_id, 
 				vendor.item_catalog.size()
 			])
+
+
+func _initialize_worker_bots() -> void:
+	"""Spawn walking bots for each WorkerArea (Rocky, Fern, Jack, etc.)"""
+	if not has_node("BotManager"):
+		return
+
+	var workers = instance_map.find_children("*", "WorkerArea", true, false)
+	print("[ServerInstance] Spawning worker bots for %d worker(s)..." % workers.size())
+
+	for worker_node in workers:
+		if worker_node is WorkerArea:
+			var worker = worker_node as WorkerArea
+			# Generate worker_id if not set
+			if worker.worker_id.is_empty():
+				worker.worker_id = "%s_%s" % [worker.worker_type, worker.name.to_lower().replace(" ", "_")]
+
+			worker.spawn_worker_bot()
 
 
 func _get_peer_id_for_player(player: Player) -> int:

@@ -106,6 +106,12 @@ func data_request_handler(
 	var status = worker.get_player_status(player_resource)
 	status["worker_type"] = worker_type
 	instance.data_push.rpc_id(peer_id, &"worker.status", status)
+
+	# Notify BotManager that worker can return (job collected)
+	# Only respawn if there are no more active jobs for this worker
+	var remaining_jobs = player_resource.get_worker_jobs(worker_type)
+	if remaining_jobs.is_empty() and worker.has_method("notify_worker_job_complete"):
+		worker.notify_worker_job_complete()
 	
 	# Push item received notifications (like harvest popups)
 	var items_for_popup: Array[Dictionary] = []

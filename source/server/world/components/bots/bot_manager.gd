@@ -12,6 +12,11 @@ var server_instance: ServerInstance
 var bots_by_entity_id: Dictionary[int, Player] = {}
 var controllers_by_entity_id: Dictionary[int, BotController] = {}
 
+# Worker bot tracking (worker_id -> entity_id)
+var worker_bots: Dictionary[String, int] = {}
+# Hidden worker bots (despawned while hired)
+var _hidden_workers: Dictionary[String, Dictionary] = {}  # worker_id -> {entity_id, spawn_data}
+
 var _next_entity_id: int = -1000
 var _update_accumulator: float = 0.0
 var _update_interval: float = 0.1  # 10 Hz bot updates
@@ -143,11 +148,16 @@ func spawn_bot(
 	controller.bot = bot
 	controller.entity_id = entity_id
 	controller.activity_mode = activity_mode
-	controller.home_position = position
+	controller.home_position = options.get("home_position", position)
 	controller.wander_radius = options.get("wander_radius", 150.0)
 	controller.dialogue_pool = options.get("dialogue", [])
 	controller.server_instance = server_instance
+	controller.npc_type = options.get("npc_type", NPCType.Type.VILLAGER_AMBIENT)
+	controller.linked_worker_id = options.get("worker_id", "")
 	controllers_by_entity_id[entity_id] = controller
+
+	# If this is a worker returning after a job, start the return animation
+	var should_return: bool = options.get("return_to_home", false)
 
 	# Setup synchronizer in ready callback (like instantiate_player does)
 	bot.ready.connect(func():
@@ -171,6 +181,10 @@ func spawn_bot(
 
 		# Setup controller
 		controller.setup()
+
+		# If worker returning from job, start return animation
+		if should_return:
+			controller.start_returning(position)
 
 		# Notify existing clients
 		_spawn_bot_to_clients(entity_id)
@@ -289,3 +303,180 @@ func _allocate_entity_id() -> int:
 ## Get bot count.
 func get_bot_count() -> int:
 	return bots_by_entity_id.size()
+
+
+# === WORKER BOT FUNCTIONS ===
+
+
+## Spawn a bot for a WorkerArea (Rocky, Fern, Jack, etc.)
+func spawn_worker_bot(worker_area: Node) -> int:
+	if not worker_area:
+		return 0
+
+	var worker_id: String = worker_area.worker_id if "worker_id" in worker_area else ""
+	if worker_id.is_empty():
+		push_warning("[BotManager] WorkerArea has no worker_id!")
+		return 0
+
+	# Already spawned?
+	if worker_bots.has(worker_id):
+		return worker_bots[worker_id]
+
+	var worker_name: String = worker_area.worker_name if "worker_name" in worker_area else "Worker"
+	var worker_type: String = worker_area.worker_type if "worker_type" in worker_area else "forager"
+	var position: Vector2 = worker_area.global_position
+
+	print("[BotManager] Spawning worker bot '%s' (type: %s) at %s" % [worker_name, worker_type, position])
+
+	var entity_id: int = spawn_bot(
+		worker_name,
+		worker_type,  # Character class matches worker type
+		position,
+		ActivityMode.ACTIVE,
+		{
+			"head_id": "head_a",
+			"wander_radius": 100.0,
+			"dialogue": [
+				"Need something gathered?",
+				"I'm ready to work!",
+				"Fine day for it.",
+			],
+			"npc_type": NPCType.Type.VILLAGER_WORKER,
+			"worker_id": worker_id,
+		}
+	)
+
+	if entity_id != 0:
+		worker_bots[worker_id] = entity_id
+
+	return entity_id
+
+
+## Set a worker as busy (hired) or not busy (returned)
+func set_worker_busy(worker_id: String, busy: bool) -> void:
+	if not worker_bots.has(worker_id):
+		# Worker might be hidden, check if we need to respawn
+		if not busy and _hidden_workers.has(worker_id):
+			_respawn_hidden_worker(worker_id)
+		return
+
+	var entity_id: int = worker_bots[worker_id]
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if not controller:
+		return
+
+	if busy:
+		# Start leaving animation
+		controller.start_leaving()
+	else:
+		# Worker returned - this is handled by _respawn_hidden_worker
+		pass
+
+
+## Called by BotController when a worker has finished walking away
+func _on_worker_left(entity_id: int) -> void:
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if not controller or controller.npc_type != NPCType.Type.VILLAGER_WORKER:
+		return
+
+	var worker_id: String = controller.linked_worker_id
+	if worker_id.is_empty():
+		return
+
+	print("[BotManager] Worker '%s' has left (entity %d)" % [worker_id, entity_id])
+
+	# Store data for respawn later
+	var bot: Player = bots_by_entity_id.get(entity_id, null)
+	if bot:
+		_hidden_workers[worker_id] = {
+			"entity_id": entity_id,
+			"home_position": controller.home_position,
+			"wander_radius": controller.wander_radius,
+			"dialogue": controller.dialogue_pool,
+			"display_name": bot.player_resource.display_name,
+			"character_class": bot.character_class,
+		}
+
+	# Despawn the bot (make invisible to clients)
+	despawn_bot(entity_id)
+	worker_bots.erase(worker_id)
+
+
+## Called by BotController when a worker has returned to their station
+func _on_worker_returned(entity_id: int) -> void:
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if not controller or controller.npc_type != NPCType.Type.VILLAGER_WORKER:
+		return
+
+	print("[BotManager] Worker entity %d has returned to station" % entity_id)
+	# Worker is back and ready to be hired again
+
+
+## Respawn a hidden worker after their job is complete
+func _respawn_hidden_worker(worker_id: String) -> void:
+	if not _hidden_workers.has(worker_id):
+		return
+
+	var data: Dictionary = _hidden_workers[worker_id]
+	_hidden_workers.erase(worker_id)
+
+	var home_position: Vector2 = data.get("home_position", Vector2.ZERO)
+	var wander_radius: float = data.get("wander_radius", 100.0)
+
+	# Spawn at edge of wander area
+	var spawn_offset: Vector2 = Vector2(wander_radius, 0).rotated(randf() * TAU)
+	var spawn_position: Vector2 = home_position + spawn_offset
+
+	print("[BotManager] Respawning worker '%s' at edge position %s" % [worker_id, spawn_position])
+
+	var entity_id: int = spawn_bot(
+		data.get("display_name", "Worker"),
+		data.get("character_class", "forager"),
+		spawn_position,
+		ActivityMode.ACTIVE,
+		{
+			"head_id": "head_a",
+			"wander_radius": wander_radius,
+			"dialogue": data.get("dialogue", []),
+			"npc_type": NPCType.Type.VILLAGER_WORKER,
+			"worker_id": worker_id,
+			"return_to_home": true,
+			"home_position": home_position,
+		}
+	)
+
+	if entity_id != 0:
+		worker_bots[worker_id] = entity_id
+
+
+## Check if a worker is currently available (not busy)
+func is_worker_available(worker_id: String) -> bool:
+	if _hidden_workers.has(worker_id):
+		return false
+	if not worker_bots.has(worker_id):
+		return true  # Not spawned yet, probably available
+	var entity_id: int = worker_bots[worker_id]
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if controller:
+		return not controller.is_busy
+	return true
+
+
+## Pause a worker for interaction (player entered WorkerArea)
+func pause_worker_for_interaction(worker_id: String, player_position: Vector2) -> void:
+	if not worker_bots.has(worker_id):
+		return
+	var entity_id: int = worker_bots[worker_id]
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if controller:
+		controller.pause_for_interaction(player_position)
+
+
+## Resume a worker's wandering (all players left WorkerArea)
+func resume_worker_wandering(worker_id: String) -> void:
+	if not worker_bots.has(worker_id):
+		return
+	var entity_id: int = worker_bots[worker_id]
+	var controller: BotController = controllers_by_entity_id.get(entity_id, null)
+	if controller:
+		controller.resume_wandering()
