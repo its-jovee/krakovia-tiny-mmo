@@ -454,9 +454,9 @@ inventory = {
 }
 available_attributes_points = 10
 experience = 1025
-current_energy = 69.5
-last_logout_time = 1770063820.613
-last_position = Vector2(1264.8225, 883.1603)
+current_energy = 100.0
+last_logout_time = 1770065120.111
+last_position = Vector2(-317.99597, -636.1569)
 worker_burnout = {
 "forager": {
 "hire_count": 0,
