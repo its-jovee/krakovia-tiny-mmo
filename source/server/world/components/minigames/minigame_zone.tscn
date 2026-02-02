@@ -1,18 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dm3xqv0yj5mg0"]
+[gd_scene format=3 uid="uid://dm3xqv0yj5mg0"]
 
 [ext_resource type="Script" uid="uid://3xid202m8ml2" path="res://source/server/world/components/minigames/minigame_zone.gd" id="1_minigame_zone"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
 size = Vector2(400, 400)
 
-[node name="MinigameZone" type="Area2D"]
+[node name="MinigameZone" type="Area2D" unique_id=408705460]
 collision_layer = 0
 script = ExtResource("1_minigame_zone")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695252992]
 shape = SubResource("RectangleShape2D_zone")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1829832639]
 offset_left = -100.0
 offset_top = -220.0
 offset_right = 100.0
@@ -21,6 +22,7 @@ text = "Game Arena"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GroundMarker" type="Polygon2D" parent="."]
+[node name="GroundMarker" type="Polygon2D" parent="." unique_id=884279381]
+z_index = -1
 color = Color(0.4, 0.8, 1, 0.2)
 polygon = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)

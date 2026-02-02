@@ -1,46 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2qvx8n3f5hak"]
+[gd_scene format=3 uid="uid://b2qvx8n3f5hak"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/maps/components/interaction_areas/vendor/vendor_area.gd" id="1_vendor"]
+[ext_resource type="Script" uid="uid://cjdaijsxtn1" path="res://source/common/gameplay/maps/components/interaction_areas/vendor/vendor_area.gd" id="1_vendor"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1"]
 radius = 32.0
 
-[node name="VendorArea" type="Area2D"]
+[node name="VendorArea" type="Area2D" unique_id=1852815219]
 script = ExtResource("1_vendor")
-vendor_name = "Merchant"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=785393323]
 shape = SubResource("CircleShape2D_1")
 
-[node name="VendorVisual" type="Node2D" parent="."]
+[node name="VendorVisual" type="Node2D" parent="." unique_id=503247807]
 position = Vector2(0, -16)
 
-[node name="Body" type="Polygon2D" parent="VendorVisual"]
+[node name="Body" type="Polygon2D" parent="VendorVisual" unique_id=1275621981]
+visible = false
+position = Vector2(0, -20.000002)
+scale = Vector2(4.3233013, 3.2752256)
 color = Color(0.6, 0.4, 0.2, 1)
 polygon = PackedVector2Array(-10, 0, 10, 0, 10, 24, -10, 24)
 
-[node name="Head" type="Polygon2D" parent="VendorVisual"]
+[node name="Head" type="Polygon2D" parent="VendorVisual" unique_id=885212299]
+visible = false
 position = Vector2(0, -8)
 color = Color(1, 0.85, 0.7, 1)
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[node name="Hat" type="Polygon2D" parent="VendorVisual"]
-position = Vector2(0, -20)
+[node name="Hat" type="Polygon2D" parent="VendorVisual" unique_id=737183109]
+position = Vector2(0, 48.000004)
+scale = Vector2(2.9560988, 4.729758)
 color = Color(0.8, 0.1, 0.1, 1)
 polygon = PackedVector2Array(-12, 0, 12, 0, 8, -12, -8, -12)
 
-[node name="Label" type="RichTextLabel" parent="."]
-offset_left = -40.0
+[node name="Hat2" type="Polygon2D" parent="VendorVisual" unique_id=1581546559]
+z_index = -1
+position = Vector2(1, 52)
+scale = Vector2(3.396098, 5.4337564)
+color = Color(0.6, 0.4, 0.2, 1)
+polygon = PackedVector2Array(-12, 0, 12, 0, 8, -12, -8, -12)
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=2116401988]
+offset_left = -61.0
 offset_top = -56.0
-offset_right = 40.0
+offset_right = 61.0
 offset_bottom = -36.0
 theme_override_colors/default_color = Color(1, 0.84, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/normal_font_size = 12
-text = "Merchant"
-horizontal_alignment = 1
 bbcode_enabled = true
+text = "Merchant"
 scroll_active = false
 autowrap_mode = 0
-
+horizontal_alignment = 1

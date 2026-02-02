@@ -431,33 +431,37 @@ character_class = "forager"
 golds = 103
 inventory = {
 56: {
-"stack": 98
+"stack": 115
 },
 64: {
-"stack": 40
+"stack": 58
 },
 71: {
-"stack": 33
+"stack": 47
 },
 79: {
-"stack": 3
+"stack": 5
 },
 82: {
-"stack": 7
+"stack": 10
 },
 86: {
-"stack": 3
+"stack": 4
 },
 92: {
 "stack": 1
 }
 }
 available_attributes_points = 10
-experience = 620
-current_energy = 100.0
-last_logout_time = 1770053280.164
-last_position = Vector2(-154.94516, 721.40643)
+experience = 755
+current_energy = 88.11902766666668
+last_logout_time = 1770057667.074
+last_position = Vector2(-279.14294, -273.1327)
 worker_burnout = {
+"forager": {
+"hire_count": 0,
+"last_reset": 1770057635
+},
 "miner": {
 "hire_count": 0,
 "last_reset": 1770053142
@@ -547,7 +551,7 @@ account_titles = {
 "teste123": {
 "progress": {
 "event_founder": 1,
-"harvests_collector": 72
+"harvests_collector": 78
 },
 "unlocked": [&"founder"]
 },

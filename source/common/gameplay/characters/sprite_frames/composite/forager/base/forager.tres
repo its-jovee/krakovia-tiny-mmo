@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dkeeft051qhl3"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dkeeft051qhl3"]
 
 [ext_resource type="Texture2D" uid="uid://bxkdc2v12aksj" path="res://assets/sprites/characters/composite/forager/body/forager-base.png" id="1_o3is8"]
 
