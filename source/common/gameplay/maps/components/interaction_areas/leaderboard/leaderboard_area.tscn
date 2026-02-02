@@ -1,31 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkw7x3m8pq2yl"]
+[gd_scene format=3 uid="uid://bkw7x3m8pq2yl"]
 
-[ext_resource type="Script" path="res://source/common/gameplay/maps/components/interaction_areas/leaderboard/leaderboard_area.gd" id="1_leaderboard"]
+[ext_resource type="Script" uid="uid://8isewea1y07f" path="res://source/common/gameplay/maps/components/interaction_areas/leaderboard/leaderboard_area.gd" id="1_leaderboard"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_leaderboard"]
 size = Vector2(64, 64)
 
-[node name="LeaderboardArea" type="Area2D"]
+[node name="LeaderboardArea" type="Area2D" unique_id=138688698]
 script = ExtResource("1_leaderboard")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=420417805]
 shape = SubResource("RectangleShape2D_leaderboard")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=2137653191]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 32.0
-offset_right = 48.0
-offset_bottom = 53.0
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Leaderboard"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-
-
