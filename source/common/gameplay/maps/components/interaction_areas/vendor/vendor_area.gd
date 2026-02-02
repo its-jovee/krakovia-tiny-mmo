@@ -545,14 +545,9 @@ func get_catalog_for_client(event_multiplier: float = 1.0) -> Dictionary:
 
 ## Get vendor info for client UI
 func get_vendor_info() -> Dictionary:
-	# Get translated name if _vendor_data is available
-	var display_name: String = vendor_name
-	if _vendor_data and _vendor_data.has_method("get_translated_name"):
-		display_name = _vendor_data.get_translated_name()
-	
 	return {
 		"id": vendor_id,
-		"name": display_name,
+		"name": vendor_name,
 		"icon": vendor_icon,
 		"type": vendor_type,
 		"description": vendor_description,

@@ -49,8 +49,8 @@ func data_request_handler(
 		
 		titles_array.append({
 			"slug": String(title_slug),
-			"name": title.get_translated_name(),
-			"description": title.get_translated_description(),
+			"name": title.title_name,
+			"description": title.description,
 			"rarity": title.rarity,
 			"unlocked": is_unlocked,
 			"progress": current_progress,

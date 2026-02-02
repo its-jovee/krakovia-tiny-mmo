@@ -166,8 +166,8 @@ func unlock_title(account_name: String, title_slug: StringName, peer_id: int, in
 	# Send notification to player
 	instance.data_push.rpc_id(peer_id, &"title.unlocked", {
 		"slug": String(title_slug),
-		"name": title.get_translated_name(),
-		"description": title.get_translated_description(),
+		"name": title.title_name,
+		"description": title.description,
 		"rarity": title.rarity
 	})
 	

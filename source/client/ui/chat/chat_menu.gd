@@ -70,7 +70,37 @@ func open_chat() -> void:
 func _on_chat_message(message: Dictionary) -> void:
 	if not message:
 		return
-	var text: String = message.get("text", "")
+	
+	# Check if message needs translation
+	var text: String
+	if message.get("translate", false):
+		# Translate the message on client side
+		if message.has("i18n_key"):
+			var i18n_key: String = message.get("i18n_key", "")
+			var params: Dictionary = message.get("i18n_params", {})
+			text = TranslationServer.translate(i18n_key)
+			# Replace parameters - handle nested translation keys
+			for param_key in params.keys():
+				var param_value = params[param_key]
+				# If parameter is itself a translation key, translate it
+				if typeof(param_value) == TYPE_STRING and param_value.begins_with("minigame_"):
+					param_value = TranslationServer.translate(param_value)
+				text = text.replace("%s", str(param_value))
+		elif message.has("event_id"):
+			# Market event messages
+			var event_id: String = message.get("event_id", "")
+			var title_key: String = "event_%s_title" % event_id
+			var desc_key: String = "event_%s_desc" % event_id
+			var icon: String = message.get("text", "").split("\n")[0]  # Get icon from original text
+			text = "%s\n%s" % [
+				TranslationServer.translate(title_key),
+				TranslationServer.translate(desc_key)
+			]
+		else:
+			text = message.get("text", "")
+	else:
+		text = message.get("text", "")
+	
 	var sender_name: String = message.get("name", "")
 	var channel: int = message.get("channel", 0)
 	var sender_id: int = message.get("id", 0)

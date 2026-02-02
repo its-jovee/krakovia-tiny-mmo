@@ -46,9 +46,7 @@ func start_active_phase() -> void:
 	"""Called by MinigameManager after 60-second waiting phase"""
 	if active_players.size() < 2:
 		print("[HotPotato:%d] Not enough players (%d), cancelling game" % [session_id, active_players.size()])
-		var game_name: String = TranslationServer.translate("minigame_hot_potato_name")
-		var cancel_msg: String = TranslationServer.translate("system_minigame_cancelled") % game_name
-		minigame_manager.send_system_message(cancel_msg)
+		minigame_manager.send_system_message_i18n("system_minigame_cancelled", {"game": "minigame_hot_potato_name"})
 		minigame_manager.remove_session(session_id)
 		return
 	
@@ -275,8 +273,7 @@ func end_game() -> void:
 		award_winner(winner_id)
 	else:
 		print("[HotPotato:%d] No winner - all players eliminated" % session_id)
-		var draw_msg: String = TranslationServer.translate("minigame_hot_potato_draw")
-		minigame_manager.send_system_message(draw_msg)
+		minigame_manager.send_system_message_i18n("minigame_hot_potato_draw")
 	
 	# Schedule cleanup
 	await get_tree().create_timer(10.0).timeout

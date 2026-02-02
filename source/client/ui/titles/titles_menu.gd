@@ -93,7 +93,16 @@ func _create_title_row(title_data: Dictionary) -> void:
 	
 	# [Title Name] - fixed width, colored by rarity
 	var title_label: Label = Label.new()
-	title_label.text = title_data.get("name", "Unknown")
+	
+	# Translate title name on client side
+	var title_slug: String = title_data.get("slug", "")
+	var title_name: String = title_data.get("name", "Unknown")
+	if not title_slug.is_empty():
+		var translated_name = TranslationServer.translate("title_%s_name" % title_slug)
+		if translated_name != ("title_%s_name" % title_slug):  # Check if translation exists
+			title_name = translated_name
+	
+	title_label.text = title_name
 	title_label.add_theme_color_override("font_color", rarity_color)
 	title_label.add_theme_font_size_override("font_size", 14)
 	title_label.custom_minimum_size = Vector2(160, 0)
@@ -102,7 +111,15 @@ func _create_title_row(title_data: Dictionary) -> void:
 	
 	# [Requirement] - description
 	var desc_label: Label = Label.new()
-	desc_label.text = title_data.get("description", "")
+	
+	# Translate title description on client side
+	var description: String = title_data.get("description", "")
+	if not title_slug.is_empty():
+		var translated_desc = TranslationServer.translate("title_%s_desc" % title_slug)
+		if translated_desc != ("title_%s_desc" % title_slug):  # Check if translation exists
+			description = translated_desc
+	
+	desc_label.text = description
 	desc_label.add_theme_font_size_override("font_size", 12)
 	desc_label.custom_minimum_size = Vector2(220, 0)
 	desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -113,7 +130,7 @@ func _create_title_row(title_data: Dictionary) -> void:
 	if is_unlocked:
 		# Show "Unlocked" badge
 		var unlocked_label: Label = Label.new()
-		unlocked_label.text = "Unlocked"
+		unlocked_label.text = TranslationServer.translate("ui_unlocked")
 		unlocked_label.add_theme_color_override("font_color", Color(0.3, 0.9, 0.3, 1.0))
 		unlocked_label.add_theme_font_size_override("font_size", 12)
 		unlocked_label.custom_minimum_size = Vector2(180, 0)
@@ -158,18 +175,17 @@ func _create_title_row(title_data: Dictionary) -> void:
 	# [Equip Button] - fixed width
 	var equip_button: Button = Button.new()
 	equip_button.custom_minimum_size = Vector2(100, 0)
-	var title_slug: String = title_data.get("slug", "")
 	
 	if is_unlocked:
 		if title_slug == selected_title_slug:
-			equip_button.text = "Equipped"
+			equip_button.text = TranslationServer.translate("ui_equipped")
 			equip_button.disabled = false
 			equip_button.pressed.connect(func(): _unequip_title())
 		else:
-			equip_button.text = "Equip"
+			equip_button.text = TranslationServer.translate("ui_equip")
 			equip_button.pressed.connect(func(): _equip_title(title_slug, title_data.get("name", "")))
 	else:
-		equip_button.text = "Locked"
+		equip_button.text = TranslationServer.translate("ui_locked")
 		equip_button.disabled = true
 	
 	hbox.add_child(equip_button)
@@ -232,5 +248,3 @@ func on_progress_update(data: Dictionary) -> void:
 	
 	# Refresh the entire menu to show updated progress
 	InstanceClient.current.request_data(&"titles.get", _on_titles_received, {})
-
-

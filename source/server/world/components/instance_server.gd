@@ -204,7 +204,8 @@ func _on_player_entered_interaction_area(player: Player, interaction_area: Inter
 			data_push.rpc_id(peer_id, &"worker.area.status", {
 				"in_worker_area": true,
 				"worker_type": worker.worker_type,
-				"worker_name": worker.get_translated_name(),
+				"worker_id": worker.worker_id,
+				"worker_name": worker.worker_name,
 				"worker_icon": worker.worker_icon,
 				"has_completed_jobs": has_completed
 			})
@@ -397,7 +398,8 @@ func instantiate_player(peer_id: int) -> Player:
 		if not title_slug.is_empty():
 			var title: TitleResource = ContentRegistryHub.load_by_slug(&"titles", StringName(title_slug))
 			if title:
-				syn.set_by_path(^":title_text", title.get_translated_name())
+				syn.set_by_path(^":title_text", title.title_name)
+				syn.set_by_path(^":title_slug", player_resource.selected_title_slug)
 				syn.set_by_path(^":title_rarity", title.rarity)
 			else:
 				syn.set_by_path(^":title_text", "")

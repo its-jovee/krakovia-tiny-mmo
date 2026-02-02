@@ -156,6 +156,18 @@ func _update_event_banner() -> void:
 		if event_label:
 			var title = current_event.get("title", "Market Event")
 			var description = current_event.get("description", "")
+			var event_id = current_event.get("id", "")
+			
+			# Translate event title and description on client side
+			if not event_id.is_empty():
+				var translated_title = TranslationServer.translate("event_%s_title" % event_id)
+				if translated_title != ("event_%s_title" % event_id):  # Check if translation exists
+					title = translated_title
+				
+				var translated_desc = TranslationServer.translate("event_%s_desc" % event_id)
+				if translated_desc != ("event_%s_desc" % event_id):  # Check if translation exists
+					description = translated_desc
+			
 			var affected_items: Array = current_event.get("affected_items", [])
 			
 			# Build price change indicators
@@ -966,7 +978,7 @@ func _on_market_event(data: Dictionary) -> void:
 
 func _update_gold_display() -> void:
 	if gold_label:
-		gold_label.text = "%d Gold" % current_gold
+		gold_label.text = "%d %s" % [current_gold, TranslationServer.translate("inventory_gold")]
 
 
 func _on_close_button_pressed() -> void:

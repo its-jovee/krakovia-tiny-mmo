@@ -50,7 +50,8 @@ func data_request_handler(
 	# Update state synchronizer for live display update
 	var syn: StateSynchronizer = player.get_node_or_null(^"StateSynchronizer")
 	if syn:
-		syn.set_by_path(^":title_text", title.get_translated_name())
+		syn.set_by_path(^":title_text", title.title_name)
+		syn.set_by_path(^":title_slug", String(title_slug))
 		syn.set_by_path(^":title_rarity", title.rarity)
 	
 	# Save database
@@ -59,7 +60,7 @@ func data_request_handler(
 	return {
 		"success": true,
 		"selected": title_slug,
-		"title_name": title.get_translated_name()
+		"title_name": title.title_name
 	}
 
 

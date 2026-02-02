@@ -24,6 +24,18 @@ func _ready() -> void:
 	
 	close_button.pressed.connect(_on_close_button_pressed)
 	
+	# Set translated UI labels
+	var tiers_label = $Panel/MarginContainer/VBoxContainer/TiersLabel
+	if tiers_label:
+		tiers_label.text = TranslationServer.translate("ui_select_tier")
+	
+	var jobs_label = $Panel/MarginContainer/VBoxContainer/JobsLabel
+	if jobs_label:
+		jobs_label.text = TranslationServer.translate("ui_active_jobs")
+	
+	if close_button:
+		close_button.text = TranslationServer.translate("ui_close")
+	
 	# Subscribe to updates
 	InstanceClient.subscribe(&"gold.update", _on_gold_update)
 	InstanceClient.subscribe(&"worker.status", _on_worker_status_update)
@@ -91,10 +103,22 @@ func _refresh_display() -> void:
 
 func _update_header() -> void:
 	var name = worker_info.get("name", "Worker")
+	var worker_id = worker_info.get("id", "")
 	var desc = worker_info.get("description", "")
 	
+	# Translate worker name if ID is provided
+	if not worker_id.is_empty():
+		var translated_name = TranslationServer.translate("npc_%s_name" % worker_id)
+		if translated_name != ("npc_%s_name" % worker_id):  # Check if translation exists
+			name = translated_name
+		
+		# Translate description
+		var translated_desc = TranslationServer.translate("npc_%s_desc" % worker_id)
+		if translated_desc != ("npc_%s_desc" % worker_id):  # Check if translation exists
+			desc = translated_desc
+	
 	if title_label:
-		title_label.text = "Hired %s" % name
+		title_label.text = "%s %s" % [TranslationServer.translate("ui_hired"), name]
 	
 	if description_label:
 		description_label.text = "[i]%s[/i]" % desc
@@ -102,7 +126,7 @@ func _update_header() -> void:
 
 func _update_gold_display() -> void:
 	if gold_label:
-		gold_label.text = "%d gold" % current_gold
+		gold_label.text = "%d %s" % [current_gold, TranslationServer.translate("ui_gold")]
 
 
 func _update_burnout_display() -> void:
@@ -114,7 +138,7 @@ func _update_burnout_display() -> void:
 	
 	if hire_count > 0:
 		var reset_text = _format_duration(reset_seconds)
-		burnout_label.text = "Hired %dx today - Prices +%d%% (resets in %s)" % [
+		burnout_label.text = TranslationServer.translate("ui_hire_today") % [
 			hire_count,
 			int((pow(1.25, hire_count) - 1) * 100),
 			reset_text
@@ -210,11 +234,11 @@ func _create_tier_panel(tier: int, cost: int, base_cost: int, duration: int, rol
 	
 	# Hire button
 	var hire_btn = Button.new()
-	hire_btn.text = "Hire"
+	hire_btn.text = TranslationServer.translate("ui_hire")
 	hire_btn.custom_minimum_size = Vector2(80, 36)
 	hire_btn.disabled = current_gold < cost
 	if hire_btn.disabled:
-		hire_btn.tooltip_text = "Not enough gold"
+		hire_btn.tooltip_text = TranslationServer.translate("ui_not_enough_gold")
 	hire_btn.pressed.connect(_on_hire_pressed.bind(tier, cost))
 	hbox.add_child(hire_btn)
 	
@@ -251,7 +275,7 @@ func _refresh_jobs_display() -> void:
 	# Show message if no jobs
 	if active_jobs.is_empty() and completed_jobs.is_empty():
 		var label = Label.new()
-		label.text = "No active jobs. Hire a worker above!"
+		label.text = TranslationServer.translate("ui_no_active_jobs")
 		label.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6))
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		jobs_container.add_child(label)
@@ -283,14 +307,14 @@ func _create_collection_banner(count: int) -> PanelContainer:
 	panel.add_child(hbox)
 	
 	var label = Label.new()
-	label.text = "%d job%s ready to collect!" % [count, "s" if count > 1 else ""]
+	label.text = "%d %s" % [count, TranslationServer.translate("ui_jobs_ready")]
 	label.add_theme_font_size_override("font_size", 15)
 	label.add_theme_color_override("font_color", Color.WHITE)
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	hbox.add_child(label)
 	
 	var collect_btn = Button.new()
-	collect_btn.text = "Collect All"
+	collect_btn.text = TranslationServer.translate("ui_collect_all")
 	collect_btn.custom_minimum_size = Vector2(110, 36)
 	collect_btn.pressed.connect(_on_collect_pressed)
 	hbox.add_child(collect_btn)
@@ -343,10 +367,10 @@ func _create_job_panel(job: Dictionary, completed: bool) -> PanelContainer:
 	status_label.add_theme_font_size_override("font_size", 13)
 	
 	if completed:
-		status_label.text = "Ready to collect!"
+		status_label.text = TranslationServer.translate("ui_ready_to_collect")
 		status_label.add_theme_color_override("font_color", Color(0.5, 1, 0.5))
 	else:
-		status_label.text = "%s remaining" % _format_duration(remaining)
+		status_label.text = "%s %s" % [_format_duration(remaining), TranslationServer.translate("ui_remaining")]
 		status_label.add_theme_color_override("font_color", Color(0.75, 0.75, 0.75))
 		status_label.name = "StatusLabel"  # For timer updates
 	
@@ -355,7 +379,7 @@ func _create_job_panel(job: Dictionary, completed: bool) -> PanelContainer:
 	# Collect button (only for completed)
 	if completed:
 		var collect_btn = Button.new()
-		collect_btn.text = "Collect"
+		collect_btn.text = TranslationServer.translate("ui_collect")
 		collect_btn.custom_minimum_size = Vector2(80, 32)
 		collect_btn.pressed.connect(_on_collect_pressed)
 		hbox.add_child(collect_btn)

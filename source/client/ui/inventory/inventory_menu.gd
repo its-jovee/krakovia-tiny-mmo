@@ -242,7 +242,7 @@ func _on_gold_update(data: Dictionary) -> void:
 	_update_gold_display()
 
 func _update_gold_display() -> void:
-	var gold_text = "Gold: %d" % current_gold
+	var gold_text = "%s: %d" % [TranslationServer.translate("inventory_gold"), current_gold]
 	if equipment_gold_label:
 		equipment_gold_label.text = gold_text
 	if trade_gold_label:
@@ -425,9 +425,9 @@ func _on_item_slot_clicked(item_slot_panel: Panel) -> void:
 			if equip_button:
 				# Show "Equip" or "Unequip" based on current state
 				if is_equipped:
-					equip_button.text = "Unequip"
+					equip_button.text = TranslationServer.translate("inventory_unequip")
 				else:
-					equip_button.text = "Equip"
+					equip_button.text = TranslationServer.translate("inventory_equip")
 				
 				equip_button.visible = true
 				equip_button.disabled = false
@@ -497,8 +497,9 @@ func _on_equip_button_pressed() -> void:
 			print("  ✗ No equip button found!")
 			return
 		
-		# Check button text to determine action (simpler than checking equipped state again)
-		var is_unequip: bool = (equip_button.text == "Unequip")
+		# Check button text to determine action (compare with translation keys)
+		var unequip_text = TranslationServer.translate("inventory_unequip")
+		var is_unequip: bool = (equip_button.text == unequip_text)
 		print("  → Button text: '%s', Action: %s" % [equip_button.text, "UNEQUIP" if is_unequip else "EQUIP"])
 		
 		if is_unequip:
@@ -516,11 +517,7 @@ func _on_equip_button_pressed() -> void:
 						# Update button to show "Equip"
 						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
 						if btn:
-							btn.text = "Equip"
-						
-						# Clear the AccessorySlot visual
-						var accessory_slot = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots/AccessorySlot")
-						if accessory_slot and accessory_slot.has_method("clear_slot"):
+									btn.text = TranslationServer.translate("inventory_equip")
 							accessory_slot.clear_slot()
 							print("  → Cleared AccessorySlot visual")
 						
@@ -547,11 +544,7 @@ func _on_equip_button_pressed() -> void:
 						# Update button to show "Unequip"
 						var btn = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/ItemInfo/VBoxContainer/HBoxContainer/Button")
 						if btn:
-							btn.text = "Unequip"
-						
-						# Update the AccessorySlot visual
-						var accessory_slot = get_node_or_null("EquipmentView/HBoxContainer/VBoxContainer2/EquipmentSlots/AccessorySlot")
-						if accessory_slot and accessory_slot.has_method("set_equipped_item"):
+									btn.text = TranslationServer.translate("inventory_unequip")
 							accessory_slot.set_equipped_item(selected_item_id, selected_item)
 							print("  → Updated AccessorySlot visual with %s" % selected_item.item_name)
 						
@@ -687,7 +680,7 @@ func _on_trade_open(data: Dictionary):
 	other_player_name = data.get("other_name", "Unknown")
 	
 	your_offer_title.text = TranslationServer.translate("inventory_trade_your_offer")
-	their_offer_title.text = other_player_name + "'s Offer"
+	their_offer_title.text = other_player_name + " " + TranslationServer.translate("inventory_offer_suffix")
 	
 	# Switch to trade view and hide other UI elements
 	equipment_view.hide()

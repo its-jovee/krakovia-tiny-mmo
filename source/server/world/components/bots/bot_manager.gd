@@ -279,16 +279,18 @@ func send_bots_to_peer(peer_id: int) -> void:
 
 
 ## Broadcast a chat message from a bot.
-func broadcast_bot_chat(entity_id: int, message: String) -> void:
+func broadcast_bot_chat(entity_id: int, message: String, is_i18n_key: bool = false) -> void:
 	if not bots_by_entity_id.has(entity_id):
 		return
 
 	var bot: Player = bots_by_entity_id[entity_id]
 	var chat_data: Dictionary = {
 		"text": message,
-		"display_name": bot.player_resource.display_name,
+		"name": bot.player_resource.display_name,
 		"id": entity_id,
-		"is_bot": true
+		"is_bot": true,
+		"translate": is_i18n_key,
+		"i18n_key": message if is_i18n_key else ""
 	}
 
 	server_instance.propagate_rpc(server_instance.data_push.bind(&"chat.message", chat_data))
@@ -337,9 +339,9 @@ func spawn_worker_bot(worker_area: Node) -> int:
 			"head_id": "head_a",
 			"wander_radius": 100.0,
 			"dialogue": [
-				TranslationServer.translate("npc_worker_dialog_1"),
-				TranslationServer.translate("npc_worker_dialog_2"),
-				TranslationServer.translate("npc_worker_dialog_3"),
+				"npc_worker_dialog_1",
+				"npc_worker_dialog_2",
+				"npc_worker_dialog_3",
 			],
 			"npc_type": NPCType.Type.VILLAGER_WORKER,
 			"worker_id": worker_id,

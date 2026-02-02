@@ -1103,3 +1103,30 @@ minigame_horse_race_winner,\ud83c\udfc6 %s wins the race! %s came in second!,\ud
 npc_worker_dialog_1,Need something gathered?,Precisa que eu colete algo?
 npc_worker_dialog_2,I'm ready to work!,Estou pronto para trabalhar!
 npc_worker_dialog_3,Fine day for it.,Um bom dia para isso.
+ui_unlocked,Unlocked,Desbloqueado
+ui_equipped,Equipped,Equipado
+ui_equip,Equip,Equipar
+ui_locked,Locked,Bloqueado
+ui_title_unlocked,Title Unlocked!,Título Desbloqueado!
+ui_hired,Hired,Contratado
+ui_gold,gold,ouro
+ui_hire,Hire,Contratar
+ui_hire_today,Hired %dx today - Prices +%d%% (resets in %s),Contratado %dx hoje - Preços +%d%% (reseta em %s)
+ui_not_enough_gold,Not enough gold,Ouro insuficiente
+ui_no_active_jobs,No active jobs. Hire a worker above!,Nenhum trabalho ativo. Contrate um trabalhador acima!
+ui_jobs_ready,job(s) ready to collect!,trabalho(s) pronto(s) para coletar!
+ui_collect_all,Collect All,Coletar Tudo
+ui_ready_to_collect,Ready to collect!,Pronto para coletar!
+ui_remaining,remaining,restante
+ui_collect,Collect,Coletar
+ui_ok,OK,OK
+inventory_unequip,Unequip,Desequipar
+inventory_equip,Equip,Equipar
+inventory_gold,Gold,Ouro
+inventory_offer_suffix,'s Offer, Oferecido Por
+ui_select_tier,Select Tier to Hire:,Selecione o Nível para Contratar:
+ui_active_jobs,Active Jobs:,Trabalhos Ativos:
+ui_close,Close,Fechar
+npc_worker_miner_desc,A seasoned miner who knows every vein in the mountain. Pay Rocky to dig up ores and minerals for you while you tend to other business. The longer he works the better the haul!,Um minerador experiente que conhece cada veia na montanha. Pague Rocky para cavar minérios e minerais para você enquanto cuida de outros negócios. Quanto mais tempo ele trabalha melhor é a coleta!
+npc_worker_woodcutter_desc,A skilled lumberjack with a sharp axe. Hire Bjorn to gather wood and timber for your crafting needs.,Um lenhador habilidoso com um machado afiado. Contrate Bjorn para coletar madeira e toras para suas necessidades de fabricação.
+npc_worker_forager_desc,An expert gatherer who knows where to find the best herbs and plants. Hire Flora to collect materials from the wilderness.,Uma coletora especialista que sabe onde encontrar as melhores ervas e plantas. Contrate Flora para coletar materiais da natureza.

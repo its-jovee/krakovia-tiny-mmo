@@ -237,6 +237,14 @@ func _on_vendor_status_update(data: Dictionary) -> void:
 	var in_vendor = data.get("in_vendor", false)
 	var vendor_info = data.get("vendor", {})
 	var vendor_name = vendor_info.get("name", "Vendor")
+	var vendor_id = vendor_info.get("id", "")
+	
+	# Translate vendor name on client side
+	if not vendor_id.is_empty():
+		var translated_name = TranslationServer.translate("npc_%s_name" % vendor_id)
+		if translated_name != ("npc_%s_name" % vendor_id):  # Check if translation exists
+			vendor_name = translated_name
+	
 	print("[HUD] Vendor status: in_vendor=%s, vendor=%s" % [in_vendor, vendor_name])
 	
 	if in_vendor:
@@ -252,6 +260,14 @@ func _on_worker_area_status_update(data: Dictionary) -> void:
 	var in_worker_area = data.get("in_worker_area", false)
 	var worker_type = data.get("worker_type", "")
 	var worker_name = data.get("worker_name", "Worker")
+	var worker_id = data.get("worker_id", "")
+	
+	# Translate worker name on client side
+	if not worker_id.is_empty():
+		var translated_name = TranslationServer.translate("npc_%s_name" % worker_id)
+		if translated_name != ("npc_%s_name" % worker_id):  # Check if translation exists
+			worker_name = translated_name
+	
 	print("[HUD] Worker area status: in_area=%s, type=%s, name=%s" % [in_worker_area, worker_type, worker_name])
 	
 	if in_worker_area and worker_type != "":

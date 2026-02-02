@@ -448,11 +448,26 @@ func _show_title_unlocked_notification(data: Dictionary) -> void:
 	var notification = notification_scene.instantiate()
 	
 	# Set notification content
+	var header_label: Label = notification.get_node("MarginContainer/VBoxContainer/HeaderLabel")
 	var title_label: Label = notification.get_node("MarginContainer/VBoxContainer/TitleLabel")
 	var desc_label: Label = notification.get_node("MarginContainer/VBoxContainer/DescriptionLabel")
 	
-	var title_name: String = data.get("name", "Unknown Title")
-	var description: String = data.get("description", "")
+	# Set translated header text
+	header_label.text = TranslationServer.translate("ui_title_unlocked")
+	
+	# Translate title and description on client side
+	var title_slug: String = data.get("slug", "")
+	var title_name: String
+	var description: String
+	
+	if not title_slug.is_empty():
+		title_name = TranslationServer.translate("title_%s_name" % title_slug)
+		description = TranslationServer.translate("title_%s_desc" % title_slug)
+	else:
+		# Fallback to server data if slug not provided
+		title_name = data.get("name", "Unknown Title")
+		description = data.get("description", "")
+	
 	var rarity: int = data.get("rarity", 0)
 	
 	title_label.text = title_name

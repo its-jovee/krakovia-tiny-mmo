@@ -202,7 +202,7 @@ sell_multiplier = 1.35
 stock = {
 1: 50,
 196: 10,
-197: 10,
+197: 11,
 198: 50,
 199: 0,
 200: 10,
@@ -224,13 +224,6 @@ pending_materials = {
 },
 251: {
 79: 1
-}
-}
-production_queue = {
-197: {
-"amount": 1,
-"start_time": 1767061971,
-"time_per_item": 30.0
 }
 }
 

@@ -58,9 +58,7 @@ func send_game_invitation(game_type: String) -> void:
 	active_sessions[session_id] = game_session
 	
 	# Send announcement to EVERYONE
-	var msg_key: String = "system_minigame_starting"
-	var translated_msg: String = TranslationServer.translate(msg_key)
-	send_system_message(translated_msg % game_name)
+	send_system_message_i18n("system_minigame_starting", {"game": game_name})
 	
 	# NEW: Send popup announcement to ALL players
 	send_announcement_popup("🎮 %s Starting Soon!" % game_name, "Get to the Game Arena in 1 minute to join!", 10.0)
@@ -85,12 +83,10 @@ func send_game_invitation(game_type: String) -> void:
 	if active_sessions.has(session_id):
 		match game_type:
 			"horse_racing":
-				var betting_msg: String = TranslationServer.translate("system_minigame_betting_phase") % game_name
-				send_system_message(betting_msg)
+				send_system_message_i18n("system_minigame_betting_phase", {"game": game_name})
 				game_session.start_betting_phase()
 			"hot_potato":
-				var start_msg: String = TranslationServer.translate("system_minigame_begun") % game_name
-				send_system_message(start_msg)
+				send_system_message_i18n("system_minigame_begun", {"game": game_name})
 				game_session.start_active_phase()
 			_:
 				push_warning("[MinigameManager] Unknown game type in phase start: %s" % game_type)
@@ -123,11 +119,11 @@ func create_game_session(game_type: String, session_id: int) -> Node:
 func get_game_display_name(game_type: String) -> String:
 	match game_type:
 		"horse_racing":
-			return TranslationServer.translate("minigame_horse_racing_name")
+			return "minigame_horse_racing_name"
 		"hot_potato":
-			return TranslationServer.translate("minigame_hot_potato_name")
+			return "minigame_hot_potato_name"
 		_:
-			return game_type.capitalize()
+			return game_type
 
 
 func get_next_game_in_rotation() -> String:
@@ -225,6 +221,21 @@ func send_system_message(message: String) -> void:
 				"text": message,
 				"name": "System",
 				"id": 1
+			}
+			child.propagate_rpc(child.data_push.bind(&"chat.message", chat_message))
+
+
+func send_system_message_i18n(i18n_key: String, params: Dictionary = {}) -> void:
+	"""Send a system message that will be translated on the client side"""
+	for child in instance_manager.get_children():
+		if child is ServerInstance:
+			var chat_message = {
+				"text": "",  # Will be translated on client
+				"name": "System",
+				"id": 1,
+				"translate": true,
+				"i18n_key": i18n_key,
+				"i18n_params": params
 			}
 			child.propagate_rpc(child.data_push.bind(&"chat.message", chat_message))
 

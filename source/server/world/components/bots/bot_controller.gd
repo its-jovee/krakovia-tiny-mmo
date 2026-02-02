@@ -149,7 +149,9 @@ func _say_something() -> void:
 	# Broadcast chat message via BotManager
 	if server_instance and server_instance.has_node("BotManager"):
 		var bot_manager: BotManager = server_instance.get_node("BotManager")
-		bot_manager.broadcast_bot_chat(entity_id, message)
+		# Check if message is a translation key (starts with "npc_worker_dialog_")
+		var is_i18n_key: bool = message.begins_with("npc_worker_dialog_")
+		bot_manager.broadcast_bot_chat(entity_id, message, is_i18n_key)
 
 	chat_cooldown = randf_range(min_chat_interval, max_chat_interval)
 	_transition_to(&"chatting", 3.0)
