@@ -58,7 +58,9 @@ func send_game_invitation(game_type: String) -> void:
 	active_sessions[session_id] = game_session
 	
 	# Send announcement to EVERYONE
-	send_system_message("🎮 %s starting in 1 minute at the Game Arena! Hurry over to join!" % game_name)
+	var msg_key: String = "system_minigame_starting"
+	var translated_msg: String = TranslationServer.translate(msg_key)
+	send_system_message(translated_msg % game_name)
 	
 	# NEW: Send popup announcement to ALL players
 	send_announcement_popup("🎮 %s Starting Soon!" % game_name, "Get to the Game Arena in 1 minute to join!", 10.0)
@@ -83,10 +85,12 @@ func send_game_invitation(game_type: String) -> void:
 	if active_sessions.has(session_id):
 		match game_type:
 			"horse_racing":
-				send_system_message("🎮 %s betting phase has begun!" % game_name)
+				var betting_msg: String = TranslationServer.translate("system_minigame_betting_phase") % game_name
+				send_system_message(betting_msg)
 				game_session.start_betting_phase()
 			"hot_potato":
-				send_system_message("🎮 %s has begun! Good luck!" % game_name)
+				var start_msg: String = TranslationServer.translate("system_minigame_begun") % game_name
+				send_system_message(start_msg)
 				game_session.start_active_phase()
 			_:
 				push_warning("[MinigameManager] Unknown game type in phase start: %s" % game_type)
@@ -119,9 +123,9 @@ func create_game_session(game_type: String, session_id: int) -> Node:
 func get_game_display_name(game_type: String) -> String:
 	match game_type:
 		"horse_racing":
-			return "Horse Racing"
+			return TranslationServer.translate("minigame_horse_racing_name")
 		"hot_potato":
-			return "Hot Potato"
+			return TranslationServer.translate("minigame_hot_potato_name")
 		_:
 			return game_type.capitalize()
 

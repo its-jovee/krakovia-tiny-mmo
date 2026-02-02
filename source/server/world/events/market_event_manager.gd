@@ -74,7 +74,7 @@ func _start_random_event() -> void:
 	
 	print("[MarketEventManager] 📢 Event Started: %s %s (duration: %d min)" % [
 		current_event.icon,
-		current_event.title,
+		current_event.get_translated_title(),
 		current_event.duration_minutes
 	])
 	
@@ -86,7 +86,7 @@ func _end_current_event() -> void:
 	if not current_event:
 		return
 	
-	print("[MarketEventManager] 📢 Event Ended: %s %s" % [current_event.icon, current_event.title])
+	print("[MarketEventManager] 📢 Event Ended: %s %s" % [current_event.icon, current_event.get_translated_title()])
 	
 	var ended_event = current_event
 	current_event = null
@@ -141,8 +141,8 @@ func _broadcast_event_to_all_players(active: bool) -> void:
 		event_data = {
 			"active": true,
 			"id": current_event.event_id,
-			"title": current_event.title,
-			"description": current_event.description,
+			"title": current_event.get_translated_title(),
+			"description": current_event.get_translated_description(),
 			"icon": current_event.icon,
 			"ends_at": event_end_time,
 			"affected_items": current_event.affected_items.keys()
@@ -166,8 +166,8 @@ func _broadcast_event_to_all_players(active: bool) -> void:
 						"display_name": "📢 Market News",
 						"text": "%s %s\n%s\n%s" % [
 							current_event.icon,
-							current_event.title,
-							current_event.description,
+						current_event.get_translated_title(),
+						current_event.get_translated_description(),
 							price_changes
 						],
 						"color": "#FFD700",
@@ -236,8 +236,8 @@ func get_event_info_for_client() -> Variant:
 	
 	return {
 		"id": current_event.event_id,
-		"title": current_event.title,
-		"description": current_event.description,
+		"title": current_event.get_translated_title(),
+		"description": current_event.get_translated_description(),
 		"icon": current_event.icon,
 		"ends_at": event_end_time
 	}

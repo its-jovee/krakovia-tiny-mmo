@@ -91,3 +91,23 @@ func get_progress_key() -> String:
 ## Check if the current progress meets the unlock requirement
 func check_unlock_condition(progress_value: int) -> bool:
 	return progress_value >= target_value
+
+
+## Get translated title name based on current language
+func get_translated_name() -> String:
+	var key: String = "title_%s_name" % slug
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return title_name
+	return translated
+
+
+## Get translated title description based on current language
+func get_translated_description() -> String:
+	var key: String = "title_%s_desc" % slug
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return description
+	return translated

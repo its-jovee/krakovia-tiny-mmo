@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://bii2ihhnupf5"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://bii2ihhnupf5"]
 
 [ext_resource type="Texture2D" uid="uid://bye66inpdvpdy" path="res://assets/sprites/characters/knight/knight_idle.png" id="1_da3vh"]
 [ext_resource type="Texture2D" uid="uid://cybc55oxsoqrb" path="res://assets/sprites/characters/composite/miner/body/miner-base.png" id="2_jwyvd"]

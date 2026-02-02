@@ -1012,3 +1012,94 @@ item_premium_workshop_tools_name,Premium Workshop Tools,Ferramentas de Oficina P
 item_premium_workshop_tools_desc,High-quality workshop tools.,Ferramentas de oficina de alta qualidade.
 item_workshop_tools_name,Workshop Tools,Ferramentas de Oficina
 item_workshop_tools_desc,Wrench\\, pliers\\, tongs\\, shears.,Chave inglesa.
+title_founder_name,Alpha Tester,Testador Alfa
+title_founder_desc,Played during Alpha testing.,Jogou durante o teste Alfa.
+title_apprentice_collector_name,Apprentice Collector,Aprendiz de Coletor
+title_apprentice_collector_desc,Craft 10 items as a Collector class.,Criar 10 itens como classe Coletor.
+title_apprentice_smith_name,Apprentice Smith,Aprendiz de Ferreiro
+title_apprentice_smith_desc,Craft 10 items as a Miner class.,Criar 10 itens como classe Minerador.
+title_apprentice_trapper_name,Apprentice Trapper,Aprendiz de Caçador
+title_apprentice_trapper_desc,Craft 10 items as a Trapper class.,Criar 10 itens como classe Caçador.
+title_expert_collector_name,Expert Collector,Coletor Experiente
+title_expert_collector_desc,Craft 100 items as a Collector class.,Criar 100 itens como classe Coletor.
+title_expert_trapper_name,Expert Trapper,Caçador Experiente
+title_expert_trapper_desc,Craft 100 items as a Trapper class.,Criar 100 itens como classe Caçador.
+title_master_smith_name,Master Smith,Mestre Ferreiro
+title_master_smith_desc,Craft 100 items as a Miner class.,Criar 100 itens como classe Minerador.
+title_master_collector_name,Master Collector,Mestre Coletor
+title_master_collector_desc,Craft 500 items as a Collector class.,Criar 500 itens como classe Coletor.
+title_master_miner_name,Master Miner,Mestre Minerador
+title_master_miner_desc,Craft 500 items as a Miner class.,Criar 500 itens como classe Minerador.
+title_master_trapper_name,Master Trapper,Mestre Caçador
+title_master_trapper_desc,Craft 500 items as a Trapper class.,Criar 500 itens como classe Caçador.
+title_grand_forager_name,Grand Collector,Grande Coletor
+title_grand_forager_desc,Reach level 30 as a Collector.,Atingir nível 30 como Coletor.
+title_grand_miner_name,Grand Miner,Grande Minerador
+title_grand_miner_desc,Reach level 30 as a Miner.,Atingir nível 30 como Minerador.
+title_grand_trapper_name,Grand Trapper,Grande Caçador
+title_grand_trapper_desc,Reach level 30 as a Trapper.,Atingir nível 30 como Caçador.
+title_grand_master_name,Grand Master,Grão-Mestre
+title_grand_master_desc,Reach level 30 on all three classes.,Atingir nível 30 em todas as três classes.
+title_timber_lord_name,Timber Lord,Senhor da Madeira
+title_timber_lord_desc,Harvest 1\\,000 items from Collector nodes.,Colher 1.000 itens de nós de Coletor.
+title_rock_breaker_name,Rock Breaker,Quebra-Pedras
+title_rock_breaker_desc,Harvest 1\\,000 items from Miner nodes.,Colher 1.000 itens de nós de Mineração.
+title_berry_picker_name,Wilderness Expert,Especialista em Natureza
+title_berry_picker_desc,Harvest 1\\,000 items from Trapper nodes.,Colher 1.000 itens de nós de Caça.
+title_benchmaxer_name,Benchmaxer,Maximizador
+title_benchmaxer_desc,Craft 500 items total across all classes.,Criar 500 itens no total em todas as classes.
+title_legendary_artisan_name,Legendary Artisan,Artesão Lendário
+title_legendary_artisan_desc,Craft 5\\,000 items total across all classes.,Criar 5.000 itens no total em todas as classes.
+title_shopkeeper_name,Shopkeeper,Lojista
+title_shopkeeper_desc,Complete 100 trades with other players.,Completar 100 trocas com outros jogadores.
+title_merchant_prince_name,Merchant Prince,Príncipe Mercador
+title_merchant_prince_desc,Earn 100\\,000\\,000 gold total.,Ganhar 100.000.000 de ouro no total.
+title_generous_soul_name,Generous Soul,Alma Generosa
+title_generous_soul_desc,Give away items worth 1\\,000\\,000 gold.,Dar itens no valor de 1.000.000 de ouro.
+title_party_animal_name,Party Animal,Festeiro
+title_party_animal_desc,Join 100 harvest parties (2+ players).,Participar de 100 festas de colheita (2+ jogadores).
+title_scary_season_name,Scary Season,Temporada Assustadora
+title_scary_season_desc,Participated in Halloween 2025 event.,Participou do evento de Halloween 2025.
+npc_town_blacksmith_name,Blacksmith Gorm,Ferreiro Gorm
+npc_town_carpenter_name,Oakley the Builder,Oakley o Construtor
+npc_town_general_name,Old Mercer,Velho Mercer
+npc_town_grocer_name,Farmer Bramble,Fazendeiro Bramble
+npc_town_herbalist_name,Dr. Willowroot,Dr. Willowroot
+npc_town_jeweler_name,Gemma Sparkle,Gemma Sparkle
+npc_worker_miner_name,Rocky the Miner,Rocky o Minerador
+npc_worker_collector_name,Fern the Gatherer,Fern a Coletora
+npc_worker_trapper_name,Hunter Jack,Jack o Caçador
+npc_grandmother_willow_name,Grandmother Willow,Vovó Willow
+event_harvest_festival_title,Harvest Festival!,Festival da Colheita!
+event_harvest_festival_desc,Bountiful harvest! Farmers bring surplus crops to market.,Colheita abundante! Fazendeiros trazem safras excedentes ao mercado.
+event_harsh_winter_title,Harsh Winter Approaching,Inverno Rigoroso se Aproxima
+event_harsh_winter_desc,Stock up on food and fuel! Temperatures dropping rapidly.,Estoque comida e combustível! Temperaturas caindo rapidamente.
+event_mining_boom_title,Mining Boom!,Boom de Mineração!
+event_mining_boom_desc,New ore veins discovered! Miners flood the market with raw materials.,Novos veios de minério descobertos! Mineradores inundam o mercado com matéria-prima.
+event_construction_boom_title,Construction Boom!,Boom de Construção!
+event_construction_boom_desc,New buildings going up everywhere! Building materials in high demand.,Novos edifícios surgindo em todo lugar! Materiais de construção em alta demanda.
+event_goblin_raid_title,Goblin Raid Incoming!,Invasão Goblin a Caminho!
+event_goblin_raid_desc,The militia needs supplies! Weapons\\, armor\\, and healing items in high demand.,A milícia precisa de suprimentos! Armas\\, armaduras e itens de cura em alta demanda.
+event_market_day_title,Market Day!,Dia de Mercado!
+event_market_day_desc,The weekly market is bustling! General goods are discounted across the board.,O mercado semanal está movimentado! Produtos gerais com desconto em geral.
+event_alchemist_convention_title,Alchemist Convention,Convenção de Alquimistas
+event_alchemist_convention_desc,Potion makers gather! Herbs and reagents in high demand.,Criadores de poções se reúnem! Ervas e reagentes em alta demanda.
+event_royal_inspection_title,Royal Inspection,Inspeção Real
+event_royal_inspection_desc,The King's inspectors are visiting! Quality crafted goods fetch premium prices.,Inspetores do Rei estão visitando! Produtos artesanais de qualidade alcançam preços premium.
+event_moonlit_gathering_title,Moonlit Gathering,Encontro ao Luar
+event_moonlit_gathering_desc,Rare nocturnal herbs bloom under the moonlight. Herbalists pay premium prices!,Ervas noturnas raras florescem ao luar. Herbalistas pagam preços premium!
+event_nocturnal_traders_title,Nocturnal Traders,Mercadores Noturnos
+event_nocturnal_traders_desc,Mysterious merchants emerge from the shadows with rare goods at bargain prices.,Mercadores misteriosos emergem das sombras com produtos raros a preços de pechincha.
+system_minigame_starting,\ud83c\udfae %s starting in 1 minute at the Game Arena! Hurry over to join!,\ud83c\udfae %s começando em 1 minuto na Arena de Jogos! Corra para se juntar!
+system_minigame_betting_phase,\ud83c\udfae %s betting phase has begun!,\ud83c\udfae Fase de apostas de %s começou!
+system_minigame_begun,\ud83c\udfae %s has begun! Good luck!,\ud83c\udfae %s começou! Boa sorte!
+system_minigame_cancelled,\ud83c\udfae %s cancelled - not enough players,\ud83c\udfae %s cancelado - jogadores insuficientes
+minigame_hot_potato_name,Hot Potato,Batata Quente
+minigame_horse_racing_name,Horse Racing,Corrida de Cavalos
+minigame_hot_potato_draw,Hot Potato ended in a draw!,Batata Quente terminou em empate!
+minigame_horse_player_joined,%s joined the Horse Racing game!,%s entrou no jogo de Corrida de Cavalos!
+minigame_horse_race_begun,\ud83c\udfc1 The race has begun!,\ud83c\udfc1 A corrida começou!
+minigame_horse_race_winner,\ud83c\udfc6 %s wins the race! %s came in second!,\ud83c\udfc6 %s venceu a corrida! %s ficou em segundo!
+npc_worker_dialog_1,Need something gathered?,Precisa que eu colete algo?
+npc_worker_dialog_2,I'm ready to work!,Estou pronto para trabalhar!
+npc_worker_dialog_3,Fine day for it.,Um bom dia para isso.

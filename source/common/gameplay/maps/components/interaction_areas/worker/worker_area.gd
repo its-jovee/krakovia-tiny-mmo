@@ -32,6 +32,18 @@ class_name WorkerArea
 ## Description/personality blurb for the UI
 @export_multiline var worker_description: String = "A skilled worker ready to gather resources for you."
 
+
+## Get translated worker name based on current language
+func get_translated_name() -> String:
+	if worker_id.is_empty():
+		return worker_name
+	var key: String = "npc_%s_name" % worker_id
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return worker_name
+	return translated
+
 # Bot entity ID when the worker is spawned as a walking bot
 var _bot_entity_id: int = 0
 

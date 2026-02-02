@@ -129,7 +129,9 @@ func join_game(peer_id: int, instance: ServerInstance, player_name: String) -> D
 	# Broadcast to all other participants
 	broadcast_state()
 	
-	minigame_manager.send_system_message("%s joined the Horse Racing game!" % player_name)
+	var msg_key: String = "minigame_horse_player_joined"
+	var translated_msg: String = TranslationServer.translate(msg_key) % player_name
+	minigame_manager.send_system_message(translated_msg)
 	
 	return {"success": true, "session_id": session_id}
 
@@ -290,7 +292,8 @@ func start_race() -> void:
 	race_timer.start()
 	race_update_timer.start()
 	
-	minigame_manager.send_system_message("🏁 The race has begun!")
+	var race_msg: String = TranslationServer.translate("minigame_horse_race_begun")
+	minigame_manager.send_system_message(race_msg)
 	
 	print("[HorseRacing:%d] Race started with %d participants" % [session_id, participants.size()])
 
@@ -441,7 +444,8 @@ func calculate_winnings() -> void:
 	})
 	
 	# Send system message
-	minigame_manager.send_system_message("🏆 %s wins the race! %s came in second!" % [HORSE_NAMES[race_winner], HORSE_NAMES[race_second]])
+	var winner_msg: String = TranslationServer.translate("minigame_horse_race_winner")
+	minigame_manager.send_system_message(winner_msg % [HORSE_NAMES[race_winner], HORSE_NAMES[race_second]])
 
 
 func _award_winnings(peer_id: int, amount: int, place: int) -> void:
@@ -506,6 +510,8 @@ func _broadcast_to_participants(event: StringName, data: Dictionary) -> void:
 
 func _cancel_game() -> void:
 	print("[HorseRacing:%d] Game cancelled - no participants" % session_id)
-	minigame_manager.send_system_message("Horse Racing game cancelled - not enough players")
+	var game_name: String = TranslationServer.translate("minigame_horse_racing_name")
+	var cancel_msg: String = TranslationServer.translate("system_minigame_cancelled") % game_name
+	minigame_manager.send_system_message(cancel_msg)
 	minigame_manager.remove_session(session_id)
 

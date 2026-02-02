@@ -12,6 +12,17 @@ extends Resource
 ## Icon/emoji for UI display
 @export var vendor_icon: String = "🏪"
 
+## Get translated vendor name based on current language
+func get_translated_name() -> String:
+	if vendor_id.is_empty():
+		return vendor_name
+	var key: String = "npc_%s_name" % vendor_id
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return vendor_name
+	return translated
+
 ## Items this vendor deals in (item IDs)
 ## If empty, vendor deals in ALL sellable items (legacy behavior)
 @export var item_catalog: Array[int] = []

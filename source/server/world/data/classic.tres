@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WorldPlayerData" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="WorldPlayerData" format=3]
 
 [ext_resource type="Script" path="res://source/common/gameplay/characters/player/player_resource.gd" id="1_ni45q"]
 [ext_resource type="Script" path="res://source/server/world/data/world_player_data.gd" id="2_83xu3"]
@@ -442,12 +442,24 @@ inventory = {
 }
 available_attributes_points = 10
 experience = 235
+current_energy = 100.0
+last_logout_time = 1770049911.455
+last_position = Vector2(939.9646, 318.1656)
 worker_burnout = {
 "miner": {
 "hire_count": 0,
-"last_reset": 1767061803
+"last_reset": 1770049902
 }
 }
+
+[sub_resource type="Resource" id="Resource_ylhue"]
+script = ExtResource("1_ni45q")
+player_id = 15
+account_name = "teste1234"
+display_name = "teste1234"
+character_class = "trapper"
+golds = 100
+available_attributes_points = 10
 
 [resource]
 script = ExtResource("2_83xu3")
@@ -460,7 +472,8 @@ accounts = {
 "jovee": PackedInt32Array(1, 7, 8),
 "maluco": PackedInt32Array(12, 13),
 "teste": PackedInt32Array(5),
-"teste123": PackedInt32Array(14)
+"teste123": PackedInt32Array(14),
+"teste1234": PackedInt32Array(15)
 }
 players = {
 1: SubResource("Resource_ugqtu"),
@@ -476,9 +489,10 @@ players = {
 11: SubResource("Resource_r72w2"),
 12: SubResource("Resource_hl36p"),
 13: SubResource("Resource_jspr0"),
-14: SubResource("Resource_5gpea")
+14: SubResource("Resource_5gpea"),
+15: SubResource("Resource_ylhue")
 }
-next_player_id = 14
+next_player_id = 15
 account_titles = {
 "filhodedeus": {
 "progress": {
@@ -513,6 +527,12 @@ account_titles = {
 "progress": {
 "event_founder": 1,
 "harvests_collector": 33
+},
+"unlocked": [&"founder"]
+},
+"teste1234": {
+"progress": {
+"event_founder": 1
 },
 "unlocked": [&"founder"]
 }

@@ -161,13 +161,13 @@ func unlock_title(account_name: String, title_slug: StringName, peer_id: int, in
 	if not title:
 		return
 	
-	print("[TitleProgressTracker] 🏆 %s unlocked title: %s" % [account_name, title.title_name])
+	print("[TitleProgressTracker] 🏆 %s unlocked title: %s" % [account_name, title.get_translated_name()])
 	
 	# Send notification to player
 	instance.data_push.rpc_id(peer_id, &"title.unlocked", {
 		"slug": String(title_slug),
-		"name": title.title_name,
-		"description": title.description,
+		"name": title.get_translated_name(),
+		"description": title.get_translated_description(),
 		"rarity": title.rarity
 	})
 	

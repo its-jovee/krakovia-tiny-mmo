@@ -337,9 +337,9 @@ func spawn_worker_bot(worker_area: Node) -> int:
 			"head_id": "head_a",
 			"wander_radius": 100.0,
 			"dialogue": [
-				"Need something gathered?",
-				"I'm ready to work!",
-				"Fine day for it.",
+				TranslationServer.translate("npc_worker_dialog_1"),
+				TranslationServer.translate("npc_worker_dialog_2"),
+				TranslationServer.translate("npc_worker_dialog_3"),
 			],
 			"npc_type": NPCType.Type.VILLAGER_WORKER,
 			"worker_id": worker_id,

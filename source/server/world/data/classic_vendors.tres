@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="VendorsDataWrapper" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="VendorsDataWrapper" format=3]
 
 [ext_resource type="Script" path="res://source/server/world/data/vendors_data_wrapper.gd" id="1_d44kn"]
 [ext_resource type="Script" path="res://source/server/world/data/vendor_data.gd" id="2_8yaue"]
@@ -198,12 +198,6 @@ vendor_id = "town_herbalist"
 vendor_name = "Dr. Willowroot"
 vendor_icon = "🌿"
 item_catalog = Array[int]([1, 197, 198, 199, 225, 226, 253, 275, 196, 200, 251])
-local_supply = {
-79: {
-"last_transaction": 1767061971,
-"level": 0.02
-}
-}
 sell_multiplier = 1.35
 stock = {
 1: 50,

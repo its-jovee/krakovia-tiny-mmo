@@ -22,6 +22,30 @@ enum TimeRestriction {
 ## Icon/emoji for UI display
 @export var icon: String = "📢"
 
+
+## Get translated event title based on current language
+func get_translated_title() -> String:
+	if event_id.is_empty():
+		return title
+	var key: String = "event_%s_title" % event_id
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return title
+	return translated
+
+
+## Get translated event description based on current language
+func get_translated_description() -> String:
+	if event_id.is_empty():
+		return description
+	var key: String = "event_%s_desc" % event_id
+	var translated: String = TranslationServer.translate(key)
+	# Fallback to English if translation not found
+	if translated == key:
+		return description
+	return translated
+
 ## Which items are affected and how much
 ## {item_id: demand_modifier}
 ## demand_modifier > 0 = high demand, prices UP (good for sellers)
