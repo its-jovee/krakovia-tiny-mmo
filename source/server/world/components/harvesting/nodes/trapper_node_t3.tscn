@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://benapojeyfq3q"]
+[gd_scene format=3 uid="uid://benapojeyfq3q"]
 
 [ext_resource type="Script" uid="uid://bee35jk1eh53u" path="res://source/server/world/components/harvesting/harvest_node.gd" id="1"]
 [ext_resource type="Resource" path="res://source/server/world/components/harvesting/loot_tables/trapper_t3_loot_table.tres" id="2"]
@@ -13,7 +13,7 @@ height = 12.0
 cull_mode = 1
 polygon = PackedVector2Array(-8, -9, -10, -8, -10, -4, -12, -3, -12, 0, -12, 6, -5, 6, 3, 6, 2, 4, 5, 2, 6, 0, 8, 1, 14, 1, 15, -1, 19, -4, 19, -7, 19, -12, 16, -18, 11, -21, 7, -23, 3, -22, 1, -20, -2, -19, -3, -18, -3, -17, -5, -6)
 
-[node name="TrapperNodeT3" type="Node2D"]
+[node name="TrapperNodeT3" type="Node2D" unique_id=1081146905]
 script = ExtResource("1")
 node_type = &"trapper_t3"
 base_yield_per_sec = 0.5
@@ -25,25 +25,25 @@ required_level = 11
 tier = 3
 loot_table = ExtResource("2")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=834194985]
 collision_layer = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1394147179]
 texture = ExtResource("3_qvdq3")
 region_enabled = true
 region_rect = Rect2(368, 68, 32, 28)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1033063701]
 position = Vector2(-10, 11)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_qii6f")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="StaticBody2D" unique_id=17515073]
 position = Vector2(-4, 8)
 occluder = SubResource("OccluderPolygon2D_x5c8a")
 
-[node name="Class_Signal" type="Sprite2D" parent="."]
-modulate = Color(0.36278185, 0.7432247, 0.22855753, 1)
+[node name="Class_Signal" type="Sprite2D" parent="." unique_id=842511340]
+modulate = Color(0.7607843, 0.49411765, 1, 1)
 position = Vector2(0, -40)
 scale = Vector2(0.334375, 0.334375)
 texture = ExtResource("4_qvdq3")
